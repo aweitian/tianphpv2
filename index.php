@@ -5,4 +5,6 @@
  * Function:
  */
 require 'lib/tianv2/tian.php';
-tian::init();
+tian::initRunEnvir();
+tian::initHttpRequest();
+tian::initHttpResponse();

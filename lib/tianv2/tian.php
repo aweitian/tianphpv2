@@ -14,7 +14,7 @@ if(DEBUG_FLAG){
 }
 
 define("ENTRY_PATH",dirname(dirname(dirname(__FILE__))));
-define("ENTRY_HOME","/ep");
+define("ENTRY_HOME","/tianphpv2");
 set_include_path(ENTRY_PATH.PATH_SEPARATOR.get_include_path());
 
 class tian{
@@ -31,12 +31,16 @@ class tian{
 	 */
 	public static $response;
 	/**
+	 * @var urlManager
+	 */
+	public static $urlManager;
+	/**
 	 * @var message
 	 */
 	public static $message;
 	private function __construct(){}
 	
-	public static function throwExctpion($err_no){
+	public static function throwException($err_no){
 		static $e;
 		if(!is_array($e)){
 			$e = require_once 'lib/tianv2/exceptions/exceptions.php';
@@ -52,7 +56,19 @@ class tian{
 	public static function initHttpResponse(){
 		self::$response = new httpResponse();
 	}
+	public static function initUrlManager(){
+		if(is_null(self::$requiest)){
+			self::throwException("7392");
+			return;
+		}
+		if(is_null(self::$response)){
+			self::throwException("7393");
+			return;
+		}
+		self::$urlManager = new urlManager();
+	}
 	public static function initMsg(){
 		
+		self::$message = new message(self::$requiest, $urlManager)
 	}
 }

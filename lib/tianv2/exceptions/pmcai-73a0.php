@@ -5,5 +5,5 @@
  * 说明:
  */
 return array(
-	"7392" => "invalid mask string"
+	"73a0" => "invalid mask string"
 );

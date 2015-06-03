@@ -20,7 +20,7 @@ class runEnvirFactory{
 			}else{
 				$path = ENTRY_PATH."/app/runEnvir/".$c."/runEnvir.php";
 				if(!file_exists($path)){
-					tian::throwExctpion("7391");
+					tian::throwException("7391");
 					return;
 				}else{
 					$this->name = $c;

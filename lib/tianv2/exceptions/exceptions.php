@@ -4,8 +4,8 @@
  * Author:Awei.tian
  * Function:
  */
-return array(
-	"7391" => "file not exist",
-) 
-+ require_once 'lib/tianv2/exceptions/pmcaiException.php'
+return
+  require_once 'lib/tianv2/exceptions/default-7390.php'
++ require_once 'lib/tianv2/exceptions/pmcai-73a0.php'
++ require_once 'lib/tianv2/exceptions/route-73b0.php'
 ;
