@@ -69,6 +69,6 @@ class tian{
 	}
 	public static function initMsg(){
 		
-		self::$message = new message(self::$requiest, $urlManager)
+		//self::$message = new message(self::$requiest, $urlManager)
 	}
 }

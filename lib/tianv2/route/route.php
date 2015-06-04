@@ -3,7 +3,6 @@
  * 引用了MESSAGE和route配置文件
  */
 
-C::load(LIB_PATH.'/config/route.php');
 
 abstract class route{
 	/**
@@ -17,14 +16,5 @@ abstract class route{
 			return substr($path, strlen($stripstart));
 		}
 		return $path;
-	}
-	protected function getDefaultModel(){
-		return C::get("route.defaultModel");
-	}
-	protected function getDefaultControl(){
-		return C::get("route.defaultControl");
-	}
-	protected function getDefaultAction(){
-		return C::get("route.defaultAction");
 	}
 }

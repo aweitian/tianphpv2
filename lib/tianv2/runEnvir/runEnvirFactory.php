@@ -12,9 +12,9 @@ class runEnvirFactory{
 	 */
 	public $runEnvir;
 	private function __construct(){
-		$conf_path = ENTRY_PATH."/conf/runEnvirFactory.ini";
+		$conf_path = ENTRY_PATH."/app/conf/runEnvirFactory.php";
 		if(file_exists($conf_path)){
-			$c = file_get_contents($conf_path);
+			$c = require_once ($conf_path);
 			if($c == "default"){
 				$this->name = "default";
 			}else{
@@ -25,6 +25,8 @@ class runEnvirFactory{
 				}else{
 					$this->name = $c;
 					require_once $path;
+					$this->runEnvir = new runEnvir();
+					return;
 				}
 			}
 		}

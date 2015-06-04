@@ -15,7 +15,7 @@
 /**
  * 下面的文件包含了pmcai && httpdataconverter
  */
-require_once 'lib/tianv2/url/urlManager.php';
+require_once '../route/routes/default/match/pmcaiUrl.php';
 class message implements arrayaccess{
 	private $request;
 	private $urlManager;
@@ -50,7 +50,7 @@ class message implements arrayaccess{
 	 * @param number $port
 	 * @param string $fragment
 	 */
-	public function __construct(httpRequest $request,urlManager $urlManager,$extra="",$raw_query_string="",$scheme="http",$host="localhost",$port=80,$fragment=""){
+	public function __construct(httpRequest $request,pmcaiUrl $urlManager,$extra="",$raw_query_string="",$scheme="http",$host="localhost",$port=80,$fragment=""){
 		$this->request=$request;
 		$this->urlManager=$urlManager;
 		$this->pmcai=$urlManager->getPmcai();

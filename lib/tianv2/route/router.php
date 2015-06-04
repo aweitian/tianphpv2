@@ -2,15 +2,13 @@
 /**
  * @author awei.tian
  * date: 2013-8-29
- * 说明:
- * 路由器
+ * 说明: 路由器
+ * 
  * 需要路由规则(把HTTPREQUEST怎么变成pmcai)
  * 路由规则目前有一种，正则
  */
-C::addAutoloadPath("IMatch", LIB_PATH.'/interfaces/IMatch.php');
-C::addAutoloadPath("routerException", LIB_PATH.'/routes/routerException.php');
-C::addAutoloadPath("httpRequest", LIB_PATH.'/request/httpRequest.php');
-C::addAutoloadPath("route", LIB_PATH.'/mvc/route/route.php');
+require_once 'lib/tianv2/request/httpRequest.php';
+require_once 'lib/tianv2/route/route.php';
 class router{
 	protected $_useDefaultRoutes=true;
 	protected $request;
@@ -31,10 +29,9 @@ class router{
 	 * Add default routes which are used to mimic basic router behaviour
 	 * @return this
 	 */
-	public function addDefaultRoutes()
-	{
+	public function addDefaultRoutes(){
 		if (!$this->hasRoute('default')) {
-			C::addAutoloadPath("defaultRoute", LIB_PATH."/mvc/route/routes/defaultRoute.php");
+			require_once 'routes/default/defaultRoute.php';
 			$p=str_repeat("p", count(explode("/", trim(ENTRY_HOME,"/"))));
 			$compat = new defaultRoute(".*",$p."ca");
 			$this->_routes = array('default' => $compat) + $this->_routes;
@@ -48,8 +45,7 @@ class router{
 	 * @param  Route $route      Instance of the route
 	 * @return Router
 	 */
-	public function addRoute($name, route $route)
-	{
+	public function addRoute($name, route $route){
 		$this->_routes[$name] = $route;
 		return $this;
 	}
@@ -60,8 +56,7 @@ class router{
 	 * @param  string $name Name of the route
 	 * @return boolean
 	 */
-	public function hasRoute($name)
-	{
+	public function hasRoute($name){
 		return isset($this->_routes[$name]);
 	}
 	
@@ -71,9 +66,8 @@ class router{
 	 * @param  string $name Name of the route
 	 * @return this
 	 */
-	public function removeRoute($name)
-	{
-		if (isset($this->_routes[$name])) {
+	public function removeRoute($name){
+		if (isset($this->_routes[$name])){
 			unset($this->_routes[$name]);
 		}
 		return $this;
@@ -86,8 +80,7 @@ class router{
 	 * @throws routerException
 	 * @return IRoute
 	 */
-	public function getRoute($name="")
-	{
+	public function getRoute($name=""){
 		if(empty($name))$name=$this->getMatchedRouteName();
 		if (isset($this->_routes[$name])) {
 			return $this->_routes[$name];
@@ -103,8 +96,7 @@ class router{
 	 *
 	 * @return this
 	 */
-	public function removeDefaultRoutes()
-	{
+	public function removeDefaultRoutes(){
 		$this->_useDefaultRoutes = false;
 	
 		return $this;
@@ -116,8 +108,7 @@ class router{
 	 * @throws routerException::NOMATCH_CODE
 	 * @return route
 	 */
-	public function route($url=null,$matcher=null)
-	{
+	public function route($url=null,$matcher=null){
 		if(!is_string($url)){
 			$url=$this->request->requestUri();
 		}

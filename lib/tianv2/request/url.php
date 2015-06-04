@@ -31,6 +31,11 @@ class url{
 		$this->query=httpDataConverter::arrayToForm($queryArr);
 		return $this;
 	}
+	public function getQuery($key){
+		$queryArr=httpDataConverter::formToArray($this->query);
+		if(isset($queryArr[$key]))return $queryArr[$key];
+		return null;
+	}
 	public function removeQuery($key){
 		$queryArr=httpDataConverter::formToArray($this->query);
 		if(array_key_exists($key,$queryArr))unset($queryArr[$key]);

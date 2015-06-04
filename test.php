@@ -4,4 +4,5 @@
  * Author:Awei.tian
  * Function:
  */
-echo "hello world!";
+require_once 'lib/tianv2/tian.php';
+require_once 'lib/tianv2/route/routes/default/match/pmcaiUrl.php';
