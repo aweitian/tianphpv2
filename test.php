@@ -4,5 +4,4 @@
  * Author:Awei.tian
  * Function:
  */
-require_once 'lib/tianv2/tian.php';
-require_once 'lib/tianv2/route/routes/default/match/pmcaiUrl.php';
+var_dump(array("2"=>"2","4"=>3)+array("45"=>'e',"333"=>"11")+array("88"=>"e"));

@@ -21,12 +21,23 @@ class pmcaiUrl{
 	 */
 	private $url;
 	private $pmcaiArr;
+	
+	/**
+	 * 用于还原URL,区分URL中如果使用的是默认值,
+	 * TRUE表示是空白,然后用默认值填充,FALSE表示传递过来用的是默认值
+	 */
+	private $ori_blank_m = false;
+	private $ori_blank_c = false;
+	private $ori_blank_a = false;
 	public function __construct($url,$pmcaimask=""){
 		$this->url = new url($url);
 		$this->initConf();
 		$this->initMask($pmcaimask);
 		$this->pmcaiArr = $this->getEmptyPmcai();
 		$this->parse();
+	}
+	public function getPmcai(){
+		return $this->pmcaiArr;
 	}
 	/**
 	 * @return string 前后不带/
@@ -37,6 +48,12 @@ class pmcaiUrl{
 	public function getModule(){
 		return $this->pmcaiArr["module"];
 	}
+	public function setControl($control){
+		$this->pmcaiArr["control"] = $control;
+	}
+	public function setAction($action){
+		$this->pmcaiArr["action"] = $action;
+	}
 	public function getControl(){
 		return $this->pmcaiArr["control"];
 	}
@@ -46,6 +63,33 @@ class pmcaiUrl{
 	public function getInfo(){
 		return join("/",$this->pmcaiArr["pathinfo"]);
 	}
+	public function setQuery($k,$v){
+		$this->url->setQuery($k, $v);
+	}
+	public function removeQuery($key){
+		$this->url->removeQuery($key);
+	}
+	/**
+	 * @return "" or a/b/c?d=e or ?a=b&c=d
+	 */
+	public function getUrl(){
+		if($this->conf["mode"] == "get"){
+			return $this->url_get();
+		}else{
+			return $this->url_pathinfo();
+		}
+	}
+	/**
+	 * for debug
+	 * @param array $conf
+	 */
+	public function _setConfig($conf){
+		$this->conf = $conf;
+		$this->initConf();
+		$this->pmcaiArr = $this->getEmptyPmcai();
+		$this->parse();
+	}
+	
 	private function getEmptyPmcai(){
 		return array(
 			"preurl"   => array(),
@@ -99,6 +143,74 @@ class pmcaiUrl{
 			return $this->parse_pathinfo();
 		}
 	}
+	private function url_pathinfo(){
+		$url = "";
+		$p = join("/",$this->pmcaiArr["preurl"]);
+		$url = $p;
+		if(false !== strpos($this->mask, "m")){//GET参数中存在MODULE
+			if(!$this->ori_blank_m || $this->pmcaiArr["module"] != $this->conf["moduleDefault"]){
+				//原来URL中存在,或者现在不是默认值
+				if($url == ""){
+					$url = $this->pmcaiArr["module"];
+				}else{
+					$url = $url."/".$this->pmcaiArr["module"];
+				}
+			}
+		}
+		if(false !== strpos($this->mask, "c")){
+			if(!$this->ori_blank_c || $this->pmcaiArr["control"] != $this->conf["controlDefault"]){
+				//原来URL中存在,或者现在不是默认值
+				if($url == ""){
+					$url = $this->pmcaiArr["control"];
+				}else{
+					$url = $url."/".$this->pmcaiArr["control"];
+				}
+			}
+		}
+		if(false !== strpos($this->mask, "a")){
+			if(!$this->ori_blank_a || $this->pmcaiArr["action"] != $this->conf["actionDefault"]){
+				//原来URL中存在,或者现在不是默认值
+				if($url == ""){
+					$url = $this->pmcaiArr["action"];
+				}else{
+					$url = $url."/".$this->pmcaiArr["action"];
+				}
+			}
+		}
+		$i = $this->getInfo();
+		if($url == ""){
+			$url = $i;
+		}else{
+			$url = $url."/".$i;
+		}
+		$queryString = $this->url->query == "" ? "" : "?".$this->url->query;
+		return $url.''.$queryString;
+	}
+	private function url_get(){
+		$url = "";
+		$p = join("/",$this->pmcaiArr["preurl"]);
+		$url = $p;
+		if(false !== strpos($this->mask, "m")){//GET参数中存在MODULE
+			if(!$this->ori_blank_m || $this->pmcaiArr["module"] != $this->conf["moduleDefault"]){
+				//原来URL中存在,或者现在不是默认值
+				$this->url->setQuery($this->conf["module"], $this->pmcaiArr["module"]);
+			}
+		}
+		if(false !== strpos($this->mask, "c")){
+			if(!$this->ori_blank_c || $this->pmcaiArr["control"] != $this->conf["controlDefault"]){
+				//原来URL中存在,或者现在不是默认值
+				$this->url->setQuery($this->conf["control"], $this->pmcaiArr["control"]);
+			}
+		}
+		if(false !== strpos($this->mask, "a")){
+			if(!$this->ori_blank_a || $this->pmcaiArr["action"] != $this->conf["actionDefault"]){
+				//原来URL中存在,或者现在不是默认值
+				$this->url->setQuery($this->conf["action"], $this->pmcaiArr["action"]);
+			}
+		}
+		$queryString = $this->url->query == "" ? "" : "?".$this->url->query;
+		return $url.''.$queryString;
+	}
 	private function parse_get(){
 		$this->pmcaiArr["preurl"] = explode("/", trim($this->url->path,"/"));
 		if(false !== strpos($this->mask, "m")){
@@ -106,6 +218,7 @@ class pmcaiUrl{
 			if(!is_null($m)){
 				$this->pmcaiArr["module"] = $m;
 			} else {
+				$this->ori_blank_m = true;
 				$this->pmcaiArr["module"] = $this->conf["moduleDefault"];
 			}
 		}else{
@@ -116,6 +229,7 @@ class pmcaiUrl{
 			if(!is_null($c)){
 				$this->pmcaiArr["control"] = $c;
 			} else {
+				$this->ori_blank_c = true;
 				$this->pmcaiArr["control"] = $this->conf["controlDefault"];
 			}
 		}else{
@@ -126,6 +240,7 @@ class pmcaiUrl{
 			if(!is_null($a)){
 				$this->pmcaiArr["action"] = $a;
 			} else {
+				$this->ori_blank_a = true;
 				$this->pmcaiArr["action"] = $this->conf["actionDefault"];
 			}
 		}else{
@@ -136,12 +251,15 @@ class pmcaiUrl{
 	private function parse_pathinfo(){
 		$this->initPmcai(explode("/", trim($this->url->path,"/")), $this->mask);
 		if($this->pmcaiArr["module"] == ""){
+			$this->ori_blank_m = true;
 			$this->pmcaiArr["module"] = $this->conf["moduleDefault"];
 		}
 		if($this->pmcaiArr["control"] == ""){
+			$this->ori_blank_c = true;
 			$this->pmcaiArr["control"] = $this->conf["controlDefault"];
 		}
 		if($this->pmcaiArr["action"] == ""){
+			$this->ori_blank_a = true;
 			$this->pmcaiArr["action"] = $this->conf["actionDefault"];
 		}
 		return;
@@ -168,7 +286,7 @@ class pmcaiUrl{
 		}
 		$path = ENTRY_PATH."/app/conf/pmcaiUrl.php";
 		if(file_exists($path)){
-			$conf = require_once $path;
+			$conf = require $path;
 			if($this->isValidConf($conf)){
 				$this->conf = $conf;
 				return ;

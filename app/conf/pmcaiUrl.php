@@ -14,9 +14,9 @@ return array(
 // return array(
 // 	"mode" => "get",
 // 	"module" => "_m",	
-//	"moduleDefault" => "default",
-//	controlDefault" => "main",
-//	"actionDefault" => "welcome",
+// 	"moduleDefault" => "default",
+// 	"controlDefault" => "main",
+// 	"actionDefault" => "welcome",
 // 	"control" => "_c",	
 // 	"action" => "_a",	
 	
