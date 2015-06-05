@@ -3,8 +3,8 @@
  * 引用了MESSAGE和route配置文件
  */
 
-
-abstract class route{
+require_once 'lib/tianv2/interfaces/route/IRoute.php';
+abstract class route implements IRoute{
 	/**
 	 * 路径从入口开始算起
 	 */

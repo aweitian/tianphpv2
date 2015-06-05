@@ -7,20 +7,18 @@
  * 需要路由规则(把HTTPREQUEST怎么变成pmcai)
  * 路由规则目前有一种，正则
  */
-require_once 'lib/tianv2/request/httpRequest.php';
 require_once 'lib/tianv2/route/route.php';
 class router{
-	protected $_useDefaultRoutes=true;
-	protected $request;
-	private $trace=array();
+	protected $_useDefaultRoutes = true;
+	private $trace = array();
 	/**
 	 * Array of routes to match against
 	 * @var array
 	 */
 	protected $_routes = array();
-	protected $_currentRoute="";
-	public function __construct(httpRequest $request){
-		$this->request=$request;
+	protected $_currentRoute = "";
+	public function __construct(){
+
 	}
 	public function getHttpRequest(){
 		return $this->request;
@@ -33,7 +31,7 @@ class router{
 		if (!$this->hasRoute('default')) {
 			require_once 'routes/default/defaultRoute.php';
 			$p=str_repeat("p", count(explode("/", trim(ENTRY_HOME,"/"))));
-			$compat = new defaultRoute(".*",$p."ca");
+			$compat = new defaultRoute($p."ca");
 			$this->_routes = array('default' => $compat) + $this->_routes;
 		}
 		return $this;
@@ -42,10 +40,10 @@ class router{
 	 * Add route to the route chain
 	 *
 	 * @param  string $name       Name of the route
-	 * @param  Route $route      Instance of the route
+	 * @param  IRoute $route      Instance of the route
 	 * @return Router
 	 */
-	public function addRoute($name, route $route){
+	public function addRoute($name, IRoute $route){
 		$this->_routes[$name] = $route;
 		return $this;
 	}
@@ -75,7 +73,7 @@ class router{
 	
 	/**
 	 * Retrieve a named route
-	 *
+	 * empty return currentRoute
 	 * @param string $name Name of the route
 	 * @throws routerException
 	 * @return IRoute
@@ -85,7 +83,7 @@ class router{
 		if (isset($this->_routes[$name])) {
 			return $this->_routes[$name];
 		}else{
-			throw new routerException(null,routerException::NOT_FOUND_CODE);
+			tian::throwException("73b3");
 			return null;
 		}
 	
@@ -105,35 +103,38 @@ class router{
 	/**
 	 * 
 	 * @param string $url 用户请求URL
-	 * @throws routerException::NOMATCH_CODE
 	 * @return route
 	 */
-	public function route($url=null,$matcher=null){
+	public function route($url=null,$dispatcherName=""){
 		if(!is_string($url)){
-			$url=$this->request->requestUri();
+			if(is_null(tian::$requiest)){
+				tian::throwException("7392");
+				return false;
+			}
+			$url = tian::$requiest->requestUri();
 		}
 		if ($this->_useDefaultRoutes) {
 			$this->addDefaultRoutes();
 		}
-	
 		// Find the matching route
 		$routeMatched = false;
 		$matchedRoute = null;
 		foreach (array_reverse($this->_routes, true) as $name => $route) {
-			$this->trace[]=$name." route is matching ".$url;
-			if ($route->match($url,$matcher)) {
-				$this->trace[]="<font color=green>".$name." route is matched ".$url."</font>";
+			$this->trace[] = $name." route is matching ".$url;
+			if ($route->match($url)) {
+				$this->trace[] = "<font color=green>".$name." route is matched ".$url."</font>";
 				$this->_currentRoute = $name;
 				$routeMatched        = true;
 				$matchedRoute		 = $route;
 				break;
 			}else{
-				$this->trace[]="<font color=red>".$name." route is not matched ".$url."</font>";
+				$this->trace[] = "<font color=red>".$name." route is not matched ".$url."</font>";
 			}
 		}
 	
 		if (!$routeMatched) {
-			throw new routerException(null,routerException::NOMATCH_CODE);
+			tian::throwException("73b3");
+			return ;
 		}
 		return $matchedRoute;
 	}

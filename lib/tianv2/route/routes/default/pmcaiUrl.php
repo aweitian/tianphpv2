@@ -79,6 +79,52 @@ class pmcaiUrl{
 			return $this->url_pathinfo();
 		}
 	}
+	public static function isValidMask($mask){
+		return preg_match("/^p*m?c?a?$/", $mask);
+	}
+	public static function isValidConf($conf){
+		if(!is_array($conf))return false;
+		if(!array_key_exists('mode', $conf))return false;
+// 		if($conf['mode'] != 'get' &&  $conf['mode'] != 'pathinfo')return false;
+		if($conf['mode'] == 'get'){
+			if(!array_key_exists('module', $conf))return false;
+			if(!is_string($conf['module']))return false;
+			if(!array_key_exists('control', $conf))return false;
+			if(!is_string($conf['control']))return false;
+			if(!array_key_exists('action', $conf))return false;
+			if(!is_string($conf['action']))return false;
+			if(!array_key_exists('controlDefault', $conf))return false;
+			if(!is_string($conf['controlDefault']))return false;
+			if(!array_key_exists('actionDefault', $conf))return false;
+			if(!is_string($conf['actionDefault']))return false;
+			if(!array_key_exists('moduleDefault', $conf))return false;
+			if(!is_string($conf['moduleDefault']))return false;
+			return true;
+		}
+		if($conf['mode'] == 'pathinfo'){
+			if(!array_key_exists('controlDefault', $conf))return false;
+			if(!is_string($conf['controlDefault']))return false;
+			if(!array_key_exists('actionDefault', $conf))return false;
+			if(!is_string($conf['actionDefault']))return false;
+			if(!array_key_exists('moduleDefault', $conf))return false;
+			if(!is_string($conf['moduleDefault']))return false;
+			return true;
+		}
+		return false;
+	}
+	public static function hasValidConf(){
+		$path = ENTRY_PATH."/app/conf/pmcaiUrl.php";
+		if(file_exists($path)){
+			$conf = require $path;
+			if(!self::isValidConf($conf)){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
+	
 	/**
 	 * for debug
 	 * @param array $conf
@@ -122,8 +168,9 @@ class pmcaiUrl{
 		}
 		$this->pmcaiArr = $pmcai;
 	}
+	
 	private function isValidPmcaiMask($mask){
-		return preg_match("/^p*m?c?a?$/", $mask);
+		return self::isValidMask($mask);
 	}
 	public function fixArrToPmcai($arr){
 		if(!is_array($arr))return $this->getEmptyPmcai();
@@ -287,7 +334,7 @@ class pmcaiUrl{
 		$path = ENTRY_PATH."/app/conf/pmcaiUrl.php";
 		if(file_exists($path)){
 			$conf = require $path;
-			if($this->isValidConf($conf)){
+			if(self::isValidConf($conf)){
 				$this->conf = $conf;
 				return ;
 			}else{
@@ -304,35 +351,5 @@ class pmcaiUrl{
 			"controlDefault" => "main",
 			"actionDefault" => "welcome",
 		);
-	}
-	private function isValidConf($conf){
-		if(!is_array($conf))return false;
-		if(!array_key_exists('mode', $conf))return false;
-// 		if($conf['mode'] != 'get' &&  $conf['mode'] != 'pathinfo')return false;
-		if($conf['mode'] == 'get'){
-			if(!array_key_exists('module', $conf))return false;
-			if(!is_string($conf['module']))return false;
-			if(!array_key_exists('control', $conf))return false;
-			if(!is_string($conf['control']))return false;
-			if(!array_key_exists('action', $conf))return false;
-			if(!is_string($conf['action']))return false;
-			if(!array_key_exists('controlDefault', $conf))return false;
-			if(!is_string($conf['controlDefault']))return false;
-			if(!array_key_exists('actionDefault', $conf))return false;
-			if(!is_string($conf['actionDefault']))return false;
-			if(!array_key_exists('moduleDefault', $conf))return false;
-			if(!is_string($conf['moduleDefault']))return false;
-			return true;
-		}
-		if($conf['mode'] == 'pathinfo'){
-			if(!array_key_exists('controlDefault', $conf))return false;
-			if(!is_string($conf['controlDefault']))return false;
-			if(!array_key_exists('actionDefault', $conf))return false;
-			if(!is_string($conf['actionDefault']))return false;
-			if(!array_key_exists('moduleDefault', $conf))return false;
-			if(!is_string($conf['moduleDefault']))return false;
-			return true;
-		}
-		return false;
 	}
 }

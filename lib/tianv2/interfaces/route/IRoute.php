@@ -6,19 +6,9 @@
  */
 
 interface IRoute{
-	public function match($url_path,$matcher);
 	/**
-	 * 路由匹配成功就可以获取这个数组
-	 * array(
-			"preurl"=>array(),
-			"module"=>"",
-			"control"=>"",
-			"action"=>"",
-			"pathinfo"=>array()
-		)
+	 * @return bool
+	 * @param string $url_path
 	 */
-	/**
-	 * @return urlManager
-	 */
-	public function getUrlManager();
+	public function match($url_path);
 }

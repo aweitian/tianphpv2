@@ -4,7 +4,7 @@
  * Author:Awei.tian
  * Function:
  */
-require 'lib/tianv2/tian.php';
-tian::initRunEnvir();
-tian::initHttpRequest();
-tian::initHttpResponse();
+require_once 'lib/tianv2/tian.php';
+require_once 'app/App.php';
+App::init();
+App::run();

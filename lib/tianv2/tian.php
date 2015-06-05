@@ -12,10 +12,14 @@ if(DEBUG_FLAG){
 	error_reporting(0);
 	ini_set("display_errors","Off");
 }
-
 define("ENTRY_PATH",dirname(dirname(dirname(__FILE__))));
 define("ENTRY_HOME","/tianphpv2");
 set_include_path(ENTRY_PATH.PATH_SEPARATOR.get_include_path());
+require_once 'lib/tianv2/runEnvir/runEnvirFactory.php';
+require_once 'lib/tianv2/request/httpRequest.php';
+require_once 'lib/tianv2/response/httpResponse.php';
+require_once 'lib/tianv2/route/router.php';
+require_once 'lib/tianv2/identityToken/identityToken.php';
 
 class tian{
 	/**
@@ -31,13 +35,24 @@ class tian{
 	 */
 	public static $response;
 	/**
-	 * @var urlManager
+	 * @var router
 	 */
-	public static $urlManager;
+	public static $router;
+	
+	/**
+	 * @var IDispatcher
+	 */
+	public static $dispatcher;
 	/**
 	 * @var message
 	 */
 	public static $message;
+	
+	
+	
+	public static $identityToken;
+	
+	private static $modulePath = array();
 	private function __construct(){}
 	
 	public static function throwException($err_no){
@@ -53,6 +68,9 @@ class tian{
 		print "<pre>";
 		throw new Exception($e[$err_no],$err_no);
 	}
+	public static function initIdentityEoken(){
+		self::$identityToken = new identityToken(self::getClientIp());
+	}
 	public static function initRunEnvir(){
 		self::$runEnvir = runEnvirFactory::getInstance()->runEnvir;
 	}
@@ -62,16 +80,25 @@ class tian{
 	public static function initHttpResponse(){
 		self::$response = new httpResponse();
 	}
-	public static function initUrlManager(){
-		if(is_null(self::$requiest)){
-			self::throwException("7392");
-			return;
+	public static function addModulePath($name,$path){
+		self::$modulePath[$name] = $path;
+	}
+	public static function removeModulePath($name){
+		unset(self::$modulePath[$name]);
+	}
+	public static function initRouter(){
+		self::$router = new router();
+	}
+	public static function initDefDispatcher(){
+		require_once 'lib/tianv2/route/routes/default/defaultDispatcher.php';
+		self::$dispatcher = new defaultDispatcher(self::$router->getRoute()->msg);
+	}
+	public static function getModulePath($name){
+		if(!isset(self::$modulePath[$name])){
+			tian::throwException("7396");
+			return ;
 		}
-		if(is_null(self::$response)){
-			self::throwException("7393");
-			return;
-		}
-		self::$urlManager = new urlManager();
+		return self::$modulePath[$name];
 	}
 	public static function initMsg(){
 		
@@ -139,5 +166,16 @@ class tian{
 			}
 		}
 		return $ret;
+	}
+	public static function getClientIp(){
+		$ip = $_SERVER["REMOTE_ADDR"];
+		if(substr($ip,0,7) === "192.168"){
+			$ip = getenv("HTTP_X_Forwarded_For");
+			if(strpos($ip, ",") !== false){
+				$ips = explode(",",$ip);
+				$ip = $ips[sizeof($ips)-1];
+			}
+		}
+		return($ip);
 	}
 }

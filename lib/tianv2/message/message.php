@@ -9,18 +9,23 @@
 /**
  * 下面的文件包含了pmcai && httpdataconverter
  */
+require_once 'lib/tianv2/request/url.php';
+require_once "lib/tianv2/utils/httpDataConverter.php";
+require_once 'lib/tianv2/request/httpRequest.php';
 class message implements arrayaccess{
 	private $request;
-	private $_body_data_array=array();
-	private $_query_access_char="?";
-
+	private $_query_access_char = "?";
+	private $_get_data;
+	private $_post_data;
+	
 	/**
 	 * @param httpRequest $request
 	 * @param array $pmcai
 	 */
 	public function __construct(httpRequest $request){
-		$this->request=$request;
+		$this->request = $request;
 		$this->_parse_raw_body_data();
+		$this->_get_data = httpDataConverter::formToArray($this->request->getQueryString());
 		//unset _GET _POST
 		$this->_unsetUserData();
 	}
@@ -28,158 +33,44 @@ class message implements arrayaccess{
 		return false;	
 	}
 	public function getGetData(){
-		return $this->pmcaiUrl->getQueryArray();
+		return $this->_get_data;
 	}
 	public function getPostData(){
-		return $this->_body_data_array;
-	}
-	public function setDispatcher(dispatcher $dispatcher){
-		$this->_dispatcher=$dispatcher;
-	}
-	public function setDispatchedState($s){
-		$this->_dispatched_state=$s;
-	}
-	public function getDispatcher(){
-		return $this->_dispatcher;
-	}
-	public function getDispatchState(){
-		return $this->_dispatched_state;
+		return $this->_post_data;
 	}
 	public function getHttpRequest(){
 		return $this->request;
 	}
-	public function getpmcaiUrl(){
-		return $this->pmcaiUrl;
-	}
-	public function getModule(){
-		return $this->pmcaiUrl->getModule();
-	}
-	public function setModule($v){
-		$this->pmcaiUrl->setModule($v);
-		return $this;
-	}
-	public function getControl(){
-		return $this->pmcaiUrl->getControl();
-	}
-	public function setControl($v){
-		$this->pmcaiUrl->setControl($v);
-		return $this;
-	}
-	public function getAction(){
-		return $this->pmcaiUrl->getAction();
-	}
-	public function setAction($v){
-		$this->pmcaiUrl->setAction($v);
-		return $this;
-	}
 	public function getRawQueryString(){
-		return $this->pmcaiUrl->getRawQuery();	
+		return $this->request->getQueryString();	
 	}
 	public function getRawHttpBodyData(){
 		return $this->request->rawBody();	
 	}
-	public function getModuleLoc(){
-		if($this->moduleLoc == ""){
-			return $this->_getDefaultModuleLoc();
-		}
-		return $this->moduleLoc;
+	public function isPost(){
+		return $this->request->isPost();
 	}
-	public function setModuleLoc($loc){
-		$this->moduleLoc=$loc;
-		return $this;
-	}
-	public function setPmcaiAccessChar($char){
-		$this->_pmcai_access_char=$char;
-		return $this;
-	}
-	public function setQueryAccessChar($char){
-		$this->_query_access_char=$char;
-		return $this;
-	}
-	public function setPathinfoAccessChar($char){
-		$this->_pathinfo_access_char=$char;
-		return $this;
-	}
-	public function setTempvarAccessChar($char){
-		$this->_tempvar_access_char=$char;
-		return $this;
-	}
-	public function getQueryAccessChar(){
-		return $this->_query_access_char;
-	}
-	public function getPathinfoAccessChar(){
-		return $this->_pathinfo_access_char;
-	}
-	public function getTempvarAccessChar(){
-		return $this->_tempvar_access_char;
-	}
-	public function getPmcaiAccessChar(){
-		return $this->_pmcai_access_char;
-	}
-	public function setDispatchCount($v){
-		$this->_count_dispatch=$v;
-		return $this;
-	}
-	public function getDispatchCount(){
-		return $this->_count_dispatch;
-	}
-	public function getUseSysControlNotFound(){
-		return $this->_use_sys_control_not_found;
-	}
-	public function setUseSysControlNotFound(){
-		$this->_use_sys_control_not_found=true;
-		return $this;
-	}
-	public function resetUseSysControlNotFound(){
-		$this->_use_sys_control_not_found=false;
-		return $this;
-	}
-	private function _getDefaultModuleLoc(){
-		return ENTRY_PATH.C::get("defaultModuleLocation");
-	}	
+	
+	
+	
 //---------------------------------------------------------------------
-	private function _get_querystrig($_default){
-		if($_default!=="")return $_default;
-		return $this->request->getQueryString();
-	}
-	private function _get_scheme($_default){
-		if($_default!=="")return $_default;
-		return $this->request->getScheme();
-	}
-	private function _get_host($_default){
-		if($_default!=="")return $_default;
-		return $this->request->getHost();
-	}
-	private function _get_port($_default){
-		if($_default!=="")return $_default;
-		return $this->request->getPort();
-	}
-	private function _get_fragment($_default){
-		if($_default!=="")return $_default;
-		return "";
-	}
 	private function _unsetUserData(){
 		unset($_POST);
 		unset($_GET);
 	}	
 	private function _parse_raw_body_data(){
-		if(empty($this->_body_data_array)){
+		if(empty($this->_post_data)){
 			if(httpDataConverter::isJson($this->getRawHttpBodyData())){
-				$this->_body_data_array=httpDataConverter::jsonToArray($this->getRawHttpBodyData());
+				$this->_post_data=httpDataConverter::jsonToArray($this->getRawHttpBodyData());
 			}else{
-				$this->_body_data_array=httpDataConverter::formToArray($this->getRawHttpBodyData());
+				$this->_post_data=httpDataConverter::formToArray($this->getRawHttpBodyData());
 			}
 		}
 	}
 	private function & _key($offset){
-		$x = false;
 		$_args = $this->_args($offset);
-		$offset = $this->_offset($offset);
-		if($_args===1)return $this->pmcaiUrl->getQueryArray();
-		if($_args===2)return $this->pmcaiUrl->getPathinfoArray();
-		if($_args===3)return $this->_tempvar_data;
-		if($_args===4)return $x;
-		return $this->_body_data_array;
+		if($_args === 1)return $this->_get_data;
+		return $this->_post_data;
 	}
 	private function _offset($offset){
 		if($this->_args($offset)){
@@ -189,18 +80,11 @@ class message implements arrayaccess{
 	}
 	private function _args($offset){
 		if(substr($offset,0,1) === $this->_query_access_char)return 1;
-		if(substr($offset,0,1) === $this->_pathinfo_access_char)return 2;
-		if(substr($offset,0,1) === $this->_tempvar_access_char)return 3;
-		if(substr($offset,0,1) === $this->_pmcai_access_char)return 4;
 		return 0;
 	}
 	public function offsetSet($offset, $value){
 		$r = & $this->_key($offset);
 		if($r === false){
-			if($this->_args($offset)==4 && in_array($this->_offset($offset), $this->_pmcai_access_attr)){
-				$this->{"set".$this->_offset($offset)}($value);
-				return true;
-			}
 			return false;
 		}
 		$offset = $this->_offset($offset);
@@ -210,9 +94,6 @@ class message implements arrayaccess{
 	public function offsetExists($offset) {
 		$r = $this->_key($offset);
 		if($r === false){
-			if($this->_args($offset)==4 && in_array($this->_offset($offset), $this->_pmcai_access_attr)){
-				return true;
-			}
 			return false;
 		}
 		$offset = $this->_offset($offset);
@@ -221,9 +102,6 @@ class message implements arrayaccess{
 	public function offsetUnset($offset) {
 		$r = & $this->_key($offset);
 		if($r === false){
-			if($this->_args($offset)==4 && in_array($this->_offset($offset), $this->_pmcai_access_attr)){
-				throw new Exception("permisstion denied @ unset message pmcai");
-			}
 			return false;
 		}
 		$offset = $this->_offset($offset);
@@ -232,9 +110,6 @@ class message implements arrayaccess{
 	public function offsetGet($offset) {
 		$value = $this->_key($offset);
 		if($value === false){
-			if($this->_args($offset)==4 && in_array($this->_offset($offset), $this->_pmcai_access_attr)){
-				return $this->{"get".$this->_offset($offset)}();
-			}
 			return false;
 		}
 		if(!is_array($value)){
