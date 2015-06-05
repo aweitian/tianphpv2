@@ -30,7 +30,7 @@ class router{
 	public function addDefaultRoutes(){
 		if (!$this->hasRoute('default')) {
 			require_once 'routes/default/defaultRoute.php';
-			$p=str_repeat("p", count(explode("/", trim(ENTRY_HOME,"/"))));
+			$p = tian::getDefPreMask();
 			$compat = new defaultRoute($p."ca");
 			$this->_routes = array('default' => $compat) + $this->_routes;
 		}

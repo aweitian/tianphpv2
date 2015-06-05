@@ -325,7 +325,7 @@ class pmcaiUrl{
 		}
 	}
 	private function defaultMask(){
-		return str_repeat("p", count(explode("/", trim(ENTRY_HOME,"/"))))."ca";
+		return tian::getDefPreMask()."ca";
 	}
 	private function initConf(){
 		if(is_array($this->conf)){

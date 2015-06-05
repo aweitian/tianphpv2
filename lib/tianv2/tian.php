@@ -12,8 +12,7 @@ if(DEBUG_FLAG){
 	error_reporting(0);
 	ini_set("display_errors","Off");
 }
-define("ENTRY_PATH",dirname(dirname(dirname(__FILE__))));
-define("ENTRY_HOME","/tianphpv2");
+
 set_include_path(ENTRY_PATH.PATH_SEPARATOR.get_include_path());
 require_once 'lib/tianv2/runEnvir/runEnvirFactory.php';
 require_once 'lib/tianv2/request/httpRequest.php';
@@ -177,5 +176,9 @@ class tian{
 			}
 		}
 		return($ip);
+	}
+	public static function getDefPreMask(){
+		if(ENTRY_HOME == "" )return "";
+		return str_repeat("p", count(explode("/", trim(ENTRY_HOME,"/"))));
 	}
 }

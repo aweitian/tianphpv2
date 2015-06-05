@@ -5,10 +5,12 @@
  * Function:
  */
 class App{
+	public static $envir;
 	private function __construct(){
 		
 	}
-	public static function init(){
+	public static function init($envir){
+		self::$envir = $envir;
 		tian::initIdentityEoken();
 		tian::initRunEnvir();
 		tian::initHttpRequest();
