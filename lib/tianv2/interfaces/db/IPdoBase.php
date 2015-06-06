@@ -34,4 +34,8 @@ interface IPdoBase{
 	 * 返回影响的行数
 	 */
 	function exec($sql,$data);
+	/**
+	 * 判断是不是操作没有数据改变
+	 */
+	function hasAffected();
 }

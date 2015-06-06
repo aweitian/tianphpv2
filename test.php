@@ -4,4 +4,9 @@
  * Author:Awei.tian
  * Function:
  */
-var_dump(array("2"=>"2","4"=>3)+array("45"=>'e',"333"=>"11")+array("88"=>"e"));
+error_reporting(E_ALL);
+ini_set("display_errors","On");
+require_once 'app/runEnvir/openshift.php';
+$pdo = new PDO('mysql:host=localhost;dbname='.DB_NAME,DB_USER,DB_PASS);
+var_dump($pdo);
+

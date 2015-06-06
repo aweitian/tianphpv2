@@ -21,6 +21,7 @@ require_once 'lib/tianv2/route/router.php';
 require_once 'lib/tianv2/identityToken/identityToken.php';
 
 class tian{
+	
 	/**
 	 * @var runEnvir
 	 */
@@ -67,6 +68,7 @@ class tian{
 		print "<pre>";
 		throw new Exception($e[$err_no],$err_no);
 	}
+	
 	public static function initIdentityEoken(){
 		self::$identityToken = new identityToken(self::getClientIp());
 	}

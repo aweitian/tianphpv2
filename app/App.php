@@ -10,7 +10,7 @@ class App{
 		
 	}
 	public static function init($envir){
-		self::$envir = $envir;
+		self::initEnvir($envir);
 		tian::initIdentityEoken();
 		tian::initRunEnvir();
 		tian::initHttpRequest();
@@ -36,6 +36,17 @@ class App{
 			case "svc":
 				tian::$dispatcher = new svcDispatcher();
 				tian::$dispatcher->dispatch();
+				break;
+		}
+	}
+	private static function initEnvir($envir){
+		self::$envir = $envir;
+		switch ($envir){
+			case "openshift":
+				require_once 'app/runEnvir/openshift.php';
+				break;
+			default:
+				require_once 'app/runEnvir/default.php';
 				break;
 		}
 	}
