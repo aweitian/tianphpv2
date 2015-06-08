@@ -13,30 +13,19 @@
 // | key_value_cache | MyISAM |      10 | Dynamic    |    1 |             28 |          96 | 281474976710655 |         7168 |         68 |           NULL | 2013-09-30 14:44:41 | 2013-09-30 15:08:11 | NULL       | utf8_general_ci |     NULL |                |         |
 // | key_value_pair  | MyISAM |      10 | Dynamic    |    2 |             30 |          60 | 281474976710655 |         7168 |          0 |           NULL | 2013-09-30 13:34:06 | 2013-11-14 11:10:43 | NULL       | utf8_general_ci |     NULL |                |         |
 // +-----------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+------------+----------------+---------------------+---------------------+------------+-----------------+----------+----------------+---------+
-require_once LIB_PATH.'/interfaces/IDbInfo.php';
-C::addAutoloadPath("IKv", LIB_PATH.'/interfaces/IKv.php');
+require_once 'lib/tianv2/interfaces/db/IDbInfo.php';
 class mysqlDbInfo implements IDbInfo{
 	private $connection;
 	private $dbname;
-	private $cache_engine=null;
-	private $cache_flag=false;
-	private $prefix_kv="mysqlDbInfo.";
 	private static $descriptions=null;
 	public $errorInfo;
-	public function __construct(PDO $connection,$dbname,$kv=null){
-		$this->connection=$connection;
+	public function __construct($dbname,$kv=null){
+		$this->connection=tian::$pdo;
 		$this->dbname=$dbname;
-		if(!is_null($kv)){
-			if(!($kv instanceof IKv)){
-				throw new Exception("CACHE_HAVE_TO_IMPLEMENT_ICACHE");//(null, mysqlDbInfoException::CACHE_HAVE_TO_IMPLEMENT_ICACHE);
-			}else{
-				$this->cache_flag=true;
-				$this->cache_engine=$kv;
-			}
-		}
 		if(is_null(self::$descriptions))self::$descriptions=$this->getDescription();
 		if(is_null(self::$descriptions)){
-			throw new Exception("obtain descripton failed @ mysqlDbInfo Error:".$this->dbname);
+			tian::throwException("73e1");
+			return ;
 		}
 	}
 	public function getTableNames(){
@@ -64,20 +53,13 @@ class mysqlDbInfo implements IDbInfo{
 		return in_array($tabname, $hash);
 	}
 	protected function getDescription(){
-		if($this->cache_flag&&is_array($result=$this->cache_engine->get($this->prefix_kv.$table))){
-			return $result;
-		}else{
-			$sth=$this->connection->prepare("SHOW TABLE status FROM $this->dbname");
-			$sth->execute();
-			$result=$sth->fetchAll(PDO::FETCH_ASSOC);
-			$this->errorInfo=$sth->errorInfo();
-			if(count($result)==0){
-				return null;
-			}
-			if($this->cache_flag){
-				$this->cache_engine->set($this->prefix_kv.$table,$result);
-			}
-			return $result;
+		$sth=$this->connection->prepare("SHOW TABLE status FROM $this->dbname");
+		$sth->execute();
+		$result=$sth->fetchAll(PDO::FETCH_ASSOC);
+		$this->errorInfo=$sth->errorInfo();
+		if(count($result)==0){
+			return null;
 		}
+		return $result;
 	}
 }

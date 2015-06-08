@@ -8,8 +8,29 @@ class App{
 	public static $envir;
 	private function __construct(){
 		
+		
 	}
-	public static function init($envir){
+	/**
+	 * @return envir string
+	 */
+	public static function probe(){
+		
+	}
+	/**
+	 * 
+	 * 1. 环境名初始化
+	 * 2. 初始化IdentityEoken
+	 * 3. RunEnvir
+	 * 4. HttpRequest
+	 * 5. HttpResponse
+	 * 6. initRouter
+	 */
+	public static function init(){
+		if(false !== strpos(ENTRY_PATH, "openshift")){
+			self::initEnvir("openshift");
+		}else{
+			self::initEnvir("default");
+		}
 		self::initEnvir($envir);
 		tian::initIdentityEoken();
 		tian::initRunEnvir();

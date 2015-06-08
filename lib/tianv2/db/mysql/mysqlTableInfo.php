@@ -22,27 +22,29 @@ require_once 'lib/tianv2/interfaces/db/ITableInfo.php';
 class mysqlTableInfo implements ITableInfo{
 	/**
 	 * Enter description here ...
-	 * @var pdoConnection
+	 * @var PDO
 	 */
 	private $connection;
 	private $tabname;
-	private $cache_engine=null;
-	private $cache_flag=false;
-	private $prefix_kv="mysqlTableInfo.";
+
 	private static $descriptions=array();
 	private static $key_descriptions=array();
 	
-	public function __construct(pdoConnection $connection,$tabname,$kv=null){
+	public function __construct($tabname){
 		$this->connection=$connection;
-		if(!is_null($kv)){
-			if(!($kv instanceof IKv)){
-				throw new mysqlColumnInfoException(null, mysqlTableInfoException::CACHE_HAVE_TO_IMPLEMENT_ICACHE);
-			}else{
-				$this->cache_flag=true;
-				$this->cache_engine=$kv;
-			}
-		}
+		$this->init($tabname);
+	}
+	/**
+	 * 
+	 * @param string $tabname
+	 * 用于调用clearCache后调用
+	 */
+	public function init($tabname){
 		$this->setTableName($tabname);
+	}
+	public function clearCache(){
+		mysqlTableInfo::$descriptions = array();
+		mysqlTableInfo::$key_descriptions = array();
 	}
 	private function setTableName($tab){
 		if($tab=="")return ;
@@ -56,9 +58,8 @@ class mysqlTableInfo implements ITableInfo{
 			if(!is_null($ret))self::$descriptions[$tab]=$ret;
 		}
 		if(!array_key_exists($tab,self::$descriptions)){
-			throw new mysqlTableInfoException(null, 
-				mysqlTableInfoException::ERROR
-			);
+			tian::throwException("73e0");
+			return ;
 		}
 	}
 	public function getPk(){
@@ -74,7 +75,7 @@ class mysqlTableInfo implements ITableInfo{
 	public function getColumnNames(){
 		$ret=array();
 		if(!isset(self::$key_descriptions[$this->tabname])||!is_array(self::$key_descriptions[$this->tabname])){
-			throw new Exception("tablename:[".$this->tabname."] not found @ mysqlTableInfo");
+			return "";
 		}
 		foreach (self::$key_descriptions[$this->tabname] as $val){
 			$ret[]=$val["Field"];
@@ -94,36 +95,23 @@ class mysqlTableInfo implements ITableInfo{
 		return self::$key_descriptions[$this->tabname];
 	}
 	protected function getTableDecription(){
-		if($this->cache_flag&&is_array($result=$this->cache_engine->get($this->prefix_kv.$table))){
-			return $result;
-		}else{
-			$sth=$this->connection->getConnection()->prepare("show table status from ".$this->connection->getDbname()." where name=:tablename");
-			$sth->execute(array("tablename"=>$this->tabname));
-			$result=$sth->fetchAll(PDO::FETCH_ASSOC);
-			if(count($result)!=1){
-				return null;
-			}
-			$result=$result[0];
-			if($this->cache_flag){
-				$this->cache_engine->set($this->prefix_kv.$table,$result);
-			}
-			return $result;
+		$sth=$this->connection->prepare("show table status from ".$this->connection->getDbname()." where name=:tablename");
+		$sth->execute(array("tablename"=>$this->tabname));
+		$result=$sth->fetchAll(PDO::FETCH_ASSOC);
+		if(count($result)!=1){
+			return null;
 		}
+		$result=$result[0];
+		return $result;
+
 	}	
 	protected function getTableKeyDecription(){
-		if($this->cache_flag&&is_array($result=$this->cache_engine->get($this->prefix_kv.$table))){
-			return $result;
-		}else{
-			$sth=$this->connection->getConnection()->prepare("SHOW COLUMNS FROM $this->tabname");
-			$sth->execute();
-			$result=$sth->fetchAll(PDO::FETCH_ASSOC);
-			if(count($result)==0){
-				return null;
-			}
-			if($this->cache_flag){
-				$this->cache_engine->set($this->prefix_kv.$table,$result);
-			}
-			return $result;
+		$sth=$this->connection->prepare("SHOW COLUMNS FROM $this->tabname");
+		$sth->execute();
+		$result=$sth->fetchAll(PDO::FETCH_ASSOC);
+		if(count($result)==0){
+			return null;
 		}
+		return $result;
 	}	
 }

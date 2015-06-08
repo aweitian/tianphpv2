@@ -13,16 +13,11 @@
 //| order      | int(2)        | NULL            | NO   | UNI | 0       |      			 | select,insert,update,references | 排序       	  |
 //| updatetime | datetime      | NULL            | NO   |     | NULL    |       		 | select,insert,update,references | 更新时间    |
 //+------------+---------------+-----------------+------+-----+---------+----------------+---------------------------------+----------+
-require_once LIB_PATH.'/interfaces/IColumnInfo.php';
-C::addAutoloadPath("mysqlColumnInfoException", LIB_PATH."/db/mysql/mysqlColumnInfoException.php");
-C::addAutoloadPath("IKv", LIB_PATH.'/interfaces/IKv.php');
+require_once 'lib/tianv2/interfaces/db/IColumnInfo.php';
 class mysqlColumnInfo implements IColumnInfo{
 	private $connection;
 	private $tabname;
 	private $columnname;
-	private $cache_engine=null;
-	private $cache_flag=false;
-	private $prefix_kv="mysqlColumnInfo.";
 	/**
 	 * 格式是以列名为键值的数组
 	 */
@@ -30,23 +25,24 @@ class mysqlColumnInfo implements IColumnInfo{
 	/**
 	 * 
 	 * Enter description here ...
-	 * @param PDO $connection
-	 * @param unknown_type $tabname
-	 * @param unknown_type $columnname
-	 * @param USECACHE $flag
+	 * @param string $tabname
+	 * @param string $columnname
 	 */
-	public function __construct(PDO $connection,$tabname,$columnname,$kv=null){
-		$this->connection=$connection;
+	public function __construct($tabname,$columnname){
+		$this->connection=tian::$pdo;
 		$this->columnname=$columnname;
-		if(!is_null($kv)){
-			if(!($kv instanceof IKv)){
-				throw new mysqlColumnInfoException(null, mysqlColumnInfoException::CACHE_HAVE_TO_IMPLEMENT_ICACHE);
-			}else{
-				$this->cache_flag=true;
-				$this->cache_engine=$kv;
-			}
-		}
+		$this->init($tabname);
+	}
+	/**
+	 *
+	 * @param string $tabname
+	 * 用于调用clearCache后调用
+	 */
+	public function init($tabname){
 		$this->setTableName($tabname);
+	}
+	public function clearCache(){
+		self::$descriptions = array();
 	}
 	private function setTableName($tab){
 		if($tab=="")return ;
@@ -159,20 +155,13 @@ class mysqlColumnInfo implements IColumnInfo{
 		return $name==="Field" ? array_values($k) : $k;
 	}
 	protected function getTableDecription(){
-		if($this->cache_flag&&is_array($result=$this->cache_engine->get($this->prefix_kv.$table))){
-			return $result;
-		}else{
-			$sth=$this->connection->prepare("SHOW FULL COLUMNS FROM `$this->tabname`");
-			$sth->execute();
-			$res=$sth->fetchAll(PDO::FETCH_ASSOC);
-			$result=array();
-			foreach ($res as $v){
-				$result[$v["Field"]]=$v;
-			}
-			if($this->cache_flag){
-				$this->cache_engine->set($this->prefix_kv.$table,$result);
-			}
-			return $result;
+		$sth=$this->connection->prepare("SHOW FULL COLUMNS FROM `$this->tabname`");
+		$sth->execute();
+		$res=$sth->fetchAll(PDO::FETCH_ASSOC);
+		$result=array();
+		foreach ($res as $v){
+			$result[$v["Field"]]=$v;
 		}
+		return $result;
 	}
 }

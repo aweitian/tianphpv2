@@ -52,6 +52,12 @@ class tian{
 	
 	public static $identityToken;
 	
+	/**
+	 * 
+	 * @var PDO
+	 */
+	public static $pdo;
+	
 	private static $modulePath = array();
 	private function __construct(){}
 	
@@ -74,6 +80,7 @@ class tian{
 	}
 	public static function initRunEnvir(){
 		self::$runEnvir = runEnvirFactory::getInstance()->runEnvir;
+		self::$pdo = new PDO('mysql:host=localhost;dbname='.DB_NAME,DB_USER,DB_PASS);
 	}
 	public static function initHttpRequest(){
 		self::$requiest = new httpRequest();

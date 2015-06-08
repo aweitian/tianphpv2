@@ -6,4 +6,5 @@
  */
 return array(
 	"73e0" => "error",
+	"73e1" => "'SHOW TABLE status FROM tabname' failed",
 );

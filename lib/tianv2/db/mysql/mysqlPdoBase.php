@@ -15,7 +15,7 @@ class mysqlPdoBase implements IPdoBase{
 	private $errorCode;//code
 	const NONERRCODE = "00000";
 	public function __construct(){
-		$this->connection = new PDO('mysql:host=localhost;dbname='.DB_NAME,DB_USER,DB_PASS);
+		$this->connection = tian::$pdo;
 	}
 	/**
 	 * @return string
