@@ -19,7 +19,7 @@ class mysqlDbInfo implements IDbInfo{
 	private $dbname;
 	private static $descriptions=null;
 	public $errorInfo;
-	public function __construct($dbname,$kv=null){
+	public function __construct($dbname){
 		$this->connection=tian::$pdo;
 		$this->dbname=$dbname;
 		if(is_null(self::$descriptions))self::$descriptions=$this->getDescription();
@@ -58,6 +58,9 @@ class mysqlDbInfo implements IDbInfo{
 		$result=$sth->fetchAll(PDO::FETCH_ASSOC);
 		$this->errorInfo=$sth->errorInfo();
 		if(count($result)==0){
+			if($this->errorInfo[0] == "00000"){
+				return array();
+			}
 			return null;
 		}
 		return $result;

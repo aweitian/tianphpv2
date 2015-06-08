@@ -14,7 +14,6 @@ if(DEBUG_FLAG){
 }
 
 set_include_path(ENTRY_PATH.PATH_SEPARATOR.get_include_path());
-require_once 'lib/tianv2/runEnvir/runEnvirFactory.php';
 require_once 'lib/tianv2/request/httpRequest.php';
 require_once 'lib/tianv2/response/httpResponse.php';
 require_once 'lib/tianv2/route/router.php';
@@ -57,6 +56,25 @@ class tian{
 	 * @var PDO
 	 */
 	public static $pdo;
+	/**
+	 * @var IDbInfo
+	 */
+	public static $dbInfo;
+	/**
+	 * @var ITableInfo
+	 */
+	public static $tableInfo;
+	/**
+	 * 
+	 * @var IColumnInfo
+	 */
+	public static $columnInfo;
+	
+	/**
+	 * @var IPdoBase
+	 */
+	public static $pdoBase;
+	
 	
 	private static $modulePath = array();
 	private function __construct(){}
@@ -77,10 +95,6 @@ class tian{
 	
 	public static function initIdentityEoken(){
 		self::$identityToken = new identityToken(self::getClientIp());
-	}
-	public static function initRunEnvir(){
-		self::$runEnvir = runEnvirFactory::getInstance()->runEnvir;
-		self::$pdo = new PDO('mysql:host=localhost;dbname='.DB_NAME,DB_USER,DB_PASS);
 	}
 	public static function initHttpRequest(){
 		self::$requiest = new httpRequest();
@@ -107,10 +121,6 @@ class tian{
 			return ;
 		}
 		return self::$modulePath[$name];
-	}
-	public static function initMsg(){
-		
-		//self::$message = new message(self::$requiest, $urlManager)
 	}
 	public static function getDirList($dir){
 		$ret=array();
@@ -190,4 +200,38 @@ class tian{
 		if(ENTRY_HOME == "" )return "";
 		return str_repeat("p", count(explode("/", trim(ENTRY_HOME,"/"))));
 	}
+
+
+	/* db */
+	/**
+	 * @return mysqlPdoBase
+	 */
+	public static function initPdoBase(){
+		require_once 'lib/tianv2/db/mysql/mysqlPdoBase.php';
+		self::$pdo = new PDO('mysql:host=localhost;dbname='.DB_NAME,DB_USER,DB_PASS);
+		self::$pdoBase = new mysqlPdoBase();
+	}
+	/**
+	 * @return mysqlDbInfo
+	*/
+	public static function initDbInfo(){
+		require_once 'lib/tianv2/db/mysql/mysqlDbInfo.php';
+		self::$dbInfo = new mysqlDbInfo(DB_NAME);
+	}
+	/**
+	 * @return mysqlTableInfo
+	*/
+	public static function getTableInfo($tabname){
+		require_once 'lib/tianv2/db/mysql/mysqlTableInfo.php';
+		return new mysqlTableInfo($tabname);
+	}
+	/**
+	 * @return mysqlColumnInfo
+	*/
+	public static function getColumnInfo($tabname, $columnname){
+		require_once 'lib/tianv2/db/mysql/mysqlColumnInfo.php';
+		return new mysqlColumnInfo($tabname, $columnname);
+	}
+
+
 }

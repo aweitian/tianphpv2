@@ -6,6 +6,16 @@
  */
 class App{
 	public static $envir;
+	/**
+	 * 
+	 * @var IPdoBase
+	 */
+	public static $db;
+	/**
+	 * 
+	 * @var PDO
+	 */
+	public static $pdo;
 	private function __construct(){
 		
 		
@@ -31,17 +41,24 @@ class App{
 		}else{
 			self::initEnvir("default");
 		}
-		self::initEnvir($envir);
 		tian::initIdentityEoken();
-		tian::initRunEnvir();
 		tian::initHttpRequest();
 		tian::initHttpResponse();
 		tian::initRouter();
 		
+		tian::initPdoBase();
+		tian::initDbInfo();
+		
+		
 		require_once 'app/routes/svc/svcRoute.php';
 		require_once 'app/routes/svc/svcDispatcher.php';
+		
+		self::$db = tian::$pdoBase;
+		self::$pdo = tian::$pdo;
+		
 	}
 	public static function run(){
+		
 		tian::addModulePath("default", ENTRY_PATH."/app/controls");
 		tian::$router->addRoute("svc", new svcRoute());
 		
@@ -70,5 +87,29 @@ class App{
 				require_once 'app/runEnvir/default.php';
 				break;
 		}
+	}
+	/**
+	 * @return IPdoBase
+	 */
+	public static function getPdoBase(){
+		return tian::$pdoBase;
+	}
+	/**
+	 * @return IDbInfo
+	 */
+	public static function getDbInfo(){
+		return tian::$dbInfo;
+	}
+	/**
+	 * @return ITableInfo
+	 */
+	public static function getTableInfo($tabname){
+		return tian::getTableInfo($tabname);
+	}
+	/**
+	 * @return IColumnInfo
+	 */
+	public static function getColumnInfo($tabname, $columnname){
+		return tian::getColumnInfo($tabname, $columnname);
 	}
 }
