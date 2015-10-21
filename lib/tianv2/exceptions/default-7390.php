@@ -14,4 +14,5 @@ return array(
 	"7396" => "invalid module name",
 	"7397" => "hook 404 failed",
 	"7398" => "hook 404 no implements iControlNotFound",
+	"7399" => "require tianv2 lib",
 );

@@ -4,10 +4,10 @@
  * @date:2013-12-11
  * @functions:
  */
-require dirname(__FILE__)."/IPdoBase.php";
-require dirname(__FILE__)."/IDbInfo.php";
-require dirname(__FILE__)."/ITableInfo.php";
-require dirname(__FILE__)."/IColumnInfo.php";
+require_once dirname(__FILE__)."/IPdoBase.php";
+require_once dirname(__FILE__)."/IDbInfo.php";
+require_once dirname(__FILE__)."/ITableInfo.php";
+require_once dirname(__FILE__)."/IColumnInfo.php";
 
 interface IDb{
 	/**

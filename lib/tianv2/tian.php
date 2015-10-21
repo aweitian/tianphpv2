@@ -75,6 +75,11 @@ class tian{
 	 */
 	public static $pdoBase;
 	
+	/**
+	 * 
+	 * @var session
+	 */
+	public static $session;
 	
 	private static $modulePath = array();
 	private function __construct(){}
@@ -89,11 +94,36 @@ class tian{
 				$e = $e + require_once $item;
 			}
 		}
-		print "<pre>";
-		throw new Exception($e[$err_no],$err_no);
+		self::newException($e[$err_no],$err_no);
 	}
-	
-	public static function initIdentityEoken(){
+	public static function newException($msg,$no) {
+		print "<pre>";
+		throw new Exception($msg,$no);
+	}
+	public static function init() {
+		require_once 'lib/tianv2/validate/validator.php';
+		tian::loadInterfaces();
+		tian::initSession();
+		tian::initIdentityToken();
+		tian::initHttpRequest();
+		tian::initHttpResponse();
+		tian::initRouter();
+		
+		tian::initPdoBase();
+		tian::initDbInfo();
+		
+	}
+	private static function loadInterfaces() {
+		return self::loadLibs("lib/tianv2/interfaces");
+	}
+	public static function loadLibs($dir) {
+		$ls = tian::getALLFileList($dir,"php");
+		foreach($ls as $f) {
+			require_once $f;
+		}
+		return ;
+	}
+	public static function initIdentityToken(){
 		self::$identityToken = new identityToken(self::getClientIp());
 	}
 	public static function initHttpRequest(){
@@ -125,7 +155,7 @@ class tian{
 	public static function getDirList($dir){
 		$ret=array();
 		if(!$handle = @opendir($dir)){
-			return false;
+			return $ret;
 		}
 		while (false !== ($file = @readdir($handle))) {
 			if($file==".")continue;
@@ -135,6 +165,7 @@ class tian{
 				$ret[]=$file;
 			}
 		}
+		@closedir($handle);
 		return $ret;
 	}
 	/**
@@ -146,7 +177,7 @@ class tian{
 	public static function getFileList($dir,$ext_filter=""){
 		$ret=array();
 		if(!$handle = @opendir($dir)){
-			return false;
+			return $ret;
 		}
 		$filter=array();
 		$filter_mode="include";
@@ -183,6 +214,23 @@ class tian{
 	
 			}
 		}
+		@closedir($handle);
+		return $ret;
+	}
+	/**
+	 *
+	 * 获取目录下所有文件全路径,后台的参数大小写不区分
+	 * @param $dir
+	 * @param $ext_filter 排除前面用!txt,ini.
+	 */
+	public static function getALLFileList($dir,$ext_filter="",&$ret=array()){
+		$dirArr = self::getDirList($dir);
+		
+// 		var_dump($ret);
+		foreach ($dirArr as $d) {
+			self::getALLFileList($dir.DIRECTORY_SEPARATOR.$d,$ext_filter,$ret);
+		}
+		$ret = array_merge($ret , self::getFileList($dir,$ext_filter));
 		return $ret;
 	}
 	public static function getClientIp(){
@@ -218,6 +266,12 @@ class tian{
 		require_once 'lib/tianv2/db/mysql/mysqlDbInfo.php';
 		self::$dbInfo = new mysqlDbInfo(DB_NAME);
 	}
+	public static function initSession() {
+		require_once "lib/tianv2/session/session.php";
+		self::$session = new session();
+	}
+	
+	
 	/**
 	 * @return mysqlTableInfo
 	*/
