@@ -6,6 +6,9 @@
  */
 class validator{
 	public static function isInt($v){
+		return is_numeric($v) && preg_match("/^-?\d+$/",$v);
+	}
+	public static function isUint($v){
 		return is_numeric($v) && preg_match("/^\d+$/",$v);
 	}
 	public static function isDate($v){

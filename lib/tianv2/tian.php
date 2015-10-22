@@ -82,23 +82,49 @@ class tian{
 	public static $session;
 	
 	private static $modulePath = array();
+	
+	private static $e;
 	private function __construct(){}
 	
-	public static function throwException($err_no){
-		static $e;
-		if(!is_array($e)){
+	public static function throwException($err_no,$placeHolder=array()){
+		if(!is_array(tian::$e)){
 			$dir = ENTRY_PATH.'/lib/tianv2/exceptions';
 			$list = self::getFileList($dir,"php");
-			$e = array();
+			tian::$e = array();
 			foreach ($list as $item){
-				$e = $e + require_once $item;
+				tian::addException($item);
 			}
 		}
-		self::newException($e[$err_no],$err_no);
+		self::newException($e[$err_no],$err_no,$placeHolder);
 	}
-	public static function newException($msg,$no) {
+	public static function newException($msg,$no,$placeHolder=array()) {
 		print "<pre>";
+		$replacement = array();
+		foreach ($placeHolder as $key => $val) {
+			$replacement[":".$key] = $val;
+		}
+		if (count($replacement)) {
+			$msg = strtr($msg,$replacement);
+		}
 		throw new Exception($msg,$no);
+	}
+	/**
+	 * 
+	 * @param string $path
+	 * @return bool
+	 */
+	public static function addException($path){
+		static $loaded_files = array();
+		$p = realpath($path);
+		if ($p) {
+			$md5 = md5($p);
+			if (!array_key_exists($md5,$loaded_files)) {
+				$loaded_files[$md5] = $p;
+				tian::$e = tian::$e + require_once $p;
+				return true;
+			}
+		}
+		return false;
 	}
 	public static function init() {
 		require_once 'lib/tianv2/validate/validator.php';

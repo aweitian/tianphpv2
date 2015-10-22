@@ -15,4 +15,6 @@ return array(
 	"7397" => "hook 404 failed",
 	"7398" => "hook 404 no implements iControlNotFound",
 	"7399" => "require tianv2 lib",
+	"739a" => "invalid :name",
+	"739b" => "require :name",
 );
