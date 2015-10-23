@@ -35,7 +35,7 @@ interface IPdoBase{
 	 */
 	function exec($sql,$data);
 	/**
-	 * 判断是不是操作没有数据改变
+	 * 当影响行数为零时，用它来判断是语法错误，还是正常很执行
 	 */
-	function hasAffected();
+	function hasError();
 }

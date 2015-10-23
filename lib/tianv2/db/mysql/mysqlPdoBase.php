@@ -26,7 +26,7 @@ class mysqlPdoBase implements IPdoBase{
 	public function getErrorCode(){
 		return $this->errorCode;
 	}
-	public function hasAffected(){
+	public function hasError(){
 		return $this->getErrorCode() !== self::NONERRCODE;
 	}
 	/**
