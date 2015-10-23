@@ -95,7 +95,7 @@ class tian{
 				tian::addException($item);
 			}
 		}
-		self::newException($e[$err_no],$err_no,$placeHolder);
+		self::newException(tian::$e[$err_no],$err_no,$placeHolder);
 	}
 	public static function newException($msg,$no,$placeHolder=array()) {
 		print "<pre>";

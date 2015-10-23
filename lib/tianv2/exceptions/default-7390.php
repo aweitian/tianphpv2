@@ -17,4 +17,5 @@ return array(
 	"7399" => "require tianv2 lib",
 	"739a" => "invalid :name",
 	"739b" => "require :name",
+	"739c" => ":name dose not exists",
 );
