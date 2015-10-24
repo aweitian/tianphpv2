@@ -29,9 +29,9 @@ class router{
 	 */
 	public function addDefaultRoutes(){
 		if (!$this->hasRoute('default')) {
-			require_once 'routes/default/defaultRoute.php';
+			require_once 'lib/tianv2/route/routes/pmcai/pmcaiRoute.php';
 			$p = tian::getDefPreMask();
-			$compat = new defaultRoute($p."ca");
+			$compat = new pmcaiRoute($p."ca");
 			$this->_routes = array('default' => $compat) + $this->_routes;
 		}
 		return $this;

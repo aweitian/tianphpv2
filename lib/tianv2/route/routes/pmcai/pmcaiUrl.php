@@ -30,6 +30,7 @@ class pmcaiUrl{
 	private $ori_blank_c = false;
 	private $ori_blank_a = false;
 	public function __construct($url,$pmcaimask=""){
+// 		var_dump($pmcaimask);exit;
 		$this->url = new url($url);
 		$this->initConf();
 		$this->initMask($pmcaimask);
@@ -152,6 +153,7 @@ class pmcaiUrl{
 	 * @return array of pmcai
 	 */
 	private function initPmcai($data,$maskPmcai){
+// 		var_dump($data,$maskPmcai);exit;
 		$x=0;$url_arr=$data;$pmcai_mask_arr=str_split($maskPmcai);$pmcai=self::getEmptyPmcai();
 		while ($x<count($url_arr)){
 			if($x>=count($pmcai_mask_arr))$z="i";
@@ -331,7 +333,7 @@ class pmcaiUrl{
 		if(is_array($this->conf)){
 			return;
 		}
-		$path = ENTRY_PATH."/app/conf/pmcaiUrl.php";
+		$path = "app/conf/pmcaiUrl.php";
 		if(file_exists($path)){
 			$conf = require $path;
 			if(self::isValidConf($conf)){

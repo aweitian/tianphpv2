@@ -6,6 +6,7 @@
  */
 require_once 'lib/tianv2/message/message.php';
 class pmcaiMsg extends message{
+	private $moduleLoc;
 	private $module;
 	private $control;
 	private $action;
@@ -20,6 +21,7 @@ class pmcaiMsg extends message{
 		$this->control = $c;
 		$this->action = $a;
 		$this->dispatch_times = 0;
+		$this->moduleLoc = "app/controls";
 	}
 	
 	public function getDispatchCount(){
@@ -31,10 +33,16 @@ class pmcaiMsg extends message{
 	public function getModule(){
 		return $this->module;
 	}
-	public function getClassName(){
+	public function setModuleLoc($loc) {
+		$this->moduleLoc = $loc;
+	}
+	public function getModuleLoc() {
+		return $this->moduleLoc;
+	}
+	public function getControl(){
 		return $this->control;
 	}
-	public function getMethodName(){
+	public function getAction(){
 		return $this->action;
 	}
 	

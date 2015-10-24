@@ -5,5 +5,5 @@
  * @usage:
  */
 interface IDispatcher{
-	public function dispatch();
+	public function dispatch($msg);
 }

@@ -1,14 +1,22 @@
 <?php
+// $control_suffix = $this->msg->getClassName().$this->conf["ControlSuffix"];
+// $controlLoc = tian::getModulePath($this->msg->getModule());
+// $controlLoc = $controlLoc.'/'.$control_suffix.".php";
 /**
  * @author awei.tian
  * date: 2013-9-17
  * 说明:
+ * 		只能派遣PMCAI MSG
+ * 		PMCAI MSG中包含MODULE LOC
+ * 		根据MODULE LOC + CONTROLLER + ACTIONER + .PHP
+ * 		查找相应文件是否存在
+ * 		
  */
 require_once 'lib/tianv2/interfaces/route/IDispatcher.php';
 require_once 'lib/tianv2/interfaces/route/IController.php';
 require_once 'lib/tianv2/interfaces/route/IActionNotFound.php';
 
-class defaultDispatcher implements IDispatcher{
+class pmcaiDispatcher implements IDispatcher{
 	
 	const DISPATCH_STATE_INIT				= 0xa1;
 	const DISPATCH_STATE_RESTART    		= 0xb2;
@@ -39,7 +47,10 @@ class defaultDispatcher implements IDispatcher{
 	
 	private $IActionNotFoundMethodName = "_action_not_found";
 	private $IControllerMethodName = "_checkPrivilege";
-	public function __construct(pmcaiMsg $msg){
+	public function __construct(){
+		
+	}
+	private function init(pmcaiMsg $msg) {
 		$this->msg = $msg;
 		$this->msg->dispatchStatus = self::DISPATCH_STATE_INIT;
 		$path = ENTRY_PATH."/app/conf/dispatch.php";
@@ -61,7 +72,8 @@ class defaultDispatcher implements IDispatcher{
 	/**
 	 * 返回是否派遣成功
 	 */
-	public function dispatch(){
+	public function dispatch($msg){
+		$this->init($msg);
 		while ($this->doDispatch()===false);
 		return $this->getDispatchResult()===self::DISPATCH_STATE_DISPATCH_OK;
 	}
@@ -183,8 +195,8 @@ class defaultDispatcher implements IDispatcher{
 	 * 调用FAIL（）。
 	 */
 	protected function _Dispatch(){
-		$control_suffix = $this->msg->getClassName().$this->conf["ControlSuffix"];
-		$controlLoc = tian::getModulePath($this->msg->getModule());
+		$control_suffix = $this->msg->getControl().$this->conf["ControlSuffix"];
+		$controlLoc = $this->msg->getModuleLoc();
 		$controlLoc = $controlLoc.'/'.$control_suffix.".php";
 		$this->traces[] = "dispatching://prepare to check class exists named $control_suffix";
 		if(!class_exists($control_suffix)){
@@ -208,12 +220,12 @@ class defaultDispatcher implements IDispatcher{
 	}
 	protected function _dispatch_control_exist(){
 		$this->traces[] = "dispatching://init control class";
-		$rc = new ReflectionClass($this->msg->getClassName().$this->conf["ControlSuffix"]);
+		$rc = new ReflectionClass($this->msg->getControl().$this->conf["ControlSuffix"]);
 		$this->traces[] = "dispatching://check control implements the iController interface";
 		if ($rc->implementsInterface('IController')) {
 			$this->traces[] = "dispatching://control implemented the iController interface";
 			//权限检查
-			$controller = $this->msg->getClassName().$this->conf["ControlSuffix"];
+			$controller = $this->msg->getControl().$this->conf["ControlSuffix"];
 			if (!$rc->hasMethod($this->IControllerMethodName) or !$rc->getMethod($this->IControllerMethodName)->isStatic()) {
 				$this->traces[] = "dispatching://controller not function ".$this->IControllerMethodName;
 				return true;
@@ -232,7 +244,7 @@ class defaultDispatcher implements IDispatcher{
 				return false;
 			}else{
 				$this->traces[] = "dispatching://pass the privilege check";
-				$action = $this->msg->getMethodName();
+				$action = $this->msg->getAction();
 				$action_suffix = $action.$this->conf["ActionSuffix"];
 				$this->traces[] = "dispatching://assign the action:$action_suffix";
 				//action存在

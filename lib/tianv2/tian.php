@@ -158,25 +158,12 @@ class tian{
 	public static function initHttpResponse(){
 		self::$response = new httpResponse();
 	}
-	public static function addModulePath($name,$path){
-		self::$modulePath[$name] = $path;
-	}
-	public static function removeModulePath($name){
-		unset(self::$modulePath[$name]);
-	}
 	public static function initRouter(){
 		self::$router = new router();
 	}
 	public static function initDefDispatcher(){
-		require_once 'lib/tianv2/route/routes/default/defaultDispatcher.php';
-		self::$dispatcher = new defaultDispatcher(self::$router->getRoute()->msg);
-	}
-	public static function getModulePath($name){
-		if(!isset(self::$modulePath[$name])){
-			tian::throwException("7396");
-			return ;
-		}
-		return self::$modulePath[$name];
+		require_once 'lib/tianv2/route/routes/pmcai/pmcaiDispatcher.php';
+		self::$dispatcher = new pmcaiDispatcher();
 	}
 	public static function getDirList($dir){
 		$ret=array();
