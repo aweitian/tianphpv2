@@ -197,7 +197,7 @@ class pmcaiDispatcher implements IDispatcher{
 	protected function _Dispatch(){
 		$control_suffix = $this->msg->getControl().$this->conf["ControlSuffix"];
 		$controlLoc = $this->msg->getModuleLoc();
-		$controlLoc = $controlLoc.'/'.$control_suffix.".php";
+		$controlLoc = $controlLoc.'/'.$this->msg->getControl()."/".$control_suffix.".php";
 		$this->traces[] = "dispatching://prepare to check class exists named $control_suffix";
 		if(!class_exists($control_suffix)){
 			$this->traces[] = "dispatching://class not found,finding file $controlLoc";
