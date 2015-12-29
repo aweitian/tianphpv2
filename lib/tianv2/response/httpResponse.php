@@ -5,10 +5,6 @@
  * 说明:
  */
 class httpResponse{
-	const RESPONSE_TYPE_HTML=0;
-	const RESPONSE_TYPE_JSON=1;
-
-
 	public function __construct(){
 
 	}
@@ -19,7 +15,26 @@ class httpResponse{
 		@header('HTTP/1.x 404 Not Found');
 		@header('Status: 404 Not Found');
 		include_once dirname(__FILE__)."/404.tpl.php";
-		exit();
+		exit;
 	}
-
+	public function showError($msg){
+		include_once dirname(__FILE__)."/msg.tpl.php";
+		exit;
+	}
+	/**
+	 * 相对于ENTRY_HOME的URL地址
+	 * @param string $url
+	 */
+	public function go($url){
+		$url = ENTRY_HOME.$url;
+		$this->redirect($url);
+	}
+	/**
+	 * 绝对URL地址
+	 * @param string $url
+	 */
+	public function redirect($url){
+		header("location:".$url);
+		exit;
+	}
 }
