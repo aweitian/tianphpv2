@@ -13,7 +13,7 @@ if(DEBUG_FLAG){
 	ini_set("display_errors","Off");
 }
 
-set_include_path(ENTRY_PATH.PATH_SEPARATOR.get_include_path());
+set_include_path(FILESYSTEM_ENTRY_POINT.PATH_SEPARATOR.get_include_path());
 require_once 'lib/tianv2/request/httpRequest.php';
 require_once 'lib/tianv2/response/httpResponse.php';
 require_once 'lib/tianv2/route/router.php';
@@ -88,7 +88,7 @@ class tian{
 	
 	public static function throwException($err_no,$placeHolder=array()){
 		if(!is_array(tian::$e)){
-			$dir = ENTRY_PATH.'/lib/tianv2/exceptions';
+			$dir = FILESYSTEM_ENTRY_POINT.'/lib/tianv2/exceptions';
 			$list = self::getFileList($dir,"php");
 			tian::$e = array();
 			foreach ($list as $item){

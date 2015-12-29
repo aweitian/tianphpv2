@@ -36,7 +36,7 @@ class App{
 	 * 6. initRouter
 	 */
 	public static function init(){
-		if(false !== strpos(ENTRY_PATH, "openshift")){
+		if(false !== strpos(FILESYSTEM_ENTRY_POINT, "openshift")){
 			self::initEnvir("openshift");
 		}else{
 			self::initEnvir("default");
@@ -59,7 +59,7 @@ class App{
 	}
 	public static function run(){
 		
-		tian::addModulePath("default", ENTRY_PATH."/app/controls");
+		tian::addModulePath("default", FILESYSTEM_ENTRY_POINT."/app/controls");
 		tian::$router->addRoute("svc", new svcRoute());
 		
 		tian::$router->addDefaultRoutes();

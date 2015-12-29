@@ -12,13 +12,13 @@ class runEnvirFactory{
 	 */
 	public $runEnvir;
 	private function __construct(){
-		$conf_path = ENTRY_PATH."/app/conf/runEnvirFactory.php";
+		$conf_path = FILESYSTEM_ENTRY_POINT."/app/conf/runEnvirFactory.php";
 		if(file_exists($conf_path)){
 			$c = require_once ($conf_path);
 			if($c == "default"){
 				$this->name = "default";
 			}else{
-				$path = ENTRY_PATH."/app/runEnvir/".$c."/runEnvir.php";
+				$path = FILESYSTEM_ENTRY_POINT."/app/runEnvir/".$c."/runEnvir.php";
 				if(!file_exists($path)){
 					tian::throwException("7391");
 					return;

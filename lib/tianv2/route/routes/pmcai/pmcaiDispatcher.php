@@ -53,7 +53,7 @@ class pmcaiDispatcher implements IDispatcher{
 	private function init(pmcaiMsg $msg) {
 		$this->msg = $msg;
 		$this->msg->dispatchStatus = self::DISPATCH_STATE_INIT;
-		$path = ENTRY_PATH."/app/conf/dispatch.php";
+		$path = FILESYSTEM_ENTRY_POINT."/app/conf/dispatch.php";
 		if(file_exists($path)){
 			$conf = require $path;
 			$this->conf = $conf;

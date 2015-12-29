@@ -114,7 +114,7 @@ class pmcaiUrl{
 		return false;
 	}
 	public static function hasValidConf(){
-		$path = ENTRY_PATH."/app/conf/pmcaiUrl.php";
+		$path = FILESYSTEM_ENTRY_POINT."/app/conf/pmcaiUrl.php";
 		if(file_exists($path)){
 			$conf = require $path;
 			if(!self::isValidConf($conf)){

@@ -5,8 +5,8 @@
  * Function:
  */
 
-define("ENTRY_PATH",dirname(dirname(dirname(__FILE__))));
-set_include_path(ENTRY_PATH.PATH_SEPARATOR.get_include_path());
+define("FILESYSTEM_ENTRY_POINT",dirname(dirname(dirname(__FILE__))));
+set_include_path(FILESYSTEM_ENTRY_POINT.PATH_SEPARATOR.get_include_path());
 require_once 'lib/tianv2/tian.php';
 require_once 'app/App.php';
 App::init();
