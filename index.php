@@ -4,10 +4,11 @@
  * Author:Awei.tian
  * Function:
  */
-define("FILESYSTEM_ENTRY_POINT",dirname(__FILE__));
-define("HTTP_ENTRY_POINT",'');
-require_once 'lib/tianv2/tian.php';
-require_once 'app/App.php';
+define("DEBUG_FLAG", TRUE);
+define("FILE_SYSTEM_ENTRY",dirname(__FILE__));
+
+require_once FILE_SYSTEM_ENTRY.'/lib/tian.php';
+require_once FILE_SYSTEM_ENTRY.'/app/App.php';
 App::init();
 
 App::run();

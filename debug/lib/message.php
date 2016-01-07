@@ -4,8 +4,8 @@
  * Author:Awei.tian
  * Function:
  */
-require_once '../../lib/tianv2/tian.php';
-require_once 'lib/tianv2/message/message.php';
+require_once '../../lib/tian.php';
+require_once 'lib/message/message.php';
 $demo = new message(new httpRequest());
 
 if($demo->isPost()){

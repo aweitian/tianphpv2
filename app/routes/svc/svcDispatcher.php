@@ -4,7 +4,7 @@
  * date: 2013-9-17
  * 说明:
  */
-require_once 'lib/tianv2/interfaces/route/IDispatcher.php';
+require_once 'lib/interfaces/route/IDispatcher.php';
 class svcDispatcher implements IDispatcher{
 
 	public function __construct(){
@@ -14,7 +14,7 @@ class svcDispatcher implements IDispatcher{
 	/**
 	 * 返回是否派遣成功
 	 */
-	public function dispatch(){
+	public function dispatch($msg){
 		new svcController(tian::$router->getRoute()->msg);
 		return true;			
 

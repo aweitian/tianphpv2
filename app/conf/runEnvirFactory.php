@@ -1,5 +1,5 @@
 <?php 
 /**
- * lib/tianv2/runEnvir/runEnvirFactory.php
+ * lib/runEnvir/runEnvirFactory.php
  */
 return "default";

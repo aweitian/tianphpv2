@@ -4,8 +4,8 @@
  * Author:Awei.tian
  * Function:
  */
-require_once '../../lib/tianv2/tian.php';
-require_once '../../lib/tianv2/route/routes/default/pmcaiUrl.php';
+require_once '../../lib/tian.php';
+require_once '../../lib/route/routes/default/pmcaiUrl.php';
 $demo = new pmcaiUrl("http://localhost/a/b/c/d/e","ca");
 //var_dump($demo->getPreurl(),$demo->getModule(),$demo->getControl(),$demo->getAction(),$demo->getInfo());
 // $demo->setQuery("abc", "abc_value");
