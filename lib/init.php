@@ -4,6 +4,12 @@
  * Author: Awei.tian
  * Description: 
  */
+
+require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/route/IControlNotFound.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/route/IActionNotFound.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/route/IController.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/route/IDispatcher.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/route/IRoute.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/route/route.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/route/router.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/route/routes/pmcai/pmcaiDispatcher.php';
@@ -26,7 +32,8 @@ define("PMCAI_MSG_CNF_CONTROL_DEFAULT","main");
 define("PMCAI_MSG_CNF_ACTION_DEFAULT","welcome");
 
 #PMCAI DISPATCHER CONF
-define("PMCAI_DISPATCHER_CNF_CONTROL_NOT_FOUND","hook404");/*这是一个类名,需要手动加载,要实现iControlNotFound接口*/
+define("PMCAI_DISPATCHER_CNF_CONTROL_NOT_FOUND",
+	"hook404");/*这是一个类名,需要手动加载,要实现iControlNotFound接口*/
 define("PMCAI_DISPATCHER_CNF_DEFAULT_MODULE_LOCATION",FILE_SYSTEM_ENTRY."/app/modules");
 define("PMCAI_DISPATCHER_CNF_ACTION_SUFFIX","Action");
 define("PMCAI_DISPATCHER_CNF_CONTROL_SUFFIX","Controller");

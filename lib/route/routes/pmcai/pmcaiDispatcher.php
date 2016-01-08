@@ -75,19 +75,21 @@ class pmcaiDispatcher implements IDispatcher{
 	public function dispatch($msg){
 		$this->init($msg);
 		while ($this->doDispatch()===false);
+// 		var_dump("======".$this->msg->dispatchStatus,$this->getDispatchResult(),$this->_state,"==========") ;
+// 		echo "<br>";
 		return $this->getDispatchResult()===self::DISPATCH_STATE_DISPATCH_OK;
 	}
 	/**
 	 * 返回TRUE，结束派遣
 	 * @return boolean
 	 * 根据msg的mca
-	 * 如果C不存在，它实现了iControlNotFound，就把$msg传递给它的zzzSysDefinedRewriteMessage方法
+	 * 如果C不存在，它实现了iControlNotFound，就把$msg传递给它的hook404方法
 	 * 如果没有实现，就fail()
 	 * 如果方法存在，派遣成功
-	 * 如果不存在，但它实现了iActionNotFound,调用zzzSysDefinedDefaultAction
+	 * 如果不存在，但它实现了iActionNotFound,调用 _action_not_found
 	 * 派遣结束
 	 * 没有实现iActionNotFound，
-	 *
+	 * 404
 	 */
 	protected function doDispatch(){
 		$times = $this->msg->getDispatchCount();
@@ -100,11 +102,10 @@ class pmcaiDispatcher implements IDispatcher{
 		if($this->msg->getUseSysControlNotFound()){
 			$this->_dispatch_Sys_control_not_found();
 			$this->traces[] = "dispatching://dispatch end";
-			$this->fail("404");
-			return false;
+			return true;
 		}
 		$state = $this->msg->dispatchStatus;
-		
+// 		var_dump("????".($state));echo "<br>";
 		switch ($state){
 			case self::DISPATCH_STATE_INIT:
 			case self::DISPATCH_STATE_RESTART:
@@ -133,6 +134,7 @@ class pmcaiDispatcher implements IDispatcher{
 	}
 	protected function ok(){
 		$this->msg->dispatchStatus = self::DISPATCH_STATE_DISPATCH_OK;
+		$this->_state = self::DISPATCH_STATE_DISPATCH_OK;
 	}
 	protected function fail($msg){
 		$this->msg->dispatchStatus = self::DISPATCH_STATE_DISPATCH_FAIL;
@@ -153,6 +155,7 @@ class pmcaiDispatcher implements IDispatcher{
 	}
 	protected function getDispatchResult(){
 		$state = $this->msg->dispatchStatus;
+// 		var_dump("+++".$state,$this->_state,"+++");echo "<br>";
 		switch ($state){
 			case self::DISPATCH_STATE_INIT:
 			case self::DISPATCH_STATE_RESTART:
@@ -298,18 +301,21 @@ class pmcaiDispatcher implements IDispatcher{
 // 			tian::throwException("7397");
 			return false;
 		}
+		$this->traces[] = "dispatching://$control class found,checking interface IControlNotFound";
 		$rc = new ReflectionClass($control);
-		if ($rc->implementsInterface('iControlNotFound')) {
+		if ($rc->implementsInterface('IControlNotFound')) {
 			$this->traces[] = "dispatching://control name $control implements icontroller interface";
 			$controller = $rc->newInstance();
-			$method=$rc->getMethod("_action_not_found");
+			$method=$rc->getMethod("hook404");
 			$method->invokeArgs($controller, array($this->msg));
 			$this->ok();
-			$this->traces[] = "dispatching://invoke the _action_not_found,dispatch end";
+			$this->traces[] = "dispatching://invoke the hook404,dispatch end";
 			return true;
 		}else{
-			$this->traces[] = "dispatching://control name $control dese not implements icontroller interface,dispatch end";
-			//tian::throwException("7398");
+			$this->traces[] = "dispatching://control name $control dese not implements IControlNotFound interface,dispatch end";
+// 			tian::throwException("7398");
+			
+			$this->fail("wrong class ".$control);
 			return false;
 		}
 		

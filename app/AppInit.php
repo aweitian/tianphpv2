@@ -6,6 +6,8 @@
  */
 define("HTTP_ENTRY",'');
 
+require_once FILE_SYSTEM_ENTRY.'/app/hook404.php';
+
 
 if(false !== strpos(FILE_SYSTEM_ENTRY, "openshift")){
 	require_once FILE_SYSTEM_ENTRY.'/app/runEnvir/openshift.php';

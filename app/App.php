@@ -77,16 +77,18 @@ class App{
 			
 				//初始化PMCAI派遣器派遣
 				$dispatcher = new pmcaiDispatcher();
-			
-				if (!$dispatcher->dispatch($msg) && DEBUG_FLAG) {
-					//如果404，并且是调试模式，输出路由，派遣信息
-					$router->appendDebugInfo();
-					$dispatcher->appendDebugInfo();
-					debug::output();
-				} else {
-					//404
-					$rep = new httpResponse();
-					$rep->_404();
+				
+				if (!$dispatcher->dispatch($msg)) {
+					if (DEBUG_FLAG){
+						//如果404，并且是调试模式，输出路由，派遣信息
+						$router->appendDebugInfo();
+						$dispatcher->appendDebugInfo();
+						debug::output();						
+					} else {
+						//404
+						$rep = new httpResponse();
+						$rep->_404();
+					}
 				}
 				break;
 			default:
