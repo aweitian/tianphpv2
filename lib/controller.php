@@ -1,9 +1,9 @@
 <?php
 /**
- * Date: 2015年12月31日
+ * Date: 2016年1月8日
  * Author: Awei.tian
  * Description: 
  */
-class toolView extends view{
+class Controller{
 	
 }

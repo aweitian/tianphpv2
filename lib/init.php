@@ -16,7 +16,7 @@ require_once FILE_SYSTEM_ENTRY.'/lib/response/httpResponse.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/session/session.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/validate/validator.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/view.php';
-
+require_once FILE_SYSTEM_ENTRY.'/lib/controller.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/debug.php';
 
 

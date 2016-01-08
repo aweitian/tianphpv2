@@ -5,6 +5,6 @@
  * Function:
  */
 ?>
-<form action='<?php print ENTRY_HOME?>/debug/lib/message.php?get=cc' method='post'>
+<form action='<?php print HTTP_ENTRY?>/debug/lib/message.php?get=cc' method='post'>
 <input type="text" value="tet" name="aa"><input type="submit" value="submit">
 </form>

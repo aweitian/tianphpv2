@@ -4,9 +4,9 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY.'/app/modules/tool/model.php';
-require_once FILE_SYSTEM_ENTRY.'/app/modules/tool/view.php';
-class toolController{
+require_once FILE_SYSTEM_ENTRY.'/app/modules/tool/toolModel.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/tool/toolView.php';
+class toolController implements IController{
 	/**
 	 * 
 	 * @var toolView
@@ -17,15 +17,22 @@ class toolController{
 	 * @var toolModel
 	 */
 	private $model;
+	public static function _checkPrivilege(pmcaiMsg $msg,identityToken $it){
+		return true;
+	}
 	public function __construct(){
 		$this->model = new toolModel();
 		$this->view = new toolView();
-		if ($this->isPost()){
-			$ctl = App::$router->getController();
-			$pt = $_POST["name"];
+		
+	}
+	
+	public function welcomeAction(pmcaiMsg $msg){
+		if ($msg->isPost()){
+			$ctl = $msg->getControl();
+			$pt = $msg["name"];
 			$path = FILE_SYSTEM_ENTRY.'/app/modules/'.$pt;
 			if(is_dir($path)){
-				$this->exitMsg('folder ['.$pt.'] exits');
+				exit('folder ['.$pt.'] exits');
 			}
 			mkdir($path);
 			$str = file_get_contents('app/modules/tool/tpl/control.tpl');
@@ -33,14 +40,14 @@ class toolController{
 				"{date}"=>date("Y-m-d",time()),
 				"{name}"=>$pt
 			));
-			file_put_contents($path.'/control.php', $c);
+			file_put_contents($path.'/'.$pt.'Controller.php', $c);
 			
 			$str = file_get_contents('app/modules/tool/tpl/model.tpl');
 			$c = strtr($str,array(
 					"{date}"=>date("Y-m-d",time()),
 					"{name}"=>$pt
 			));
-			file_put_contents($path.'/model.php', $c);
+			file_put_contents($path.'/'.$pt.'Model.php', $c);
 			
 			
 			$str = file_get_contents('app/modules/tool/tpl/view.tpl');
@@ -48,14 +55,10 @@ class toolController{
 					"{date}"=>date("Y-m-d",time()),
 					"{name}"=>$pt
 			));
-			file_put_contents($path.'/view.php', $c);
-			$this->exitMsg('ok,<a href="/tool">continue</a>');
+			file_put_contents($path.'/'.$pt.'View.php', $c);
+			exit('ok,<a href="/tool">continue</a>');
 		}else{
-			$content = $this->view->fetch('form');
-			$this->view->hideHeader()->hideFooter()->wrap($content)->show();
+			$this->view->show();
 		}
-	}
-	public function welcomeAction(){
-		echo "hi";
 	}
 }

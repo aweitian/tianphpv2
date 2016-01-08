@@ -29,7 +29,7 @@ a{
 				<br>
 				<span class="s404">404</span>
 				<br><br>
-				<a href="<?php echo ENTRY_HOME;?>">返回到首页</a>
+				<a href="<?php echo HTTP_ENTRY;?>">返回到首页</a>
 <?php if(isset($_SERVER["HTTP_REFERER"])):?>
  | <a href="<?php echo $_SERVER["HTTP_REFERER"];?>">返回上一页</a>
 <?php endif;?>

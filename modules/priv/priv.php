@@ -103,7 +103,7 @@ class priv implements IInstall,IOp{
 		$failCnt = $this->getOPFailCnt();
 		if($failCnt>$this->conf["u_try_times"]){
 			$ret["Verification code"] = "<input type=\"text\" name=\"code\">";
-			$ret["code_img"] = "<img src=\"".ENTRY_HOME."/captcha\">";
+			$ret["code_img"] = "<img src=\"".HTTP_ENTRY."/captcha\">";
 		}
 		return $ret;
 	}

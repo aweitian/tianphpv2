@@ -22,11 +22,11 @@ class httpResponse{
 		exit;
 	}
 	/**
-	 * 相对于ENTRY_HOME的URL地址
+	 * 相对于HTTP_ENTRY的URL地址
 	 * @param string $url
 	 */
 	public function go($url){
-		$url = ENTRY_HOME.$url;
+		$url = HTTP_ENTRY.$url;
 		$this->redirect($url);
 	}
 	/**

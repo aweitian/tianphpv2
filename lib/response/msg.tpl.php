@@ -30,7 +30,7 @@ a{
 				<span class="s404">Error:</span>
 				<?php echo $msg;?>
 				<br><br>
-				<a href="<?php echo ENTRY_HOME;?>">Back to Home</a>
+				<a href="<?php echo HTTP_ENTRY;?>">Back to Home</a>
 <?php if(isset($_SERVER["HTTP_REFERER"])):?>
  | <a href="<?php echo $_SERVER["HTTP_REFERER"];?>">Backward</a>
 <?php endif;?>

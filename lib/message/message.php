@@ -3,15 +3,14 @@
  * @author awei.tian
  * date: 2013-8-28
  * 说明:提供POST OR GET数据快速访问
- * ? querystring
- * POSTKEY
+ * 原来访问通过$_GET["AAA"]变成现在$msg["?AAA"]来访问
+ * 原来访问通过$_POST["AAA"]变成现在$msg["AAA"]来访问
  */
 /**
  * 下面的文件包含了pmcai && httpdataconverter
  */
-require_once 'lib/request/url.php';
-require_once "lib/utils/httpDataConverter.php";
-require_once 'lib/request/httpRequest.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/request/url.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/utils/httpDataConverter.php';
 class message implements arrayaccess{
 	private $request;
 	private $_query_access_char = "?";

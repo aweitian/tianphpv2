@@ -11,7 +11,7 @@ abstract class route implements IRoute{
 	const PATHINFO_KVP=0;
 	const PATHINFO_NUM=1;
 	
-	protected function strip($path,$stripstart=ENTRY_HOME){
+	protected function strip($path,$stripstart=HTTP_ENTRY){
 		if(substr($path, 0,strlen($stripstart))===$stripstart){
 			return substr($path, strlen($stripstart));
 		}

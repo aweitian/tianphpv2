@@ -70,8 +70,11 @@ class router{
 			tian::throwException("73b3");
 			return null;
 		}
-	
-		
+	}
+	public function appendDebugInfo(){
+		foreach ($this->trace as $item){
+			debug::d($item);
+		}
 	}
 	/**
 	 * 

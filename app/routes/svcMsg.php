@@ -4,7 +4,6 @@
  * Author:Awei.tian
  * Function:
  */
-require_once 'lib/message/message.php';
 class svcMsg extends message{
 	private $name;
 	public function __construct(httpRequest $request,$svcName){

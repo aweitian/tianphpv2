@@ -4,8 +4,8 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY.'/app/modules/{name}/model.php';
-require_once FILE_SYSTEM_ENTRY.'/app/modules/{name}/view.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/{name}/{name}Model.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/{name}/{name}View.php';
 class {name}Controller extends Controller{
 	/**
 	 * 
@@ -20,7 +20,6 @@ class {name}Controller extends Controller{
 	public function __construct(){
 		$this->model = new {name}Model();
 		$this->view = new {name}View();
-		$this->view->wrap($this->model->test())->show();
 	}
 	public function welcomeAction(){
 

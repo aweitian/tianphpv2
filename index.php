@@ -4,7 +4,7 @@
  * Author:Awei.tian
  * Function:
  */
-define("DEBUG_FLAG", TRUE);
+define("DEBUG_FLAG", true);
 define("FILE_SYSTEM_ENTRY",dirname(__FILE__));
 
 require_once FILE_SYSTEM_ENTRY.'/lib/tian.php';
