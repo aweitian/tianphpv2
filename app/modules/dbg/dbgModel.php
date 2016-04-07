@@ -4,11 +4,13 @@
  * Author: Awei.tian
  * Description: 
  */
-class dbgModel extends model{
+class dbgModel extends Model{
 	public function __construct(){
 		parent::__construct();
+		$this->initMySqlDb();
 	}
 	public function test(){
-		return "hi";
+		$row = $this->db->fetch("select * from aaa", array());
+		return $row;
 	}
 }

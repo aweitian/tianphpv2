@@ -15,7 +15,14 @@ class mysqlPdoBase implements IPdoBase{
 	private $errorCode;//code
 	const NONERRCODE = "00000";
 	public function __construct(){
-		$this->connection = tian::$pdo;
+		$dsn = "mysql:host=:ip;port=:port;dbname=:dbname";
+		$dsn = strtr($dsn,array(
+			":ip" => DB_HOST,
+			":port" => DB_PORT,
+			":dbname" => DB_NAME
+		));
+		//exit($dsn);
+		$this->connection = new PDO($dsn,DB_USER,DB_PASS,array("PDO::MYSQL_ATTR_INIT_COMMAND=set names ".DB_CHARSET));
 	}
 	/**
 	 * @return string

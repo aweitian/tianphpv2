@@ -22,6 +22,6 @@ class dbgController extends Controller{
 		$this->view = new dbgView();
 	}
 	public function xxAction(){
-		echo "xx from def/dbg/xx";
+		var_dump($this->model->test());
 	}
 }
