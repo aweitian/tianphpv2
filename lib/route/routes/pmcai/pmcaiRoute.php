@@ -22,10 +22,70 @@ class pmcaiRoute extends route{
 	 * @var pmcaiUrl
 	 */
 	private $url;
-	public function __construct($pmcaiMask){
-		$this->mask = $pmcaiMask;
-		$this->url = new pmcaiUrl("",$pmcaiMask);
+	
+	private $rt;
+	private $loc;
+	/**
+	 * 路由表 格式参考 array( "equal" "regExp" "startWith" "default" )
+	 * @param array $rt
+	 */
+	public function __construct($rt){
+		$this->rt = $rt;
 	}
+	/**
+	 * init mask,module location
+	 * @param string $url_path
+	 */
+	private function initMask($url_path){
+		//去掉HTTP_ENTRY
+		$url = $this->strip($url_path);
+		
+		$preg_p = HTTP_ENTRY == "" ? ""
+			: str_repeat("p", count(explode("/", trim(HTTP_ENTRY,"/"))));
+		
+		
+		//equal
+		$eq_rt = $this->rt["equal"];
+		foreach ($eq_rt as $key => $item){
+			if($key == $url){
+				$this->mask = $preg_p . $item["mca"];
+				$this->loc = $item["loc"];
+				return ;
+			}
+		}
+		
+		//regExp
+		$reg_rt = $this->rt["regExp"];
+		foreach ($reg_rt as $key => $item){
+			if(preg_match("#^{$key}\$#",$url)){
+				$this->mask = $preg_p . $item["mca"];
+				$this->loc = $item["loc"];
+				return ;
+			}
+		}
+		
+		//startWith
+		$sw_rt = $this->rt["startWith"];
+		foreach ($sw_rt as $key => $item){
+			if(strpos($url,$key) === 0){
+				$this->mask = $preg_p . $item["mca"];
+				$this->loc = $item["loc"];
+				return ;
+			}
+		}
+		
+		//default
+		$def_rt = $this->rt["default"];
+		$this->mask = $preg_p . $def_rt["mca"];
+		$this->loc = $def_rt["loc"];
+		
+		return ;
+	}
+	
+	public function getModuleLoc(){
+		return $this->loc;
+	}
+	
 	/**
 	 * @return pmcaiUrl
 	 */
@@ -34,9 +94,12 @@ class pmcaiRoute extends route{
 	}
 	/**
 	 * 它会匹配任何形式的URL
+	 * 在MATCH的时候再初始化路由表，效率会更好
 	 * @see Iroute::match()
 	 */
 	public function match($url_path){
+		$this->initMask($url_path);
+		$this->url = new pmcaiUrl("",$this->mask);
 		if(!pmcaiUrl::isValidMask($this->mask)){
 			$this->errorNo = "7395";
 			return false;

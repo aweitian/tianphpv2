@@ -15,6 +15,7 @@ class httpResponse{
 		@header('HTTP/1.x 404 Not Found');
 		@header('Status: 404 Not Found');
 		include_once dirname(__FILE__)."/404.tpl.php";
+// 		debug_print_backtrace();
 		exit;
 	}
 	public function showError($msg){

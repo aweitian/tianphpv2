@@ -64,7 +64,7 @@ class pmcaiDispatcher implements IDispatcher{
 	public function defaultConf(){
 		return array(
 			"controlNotFound" => PMCAI_DISPATCHER_CNF_CONTROL_NOT_FOUND,
-			"defaultModuleLocation" => PMCAI_DISPATCHER_CNF_DEFAULT_MODULE_LOCATION,
+			"defaultModuleLocation" => $this->msg->getModuleLoc(),
 			"ActionSuffix" => PMCAI_DISPATCHER_CNF_ACTION_SUFFIX,
 			"ControlSuffix" => PMCAI_DISPATCHER_CNF_CONTROL_SUFFIX,
 		);
@@ -205,6 +205,7 @@ class pmcaiDispatcher implements IDispatcher{
 	 * 调用FAIL（）。
 	 */
 	protected function _Dispatch(){
+// 		exit("test");
 		$control_suffix = $this->msg->getControl().$this->conf["ControlSuffix"];
 		$controlLoc = $this->msg->getModuleLoc();
 		$controlLoc = $controlLoc.'/'.$this->msg->getControl()."/".$control_suffix.".php";
@@ -223,6 +224,7 @@ class pmcaiDispatcher implements IDispatcher{
 				$this->traces[] = "dispatching://trigger control exist";
 				$this->_dispatch_control_exist();
 			}
+// 			exit("ccc");
 		}else{
 			$this->traces[]="dispatching://trigger control exist";
 			$this->_dispatch_control_exist();

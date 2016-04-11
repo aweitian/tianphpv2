@@ -4,6 +4,8 @@
  * Author: Awei.tian
  * Description: 
  */
-class Controller{
-	
+class Controller implements IController{
+	public static function _checkPrivilege(pmcaiMsg $msg,identityToken $identityToken){
+		return true;
+	}
 }

@@ -5,5 +5,11 @@
  * Description: 
  */
 class Model{
-	
+	/**
+	 * @var IPdoBase
+	 */
+	protected $db;
+	public function __construct(){
+		
+	}
 }

@@ -24,17 +24,12 @@ class App{
 		require_once FILE_SYSTEM_ENTRY.'/lib/route/routes/pmcai/pmcaiRoute.php';
 		require_once FILE_SYSTEM_ENTRY.'/app/routes/svc/svcDispatcher.php';
 	}
-	private static function _defPreMask(){
-		if(!HTTP_ENTRY)return "";
-		return str_repeat("p", count(explode("/", trim(HTTP_ENTRY,"/"))));
-	}
 	public static function run(){
 		//初始化httpRequest
 		$req = new httpRequest();
 		
 		//初始化默认路由规则(PMCAI路由规则)
-		$pmcaiMask = App::_defPreMask()."ca";
-		$defRoute = new pmcaiRoute($pmcaiMask);
+		$defRoute = new pmcaiRoute(require FILE_SYSTEM_ENTRY.'/app/conf/routeTable.php');
 		
 		//初始化SVC路由规则(它只要是以HTTP_ENTRY/svc开头就行，
 		//具体参考app/routes/svc/svcRoute.php的match方法
@@ -74,7 +69,10 @@ class App{
 				//并作为CONTROLLER方法的第一个参数传递
 				//更多细节参数pmcaiMsg类和message类
 				$msg = new pmcaiMsg($req, $pmcaiUrl);
-			
+				$msg->setModuleLoc($defRoute->getModuleLoc());
+				
+// 				exit($defRoute->getModuleLoc());
+				
 				//初始化PMCAI派遣器派遣
 				$dispatcher = new pmcaiDispatcher();
 				

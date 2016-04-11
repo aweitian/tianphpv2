@@ -11,6 +11,12 @@ abstract class route implements IRoute{
 	const PATHINFO_KVP=0;
 	const PATHINFO_NUM=1;
 	
+	/**
+	 * 如果存在，以/开头   /aa/bb/cc   /aa/bb 返回/cc
+	 * @param string $path
+	 * @param string $stripstart
+	 * @return string|unknown
+	 */
 	protected function strip($path,$stripstart=HTTP_ENTRY){
 		if(substr($path, 0,strlen($stripstart))===$stripstart){
 			return substr($path, strlen($stripstart));
