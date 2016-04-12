@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
-class {name}Model extends model{
+class {name}Model extends Model{
 	public function __construct(){
 		parent::__construct();
 	}
