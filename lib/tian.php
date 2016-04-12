@@ -51,6 +51,20 @@ class tian{
 		}
 		return false;
 	}
+	/**
+	 *
+	 * @param string $path
+	 * @return bool
+	 */
+	public static function addExceptionDir($dir){
+		if(!is_array(tian::$e)){
+			tian::$e = array();
+		}
+		$list = self::getFileList($dir,"php");
+		foreach ($list as $item){
+			tian::addException($item);
+		}
+	}
 	private static function loadInterfaces() {
 		return self::loadLibs("lib/interfaces");
 	}
