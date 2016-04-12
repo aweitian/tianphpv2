@@ -20,6 +20,8 @@ class App{
 	 * 6. initRouter
 	 */
 	public static function init(){
+		//LOAD EXCEPTIONS
+		tian::addException(FILE_SYSTEM_ENTRY."/app/exceptions");
 		require_once FILE_SYSTEM_ENTRY.'/app/routes/svc/svcRoute.php';
 		require_once FILE_SYSTEM_ENTRY.'/lib/route/routes/pmcai/pmcaiRoute.php';
 		require_once FILE_SYSTEM_ENTRY.'/app/routes/svc/svcDispatcher.php';
