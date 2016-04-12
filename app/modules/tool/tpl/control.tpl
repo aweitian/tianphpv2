@@ -6,7 +6,7 @@
  */
 require_once FILE_SYSTEM_ENTRY.'/app/modules/{name}/{name}Model.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/{name}/{name}View.php';
-class {name}Controller extends Controller{
+class {name}Controller extends AppController{
 	/**
 	 * 
 	 * @var {name}Model

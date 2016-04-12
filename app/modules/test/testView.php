@@ -1,9 +1,9 @@
 <?php
 /**
- * Date: {date}
+ * Date: 2016-04-12
  * Author: Awei.tian
  * Description: 
  */
-class {name}View extends AppView{
+class testView extends AppView{
 	
 }

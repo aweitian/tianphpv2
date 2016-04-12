@@ -5,6 +5,9 @@
  * Function:
  */
 require_once FILE_SYSTEM_ENTRY. "/app/AppInit.php";
+require_once FILE_SYSTEM_ENTRY. "/app/AppModel.php";
+require_once FILE_SYSTEM_ENTRY. "/app/AppView.php";
+require_once FILE_SYSTEM_ENTRY. "/app/AppController.php";
 
 class App{
 	private function __construct(){
