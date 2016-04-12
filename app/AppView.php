@@ -11,7 +11,7 @@ class AppView extends View{
 	 * @var pmcaiMsg $pmcaiMsg
 	 */
 	protected $pmcaiMsg;
-	protected $html;
+	
 	public function __construct(){
 		
 	}
@@ -19,13 +19,7 @@ class AppView extends View{
 	public function setPmcaiMsg(pmcaiMsg $msg){
 		$this->pmcaiMsg = $msg;
 	}
-	public function wrap($content,$title=""){
-		ob_start();
-		include 'template/layout.php';
-		$this->html = ob_get_contents();
-		ob_end_clean();
-		return $this;
-	}
+	
 	public function fetch($tpl,$data=array(),$ext='.tpl.php'){
 		if(is_null($this->pmcaiMsg)){
 			tian::throwException(0x0000);
@@ -41,8 +35,5 @@ class AppView extends View{
 		ob_end_clean();
 		return $ret;
 	}
-	public function show(){
-		print $this->html;
-		exit;
-	}
+	
 }

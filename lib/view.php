@@ -6,4 +6,16 @@
  */
 class View{
 
+	protected $html;
+	public function wrap($content,$title="",$tpl = 'template/layout.php'){
+		ob_start();
+		include $tpl;
+		$this->html = ob_get_contents();
+		ob_end_clean();
+		return $this;
+	}
+	public function show(){
+		print $this->html;
+		exit;
+	}
 }
