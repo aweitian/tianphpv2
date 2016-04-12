@@ -204,10 +204,12 @@ class pmcaiUrl{
 		if($url == ""){
 			$url = $i;
 		}else{
-			$url = $url."/".$i;
+			if($i != ""){
+				$url = $url."/".$i;
+			}
 		}
 		$queryString = $this->url->query == "" ? "" : "?".$this->url->query;
-		return $url.''.$queryString;
+		return '/'.HTTP_ENTRY.$url.''.$queryString;
 	}
 	private function parse_pathinfo(){
 		$this->initPmcai(explode("/", trim($this->url->path,"/")), $this->mask);
