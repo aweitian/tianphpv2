@@ -16,8 +16,7 @@ body{
 }
 .dark-bg{
 	color: #fff;
-    background: #1a2732;
-    background-color: #1a2732;
+    background-color: #0593d3;
     border-bottom: 1px solid #f1f2f7;
 }
 
@@ -30,7 +29,7 @@ a.logo {
     text-transform: uppercase;
 }
 .lite {
-    color: #00a0df !important;
+    color: #f3f3f3!important;
 }
 
 .top-nav{
@@ -42,4 +41,9 @@ a.logo {
 .top-nav ul li a{
 	margin-left:25px;
 	color:white;
+}
+.footer{
+	position:fixed;
+	bottom:0px;
+	width:100%;
 }
