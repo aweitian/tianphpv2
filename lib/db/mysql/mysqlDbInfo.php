@@ -53,7 +53,7 @@ class mysqlDbInfo implements IDbInfo{
 		return in_array($tabname, $hash);
 	}
 	protected function getDescription(){
-		$sth=$this->connection->prepare("SHOW TABLE status FROM $this->dbname");
+		$sth=$this->connection->prepare("SHOW TABLE status FROM `$this->dbname`");
 		$sth->execute();
 		$result=$sth->fetchAll(PDO::FETCH_ASSOC);
 		$this->errorInfo=$sth->errorInfo();
