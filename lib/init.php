@@ -24,7 +24,7 @@ require_once FILE_SYSTEM_ENTRY.'/lib/validate/validator.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/view.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/controller.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/debug.php';
-
+require_once FILE_SYSTEM_ENTRY.'/lib/rirResult.php';
 
 #PMCAI MSG CONF
 defined("PMCAI_MSG_CNF_MODULE_DEFAULT") 
