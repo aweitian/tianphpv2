@@ -26,7 +26,7 @@ class toolController implements IController{
 		
 	}
 	
-	public function welcomeAction(pmcaiMsg $msg){
+public function welcomeAction(pmcaiMsg $msg){
 		if ($msg->isPost()){
 			$ctl = $msg->getControl();
 			$pt = $msg["name"];
