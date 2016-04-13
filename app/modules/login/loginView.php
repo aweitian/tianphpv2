@@ -10,8 +10,7 @@ class loginView extends AppView{
 	public function showLoginUI($submit_url){
 		$this->wrap($this->fetch("form",array(
 			"submit_url"=>$submit_url
-		)))->show()
-		;
+		)))->show();
 	}
 	
 }
