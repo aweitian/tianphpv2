@@ -8,3 +8,5 @@
 $TPL_PATR = __DIR__;
 ?>
 <?php include $TPL_PATR."/header.php"?>
+<?php print $content?>
+<?php include $TPL_PATR."/footer.php"?>

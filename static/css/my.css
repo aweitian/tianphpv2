@@ -2,6 +2,10 @@
 body{
 	background:#eee;
 }
+.m-doc{
+	width:960px;
+	margin:0 auto;
+}
 .m-login-form{
 	width:350px;
 	margin:128px auto;
@@ -27,4 +31,15 @@ a.logo {
 }
 .lite {
     color: #00a0df !important;
+}
+
+.top-nav{
+	line-height:60px;
+}
+.top-nav ul li{
+	float:right;
+}
+.top-nav ul li a{
+	margin-left:25px;
+	color:white;
 }

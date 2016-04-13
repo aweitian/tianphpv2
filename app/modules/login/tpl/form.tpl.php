@@ -12,7 +12,7 @@
 	    <form action="<?php print $submit_url?>" method="get">
 	        <fieldset>
 	            <legend>登陆</legend>
-	            <div id="info" class="f-text-white f-tac f-bg-red f-m5 f-p3">test</div>
+	            <div id="info" class="f-text-white f-tac f-bg-red f-m5 f-p3 f-dn">test</div>
 	            <div class="formitm">
 	                <label class="lab">账号：</label>
 	                <div class="ipt">

@@ -19,7 +19,13 @@ class AppView extends View{
 	public function setPmcaiMsg(pmcaiMsg $msg){
 		$this->pmcaiMsg = $msg;
 	}
-	
+	public function wrap($content,$title="",$tpl=""){
+		ob_start();
+		include FILE_SYSTEM_ENTRY."/template/skeleton.php";
+		$ret = ob_get_contents();
+		ob_end_clean();
+		return parent::wrap($ret,$title);
+	}
 	public function fetch($tpl,$data=array(),$ext='.tpl.php'){
 		if(is_null($this->pmcaiMsg)){
 			tian::throwException("0000");
