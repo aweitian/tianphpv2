@@ -40,8 +40,16 @@ class loadDataController extends AppController{
 // 				["size"]=> int(0) 
 // 			} 
 // 		}
+
+// 		$gbk = file_get_contents("uploads/1460546321");
+// 		echo iconv("GBK", "UTF-8", $gbk);
+// 		exit;
 		if(isset($_FILES) && $msg->isPost()){
-			var_dump($_FILES);
+			$ret = $this->model->saveData($_FILES["csv"]);
+			if($ret->isTrue()){
+				$path = $ret->return;
+				
+			}
 		}else{
 			$this->showFormUI($msg);
 		}
