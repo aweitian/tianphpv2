@@ -95,7 +95,7 @@ class mysqlTableInfo implements ITableInfo{
 		return self::$key_descriptions[$this->tabname];
 	}
 	protected function getTableDecription(){
-		$sth=$this->connection->prepare("show table status from ".DB_NAME." where name=:tablename");
+		$sth=$this->connection->prepare("show table status from `".DB_NAME."` where name=:tablename");
 		$sth->execute(array("tablename"=>$this->tabname));
 		$result=$sth->fetchAll(PDO::FETCH_ASSOC);
 		if(count($result)!=1){
@@ -106,7 +106,7 @@ class mysqlTableInfo implements ITableInfo{
 
 	}	
 	protected function getTableKeyDecription(){
-		$sth=$this->connection->prepare("SHOW COLUMNS FROM $this->tabname");
+		$sth=$this->connection->prepare("SHOW COLUMNS FROM `$this->tabname`");
 		$sth->execute();
 		$result=$sth->fetchAll(PDO::FETCH_ASSOC);
 		if(count($result)==0){
