@@ -35,27 +35,31 @@ class toolController implements IController{
 				exit('folder ['.$pt.'] exits');
 			}
 			mkdir($path);
+			chmod($path, 0777);
 			$str = file_get_contents('app/modules/tool/tpl/control.tpl');
 			$c = strtr($str,array(
 				"{date}"=>date("Y-m-d",time()),
 				"{name}"=>$pt
 			));
 			file_put_contents($path.'/'.$pt.'Controller.php', $c);
+			chmod($path.'/'.$pt.'Controller.php', 0777);
 			
 			$str = file_get_contents('app/modules/tool/tpl/model.tpl');
 			$c = strtr($str,array(
-					"{date}"=>date("Y-m-d",time()),
-					"{name}"=>$pt
+				"{date}"=>date("Y-m-d",time()),
+				"{name}"=>$pt
 			));
 			file_put_contents($path.'/'.$pt.'Model.php', $c);
-			
+			chmod($path.'/'.$pt.'Model.php', 0777);
 			
 			$str = file_get_contents('app/modules/tool/tpl/view.tpl');
 			$c = strtr($str,array(
-					"{date}"=>date("Y-m-d",time()),
-					"{name}"=>$pt
+				"{date}"=>date("Y-m-d",time()),
+				"{name}"=>$pt
 			));
 			file_put_contents($path.'/'.$pt.'View.php', $c);
+			chmod($path.'/'.$pt.'View.php', 0777);
+			
 			exit('ok,<a href="/tool">continue</a>');
 		}else{
 			$this->view->show();
