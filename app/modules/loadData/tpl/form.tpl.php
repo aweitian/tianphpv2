@@ -7,16 +7,15 @@
 
 ?>
 <div class="m-form">
-<form action="upload_file.php" method="post"
-enctype="multipart/form-data">
+<form action="<?php print $submit_url?>" method="post" enctype="multipart/form-data">
 <fieldset>
-	<legend class="f-p8">选择一个CVS文件上传</legend>
+	<legend class="f-p8">选择一个CSV文件上传</legend>
 	
 	
 	<div class="formitm">
                 <label class="lab">选择文件：</label>
                 <div class="ipt">
-                    <input type="file" name="file" id="file"/> 
+                    <input type="file" name="csv" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/> 
                 </div>
 	</div>
 
