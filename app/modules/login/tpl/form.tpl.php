@@ -5,21 +5,45 @@
  * Description: 
  */
 ?>
-<div class="container">
 
-      <form class="login-form" method="post" action="<?php print $submit_url?>">        
-        <div class="login-wrap">
-            <p class="login-img"><i class="icon_lock_alt"></i></p>
-            <div class="input-group">
-              <span class="input-group-addon"><i class="icon_profile"></i></span>
-              <input name="usr" type="text" class="form-control" placeholder="Username" autofocus>
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input name="pwd" type="password" class="form-control" placeholder="Password">
-            </div>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-        </div>
-      </form>
+
+<div class="m-login-form">
+	<div class="m-form">
+	    <form action="<?php print $submit_url?>" method="get">
+	        <fieldset>
+	            <legend>登陆</legend>
+	            <div id="info" class="f-text-white f-tac f-bg-red f-m5 f-p3">test</div>
+	            <div class="formitm">
+	                <label class="lab">账号：</label>
+	                <div class="ipt">
+	                    <input type="text" name="usr" class="u-ipt" autofocus/>
+	                </div>
+	            </div>
+	            <div class="formitm">
+	                <label class="lab">密码：</label>
+	                <div class="ipt">
+	                    <input type="password" class="u-ipt" name="pwd"/>
+	                </div>
+	            </div>
+	
+	            <div class="formitm formitm-1"><button class="u-btn" type="submit">提交</button></div>
+	        </fieldset>
+	    </form>
+	</div>
 
 </div>
+<script>
+setTimeout(function(){
+	$("#info").fadeOut("slow");
+
+},2500);
+
+
+</script>
+
+
+
+
+
+
+

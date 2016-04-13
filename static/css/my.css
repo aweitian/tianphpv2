@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+body{
+	background:#eee;
+}
+.m-login-form{
+	width:350px;
+	margin:128px auto;
+}
+.header{
+	min-height: 60px;
+    padding: 0 15px;
+}
+.dark-bg{
+	color: #fff;
+    background: #1a2732;
+    background-color: #1a2732;
+    border-bottom: 1px solid #f1f2f7;
+}
+
+a.logo {
+    font-size: 22px;
+    font-weight: 300;
+    color: #fed189;
+    float: left;
+    margin-top: 15px;
+    text-transform: uppercase;
+}
+.lite {
+    color: #00a0df !important;
+}
