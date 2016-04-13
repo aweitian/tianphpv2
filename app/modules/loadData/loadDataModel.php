@@ -9,6 +9,8 @@ class loadDataModel extends AppModel{
 		parent::__construct();
 		$this->initDb();
 	}
+
+	
 	/**
 	 * $_FILES["csv"]
 	 * @param array $uf
@@ -45,8 +47,13 @@ class loadDataModel extends AppModel{
 			$lineNo = 0;
 			while (($line = fgets($handle)) !== false) {
 				// process the line read.
-		
-		
+				//从第9行开始
+				if($lineNo < 9){$lineNo++;continue;}
+				//日期,小时,账户,推广计划,推广单元,创意标题,创意描述1,创意描述2,显示URL,展现,点击,
+				//消费,点击率,平均点击价格,网页转化,商桥转化
+				
+				
+				
 				$lineNo++;
 			}
 		
@@ -55,8 +62,31 @@ class loadDataModel extends AppModel{
 			// error opening the file.
 		}
 	}
-	private function add(){
-		$sql = "INSERT INTO `data_idea_bd_mb` (`account`,`plan`,`unit`,`title`,`desc1`,`desc2`,`url`,`paysum`,`shows`,`clks`,`avgprice`,`chat`,`subscribe`,`rcvpayment`,`id_code`,`at_code`,`datetime`) VALUES (:account,:plan,:unit,:title,:desc1,:desc2,:url,:paysum,:shows,:clks,:avgprice,:chat,:subscribe,:rcvpayment,:id_code,:at_code,:datetime))";
+	/**
+	 * 
+	 * @param string $pcmb
+	 * @param string $account
+	 * @param string $plan
+	 * @param string $unit
+	 * @param string $title
+	 * @param string $desc1
+	 * @param string $desc2
+	 * @param string $url
+	 * @param string $paysum
+	 * @param string $shows
+	 * @param string $clks
+	 * @param string $avgprice
+	 * @param string $datetime
+	 * @return INSERT ID
+	 */
+	private function _loadData_bd($pcmb,$account,$plan,$unit,$title,$desc1,$desc2,$url,$paysum,$shows,$clks,$avgprice,$datetime){
+		$sql = "
+		INSERT INTO `data_idea_bd_".$pcmb."` (
+			`account`,`plan`,`unit`,`title`,`desc1`,`desc2`,`url`,`paysum`,`shows`,`clks`,`avgprice`,`datetime`
+		) VALUES (
+			:account,:plan,:unit,:title,:desc1,:desc2,:url,:paysum,:shows,:clks,:avgprice,:datetime
+		)		
+		";
 		$data = array(
 			":account" => $account,
 			":plan" => $plan,
@@ -69,13 +99,14 @@ class loadDataModel extends AppModel{
 			":shows" => $shows,
 			":clks" => $clks,
 			":avgprice" => $avgprice,
-			":chat" => $chat,
-			":subscribe" => $subscribe,
-			":rcvpayment" => $rcvpayment,
-			":id_code" => $id_code,
-			":at_code" => $at_code,
 			":datetime" => $datetime,
-		
 		);
+		return $this->db->insert($sql, $data);
+	}
+	private function _loadData_pc_bd($account,$plan,$unit,$title,$desc1,$desc2,$url,$paysum,$shows,$clks,$avgprice,$datetime){
+		return $this->_loadData_bd("pc", $account, $plan, $unit, $title, $desc1, $desc2, $url, $paysum, $shows, $clks, $avgprice, $datetime);
+	}
+	private function _loadData_mb_bd($account,$plan,$unit,$title,$desc1,$desc2,$url,$paysum,$shows,$clks,$avgprice,$datetime){
+		return $this->_loadData_bd("mb", $account, $plan, $unit, $title, $desc1, $desc2, $url, $paysum, $shows, $clks, $avgprice, $datetime);
 	}
 }
