@@ -6,6 +6,7 @@
  */
 extract($data);
 $method = array("SELECT","INSERT","UPDATE","DELETE");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,6 +34,9 @@ $method = array("SELECT","INSERT","UPDATE","DELETE");
 </select>
 <br>
 <table>
+<tr>
+	<td><?php print $arg?></td>
+</tr>
 <tr>
 	<td><textarea rows="8" cols="52" name="sql"><?php print $sql?></textarea></td>
 	<td><textarea rows="8" cols="52" name="var"><?php print $var?></textarea></td>

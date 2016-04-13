@@ -42,7 +42,7 @@ class toolController implements IController{
 			$sql = $this->model->genSql($msg);
 			$this->view->setPmcaiMsg($msg);
 // 			var_dump($sql);exit;
-			$this->view->sql($this->model->getTabNames(),$sql["sql"],$sql["var"]);
+			$this->view->sql($this->model->getTabNames(),$sql["sql"],$sql["var"],$sql["arg"]);
 		}else{
 			$this->view->setPmcaiMsg($msg);
 			$this->view->sql($this->model->getTabNames());
