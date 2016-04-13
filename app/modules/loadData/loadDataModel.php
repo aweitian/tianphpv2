@@ -56,20 +56,26 @@ class loadDataModel extends AppModel{
 		}
 	}
 	private function add(){
-		$sql = "INSERT INTO `data_idea_bd_mb`(
-				`account`, `plan`, `unit`, `title`, 
-				`desc1`, `desc2`, `url`, `paysum`, `shows`, 
-				`clks`, `avgprice`, `chat`, `subscribe`, 
-				`rcvpayment`, `id_code`, `at_code`, 
-				`datetime`
-		) VALUES (
-			：account, ：plan, ：unit, ：title, 
-			：desc1, ：desc2, ：url, ：paysum, ：shows, 
-			：clks, ：avgprice, ：chat, ：subscribe, 
-			：rcvpayment, ：id_code, ：at_code, 
-			：datetime	
-				
-		)";
+		$sql = "INSERT INTO `data_idea_bd_mb` (`account`,`plan`,`unit`,`title`,`desc1`,`desc2`,`url`,`paysum`,`shows`,`clks`,`avgprice`,`chat`,`subscribe`,`rcvpayment`,`id_code`,`at_code`,`datetime`) VALUES (:account,:plan,:unit,:title,:desc1,:desc2,:url,:paysum,:shows,:clks,:avgprice,:chat,:subscribe,:rcvpayment,:id_code,:at_code,:datetime))";
+		$data = array(
+			":account" => $account,
+			":plan" => $plan,
+			":unit" => $unit,
+			":title" => $title,
+			":desc1" => $desc1,
+			":desc2" => $desc2,
+			":url" => $url,
+			":paysum" => $paysum,
+			":shows" => $shows,
+			":clks" => $clks,
+			":avgprice" => $avgprice,
+			":chat" => $chat,
+			":subscribe" => $subscribe,
+			":rcvpayment" => $rcvpayment,
+			":id_code" => $id_code,
+			":at_code" => $at_code,
+			":datetime" => $datetime,
 		
+		);
 	}
 }
