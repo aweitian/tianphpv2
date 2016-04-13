@@ -12,7 +12,7 @@
 // path
 // query - 在问号 ? 之后
 // fragment - 在散列符号 # 之后
-require_once "lib/utils/httpDataConverter.php";
+require_once FILE_SYSTEM_ENTRY."/lib/utils/httpDataConverter.php";
 class url{
 	public $scheme="";
 	public $host="";

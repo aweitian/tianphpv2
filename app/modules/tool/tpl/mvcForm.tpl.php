@@ -18,7 +18,7 @@
 <div style="position: fixed;top:50px;left:45%;">
 <h3 class="u-tt-xl">MVC file struct generator</h3>
 <br>
-<form action="/tool" method="post">
+<form action="/tool/mvc" method="post">
 <input class="u-ipt" name="name">
 <input class="u-btn" type="submit" value="submit">
 

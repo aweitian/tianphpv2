@@ -1,6 +1,6 @@
 <?php
-require_once "lib/interfaces/IInstall.php";
-require_once 'lib/modules/oplog/opValidator.php';
+require_once FILE_SYSTEM_ENTRY."/lib/interfaces/IInstall.php";
+require_once FILE_SYSTEM_ENTRY.'/lib/modules/oplog/opValidator.php';
 class oplog implements IInstall{
 	
 	
@@ -9,7 +9,7 @@ class oplog implements IInstall{
 	
 	
 	public function __construct() {
-		if (is_null(tian::$pdoBase)) {
+		if (is_null(mysqlPdo::getConnection())) {
 			tian::throwException("7399");
 		}
 		

@@ -22,3 +22,7 @@ if(DEBUG_FLAG){
 	error_reporting(0);
 	ini_set("display_errors","Off");
 }
+
+
+#define("TPL_404_CNF_PATH",FILE_SYSTEM_ENTRY."/lib/misc/404.tpl.php");
+#define("TPL_MSG_CNF_PATH",FILE_SYSTEM_ENTRY."/lib/misc/msg.tpl.php");

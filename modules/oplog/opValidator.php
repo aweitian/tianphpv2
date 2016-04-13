@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * function: 
  */
-require_once "lib/validate/validator.php";
+require_once FILE_SYSTEM_ENTRY."/lib/validate/validator.php";
 class opValidator{
 	public static function isValidOptype($v){
 		return preg_match("/^\w{1,16}$/", $v);

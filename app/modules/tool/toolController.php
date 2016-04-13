@@ -26,43 +26,29 @@ class toolController implements IController{
 		
 	}
 	
-public function welcomeAction(pmcaiMsg $msg){
+	public function welcomeAction(pmcaiMsg $msg){
+		$this->view->main();
+	}
+	public function mvcAction(pmcaiMsg $msg){
 		if ($msg->isPost()){
-			$ctl = $msg->getControl();
-			$pt = $msg["name"];
-			$path = FILE_SYSTEM_ENTRY.'/app/modules/'.$pt;
-			if(is_dir($path)){
-				exit('folder ['.$pt.'] exits');
-			}
-			mkdir($path);
-			chmod($path, 0777);
-			$str = file_get_contents('app/modules/tool/tpl/control.tpl');
-			$c = strtr($str,array(
-				"{date}"=>date("Y-m-d",time()),
-				"{name}"=>$pt
-			));
-			file_put_contents($path.'/'.$pt.'Controller.php', $c);
-			chmod($path.'/'.$pt.'Controller.php', 0777);
-			
-			$str = file_get_contents('app/modules/tool/tpl/model.tpl');
-			$c = strtr($str,array(
-				"{date}"=>date("Y-m-d",time()),
-				"{name}"=>$pt
-			));
-			file_put_contents($path.'/'.$pt.'Model.php', $c);
-			chmod($path.'/'.$pt.'Model.php', 0777);
-			
-			$str = file_get_contents('app/modules/tool/tpl/view.tpl');
-			$c = strtr($str,array(
-				"{date}"=>date("Y-m-d",time()),
-				"{name}"=>$pt
-			));
-			file_put_contents($path.'/'.$pt.'View.php', $c);
-			chmod($path.'/'.$pt.'View.php', 0777);
-			
-			exit('ok,<a href="/tool">continue</a>');
+			$this->model->genMvc($msg);
+			$this->back2main();
 		}else{
 			$this->view->show();
 		}
+	}
+	public function sqlAction(pmcaiMsg $msg){
+		if ($msg->isPost()){
+			$sql = $this->model->genSql($msg);
+			$this->view->setPmcaiMsg($msg);
+// 			var_dump($sql);exit;
+			$this->view->sql($this->model->getTabNames(),$sql["sql"],$sql["var"]);
+		}else{
+			$this->view->setPmcaiMsg($msg);
+			$this->view->sql($this->model->getTabNames());
+		}
+	}
+	private function back2main(){
+		exit('ok,<a href="/tool">BACK TO MAIN CONSOLE</a>');
 	}
 }

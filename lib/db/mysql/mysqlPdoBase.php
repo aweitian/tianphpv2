@@ -5,9 +5,9 @@
  * 说明:MYSQL PDO 最基本的操作
  */
 define("MAX_RESULT_RETURN",500);
-require_once 'lib/interfaces/db/IPdoBase.php';
-require_once 'PHPVarType2PDOBindType.php';
-require_once "sqlExpression.php";
+require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/db/IPdoBase.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/db/mysql/PHPVarType2PDOBindType.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/db/mysql/sqlExpression.php';
 class mysqlPdoBase implements IPdoBase{
 	const ERROR_EXCEED_LIMIT_COUNT = 0x1e7d;
 	private $connection;
@@ -15,14 +15,7 @@ class mysqlPdoBase implements IPdoBase{
 	private $errorCode;//code
 	const NONERRCODE = "00000";
 	public function __construct(){
-		$dsn = "mysql:host=:ip;port=:port;dbname=:dbname";
-		$dsn = strtr($dsn,array(
-			":ip" => DB_HOST,
-			":port" => DB_PORT,
-			":dbname" => DB_NAME
-		));
-		//exit($dsn);
-		$this->connection = new PDO($dsn,DB_USER,DB_PASS,array("PDO::MYSQL_ATTR_INIT_COMMAND=set names ".DB_CHARSET));
+		$this->connection = mysqlPdo::getConnection();
 	}
 	/**
 	 * @return string

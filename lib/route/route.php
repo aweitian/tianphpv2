@@ -3,7 +3,7 @@
  * 引用了MESSAGE和route配置文件
  */
 
-require_once 'lib/interfaces/route/IRoute.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/route/IRoute.php';
 abstract class route implements IRoute{
 	/**
 	 * 路径从入口开始算起

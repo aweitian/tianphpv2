@@ -13,7 +13,7 @@
 //| order      | int(2)        | NULL            | NO   | UNI | 0       |      			 | select,insert,update,references | 排序       	  |
 //| updatetime | datetime      | NULL            | NO   |     | NULL    |       		 | select,insert,update,references | 更新时间    |
 //+------------+---------------+-----------------+------+-----+---------+----------------+---------------------------------+----------+
-require_once 'lib/interfaces/db/IColumnInfo.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/db/IColumnInfo.php';
 class mysqlColumnInfo implements IColumnInfo{
 	private $connection;
 	private $tabname;
@@ -29,7 +29,7 @@ class mysqlColumnInfo implements IColumnInfo{
 	 * @param string $columnname
 	 */
 	public function __construct($tabname,$columnname){
-		$this->connection=tian::$pdo;
+		$this->connection=mysqlPdo::getConnection();
 		$this->columnname=$columnname;
 		$this->init($tabname);
 	}

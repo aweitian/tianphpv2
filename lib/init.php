@@ -15,6 +15,8 @@ require_once FILE_SYSTEM_ENTRY.'/lib/route/router.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/route/routes/pmcai/pmcaiDispatcher.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/identityToken/identityToken.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/message/message.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/rirResult.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/db/mysql/pdo.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/model.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/request/url.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/request/httpRequest.php';
@@ -24,7 +26,13 @@ require_once FILE_SYSTEM_ENTRY.'/lib/validate/validator.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/view.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/controller.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/debug.php';
-require_once FILE_SYSTEM_ENTRY.'/lib/rirResult.php';
+
+
+#tpl path conf
+defined("TPL_404_CNF_PATH")
+	or define("TPL_404_CNF_PATH",FILE_SYSTEM_ENTRY."/lib/misc/404.tpl.php");
+defined("TPL_MSG_CNF_PATH")
+	or define("TPL_MSG_CNF_PATH",FILE_SYSTEM_ENTRY."/lib/misc/msg.tpl.php");
 
 #PMCAI MSG CONF
 defined("PMCAI_MSG_CNF_MODULE_DEFAULT") 
