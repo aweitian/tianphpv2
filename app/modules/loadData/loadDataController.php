@@ -21,7 +21,8 @@ class loadDataController extends AppController{
 		$this->model = new loadDataModel();
 		$this->view = new loadDataView();
 	}
-	public function welcomeAction(){
-
+	public function welcomeAction(pmcaiMsg $msg){
+		$this->view->setPmcaiMsg($msg);
+		$this->view->showFormUI("");
 	}
 }
