@@ -68,18 +68,20 @@ class toolModel extends model{
 				break;	
 			default;
 				$tpl = $this->tpl_delete();
-				return array("sql"=>strtr($tpl,$obj),"var"=>strtr($var,array("_PH_"=>"")));
+				return array("sql"=>strtr($tpl,$obj),"var"=>strtr($var,array("_PH_"=>"")),"arg"=>"");
 		}
 		$ph = "";
+		$arg = array();
 		foreach ($data as $col){
 			$obj["f".$i] = $col;
 			$ph .= "\t\":".$col."\" => \$".$col.",\n";
+			$arg[] = "\$".$col;
 			$i++;
 		}
-		return array("sql"=>strtr($tpl,$obj),"var"=>strtr($var,array("_PH_"=>$ph)));
+		return array("sql"=>strtr($tpl,$obj),"var"=>strtr($var,array("_PH_"=>$ph)),"arg"=>join(",",$arg));
 	}
 	private function tpl_select($cnt){
-		$tpl = "SELECT _FIELDS_ FROM `_tbname_` WHERE 1";
+		$tpl = "SELECT \n\t_FIELDS_\n FROM `_tbname_` WHERE 1";
 		$ret = array();
 		for($i=0;$i<$cnt;$i++){
 			$ret[] = "`f".$i."`";
@@ -90,7 +92,7 @@ class toolModel extends model{
 	}
 	
 	private function tpl_insert($cnt){
-		$tpl = "INSERT INTO `_tbname_` (_FIELDS_) VALUES (_PLACEHOLDER_)";
+		$tpl = "INSERT INTO `_tbname_` (\n\t_FIELDS_\n) VALUES (\n\t_PLACEHOLDER_\n)";
 		$f = array();
 		$p = array();
 		for($i=0;$i<$cnt;$i++){
@@ -104,7 +106,7 @@ class toolModel extends model{
 	}
 	
 	private function tpl_update($cnt){
-		$tpl = "UPDATE `_tbname_` SET _FIELDS_ WHERE 1";
+		$tpl = "UPDATE `_tbname_` SET \n\t_FIELDS_\n WHERE 1";
 		$ret = array();
 		for($i=0;$i<$cnt;$i++){
 			$ret[] = "`f".$i."`=:f".$i;

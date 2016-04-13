@@ -14,11 +14,12 @@ class toolView extends AppView{
 		$msg = file_get_contents("app/modules/tool/tpl/main.tpl.php");
 		print $msg;
 	}
-	public function sql($tables,$sql="",$sql_var=""){
+	public function sql($tables,$sql="",$sql_var="",$arg=""){
 		$msg = $this->fetch("sqlForm",array(
 			"table" => $tables,
 			"sql" => $sql,
-			"var" => $sql_var
+			"var" => $sql_var,
+			"arg" => $arg
 		));
 		print $msg;
 	}
