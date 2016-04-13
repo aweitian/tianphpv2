@@ -35,7 +35,7 @@ $method = array("SELECT","INSERT","UPDATE","DELETE");
 <br>
 <table>
 <tr>
-	<td><?php print $arg?></td>
+	<td colspan="2"><?php print $arg?></td>
 </tr>
 <tr>
 	<td><textarea rows="8" cols="52" name="sql"><?php print $sql?></textarea></td>
