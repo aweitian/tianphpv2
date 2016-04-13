@@ -22,13 +22,13 @@ class AppView extends View{
 	
 	public function fetch($tpl,$data=array(),$ext='.tpl.php'){
 		if(is_null($this->pmcaiMsg)){
-			tian::throwException(0x0000);
+			tian::throwException("0000");
 		}
 		$ctl = $this->pmcaiMsg->getControl();
+		extract($data);
 		ob_start();
 		if(strpos($tpl,'/') !== 0){
 			$tpl = FILE_SYSTEM_ENTRY."/app/modules/".$ctl."/tpl/".$tpl.$ext;
-				
 		}
 		include $tpl;
 		$ret = ob_get_contents();
