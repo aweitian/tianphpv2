@@ -13,14 +13,14 @@
 // | key_value_cache | MyISAM |      10 | Dynamic    |    1 |             28 |          96 | 281474976710655 |         7168 |         68 |           NULL | 2013-09-30 14:44:41 | 2013-09-30 15:08:11 | NULL       | utf8_general_ci |     NULL |                |         |
 // | key_value_pair  | MyISAM |      10 | Dynamic    |    2 |             30 |          60 | 281474976710655 |         7168 |          0 |           NULL | 2013-09-30 13:34:06 | 2013-11-14 11:10:43 | NULL       | utf8_general_ci |     NULL |                |         |
 // +-----------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+------------+----------------+---------------------+---------------------+------------+-----------------+----------+----------------+---------+
-require_once 'lib/interfaces/db/IDbInfo.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/db/IDbInfo.php';
 class mysqlDbInfo implements IDbInfo{
 	private $connection;
 	private $dbname;
 	private static $descriptions=null;
 	public $errorInfo;
 	public function __construct($dbname){
-		$this->connection=tian::$pdo;
+		$this->connection=mysqlPdo::getConnection();
 		$this->dbname=$dbname;
 		if(is_null(self::$descriptions))self::$descriptions=$this->getDescription();
 		if(is_null(self::$descriptions)){

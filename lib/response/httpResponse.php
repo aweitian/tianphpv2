@@ -14,12 +14,12 @@ class httpResponse{
 	public function _404(){
 		@header('HTTP/1.x 404 Not Found');
 		@header('Status: 404 Not Found');
-		include_once dirname(__FILE__)."/404.tpl.php";
+		include_once TPL_404_CNF_PATH;
 // 		debug_print_backtrace();
 		exit;
 	}
 	public function showError($msg){
-		include_once dirname(__FILE__)."/msg.tpl.php";
+		include TPL_MSG_CNF_PATH;
 		exit;
 	}
 	/**

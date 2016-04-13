@@ -4,10 +4,10 @@
  *  在验证码打开的情况下再错误一定次数就拒绝登陆
  *  判断标准是以IP加每天再加操作类型（比如登陆和发贴就不是同一个操作类型）进行判断
  */
-require_once "lib/modules/oplog/IOp.php";
-require_once "lib/modules/oplog/oplog.php";
-require_once "lib/modules/priv/privAuth.php";
-require_once "lib/modules/captcha/captcha.php";
+require_once FILE_SYSTEM_ENTRY."/lib/modules/oplog/IOp.php";
+require_once FILE_SYSTEM_ENTRY."/lib/modules/oplog/oplog.php";
+require_once FILE_SYSTEM_ENTRY."/lib/modules/priv/privAuth.php";
+require_once FILE_SYSTEM_ENTRY."/lib/modules/captcha/captcha.php";
 
 class priv implements IInstall,IOp{
 	/**

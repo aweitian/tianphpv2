@@ -18,7 +18,7 @@
 // | sid   | int(11)     | NO   | PRI | NULL    | auto_increment |
 // | vv    | varchar(50) | YES  |     | NULL    |                |
 // +-------+-------------+------+-----+---------+----------------+
-require_once 'lib/interfaces/db/ITableInfo.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/db/ITableInfo.php';
 class mysqlTableInfo implements ITableInfo{
 	/**
 	 * Enter description here ...
@@ -31,7 +31,7 @@ class mysqlTableInfo implements ITableInfo{
 	private static $key_descriptions=array();
 	
 	public function __construct($tabname){
-		$this->connection=$connection;
+		$this->connection=mysqlPdo::getConnection();
 		$this->init($tabname);
 	}
 	/**
@@ -95,7 +95,7 @@ class mysqlTableInfo implements ITableInfo{
 		return self::$key_descriptions[$this->tabname];
 	}
 	protected function getTableDecription(){
-		$sth=$this->connection->prepare("show table status from ".$this->connection->getDbname()." where name=:tablename");
+		$sth=$this->connection->prepare("show table status from ".DB_NAME." where name=:tablename");
 		$sth->execute(array("tablename"=>$this->tabname));
 		$result=$sth->fetchAll(PDO::FETCH_ASSOC);
 		if(count($result)!=1){
