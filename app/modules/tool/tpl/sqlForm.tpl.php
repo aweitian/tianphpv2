@@ -35,11 +35,11 @@ $method = array("SELECT","INSERT","UPDATE","DELETE");
 <br>
 <table>
 <tr>
-	<td colspan="2"><?php print $arg?></td>
+	<td colspan="2"><input value="<?php print $arg?>" style="width:712px;"></td>
 </tr>
 <tr>
-	<td><textarea rows="8" cols="52" name="sql"><?php print $sql?></textarea></td>
-	<td><textarea rows="8" cols="52" name="var"><?php print $var?></textarea></td>
+	<td><textarea style="width:350px;height:128px;" name="sql"><?php print $sql?></textarea></td>
+	<td><textarea style="width:350px;height:128px;" name="var"><?php print $var?></textarea></td>
 </tr>
 </table>
 <input class="u-btn" type="submit" value="submit">
