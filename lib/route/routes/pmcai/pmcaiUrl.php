@@ -62,9 +62,11 @@ class pmcaiUrl{
 	}
 	public function setControl($control){
 		$this->pmcaiArr["control"] = $control;
+		return $this;
 	}
 	public function setAction($action){
 		$this->pmcaiArr["action"] = $action;
+		return $this;
 	}
 	public function getControl(){
 		return $this->pmcaiArr["control"];
