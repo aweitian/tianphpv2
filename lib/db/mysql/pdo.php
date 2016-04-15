@@ -7,14 +7,15 @@
 class mysqlPdo{
 	private static $pdo = null;
 	private function __construct(){
-		$dsn = "mysql:host=:ip;port=:port;dbname=:dbname";
+		$dsn = "mysql:host=:ip;port=:port;dbname=:dbname;charset=:charset";
 		$dsn = strtr($dsn,array(
 			":ip" => DB_HOST,
 			":port" => DB_PORT,
-			":dbname" => DB_NAME
+			":dbname" => DB_NAME,
+			":charset" => DB_CHARSET
 		));
 		//exit($dsn);
-		self::$pdo = new PDO($dsn,DB_USER,DB_PASS,array("PDO::MYSQL_ATTR_INIT_COMMAND=set names ".DB_CHARSET));
+		self::$pdo = new PDO($dsn,DB_USER,DB_PASS);
 	
 	}
 	/**
