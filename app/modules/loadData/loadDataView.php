@@ -12,4 +12,13 @@ class loadDataView extends AppView{
 		)),"Upload a csv file")->show();
 	}
 	
+	public function showUploadResult(rirResult $r,$submit_url){
+		$this->wrap($this->fetch("form",array(
+				"submit_url"=>$submit_url
+		)),"Confirm to load data to database")->show();
+	}
+	
+	public function showLoadData($pos,$sid){
+		
+	}
 }

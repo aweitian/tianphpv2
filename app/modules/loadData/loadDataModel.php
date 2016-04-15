@@ -5,13 +5,17 @@
  * Description: 
  */
 class loadDataModel extends AppModel{
+	private $callback = null;
+	
 	
 	public function __construct(){
 		parent::__construct();
 		$this->initDb();
 	}
 
-	
+	public function setCallback($cb){
+		$this->callback = $cb;
+	}
 	/**
 	 * $_FILES["csv"]
 	 * @param array $uf
@@ -45,7 +49,7 @@ class loadDataModel extends AppModel{
 
 
 	}
-	public function loadDataToDb($path){
+	public function loadDataToDb($path,$pcmb){
 		#offsets
 		$offset_acc  = 2;
 		$offset_plan = 3;
@@ -58,6 +62,11 @@ class loadDataModel extends AppModel{
 		$offset_pays = 10;
 		$offset_clks = 11;
 		$offset_avgp = 13;
+		
+		
+		//检查文件头，判断是不是识别的格式
+
+		
 		
 		
 		$handle = fopen($path, "r");
@@ -73,20 +82,26 @@ class loadDataModel extends AppModel{
 				//"{男性勃起功能障碍的原因},勃起不坚,时间不长不坚硬的病因是什么,找到病因能一次性治",
 				//"吗?上海九龙男子医院专家在线解答勃起问题.","man.long120.cn",1,0,0.00,0.00%,0.00,0,0
 				$items = explode(",", $line);
-				$acc   = $items[$offset_acc];
-				$plan  = $items[$offset_plan];
-				$unit  = $items[$offset_unit];
-				$title = $items[$offset_titl];
-				$desc1 = $items[$offset_des1];
-				$desc2 = $items[$offset_des2];
-				$url   = $items[$offset_url];
-				$pays  = $items[$offset_pays];
-				$shows = $items[$offset_show];
-				$clks  = $items[$offset_clks];
-				$avgpr = $items[$offset_avgp];
-				$date  = $items[0] . " " . $items[1] . ":00:00";
+				$acc   = $this->stripQuote($items[$offset_acc]);
+				$plan  = $this->stripQuote($items[$offset_plan]);
+				$unit  = $this->stripQuote($items[$offset_unit]);
+				$title = $this->stripQuote($items[$offset_titl]);
+				$desc1 = $this->stripQuote($items[$offset_des1]);
+				$desc2 = $this->stripQuote($items[$offset_des2]);
+				$url   = $this->stripQuote($items[$offset_url]);
+				$pays  = $this->stripQuote($items[$offset_pays]);
+				$shows = $this->stripQuote($items[$offset_show]);
+				$clks  = $this->stripQuote($items[$offset_clks]);
+				$avgpr = $this->stripQuote($items[$offset_avgp]);
+				$date  = $this->stripQuote($items[0] . " " . $items[1] . ":00:00");
+				
+				$id = $this->_loadData_bd($pcmb, $acc, $plan, $unit, $title, $desc1, $desc2, 
+						$url, $pays, $shows, $clks, $avgpr, $date);
 				
 				
+				if(!is_null($this->callback)){
+					call_user_func_array($this->callback, array($lineNo,$id));
+				}
 				$lineNo++;
 			}
 		
@@ -94,6 +109,9 @@ class loadDataModel extends AppModel{
 		} else {
 			// error opening the file.
 		}
+	}
+	private function stripQuote($str){
+		return str_replace('"',"",$str);
 	}
 	/**
 	 * 

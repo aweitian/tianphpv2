@@ -6,6 +6,7 @@
  */
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataView.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvFormat.php';
 class loadDataController extends AppController{
 	/**
 	 * 
@@ -44,16 +45,31 @@ class loadDataController extends AppController{
 // 		$gbk = file_get_contents("uploads/1460546321");
 // 		echo iconv("GBK", "UTF-8", $gbk);
 // 		exit;
-		if(isset($_FILES) && $msg->isPost()){
+		if(isset($_FILES) && isset($_FILES["csv"]) && $msg->isPost()){
 			$ret = $this->model->mvFIleToUploads($_FILES["csv"]);
 			if($ret->isTrue()){
 				$path = $ret->return;
-				
+				$csv = new csvFormat();
+				$r = $csv->parse($path);
+//				if($r->isTrue()){
+// 					if($r->return["channel"] == csvFormat::CHANNEL_BD){
+// 						$this->model->setCallback(array($this,"loadDataProcessingCallback"));
+// 						$this->model->loadDataToDb($path,$r->return["device"] == csvFormat::DEVICE_PC ? "pc" : "mb");
+// 					}
+					
+//				}
+				//$this->view->showUploadResult($r,$msg->getPmcaiUrl()->setAction("load")->);
 			}
 		}else{
 			$this->showFormUI($msg);
 		}
 		
+	}
+	public function loadAction(pmcaiMsg $msg){
+		
+	}
+	private function loadDataProcessingCallback($pos,$insertId){
+		$this->view->showLoadData($pos, $insertId);
 	}
 	private function showFormUI(pmcaiMsg $msg){
 		$this->view->setPmcaiMsg($msg);
