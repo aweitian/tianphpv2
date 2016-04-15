@@ -7,7 +7,7 @@
 
 ?>
 <div class="m-form">
-<form action="<?php print $submit_url?>" method="post" enctype="multipart/form-data">
+<form action="<?php print $submit_url?>" method="post" enctype="multipart/form-data" accept-charset="utf-8">
 <fieldset>
 	<legend class="f-p8">选择一个CSV文件上传</legend>
 	

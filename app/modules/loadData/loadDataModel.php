@@ -5,6 +5,7 @@
  * Description: 
  */
 class loadDataModel extends AppModel{
+	
 	public function __construct(){
 		parent::__construct();
 		$this->initDb();
@@ -19,7 +20,9 @@ class loadDataModel extends AppModel{
 	public function mvFIleToUploads($uf){
 		$error = $uf["error"];
 		$tmp_name = $uf["tmp_name"];
-		$name = time();
+		//$name = time();
+		$name = $uf["tmp_name"];
+		exit($name);
 		$destination = FILE_SYSTEM_ENTRY."/uploads/".$name;
 		$errInfo = array(
 			"",
@@ -42,6 +45,20 @@ class loadDataModel extends AppModel{
 
 	}
 	public function loadDataToDb($path){
+		#offsets
+		$offset_acc  = 2;
+		$offset_plan = 3;
+		$offset_unit = 4;
+		$offset_titl = 5;
+		$offset_des1 = 6;
+		$offset_des2 = 7;
+		$offset_url  = 8;
+		$offset_show = 9;
+		$offset_pays = 10;
+		$offset_clks = 11;
+		$offset_avgp = 13;
+		
+		
 		$handle = fopen($path, "r");
 		if ($handle) {
 			$lineNo = 0;
@@ -51,7 +68,22 @@ class loadDataModel extends AppModel{
 				if($lineNo < 9){$lineNo++;continue;}
 				//日期,小时,账户,推广计划,推广单元,创意标题,创意描述1,创意描述2,显示URL,展现,点击,
 				//消费,点击率,平均点击价格,网页转化,商桥转化
-				
+				//"2016-03-28",0,"shb-九龙2","性功能-勃起异常","勃起-硬","{男性勃起功能障碍的原因},硬不起来该如何治?",
+				//"{男性勃起功能障碍的原因},勃起不坚,时间不长不坚硬的病因是什么,找到病因能一次性治",
+				//"吗?上海九龙男子医院专家在线解答勃起问题.","man.long120.cn",1,0,0.00,0.00%,0.00,0,0
+				$items = explode(",", $line);
+				$acc   = $items[$offset_acc];
+				$plan  = $items[$offset_plan];
+				$unit  = $items[$offset_unit];
+				$title = $items[$offset_titl];
+				$desc1 = $items[$offset_des1];
+				$desc2 = $items[$offset_des2];
+				$url   = $items[$offset_url];
+				$pays  = $items[$offset_pays];
+				$shows = $items[$offset_show];
+				$clks  = $items[$offset_clks];
+				$avgpr = $items[$offset_avgp];
+				$date  = $items[0] . " " . $items[1] . ":00:00";
 				
 				
 				$lineNo++;
