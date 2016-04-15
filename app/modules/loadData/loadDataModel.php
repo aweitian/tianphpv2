@@ -21,8 +21,9 @@ class loadDataModel extends AppModel{
 		$error = $uf["error"];
 		$tmp_name = $uf["tmp_name"];
 		//$name = time();
-		$name = $uf["tmp_name"];
-		exit($name);
+		$name = $uf["name"];
+// 		print '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+// 		exit($name);
 		$destination = FILE_SYSTEM_ENTRY."/uploads/".$name;
 		$errInfo = array(
 			"",

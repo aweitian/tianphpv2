@@ -45,7 +45,7 @@ class loadDataController extends AppController{
 // 		echo iconv("GBK", "UTF-8", $gbk);
 // 		exit;
 		if(isset($_FILES) && $msg->isPost()){
-			$ret = $this->model->saveData($_FILES["csv"]);
+			$ret = $this->model->mvFIleToUploads($_FILES["csv"]);
 			if($ret->isTrue()){
 				$path = $ret->return;
 				
