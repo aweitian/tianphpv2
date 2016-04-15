@@ -10,6 +10,7 @@ require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/route/IActionNotFound.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/route/IController.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/route/IDispatcher.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/route/IRoute.php';
+require_once FILE_SYSTEM_ENTRY.'/lib/utils/utility.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/route/route.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/route/router.php';
 require_once FILE_SYSTEM_ENTRY.'/lib/route/routes/pmcai/pmcaiDispatcher.php';
