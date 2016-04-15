@@ -18,4 +18,7 @@ class View{
 		print $this->html;
 		exit;
 	}
+	public function utf8Header(){
+		return '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+	}
 }
