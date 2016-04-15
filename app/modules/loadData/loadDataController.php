@@ -19,6 +19,7 @@ class loadDataController extends AppController{
 	 */
 	private $view;
 	public function __construct(){
+		parent::__construct();
 		$this->model = new loadDataModel();
 		$this->view = new loadDataView();
 	}
@@ -67,10 +68,20 @@ class loadDataController extends AppController{
 		
 	}
 	public function loadAction(pmcaiMsg $msg){
-		
+		if(!isset($msg["token"])){
+			$this->response->_404();
+		}
+		$data = $this->model->getUploadInfo($msg["token"]);
+		if(empty($data)){
+			$this->response->showError("无效的文件HASH值");
+		}
+		$this->view->setPmcaiMsg($msg);
+		$this->view->showLoadDataPre($data["cnt"]);
+		$this->model->setCallback(array($this,"loadDataProcessingCallback"));
+		$this->model->loadData($data);
 	}
-	private function loadDataProcessingCallback($pos,$insertId){
-		$this->view->showLoadData($pos, $insertId);
+	public function loadDataProcessingCallback($pos,$insertId){
+		$this->view->showLoadDataProcessing($pos, $insertId);
 	}
 	private function showFormUI(pmcaiMsg $msg){
 		$this->view->setPmcaiMsg($msg);

@@ -18,21 +18,21 @@
 
 <?php else:?>
 <div class="m-form">
-<form action="<?php print $submit_url?>" method="post" accept-charset="utf-8">
+<form onsubmit="return confirm('确认要导入到数据库?')" action="<?php print $submit_url?>" method="post" accept-charset="utf-8">
 <fieldset>
 	<legend class="f-p8">确认是否导入数据</legend>
 	
-	<input type="hidden" name="token" value="">
+	<input type="hidden" name="token" value="<?php print $r->return["token"]?>">
 	<div class="formitm">
 		<label class="lab">渠道：</label>
 		<div class="ipt">
-			<span class="domain"><?php print $r->return["channel"]?></span>
+			<span class="domain"><?php print csvFormat::getChannelName($r->return["channel"]) ?></span>
 		</div>
 	</div>
 	<div class="formitm">
 		<label class="lab">设备：</label>
 		<div class="ipt">
-			<span class="domain"><?php print $r->return["device"]?></span>
+			<span class="domain"><?php print csvFormat::getDeviceName($r->return["device"])?></span>
 		</div>
 	</div>
 	<div class="formitm">
@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	<div class="formitm">
-		<label class="lab">文件总行数：</label>
+		<label class="lab">总行数：</label>
 		<div class="ipt">
 			<span class="domain"><?php print $r->return["total"]?></span>
 		</div>

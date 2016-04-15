@@ -49,7 +49,39 @@ class loadDataModel extends AppModel{
 
 
 	}
+	
+	public function getUploadInfo($token){
+		return $this->db->fetch("SELECT * FROM `log_upload_token` WHERE `token` = :token", array(
+				":token" => $token,
+		));
+	}
+	
+	public function loadData($metaData){
+		switch($metaData["ch"]){
+			case "bd":
+				$this->loadDataToDb($metaData["name"],$metaData["dev"]);
+				return 0;
+			default:
+				return 0;
+				
+		}
+	}
+	
 	public function loadDataToDb($path,$pcmb){
+// 		$i = 15;
+// 		while($i--){
+// 			sleep(1);
+// 			if(!is_null($this->callback)){
+// 				call_user_func_array($this->callback, array(16-$i,$i));
+// 			}
+// 		}
+		
+		
+// 		return ;
+		
+		
+		
+		ini_set("max_execution_time", 300);
 		#offsets
 		$offset_acc  = 2;
 		$offset_plan = 3;
@@ -81,7 +113,7 @@ class loadDataModel extends AppModel{
 				//"2016-03-28",0,"shb-九龙2","性功能-勃起异常","勃起-硬","{男性勃起功能障碍的原因},硬不起来该如何治?",
 				//"{男性勃起功能障碍的原因},勃起不坚,时间不长不坚硬的病因是什么,找到病因能一次性治",
 				//"吗?上海九龙男子医院专家在线解答勃起问题.","man.long120.cn",1,0,0.00,0.00%,0.00,0,0
-				$items = explode(",", $line);
+				$items = explode(",", trim(iconv("GBK", "UTF8", $line)));
 				$acc   = $this->stripQuote($items[$offset_acc]);
 				$plan  = $this->stripQuote($items[$offset_plan]);
 				$unit  = $this->stripQuote($items[$offset_unit]);

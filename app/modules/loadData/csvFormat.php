@@ -22,13 +22,22 @@ class csvFormat{
 	public function __construct(){
 		
 	}
+	
+	public static function getChannelName($ch){
+		$channel = array("未知","百度","神马","搜狗","360");
+		return $channel[$ch];
+	}
+	public static function getDeviceName($dv){
+		$dev = array("未知","PC","手机");
+		return $dev[$dv];
+	}	
 	/**
 	 * 
 	 * @param unknown $path
 	 * @return rirResult
 	 */
 	public function parse($path){
-		$header = 0;//$this->isBd($path);
+		$header = $this->isBd($path);
 		$total = 0;
 		if($header == 0){
 			//把识别信息保存到数据库，用于确认
@@ -39,14 +48,15 @@ class csvFormat{
 			$pdo = new mysqlPdoBase();
 			$pdo->exec("set names utf8", array());
 			$ret = $pdo->exec("INSERT INTO `log_upload_token` (
-				`token`,`ch`,`dev`,`name`
+				`token`,`ch`,`dev`,`name`,`cnt`
 			) VALUES (
-				:token,:ch,:dev,:name
+				:token,:ch,:dev,:name,:cnt
 			)",array(
 				"token" => $token,
 				"ch"    => "bd",
 				"dev"   => $this->dv == csvFormat::DEVICE_PC ? "pc" : "mb",
-				"name"  => "俘获"
+				"name"  => $path,
+				"cnt"  => $this->cnt,
 			));
 			
 
@@ -58,7 +68,7 @@ class csvFormat{
 					"device"  => $this->dv,
 					"total"   => $this->cnt,
 					"token"   => $token,
-					"path"    => $path
+					"path"    => pathinfo($path,PATHINFO_BASENAME)
 				)) ;				
 			}else{
 				return new rirResult(1,"保存到LOG表时失败",array()) ;

@@ -19,7 +19,19 @@ class loadDataView extends AppView{
 		)),"Confirm to load data to database")->show();
 	}
 	
-	public function showLoadData($pos,$sid){
-		
+	
+	
+	public function showLoadDataPre($total){
+		$this->wrap($this->fetch("processing",array(
+				"total"=>$total,
+		)),"Loading data to db");
+		print $this->html;
+		ob_flush();
+		flush();
+	}
+	public function showLoadDataProcessing($pos,$sid){
+		echo '<script>u('.($pos + 1).')</script>' ;
+		ob_flush();
+		flush();
 	}
 }

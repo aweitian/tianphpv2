@@ -5,5 +5,12 @@
  * Description: 
  */
 class AppController extends Controller{
-
+	/**
+	 * 
+	 * @var httpResponse $response
+	 */
+	protected $response;
+	public function __construct(){
+		$this->response = new httpResponse();
+	}
 }
