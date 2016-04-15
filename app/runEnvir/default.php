@@ -8,5 +8,5 @@ define("DB_HOST","localhost");
 define("DB_PORT",3306);
 define("DB_USER","root");
 define("DB_PASS","root");
-define("DB_NAME","shb-data");
+define("DB_NAME","shbdata");
 define("DB_CHARSET","utf8");

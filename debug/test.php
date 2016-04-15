@@ -5,4 +5,4 @@
  * Description: 
  */
 //测试中文文件名
-file_put_contents("./爱中国.txt", "perfers to love mm");
+//file_put_contents("./爱中国.txt", "perfers to love mm");

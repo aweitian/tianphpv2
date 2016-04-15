@@ -13,8 +13,9 @@ class loadDataView extends AppView{
 	}
 	
 	public function showUploadResult(rirResult $r,$submit_url){
-		$this->wrap($this->fetch("form",array(
-				"submit_url"=>$submit_url
+		$this->wrap($this->fetch("upResult",array(
+				"submit_url"=>$submit_url,
+				"r" => $r
 		)),"Confirm to load data to database")->show();
 	}
 	

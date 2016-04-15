@@ -22,6 +22,7 @@ class testController extends AppController{
 		$this->view = new testView();
 	}
 	public function welcomeAction(){
-
+		$k = $this->model->test();
+		echo "ok";
 	}
 }

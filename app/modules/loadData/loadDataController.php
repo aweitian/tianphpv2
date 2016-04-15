@@ -58,7 +58,8 @@ class loadDataController extends AppController{
 // 					}
 					
 //				}
-				//$this->view->showUploadResult($r,$msg->getPmcaiUrl()->setAction("load")->);
+				$this->view->setPmcaiMsg($msg);
+				$this->view->showUploadResult($r,$msg->getPmcaiUrl()->setAction("load")->getUrl());
 			}
 		}else{
 			$this->showFormUI($msg);

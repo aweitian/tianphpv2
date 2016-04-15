@@ -28,12 +28,16 @@ class csvFormat{
 	 * @return rirResult
 	 */
 	public function parse($path){
-		$header = $this->isBd($path);
+		$header = 0;//$this->isBd($path);
 		$total = 0;
 		if($header == 0){
 			//把识别信息保存到数据库，用于确认
 			$token = md5('shbdata'.$path.time());
+			
+			
+			
 			$pdo = new mysqlPdoBase();
+			$pdo->exec("set names utf8", array());
 			$ret = $pdo->exec("INSERT INTO `log_upload_token` (
 				`token`,`ch`,`dev`,`name`
 			) VALUES (
@@ -42,20 +46,25 @@ class csvFormat{
 				"token" => $token,
 				"ch"    => "bd",
 				"dev"   => $this->dv == csvFormat::DEVICE_PC ? "pc" : "mb",
-				"name"  => $path
+				"name"  => "俘获"
 			));
+			
+
+			
+			
 			if($ret == 1){
 				return new rirResult(0,"",array(
 					"channel" => csvFormat::CHANNEL_BD,
 					"device"  => $this->dv,
 					"total"   => $this->cnt,
-					"token"   => $token
+					"token"   => $token,
+					"path"    => $path
 				)) ;				
 			}else{
 				return new rirResult(1,"保存到LOG表时失败",array()) ;
 			}
 		}else{
-			return new rirResult(2,"未识别的格式",array()) ;
+			return new rirResult(2,"未识别的格式,Code".$header,array()) ;
 		}
 	}
 	
@@ -126,9 +135,6 @@ class csvFormat{
 								$l = trim($l);
 								if($l != '日期,小时,账户,推广计划,推广单元,创意标题,创意描述1,创意描述2,显示URL,展现,点击,消费,点击率,平均点击价格,网页转化,商桥转化'){
 									return 7;
-								}else{
-									//第8行检查通过，就认为是正确的格式
-									goto GOTO_OK;
 								}
 							default:
 								break;

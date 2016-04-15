@@ -10,6 +10,13 @@ class testModel extends AppModel{
 		$this->initDb();
 	}
 	public function test(){
-		return "hi";
+		$this->db->insert("INSERT INTO `abc` (
+	`a`
+) VALUES (
+	:a
+)", array(
+	"a" => "aaa",
+
+));
 	}
 }
