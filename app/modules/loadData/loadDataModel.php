@@ -50,6 +50,30 @@ class loadDataModel extends AppModel{
 
 	}
 	
+	/**
+	 * 检查有没有这个频道，有返回ID，没有插入，返回ID
+	 * @param string $chv
+	 */
+	public function getChananelId($chv){
+		$data = $this->db->fetch("SELECT 
+			`ch_id`,`ch_val`
+		 FROM `data_channel` WHERE `ch_val` = :ch_val", array(
+			":ch_val" => $chv,
+		));
+		if(empty($data)){
+			return $this->db->insert("INSERT INTO `data_channel` (
+				`ch_val`
+			) VALUES (
+				:ch_val
+			)", array(
+				":ch_val" => $chv,
+			));
+		}else{
+			return $data["ch_id"];
+		}
+	}
+	
+	
 	public function getUploadInfo($token){
 		return $this->db->fetch("SELECT * FROM `log_upload_token` WHERE `token` = :token", array(
 				":token" => $token,
