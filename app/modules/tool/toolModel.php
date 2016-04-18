@@ -74,7 +74,7 @@ class toolModel extends model{
 		$arg = array();
 		foreach ($data as $col){
 			$obj["f".$i] = $col;
-			$ph .= "\t\":".$col."\" => \$".$col.",\n";
+			$ph .= "\t\"".$col."\" => \$".$col.",\n";
 			$arg[] = "\$".$col;
 			$i++;
 		}
