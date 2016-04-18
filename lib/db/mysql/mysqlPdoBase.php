@@ -3,6 +3,12 @@
  * @author awei.tian
  * date: 2013-8-10
  * 说明:MYSQL PDO 最基本的操作
+ * 此为默认模式。 PDO 将只简单地设置错误码，
+ * 可使用 PDO::errorCode() 和 PDO::errorInfo() 方法来检查语句和数据库对象。
+ * 如果错误是由于对语句对象的调用而产生的，那么可以调用那个对象的 
+ * PDOStatement::errorCode() 或 PDOStatement::errorInfo() 方法。
+ * 如果错误是由于调用数据库对象而产生的，那么可以在数据库对象上调用上述两个方法
+ * 
  */
 define("MAX_RESULT_RETURN",500);
 require_once FILE_SYSTEM_ENTRY.'/lib/interfaces/db/IPdoBase.php';
@@ -16,6 +22,7 @@ class mysqlPdoBase implements IPdoBase{
 	const NONERRCODE = "00000";
 	public function __construct(){
 		$this->connection = mysqlPdo::getConnection();
+		$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
 	}
 	/**
 	 * @return string
@@ -47,14 +54,15 @@ class mysqlPdoBase implements IPdoBase{
 		foreach ($data as $k=>$v){
 			$sth->bindValue($k, $v,PHPVarType2PDOBindType::convert($v));
 		}
-		$sth->execute();
-		$id=$this->connection->lastInsertId();
-		if($id==0){
+		if($sth->execute()){
+			$id=$this->connection->lastInsertId();
+			return $id;
+		}else{
 			$this->errorInfo=$sth->errorInfo();
 			$this->errorInfo=$this->errorInfo[2];
 			$this->errorCode=$sth->errorCode();
+			return 0;
 		}
-		return $id;
 	}
 	/**
 	 * 
@@ -75,12 +83,14 @@ class mysqlPdoBase implements IPdoBase{
 			$sth->bindValue($k, $v,PHPVarType2PDOBindType::convert($v));
 		}
 		$sth->setFetchMode($fetch_mode);
-		$sth->execute();
+		if($sth->execute()){
+			$ret=$sth->fetch();
+			if(!is_array($ret))return array();
+			return $ret;
+		}
 		$this->errorInfo=$sth->errorInfo();
 		$this->errorInfo=$this->errorInfo[2];
 		$this->errorCode=$sth->errorCode();
-		$ret=$sth->fetch();
-		if(!is_array($ret))return array();
 		return $ret;
 	}
 	
@@ -103,19 +113,21 @@ class mysqlPdoBase implements IPdoBase{
 			$sth->bindValue($k, $v,PHPVarType2PDOBindType::convert($v));
 		}
 		$sth->setFetchMode($fetch_mode);
-		$sth->execute();
+		if($sth->execute()){
+			$r=$sth->fetchAll();
+			if(count($r)>MAX_RESULT_RETURN){
+				$this->errorInfo='Return data exceed the limit '.MAX_RESULT_RETURN
+				.',revise the number @ LIB_PATH/db/mysql/mysqlPdoBase.php'
+						;
+						$this->errorCode=self::ERROR_EXCEED_LIMIT_COUNT;
+						return array();
+			}
+			return $r;
+		}
 		$this->errorInfo=$sth->errorInfo();
 		$this->errorInfo=$this->errorInfo[2];
 		$this->errorCode=$sth->errorCode();
-		$r=$sth->fetchAll();
-		if(count($r)>MAX_RESULT_RETURN){
-			$this->errorInfo='Return data exceed the limit '.MAX_RESULT_RETURN
-				.',revise the number @ LIB_PATH/db/mysql/mysqlPdoBase.php'
-			;
-			$this->errorCode=self::ERROR_EXCEED_LIMIT_COUNT;
-			return array();
-		}
-		else return $r;
+		return array();
 	}
 	/**
 	 * 
@@ -135,11 +147,14 @@ class mysqlPdoBase implements IPdoBase{
 		foreach ($data as $k=>$v){
 			$sth->bindValue($k, $v,PHPVarType2PDOBindType::convert($v));
 		}
-		$sth->execute();
-		$this->errorInfo=$sth->errorInfo();
-		$this->errorInfo=$this->errorInfo[2];
-		$this->errorCode=$sth->errorCode();
-		return $sth->rowCount();
+		if($sth->execute()){
+			return $sth->rowCount();
+		}else{
+			$this->errorInfo=$sth->errorInfo();
+			$this->errorInfo=$this->errorInfo[2];
+			$this->errorCode=$sth->errorCode();
+			return 0;
+		}
 	}
 	
 	private function _parse_sqlExpression(&$sql,&$data){
