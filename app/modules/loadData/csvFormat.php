@@ -5,15 +5,9 @@
  * Description: 
  */
 class csvFormat{
-	const CHANNEL_UNKNOWN = 0;
-	const CHANNEL_BD = 1;
-	const CHANNEL_SM = 2;
-	const CHANNEL_SG = 3;
-	const CHANNEL_360 = 4;
+	const DEV_MOBILE = "mobile";
+	const DEV_PC     = "pc";
 	
-	const DEVICE_UNKNOWN = 0;
-	const DEVICE_PC = 1;
-	const DEVICE_MB = 2;
 	
 	private $ch;
 	private $dv;
@@ -22,15 +16,6 @@ class csvFormat{
 	public function __construct(){
 		
 	}
-	
-	public static function getChannelName($ch){
-		$channel = array("未知","百度","神马","搜狗","360");
-		return $channel[$ch];
-	}
-	public static function getDeviceName($dv){
-		$dev = array("未知","PC","手机");
-		return $dev[$dv];
-	}	
 	/**
 	 * 
 	 * @param unknown $path
@@ -43,8 +28,6 @@ class csvFormat{
 			//把识别信息保存到数据库，用于确认
 			$token = md5('shbdata'.$path.time());
 			
-			
-			
 			$pdo = new mysqlPdoBase();
 			$pdo->exec("set names utf8", array());
 			$ret = $pdo->exec("INSERT INTO `log_upload_token` (
@@ -53,8 +36,8 @@ class csvFormat{
 				:token,:ch,:dev,:name,:cnt
 			)",array(
 				"token" => $token,
-				"ch"    => "bd",
-				"dev"   => $this->dv == csvFormat::DEVICE_PC ? "pc" : "mb",
+				"ch"    => "百度",
+				"dev"   => $this->dv,
 				"name"  => $path,
 				"cnt"  => $this->cnt,
 			));
@@ -64,22 +47,22 @@ class csvFormat{
 			
 			if($ret == 1){
 				return new rirResult(0,"",array(
-					"channel" => csvFormat::CHANNEL_BD,
+					"channel" => "百度",
 					"device"  => $this->dv,
 					"total"   => $this->cnt,
 					"token"   => $token,
 					"path"    => pathinfo($path,PATHINFO_BASENAME)
 				)) ;				
 			}else{
-				return new rirResult(1,"保存到LOG表时失败",array()) ;
+				return new rirResult(1,"保存到LOG表时失败") ;
 			}
 		}else{
-			return new rirResult(2,"未识别的格式,Code".$header,array()) ;
+			return new rirResult(2,"未识别的格式,Code".$header) ;
 		}
 	}
 	
 	/**
-	 * 
+	 * 初始化 dv,cnt
 	 * @param string $con
 	 * @return int 0 ok
 	 */
@@ -127,13 +110,12 @@ class csvFormat{
 								$tmp = explode("：", $l);
 								$dev = trim($tmp[1]);
 								if($dev == "计算机"){
-									$this->dv = self::DEVICE_PC;
+									$this->dv = self::DEV_PC;
 									break;
 								}else if($dev == "移动设备"){
-									$this->dv = self::DEVICE_MB;
+									$this->dv = self::DEV_MOBILE;
 									break;
 								}else{
-									$this->dv = self::DEVICE_UNKNOWN;
 									return 6;
 								}
 								break;

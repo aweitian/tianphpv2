@@ -80,8 +80,8 @@ class loadDataController extends AppController{
 		$this->model->setCallback(array($this,"loadDataProcessingCallback"));
 		$this->model->loadData($data);
 	}
-	public function loadDataProcessingCallback($pos,$insertId){
-		$this->view->showLoadDataProcessing($pos, $insertId);
+	public function loadDataProcessingCallback($pos,rirResult $ret){
+		$this->view->showLoadDataProcessing($pos, $ret);
 	}
 	private function showFormUI(pmcaiMsg $msg){
 		$this->view->setPmcaiMsg($msg);

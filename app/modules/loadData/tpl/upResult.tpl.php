@@ -26,13 +26,13 @@
 	<div class="formitm">
 		<label class="lab">渠道：</label>
 		<div class="ipt">
-			<span class="domain"><?php print csvFormat::getChannelName($r->return["channel"]) ?></span>
+			<span class="domain"><?php print $r->return["channel"] ?></span>
 		</div>
 	</div>
 	<div class="formitm">
 		<label class="lab">设备：</label>
 		<div class="ipt">
-			<span class="domain"><?php print csvFormat::getDeviceName($r->return["device"])?></span>
+			<span class="domain"><?php print $r->return["device"]?></span>
 		</div>
 	</div>
 	<div class="formitm">
