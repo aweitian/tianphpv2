@@ -156,6 +156,45 @@ class loadDataModel extends AppModel{
 		}
 	}
 	
+	/**
+	 * 有返回ID，没有插入返回ID
+	 * @param int $unid
+	 * @param string $title
+	 * @param string $desc1
+	 * @param string $desc2
+	 * @param string $url
+	 * @return int 
+	 */
+	public function getIdeaId($unid,$title,$desc1,$desc2,$url){
+		$data = $this->db->fetch("SELECT 
+			`id_id`,`un_id`,`title`,`desc1`,`desc2`,`url`
+ 		FROM `data_idea` 
+		WHERE `un_id` = :un_id 
+		  AND `title` = :title
+		  AND `desc1` = :desc1
+		  AND `desc2` = :desc2
+				", array(
+			"un_id" => $unid,
+			"title" => $title,
+			"desc1" => $desc1,
+			"desc2" => $desc2,
+		));
+		if(empty($data)){
+			return $this->db->insert("INSERT INTO `data_idea` (
+				`un_id`,`title`,`desc1`,`desc2`,`url`
+			) VALUES (
+				:un_id,:title,:desc1,:desc2,:url
+			)", array(
+				"un_id" => $unid,
+				"title" => $title,
+				"desc1" => $desc1,
+				"desc2" => $desc2,
+				"url"   => $url
+			));
+		}else{
+			return $data["id_id"];
+		}
+	}
 	
 	public function getUploadInfo($token){
 		return $this->db->fetch("SELECT * FROM `log_upload_token` WHERE `token` = :token", array(
@@ -228,7 +267,7 @@ class loadDataModel extends AppModel{
 				$avgpr = $this->handleCsv($items[$offset_avgp]);
 				$date  = $this->handleCsv($items[0] . " " . $items[1] . ":00:00");
 				
-				$id = $this->_loadData($dev,$chananel, $acc, $plan, $unit, $title, $desc1, $desc2, 
+				$id = $this->_loadPubData($dev,$chananel, $acc, $plan, $unit, $title, $desc1, $desc2, 
 						$url, $pays, $shows, $clks, $avgpr, $date);
 				
 				if($id->isTrue()){
@@ -269,7 +308,8 @@ class loadDataModel extends AppModel{
 	 * @param string $datetime
 	 * @return rirResult
 	 */
-	private function _loadData($dev,$chananel,$account,$plan,$unit,$title,$desc1,$desc2,$url,$paysum,$shows,$clks,$avgprice,$datetime){
+	private function _loadPubData($dev,$chananel,$account,$plan,$unit,$title,$desc1,$desc2,$url,
+			$paysum,$shows,$clks,$avgprice,$datetime){
 		$ch_id = $this->getChananelId($chananel);
 		if($ch_id == 0)return new rirResult(1,"获取频道ID失败");
 		$ac_id = $this->getAccountId($ch_id, $account, $dev);
@@ -278,32 +318,29 @@ class loadDataModel extends AppModel{
 		if($pl_id == 0)return new rirResult(3,"获取计划ID失败");
 		$un_id = $this->getUnitId($pl_id, $unit);
 		if($un_id == 0)return new rirResult(4,"获取单元ID失败");
+		$id_id = $this->getIdeaId($un_id, $title, $desc1, $desc2, $url);
+		if($id_id == 0)return new rirResult(5,"获取创意ID失败");
+		
 		$sql = "
-			INSERT INTO `data_idea` (
-				`un_id`,`title`,`desc1`,`desc2`,`url`,`paysum`,`shows`,`clks`,
-				`avgprice`,`datetime`
+			INSERT INTO `publ_data` (
+				`id_id`,`paysum`,`shows`,`clks`,`avgprice`,`datetime`
 			) VALUES (
-				:un_id,:title,:desc1,:desc2,:url,:paysum,:shows,:clks,
-				:avgprice,:datetime
+				:id_id,:paysum,:shows,:clks,:avgprice,:datetime
 			)
 		";
 		$data = array(
-			"un_id" => $un_id,
-			"title" => $title,
-			"desc1" => $desc1,
-			"desc2" => $desc2,
-			"url" => $url,
+			"id_id" => $id_id,
 			"paysum" => $paysum,
 			"shows" => $shows,
 			"clks" => $clks,
 			"avgprice" => $avgprice,
 			"datetime" => $datetime,
+
 		);
 		$id = $this->db->insert($sql, $data);
 		if($id > 0){
 			return new rirResult(0,"ok",$id);
 		}
-		exit("Error:".$this->db->getErrorInfo());
-		return new rirResult(5,$this->db->getErrorInfo());
+		return new rirResult(6,$this->db->getErrorInfo());
 	}
 }

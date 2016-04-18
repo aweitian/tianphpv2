@@ -13,6 +13,9 @@ class csvFormat{
 	private $dv;
 	
 	private $cnt = 0;
+	
+	
+	const BD_HEADER_ROWS = 8;
 	public function __construct(){
 		
 	}
@@ -29,7 +32,6 @@ class csvFormat{
 			$token = md5('shbdata'.$path.time());
 			
 			$pdo = new mysqlPdoBase();
-			$pdo->exec("set names utf8", array());
 			$ret = $pdo->exec("INSERT INTO `log_upload_token` (
 				`token`,`ch`,`dev`,`name`,`cnt`
 			) VALUES (
@@ -76,7 +78,7 @@ class csvFormat{
 			if ($handle) {
 				$lineNo = 0;
 				while (($line = fgets($handle)) !== false) {
-					if($lineNo < 8){
+					if($lineNo < BD_HEADER_ROWS){
 						switch($lineNo){
 							case 0:
 								$l = iconv("GBK","utf-8",$line);
@@ -140,7 +142,7 @@ class csvFormat{
 		}catch(Exception $e){
 			
 		}
-		$this->cnt = $lineNo;
+		$this->cnt = $lineNo - BD_HEADER_ROWS;
 		return 0;
 
 	}
