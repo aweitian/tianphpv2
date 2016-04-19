@@ -31,6 +31,8 @@ class csvFormat{
 			//把识别信息保存到数据库，用于确认
 			$token = md5('shbdata'.$path.time());
 			
+			$fhash = md5_file($path);
+			
 			$pdo = new mysqlPdoBase();
 			$ret = $pdo->exec("INSERT INTO `log_upload_token` (
 				`token`,`ch`,`dev`,`name`,`cnt`
@@ -44,11 +46,21 @@ class csvFormat{
 				"cnt"  => $this->cnt,
 			));
 			
-
+			
+			$data = $pdo->fetch("select * from `log_load_token` where
+					`token` = :token order by sid desc limit 0,1
+					", array(
+										"token"  => $fhash,
+								));
+			if(!empty($data)){
+				$info = "你的文件数据可能在 [".$data["date"]."] 已经导入到数据库中，请确认.";
+			}else{
+				$info = "";
+			}
 			
 			
 			if($ret == 1){
-				return new rirResult(0,"",array(
+				return new rirResult(0,$info,array(
 					"channel" => "百度",
 					"device"  => $this->dv,
 					"total"   => $this->cnt,
@@ -78,7 +90,7 @@ class csvFormat{
 			if ($handle) {
 				$lineNo = 0;
 				while (($line = fgets($handle)) !== false) {
-					if($lineNo < BD_HEADER_ROWS){
+					if($lineNo < self::BD_HEADER_ROWS){
 						switch($lineNo){
 							case 0:
 								$l = iconv("GBK","utf-8",$line);
@@ -142,7 +154,7 @@ class csvFormat{
 		}catch(Exception $e){
 			
 		}
-		$this->cnt = $lineNo - BD_HEADER_ROWS;
+		$this->cnt = $lineNo - self::BD_HEADER_ROWS;
 		return 0;
 
 	}

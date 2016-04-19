@@ -22,11 +22,16 @@ class ideaqController extends AppController{
 		$this->view = new ideaqView();
 	}
 	public function welcomeAction(pmcaiMsg $msg){
+		$id = "";
 		$queryResult = "";
 		if(isset($msg["?id"])){
-			$queryResult = $this->model->test($msg["?id"]);
+			$t = $this->model->getIedaPraentInfo($msg["?id"]);
+			if($t->isTrue()){
+				$queryResult = $t->return;
+			}
+			$id = $msg["?id"];
 		}
 		$this->view->setPmcaiMsg($msg);
-		$this->view->showFormUI($msg->getPmcaiUrl()->getUrl(),$queryResult);
+		$this->view->showFormUI($msg->getPmcaiUrl()->getUrl(),$queryResult,$id);
 	}
 }

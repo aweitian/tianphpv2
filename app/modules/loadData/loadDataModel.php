@@ -44,10 +44,7 @@ class loadDataModel extends AppModel{
 // 			echo $destination;
 			move_uploaded_file($tmp_name,$destination);
 		}
-		
 		return new rirResult($error,$errInfo[$error],$destination);
-
-
 	}
 	
 	/**
@@ -152,7 +149,7 @@ class loadDataModel extends AppModel{
 				"un_val" => $uv,
 			));
 		}else{
-			return $data["pl_id"];
+			return $data["un_id"];
 		}
 	}
 	
@@ -231,10 +228,18 @@ class loadDataModel extends AppModel{
 		$offset_des2 = 7;
 		$offset_url  = 8;
 		$offset_show = 9;
-		$offset_pays = 10;
-		$offset_clks = 11;
-		$offset_avgp = 13;
-		
+		$offset_clks = 10;
+		$offset_pays = 11;
+	
+		//把文件MD5写入到LOG表中`log_load_token`
+		$fhash = md5_file($path);
+		$this->db->insert("INSERT INTO `log_load_token` (
+			`token`
+		) VALUES (
+			:token
+		)", array(
+			"token" => $fhash
+		));
 		
 		//检查文件头，判断是不是识别的格式
 
@@ -261,34 +266,37 @@ class loadDataModel extends AppModel{
 				$desc1 = $this->handleCsv($items[$offset_des1]);
 				$desc2 = $this->handleCsv($items[$offset_des2]);
 				$url   = $this->handleCsv($items[$offset_url]);
-				$pays  = $this->handleCsv($items[$offset_pays]);
+				
 				$shows = $this->handleCsv($items[$offset_show]);
 				$clks  = $this->handleCsv($items[$offset_clks]);
-				$avgpr = $this->handleCsv($items[$offset_avgp]);
+				$pays  = $this->handleCsv($items[$offset_pays]);
 				$date  = $this->handleCsv($items[0] . " " . $items[1] . ":00:00");
 				
+				
+				
+				
+				
 				$id = $this->_loadPubData($dev,$chananel, $acc, $plan, $unit, $title, $desc1, $desc2, 
-						$url, $pays, $shows, $clks, $avgpr, $date);
+						$url, $pays, $shows, $clks, $date);
 				
 				if($id->isTrue()){
 					$succ++;
 				}
 				
 				if(!is_null($this->callback)){
-					call_user_func_array($this->callback, array($lineNo,$id));
+					call_user_func_array($this->callback, array($lineNo - 8,$id));
 				}
 				$lineNo++;
 			}
 		
 			fclose($handle);
-			exit(var_dump($succ));
 		} else {
 			// error opening the file.
 		}
 	}
 	private function handleCsv($str){
-		
-		return str_replace('"',"",iconv("GBK", "UTF8", $str));
+		return iconv("GBK", "UTF8", $str);
+		//return str_replace('"',"",iconv("GBK", "UTF8", $str));
 	}
 	/**
 	 * 
@@ -304,12 +312,11 @@ class loadDataModel extends AppModel{
 	 * @param string $paysum
 	 * @param string $shows
 	 * @param string $clks
-	 * @param string $avgprice
 	 * @param string $datetime
 	 * @return rirResult
 	 */
 	private function _loadPubData($dev,$chananel,$account,$plan,$unit,$title,$desc1,$desc2,$url,
-			$paysum,$shows,$clks,$avgprice,$datetime){
+			$paysum,$shows,$clks,$datetime){
 		$ch_id = $this->getChananelId($chananel);
 		if($ch_id == 0)return new rirResult(1,"获取频道ID失败");
 		$ac_id = $this->getAccountId($ch_id, $account, $dev);
@@ -321,23 +328,52 @@ class loadDataModel extends AppModel{
 		$id_id = $this->getIdeaId($un_id, $title, $desc1, $desc2, $url);
 		if($id_id == 0)return new rirResult(5,"获取创意ID失败");
 		
+		
+		
+// 		if($title == "{怎样延长性生活时间}?自我锻炼延长30分钟不射"){
+// 			echo $acc."<br>";
+// 			echo $plan."<br>";
+// 			echo $unit."<br>";
+// 			echo $title."<br>";
+// 			echo $desc1."<br>";
+// 			echo $desc2."<br>";
+// 			exit("uid:".$un_id);
+// 		}
+		
+		
+		
+		
+		
 		$sql = "
 			INSERT INTO `publ_data` (
-				`id_id`,`paysum`,`shows`,`clks`,`avgprice`,`datetime`
+				`id_id`,`paysum`,`shows`,`clks`,`datetime`
 			) VALUES (
-				:id_id,:paysum,:shows,:clks,:avgprice,:datetime
+				:id_id,:paysum,:shows,:clks,:datetime
 			)
+			ON DUPLICATE KEY UPDATE 
+				`paysum` = `paysum` + :paysum,
+				`shows` = `shows` + :shows,
+				`clks` = `clks` + :clks
 		";
 		$data = array(
 			"id_id" => $id_id,
 			"paysum" => $paysum,
 			"shows" => $shows,
 			"clks" => $clks,
-			"avgprice" => $avgprice,
 			"datetime" => $datetime,
 
 		);
 		$id = $this->db->insert($sql, $data);
+		
+// 		$row = $this->db->exec($sql, $data);
+// 		if($row == 1){
+// 			//new row inserted
+// 		}else if($row == 2){
+// 			//updated on old row
+// 		}else{
+// 			//error
+// 		}
+		
 		if($id > 0){
 			return new rirResult(0,"ok",$id);
 		}

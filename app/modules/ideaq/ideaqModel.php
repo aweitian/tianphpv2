@@ -10,12 +10,39 @@ class ideaqModel extends AppModel{
 		$this->initDb();
 	}
 	public function getIedaPraentInfo($id_id){
+		//创意
 		$id_info = $this->getIdeaById($id_id);
 		if(empty($id_info)){
 			return new rirResult(1,"idea querys failed");
 		}
-		$un_info = $this->getUnitById($id_info[""]);
+		//单元
+		$un_info = $this->getUnitById($id_info["un_id"]);
+		if(empty($un_info)){
+			return new rirResult(2,"unit querys failed");
+		}
+		//计划
+		$pl_info = $this->getPlanById($un_info["pl_id"]);
+		if(empty($pl_info)){
+			return new rirResult(3,"plan querys failed");
+		}
+		//帐户
+		$ac_info = $this->getAccountById($pl_info["ac_id"]);
+		if(empty($ac_info)){
+			return new rirResult(4,"account querys failed");
+		}
+		//渠道
+		$ch_info = $this->getChananelById($ac_info["ch_id"]);
+		if(empty($ch_info)){
+			return new rirResult(5,"chananel querys failed");
+		}
 		
+		return new rirResult(0,"ok",array(
+			"ch" => $ch_info,
+			"ac" => $ac_info,
+			"pl" => $pl_info,
+			"un" => $un_info,
+			"id" => $id_info
+		));
 	}
 	public function getChananelById($id){
 		return $this->db->fetch("SELECT 
