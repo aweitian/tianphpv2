@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
-class bd_pub_csv extends csvFormat {
+class bd_priv_csv extends csvFormat {
 	private $dev;
 	
 	
@@ -39,10 +39,6 @@ class bd_pub_csv extends csvFormat {
 	
 	public function getHeaderInfos(){
 		return array(
-			"device"  => $this->dv,
-			"total"   => $this->cnt,
-			"token"   => $token,
-			"path"    => $path
 		);
 	}
 	

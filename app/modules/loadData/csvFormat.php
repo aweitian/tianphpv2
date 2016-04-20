@@ -25,6 +25,10 @@ abstract class csvFormat{
 	const BD_PUB_HEADER_ROWS = 8;
 	const BD_PRIV_HEADER_ROWS = 1;
 	
+	
+	const CSV_DEV_M = 0;
+	const CSV_DEV_PC = 1;
+	
 	/**
 	 * @return bool;
 	 */
@@ -46,7 +50,12 @@ abstract class csvFormat{
 	 * @return int
 	 */
 	abstract public function getHeaderRows();
-	
+	/**
+	 * @return int
+	 */
+	public function getDataRows(){
+		return $this->cnt;
+	}
 	/**
 	 * true为可以上传
 	 * @param string $path
