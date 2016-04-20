@@ -52,13 +52,19 @@ class loadDataController extends AppController{
 				$path = $ret->return;
 				$csv = new csvFormat();
 				$r = $csv->parse($path);
-//				if($r->isTrue()){
-// 					if($r->return["channel"] == csvFormat::CHANNEL_BD){
-// 						$this->model->setCallback(array($this,"loadDataProcessingCallback"));
-// 						$this->model->loadDataToDb($path,$r->return["device"] == csvFormat::DEVICE_PC ? "pc" : "mb");
-// 					}
-					
-//				}
+				if($r->isTrue()){
+					$ret = $this->model->saveUploadInfo(
+						$r->return["token"], 
+						$r->return["channel"], 
+						$r->return["channel"], 
+						$r->return["device"], 
+						$r->return["path"], 
+						$r->return["total"]
+					);
+					if($ret == 0){
+						$r = new rirResult(1,"保存到LOG表时失败") ;
+					}
+				}
 				$this->view->setPmcaiMsg($msg);
 				$this->view->showUploadResult($r,$msg->getPmcaiUrl()->setAction("load")->getUrl());
 			}

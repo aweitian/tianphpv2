@@ -204,6 +204,22 @@ class loadDataModel extends AppModel{
 
 	}
 	
+	
+	public function saveUploadInfo($token,$ch,$dev,$path,$cnt){
+		return $this->db->exec("INSERT INTO `log_upload_token` (
+				`token`,`ch`,`dev`,`name`,`cnt`
+			) VALUES (
+				:token,:ch,:dev,:name,:cnt
+			)",array(
+							"token" => $token,
+							"ch"    => $ch,
+							"dev"   => $dev,
+							"name"  => $path,
+							"cnt"  => $cnt,
+					));
+	}
+	
+	
 	public function loadDataToDb($path,$dev,$chananel){
 // 		$i = 15;
 // 		while($i--){
@@ -249,6 +265,11 @@ class loadDataModel extends AppModel{
 		$handle = fopen($path, "r");
 		if ($handle) {
 			$lineNo = 0;
+			
+			$pdo = mysqlPdo::getConnection();
+			//开始一个事实
+			$pdo->beginTransaction();
+			
 			while ($line = fgetcsv($handle)) {
 				// process the line read.
 				//从第9行开始
@@ -272,24 +293,27 @@ class loadDataModel extends AppModel{
 				$pays  = $this->handleCsv($items[$offset_pays]);
 				$date  = $this->handleCsv($items[0] . " " . $items[1] . ":00:00");
 				
-				
-				
-				
-				
 				$id = $this->_loadPubData($dev,$chananel, $acc, $plan, $unit, $title, $desc1, $desc2, 
 						$url, $pays, $shows, $clks, $date);
 				
 				if($id->isTrue()){
 					$succ++;
+					if(!is_null($this->callback)){
+						call_user_func_array($this->callback, array($lineNo - 8,$id));
+					}
+					$lineNo++;
+				}else{
+					$pdo->rollBack();
+					fclose($handle);
+					if(!is_null($this->callback)){
+						call_user_func_array($this->callback, array($lineNo - 8,$id));
+					}
+					return ;
 				}
-				
-				if(!is_null($this->callback)){
-					call_user_func_array($this->callback, array($lineNo - 8,$id));
-				}
-				$lineNo++;
 			}
 		
 			fclose($handle);
+			$pdo->commit();
 		} else {
 			// error opening the file.
 		}

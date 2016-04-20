@@ -3,160 +3,99 @@
  * Date: Apr 15, 2016
  * Author: Awei.tian
  * Description: 
+ * 
+ * 		CSV文件分为两种:PUBLIC && PRIVATE
+ * 			
  */
-class csvFormat{
-	const DEV_MOBILE = "mobile";
-	const DEV_PC     = "pc";
-	
-	
-	private $ch;
-	private $dv;
-	
-	private $cnt = 0;
-	
-	
-	const BD_HEADER_ROWS = 8;
-	public function __construct(){
-		
-	}
+abstract class csvFormat{
 	/**
-	 * 
-	 * @param unknown $path
-	 * @return rirResult
+	 * 数据总行数
+	 * @var int $cnt
 	 */
-	public function parse($path){
-		$header = $this->isBd($path);
-		$total = 0;
-		if($header == 0){
-			//把识别信息保存到数据库，用于确认
-			$token = md5('shbdata'.$path.time());
-			
-			$fhash = md5_file($path);
-			
-			$pdo = new mysqlPdoBase();
-			$ret = $pdo->exec("INSERT INTO `log_upload_token` (
-				`token`,`ch`,`dev`,`name`,`cnt`
-			) VALUES (
-				:token,:ch,:dev,:name,:cnt
-			)",array(
-				"token" => $token,
-				"ch"    => "百度",
-				"dev"   => $this->dv,
-				"name"  => $path,
-				"cnt"  => $this->cnt,
-			));
-			
-			
-			$data = $pdo->fetch("select * from `log_load_token` where
+	protected $cnt;
+	/**
+	 * csv文件路径
+	 * @var string
+	 */
+	protected $path;
+	
+	const CSV_TYPE_PUB = 0;
+	const CSV_TYPE_PRIV = 1;
+
+	const BD_PUB_HEADER_ROWS = 8;
+	const BD_PRIV_HEADER_ROWS = 1;
+	
+	/**
+	 * @return bool;
+	 */
+	abstract public function check($lineNo,$content);
+	
+	/**
+	 * @return CSV_TYPE_PUB/CSV_TYPE_PRIV
+	 */
+	abstract public function getCsvType();
+	/**
+	 * @return string
+	 */
+	abstract public function getChananel();
+	/**
+	 * @return array
+	 */
+	abstract public function getHeaderInfos();
+	/**
+	 * @return int
+	 */
+	abstract public function getHeaderRows();
+	
+	/**
+	 * true为可以上传
+	 * @param string $path
+	 * @return bool
+	 */
+	protected function isUploaded($path){
+		$fhash = md5_file($path);
+		$pdo = new mysqlPdoBase();
+		$data = $pdo->fetch("select * from `log_load_token` where
 					`token` = :token order by sid desc limit 0,1
 					", array(
-										"token"  => $fhash,
-								));
-			if(!empty($data)){
-				$info = "你的文件数据可能在 [".$data["date"]."] 已经导入到数据库中，请确认.";
-			}else{
-				$info = "";
-			}
-			
-			
-			if($ret == 1){
-				return new rirResult(0,$info,array(
-					"channel" => "百度",
-					"device"  => $this->dv,
-					"total"   => $this->cnt,
-					"token"   => $token,
-					"path"    => pathinfo($path,PATHINFO_BASENAME)
-				)) ;				
-			}else{
-				return new rirResult(1,"保存到LOG表时失败") ;
-			}
-		}else{
-			return new rirResult(2,"未识别的格式,Code".$header) ;
-		}
+									"token"  => $fhash,
+							));
+		return empty($data);
 	}
 	
-	/**
-	 * 初始化 dv,cnt
-	 * @param string $con
-	 * @return int 0 ok
-	 */
-	public function isBd($path){
-		//打开文件，读取文件头
-		
-		try{
-			$handle = fopen($path, "r");
-			#ini_set("auto_detect_line_endings", true);  //set for Macintosh 
+	
+	
+// 	/**
+// 	 * 
+// 	 * @param unknown $path
+// 	 * @return rirResult
+// 	 */
+// 	public function parse($path){
+// 		$header = $this->isBd_Pub($path);
+// 		$total = 0;
+// 		if($header == 0){
+// 			//把识别信息保存到数据库，用于确认
+// 			$token = md5('shbdata'.$path.time());
 			
-			if ($handle) {
-				$lineNo = 0;
-				while (($line = fgets($handle)) !== false) {
-					if($lineNo < self::BD_HEADER_ROWS){
-						switch($lineNo){
-							case 0:
-								$l = iconv("GBK","utf-8",$line);
-								if(!utility::startsWith($l, "数据生成时间")){
-									return 1;
-								}
-								break;
-							case 1:
-								$l = iconv("GBK","utf-8",$line);
-								if(!utility::startsWith($l, "数据生成条件")){
-									return 2;
-								}
-								break;
-							case 2:
-								$l = iconv("GBK","utf-8",$line);
-								if(!utility::startsWith($l, "1. 时间范围")){
-									return 3;
-								}
-								break;
-							case 3:
-								$l = iconv("GBK","utf-8",$line);
-								if(!utility::startsWith($l, "2. 时间单位")){
-									return 4;
-								}
-								break;
-							case 4:
-								$l = iconv("GBK","utf-8",$line);
-								if(!utility::startsWith($l, "3. 推广设备：")){
-									return 5;
-								}
-								$tmp = explode("：", $l);
-								$dev = trim($tmp[1]);
-								if($dev == "计算机"){
-									$this->dv = self::DEV_PC;
-									break;
-								}else if($dev == "移动设备"){
-									$this->dv = self::DEV_MOBILE;
-									break;
-								}else{
-									return 6;
-								}
-								break;
-							case 5:
-							case 6:
-								break;
-							case 7:
-								$l = iconv("GBK","utf-8",$line);
-								$l = trim($l);
-								if($l != '日期,小时,账户,推广计划,推广单元,创意标题,创意描述1,创意描述2,显示URL,展现,点击,消费,点击率,平均点击价格,网页转化,商桥转化'){
-									return 7;
-								}
-							default:
-								break;
-						}//end switch
-					}//end if
-					
-					$lineNo++;
-				}
-				fclose($handle);
-			}
-		}catch(Exception $e){
 			
-		}
-		$this->cnt = $lineNo - self::BD_HEADER_ROWS;
-		return 0;
-
-	}
+// 			if(!empty($data)){
+// 				$info = "你的文件数据可能在 [".$data["date"]."] 已经导入到数据库中，请确认.";
+// 			}else{
+// 				$info = "";
+// 			}
+// 			return new rirResult(0,$info,array(
+// 					"channel" => "百度",
+// 					"kind"    => self::CSV_KIND_PUB,
+// 					"device"  => $this->dv,
+// 					"total"   => $this->cnt,
+// 					"token"   => $token,
+// 					"path"    => $path
+// 			)) ;
+// 		}else{
+// 			return new rirResult(2,"未识别的格式,Code".$header) ;
+// 		}
+// 	}
+	
+	
 	
 }
