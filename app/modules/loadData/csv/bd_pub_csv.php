@@ -6,7 +6,11 @@
  */
 class bd_pub_csv extends csvFormat {
 	private $dev;
-	public function check($lineNo, $line){
+	private $match_cnt = 0;
+	public function __construct($path){
+		$this->path = $path;
+	}
+	public function checkLine($lineNo, $line){
 		switch($lineNo){
 			case 0:
 				$l = iconv("GBK","utf-8",$line);
@@ -49,7 +53,7 @@ class bd_pub_csv extends csvFormat {
 		}//end switch
 	}
 	public function getCsvType(){
-		return parent::CSV_TYPE_PRIV;
+		return parent::CSV_TYPE_PUB;
 	}
 	
 	public function getChananel(){

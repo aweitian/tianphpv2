@@ -6,14 +6,14 @@
  */
 class bd_priv_csv extends csvFormat {
 	private $dev;
-	
+	private $match_cnt = 0;
 	
 	public function __construct($path){
 		$this->path = $path;
 	}
 	
 	
-	public function check($lineNo, $line){
+	public function checkLine($lineNo, $line){
 		switch($lineNo){
 			case 0:
 				$l = iconv("GBK","utf-8",$line);

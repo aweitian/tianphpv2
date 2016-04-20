@@ -19,6 +19,10 @@ abstract class csvFormat{
 	 */
 	protected $path;
 	
+	
+	
+	private $match_mask = 0;
+	
 	const CSV_TYPE_PUB = 0;
 	const CSV_TYPE_PRIV = 1;
 
@@ -32,7 +36,7 @@ abstract class csvFormat{
 	/**
 	 * @return bool;
 	 */
-	abstract public function check($lineNo,$content);
+	abstract protected function checkLine($lineNo,$content);
 	
 	/**
 	 * @return CSV_TYPE_PUB/CSV_TYPE_PRIV
@@ -51,10 +55,25 @@ abstract class csvFormat{
 	 */
 	abstract public function getHeaderRows();
 	/**
+	 * @return bool
+	 */
+	public function isMatch(){
+		return $this->match_mask == (1 << $this->getHeaderRows()) - 1;
+	}
+	
+	public function check($lineNo,$content){
+		if($this->checkLine($lineNo,$content)){
+			$this->match_mask = $this->match_mask | (1 << $lineNo);
+		}
+	}
+	/**
 	 * @return int
 	 */
 	public function getDataRows(){
 		return $this->cnt;
+	}
+	public function setDataRows($lines){
+		$this->cnt = $lines;
 	}
 	/**
 	 * true为可以上传
