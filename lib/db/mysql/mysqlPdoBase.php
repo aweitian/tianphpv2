@@ -91,7 +91,7 @@ class mysqlPdoBase implements IPdoBase{
 		$this->errorInfo=$sth->errorInfo();
 		$this->errorInfo=$this->errorInfo[2];
 		$this->errorCode=$sth->errorCode();
-		return $ret;
+		return 0;
 	}
 	
 	/**
