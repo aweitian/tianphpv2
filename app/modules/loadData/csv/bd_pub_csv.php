@@ -4,11 +4,14 @@
  * Author: Awei.tian
  * Description: 
  */
-class bd_pub_csv extends csvFormat {
+class bd_pub_csv extends csvChannelFormat {
 	private $dev;
 	private $match_cnt = 0;
 	public function __construct($path){
 		$this->path = $path;
+	}
+	public function getDisplayName(){
+		return "百度".($this->dev == csvFormat::CSV_DEV_PC ? "计算机" : "移动")."数据";
 	}
 	public function checkLine($lineNo, $line){
 		switch($lineNo){
@@ -32,10 +35,10 @@ class bd_pub_csv extends csvFormat {
 				$tmp = explode("：", $l);
 				$dev = trim($tmp[1]);
 				if($dev == "计算机"){
-					$this->dv = self::CSV_DEV_PC;
+					$this->dev = self::CSV_DEV_PC;
 					return true;
 				}else{
-					$this->dv = self::CSV_DEV_PC;
+					$this->dev = self::CSV_DEV_PC;
 					return true;
 				}
 			case 5:
@@ -52,18 +55,14 @@ class bd_pub_csv extends csvFormat {
 				return false;;
 		}//end switch
 	}
-	public function getCsvType(){
-		return parent::CSV_TYPE_PUB;
-	}
+	
 	
 	public function getChananel(){
 		return "百度";
 	}
 	
-	public function getHeaderInfos(){
-		return array(
-			"device"  => $this->dev,
-		);
+	public function getDevType(){
+		return $this->dev;
 	}
 
 	

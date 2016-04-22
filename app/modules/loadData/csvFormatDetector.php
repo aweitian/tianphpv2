@@ -32,14 +32,23 @@ class csvFormatDetector{
 		$this->path = $path;
 		$this->csv_dir = FILE_SYSTEM_ENTRY . "/app/modules/loadData/csv";
 	}
-	/**
-	 * @return csvFormat
-	 */
-	public function getCsvFormat(){
-		return $this->selectedCsv;
-		
+	
+	public function getCsvType(){
+		return $this->selectedCsv->getCsvType();
 	}
 	
+	/**
+	 * @return csvChannelFormat
+	 */
+	public function getCsvChananelFormat(){
+		return $this->selectedCsv;
+	}
+	/**
+	 * @return csvPrivFormat
+	 */
+	public function getCsvPrivFormat(){
+		return $this->selectedCsv;
+	}
 	/**
 	 * 扫描目录，初始化合法类
 	 * @return bool
@@ -54,7 +63,7 @@ class csvFormatDetector{
 				continue;
 			}
 			$rc = new ReflectionClass($cls);
-			if(!$rc->isSubclassOf("csvFormat")){
+			if(!$rc->isSubclassOf("csvChannelFormat") && !$rc->isSubclassOf("csvPrivFormat")){
 				continue;
 			}
 			$ins = $rc->newInstanceArgs(array($this->path));

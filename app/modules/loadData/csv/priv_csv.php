@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
-class bd_priv_csv extends csvFormat {
+class priv_csv extends csvPrivFormat {
 	private $dev;
 	private $match_cnt = 0;
 	
@@ -27,19 +27,8 @@ class bd_priv_csv extends csvFormat {
 		}
 	}
 	
-	
-	
-	public function getCsvType(){
-		return parent::CSV_TYPE_PRIV;
-	}
-	
-	public function getChananel(){
-		return "百度";
-	}
-	
-	public function getHeaderInfos(){
-		return array(
-		);
+	public function getDisplayName(){
+		return "私有数据";
 	}
 	
 	public function getHeaderRows(){

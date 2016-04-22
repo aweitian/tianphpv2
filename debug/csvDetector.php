@@ -17,8 +17,15 @@ $test->search();
 if($test->match()){
 	$r = new View();
 	echo $r->utf8Header();
-	echo $test->getCsvFormat()->getChananel();
-	echo $test->getCsvFormat()->getCsvType();
+	if($test->getCsvType() == csvFormat::CSV_TYPE_PUB){
+		$csv = $test->getCsvChananelFormat();
+		echo $csv->getChananel();
+		echo $csv->getCsvType();
+	}else{
+		$csv = $test->getCsvPrivFormat();
+	}
+	
+	
 }else{
 	echo "failed";
 }

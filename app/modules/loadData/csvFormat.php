@@ -38,22 +38,23 @@ abstract class csvFormat{
 	 */
 	abstract protected function checkLine($lineNo,$content);
 	
+	
+	/**
+	 * @return string
+	 */
+	abstract public function getDisplayName();
+	
 	/**
 	 * @return CSV_TYPE_PUB/CSV_TYPE_PRIV
 	 */
 	abstract public function getCsvType();
-	/**
-	 * @return string
-	 */
-	abstract public function getChananel();
-	/**
-	 * @return array
-	 */
-	abstract public function getHeaderInfos();
+	
+	
 	/**
 	 * @return int
 	 */
 	abstract public function getHeaderRows();
+	
 	/**
 	 * @return bool
 	 */
@@ -78,9 +79,9 @@ abstract class csvFormat{
 	/**
 	 * true为可以上传
 	 * @param string $path
-	 * @return bool
+	 * @return array row
 	 */
-	protected function isUploaded($path){
+	public function isUploaded($path){
 		$fhash = md5_file($path);
 		$pdo = new mysqlPdoBase();
 		$data = $pdo->fetch("select * from `log_load_token` where
@@ -88,7 +89,7 @@ abstract class csvFormat{
 					", array(
 									"token"  => $fhash,
 							));
-		return empty($data);
+		return $data;
 	}
 	
 	

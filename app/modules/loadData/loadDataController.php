@@ -7,6 +7,10 @@
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataView.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvFormat.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvChannelFormat.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvPrivFormat.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvFormatDetector.php';
+
 class loadDataController extends AppController{
 	/**
 	 * 
@@ -46,24 +50,61 @@ class loadDataController extends AppController{
 // 		$gbk = file_get_contents("uploads/1460546321");
 // 		echo iconv("GBK", "UTF-8", $gbk);
 // 		exit;
+
+		
+		
 		if(isset($_FILES) && isset($_FILES["csv"]) && $msg->isPost()){
 			$ret = $this->model->mvFIleToUploads($_FILES["csv"]);
 			if($ret->isTrue()){
 				$path = $ret->return;
-				$csv = new csvFormat();
-				$r = $csv->parse($path);
-				if($r->isTrue()){
-					$ret = $this->model->saveUploadInfo(
-						$r->return["token"], 
-						$r->return["channel"], 
-						$r->return["channel"], 
-						$r->return["device"], 
-						$r->return["path"], 
-						$r->return["total"]
-					);
+				
+				
+				$csvDet = new csvFormatDetector($path);
+				
+				$csvDet->search();
+				
+				if($csvDet->match()){
+					$token = md5('shbdata'.$path.time());
+					if($csvDet->getCsvType() == csvFormat::CSV_TYPE_PUB){
+						$csvFor = $csvDet->getCsvChananelFormat();
+						$ret = $this->model->saveUploadInfo(
+							$token,
+							$csvFor->getChananel(),
+							$csvFor->getDevType(),
+							$path,
+							$csvFor->getDataRows()
+						);
+						if($ret == 0){
+							//exit($this->model->);
+						}
+					}else{
+						$csvFor = $csvDet->getCsvPrivFormat();
+						$ret = $this->model->saveUploadInfo(
+								$token,
+								"私有",
+								0,
+								$path,
+								$csvFor->getDataRows()
+						);
+					}
 					if($ret == 0){
 						$r = new rirResult(1,"保存到LOG表时失败") ;
+					}else{
+						$data = $csvFor->isUploaded($path);
+						if(!empty($data)){
+							$info = "你的文件数据可能在 [".$data["date"]."] 已经导入到数据库中，请确认.";
+						}else{
+							$info = "";
+						}
+						$r = new rirResult(0,$info,array(
+							"token" => $token,
+							"dn" => $csvFor->getDisplayName(),
+							"path" => $path,
+							"total" => $csvFor->getDataRows()
+						));
 					}
+				}else{
+					$r = new rirResult(2,"未能识别的格式") ;
 				}
 				$this->view->setPmcaiMsg($msg);
 				$this->view->showUploadResult($r,$msg->getPmcaiUrl()->setAction("load")->getUrl());

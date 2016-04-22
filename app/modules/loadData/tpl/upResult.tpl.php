@@ -26,21 +26,15 @@
 	
 	<input type="hidden" name="token" value="<?php print $r->return["token"]?>">
 	<div class="formitm">
-		<label class="lab">渠道：</label>
+		<label class="lab">识别信息：</label>
 		<div class="ipt">
-			<span class="domain"><?php print $r->return["channel"] ?></span>
-		</div>
-	</div>
-	<div class="formitm">
-		<label class="lab">设备：</label>
-		<div class="ipt">
-			<span class="domain"><?php print $r->return["device"]?></span>
+			<span class="domain"><?php print $r->return["dn"] ?></span>
 		</div>
 	</div>
 	<div class="formitm">
 		<label class="lab">文件名：</label>
 		<div class="ipt">
-			<span class="domain"><?php print $r->return["path"]?></span>
+			<span class="domain"><?php print pathinfo($r->return["path"],PATHINFO_BASENAME)?></span>
 		</div>
 	</div>
 	<div class="formitm">

@@ -217,6 +217,9 @@ class loadDataModel extends AppModel{
 							"name"  => $path,
 							"cnt"  => $cnt,
 					));
+// 		if($ret == 0){
+// 			exit($this->db->getErrorInfo());
+// 		}
 	}
 	
 	
