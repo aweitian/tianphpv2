@@ -129,8 +129,8 @@ class loadDataController extends AppController{
 		$this->model->setCallback(array($this,"loadDataProcessingCallback"));
 		$this->model->loadData($data);
 	}
-	public function loadDataProcessingCallback($pos,rirResult $ret){
-		$this->view->showLoadDataProcessing($pos, $ret);
+	public function loadDataProcessingCallback($pos,$app,$upd){
+		$this->view->showLoadDataProcessing($pos,$app,$upd);
 	}
 	private function showFormUI(pmcaiMsg $msg){
 		$this->view->setPmcaiMsg($msg);

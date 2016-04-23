@@ -217,7 +217,8 @@ class loadDataModel extends AppModel{
 	}
 	private function loadPrivDataToDb($path,$cls){
 		ini_set("max_execution_time", 300);
-		$succ = 0;
+		$app = 0;
+		$upd = 0;
 		if(!class_exists($cls)){
 			$cls_path = FILE_SYSTEM_ENTRY."/app/modules/loadData/csv/".$cls.".php";
 			if(!file_exists($cls_path)){
@@ -291,9 +292,9 @@ class loadDataModel extends AppModel{
 				}
 	
 				if($id->isTrue()){
-					$succ++;
+					$app++;
 					if(!is_null($this->callback)){
-						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$id));
+						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$app,$upd));
 					}
 					$lineNo++;
 				}else{
@@ -301,7 +302,7 @@ class loadDataModel extends AppModel{
 					$pdo->rollBack();
 					fclose($handle);
 					if(!is_null($this->callback)){
-						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$id));
+						call_user_func_array($this->callback, array("<font color=red>".$id->info."</font>",0,0));
 					}
 					return ;
 				}
@@ -316,8 +317,8 @@ class loadDataModel extends AppModel{
 	
 	private function loadPubDataToDb($path,$dev,$cls){
 		ini_set("max_execution_time", 300);
-		$succ = 0;
-		
+		$app = 0;
+		$upd = 0;
 		if(!class_exists($cls)){
 			$cls_path = FILE_SYSTEM_ENTRY."/app/modules/loadData/csv/".$cls.".php";
 			if(!file_exists($cls_path)){
@@ -410,9 +411,13 @@ class loadDataModel extends AppModel{
 				
 				
 				if($id->isTrue()){
-					$succ++;
+					if($id->info == "ok"){
+						$app++;
+					}else{
+						$upd++;
+					}
 					if(!is_null($this->callback)){
-						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$id));
+						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows() + 1,$app,$upd));
 					}
 					$lineNo++;
 				}else{
@@ -420,7 +425,7 @@ class loadDataModel extends AppModel{
 					$pdo->rollBack();
 					fclose($handle);
 					if(!is_null($this->callback)){
-						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$id));
+						call_user_func_array($this->callback, array($id->info,0,0));
 					}
 					return ;
 				}
@@ -514,7 +519,7 @@ class loadDataModel extends AppModel{
 			"dev" => $dev,
 			"datetime" => $datetime,
 		);
-		$id = $this->db->insert($sql, $data);
+		$id = $this->db->exec($sql, $data);
 		
 // 		$row = $this->db->exec($sql, $data);
 // 		if($row == 1){
@@ -526,7 +531,13 @@ class loadDataModel extends AppModel{
 // 		}
 		
 		if($id > 0){
-			return new rirResult(0,"ok",$id);
+			if($id == 1){
+				return new rirResult(0,"ok",$id);
+			}else if($id == 2){
+				return new rirResult(0,"update a row",$id);
+			}else{
+				return new rirResult(7,"unknow error");
+			}
 		}
 		return new rirResult(6,$this->db->getErrorInfo());
 	}

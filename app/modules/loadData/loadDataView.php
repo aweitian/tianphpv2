@@ -29,13 +29,8 @@ class loadDataView extends AppView{
 		ob_flush();
 		flush();
 	}
-	public function showLoadDataProcessing($pos,rirResult $r){
-		echo '<script>u('.(
-				$r->isTrue() ?
-				$pos + 1
-				:
-				'"'.$r->info.'"'
-			).','.($r->isTrue() ? 'true' : 'false').')</script>' ;
+	public function showLoadDataProcessing($pos,$app,$upd){
+		echo '<script>u("'.$pos.'",'.$app.','.$upd.')</script>' ;
 		ob_flush();
 		flush();
 	}
