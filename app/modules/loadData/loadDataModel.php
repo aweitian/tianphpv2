@@ -11,6 +11,7 @@ class loadDataModel extends AppModel{
 	public function __construct(){
 		parent::__construct();
 		$this->initDb();
+		$this->initSqlManager("data");
 	}
 
 	public function setCallback($cb){
@@ -52,17 +53,11 @@ class loadDataModel extends AppModel{
 	 * @param string $chv
 	 */
 	public function getChananelId($chv){
-		$data = $this->db->fetch("SELECT 
-			`ch_id`,`ch_val`
-		 FROM `data_channel` WHERE `ch_val` = :ch_val", array(
+		$data = $this->db->fetch($this->sqlManager->getSql("/sql/data_channel/getRow"), array(
 			"ch_val" => $chv,
 		));
 		if(empty($data)){
-			return $this->db->insert("INSERT INTO `data_channel` (
-				`ch_val`
-			) VALUES (
-				:ch_val
-			)", array(
+			return $this->db->insert($this->sqlManager->getSql("/sql/data_channel/insert"), array(
 				"ch_val" => $chv,
 			));
 		}else{
@@ -76,22 +71,13 @@ class loadDataModel extends AppModel{
 	 * @param pc/mobile $dev
 	 * @return int account_id
 	 */
-	public function getAccountId($ch,$acc,$dev){
-		$data = $this->db->fetch("SELECT 
-			`ac_id`,`dev`,`ch_id`,`ac_val`
-		 FROM `data_account` 
-		 WHERE `ch_id` = :ch_id AND `ac_val` = :ac_val AND `dev` = :dev", array(
-			"dev" => $dev,
+	public function getAccountId($ch,$acc){
+		$data = $this->db->fetch($this->sqlManager->getSql("/sql/data_account/getRow"), array(
 			"ch_id" => $ch,
 			"ac_val" => $acc,
 		));
 		if(empty($data)){
-			return $this->db->insert("INSERT INTO `data_account` (
-				`dev`,`ch_id`,`ac_val`
-			) VALUES (
-				:dev,:ch_id,:ac_val
-			)", array(
-				"dev" => $dev,
+			return $this->db->insert($this->sqlManager->getSql("/sql/data_account/insert"), array(
 				"ch_id" => $ch,
 				"ac_val" => $acc,
 			));
@@ -106,19 +92,12 @@ class loadDataModel extends AppModel{
 	 * @return int plan id
 	 */
 	public function getPlanId($acid,$plv){
-		$data = $this->db->fetch("SELECT 
-			`pl_id`,`ac_id`,`pl_val`
-		 FROM `data_plan` 
-				WHERE `ac_id` = :ac_id AND `pl_val` = :pl_val", array(
+		$data = $this->db->fetch($this->sqlManager->getSql("/sql/data_plan/getRow"), array(
 			"ac_id" => $acid,
 			"pl_val" => $plv,
 		));
 		if(empty($data)){
-			return $this->db->insert("INSERT INTO `data_plan` (
-				`ac_id`,`pl_val`
-			) VALUES (
-				:ac_id,:pl_val
-			)", array(
+			return $this->db->insert($this->sqlManager->getSql("/sql/data_plan/insert"), array(
 				"ac_id" => $acid,
 				"pl_val" => $plv,
 			));
@@ -133,18 +112,12 @@ class loadDataModel extends AppModel{
 	 * @return int unit id
 	 */
 	public function getUnitId($plid,$uv){
-		$data = $this->db->fetch("SELECT 
-			`un_id`,`pl_id`,`un_val`
-		 FROM `data_unit` WHERE `pl_id` = :pl_id AND `un_val` = :un_val", array(
+		$data = $this->db->fetch($this->sqlManager->getSql("/sql/data_unit/getRow"), array(
 				"pl_id" => $plid,
 				"un_val" => $uv,
 		));
 		if(empty($data)){
-			return $this->db->insert("INSERT INTO `data_unit` (
-				`pl_id`,`un_val`
-			) VALUES (
-				:pl_id,:un_val
-			)", array(
+			return $this->db->insert($this->sqlManager->getSql("/sql/data_unit/insert"), array(
 				"pl_id" => $plid,
 				"un_val" => $uv,
 			));
@@ -163,25 +136,14 @@ class loadDataModel extends AppModel{
 	 * @return int 
 	 */
 	public function getIdeaId($unid,$title,$desc1,$desc2,$url){
-		$data = $this->db->fetch("SELECT 
-			`id_id`,`un_id`,`title`,`desc1`,`desc2`,`url`
- 		FROM `data_idea` 
-		WHERE `un_id` = :un_id 
-		  AND `title` = :title
-		  AND `desc1` = :desc1
-		  AND `desc2` = :desc2
-				", array(
+		$data = $this->db->fetch($this->sqlManager->getSql("/sql/data_idea/getRow"), array(
 			"un_id" => $unid,
 			"title" => $title,
 			"desc1" => $desc1,
 			"desc2" => $desc2,
 		));
 		if(empty($data)){
-			return $this->db->insert("INSERT INTO `data_idea` (
-				`un_id`,`title`,`desc1`,`desc2`,`url`
-			) VALUES (
-				:un_id,:title,:desc1,:desc2,:url
-			)", array(
+			return $this->db->insert($this->sqlManager->getSql("/sql/data_idea/insert"), array(
 				"un_id" => $unid,
 				"title" => $title,
 				"desc1" => $desc1,
@@ -194,77 +156,151 @@ class loadDataModel extends AppModel{
 	}
 	
 	public function getUploadInfo($token){
-		return $this->db->fetch("SELECT * FROM `log_upload_token` WHERE `token` = :token", array(
+		return $this->db->fetch($this->sqlManager->getSql("/sql/log_upload_token/getRowByToken"), array(
 				":token" => $token,
 		));
 	}
 	
 	public function loadData($metaData){
-		$this->loadDataToDb($metaData["name"],$metaData["dev"],$metaData["ch"]);
-
+		if($metaData["dev"] == csvFormat::CSV_DEV_PRIV){
+			if(preg_match("/^\w+$/", $metaData["cls"])){
+				$this->loadPrivDataToDb($metaData["name"],$metaData["cls"]);
+			}else{
+				exit("CLASS 字段值不合法");
+			}
+			
+		}else{
+			if(preg_match("/^\w+$/", $metaData["cls"])){
+				$this->loadPubDataToDb($metaData["name"],$metaData["dev"],$metaData["cls"]);
+			}else{
+				exit("CLASS 字段值不合法");
+			}
+		}
 	}
 	
 	
-	public function saveUploadInfo($token,$ch,$dev,$path,$cnt){
-		return $this->db->exec("INSERT INTO `log_upload_token` (
-				`token`,`ch`,`dev`,`name`,`cnt`
-			) VALUES (
-				:token,:ch,:dev,:name,:cnt
-			)",array(
-							"token" => $token,
-							"ch"    => $ch,
-							"dev"   => $dev,
-							"name"  => $path,
-							"cnt"  => $cnt,
-					));
+	public function saveUploadInfo($token,$cls,$dev,$path,$cnt){
+		return $this->db->exec($this->sqlManager->getSql("/sql/log_upload_token/insert"),array(
+			"token" => $token,
+			"cls"    => $cls,
+			"dev"   => $dev,
+			"name"  => $path,
+			"cnt"  => $cnt,
+		));
 // 		if($ret == 0){
 // 			exit($this->db->getErrorInfo());
 // 		}
 	}
-	
-	
-	public function loadDataToDb($path,$dev,$chananel){
-// 		$i = 15;
-// 		while($i--){
-// 			sleep(1);
-// 			if(!is_null($this->callback)){
-// 				call_user_func_array($this->callback, array(16-$i,$i));
-// 			}
-// 		}
-		
-		
-// 		return ;
-		
-		
-		
+	private function loadPrivDataToDb($path,$cls){
 		ini_set("max_execution_time", 300);
-		#offsets
-		$offset_acc  = 2;
-		$offset_plan = 3;
-		$offset_unit = 4;
-		$offset_titl = 5;
-		$offset_des1 = 6;
-		$offset_des2 = 7;
-		$offset_url  = 8;
-		$offset_show = 9;
-		$offset_clks = 10;
-		$offset_pays = 11;
+		$succ = 0;
+		if(!class_exists($cls)){
+			$cls_path = FILE_SYSTEM_ENTRY."/app/modules/loadData/csv/".$cls.".php";
+			if(!file_exists($cls_path)){
+				$err = "illegal class in database";
+				if(!is_null($this->callback)){
+					call_user_func_array($this->callback, array($lineNo - 8,new rirResult(1,$err)));;
+					return ;
+				}else{
+					exit($err);
+				}
+			}else{
+				require $cls_path;
+			}
+		}
+		/**
+		 *
+		 * @var csvChannelFormat
+		 */
+		$csvInst = new $cls($path);
+		//$csvInst = new priv_csv($path);
+		$handle = fopen($path, "r");
+		if ($handle) {
+			$lineNo = 0;
+				
+			$pdo = mysqlPdo::getConnection();
+			//开始一个事实
+			$pdo->beginTransaction();
 	
-		//把文件MD5写入到LOG表中`log_load_token`
-		$fhash = md5_file($path);
-		$this->db->insert("INSERT INTO `log_load_token` (
-			`token`
-		) VALUES (
-			:token
-		)", array(
-			"token" => $fhash
-		));
-		
-		//检查文件头，判断是不是识别的格式
+			//把文件MD5写入到LOG表中`log_load_token`
+			$fhash = md5_file($path);
+			$this->db->insert($this->sqlManager->getSql("/sql/log_load_token/insert"), array(
+				"token" => $fhash
+			));
+				
+				
+			while ($line = fgetcsv($handle)) {
+				if($lineNo < $csvInst->getHeaderRows()){$lineNo++;continue;}
 
-		
+				$code = $this->handleCsv($csvInst->getCode($line));
+				$chat = $this->handleCsv($csvInst->getChat($line));
+				$subs = $this->handleCsv($csvInst->getSubscribe($line));
+				$rcvp = $this->handleCsv($csvInst->getRcvpayment($line));
+				$link = $this->handleCsv($csvInst->getLink($line));
+				$kw   = $this->handleCsv($csvInst->getKw($line));
+				$mark = $this->handleCsv($csvInst->getMark($line));
+				$date = $this->handleCsv($csvInst->getDate($line));
+
+				
+				if($code != "" && $link != "" && $kw != "" && $date != ""){
+					if($chat == "")$chat = 0;
+					if($subs == "")$subs = 0;
+					if($rcvp == "")$rcvp = 0;
+					$id = $this->_loadPrivData($code,$chat,$subs,$rcvp,$link,$kw,$mark,$date);
+				}else{
+					$id = new rirResult(1,"数据格式检查没有通过");
+				}
+				
+				
+	
+				if($id->isTrue()){
+					$succ++;
+					if(!is_null($this->callback)){
+						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$id));
+					}
+					$lineNo++;
+				}else{
+						
+					$pdo->rollBack();
+					fclose($handle);
+					if(!is_null($this->callback)){
+						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$id));
+					}
+					return ;
+				}
+			}
+	
+			fclose($handle);
+			$pdo->commit();
+		} else {
+			// error opening the file.
+		}
+	}
+	
+	private function loadPubDataToDb($path,$dev,$cls){
+		ini_set("max_execution_time", 300);
 		$succ = 0;
 		
+		if(!class_exists($cls)){
+			$cls_path = FILE_SYSTEM_ENTRY."/app/modules/loadData/csv/".$cls.".php";
+			if(!file_exists($cls_path)){
+				$err = "illegal class in database";
+				if(!is_null($this->callback)){
+					call_user_func_array($this->callback, array($lineNo - 8,new rirResult(1,$err)));;
+					return ;
+				}else{
+					exit($err);
+				}
+			}else{
+				require $cls_path;
+			}
+		}
+		/**
+		 * 
+		 * @var csvChannelFormat
+		 */
+		$csvInst = new $cls($path);
+		//$csvInst = new bd_pub_csv($path);
 		$handle = fopen($path, "r");
 		if ($handle) {
 			$lineNo = 0;
@@ -272,44 +308,52 @@ class loadDataModel extends AppModel{
 			$pdo = mysqlPdo::getConnection();
 			//开始一个事实
 			$pdo->beginTransaction();
+	
+			//把文件MD5写入到LOG表中`log_load_token`
+			$fhash = md5_file($path);
+			$this->db->insert($this->sqlManager->getSql("/sql/log_load_token/insert"), array(
+					"token" => $fhash
+			));
+			
 			
 			while ($line = fgetcsv($handle)) {
 				// process the line read.
 				//从第9行开始
-				if($lineNo < 8){$lineNo++;continue;}
+				if($lineNo < $csvInst->getHeaderRows()){$lineNo++;continue;}
 				//日期,小时,账户,推广计划,推广单元,创意标题,创意描述1,创意描述2,显示URL,展现,点击,
 				//消费,点击率,平均点击价格,网页转化,商桥转化
 				//"2016-03-28",0,"shb-九龙2","性功能-勃起异常","勃起-硬","{男性勃起功能障碍的原因},硬不起来该如何治?",
 				//"{男性勃起功能障碍的原因},勃起不坚,时间不长不坚硬的病因是什么,找到病因能一次性治",
 				//"吗?上海九龙男子医院专家在线解答勃起问题.","man.long120.cn",1,0,0.00,0.00%,0.00,0,0
-				$items = $line;
-				$acc   = $this->handleCsv($items[$offset_acc]);
-				$plan  = $this->handleCsv($items[$offset_plan]);
-				$unit  = $this->handleCsv($items[$offset_unit]);
-				$title = $this->handleCsv($items[$offset_titl]);
-				$desc1 = $this->handleCsv($items[$offset_des1]);
-				$desc2 = $this->handleCsv($items[$offset_des2]);
-				$url   = $this->handleCsv($items[$offset_url]);
+				$chana = $this->handleCsv($csvInst->getChannel());
+				$acc   = $this->handleCsv($csvInst->getAcc($line));
+				$plan  = $this->handleCsv($csvInst->getPlan($line));
+				$unit  = $this->handleCsv($csvInst->getUnit($line));
+				$title = $this->handleCsv($csvInst->getTitle($line));
+				$desc1 = $this->handleCsv($csvInst->getDes1($line));
+				$desc2 = $this->handleCsv($csvInst->getDes2($line));
+				$url   = $this->handleCsv($csvInst->getUrl($line));
 				
-				$shows = $this->handleCsv($items[$offset_show]);
-				$clks  = $this->handleCsv($items[$offset_clks]);
-				$pays  = $this->handleCsv($items[$offset_pays]);
-				$date  = $this->handleCsv($items[0] . " " . $items[1] . ":00:00");
+				$shows = $this->handleCsv($csvInst->getShow($line));
+				$clks  = $this->handleCsv($csvInst->getClks($line));
+				$pays  = $this->handleCsv($csvInst->getPays($line));
+				$date  = $this->handleCsv($csvInst->getDate($line));
 				
-				$id = $this->_loadPubData($dev,$chananel, $acc, $plan, $unit, $title, $desc1, $desc2, 
+				$id = $this->_loadPubData($dev,$chana, $acc, $plan, $unit, $title, $desc1, $desc2, 
 						$url, $pays, $shows, $clks, $date);
 				
 				if($id->isTrue()){
 					$succ++;
 					if(!is_null($this->callback)){
-						call_user_func_array($this->callback, array($lineNo - 8,$id));
+						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$id));
 					}
 					$lineNo++;
 				}else{
+					
 					$pdo->rollBack();
 					fclose($handle);
 					if(!is_null($this->callback)){
-						call_user_func_array($this->callback, array($lineNo - 8,$id));
+						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$id));
 					}
 					return ;
 				}
@@ -322,9 +366,32 @@ class loadDataModel extends AppModel{
 		}
 	}
 	private function handleCsv($str){
-		return iconv("GBK", "UTF8", $str);
+		return trim(iconv("GBK", "UTF8", $str));
 		//return str_replace('"',"",iconv("GBK", "UTF8", $str));
 	}
+	
+	private function _loadPrivData($code,$chat,$subscribe,$rcvpayment,$link,$kw,$mark,$date){
+		$bindArgs = array(
+			"code" => $code,
+			"chat" => $chat,
+			"subscribe" => $subscribe,
+			"rcvpayment" => $rcvpayment,
+			"link" => $link,
+			"kw" => $kw,
+			"mark" => $mark,
+			"date" => $date,
+		);
+		$sql = $this->sqlManager->getSql("/sql/priv_data/insert");
+		
+		$id = $this->db->insert($sql, $bindArgs);
+		if($id > 0){
+			return new rirResult(0,"ok",$id);
+		}
+		return new rirResult(6,$this->db->getErrorInfo());
+	}
+	
+	
+	
 	/**
 	 * 
 	 * @param string $dev pc/mobile
@@ -371,24 +438,14 @@ class loadDataModel extends AppModel{
 		
 		
 		
-		$sql = "
-			INSERT INTO `publ_data` (
-				`id_id`,`paysum`,`shows`,`clks`,`datetime`
-			) VALUES (
-				:id_id,:paysum,:shows,:clks,:datetime
-			)
-			ON DUPLICATE KEY UPDATE 
-				`paysum` = `paysum` + :paysum,
-				`shows` = `shows` + :shows,
-				`clks` = `clks` + :clks
-		";
+		$sql = $this->sqlManager->getSql("/sql/publ_data/insert");
 		$data = array(
 			"id_id" => $id_id,
 			"paysum" => $paysum,
 			"shows" => $shows,
 			"clks" => $clks,
+			"dev" => $dev,
 			"datetime" => $datetime,
-
 		);
 		$id = $this->db->insert($sql, $data);
 		

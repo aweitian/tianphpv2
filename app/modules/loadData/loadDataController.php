@@ -69,7 +69,7 @@ class loadDataController extends AppController{
 						$csvFor = $csvDet->getCsvChananelFormat();
 						$ret = $this->model->saveUploadInfo(
 							$token,
-							$csvFor->getChananel(),
+							$csvDet->getSelectedCls(),
 							$csvFor->getDevType(),
 							$path,
 							$csvFor->getDataRows()
@@ -81,8 +81,8 @@ class loadDataController extends AppController{
 						$csvFor = $csvDet->getCsvPrivFormat();
 						$ret = $this->model->saveUploadInfo(
 								$token,
-								"私有",
-								0,
+								$csvDet->getSelectedCls(),
+								csvFormat::CSV_DEV_PRIV,
 								$path,
 								$csvFor->getDataRows()
 						);

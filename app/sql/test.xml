@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<note>
-<to>
-	<![CDATA[
+<sql>
+	<get>
+		<![CDATA[
+		
+		
+		George > age
+		
+		
+		]]>
 	
+	</get>
+	<post>
+		<![CDATA[
+		
+		
+		]]>
+	</post>
 	
-	George > age
+	<put>
+		<![CDATA[
+		
+		
+		]]>
+	</put>
 	
-	
-	]]>
-</to>
-<from>John</from>
-<heading>Reminder</heading>
-<body>Don't forget the meeting!</body>
-</note>
+	<delete>
+		<![CDATA[
+		
+		
+		]]>
+	</delete>
+</sql>

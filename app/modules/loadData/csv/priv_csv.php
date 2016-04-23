@@ -31,8 +31,68 @@ class priv_csv extends csvPrivFormat {
 		return "私有数据";
 	}
 	
-	public function getHeaderRows(){
-		return 1;
+
+	/**
+	 * @return string
+	 */
+	public function getCode($line){
+		return $line[2];
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getChat($line){
+		return $line[5];
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getSubscribe($line){
+		return $line[6];
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getRcvpayment($line){
+		return $line[7];
+	}
+	
+	
+	/**
+	 * @return string
+	 */
+	public function getLink($line){
+		return $line[1];
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getKw($line){
+		return $line[8];
+	}
+	
+	
+	/**
+	 * @return string
+	 */
+	public function getMark($line){
+		return $line[4];
+	}
+	
+	
+	/**
+	 * @return string
+	 */
+	public function getDate($line){
+		$md = iconv("GBK", "UTF8", $line[0]);
+		$ti = $line[3];
+		$md = str_replace("月", "-", $md);
+		$md = str_replace("日", "", $md);
+		return date("Y",time()) . "-" . $md . " " . $ti . ":00:00";
 	}
 	
 	

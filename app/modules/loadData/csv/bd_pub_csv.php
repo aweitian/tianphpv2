@@ -38,7 +38,7 @@ class bd_pub_csv extends csvChannelFormat {
 					$this->dev = self::CSV_DEV_PC;
 					return true;
 				}else{
-					$this->dev = self::CSV_DEV_PC;
+					$this->dev = self::CSV_DEV_M;
 					return true;
 				}
 			case 5:
@@ -57,7 +57,7 @@ class bd_pub_csv extends csvChannelFormat {
 	}
 	
 	
-	public function getChananel(){
+	public function getChannel(){
 		return "百度";
 	}
 	
@@ -68,5 +68,84 @@ class bd_pub_csv extends csvChannelFormat {
 	
 	public function getHeaderRows(){
 		return 8;
+	}
+// 	$offset_acc  = 2;
+// 	$offset_plan = 3;
+// 	$offset_unit = 4;
+// 	$offset_titl = 5;
+// 	$offset_des1 = 6;
+// 	$offset_des2 = 7;
+// 	$offset_url  = 8;
+// 	$offset_show = 9;
+// 	$offset_clks = 10;
+// 	$offset_pays = 11;
+	/**
+	 * @return string
+	 */
+	public function getAcc($lineArr){
+		return $lineArr[2];
+	}
+	
+	
+	/**
+	 * @return string
+	 */
+	public function getPlan($lineArr){
+		return $lineArr[3];
+	}
+	/**
+	 * @return string
+	 */
+	public function getUnit($lineArr){
+		return $lineArr[4];
+	}
+	/**
+	 * @return int
+	 */
+	public function getTitle($lineArr){
+		return $lineArr[5];
+	}
+	/**
+	 * @return string
+	 */
+	public function getDes1($lineArr){
+		return $lineArr[6];
+	}
+	/**
+	 * @return string
+	 */
+	public function getDes2($lineArr){
+		return $lineArr[7];
+	}
+	/**
+	 * @return string
+	 */
+	public function getUrl($lineArr){
+		return $lineArr[8];
+	}
+	/**
+	 * @return string
+	 */
+	public function getShow($lineArr){
+		return $lineArr[9];
+	}
+	/**
+	 * @return string
+	 */
+	public function getClks($lineArr){
+		return $lineArr[0xa];
+	}
+	/**
+	 * @return string
+	 */
+	public function getPays($lineArr){
+		return $lineArr[0xb];
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getDate($lineArr){
+		return $lineArr[0] . " " . $lineArr[1] . ":00:00";
 	}
 }

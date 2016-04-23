@@ -30,9 +30,9 @@ abstract class csvFormat{
 	const BD_PRIV_HEADER_ROWS = 1;
 	
 	
-	const CSV_DEV_M = 0;
-	const CSV_DEV_PC = 1;
-	
+	const CSV_DEV_M = "m";
+	const CSV_DEV_PC = "pc";
+	const CSV_DEV_PRIV  = "pr";
 	/**
 	 * @return bool;
 	 */
@@ -84,11 +84,9 @@ abstract class csvFormat{
 	public function isUploaded($path){
 		$fhash = md5_file($path);
 		$pdo = new mysqlPdoBase();
-		$data = $pdo->fetch("select * from `log_load_token` where
-					`token` = :token order by sid desc limit 0,1
-					", array(
-									"token"  => $fhash,
-							));
+		$data = $pdo->fetch(sqlManager::getInstance("data")->getSql("/sql/log_load_token/getRowByToken"), array(
+			"token"  => $fhash,
+		));
 		return $data;
 	}
 	

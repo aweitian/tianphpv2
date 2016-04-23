@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<data_channel>
+		<getRow>
+			<![CDATA[
+			SELECT 
+				`ch_id`,`ch_val`
+			 FROM `data_channel` WHERE `ch_val` = :ch_val
+			]]>
+		</getRow>	
+		<insert>
+			INSERT INTO `data_channel` (
+				`ch_val`
+			) VALUES (
+				:ch_val
+			)
+		</insert>
+	</data_channel>
+
+	<data_account>
+		<getRow>
+			<![CDATA[
+			SELECT 
+			`ac_id`,`ch_id`,`ac_val`
+		 FROM `data_account` 
+		 WHERE `ch_id` = :ch_id AND `ac_val` = :ac_val
+			]]>
+		</getRow>	
+		<insert>
+			INSERT INTO `data_account` (
+				`ch_id`,`ac_val`
+			) VALUES (
+				:ch_id,:ac_val
+			)
+		</insert>
+	
+	</data_account>
+	
+	<data_plan>
+		<getRow>
+			<![CDATA[
+			SELECT 
+			`pl_id`,`ac_id`,`pl_val`
+		 FROM `data_plan` 
+				WHERE `ac_id` = :ac_id AND `pl_val` = :pl_val
+			]]>
+		</getRow>	
+		<insert>
+			INSERT INTO `data_plan` (
+				`ac_id`,`pl_val`
+			) VALUES (
+				:ac_id,:pl_val
+			)
+		</insert>
+	
+	</data_plan>
+
+	<data_unit>
+		<getRow>
+			<![CDATA[
+			SELECT 
+			`un_id`,`pl_id`,`un_val`
+		 FROM `data_unit` WHERE `pl_id` = :pl_id AND `un_val` = :un_val
+			]]>
+		</getRow>	
+		<insert>
+			INSERT INTO `data_unit` (
+				`pl_id`,`un_val`
+			) VALUES (
+				:pl_id,:un_val
+			)
+		</insert>
+	
+	</data_unit>
+	
+	
+	<data_idea>
+		<getRow>
+			<![CDATA[
+			SELECT 
+			`id_id`,`un_id`,`title`,`desc1`,`desc2`,`url`
+ 		FROM `data_idea` 
+		WHERE `un_id` = :un_id 
+		  AND `title` = :title
+		  AND `desc1` = :desc1
+		  AND `desc2` = :desc2
+			]]>
+		</getRow>	
+		<insert>
+			<![CDATA[
+			INSERT INTO `data_idea` (
+				`un_id`,`title`,`desc1`,`desc2`,`url`
+			) VALUES (
+				:un_id,:title,:desc1,:desc2,:url
+			)
+			]]>
+		</insert>
+	
+	</data_idea>
+	
+	
+	<log_upload_token>
+		<getRowByToken>
+		<![CDATA[
+			SELECT * FROM `log_upload_token` WHERE `token` = :token
+			]]>
+		</getRowByToken>
+		
+		<insert>
+		<![CDATA[
+			INSERT INTO `log_upload_token` (
+				`token`,`cls`,`dev`,`name`,`cnt`
+			) VALUES (
+				:token,:cls,:dev,:name,:cnt
+			)
+			]]>
+		</insert>
+	
+	</log_upload_token>
+	
+	
+	<log_load_token>
+		<getRowByToken>
+		<![CDATA[
+			select * from `log_load_token` where
+					`token` = :token order by sid desc limit 0,1
+			]]>
+		</getRowByToken>
+		
+		<insert>
+		<![CDATA[
+			INSERT INTO `log_load_token` (
+				`token`
+			) VALUES (
+				:token
+			)
+			]]>
+		</insert>
+	
+	</log_load_token>
+	
+	<publ_data>
+	
+		<insert>
+		<![CDATA[
+			INSERT INTO `publ_data` (
+				`id_id`,`paysum`,`shows`,`clks`,`dev`,`datetime`
+			) VALUES (
+				:id_id,:paysum,:shows,:clks,:dev,:datetime
+			)
+			ON DUPLICATE KEY UPDATE 
+				`paysum` = `paysum` + :paysum,
+				`shows` = `shows` + :shows,
+				`clks` = `clks` + :clks
+		]]>
+		</insert>
+	
+	
+	</publ_data>
+	
+	
+	<priv_data>
+	<insert>
+	
+	<![CDATA[
+		INSERT INTO `prvt_data` (
+			`code`,`chat`,`subscribe`,`rcvpayment`,`link`,`kw`,`mark`,`date`
+		) VALUES (
+			:code,:chat,:subscribe,:rcvpayment,:link,:kw,:mark,:date
+		)
+	
+	
+	]]>
+	</insert>
+	
+	
+	</priv_data>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</sql>

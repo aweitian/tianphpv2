@@ -26,6 +26,7 @@ class csvFormatDetector{
 	 */
 	private $selectedCsv = null;
 	
+	private $selectedCls = "";
 	
 	private $max_header_rows = 0;
 	public function __construct($path){
@@ -48,6 +49,12 @@ class csvFormatDetector{
 	 */
 	public function getCsvPrivFormat(){
 		return $this->selectedCsv;
+	}
+	
+	
+	public function getSelectedCls(){
+		return $this->selectedCls;
+		
 	}
 	/**
 	 * 扫描目录，初始化合法类
@@ -72,7 +79,7 @@ class csvFormatDetector{
 			if($hr > $this->max_header_rows){
 				$this->max_header_rows = $hr;
 			}
-			$this->csv[] = $ins;
+			$this->csv[$cls] = $ins;
 		}
 		return !empty($csv);
 	}
@@ -96,16 +103,18 @@ class csvFormatDetector{
 				/**
 				 * @var csvFormat $csv
 				 */
-				foreach ($this->csv as $csv){
+				foreach ($this->csv as $cls => $csv){
 					$csv->check($lineNo, $line);
 					if($csv->isMatch()){
 						$this->selectedCsv = $csv;
+						$this->selectedCls = $cls;
 						$found = true;
 						break;
 					}
 				}
 				$lineNo++;
 				if($lineNo > $this->max_header_rows){
+					if(!$found)
 					break;
 				}
 			}
