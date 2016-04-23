@@ -14,6 +14,9 @@ class validator{
 	public static function isDate($v){
 		return preg_match("/^(\d{4})[\/\-\.](0?[1-9]|1[012])[\/\-\.](0?[1-9]|[12][0-9]|3[01])$/",$v);
 	}
+	public static function isDateTime($v){
+		return preg_match("^(\d{4})[\/\-\.](0?[1-9]|1[012])[\/\-\.](0?[1-9]|[12][0-9]|3[01]) (0?[0-9]|[1-6][0-9]):(0?[0-9]|[1-6][0-9]):(0?[0-9]|[1-6][0-9])$/",$v);
+	}
 	public static function isEmail($v){
 		return preg_match("/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/",$v);
 	}
