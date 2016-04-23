@@ -67,11 +67,20 @@ class pmcaiRoute extends route{
 		//startWith
 		$sw_rt = $this->rt["startWith"];
 		foreach ($sw_rt as $key => $item){
-			if(strpos($url,$key) === 0){
-				$this->mask = $preg_p . $item["mca"];
-				$this->loc = $item["loc"];
-				return ;
+			if(utility::endsWith($key, "/")){
+				if(strpos($url,$key) === 0){
+					$this->mask = $preg_p . $item["mca"];
+					$this->loc = $item["loc"];
+					return ;
+				}
+			}else{
+				if($key === $url || strpos($url,$key."/") === 0){
+					$this->mask = $preg_p . $item["mca"];
+					$this->loc = $item["loc"];
+					return ;
+				}
 			}
+			
 		}
 		
 		//default

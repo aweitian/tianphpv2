@@ -21,6 +21,9 @@ class dbgController extends Controller{
 		$this->model = new dbgModel();
 		$this->view = new dbgView();
 	}
+	public function welcomeAction(){
+		var_dump("def/dbg/main");
+	}
 	public function xxAction(){
 		var_dump($this->model->test());
 	}
