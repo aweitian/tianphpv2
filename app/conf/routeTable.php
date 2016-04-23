@@ -24,14 +24,18 @@ return array(
 		"regExp" => array(
 
 		),
-		//以什么开头
+		//以什么开头 比如/priv能匹配/priv,/priv?a=b,/priv/a/b,不能匹配/privilege
 		"startWith" => array(
-
+			//				/db和/dbg是互不干扰的
+// 			"/db" => array(
+// 				"mca" => "mca",
+// 				"loc" => FILE_SYSTEM_ENTRY."/debug"
+// 			)
 		),
 		//其它
 		"default" => array(
-				"mca" => "ca",
-				"loc" => FILE_SYSTEM_ENTRY."/app/modules"
+			"mca" => "ca",
+			"loc" => FILE_SYSTEM_ENTRY."/app/modules"
 		)
 );
 
