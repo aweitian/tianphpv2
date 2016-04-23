@@ -53,6 +53,9 @@ class loadDataModel extends AppModel{
 	 * @param string $chv
 	 */
 	public function getChananelId($chv){
+		if(!loadDataValidator::isValidChannel($chv)){
+			return 0;
+		}
 		$data = $this->db->fetch($this->sqlManager->getSql("/sql/data_channel/getRow"), array(
 			"ch_val" => $chv,
 		));
@@ -72,6 +75,9 @@ class loadDataModel extends AppModel{
 	 * @return int account_id
 	 */
 	public function getAccountId($ch,$acc){
+		if(!loadDataValidator::isValidAcc($acc)){
+			return 0;
+		}
 		$data = $this->db->fetch($this->sqlManager->getSql("/sql/data_account/getRow"), array(
 			"ch_id" => $ch,
 			"ac_val" => $acc,
@@ -92,6 +98,9 @@ class loadDataModel extends AppModel{
 	 * @return int plan id
 	 */
 	public function getPlanId($acid,$plv){
+		if(!loadDataValidator::isValidPlan($plv)){
+			return 0;
+		}
 		$data = $this->db->fetch($this->sqlManager->getSql("/sql/data_plan/getRow"), array(
 			"ac_id" => $acid,
 			"pl_val" => $plv,
@@ -112,6 +121,9 @@ class loadDataModel extends AppModel{
 	 * @return int unit id
 	 */
 	public function getUnitId($plid,$uv){
+		if(!loadDataValidator::isValidUnit($uv)){
+			return 0;
+		}
 		$data = $this->db->fetch($this->sqlManager->getSql("/sql/data_unit/getRow"), array(
 				"pl_id" => $plid,
 				"un_val" => $uv,
@@ -136,6 +148,18 @@ class loadDataModel extends AppModel{
 	 * @return int 
 	 */
 	public function getIdeaId($unid,$title,$desc1,$desc2,$url){
+		if(!loadDataValidator::isValidTitle($title)){
+			return 0;
+		}
+		if(!loadDataValidator::isValidDesc1($desc1)){
+			return 0;
+		}
+		if(!loadDataValidator::isValidDesc2($desc2)){
+			return 0;
+		}
+		if(!loadDataValidator::isValidUrl($url)){
+			return 0;
+		}
 		$data = $this->db->fetch($this->sqlManager->getSql("/sql/data_idea/getRow"), array(
 			"un_id" => $unid,
 			"title" => $title,
@@ -242,16 +266,29 @@ class loadDataModel extends AppModel{
 				$date = $this->handleCsv($csvInst->getDate($line));
 
 				
-				if($code != "" && $link != "" && $kw != "" && $date != ""){
-					if($chat == "")$chat = 0;
-					if($subs == "")$subs = 0;
-					if($rcvp == "")$rcvp = 0;
+				//validate
+				if(loadDataValidator::isValidCode($code)
+					&& 	loadDataValidator::isValidChat($chat)
+					&& 	loadDataValidator::isValidSubscribue($subs)
+					&& 	loadDataValidator::isValidRcvpayment($rcvp)
+					&& 	loadDataValidator::isValidLink($link)
+					&& 	loadDataValidator::isValidMark($mark)
+					&& 	loadDataValidator::isValidDate($date)
+						
+				){
+					//filter
+					$link = loadDataFilter::filterLink($link);
+					$chat = loadDataFilter::filterChat($chat);
+					$subs = loadDataFilter::filterSubscribe($subs);
+					$rcvp = loadDataFilter::filterRcvpayment($rcvp);
+					
+					//insert
 					$id = $this->_loadPrivData($code,$chat,$subs,$rcvp,$link,$kw,$mark,$date);
+					
+					
 				}else{
-					$id = new rirResult(1,"数据格式检查没有通过");
+					$id = new rirResult(1,"数据格式检查没有通过:".loadDataValidator::$lastk.",值:".var_export(loadDataValidator::$lastv,true));;
 				}
-				
-				
 	
 				if($id->isTrue()){
 					$succ++;
@@ -339,8 +376,38 @@ class loadDataModel extends AppModel{
 				$pays  = $this->handleCsv($csvInst->getPays($line));
 				$date  = $this->handleCsv($csvInst->getDate($line));
 				
-				$id = $this->_loadPubData($dev,$chana, $acc, $plan, $unit, $title, $desc1, $desc2, 
-						$url, $pays, $shows, $clks, $date);
+				
+				//validate
+				if(loadDataValidator::isValidChannel($chana)
+						&& 	loadDataValidator::isValidAcc($acc)
+						&& 	loadDataValidator::isValidPlan($plan)
+						&& 	loadDataValidator::isValidUnit($unit)
+						&& 	loadDataValidator::isValidTitle($title)
+						&& 	loadDataValidator::isValidDesc1($desc1)
+						&& 	loadDataValidator::isValidDesc2($desc2)
+						&& 	loadDataValidator::isValidUrl($url)
+						&& 	loadDataValidator::isValidShows($shows)
+						&& 	loadDataValidator::isValidClks($clks)
+						&& 	loadDataValidator::isValidPaysum($pays)
+						&& 	loadDataValidator::isValidDate($date)
+				
+						){
+							//filter
+								
+							//insert
+							$id = $this->_loadPubData($dev,$chana, $acc, $plan, $unit, $title, $desc1, $desc2, 
+								$url, $pays, $shows, $clks, $date);	
+								
+				}else{
+					$id = new rirResult(1,"数据格式检查没有通过:".loadDataValidator::$lastk.",值:".var_export(loadDataValidator::$lastv,true));;
+				
+				}
+				
+				
+				
+				
+				
+				
 				
 				if($id->isTrue()){
 					$succ++;

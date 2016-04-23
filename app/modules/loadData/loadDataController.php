@@ -10,6 +10,8 @@ require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvFormat.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvChannelFormat.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvPrivFormat.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvFormatDetector.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataValidator.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataFilter.php';
 
 class loadDataController extends AppController{
 	/**
