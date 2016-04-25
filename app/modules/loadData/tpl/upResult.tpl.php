@@ -8,6 +8,7 @@
  * @var rirResult
  */
 //$r = new rirResult();
+
 ?>
 <?php if(!$r->isTrue()):?>
 	
@@ -34,7 +35,7 @@
 	<div class="formitm">
 		<label class="lab">文件名：</label>
 		<div class="ipt">
-			<span class="domain"><?php print pathinfo($r->return["path"],PATHINFO_BASENAME)?></span>
+			<span class="domain"><?php print ltrim(substr($r->return["path"], strrpos($r->return["path"], '/')),"/")?></span>
 		</div>
 	</div>
 	<div class="formitm">

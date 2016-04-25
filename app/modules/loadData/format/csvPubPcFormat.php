@@ -4,19 +4,15 @@
  * Author: Awei.tian
  * Description: 
  * 
- * 		CSV文件分为两种:PUBLIC && PRIVATE
+ * 		PUBLIC && PRIVATE && RELATIONSHIP
  * 			
  */
-abstract class csvChannelFormat extends csvFormat{
+abstract class csvPubPclFormat extends csvFormat{
 	/**
 	 * @return string
 	 */
 	abstract public function getChannel();
 	
-	/**
-	 * @return ENUM
-	 */
-	abstract public function getDevType();
 	/**
 	 * @return string
 	 */
@@ -64,6 +60,6 @@ abstract class csvChannelFormat extends csvFormat{
 	 */
 	abstract public function getDate($lineArr);
 	public function getCsvType(){
-		return parent::CSV_TYPE_PUB;
+		return parent::TYPE_PUB_PC;
 	}
 }

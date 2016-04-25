@@ -2,11 +2,9 @@
 <sql>
 	<data_channel>
 		<getRow>
-			<![CDATA[
 			SELECT 
 				`ch_id`,`ch_val`
 			 FROM `data_channel` WHERE `ch_val` = :ch_val
-			]]>
 		</getRow>	
 		<insert>
 			INSERT INTO `data_channel` (
@@ -19,12 +17,10 @@
 
 	<data_account>
 		<getRow>
-			<![CDATA[
 			SELECT 
 			`ac_id`,`ch_id`,`ac_val`
 		 FROM `data_account` 
 		 WHERE `ch_id` = :ch_id AND `ac_val` = :ac_val
-			]]>
 		</getRow>	
 		<insert>
 			INSERT INTO `data_account` (
@@ -38,12 +34,10 @@
 	
 	<data_plan>
 		<getRow>
-			<![CDATA[
 			SELECT 
 			`pl_id`,`ac_id`,`pl_val`
 		 FROM `data_plan` 
 				WHERE `ac_id` = :ac_id AND `pl_val` = :pl_val
-			]]>
 		</getRow>	
 		<insert>
 			INSERT INTO `data_plan` (
@@ -57,11 +51,9 @@
 
 	<data_unit>
 		<getRow>
-			<![CDATA[
 			SELECT 
 			`un_id`,`pl_id`,`un_val`
 		 FROM `data_unit` WHERE `pl_id` = :pl_id AND `un_val` = :un_val
-			]]>
 		</getRow>	
 		<insert>
 			INSERT INTO `data_unit` (
@@ -70,13 +62,16 @@
 				:pl_id,:un_val
 			)
 		</insert>
-	
+		<update>
+			UPDATE `data_unit` SET 
+				`un_code_pc`=:un_code_pc,`un_code_m`=:un_code_m
+			 WHERE `un_id`=:un_id
+		</update>
 	</data_unit>
 	
 	
 	<data_idea>
 		<getRow>
-			<![CDATA[
 			SELECT 
 			`id_id`,`un_id`,`title`,`desc1`,`desc2`,`url`
  		FROM `data_idea` 
@@ -84,36 +79,33 @@
 		  AND `title` = :title
 		  AND `desc1` = :desc1
 		  AND `desc2` = :desc2
-			]]>
 		</getRow>	
 		<insert>
-			<![CDATA[
 			INSERT INTO `data_idea` (
 				`un_id`,`title`,`desc1`,`desc2`,`url`
 			) VALUES (
 				:un_id,:title,:desc1,:desc2,:url
 			)
-			]]>
 		</insert>
-	
+		<update>
+			UPDATE `data_idea` SET 
+				`id_code_pc`=:id_code_pc,`id_code_m`=:id_code_m
+			WHERE `id_id`=:id_id
+		</update>
 	</data_idea>
 	
 	
 	<log_upload_token>
 		<getRowByToken>
-		<![CDATA[
 			SELECT * FROM `log_upload_token` WHERE `token` = :token
-			]]>
 		</getRowByToken>
 		
 		<insert>
-		<![CDATA[
 			INSERT INTO `log_upload_token` (
-				`token`,`cls`,`dev`,`name`,`cnt`
+				`token`,`cls`,`name`,`cnt`
 			) VALUES (
-				:token,:cls,:dev,:name,:cnt
+				:token,:cls,:name,:cnt
 			)
-			]]>
 		</insert>
 	
 	</log_upload_token>
@@ -121,20 +113,16 @@
 	
 	<log_load_token>
 		<getRowByToken>
-		<![CDATA[
 			select * from `log_load_token` where
 					`token` = :token order by sid desc limit 0,1
-			]]>
 		</getRowByToken>
 		
 		<insert>
-		<![CDATA[
 			INSERT INTO `log_load_token` (
 				`token`
 			) VALUES (
 				:token
 			)
-			]]>
 		</insert>
 	
 	</log_load_token>
@@ -142,7 +130,6 @@
 	<publ_data>
 	
 		<insert>
-		<![CDATA[
 			INSERT INTO `publ_data` (
 				`id_id`,`paysum`,`shows`,`clks`,`dev`,`datetime`
 			) VALUES (
@@ -152,7 +139,6 @@
 				`paysum` = `paysum` + :paysum,
 				`shows` = `shows` + :shows,
 				`clks` = `clks` + :clks
-		]]>
 		</insert>
 	
 	
@@ -160,18 +146,16 @@
 	
 	
 	<priv_data>
-	<insert>
-	
-	<![CDATA[
-		INSERT INTO `prvt_data` (
-			`code`,`chat`,`subscribe`,`rcvpayment`,`link`,`kw`,`mark`,`date`
-		) VALUES (
-			:code,:chat,:subscribe,:rcvpayment,:link,:kw,:mark,:date
-		)
-	
-	
-	]]>
-	</insert>
+		<insert>
+		
+			INSERT INTO `prvt_data` (
+				`code`,`chat`,`subscribe`,`rcvpayment`,`link`,`kw`,`mark`,`date`
+			) VALUES (
+				:code,:chat,:subscribe,:rcvpayment,:link,:kw,:mark,:date
+			)
+		
+		
+		</insert>
 	
 	
 	</priv_data>

@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * Description: 
  * 
- * 		CSV文件分为两种:PUBLIC && PRIVATE
+ * 		CSV文件分为三种:PUBLIC && PRIVATE && RELATIONSHIP
  * 			
  */
 abstract class csvPrivFormat extends csvFormat{
@@ -55,7 +55,7 @@ abstract class csvPrivFormat extends csvFormat{
 	
 	
 	public function getCsvType(){
-		return parent::CSV_TYPE_PRIV;
+		return parent::TYPE_PRI;
 	}
 	public function getHeaderRows(){
 		return 1;

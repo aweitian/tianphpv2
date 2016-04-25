@@ -31,7 +31,7 @@ class csvFormatDetector{
 	private $max_header_rows = 0;
 	public function __construct($path){
 		$this->path = $path;
-		$this->csv_dir = FILE_SYSTEM_ENTRY . "/app/modules/loadData/csv";
+		$this->csv_dir = FILE_SYSTEM_ENTRY . "/app/modules/loadData/format/csv";
 	}
 	
 	public function getCsvType(){
@@ -39,15 +39,9 @@ class csvFormatDetector{
 	}
 	
 	/**
-	 * @return csvChannelFormat
+	 * @return csvFormat
 	 */
-	public function getCsvChananelFormat(){
-		return $this->selectedCsv;
-	}
-	/**
-	 * @return csvPrivFormat
-	 */
-	public function getCsvPrivFormat(){
+	public function getCsvFormat(){
 		return $this->selectedCsv;
 	}
 	
@@ -70,7 +64,7 @@ class csvFormatDetector{
 				continue;
 			}
 			$rc = new ReflectionClass($cls);
-			if(!$rc->isSubclassOf("csvChannelFormat") && !$rc->isSubclassOf("csvPrivFormat")){
+			if(!$rc->isSubclassOf("csvFormat")){
 				continue;
 			}
 			$ins = $rc->newInstanceArgs(array($this->path));

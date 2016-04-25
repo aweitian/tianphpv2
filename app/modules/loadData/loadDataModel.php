@@ -18,6 +18,18 @@ class loadDataModel extends AppModel{
 		$this->callback = $cb;
 	}
 	/**
+	 * true为可以上传
+	 * @param string $path
+	 * @return array row
+	 */
+	public function isUploaded($path){
+		$fhash = md5_file($path);
+		$data = $this->db->fetch($this->sqlManager->getSql("/sql/log_load_token/getRowByToken"), array(
+			"token"  => $fhash,
+		));
+		return $data;
+	}
+	/**
 	 * $_FILES["csv"]
 	 * @param array $uf
 	 * @return rirResult
@@ -185,60 +197,206 @@ class loadDataModel extends AppModel{
 		));
 	}
 	
-	public function loadData($metaData){
-		if($metaData["dev"] == csvFormat::CSV_DEV_PRIV){
-			if(preg_match("/^\w+$/", $metaData["cls"])){
-				$this->loadPrivDataToDb($metaData["name"],$metaData["cls"]);
-			}else{
-				exit("CLASS 字段值不合法");
-			}
-			
+	
+	private function repErr($no,$err){
+		if(!is_null($this->callback)){
+			call_user_func_array($this->callback, array($no,new rirResult(1,$err)));;
+			return ;
 		}else{
-			if(preg_match("/^\w+$/", $metaData["cls"])){
-				$this->loadPubDataToDb($metaData["name"],$metaData["dev"],$metaData["cls"]);
-			}else{
-				exit("CLASS 字段值不合法");
-			}
+			exit($err);
 		}
 	}
-	
-	
-	public function saveUploadInfo($token,$cls,$dev,$path,$cnt){
-		return $this->db->exec($this->sqlManager->getSql("/sql/log_upload_token/insert"),array(
-			"token" => $token,
-			"cls"    => $cls,
-			"dev"   => $dev,
-			"name"  => $path,
-			"cnt"  => $cnt,
-		));
-// 		if($ret == 0){
-// 			exit($this->db->getErrorInfo());
-// 		}
-	}
-	private function loadPrivDataToDb($path,$cls){
-		ini_set("max_execution_time", 300);
-		$app = 0;
-		$upd = 0;
+	public function loadData($cls,$path){
+		if(!preg_match("/^\w+$/", $cls)){
+			$this->repErr(0, "CLASS 字段值不合法");
+			return ;
+		}
 		if(!class_exists($cls)){
-			$cls_path = FILE_SYSTEM_ENTRY."/app/modules/loadData/csv/".$cls.".php";
+			$cls_path = FILE_SYSTEM_ENTRY."/app/modules/loadData/format/csv/".$cls.".php";
 			if(!file_exists($cls_path)){
-				$err = "illegal class in database";
-				if(!is_null($this->callback)){
-					call_user_func_array($this->callback, array($lineNo - 8,new rirResult(1,$err)));;
-					return ;
-				}else{
-					exit($err);
-				}
+				$this->repErr(0, "illegal class in database");
+				return ;
 			}else{
 				require $cls_path;
 			}
 		}
-		/**
-		 *
-		 * @var csvChannelFormat
-		 */
-		$csvInst = new $cls($path);
-		//$csvInst = new priv_csv($path);
+		
+		$rc = new ReflectionClass($cls);
+		if($rc->isSubclassOf("csvPrivFormat")){
+			//csvPrivFormat
+			$this->loadPrivDataToDb($rc->newInstance($path));
+			
+		}else if($rc->isSubclassOf("csvPubMFormat")){
+			//csvPubMFormat
+			$this->loadPubDataToDb($rc->newInstance($path));
+			
+		}else if($rc->isSubclassOf("csvPubPclFormat")){
+			//csvPubPclFormat
+			$this->loadPubDataToDb($rc->newInstance($path));
+			
+		}else if($rc->isSubclassOf("csvRelIdeaFormat")){
+			//csvRelIdeaFormat
+			$this->updateRelForIdea($rc->newInstance($path));
+			
+		}else if($rc->isSubclassOf("csvRelUnitFormat")){
+			//csvRelUnitFormat
+			$this->updateRelForUnit($rc->newInstance($path));
+			
+		}else{
+			$this->repErr(0, "CLASS(".$cls.")不是继承于csvFormat");
+			return ;
+		}
+	}
+	
+	
+	public function saveUploadInfo($token,$cls,$path,$cnt){
+		return $this->db->exec($this->sqlManager->getSql("/sql/log_upload_token/insert"),array(
+			"token" => $token,
+			"cls"    => $cls,
+			"name"  => $path,
+			"cnt"  => $cnt,
+		));
+	}
+	
+	
+	private function updateRelForUnit(csvRelUnitFormat $csvInst){
+		ini_set("max_execution_time", 300);
+		$app = 0;
+		$upd = 0;
+	
+		$path = $csvInst->getPath();
+		
+		$handle = fopen($path, "r");
+		if ($handle) {
+			$lineNo = 0;
+	
+			$pdo = mysqlPdo::getConnection();
+			//开始一个事实
+			$pdo->beginTransaction();
+	
+			while ($line = fgetcsv($handle)) {
+				if($lineNo < $csvInst->getHeaderRows()){$lineNo++;continue;}
+	
+				$chan = $this->handleCsv($csvInst->getChananel($line));
+				$acc  = $this->handleCsv($csvInst->getAcc($line));
+				$plan = $this->handleCsv($csvInst->getPlan($line));
+				$unit = $this->handleCsv($csvInst->getUnit($line));
+
+				$pcod = $this->handleCsv($csvInst->getPcCode($line));
+				$mcod = $this->handleCsv($csvInst->getMCode($line));
+	
+	
+				//validate
+				if(loadDataValidator::isValidCode($pcod) && loadDataValidator::isValidCode($mcod)){
+					//filter
+						
+					//insert
+					$id = $this->_uploadCodeForUnit($chan, $acc, $plan, $unit, $pcod, $mcod);
+						
+								
+				}else{
+					$id = new rirResult(1,"数据格式检查没有通过:".loadDataValidator::$lastk.",值:".var_export(loadDataValidator::$lastv,true));;
+				}
+	
+				if($id->isTrue()){
+					$app++;
+					if(!is_null($this->callback)){
+						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$app,$upd));
+					}
+					$lineNo++;
+				}else{
+	
+					$pdo->rollBack();
+					fclose($handle);
+					if(!is_null($this->callback)){
+						call_user_func_array($this->callback, array("<font color=red>".$id->info."</font>",0,0));
+					}
+					return ;
+				}
+			}
+	
+			fclose($handle);
+			$pdo->commit();
+		} else {
+			// error opening the file.
+		}
+	}
+	
+	private function updateRelForIdea(csvRelIdeaFormat $csvInst){
+		ini_set("max_execution_time", 300);
+		$app = 0;
+		$upd = 0;
+	
+		$path = $csvInst->getPath();
+		
+		$handle = fopen($path, "r");
+		if ($handle) {
+			$lineNo = 0;
+	
+			$pdo = mysqlPdo::getConnection();
+			//开始一个事实
+			$pdo->beginTransaction();
+
+	
+			while ($line = fgetcsv($handle)) {
+				if($lineNo < $csvInst->getHeaderRows()){$lineNo++;continue;}
+	
+				$chan = $this->handleCsv($csvInst->getChananel($line));
+				$acc  = $this->handleCsv($csvInst->getAcc($line));
+				$plan = $this->handleCsv($csvInst->getPlan($line));
+				$unit = $this->handleCsv($csvInst->getUnit($line));
+				$titl = $this->handleCsv($csvInst->getIdeaTitle($line));
+				$des1 = $this->handleCsv($csvInst->getIdeaDesc1($line));
+				$des2 = $this->handleCsv($csvInst->getIdeaDesc2($line));
+				
+				
+				$pcod = $this->handleCsv($csvInst->getPcCode($line));
+				$mcod = $this->handleCsv($csvInst->getMCode($line));
+	
+	
+				//validate
+				if(loadDataValidator::isValidCode($pcod) && loadDataValidator::isValidCode($mcod)){
+					//filter
+
+					//insert
+					$id = $this->_uploadCodeForIdea($chan, $acc, $plan, $unit, $titl, $des1, $des2, $pcod, $mcod);
+				}else{
+					$id = new rirResult(1,"数据格式检查没有通过:".loadDataValidator::$lastk.",值:".var_export(loadDataValidator::$lastv,true));;
+				}
+	
+				if($id->isTrue()){
+					$app++;
+					if(!is_null($this->callback)){
+						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$app,$upd));
+					}
+					$lineNo++;
+				}else{
+	
+					$pdo->rollBack();
+					fclose($handle);
+					if(!is_null($this->callback)){
+						call_user_func_array($this->callback, array("<font color=red>".$id->info."</font>",0,0));
+					}
+					return ;
+				}
+			}
+	
+			fclose($handle);
+			$pdo->commit();
+		} else {
+			// error opening the file.
+		}
+	}
+	
+	
+	
+	private function loadPrivDataToDb(csvPrivFormat $csvInst){
+		ini_set("max_execution_time", 300);
+		$app = 0;
+		$upd = 0;
+		
+		$path = $csvInst->getPath();
+		
 		$handle = fopen($path, "r");
 		if ($handle) {
 			$lineNo = 0;
@@ -315,30 +473,13 @@ class loadDataModel extends AppModel{
 		}
 	}
 	
-	private function loadPubDataToDb($path,$dev,$cls){
+	private function loadPubDataToDb(csvPubMFormat $csvInst){
 		ini_set("max_execution_time", 300);
 		$app = 0;
 		$upd = 0;
-		if(!class_exists($cls)){
-			$cls_path = FILE_SYSTEM_ENTRY."/app/modules/loadData/csv/".$cls.".php";
-			if(!file_exists($cls_path)){
-				$err = "illegal class in database";
-				if(!is_null($this->callback)){
-					call_user_func_array($this->callback, array($lineNo - 8,new rirResult(1,$err)));;
-					return ;
-				}else{
-					exit($err);
-				}
-			}else{
-				require $cls_path;
-			}
-		}
-		/**
-		 * 
-		 * @var csvChannelFormat
-		 */
-		$csvInst = new $cls($path);
-		//$csvInst = new bd_pub_csv($path);
+
+		$path = $csvInst->getPath();
+		
 		$handle = fopen($path, "r");
 		if ($handle) {
 			$lineNo = 0;
@@ -353,6 +494,7 @@ class loadDataModel extends AppModel{
 					"token" => $fhash
 			));
 			
+			$dev = $csvInst->getCsvType() == csvFormat::TYPE_PUB_PC ? "pc" : "m";
 			
 			while ($line = fgetcsv($handle)) {
 				// process the line read.
@@ -458,6 +600,75 @@ class loadDataModel extends AppModel{
 		$id = $this->db->insert($sql, $bindArgs);
 		if($id > 0){
 			return new rirResult(0,"ok",$id);
+		}
+		return new rirResult(6,$this->db->getErrorInfo());
+	}
+	
+	/**
+	 * 
+	 * @param string $chananel
+	 * @param string $account
+	 * @param string $plan
+	 * @param string $unit
+	 * @param string $pc_code
+	 * @param string $m_code
+	 * @return rirResult
+	 */
+	private function _uploadCodeForUnit($chananel,$account,$plan,$unit,$pc_code,$m_code){
+		$ch_id = $this->getChananelId($chananel);
+		if($ch_id == 0)return new rirResult(1,"获取频道ID失败");
+		$ac_id = $this->getAccountId($ch_id, $account, $dev);
+		if($ac_id == 0)return new rirResult(2,"获取帐户ID失败");
+		$pl_id = $this->getPlanId($ac_id, $plan);
+		if($pl_id == 0)return new rirResult(3,"获取计划ID失败");
+		$un_id = $this->getUnitId($pl_id, $unit);
+		if($un_id == 0)return new rirResult(4,"获取单元ID失败");
+		
+		$sql = $this->sqlManager->getSql("/sql/data_unit/update");
+		$data = array(
+				"un_id" => $un_id,
+				"un_code_pc" => $pc_code,
+				"un_code_m" => $m_code,
+		);
+		$row = $this->db->exec($sql, $data);
+		if($row > 0){
+			return new rirResult(0,"A row updated",$row);
+		}
+		return new rirResult(6,$this->db->getErrorInfo());
+	}
+	
+	/**
+	 *
+	 * @param string $chananel
+	 * @param string $account
+	 * @param string $plan
+	 * @param string $unit
+	 * @param string $pc_code
+	 * @param string $m_code
+	 * @return rirResult
+	 */
+	private function _uploadCodeForIdea($chananel,$account,$plan,$unit,$title,$desc1,$desc2,$pc_code,$m_code){
+		$ch_id = $this->getChananelId($chananel);
+		if($ch_id == 0)return new rirResult(1,"获取频道ID失败");
+		$ac_id = $this->getAccountId($ch_id, $account, $dev);
+		if($ac_id == 0)return new rirResult(2,"获取帐户ID失败");
+		$pl_id = $this->getPlanId($ac_id, $plan);
+		if($pl_id == 0)return new rirResult(3,"获取计划ID失败");
+		$un_id = $this->getUnitId($pl_id, $unit);
+		if($un_id == 0)return new rirResult(4,"获取单元ID失败");
+		$id_id = $this->getIdeaId($un_id, $title, $desc1, $desc2, $url);
+		if($id_id == 0)return new rirResult(5,"获取创意ID失败");
+		
+		
+		$sql = $this->sqlManager->getSql("/sql/data_idea/update");
+		$data = array(
+			"id_id" => $id_id,
+			"id_code_pc" => $pc_code,
+			"id_code_m" => $m_code,
+		);
+		$row = $this->db->exec($sql, $data);
+		if($row > 0){
+			return new rirResult(0,"A row updated",$row);
 		}
 		return new rirResult(6,$this->db->getErrorInfo());
 	}

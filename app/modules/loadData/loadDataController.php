@@ -4,11 +4,19 @@
  * Author: Awei.tian
  * Description: 
  */
+//load model and view
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataView.php';
-require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvFormat.php';
-require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvChannelFormat.php';
-require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvPrivFormat.php';
+
+//load format
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvFormat.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvPrivFormat.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvPubMFormat.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvPubPcFormat.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvRelIdeaFormat.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvRelUnitFormat.php';
+
+//load detector validator and filter
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/csvFormatDetector.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataValidator.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataFilter.php';
@@ -67,32 +75,18 @@ class loadDataController extends AppController{
 				
 				if($csvDet->match()){
 					$token = md5('shbdata'.$path.time());
-					if($csvDet->getCsvType() == csvFormat::CSV_TYPE_PUB){
-						$csvFor = $csvDet->getCsvChananelFormat();
-						$ret = $this->model->saveUploadInfo(
+					$csvFor = $csvDet->getCsvFormat();
+					$ret = $this->model->saveUploadInfo(
 							$token,
 							$csvDet->getSelectedCls(),
-							$csvFor->getDevType(),
 							$path,
 							$csvFor->getDataRows()
 						);
-						if($ret == 0){
-							//exit($this->model->);
-						}
-					}else{
-						$csvFor = $csvDet->getCsvPrivFormat();
-						$ret = $this->model->saveUploadInfo(
-								$token,
-								$csvDet->getSelectedCls(),
-								csvFormat::CSV_DEV_PRIV,
-								$path,
-								$csvFor->getDataRows()
-						);
-					}
+					
 					if($ret == 0){
 						$r = new rirResult(1,"保存到LOG表时失败") ;
 					}else{
-						$data = $csvFor->isUploaded($path);
+						$data = $this->model->isUploaded($path);
 						if(!empty($data)){
 							$info = "你的文件数据可能在 [".$data["date"]."] 已经导入到数据库中，请确认.";
 						}else{
@@ -114,7 +108,6 @@ class loadDataController extends AppController{
 		}else{
 			$this->showFormUI($msg);
 		}
-		
 	}
 	public function loadAction(pmcaiMsg $msg){
 		if(!isset($msg["token"])){
@@ -127,7 +120,7 @@ class loadDataController extends AppController{
 		$this->view->setPmcaiMsg($msg);
 		$this->view->showLoadDataPre($data["cnt"]);
 		$this->model->setCallback(array($this,"loadDataProcessingCallback"));
-		$this->model->loadData($data);
+		$this->model->loadData($data["cls"],$data["name"]);
 	}
 	public function loadDataProcessingCallback($pos,$app,$upd){
 		$this->view->showLoadDataProcessing($pos,$app,$upd);
