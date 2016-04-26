@@ -292,10 +292,8 @@ class loadDataModel extends AppModel{
 						
 					//insert
 					$id = $this->_uploadCodeForUnit($chan, $acc, $plan, $unit, $pcod, $mcod);
-						
-								
 				}else{
-					$id = new rirResult(1,"数据格式检查没有通过:".loadDataValidator::$lastk.",值:".var_export(loadDataValidator::$lastv,true));;
+					$id = new rirResult(1,"数据格式检查没有通过:行号:".($lineNo+1).",名称:".loadDataValidator::$lastk.",内容:".var_export(loadDataValidator::$lastv,true));
 				}
 	
 				if($id->isTrue()){
@@ -361,7 +359,7 @@ class loadDataModel extends AppModel{
 					//insert
 					$id = $this->_uploadCodeForIdea($chan, $acc, $plan, $unit, $titl, $des1, $des2, $pcod, $mcod);
 				}else{
-					$id = new rirResult(1,"数据格式检查没有通过:".loadDataValidator::$lastk.",值:".var_export(loadDataValidator::$lastv,true));;
+					$id = new rirResult(1,"数据格式检查没有通过:行号:".($lineNo+1).",名称:".loadDataValidator::$lastk.",内容:".var_export(loadDataValidator::$lastv,true));
 				}
 	
 				if($id->isTrue()){
@@ -446,7 +444,7 @@ class loadDataModel extends AppModel{
 					
 					
 				}else{
-					$id = new rirResult(1,"数据格式检查没有通过:".loadDataValidator::$lastk.",值:".var_export(loadDataValidator::$lastv,true));;
+					$id = new rirResult(1,"数据格式检查没有通过:行号:".($lineNo+1).",名称:".loadDataValidator::$lastk.",内容:".var_export(loadDataValidator::$lastv,true));
 				}
 	
 				if($id->isTrue()){
@@ -542,8 +540,7 @@ class loadDataModel extends AppModel{
 								$url, $pays, $shows, $clks, $date);	
 								
 				}else{
-					$id = new rirResult(1,"数据格式检查没有通过:".loadDataValidator::$lastk.",值:".var_export(loadDataValidator::$lastv,true));;
-				
+					$id = new rirResult(1,"数据格式检查没有通过:行号:".($lineNo+1).",名称:".loadDataValidator::$lastk.",内容:".var_export(loadDataValidator::$lastv,true));
 				}
 				
 				
@@ -617,7 +614,7 @@ class loadDataModel extends AppModel{
 	private function _uploadCodeForUnit($chananel,$account,$plan,$unit,$pc_code,$m_code){
 		$ch_id = $this->getChananelId($chananel);
 		if($ch_id == 0)return new rirResult(1,"获取频道ID失败");
-		$ac_id = $this->getAccountId($ch_id, $account, $dev);
+		$ac_id = $this->getAccountId($ch_id, $account);
 		if($ac_id == 0)return new rirResult(2,"获取帐户ID失败");
 		$pl_id = $this->getPlanId($ac_id, $plan);
 		if($pl_id == 0)return new rirResult(3,"获取计划ID失败");
@@ -650,7 +647,7 @@ class loadDataModel extends AppModel{
 	private function _uploadCodeForIdea($chananel,$account,$plan,$unit,$title,$desc1,$desc2,$pc_code,$m_code){
 		$ch_id = $this->getChananelId($chananel);
 		if($ch_id == 0)return new rirResult(1,"获取频道ID失败");
-		$ac_id = $this->getAccountId($ch_id, $account, $dev);
+		$ac_id = $this->getAccountId($ch_id, $account);
 		if($ac_id == 0)return new rirResult(2,"获取帐户ID失败");
 		$pl_id = $this->getPlanId($ac_id, $plan);
 		if($pl_id == 0)return new rirResult(3,"获取计划ID失败");
@@ -696,7 +693,7 @@ class loadDataModel extends AppModel{
 			$paysum,$shows,$clks,$datetime){
 		$ch_id = $this->getChananelId($chananel);
 		if($ch_id == 0)return new rirResult(1,"获取频道ID失败");
-		$ac_id = $this->getAccountId($ch_id, $account, $dev);
+		$ac_id = $this->getAccountId($ch_id, $account);
 		if($ac_id == 0)return new rirResult(2,"获取帐户ID失败");
 		$pl_id = $this->getPlanId($ac_id, $plan);
 		if($pl_id == 0)return new rirResult(3,"获取计划ID失败");
