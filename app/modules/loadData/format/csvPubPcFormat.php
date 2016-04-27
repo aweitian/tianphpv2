@@ -7,7 +7,7 @@
  * 		PUBLIC && PRIVATE && RELATIONSHIP
  * 			
  */
-abstract class csvPubPclFormat extends csvFormat{
+abstract class csvPubPcFormat extends csvFormat{
 	/**
 	 * @return string
 	 */

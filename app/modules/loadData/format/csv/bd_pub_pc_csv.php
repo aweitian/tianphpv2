@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
-class bd_pub_pc_csv extends csvPubPclFormat{
+class bd_pub_pc_csv extends csvPubPcFormat{
 	private $dev;
 	private $match_cnt = 0;
 	public function __construct($path){
@@ -56,7 +56,7 @@ class bd_pub_pc_csv extends csvPubPclFormat{
 	
 	
 	public function getChannel(){
-		return "百度";
+		return iconv("utf8", "gbk", "百度") ;
 	}
 	
 	public function getHeaderRows(){

@@ -228,11 +228,11 @@ class loadDataModel extends AppModel{
 			
 		}else if($rc->isSubclassOf("csvPubMFormat")){
 			//csvPubMFormat
-			$this->loadPubDataToDb($rc->newInstance($path));
+			$this->loadPubMDataToDb($rc->newInstance($path));
 			
-		}else if($rc->isSubclassOf("csvPubPclFormat")){
-			//csvPubPclFormat
-			$this->loadPubDataToDb($rc->newInstance($path));
+		}else if($rc->isSubclassOf("csvPubPcFormat")){
+			//csvPubPcFormat
+			$this->loadPubPcDataToDb($rc->newInstance($path));
 			
 		}else if($rc->isSubclassOf("csvRelIdeaFormat")){
 			//csvRelIdeaFormat
@@ -471,7 +471,7 @@ class loadDataModel extends AppModel{
 		}
 	}
 	
-	private function loadPubDataToDb(csvPubMFormat $csvInst){
+	private function loadPubPcDataToDb(csvPubPCFormat $csvInst){
 		ini_set("max_execution_time", 300);
 		$app = 0;
 		$upd = 0;
@@ -492,7 +492,112 @@ class loadDataModel extends AppModel{
 					"token" => $fhash
 			));
 			
-			$dev = $csvInst->getCsvType() == csvFormat::TYPE_PUB_PC ? "pc" : "m";
+			$dev = $csvInst->getCsvType() == "pc";
+			
+			while ($line = fgetcsv($handle)) {
+				// process the line read.
+				//从第9行开始
+				if($lineNo < $csvInst->getHeaderRows()){$lineNo++;continue;}
+				//日期,小时,账户,推广计划,推广单元,创意标题,创意描述1,创意描述2,显示URL,展现,点击,
+				//消费,点击率,平均点击价格,网页转化,商桥转化
+				//"2016-03-28",0,"shb-九龙2","性功能-勃起异常","勃起-硬","{男性勃起功能障碍的原因},硬不起来该如何治?",
+				//"{男性勃起功能障碍的原因},勃起不坚,时间不长不坚硬的病因是什么,找到病因能一次性治",
+				//"吗?上海九龙男子医院专家在线解答勃起问题.","man.long120.cn",1,0,0.00,0.00%,0.00,0,0
+				$chana = $this->handleCsv($csvInst->getChannel());
+				$acc   = $this->handleCsv($csvInst->getAcc($line));
+				$plan  = $this->handleCsv($csvInst->getPlan($line));
+				$unit  = $this->handleCsv($csvInst->getUnit($line));
+				$title = $this->handleCsv($csvInst->getTitle($line));
+				$desc1 = $this->handleCsv($csvInst->getDes1($line));
+				$desc2 = $this->handleCsv($csvInst->getDes2($line));
+				$url   = $this->handleCsv($csvInst->getUrl($line));
+				
+				$shows = $this->handleCsv($csvInst->getShow($line));
+				$clks  = $this->handleCsv($csvInst->getClks($line));
+				$pays  = $this->handleCsv($csvInst->getPays($line));
+				$date  = $this->handleCsv($csvInst->getDate($line));
+				
+				
+				//validate
+				if(loadDataValidator::isValidChannel($chana)
+						&& 	loadDataValidator::isValidAcc($acc)
+						&& 	loadDataValidator::isValidPlan($plan)
+						&& 	loadDataValidator::isValidUnit($unit)
+						&& 	loadDataValidator::isValidTitle($title)
+						&& 	loadDataValidator::isValidDesc1($desc1)
+						&& 	loadDataValidator::isValidDesc2($desc2)
+						&& 	loadDataValidator::isValidUrl($url)
+						&& 	loadDataValidator::isValidShows($shows)
+						&& 	loadDataValidator::isValidClks($clks)
+						&& 	loadDataValidator::isValidPaysum($pays)
+						&& 	loadDataValidator::isValidDate($date)
+				
+						){
+							//filter
+								
+							//insert
+							$id = $this->_loadPubData($dev,$chana, $acc, $plan, $unit, $title, $desc1, $desc2, 
+								$url, $pays, $shows, $clks, $date);	
+								
+				}else{
+					$id = new rirResult(1,"数据格式检查没有通过:行号:".($lineNo+1).",名称:".loadDataValidator::$lastk.",内容:".var_export(loadDataValidator::$lastv,true));
+				}
+				
+				
+				
+				
+				
+				
+				
+				if($id->isTrue()){
+					if($id->info == "ok"){
+						$app++;
+					}else{
+						$upd++;
+					}
+					if(!is_null($this->callback)){
+						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows() + 1,$app,$upd));
+					}
+					$lineNo++;
+				}else{
+					
+					$pdo->rollBack();
+					fclose($handle);
+					if(!is_null($this->callback)){
+						call_user_func_array($this->callback, array($id->info,0,0));
+					}
+					return ;
+				}
+			}
+		
+			fclose($handle);
+			$pdo->commit();
+		} else {
+			// error opening the file.
+		}
+	}
+	private function loadPubMDataToDb(csvPubMFormat $csvInst){
+		ini_set("max_execution_time", 300);
+		$app = 0;
+		$upd = 0;
+
+		$path = $csvInst->getPath();
+		
+		$handle = fopen($path, "r");
+		if ($handle) {
+			$lineNo = 0;
+			
+			$pdo = mysqlPdo::getConnection();
+			//开始一个事实
+			$pdo->beginTransaction();
+	
+			//把文件MD5写入到LOG表中`log_load_token`
+			$fhash = md5_file($path);
+			$this->db->insert($this->sqlManager->getSql("/sql/log_load_token/insert"), array(
+					"token" => $fhash
+			));
+			
+			$dev = "m";
 			
 			while ($line = fgetcsv($handle)) {
 				// process the line read.

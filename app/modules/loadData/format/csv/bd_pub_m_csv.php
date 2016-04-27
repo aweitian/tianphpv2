@@ -55,7 +55,7 @@ class bd_pub_m_csv extends csvPubMFormat {
 	
 	
 	public function getChannel(){
-		return "百度";
+		return iconv("utf8", "gbk", "百度") ;
 	}
 	
 	public function getDevType(){

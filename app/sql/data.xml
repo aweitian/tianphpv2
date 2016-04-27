@@ -6,6 +6,11 @@
 				`ch_id`,`ch_val`
 			 FROM `data_channel` WHERE `ch_val` = :ch_val
 		</getRow>	
+		<getRows>
+			SELECT 
+				`ch_id`,`ch_val`
+			 FROM `data_channel` WHERE 1
+		</getRows>	
 		<insert>
 			INSERT INTO `data_channel` (
 				`ch_val`
@@ -22,6 +27,12 @@
 		 FROM `data_account` 
 		 WHERE `ch_id` = :ch_id AND `ac_val` = :ac_val
 		</getRow>	
+		<getRowsByChId>
+			SELECT 
+				`ac_id`,`ch_id`,`ac_val`
+			 FROM `data_account` 
+			 WHERE `ch_id` = :ch_id
+		</getRowsByChId>
 		<insert>
 			INSERT INTO `data_account` (
 				`ch_id`,`ac_val`
@@ -39,6 +50,12 @@
 		 FROM `data_plan` 
 				WHERE `ac_id` = :ac_id AND `pl_val` = :pl_val
 		</getRow>	
+		<getRowsByAccId>
+			SELECT 
+			`pl_id`,`ac_id`,`pl_val`
+		 FROM `data_plan` 
+				WHERE `ac_id` = :ac_id
+		</getRowsByAccId>
 		<insert>
 			INSERT INTO `data_plan` (
 				`ac_id`,`pl_val`
@@ -54,7 +71,12 @@
 			SELECT 
 			`un_id`,`pl_id`,`un_val`
 		 FROM `data_unit` WHERE `pl_id` = :pl_id AND `un_val` = :un_val
-		</getRow>	
+		</getRow>
+		<getRowsByPlanId>
+			SELECT 
+			`un_id`,`pl_id`,`un_val`
+		 FROM `data_unit` WHERE `pl_id` = :pl_id
+		</getRowsByPlanId>	
 		<insert>
 			INSERT INTO `data_unit` (
 				`pl_id`,`un_val`
