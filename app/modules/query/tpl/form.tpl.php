@@ -11,11 +11,15 @@
 <script src="<?php print HTTP_ENTRY?>/static/dateTimeRange/js/jquery-ui-1.7.1.custom.min.js"></script>
 <script src="<?php print HTTP_ENTRY?>/static/dateTimeRange/js/daterangepicker.jQuery.js"></script>
 <script src="<?php print HTTP_ENTRY?>/tree/unit/gd"></script>
+<script src="<?php print HTTP_ENTRY?>/static/js/php.js"></script>
+<script src="<?php print HTTP_ENTRY?>/static/js/showTreeSelect.js"></script>
 <style>
 label.level{
 	margin-right:12px;
 }
-
+table.lvltb td{
+	padding:8px;
+}
 </style>
 <div class="m-form">
 <form action="<?php print $submit_url?>" method="post" accept-charset="utf-8">
@@ -46,6 +50,12 @@ label.level{
                     <!-- 
                     <input type="radio" name="level" id="lvl_idea"><label class="level" for="lvl_idea">创意</label>
                 	 -->
+                </div>
+	</div>
+	<div class="formitm f-dn">
+                <label class="lab"></label>
+                <div class="ipt" id="lvl_filter_c">
+                
                 </div>
 	</div>
 	<div class="formitm">
