@@ -2,30 +2,46 @@ $(function(){
 	function getMetaData(){
 		return ["渠道","账户","计划","单元"];
 	}
+	function getPathKey(){
+		return ["chananel","account","plan","unit"];
+	}
 	/**
-	 * 返回默认路径数组
+	 * 返回路径数组
+	 * 路径出错返回空数组
+	 * 参数p:已知路径数组
+	 * 参数n:返回路径长度
 	 */
-	function gd_def_path(n){
+	function gd_path(p,n){
 		var g = false;
-		var p = [];
+		var r = [];
 		var t = gd;
+		for(var i=0;i<p.length;i++){
+			if(p[i] in t){
+				t = t[p[i]]["children"];
+				r.push(p[i]);
+			}else{
+				return [];
+			}
+		}
 		//channel,account,plan,unit
-		for(var k=0;k<n;k++){
+		for(var k=i;k<n;k++){
 			for(var i in t){
-				p.push(i);
+				r.push(i);
 				t = t[i]["children"];
 				g = true;
 				break;
 			}
 			if(!g)break;
 		}
-
-		return p;
+		if(r.length<n)return [];
+		return r;
 	}
 	/**
+	 * 参数p为路径数组
 	 * 返回数组，数组元素为HTML，路径出错返回空数组
 	 */
 	function getSelByPath(p){
+		var x = getPathKey();
 		var t = gd;
 		var q = [];
 		var r = [];
@@ -36,10 +52,16 @@ $(function(){
 			else
 				return [];
 		}
+		function sel(a,b){
+			if(a == b){
+				return  " selected";
+			}
+			return "";
+		}
 		for(var i=0;i<q.length;i++){
-			var html = '<select>';
+			var html = '<select name="sel_'+x[i]+'" onchange="pccb('+i+')">';
 			for(var v in q[i]){
-				html += '<option value="'+htmlentities(v)+'">'+htmlentities(v)+'</option>';
+				html += '<option'+sel(v,p[i])+' value="'+htmlentities(v)+'">'+htmlentities(v)+'</option>';
 			}
 			html += '</select>';
 			r.push(html);
@@ -61,8 +83,41 @@ $(function(){
 		tpl += '</table>';
 		return tpl;
 	}
-	
+	window.pccb = function(n){
+		var x = getPathKey();
+		var p = [];
+		for(var i=0;i<=n;i++){
+			p.push($("select[name=sel_"+x[i]+"]").val());
+		}
+		return main(gd_path(p,calcN()));
+	};
+	/**
+	 * N为选中的深度
+	 * 不限0  渠道1  账户2  计划3  单元4
+	 */
+	function calcN(){
+		var n = 0;
+		
+		n++;
+		if($("#lvl_chananel").attr("checked")){
+			return n;
+		}
+		n++;
+		if($("#lvl_account").attr("checked")){
+			return n;
+		}
+		n++;
+		if($("#lvl_plan").attr("checked")){
+			return n;
+		}
+		n++;
+		if($("#lvl_unit").attr("checked")){
+			return n;
+		}
+		return 0;
+	}
 	function main(path){
+		//console.log(path);
 		$("#lvl_filter_c").html(helper_sel_html(getSelByPath(path)));
 	}
 	$("input[name=level]").click(function(){
@@ -73,26 +128,8 @@ $(function(){
 		}else{
 			$("#lvl_filter_c").parent().removeClass("f-dn");
 		}
-		
-		var n = 0;
-		
-		n++;
-		if($("#lvl_chananel").attr("checked")){
-			return main(gd_def_path(n));
-		}
-		n++;
-		if($("#lvl_account").attr("checked")){
-			return main(gd_def_path(n));
-		}
-		n++;
-		if($("#lvl_plan").attr("checked")){
-			return main(gd_def_path(n));
-		}
-		n++;
-		if($("#lvl_unit").attr("checked")){
-			return main(gd_def_path(n));
-		}
-		
+
+		return main(gd_path([],calcN()));
 		
 	});
 });
