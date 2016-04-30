@@ -15,16 +15,9 @@ class queryModel extends AppModel{
 	}
 	/**
 	 * 
-	 * @param int/array/string $period 0不限,array(t1,t2),
-	 * 			一个DATE表示查询从0点到24点
-	 * 			如果T1为DATE，转化为DATETIME为DATE 00：00：00
-	 * 			如果T2为DATE，转化为DATETIME为DATE 23：59：59
-	 * @param int $scope 不限0  渠道1  账户2  计划3  单元4
-	 * @param array $scpath
-	 * @param int $dev
-	 * @param bool $grp 是否合并创意 true为合并
+	 * @param qArgs $q
 	 */
-	public function query($period,$scope,$scpath,$dev,$grp){
+	public function query(qArgs $q){
 		
 	}
 }

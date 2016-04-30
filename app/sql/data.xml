@@ -183,10 +183,43 @@
 	</priv_data>
 	
 	
+	<query>
+		<level_channel>
+			
+			<grp>
+			select
+			</grp>
+			<div>
+			
+			</div>
+		</level_channel>
 	
 	
+	</query>
 	
 	
+	<build_mem_tree>
+	
+		DROP TABLE mem_data_tree;
+		CREATE TABLE mem_data_tree ENGINE=MEMORY CHARSET=utf8
+			SELECT 
+			`data_channel`.`ch_id`,
+			`data_channel`.`ch_val`,
+			`data_account`.`ac_id`,
+			`data_account`.`ac_val`,
+			`data_plan`.`pl_id`,
+			`data_plan`.`pl_val`,
+			`data_unit`.`un_id`,
+			`data_unit`.`un_val`
+			FROM `data_account`
+			RIGHT JOIN `data_channel`
+			ON `data_channel`.`ch_id` = `data_account`.`ch_id`
+			RIGHT JOIN `data_plan`
+			ON `data_plan`.`ac_id` = `data_account`.`ac_id`
+			RIGHT JOIN `data_unit`
+			ON `data_unit`.`pl_id` = `data_plan`.`pl_id`
+	
+	</build_mem_tree>
 	
 	
 	

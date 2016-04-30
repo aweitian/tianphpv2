@@ -1,9 +1,13 @@
+//iv.tian
 $(function(){
 	function getMetaData(){
 		return ["渠道","账户","计划","单元"];
 	}
 	function getPathKey(){
 		return ["chananel","account","plan","unit"];
+	}
+	function getIdMeta(){
+		return ["ch_id","ac_id","pl_id","un_id"];
 	}
 	/**
 	 * 返回路径数组
@@ -42,6 +46,7 @@ $(function(){
 	 */
 	function getSelByPath(p){
 		var x = getPathKey();
+		var z = getIdMeta();
 		var t = gd;
 		var q = [];
 		var r = [];
@@ -61,7 +66,7 @@ $(function(){
 		for(var i=0;i<q.length;i++){
 			var html = '<select name="sel_'+x[i]+'" onchange="pccb('+i+')">';
 			for(var v in q[i]){
-				html += '<option'+sel(v,p[i])+' value="'+htmlentities(v)+'">'+htmlentities(v)+'</option>';
+				html += '<option'+sel(v,p[i])+' value="'+(q[i][v]["data"][z[i]])+'">'+htmlentities(v)+'</option>';
 			}
 			html += '</select>';
 			r.push(html);
@@ -87,7 +92,7 @@ $(function(){
 		var x = getPathKey();
 		var p = [];
 		for(var i=0;i<=n;i++){
-			p.push($("select[name=sel_"+x[i]+"]").val());
+			p.push($("select[name=sel_"+x[i]+"]").find("option:selected").text());
 		}
 		return main(gd_path(p,calcN()));
 	};
