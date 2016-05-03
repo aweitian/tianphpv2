@@ -153,9 +153,9 @@
 	
 		<insert>
 			INSERT INTO `publ_data` (
-				`id_id`,`paysum`,`shows`,`clks`,`dev`,`datetime`
+				`id_id`,`paysum`,`shows`,`clks`,`dev`,`date`,`hour`
 			) VALUES (
-				:id_id,:paysum,:shows,:clks,:dev,:datetime
+				:id_id,:paysum,:shows,:clks,:dev,:date,:hour
 			)
 			ON DUPLICATE KEY UPDATE 
 				`paysum` = `paysum` + :paysum,
@@ -171,11 +171,14 @@
 		<insert>
 		
 			INSERT INTO `prvt_data` (
-				`code`,`chat`,`subscribe`,`rcvpayment`,`link`,`kw`,`mark`,`date`
+				`code`,`chat`,`subscribe`,`rcvpayment`,`link`,`kw`,`mark`,`date`,`hour`
 			) VALUES (
-				:code,:chat,:subscribe,:rcvpayment,:link,:kw,:mark,:date
+				:code,:chat,:subscribe,:rcvpayment,:link,:kw,:mark,:date,:hour
 			)
-		
+			ON DUPLICATE KEY UPDATE 
+				`chat` = `chat` + :chat,
+				`subscribe` = `subscribe` + :subscribe,
+				`rcvpayment` = `rcvpayment` + :rcvpayment
 		
 		</insert>
 	
@@ -184,10 +187,56 @@
 	
 	
 	<query>
+		<mem_data_tree>
+			(
+				SELECT 
+				`data_channel`.`ch_id`,
+				`data_channel`.`ch_val`,
+				`data_account`.`ac_id`,
+				`data_account`.`ac_val`,
+				`data_plan`.`pl_id`,
+				`data_plan`.`pl_val`,
+				`data_unit`.`un_id`,
+				`data_unit`.`un_val`,
+				`data_unit`.`un_code_pc`,
+				`data_unit`.`un_code_m`,
+				GROUP_CONCAT(`data_idea`.`id_code_pc`) AS `grp_id_code_pc`,
+				GROUP_CONCAT(`data_idea`.`id_code_m`) AS `grp_id_code_m`,
+				GROUP_CONCAT(`data_idea`.`id_id`) AS `grp_id_id`
+				FROM `data_account`
+				RIGHT JOIN `data_channel`
+				ON `data_channel`.`ch_id` = `data_account`.`ch_id`
+				RIGHT JOIN `data_plan`
+				ON `data_plan`.`ac_id` = `data_account`.`ac_id`
+				RIGHT JOIN `data_unit`
+				ON `data_unit`.`pl_id` = `data_plan`.`pl_id`
+				LEFT JOIN `data_idea`
+				ON `data_idea`.`un_id` = `data_unit`.`un_id`
+				GROUP BY `data_unit`.`un_id`
+			) AS `mem_data_tree`
+		</mem_data_tree>
 		<level_channel>
 			
 			<grp>
-			select
+			SELECT 
+				`mem_data_tree`.`ch_val`,
+				SUM(`publ_data`.`paysum`),SUM(`publ_data`.`shows`),SUM(`publ_data`.`clks`),
+				SUM(`prvt_data`.`chat`),SUM(`prvt_data`.`subscribe`),SUM(`prvt_data`.`rcvpayment`)
+			FROM @mem_data_tree
+			
+			RIGHT JOIN `prvt_data` ON (
+				`prvt_data`.`code` = `mem_data_tree`.`un_code_pc`
+				OR
+				`prvt_data`.`code` = `mem_data_tree`.`un_code_m`
+				OR
+				FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_pc`)
+				OR
+				FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_m`)
+			)
+			RIGHT JOIN `publ_data` ON FIND_IN_SET(`publ_data`.`id_id` , `mem_data_tree`.`grp_id_id`)
+			
+			GROUP BY `mem_data_tree`.`ch_id`
+
 			</grp>
 			<div>
 			

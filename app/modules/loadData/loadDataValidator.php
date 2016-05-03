@@ -13,7 +13,11 @@ class loadDataValidator {
 	}
 	public static function isValidDate($v) {
 		self::setInfo("date",$v);
-		return validator::isDateTime($v);
+		return validator::isDate($v);
+	}
+	public static function isValidHour($v) {
+		self::setInfo("hour",$v);
+		return validator::isUint($v) && $v < 24 && $v >= 0;
 	}
 	public static function isValidChannel($v){
 		self::setInfo("Channel",$v);

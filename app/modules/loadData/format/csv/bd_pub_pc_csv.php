@@ -139,23 +139,12 @@ class bd_pub_pc_csv extends csvPubPcFormat{
 	 * @return string
 	 */
 	public function getDate($lineArr){
-		$datetime = $lineArr[0] . " " . $lineArr[1] . ":00:00";
-		$t = explode(" ", $datetime);
-		$date = $t[0];
-		$time = $t[1];
-		
-		//DATE
-		$td = explode("-", $date);
-		$td[1] = sprintf("%02d",$td[1]);
-		$td[2] = sprintf("%02d",$td[2]);
-		$date = join("-",$td);
-		
-		//TIME
-		$tt = explode(":", $time);
-		$tt[0] = sprintf("%02d",$tt[0]);
-		$tt[1] = sprintf("%02d",$tt[1]);
-		$tt[2] = sprintf("%02d",$tt[2]);
-		$time = join(":",$tt);
-		return $date . " " . $time;
+		return $lineArr[0];
+	}
+	/**
+	 * @return string
+	 */
+	public function getHour($lineArr){
+		return $lineArr[1];
 	}
 }

@@ -59,6 +59,10 @@ abstract class csvPubMFormat extends csvFormat{
 	 * @return string
 	 */
 	abstract public function getDate($lineArr);
+	/**
+	 * @return string
+	 */
+	abstract public function getHour($line);
 	public function getCsvType(){
 		return parent::TYPE_PUB_M;
 	}

@@ -92,9 +92,16 @@ class priv_csv extends csvPrivFormat {
 		$ti = $line[3];
 		$md = str_replace("月", "-", $md);
 		$md = str_replace("日", "", $md);
-		return date("Y",time()) . "-" . $md . " " . $ti . ":00:00";
+		return date("Y",time()) . "-" . $md;
 	}
-	
+	/**
+	 * @return string
+	 */
+	public function getHour($line){
+		$md = iconv("GBK", "UTF8", $line[0]);
+		$ti = $line[3];
+		return $ti;
+	}
 	
 // 	/**
 // 	 * 初始化 cnt

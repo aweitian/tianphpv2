@@ -52,7 +52,10 @@ abstract class csvPrivFormat extends csvFormat{
 	 */
 	abstract public function getDate($line);	
 	
-	
+	/**
+	 * @return string
+	 */
+	abstract public function getHour($line);
 	
 	public function getCsvType(){
 		return parent::TYPE_PRI;

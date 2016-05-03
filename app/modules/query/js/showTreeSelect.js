@@ -4,7 +4,7 @@ $(function(){
 		return ["渠道","账户","计划","单元"];
 	}
 	function getPathKey(){
-		return ["chananel","account","plan","unit"];
+		return ["channel","account","plan","unit"];
 	}
 	function getIdMeta(){
 		return ["ch_id","ac_id","pl_id","un_id"];
@@ -104,7 +104,7 @@ $(function(){
 		var n = 0;
 		
 		n++;
-		if($("#lvl_chananel").attr("checked")){
+		if($("#lvl_channel").attr("checked")){
 			return n;
 		}
 		n++;

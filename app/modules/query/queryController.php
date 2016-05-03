@@ -40,9 +40,8 @@ class queryController extends AppController{
 			if($cd->isTrue()){
 				echo $cd->info;
 			}else{
-				var_dump($msg->getPostData());
 				echo $cd->info;
-			}
+			} 
 			
 			
 		}else{
@@ -79,27 +78,22 @@ class queryController extends AppController{
 			case "all":
 				break;
 			case "channel":
-				if(!isset($msg["sel_channel"]) || 
-				!$ret->setLevel(qArgs::LVL_CHANNEL,array($msg["sel_channel"]))){
+				if(!isset($msg["sel_channel"]) || !$ret->setLevel(qArgs::LVL_CHANNEL,array($msg["sel_channel"]))){
 					return new rirResult(2,"层级为渠道，但没有相应的渠道参数");
 				}
 				break;
 			case "account":
-				if(!isset($msg["sel_channel"],$msg["sel_account"]) || 
-				!$ret->setLevel(qArgs::LVL_ACCOUNT,array($msg["sel_channel"],$msg["sel_account"]))){
-					var_dump($msg["sel_channel"],$msg["sel_account"]);
+				if(!isset($msg["sel_account"]) || !$ret->setLevel(qArgs::LVL_ACCOUNT,$msg["sel_account"])){
 					return new rirResult(2,"层级为账户，但缺少参数：渠道或者账户");
 				}
 				break;
 			case "plan":
-				if(!isset($msg["sel_channel"],$msg["sel_account"],$msg["sel_plan"]) || 
-				!$ret->setLevel(qArgs::LVL_PLAN,array($msg["sel_channel"],$msg["sel_account"],$msg["sel_plan"]))){
+				if(!isset($msg["sel_plan"]) || !$ret->setLevel(qArgs::LVL_PLAN,$msg["sel_plan"])){
 					return new rirResult(2,"层级为计划，但缺少参数：渠道,账户或者计划");
 				}
 				break;
 			case "unit":
-				if(!isset($msg["sel_channel"],$msg["sel_account"],$msg["sel_plan"],$msg["sel_unit"]) || 
-				!$ret->setLevel(qArgs::LVL_UNIT,array($msg["sel_channel"],$msg["sel_account"],$msg["sel_plan"],$msg["sel_unit"]))){
+				if(!isset($msg["sel_unit"]) || !$ret->setLevel(qArgs::LVL_UNIT,$msg["sel_unit"])){
 					return new rirResult(2,"层级为单元，但缺少参数：渠道,账户,计划或者单元");
 				}
 				break;

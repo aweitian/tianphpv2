@@ -36,7 +36,7 @@ class qArgs{
 	/**
 	 * 
 	 * @param int $l
-	 * @param array $p
+	 * @param int $p
 	 * @return bool
 	 */
 	public function setLevel($l,$p){

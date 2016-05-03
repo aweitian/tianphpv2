@@ -25,8 +25,6 @@ table.lvltb td{
 <form action="<?php print $submit_url?>" method="post" accept-charset="utf-8">
 <fieldset>
 	<legend class="f-p8">按条件检索</legend>
-	
-	
 	<div class="formitm">
                 <label class="lab">选择时间：</label>
                 <div class="ipt">

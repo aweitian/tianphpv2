@@ -421,7 +421,7 @@ class loadDataModel extends AppModel{
 				$kw   = $this->handleCsv($csvInst->getKw($line));
 				$mark = $this->handleCsv($csvInst->getMark($line));
 				$date = $this->handleCsv($csvInst->getDate($line));
-
+				$hour = $this->handleCsv($csvInst->getHour($line));
 				
 				//validate
 				if(loadDataValidator::isValidCode($code)
@@ -431,6 +431,7 @@ class loadDataModel extends AppModel{
 					&& 	loadDataValidator::isValidLink($link)
 					&& 	loadDataValidator::isValidMark($mark)
 					&& 	loadDataValidator::isValidDate($date)
+					&& 	loadDataValidator::isValidHour($hour)
 						
 				){
 					//filter
@@ -440,7 +441,7 @@ class loadDataModel extends AppModel{
 					$rcvp = loadDataFilter::filterRcvpayment($rcvp);
 					
 					//insert
-					$id = $this->_loadPrivData($code,$chat,$subs,$rcvp,$link,$kw,$mark,$date);
+					$id = $this->_loadPrivData($code,$chat,$subs,$rcvp,$link,$kw,$mark,$date,$hour);
 					
 					
 				}else{
@@ -448,9 +449,13 @@ class loadDataModel extends AppModel{
 				}
 	
 				if($id->isTrue()){
-					$app++;
+					if($id->info == "ok"){
+						$app++;
+					}else{
+						$upd++;
+					}
 					if(!is_null($this->callback)){
-						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows(),$app,$upd));
+						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows() + 1,$app,$upd));
 					}
 					$lineNo++;
 				}else{
@@ -516,7 +521,7 @@ class loadDataModel extends AppModel{
 				$clks  = $this->handleCsv($csvInst->getClks($line));
 				$pays  = $this->handleCsv($csvInst->getPays($line));
 				$date  = $this->handleCsv($csvInst->getDate($line));
-				
+				$hour  = $this->handleCsv($csvInst->getHour($line));
 				
 				//validate
 				if(loadDataValidator::isValidChannel($chana)
@@ -531,13 +536,13 @@ class loadDataModel extends AppModel{
 						&& 	loadDataValidator::isValidClks($clks)
 						&& 	loadDataValidator::isValidPaysum($pays)
 						&& 	loadDataValidator::isValidDate($date)
-				
-						){
+						&& 	loadDataValidator::isValidHour($hour)
+				){
 							//filter
 								
 							//insert
 							$id = $this->_loadPubData($dev,$chana, $acc, $plan, $unit, $title, $desc1, $desc2, 
-								$url, $pays, $shows, $clks, $date);	
+								$url, $pays, $shows, $clks, $date,$hour);	
 								
 				}else{
 					$id = new rirResult(1,"数据格式检查没有通过:行号:".($lineNo+1).",名称:".loadDataValidator::$lastk.",内容:".var_export(loadDataValidator::$lastv,true));
@@ -621,7 +626,7 @@ class loadDataModel extends AppModel{
 				$clks  = $this->handleCsv($csvInst->getClks($line));
 				$pays  = $this->handleCsv($csvInst->getPays($line));
 				$date  = $this->handleCsv($csvInst->getDate($line));
-				
+				$hour  = $this->handleCsv($csvInst->getHour($line));
 				
 				//validate
 				if(loadDataValidator::isValidChannel($chana)
@@ -636,13 +641,13 @@ class loadDataModel extends AppModel{
 						&& 	loadDataValidator::isValidClks($clks)
 						&& 	loadDataValidator::isValidPaysum($pays)
 						&& 	loadDataValidator::isValidDate($date)
-				
-						){
+						&& 	loadDataValidator::isValidHour($hour)
+				){
 							//filter
 								
 							//insert
 							$id = $this->_loadPubData($dev,$chana, $acc, $plan, $unit, $title, $desc1, $desc2, 
-								$url, $pays, $shows, $clks, $date);	
+								$url, $pays, $shows, $clks, $date,$hour);	
 								
 				}else{
 					$id = new rirResult(1,"数据格式检查没有通过:行号:".($lineNo+1).",名称:".loadDataValidator::$lastk.",内容:".var_export(loadDataValidator::$lastv,true));
@@ -686,7 +691,7 @@ class loadDataModel extends AppModel{
 		//return str_replace('"',"",iconv("GBK", "UTF8", $str));
 	}
 	
-	private function _loadPrivData($code,$chat,$subscribe,$rcvpayment,$link,$kw,$mark,$date){
+	private function _loadPrivData($code,$chat,$subscribe,$rcvpayment,$link,$kw,$mark,$date,$hour){
 		$bindArgs = array(
 			"code" => $code,
 			"chat" => $chat,
@@ -696,12 +701,19 @@ class loadDataModel extends AppModel{
 			"kw" => $kw,
 			"mark" => $mark,
 			"date" => $date,
+			"hour" => $hour
 		);
 		$sql = $this->sqlManager->getSql("/sql/priv_data/insert");
 		
 		$id = $this->db->insert($sql, $bindArgs);
 		if($id > 0){
-			return new rirResult(0,"ok",$id);
+			if($id == 1){
+				return new rirResult(0,"ok",$id);
+			}else if($id == 2){
+				return new rirResult(0,"update a row",$id);
+			}else{
+				return new rirResult(7,"unknow error");
+			}
 		}
 		return new rirResult(6,$this->db->getErrorInfo());
 	}
@@ -795,7 +807,7 @@ class loadDataModel extends AppModel{
 	 * @return rirResult
 	 */
 	private function _loadPubData($dev,$chananel,$account,$plan,$unit,$title,$desc1,$desc2,$url,
-			$paysum,$shows,$clks,$datetime){
+			$paysum,$shows,$clks,$date,$hour){
 		$ch_id = $this->getChananelId($chananel);
 		if($ch_id == 0)return new rirResult(1,"获取频道ID失败");
 		$ac_id = $this->getAccountId($ch_id, $account);
@@ -830,7 +842,8 @@ class loadDataModel extends AppModel{
 			"shows" => $shows,
 			"clks" => $clks,
 			"dev" => $dev,
-			"datetime" => $datetime,
+			"date" => $date,
+			"hour" => $hour,
 		);
 		$id = $this->db->exec($sql, $data);
 		
