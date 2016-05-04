@@ -123,16 +123,26 @@ class qArgs{
 		return true;
 	}
 	
-	
+	/**
+	 *
+	 * @return self::LVL_ALL/self::LVL_CHANNEL/self::LVL_ACCOUNT/self::LVL_PLAN/self::LVL_UNIT
+	 * 
+	 */
 	public function getLevel(){
-		return $this->level_meta;
+		return $this->lvl_meta;
 	}
 	public function getLevelDatas(){
 		return $this->lvl_data;
 	}
+	/**
+	 * @return self::DEV_ALL,DEV_PC,DEV_M
+	 */
 	public function getDev(){
 		return $this->dev;
 	}
+	/**
+	 * @return bool
+	 */
 	public function getGrpIdea(){
 		return $this->gi;
 	}

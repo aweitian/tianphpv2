@@ -38,7 +38,8 @@ class queryController extends AppController{
 			echo $r->utf8Header(); 
 			$cd = $this->chkPostData($msg);
 			if($cd->isTrue()){
-				echo $cd->info;
+				$sql = $this->model->query($cd->return);
+				echo $sql;
 			}else{
 				echo $cd->info;
 			} 
@@ -65,8 +66,11 @@ class queryController extends AppController{
 	 * @return rirResult
 	 */
 	private function chkPostData(pmcaiMsg $msg){
-		if(!isset($msg["span"],$msg["level"],$msg["device"],$msg["groupidea"])){
+		if(!isset($msg["span"],$msg["level"],$msg["device"])){
 			return new rirResult(1,"POST 参数格式不对");
+		}
+		if(!isset($msg["groupidea"])){
+			$msg["groupidea"] = "off";
 		}
 		$ret = new qArgs();
 		

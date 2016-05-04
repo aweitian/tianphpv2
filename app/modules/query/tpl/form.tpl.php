@@ -67,7 +67,7 @@ table.lvltb td{
 	<div class="formitm">
                 <label class="lab">合并创意：</label>
                 <div class="ipt">
-                    <input type="checkbox" name="groupidea" id="groupidea" checked><label class="level" for="groupidea">合并</label>
+                    <input type="checkbox" name="groupidea" value="1" id="groupidea" checked><label class="level" for="groupidea">合并</label>
                 </div>
 	</div>
 	

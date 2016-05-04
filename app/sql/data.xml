@@ -187,7 +187,17 @@
 	
 	
 	<query>
-		<mem_data_tree>
+	
+		<base>
+		SELECT @fields FROM @table @join WHERE @where;
+		</base>
+	
+		<base_grp>
+		SELECT @fields FROM @table @join WHERE @where GROUP BY @grp;
+		</base_grp>
+	
+	
+		<table_tree>
 			(
 				SELECT 
 				`data_channel`.`ch_id`,
@@ -213,63 +223,98 @@
 				LEFT JOIN `data_idea`
 				ON `data_idea`.`un_id` = `data_unit`.`un_id`
 				GROUP BY `data_unit`.`un_id`
-			) AS `mem_data_tree`
-		</mem_data_tree>
-		<level_channel>
+			) AS `@table_tree`
+		</table_tree>
+		
+		<fields>
+			<private_data>`publ_data`.`paysum`,`publ_data`.`shows`,`publ_data`.`clks`</private_data>
+			<private_data_grp>SUM(`publ_data`.`paysum`),SUM(`publ_data`.`shows`),SUM(`publ_data`.`clks`)</private_data_grp>
+			<public_data>`prvt_data`.`chat`,`prvt_data`.`subscribe`,`prvt_data`.`rcvpayment`</public_data>
+			<public_data_grp>SUM(`prvt_data`.`chat`),SUM(`prvt_data`.`subscribe`),SUM(`prvt_data`.`rcvpayment`)</public_data_grp>
 			
-			<grp>
-			SELECT 
-				`mem_data_tree`.`ch_val`,
-				SUM(`publ_data`.`paysum`),SUM(`publ_data`.`shows`),SUM(`publ_data`.`clks`),
-				SUM(`prvt_data`.`chat`),SUM(`prvt_data`.`subscribe`),SUM(`prvt_data`.`rcvpayment`)
-			FROM @mem_data_tree
+			<channel>`@table_tree`.`ch_val`</channel>
+			<account>`@table_tree`.`ac_val`</account>
+			<plan>`@table_tree`.`pl_val`</plan>
+			<unit>`@table_tree`.`un_val`</unit>
+			<idea>`data_idea`.`title`,`data_idea`.`desc1`,`data_idea`.`desc2`</idea>
 			
-			RIGHT JOIN `prvt_data` ON (
-				`prvt_data`.`code` = `mem_data_tree`.`un_code_pc`
-				OR
-				`prvt_data`.`code` = `mem_data_tree`.`un_code_m`
-				OR
-				FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_pc`)
-				OR
-				FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_m`)
-			)
-			RIGHT JOIN `publ_data` ON FIND_IN_SET(`publ_data`.`id_id` , `mem_data_tree`.`grp_id_id`)
+		</fields>
+		
+		
+		<join>
+			<private_data>
+				<all>
+					RIGHT JOIN `prvt_data` ON (
+						`prvt_data`.`code` = `mem_data_tree`.`un_code_pc`
+						OR
+						`prvt_data`.`code` = `mem_data_tree`.`un_code_m`
+						OR
+						FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_pc`)
+						OR
+						FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_m`)
+					)
+				</all>
+				<pc>
+					RIGHT JOIN `prvt_data` ON (
+						`prvt_data`.`code` = `mem_data_tree`.`un_code_pc`
+						OR
+						FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_pc`)
+					)
+				</pc>
+				<m>
+					RIGHT JOIN `prvt_data` ON (
+						`prvt_data`.`code` = `mem_data_tree`.`un_code_m`
+						OR
+						FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_m`)
+					)
+				</m>
+			</private_data>
 			
-			GROUP BY `mem_data_tree`.`ch_id`
-
-			</grp>
-			<div>
-			
-			</div>
-		</level_channel>
+			<public_data>
+				RIGHT JOIN `publ_data` ON FIND_IN_SET(`publ_data`.`id_id` , `mem_data_tree`.`grp_id_id`)
+			</public_data>
+		</join>
+		
+		
+		<where>
+			<span_pub_date>
+				<![CDATA[
+				DATE_ADD(`publ_data`.`date`, INTERVAL `publ_data`.`hour` HOUR) > :date1 
+				AND 
+				DATE_ADD(`publ_data`.`date`, INTERVAL `publ_data`.`hour` HOUR) <= :date2 
+				]]>
+			</span_pub_date>
+			<span_priv_data>
+				<![CDATA[
+				DATE_ADD(`prvt_data`.`date`, INTERVAL `prvt_data`.`hour` HOUR) > :date1 
+				AND 
+				DATE_ADD(`prvt_data`.`date`, INTERVAL `prvt_data`.`hour` HOUR) <= :date2 
+				]]>
+			</span_priv_data>
+		
+			<channel>`@table_tree`.`ch_id` = :id</channel>
+			<account>`@table_tree`.`ac_id` = :id</account>
+			<plan>`@table_tree`.`pl_id` = :id</plan>
+			<unit>`@table_tree`.`un_id` = :id</unit>
+		
+		
+			<dev_pc>
+				`publ_data`.`dev` = 'pc'
+			</dev_pc>
+			<dev_m>
+				`publ_data`.`dev` = 'm'
+			</dev_m>
+		</where>
+		
+		
 	
-	
+		<groupby>
+			<channel>`@table_tree`.`ch_id`</channel>
+			<account>`@table_tree`.`ac_id`</account>
+			<plan>`@table_tree`.`pl_id`</plan>
+			<unit>`@table_tree`.`un_id`</unit>
+			
+		</groupby>
 	</query>
-	
-	
-	<build_mem_tree>
-	
-		DROP TABLE mem_data_tree;
-		CREATE TABLE mem_data_tree ENGINE=MEMORY CHARSET=utf8
-			SELECT 
-			`data_channel`.`ch_id`,
-			`data_channel`.`ch_val`,
-			`data_account`.`ac_id`,
-			`data_account`.`ac_val`,
-			`data_plan`.`pl_id`,
-			`data_plan`.`pl_val`,
-			`data_unit`.`un_id`,
-			`data_unit`.`un_val`
-			FROM `data_account`
-			RIGHT JOIN `data_channel`
-			ON `data_channel`.`ch_id` = `data_account`.`ch_id`
-			RIGHT JOIN `data_plan`
-			ON `data_plan`.`ac_id` = `data_account`.`ac_id`
-			RIGHT JOIN `data_unit`
-			ON `data_unit`.`pl_id` = `data_plan`.`pl_id`
-	
-	</build_mem_tree>
-	
-	
 	
 </sql>
