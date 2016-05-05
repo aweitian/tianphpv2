@@ -189,42 +189,12 @@
 	<query>
 	
 		<base>
-		SELECT @fields FROM @table @join WHERE @where;
+		SELECT @fields FROM `table_tree` @join WHERE @where;
 		</base>
 	
 		<base_grp>
-		SELECT @fields FROM @table @join WHERE @where GROUP BY @grp;
+		SELECT @fields FROM `table_tree` @join WHERE @where GROUP BY @grp;
 		</base_grp>
-	
-	
-		<table_tree>
-			(
-				SELECT 
-				`data_channel`.`ch_id`,
-				`data_channel`.`ch_val`,
-				`data_account`.`ac_id`,
-				`data_account`.`ac_val`,
-				`data_plan`.`pl_id`,
-				`data_plan`.`pl_val`,
-				`data_unit`.`un_id`,
-				`data_unit`.`un_val`,
-				`data_unit`.`un_code_pc`,
-				`data_unit`.`un_code_m`,
-				GROUP_CONCAT(`data_idea`.`id_code_pc`) AS `grp_id_code_pc`,
-				GROUP_CONCAT(`data_idea`.`id_code_m`) AS `grp_id_code_m`,
-				GROUP_CONCAT(`data_idea`.`id_id`) AS `grp_id_id`
-				FROM `data_account`
-				RIGHT JOIN `data_channel`
-				ON `data_channel`.`ch_id` = `data_account`.`ch_id`
-				RIGHT JOIN `data_plan`
-				ON `data_plan`.`ac_id` = `data_account`.`ac_id`
-				RIGHT JOIN `data_unit`
-				ON `data_unit`.`pl_id` = `data_plan`.`pl_id`
-				LEFT JOIN `data_idea`
-				ON `data_idea`.`un_id` = `data_unit`.`un_id`
-				GROUP BY `data_unit`.`un_id`
-			) AS `@table_tree`
-		</table_tree>
 		
 		<fields>
 			<private_data>`publ_data`.`paysum`,`publ_data`.`shows`,`publ_data`.`clks`</private_data>
@@ -232,10 +202,10 @@
 			<public_data>`prvt_data`.`chat`,`prvt_data`.`subscribe`,`prvt_data`.`rcvpayment`</public_data>
 			<public_data_grp>SUM(`prvt_data`.`chat`),SUM(`prvt_data`.`subscribe`),SUM(`prvt_data`.`rcvpayment`)</public_data_grp>
 			
-			<channel>`@table_tree`.`ch_val`</channel>
-			<account>`@table_tree`.`ac_val`</account>
-			<plan>`@table_tree`.`pl_val`</plan>
-			<unit>`@table_tree`.`un_val`</unit>
+			<channel>`table_tree`.`ch_val`</channel>
+			<account>`table_tree`.`ac_val`</account>
+			<plan>`table_tree`.`pl_val`</plan>
+			<unit>`table_tree`.`un_val`</unit>
 			<idea>`data_idea`.`title`,`data_idea`.`desc1`,`data_idea`.`desc2`</idea>
 			
 		</fields>
@@ -245,33 +215,33 @@
 			<private_data>
 				<all>
 					RIGHT JOIN `prvt_data` ON (
-						`prvt_data`.`code` = `mem_data_tree`.`un_code_pc`
+						`prvt_data`.`code` = `table_tree`.`un_code_pc`
 						OR
-						`prvt_data`.`code` = `mem_data_tree`.`un_code_m`
+						`prvt_data`.`code` = `table_tree`.`un_code_m`
 						OR
-						FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_pc`)
+						FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_pc`)
 						OR
-						FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_m`)
+						FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_m`)
 					)
 				</all>
 				<pc>
 					RIGHT JOIN `prvt_data` ON (
-						`prvt_data`.`code` = `mem_data_tree`.`un_code_pc`
+						`prvt_data`.`code` = `table_tree`.`un_code_pc`
 						OR
-						FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_pc`)
+						FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_pc`)
 					)
 				</pc>
 				<m>
 					RIGHT JOIN `prvt_data` ON (
-						`prvt_data`.`code` = `mem_data_tree`.`un_code_m`
+						`prvt_data`.`code` = `table_tree`.`un_code_m`
 						OR
-						FIND_IN_SET(`prvt_data`.`code` , `mem_data_tree`.`grp_id_code_m`)
+						FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_m`)
 					)
 				</m>
 			</private_data>
 			
 			<public_data>
-				RIGHT JOIN `publ_data` ON FIND_IN_SET(`publ_data`.`id_id` , `mem_data_tree`.`grp_id_id`)
+				RIGHT JOIN `publ_data` ON FIND_IN_SET(`publ_data`.`id_id` , `table_tree`.`grp_id_id`)
 			</public_data>
 		</join>
 		
@@ -292,10 +262,10 @@
 				]]>
 			</span_priv_data>
 		
-			<channel>`@table_tree`.`ch_id` = :id</channel>
-			<account>`@table_tree`.`ac_id` = :id</account>
-			<plan>`@table_tree`.`pl_id` = :id</plan>
-			<unit>`@table_tree`.`un_id` = :id</unit>
+			<channel>`table_tree`.`ch_id` = :id</channel>
+			<account>`table_tree`.`ac_id` = :id</account>
+			<plan>`table_tree`.`pl_id` = :id</plan>
+			<unit>`table_tree`.`un_id` = :id</unit>
 		
 		
 			<dev_pc>
@@ -309,10 +279,10 @@
 		
 	
 		<groupby>
-			<channel>`@table_tree`.`ch_id`</channel>
-			<account>`@table_tree`.`ac_id`</account>
-			<plan>`@table_tree`.`pl_id`</plan>
-			<unit>`@table_tree`.`un_id`</unit>
+			<channel>`table_tree`.`ch_id`</channel>
+			<account>`table_tree`.`ac_id`</account>
+			<plan>`table_tree`.`pl_id`</plan>
+			<unit>`table_tree`.`un_id`</unit>
 			
 		</groupby>
 	</query>

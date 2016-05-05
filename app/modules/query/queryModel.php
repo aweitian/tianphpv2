@@ -54,9 +54,6 @@ class queryModel extends AppModel{
 				return false;
 		}
 		
-		//TABLE
-		$table = $this->sqlManager->getSql("/sql/query/table_tree");
-		
 		
 		//JOIN
 		$join = $this->sqlManager->getSql("/sql/query/join/public_data");
@@ -162,7 +159,6 @@ class queryModel extends AppModel{
 			$sql = $this->sqlManager->getSql("/sql/query/base_grp");
 			$sql = strtr($sql,array(
 				"@fields" => $fields,
-				"@table"  => $table,
 				"@join"   => $join,
 				"@where"  => $where,
 				"@grp"    => $grp
@@ -171,12 +167,11 @@ class queryModel extends AppModel{
 			$sql = $this->sqlManager->getSql("/sql/query/base");
 			$sql = strtr($sql,array(
 				"@fields" => $fields,
-				"@table"  => $table,
 				"@join"   => $join,
 				"@where"  => $where
 			));
 		}
 		
-		return strtr($sql,array("@table_tree" => "table_tree"));
+		return $sql;
 	}
 }
