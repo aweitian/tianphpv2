@@ -705,7 +705,7 @@ class loadDataModel extends AppModel{
 		);
 		$sql = $this->sqlManager->getSql("/sql/priv_data/insert");
 		
-		$id = $this->db->insert($sql, $bindArgs);
+		$id = $this->db->exec($sql, $bindArgs);
 		if($id > 0){
 			if($id == 1){
 				return new rirResult(0,"ok",$id);
