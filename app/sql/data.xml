@@ -214,7 +214,7 @@
 		<join>
 			<private_data>
 				<all>
-					RIGHT JOIN `prvt_data` ON (
+					LEFT JOIN `prvt_data` ON (
 						`prvt_data`.`code` = `table_tree`.`un_code_pc`
 						OR
 						`prvt_data`.`code` = `table_tree`.`un_code_m`

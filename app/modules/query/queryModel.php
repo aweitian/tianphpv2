@@ -76,13 +76,15 @@ class queryModel extends AppModel{
 		
 		
 		//WHERE
-		$where = "";
+		
 		
 		#####	where-timespan
 		if($q->getSpanValid()){
 			$where = $this->sqlManager->getSql("/sql/query/where/span_pub_date") 
 			. " AND " 
 			. $this->sqlManager->getSql("/sql/query/where/span_priv_data");
+		}else{
+			$where = " 1";
 		}
 		#####	where level		
 		switch($q->getLevel()){
@@ -154,24 +156,35 @@ class queryModel extends AppModel{
 					return false;
 			}
 		}
-		//SQL BASE
-		if($q->getGrpIdea() && $q->getLevel() != qArgs::LVL_ALL){
-			$sql = $this->sqlManager->getSql("/sql/query/base_grp");
-			$sql = strtr($sql,array(
-				"@fields" => $fields,
-				"@join"   => $join,
-				"@where"  => $where,
-				"@grp"    => $grp
-			));
-		}else{
-			$sql = $this->sqlManager->getSql("/sql/query/base");
-			$sql = strtr($sql,array(
+		
+		$sql = $this->sqlManager->getSql("/sql/query/base");
+		$sql = strtr($sql,array(
 				"@fields" => $fields,
 				"@join"   => $join,
 				"@where"  => $where
-			));
-		}
-		
+		));
 		return $sql;
+		
+		
+		
+// 		//SQL BASE
+// 		if($q->getGrpIdea() && $q->getLevel() != qArgs::LVL_ALL){
+// 			$sql = $this->sqlManager->getSql("/sql/query/base_grp");
+// 			$sql = strtr($sql,array(
+// 				"@fields" => $fields,
+// 				"@join"   => $join,
+// 				"@where"  => $where,
+// 				"@grp"    => $grp
+// 			));
+// 		}else{
+// 			$sql = $this->sqlManager->getSql("/sql/query/base");
+// 			$sql = strtr($sql,array(
+// 				"@fields" => $fields,
+// 				"@join"   => $join,
+// 				"@where"  => $where
+// 			));
+// 		}
+		
+// 		return $sql;
 	}
 }
