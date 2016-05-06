@@ -7,7 +7,6 @@
  * 		渠道,账户名,计划名称,单元名称,单元PC参数,单元无线参数	
  */
 class rel_unit_csv extends csvRelUnitFormat {
-	
 	public function __construct($path){
 		$this->path = $path;
 	}

@@ -15,6 +15,7 @@
 			<li><a href="<?php print HTTP_ENTRY?>/login/exit">退出</a></li>
 			<li><a href="<?php print HTTP_ENTRY?>/loadData">导入数据</a></li>
 			<li><a href="<?php print HTTP_ENTRY?>/query">查询</a></li>
+			<li><a href="<?php print HTTP_ENTRY?>/ideaq">ID TRACK</a></li>
 			
 			</ul>
 	

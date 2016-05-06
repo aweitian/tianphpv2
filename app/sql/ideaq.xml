@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<channel>
+		SELECT 
+			`ch_id`,`ch_val`
+		 FROM `data_channel` WHERE `ch_id` = :ch_id
+ 	</channel>
+	<account>
+		SELECT 
+		`ac_id`,`ch_id`,`ac_val`
+	 FROM `data_account` WHERE `ac_id` = :ac_id
+ 	</account>
+	<plan>
+				SELECT 
+			`pl_id`,`ac_id`,`pl_val`
+		 FROM `data_plan` WHERE `pl_id` = :pl_id
+ 	</plan>
+	<unit>
+		SELECT 
+			`un_id`,`pl_id`,`un_val`,`un_code_pc`,`un_code_m`
+		 FROM `data_unit` WHERE `un_id` = :un_id
+ 	</unit>
+	<idea>
+		SELECT 
+			`id_id`,`un_id`,`title`,`desc1`,`desc2`,`url`,`id_code_pc`,`id_code_m`
+		 FROM `data_idea` WHERE `id_id` = :id_id
+ 	</idea>
+</sql>

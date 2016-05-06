@@ -58,13 +58,13 @@ class csvFormatDetector{
 		$this->csv = array();
 		$files = tian::getALLFileList($this->csv_dir,"php");
 		foreach ($files as $file){
-			require $file;
+			require_once $file;
 			$cls = pathinfo($file,PATHINFO_FILENAME);
 			if(!preg_match("/^\w+$/", $cls)){
 				continue;
 			}
 			$rc = new ReflectionClass($cls);
-			if(!$rc->isSubclassOf("csvFormat")){
+			if($rc->isAbstract() || !$rc->isSubclassOf("csvFormat")){
 				continue;
 			}
 			$ins = $rc->newInstanceArgs(array($this->path));
@@ -122,7 +122,6 @@ class csvFormatDetector{
 			$this->selectedCsv->setDataRows($lineNo - $this->selectedCsv->getHeaderRows());
 			return true;
 		}
-		
 		return false;
 	}
 	

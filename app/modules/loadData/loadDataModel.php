@@ -6,7 +6,7 @@
  */
 class loadDataModel extends AppModel{
 	private $callback = null;
-	
+	private $cb_save_form = null;
 	
 	public function __construct(){
 		parent::__construct();
@@ -16,6 +16,9 @@ class loadDataModel extends AppModel{
 
 	public function setCallback($cb){
 		$this->callback = $cb;
+	}
+	public function setShowSaveFormCallback($cb){
+		$this->cb_save_form = $cb;
 	}
 	/**
 	 * true为可以上传
@@ -197,7 +200,12 @@ class loadDataModel extends AppModel{
 		));
 	}
 	
-	
+	private function showForm(){
+		if(!is_null($this->cb_save_form)){
+			call_user_func_array($this->cb_save_form, array());
+			return ;
+		}
+	}
 	private function repErr($no,$err){
 		if(!is_null($this->callback)){
 			call_user_func_array($this->callback, array($no,new rirResult(1,$err)));;
@@ -206,48 +214,6 @@ class loadDataModel extends AppModel{
 			exit($err);
 		}
 	}
-	public function loadData($cls,$path){
-		if(!preg_match("/^\w+$/", $cls)){
-			$this->repErr(0, "CLASS 字段值不合法");
-			return ;
-		}
-		if(!class_exists($cls)){
-			$cls_path = FILE_SYSTEM_ENTRY."/app/modules/loadData/format/csv/".$cls.".php";
-			if(!file_exists($cls_path)){
-				$this->repErr(0, "illegal class in database");
-				return ;
-			}else{
-				require $cls_path;
-			}
-		}
-		
-		$rc = new ReflectionClass($cls);
-		if($rc->isSubclassOf("csvPrivFormat")){
-			//csvPrivFormat
-			$this->loadPrivDataToDb($rc->newInstance($path));
-			
-		}else if($rc->isSubclassOf("csvPubMFormat")){
-			//csvPubMFormat
-			$this->loadPubMDataToDb($rc->newInstance($path));
-			
-		}else if($rc->isSubclassOf("csvPubPcFormat")){
-			//csvPubPcFormat
-			$this->loadPubPcDataToDb($rc->newInstance($path));
-			
-		}else if($rc->isSubclassOf("csvRelIdeaFormat")){
-			//csvRelIdeaFormat
-			$this->updateRelForIdea($rc->newInstance($path));
-			
-		}else if($rc->isSubclassOf("csvRelUnitFormat")){
-			//csvRelUnitFormat
-			$this->updateRelForUnit($rc->newInstance($path));
-			
-		}else{
-			$this->repErr(0, "CLASS(".$cls.")不是继承于csvFormat");
-			return ;
-		}
-	}
-	
 	
 	public function saveUploadInfo($token,$cls,$path,$cnt){
 		return $this->db->exec($this->sqlManager->getSql("/sql/log_upload_token/insert"),array(
@@ -258,8 +224,11 @@ class loadDataModel extends AppModel{
 		));
 	}
 	
-	
-	private function updateRelForUnit(csvRelUnitFormat $csvInst){
+	/**
+	 * @return bool
+	 * @param csvRelUnitFormat $csvInst
+	 */
+	public function updateRelForUnit(csvRelUnitFormat $csvInst){
 		ini_set("max_execution_time", 300);
 		$app = 0;
 		$upd = 0;
@@ -309,18 +278,23 @@ class loadDataModel extends AppModel{
 					if(!is_null($this->callback)){
 						call_user_func_array($this->callback, array("<font color=red>".$id->info."</font>",0,0));
 					}
-					return ;
+					return false;
 				}
 			}
 	
 			fclose($handle);
 			$pdo->commit();
+			return true;
 		} else {
-			// error opening the file.
+			return false;
 		}
 	}
 	
-	private function updateRelForIdea(csvRelIdeaFormat $csvInst){
+	/**
+	 * 
+	 * @param csvRelIdeaFormat $csvInst
+	 */
+	public function updateRelForIdea(csvRelIdeaFormat $csvInst){
 		ini_set("max_execution_time", 300);
 		$app = 0;
 		$upd = 0;
@@ -332,7 +306,7 @@ class loadDataModel extends AppModel{
 			$lineNo = 0;
 	
 			$pdo = mysqlPdo::getConnection();
-			//开始一个事实
+			//开始一个事务
 			$pdo->beginTransaction();
 
 	
@@ -375,20 +349,48 @@ class loadDataModel extends AppModel{
 					if(!is_null($this->callback)){
 						call_user_func_array($this->callback, array("<font color=red>".$id->info."</font>",0,0));
 					}
-					return ;
+					return false;
 				}
 			}
 	
 			fclose($handle);
 			$pdo->commit();
+			return true;
 		} else {
-			// error opening the file.
+			return false;
 		}
 	}
 	
 	
 	
-	private function loadPrivDataToDb(csvPrivFormat $csvInst){
+	
+	public function clearPubCache(){
+		$sql = $this->sqlManager->getSql("/sql/publ_data/cache_empty");
+		$this->db->exec($sql, array());
+	}
+	public function clearPrivCache(){
+		$sql = $this->sqlManager->getSql("/sql/priv_data/cache_empty");
+		$this->db->exec($sql, array());
+	}
+	
+	public function savePubCache2Db(){
+		$sql = $this->sqlManager->getSql("/sql/publ_data/insert");
+		return new rirResult($this->db->exec($sql, array()) > 0 ? 0 : 1,$this->db->getErrorInfo());
+	}
+	public function savePrivCache2Db(){
+		$sql = $this->sqlManager->getSql("/sql/priv_data/insert");
+		return new rirResult($this->db->exec($sql, array()) > 0 ? 0 : 1,$this->db->getErrorInfo());
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @return bool;
+	 * @param csvPrivFormat $csvInst
+	 */
+	public function loadPrivDataToCache(csvPrivFormat $csvInst){
 		ini_set("max_execution_time", 300);
 		$app = 0;
 		$upd = 0;
@@ -413,6 +415,8 @@ class loadDataModel extends AppModel{
 			while ($line = fgetcsv($handle)) {
 				if($lineNo < $csvInst->getHeaderRows()){$lineNo++;continue;}
 
+				$chan = $this->handleCsv($csvInst->getChannel($line));
+				$acco = $this->handleCsv($csvInst->getAccount($line));
 				$code = $this->handleCsv($csvInst->getCode($line));
 				$chat = $this->handleCsv($csvInst->getChat($line));
 				$subs = $this->handleCsv($csvInst->getSubscribe($line));
@@ -425,14 +429,15 @@ class loadDataModel extends AppModel{
 				
 				//validate
 				if(loadDataValidator::isValidCode($code)
-					&& 	loadDataValidator::isValidChat($chat)
-					&& 	loadDataValidator::isValidSubscribue($subs)
-					&& 	loadDataValidator::isValidRcvpayment($rcvp)
-					&& 	loadDataValidator::isValidLink($link)
-					&& 	loadDataValidator::isValidMark($mark)
-					&& 	loadDataValidator::isValidDate($date)
-					&& 	loadDataValidator::isValidHour($hour)
-						
+					&& loadDataValidator::isValidChat($chat)
+					&& loadDataValidator::isValidSubscribue($subs)
+					&& loadDataValidator::isValidRcvpayment($rcvp)
+					&& loadDataValidator::isValidLink($link)
+					&& loadDataValidator::isValidMark($mark)
+					&& loadDataValidator::isValidDate($date)
+					&& loadDataValidator::isValidHour($hour)
+					&& loadDataValidator::isValidChannel($chan)
+					&& loadDataValidator::isValidAcc($acco)
 				){
 					//filter
 					$link = loadDataFilter::filterLink($link);
@@ -441,11 +446,11 @@ class loadDataModel extends AppModel{
 					$rcvp = loadDataFilter::filterRcvpayment($rcvp);
 					
 					//insert
-					$id = $this->_loadPrivData($code,$chat,$subs,$rcvp,$link,$kw,$mark,$date,$hour);
-					
-					
+					$id = $this->_loadPriv2Cache($chan,$acco,$code,$chat,$subs,$rcvp,$link,$kw,$mark,$date,$hour);
 				}else{
-					$id = new rirResult(1,"数据格式检查没有通过:行号:".($lineNo+1).",名称:".loadDataValidator::$lastk.",内容:".var_export(loadDataValidator::$lastv,true));
+					$id = new rirResult(1,"数据格式检查没有通过:行号:"
+							.($lineNo+1).",名称:".loadDataValidator::$lastk.",内容:"
+							.var_export(loadDataValidator::$lastv,true));
 				}
 	
 				if($id->isTrue()){
@@ -465,18 +470,22 @@ class loadDataModel extends AppModel{
 					if(!is_null($this->callback)){
 						call_user_func_array($this->callback, array("<font color=red>".$id->info."</font>",0,0));
 					}
-					return ;
+					return false;
 				}
 			}
 	
 			fclose($handle);
 			$pdo->commit();
+			return true;
 		} else {
-			// error opening the file.
+			return false;
 		}
 	}
-	
-	private function loadPubPcDataToDb(csvPubPCFormat $csvInst){
+	/**
+	 * @return bool
+	 * @param csvPubFormat $csvInst
+	 */
+	public function loadPubDataToCache(csvPubFormat $csvInst){
 		ini_set("max_execution_time", 300);
 		$app = 0;
 		$upd = 0;
@@ -498,10 +507,15 @@ class loadDataModel extends AppModel{
 			));
 			
 			$dev = $csvInst->getCsvType() == "pc";
-			
 			while ($line = fgetcsv($handle)) {
 				// process the line read.
 				//从第9行开始
+				if($lineNo == $csvInst->getHeaderRows() - 1){
+					foreach ($line as &$l){
+						$l = iconv("GBK", "UTF8", $l);
+					}
+					$csvInst->parseOffset($line);
+				}
 				if($lineNo < $csvInst->getHeaderRows()){$lineNo++;continue;}
 				//日期,小时,账户,推广计划,推广单元,创意标题,创意描述1,创意描述2,显示URL,展现,点击,
 				//消费,点击率,平均点击价格,网页转化,商桥转化
@@ -549,11 +563,6 @@ class loadDataModel extends AppModel{
 				}
 				
 				
-				
-				
-				
-				
-				
 				if($id->isTrue()){
 					if($id->info == "ok"){
 						$app++;
@@ -565,134 +574,32 @@ class loadDataModel extends AppModel{
 					}
 					$lineNo++;
 				}else{
-					
 					$pdo->rollBack();
 					fclose($handle);
 					if(!is_null($this->callback)){
 						call_user_func_array($this->callback, array($id->info,0,0));
 					}
-					return ;
+					return false;
 				}
 			}
 		
 			fclose($handle);
 			$pdo->commit();
+			return true;
 		} else {
-			// error opening the file.
+			return false;
 		}
 	}
-	private function loadPubMDataToDb(csvPubMFormat $csvInst){
-		ini_set("max_execution_time", 300);
-		$app = 0;
-		$upd = 0;
-
-		$path = $csvInst->getPath();
-		
-		$handle = fopen($path, "r");
-		if ($handle) {
-			$lineNo = 0;
-			
-			$pdo = mysqlPdo::getConnection();
-			//开始一个事实
-			$pdo->beginTransaction();
 	
-			//把文件MD5写入到LOG表中`log_load_token`
-			$fhash = md5_file($path);
-			$this->db->insert($this->sqlManager->getSql("/sql/log_load_token/insert"), array(
-					"token" => $fhash
-			));
-			
-			$dev = "m";
-			
-			while ($line = fgetcsv($handle)) {
-				// process the line read.
-				//从第9行开始
-				if($lineNo < $csvInst->getHeaderRows()){$lineNo++;continue;}
-				//日期,小时,账户,推广计划,推广单元,创意标题,创意描述1,创意描述2,显示URL,展现,点击,
-				//消费,点击率,平均点击价格,网页转化,商桥转化
-				//"2016-03-28",0,"shb-九龙2","性功能-勃起异常","勃起-硬","{男性勃起功能障碍的原因},硬不起来该如何治?",
-				//"{男性勃起功能障碍的原因},勃起不坚,时间不长不坚硬的病因是什么,找到病因能一次性治",
-				//"吗?上海九龙男子医院专家在线解答勃起问题.","man.long120.cn",1,0,0.00,0.00%,0.00,0,0
-				$chana = $this->handleCsv($csvInst->getChannel());
-				$acc   = $this->handleCsv($csvInst->getAcc($line));
-				$plan  = $this->handleCsv($csvInst->getPlan($line));
-				$unit  = $this->handleCsv($csvInst->getUnit($line));
-				$title = $this->handleCsv($csvInst->getTitle($line));
-				$desc1 = $this->handleCsv($csvInst->getDes1($line));
-				$desc2 = $this->handleCsv($csvInst->getDes2($line));
-				$url   = $this->handleCsv($csvInst->getUrl($line));
-				
-				$shows = $this->handleCsv($csvInst->getShow($line));
-				$clks  = $this->handleCsv($csvInst->getClks($line));
-				$pays  = $this->handleCsv($csvInst->getPays($line));
-				$date  = $this->handleCsv($csvInst->getDate($line));
-				$hour  = $this->handleCsv($csvInst->getHour($line));
-				
-				//validate
-				if(loadDataValidator::isValidChannel($chana)
-						&& 	loadDataValidator::isValidAcc($acc)
-						&& 	loadDataValidator::isValidPlan($plan)
-						&& 	loadDataValidator::isValidUnit($unit)
-						&& 	loadDataValidator::isValidTitle($title)
-						&& 	loadDataValidator::isValidDesc1($desc1)
-						&& 	loadDataValidator::isValidDesc2($desc2)
-						&& 	loadDataValidator::isValidUrl($url)
-						&& 	loadDataValidator::isValidShows($shows)
-						&& 	loadDataValidator::isValidClks($clks)
-						&& 	loadDataValidator::isValidPaysum($pays)
-						&& 	loadDataValidator::isValidDate($date)
-						&& 	loadDataValidator::isValidHour($hour)
-				){
-							//filter
-								
-							//insert
-							$id = $this->_loadPubData($dev,$chana, $acc, $plan, $unit, $title, $desc1, $desc2, 
-								$url, $pays, $shows, $clks, $date,$hour);	
-								
-				}else{
-					$id = new rirResult(1,"数据格式检查没有通过:行号:".($lineNo+1).",名称:".loadDataValidator::$lastk.",内容:".var_export(loadDataValidator::$lastv,true));
-				}
-				
-				
-				
-				
-				
-				
-				
-				if($id->isTrue()){
-					if($id->info == "ok"){
-						$app++;
-					}else{
-						$upd++;
-					}
-					if(!is_null($this->callback)){
-						call_user_func_array($this->callback, array($lineNo - $csvInst->getHeaderRows() + 1,$app,$upd));
-					}
-					$lineNo++;
-				}else{
-					
-					$pdo->rollBack();
-					fclose($handle);
-					if(!is_null($this->callback)){
-						call_user_func_array($this->callback, array($id->info,0,0));
-					}
-					return ;
-				}
-			}
-		
-			fclose($handle);
-			$pdo->commit();
-		} else {
-			// error opening the file.
-		}
-	}
 	private function handleCsv($str){
 		return trim(iconv("GBK", "UTF8", $str));
 		//return str_replace('"',"",iconv("GBK", "UTF8", $str));
 	}
 	
-	private function _loadPrivData($code,$chat,$subscribe,$rcvpayment,$link,$kw,$mark,$date,$hour){
+	private function _loadPriv2Cache($chan,$acco,$code,$chat,$subscribe,$rcvpayment,$link,$kw,$mark,$date,$hour){
 		$bindArgs = array(
+			"channel" => $chan,
+			"account" => $acco,
 			"code" => $code,
 			"chat" => $chat,
 			"subscribe" => $subscribe,
@@ -703,7 +610,7 @@ class loadDataModel extends AppModel{
 			"date" => $date,
 			"hour" => $hour
 		);
-		$sql = $this->sqlManager->getSql("/sql/priv_data/insert");
+		$sql = $this->sqlManager->getSql("/sql/priv_data/cache_insert");
 		
 		$id = $this->db->exec($sql, $bindArgs);
 		if($id > 0){
@@ -835,7 +742,7 @@ class loadDataModel extends AppModel{
 		
 		
 		
-		$sql = $this->sqlManager->getSql("/sql/publ_data/insert");
+		$sql = $this->sqlManager->getSql("/sql/publ_data/cache_insert");
 		$data = array(
 			"id_id" => $id_id,
 			"paysum" => $paysum,

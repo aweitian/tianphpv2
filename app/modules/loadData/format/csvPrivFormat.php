@@ -12,6 +12,14 @@ abstract class csvPrivFormat extends csvFormat{
 	/**
 	 * @return string
 	 */
+	abstract public function getChannel($line);
+	/**
+	 * @return string
+	 */
+	abstract public function getAccount($line);
+	/**
+	 * @return string
+	 */
 	abstract public function getCode($line);
 	
 	/**

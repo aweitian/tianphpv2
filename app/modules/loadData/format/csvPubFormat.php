@@ -7,7 +7,7 @@
  * 		PUBLIC && PRIVATE && RELATIONSHIP
  * 			
  */
-abstract class csvPubPcFormat extends csvFormat{
+abstract class csvPubFormat extends csvFormat{
 	/**
 	 * @return string
 	 */
@@ -63,7 +63,8 @@ abstract class csvPubPcFormat extends csvFormat{
 	 * @return string
 	 */
 	abstract public function getHour($line);
-	public function getCsvType(){
-		return parent::TYPE_PUB_PC;
-	}
+	
+	
+	
+	abstract public function parseOffset($uploadFileRowData);
 }

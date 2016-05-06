@@ -150,9 +150,11 @@
 	</log_load_token>
 	
 	<publ_data>
-	
-		<insert>
-			INSERT INTO `publ_data` (
+		<cache_empty>
+			TRUNCATE TABLE `publ_cache`
+		</cache_empty>
+		<cache_insert>
+			INSERT INTO `publ_cache` (
 				`id_id`,`paysum`,`shows`,`clks`,`dev`,`date`,`hour`
 			) VALUES (
 				:id_id,:paysum,:shows,:clks,:dev,:date,:hour
@@ -160,7 +162,14 @@
 			ON DUPLICATE KEY UPDATE 
 				`paysum` = `paysum` + :paysum,
 				`shows` = `shows` + :shows,
-				`clks` = `clks` + :clks
+				`clks` = `clks` + :clks	
+		</cache_insert>
+	
+		<insert>
+			INSERT INTO `publ_data` (
+				`id_id`,`paysum`,`shows`,`clks`,`dev`,`date`,`hour`
+			) SELECT `id_id`,`paysum`,`shows`,`clks`,`dev`,`date`,`hour`
+			FROM `publ_cache`
 		</insert>
 	
 	
@@ -168,21 +177,31 @@
 	
 	
 	<priv_data>
-		<insert>
+		<cache_empty>
+			TRUNCATE TABLE `prvt_cache`
+		</cache_empty>
+		<cache_insert>
 		
-			INSERT INTO `prvt_data` (
-				`code`,`chat`,`subscribe`,`rcvpayment`,`link`,`kw`,`mark`,`date`,`hour`
+			INSERT INTO `prvt_cache` (
+				`channel`,`account`,`code`,`chat`,`subscribe`,`rcvpayment`,`link`,`kw`,`mark`,`date`,`hour`
 			) VALUES (
-				:code,:chat,:subscribe,:rcvpayment,:link,:kw,:mark,:date,:hour
+				:channel,:account,:code,:chat,:subscribe,:rcvpayment,:link,:kw,:mark,:date,:hour
 			)
 			ON DUPLICATE KEY UPDATE 
 				`chat` = `chat` + :chat,
 				`subscribe` = `subscribe` + :subscribe,
 				`rcvpayment` = `rcvpayment` + :rcvpayment
 		
+		</cache_insert>
+		<insert>
+			INSERT INTO `prvt_data` (
+				`channel`,`account`,`code`,`chat`,`subscribe`,`rcvpayment`,`link`,`kw`,`mark`,`date`,`hour`
+			)
+			SELECT
+			`channel`,`account`,`code`,`chat`,`subscribe`,`rcvpayment`,`link`,`kw`,`mark`,`date`,`hour`
+			FROM
+			`prvt_cache`
 		</insert>
-	
-	
 	</priv_data>
 	
 	

@@ -11,8 +11,7 @@ require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/loadDataView.php';
 //load format
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvFormat.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvPrivFormat.php';
-require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvPubMFormat.php';
-require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvPubPcFormat.php';
+require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvPubFormat.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvRelIdeaFormat.php';
 require_once FILE_SYSTEM_ENTRY.'/app/modules/loadData/format/csvRelUnitFormat.php';
 
@@ -109,6 +108,36 @@ class loadDataController extends AppController{
 			$this->showFormUI($msg);
 		}
 	}
+	
+	
+	public function saveAction(pmcaiMsg $msg){
+		if(!isset($msg["type"])){
+			$this->response->_404();
+		}
+		switch ($msg["type"]){
+			case "pub":
+				$ret = $this->model->savePubCache2Db();
+				if($ret->isTrue()){
+					$this->view->setPmcaiMsg($msg);
+					$this->view->showInfo("保存成功");
+				}else{
+					$this->response->showError("保存失败:".$ret->info);
+				}
+				break;
+			case "priv":
+				if($this->model->savePrivCache2Db() > 0){
+					$this->view->setPmcaiMsg($msg);
+					$this->view->showInfo("保存成功");
+				}else{
+					$this->response->showError("保存失败:".$ret->info);
+				}
+				break;
+			default:
+				$this->response->_404();
+		}
+	}
+	
+	
 	public function loadAction(pmcaiMsg $msg){
 		if(!isset($msg["token"])){
 			$this->response->_404();
@@ -117,13 +146,64 @@ class loadDataController extends AppController{
 		if(empty($data)){
 			$this->response->showError("无效的文件HASH值");
 		}
+		
+		$cls = $data["cls"];
+		$path = $data["name"];
+		
+		if(!preg_match("/^\w+$/", $cls)){
+			$this->response->showError("CLASS 字段值不合法");
+			return ;
+		}
+		if(!class_exists($cls)){
+			$cls_path = FILE_SYSTEM_ENTRY."/app/modules/loadData/format/csv/".$cls.".php";
+			if(!file_exists($cls_path)){
+				$this->response->showError("illegal class in database");
+				return ;
+			}else{
+				require $cls_path;
+			}
+		}
 		$this->view->setPmcaiMsg($msg);
-		$this->view->showLoadDataPre($data["cnt"]);
 		$this->model->setCallback(array($this,"loadDataProcessingCallback"));
-		$this->model->loadData($data["cls"],$data["name"]);
+		$rc = new ReflectionClass($cls);
+		if($rc->isSubclassOf("csvPrivFormat")){
+			//csvPrivFormat
+			$this->view->showLoadDataPre($data["cnt"],"priv");
+			$ret = $this->model->loadPrivDataToCache($rc->newInstance($path));
+			if($ret){
+				$this->doneCallback();
+			}
+		}else if($rc->isSubclassOf("csvPubFormat")){
+			//csvPubFormat
+			$this->view->showLoadDataPre($data["cnt"],"pub");
+			$ret = $this->model->loadPubDataToCache($rc->newInstance($path));
+			if($ret){
+				$this->doneCallback();
+			}	
+		}else if($rc->isSubclassOf("csvRelIdeaFormat")){
+			//csvRelIdeaFormat
+			$this->view->showLoadDataPre($data["cnt"],"relid");
+			$ret = $this->model->updateRelForIdea($rc->newInstance($path));
+			if($ret){
+				$this->doneCallback();
+			}	
+		}else if($rc->isSubclassOf("csvRelUnitFormat")){
+			//csvRelUnitFormat
+			$this->view->showLoadDataPre($data["cnt"],"relun");
+			$ret = $this->model->updateRelForUnit($rc->newInstance($path));
+			if($ret){
+				$this->doneCallback();
+			}	
+		}else{
+			$this->response->showError("CLASS(".$cls.")不是继承于csvFormat");
+			return ;
+		}
 	}
 	public function loadDataProcessingCallback($pos,$app,$upd){
 		$this->view->showLoadDataProcessing($pos,$app,$upd);
+	}
+	public function doneCallback(){
+		$this->view->doneCallback();
 	}
 	private function showFormUI(pmcaiMsg $msg){
 		$this->view->setPmcaiMsg($msg);

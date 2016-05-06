@@ -7,9 +7,6 @@
  * 		渠道,账户名,计划名称,单元名称,创意标题,创意描述1,创意描述2,创意PC参数,创意无线参数
  */
 class rel_idea_csv extends csvRelIdeaFormat {
-	private $dev;
-	private $match_cnt = 0;
-	
 	public function __construct($path){
 		$this->path = $path;
 	}

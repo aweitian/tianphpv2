@@ -5,9 +5,6 @@
  * Description: 
  */
 class priv_csv extends csvPrivFormat {
-	private $dev;
-	private $match_cnt = 0;
-	
 	public function __construct($path){
 		$this->path = $path;
 	}
@@ -18,7 +15,7 @@ class priv_csv extends csvPrivFormat {
 			case 0:
 				$l = iconv("GBK","utf-8",$line);
 				$l = trim($l);
-				if($l != '日期,链接,参数,时间,备注,对话,预约,到诊,搜索词'){
+				if($l != '渠道,账户,日期,链接,参数,时间,备注,对话,预约,到诊,搜索词'){
 					return false;
 				}
 				return true;
@@ -35,29 +32,41 @@ class priv_csv extends csvPrivFormat {
 	/**
 	 * @return string
 	 */
+	public function getChannel($line){
+		return $line[0];
+	}
+	/**
+	 * @return string
+	 */
+	public function getAccount($line){
+		return $line[1];
+	}
+	/**
+	 * @return string
+	 */
 	public function getCode($line){
-		return $line[2];
+		return $line[2+2];
 	}
 	
 	/**
 	 * @return string
 	 */
 	public function getChat($line){
-		return $line[5];
+		return $line[5+2];
 	}
 	
 	/**
 	 * @return string
 	 */
 	public function getSubscribe($line){
-		return $line[6];
+		return $line[6+2];
 	}
 	
 	/**
 	 * @return string
 	 */
 	public function getRcvpayment($line){
-		return $line[7];
+		return $line[7+2];
 	}
 	
 	
@@ -65,14 +74,14 @@ class priv_csv extends csvPrivFormat {
 	 * @return string
 	 */
 	public function getLink($line){
-		return $line[1];
+		return $line[1+2];
 	}
 	
 	/**
 	 * @return string
 	 */
 	public function getKw($line){
-		return $line[8];
+		return $line[8+2];
 	}
 	
 	
@@ -80,7 +89,7 @@ class priv_csv extends csvPrivFormat {
 	 * @return string
 	 */
 	public function getMark($line){
-		return $line[4];
+		return $line[4+2];
 	}
 	
 	
@@ -88,8 +97,7 @@ class priv_csv extends csvPrivFormat {
 	 * @return string
 	 */
 	public function getDate($line){
-		$md = iconv("GBK", "UTF8", $line[0]);
-		$ti = $line[3];
+		$md = iconv("GBK", "UTF8", $line[0+2]);
 		$md = str_replace("月", "-", $md);
 		$md = str_replace("日", "", $md);
 		return date("Y",time()) . "-" . $md;
@@ -98,8 +106,7 @@ class priv_csv extends csvPrivFormat {
 	 * @return string
 	 */
 	public function getHour($line){
-		$md = iconv("GBK", "UTF8", $line[0]);
-		$ti = $line[3];
+		$ti = $line[3+2];
 		return $ti;
 	}
 	
