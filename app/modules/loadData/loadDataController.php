@@ -118,6 +118,7 @@ class loadDataController extends AppController{
 			case "pub":
 				$ret = $this->model->savePubCache2Db();
 				if($ret->isTrue()){
+					$this->model->clearPubCache();
 					$this->view->setPmcaiMsg($msg);
 					$this->view->showInfo("保存成功");
 				}else{
@@ -125,7 +126,9 @@ class loadDataController extends AppController{
 				}
 				break;
 			case "priv":
-				if($this->model->savePrivCache2Db() > 0){
+				$ret = $this->model->savePrivCache2Db();
+				if($ret->isTrue()){
+					$this->model->clearPrivCache();
 					$this->view->setPmcaiMsg($msg);
 					$this->view->showInfo("保存成功");
 				}else{
