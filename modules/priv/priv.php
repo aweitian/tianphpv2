@@ -4,12 +4,14 @@
  *  在验证码打开的情况下再错误一定次数就拒绝登陆
  *  判断标准是以IP加每天再加操作类型（比如登陆和发贴就不是同一个操作类型）进行判断
  */
-require_once FILE_SYSTEM_ENTRY."/lib/modules/oplog/IOp.php";
-require_once FILE_SYSTEM_ENTRY."/lib/modules/oplog/oplog.php";
-require_once FILE_SYSTEM_ENTRY."/lib/modules/priv/privAuth.php";
-require_once FILE_SYSTEM_ENTRY."/lib/modules/captcha/captcha.php";
 
-class priv implements IInstall,IOp{
+require_once FILE_SYSTEM_ENTRY."/modules/algorithms/Security.php";
+require_once FILE_SYSTEM_ENTRY."/modules/oplog/IOp.php";
+require_once FILE_SYSTEM_ENTRY."/modules/oplog/oplog.php";
+require_once FILE_SYSTEM_ENTRY."/modules/priv/privAuth.php";
+require_once FILE_SYSTEM_ENTRY."/modules/captcha/captcha.php";
+
+class priv implements IOp{
 	/**
 	 * @var identityToken
 	 */
@@ -22,57 +24,71 @@ class priv implements IInstall,IOp{
 	private $oplog;
 	private $conf;
 	private $tb_postfix = "priv";
+	private $tb_prefix  = "";
 	public $errorMsg;
 	public $remain_times = 0;
+	/**
+	 * 
+	 * @var mysqlPdoBase
+	 */
+	private $db;
 	
-	public function __construct() {
-		if (is_null(tian::$pdoBase)) {
-			tian::throwException("7399");
-		}
-		$this->conf = require "app/conf/auth.php";
-		$this->idtoken = tian::$identityToken;
-		$auth = new session_privAuth();
+	/**
+	 * 
+	 * @var session
+	 */
+	private $session;
+	/**
+	 * 
+	 * @param session $session
+	 * @param string $tb_prefix
+	 * @param array $conf  u_try_times_max/u_try_times/open  是否需要验证码
+	 */
+	public function __construct(session $session,$tb_prefix = "",$conf = null,$roleCode = null) {
+		$this->session = $session;
+		$this->tb_prefix = $tb_prefix;
+		$this->db = new mysqlPdoBase();
+		$this->conf = is_array($conf) ? $conf : array(
+			"u_try_times"     => 5,
+			"u_try_times_max" => 20,
+			"open"            => true  //是否需要验证码
+		);
+		$this->idtoken = identityToken::getInstance();
+		$auth = new session_privAuth($this->session);
 		$this->idtoken->setInfo($auth->getInfo());
 		$this->idtoken->setRoleCode($auth->getRoleCode());
-		$roleCode = require "app/conf/rolecode.php";
-		if(!array_key_exists($this->idtoken->getRoleCode(), $roleCode)){
+		$role = is_array($roleCode) ? $roleCode : array(
+			"guest" => "Guest",
+			"root"  => "Administrator"
+		);
+		if(!array_key_exists($this->idtoken->getRoleCode(), $role)){
 			$this->idtoken->setRoleCode("guest");
 		}
 	}
-	public function install() {
-		$sql = file_get_contents("lib/modules/priv/install.sql");
-		$sql = str_replace("xxxx_priv",$this->getTabelName(),$sql);
-		tian::$pdoBase->exec($sql, array());
-	}
-	public function uninstall() {
-		$sql = file_get_contents("lib/modules/priv/uninstall.sql");
-		$sql = str_replace("xxxx_priv",$this->getTabelName(),$sql);
-		tian::$pdoBase->exec($sql, array());
-	}
 	public function getTabelName() {
-		return TABLE_PREFIX."_".$this->tb_postfix;
+		return $this->tb_prefix.$this->tb_postfix;
 	}
 	
 	public function all(){
-		return tian::$pdoBase->fetchAll("select * from `".$this->getTabelName()."` where 1", array());
+		return $this->db->fetchAll("select * from `".$this->getTabelName()."` where 1", array());
 	}
 	public function infoById($sid){
-		$row = tian::$pdoBase->fetch("select * from `".$this->getTabelName()."` where `id`=:sid", array(
-				"sid"=>$sid
+		$row = $this->db->fetch("select * from `".$this->getTabelName()."` where `id`=:sid", array(
+			"sid"=>$sid
 		));
 		return $row;
 	}
-	public function infoByNamePwd($name,$pwd){
-		$row = tian::$pdoBase->fetch("select * from `".$this->getTabelName()."` where `name`=:name and `pass`=:pass", array(
-				"name"=>$name,
-				"pass"=>app::calcPwd($pwd)
+	public function infoByEmailPwd($email,$pwd){
+		$row = $this->db->fetch("select * from `".$this->getTabelName()."` where `email`=:email and `pass`=:pass", array(
+				"email"=>$email,
+				"pass"=>Security::encrypt($pwd)
 		));
 		return $row;
 	}
 	
 	
 	
-	public function checkByNamePwd($name,$pwd,$code=""){
+	public function check($email,$pwd,$code=""){
 		$this->remain_times = $this->getRemainTryTimes();
 		if($this->remain_times<=0){
 			$this->errorMsg="Exceed Max try times.";
@@ -84,7 +100,7 @@ class priv implements IInstall,IOp{
 			$this->opUpdate();
 			return false;
 		}
-		$ret = $this->infoByNamePwd($name, $pwd);
+		$ret = $this->infoByEmailPwd($email, $pwd);
 		if(empty($ret)){
 			$this->errorMsg = "Invalid name or password";
 			$this->opUpdate();
@@ -97,7 +113,7 @@ class priv implements IInstall,IOp{
 	}
 	public function getUiData(){
 		$ret = array(
-			"Name"=>"<input type=\"text\" name=\"name\">",
+			"Name"=>"<input type=\"text\" name=\"email\">",
 			"Password"=>"<input type=\"password\" name=\"pwd\">",
 		);
 		$failCnt = $this->getOPFailCnt();
@@ -117,7 +133,7 @@ class priv implements IInstall,IOp{
 		return $this->idtoken->getInfo();
 	}
 	public function logout(){
-		$auth = new session_privAuth();
+		$auth = new session_privAuth($this->session);
 		$auth->logout();
 		$this->idtoken->setRoleCode("guest");
 	}
@@ -136,10 +152,10 @@ class priv implements IInstall,IOp{
 	}
 	
 	private function _saveInfo($ret){
-		$auth = new session_privAuth();
+		$auth = new session_privAuth($this->session);
 		$info = array(
 			"sid"=>$ret["id"],
-			"name"=>$ret["name"],
+			"email"=>$ret["email"],
 			"privilege"=>$ret["privilege"],
 		);
 		$auth->saveInfo($info);

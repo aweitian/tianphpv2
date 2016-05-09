@@ -11,8 +11,8 @@ class session_privAuth{
 	private $session;
 	private $session_key = "priv_usr_auth_info";
 	private $session_key_rc = "priv_usr_auth_rolecode";
-	public function __construct(){
-		$this->session=tian::$session;
+	public function __construct(session $session){
+		$this->session=$session;
 	}
 	public function saveInfo($info){
 		$this->session->add($this->session_key, $info);

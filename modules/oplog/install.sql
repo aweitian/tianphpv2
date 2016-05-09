@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `xxxx_oplog`;
+DROP TABLE IF EXISTS `oplog`;
 
-CREATE TABLE `xxxx_oplog` (
+CREATE TABLE `oplog` (
   `sid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `optype` varchar(16) NOT NULL,
   `ipaddr` varchar(15) NOT NULL,
