@@ -9,7 +9,7 @@ require_once FILE_SYSTEM_ENTRY."/template/priv/privUI.php";
 
 class privView extends AppView{
 
-	public function priv_wrap($content){
+	public function priv_wrap($userInfo,$content){
 		$tpl = "template/priv/body.php";
 		ob_start();
 		include $tpl;

@@ -158,6 +158,7 @@ class priv implements IOp{
 			"sid"=>$ret["id"],
 			"email"=>$ret["email"],
 			"privilege"=>$ret["privilege"],
+			"time"=>$ret["time"]
 		);
 		$auth->saveInfo($info);
 		$auth->saveRoleCode("privUsr");
