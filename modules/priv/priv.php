@@ -59,6 +59,7 @@ class priv implements IOp{
 		$this->idtoken->setRoleCode($auth->getRoleCode());
 		$role = is_array($roleCode) ? $roleCode : array(
 			"guest" => "Guest",
+			"privUsr"  => "User",
 			"root"  => "Administrator"
 		);
 		if(!array_key_exists($this->idtoken->getRoleCode(), $role)){
