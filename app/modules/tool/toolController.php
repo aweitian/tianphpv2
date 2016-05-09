@@ -29,6 +29,14 @@ class toolController implements IController{
 	public function welcomeAction(pmcaiMsg $msg){
 		$this->view->main();
 	}
+	public function privmvcAction(pmcaiMsg $msg){
+		if ($msg->isPost()){
+			$this->model->genPrivMvc($msg);
+			$this->back2main();
+		}else{
+			$this->view->showPriv();
+		}
+	}
 	public function mvcAction(pmcaiMsg $msg){
 		if ($msg->isPost()){
 			$this->model->genMvc($msg);

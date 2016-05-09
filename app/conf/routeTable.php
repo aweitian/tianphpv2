@@ -27,10 +27,10 @@ return array(
 		//以什么开头 比如/priv能匹配/priv,/priv?a=b,/priv/a/b,不能匹配/privilege
 		"startWith" => array(
 			//				/db和/dbg是互不干扰的
-// 			"/db" => array(
-// 				"mca" => "mca",
-// 				"loc" => FILE_SYSTEM_ENTRY."/debug"
-// 			)
+			"/priv" => array(
+				"mca" => "mca",
+				"loc" => FILE_SYSTEM_ENTRY."/priv"
+			)
 		),
 		//其它
 		"default" => array(

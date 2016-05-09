@@ -10,6 +10,10 @@ class toolView extends AppView{
 		$msg = file_get_contents("app/modules/tool/tpl/mvcForm.tpl.php");
 		print $msg;
 	}
+	public function showPriv(){
+		$msg = file_get_contents("app/modules/tool/tpl/mvcPrivForm.tpl.php");
+		print $msg;
+	}
 	public function main(){
 		$msg = file_get_contents("app/modules/tool/tpl/main.tpl.php");
 		print $msg;
