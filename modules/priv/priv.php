@@ -143,7 +143,7 @@ class priv implements IOp{
 			//检查是否需要验证码
 			$failCnt = $this->getOPFailCnt();
 			if($failCnt>$this->conf["u_try_times"]){
-				$helper = new session_captcha();
+				$helper = new session_captcha($this->session);
 				return $helper->check($code);
 			}
 			return true;
