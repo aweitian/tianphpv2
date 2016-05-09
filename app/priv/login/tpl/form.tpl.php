@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
-$auth = new priv($session);
+//$auth = new priv($session);
 
 $uidata = $auth->getUiData();
 ?>
