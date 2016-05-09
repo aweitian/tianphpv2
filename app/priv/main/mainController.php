@@ -27,7 +27,8 @@ class mainController extends privController{
 		$priv = new priv(App::getSession());
 		if($priv->isLogined()){
 			$info = $priv->getUserInfo();
-			echo "welcome,".$info["email"];
+			$content =  "welcome,".$info["email"];
+			$this->view->main();
 		}else{
 			$this->response->go("/priv/login");
 		}

@@ -5,17 +5,16 @@
  * Description: 
  * 		Specail for pmcai view
  */
+require_once FILE_SYSTEM_ENTRY."/template/priv/privUI.php";
+
 class privView extends AppView{
-	/**
-	 * 
-	 * @var pmcaiMsg $pmcaiMsg
-	 */
-	protected $pmcaiMsg;
-	
-	public function __construct(){
-		
-	}
-	public function wrap($content,$title="",$tpl = 'template/layout-priv.php'){
-		return parent::wrap($content,$title,$tpl);
+
+	public function priv_wrap($content){
+		$tpl = "template/priv/body.php";
+		ob_start();
+		include $tpl;
+		$body = ob_get_contents();
+		ob_end_clean();
+		return View::wrap($body,"priv","template/priv/layout.php");
 	}
 }

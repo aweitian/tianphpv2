@@ -6,4 +6,9 @@
  */
 class mainView extends privView{
 	
+	public function main(){
+		$this->priv_wrap("")->show();
+	}
+	
+	
 }

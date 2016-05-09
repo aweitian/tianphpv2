@@ -12,7 +12,7 @@ class loginView extends privView{
 		$this->wrap($this->fetch("form",array(
 				"auth" => $auth,
 				"msg" => $msg
-		)))->show();
+		)),"priv","template/priv/layout.php")->show();
 	}
 	
 	
