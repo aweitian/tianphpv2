@@ -4,6 +4,6 @@
  * Author: Awei.tian
  * Description: 
  */
-class privController implements Controller{
+class privController extends Controller{
 	
 }

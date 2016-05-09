@@ -1,0 +1,2 @@
+404
+自己加了一个MODULE，然后再格式添加相应文件，访问404，可能是你routeTable.PHP的Module路径有没有写对

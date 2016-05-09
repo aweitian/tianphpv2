@@ -22,7 +22,9 @@ class loginController extends privController{
 		$this->model = new loginModel();
 		$this->view = new loginView();
 	}
-	public function welcomeAction(){
-
+	public function welcomeAction(pmcaiMsg $msg){
+		echo __DIR__;exit;
+		$this->view->setPmcaiMsg($msg);
+		$this->view->loginUI();
 	}
 }

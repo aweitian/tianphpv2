@@ -29,7 +29,7 @@ return array(
 			//				/db和/dbg是互不干扰的
 			"/priv" => array(
 				"mca" => "mca",
-				"loc" => FILE_SYSTEM_ENTRY."/priv"
+				"loc" => FILE_SYSTEM_ENTRY."/app/priv"
 			)
 		),
 		//其它
