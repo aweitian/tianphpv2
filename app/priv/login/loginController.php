@@ -26,9 +26,9 @@ class loginController extends privController{
 	}
 	public function welcomeAction(pmcaiMsg $msg){
 		$priv = new priv(App::getSession());
-var_dump($priv->isLogined()
-		);exit;		
-		
+		if($priv->isLogined()){
+			$this->response->go("/priv");
+		}
 		if($msg->isPost()){
 			if(!isset($msg["email"],$msg["pwd"])){
 				$this->response->_404();
@@ -38,7 +38,7 @@ var_dump($priv->isLogined()
 			}else{
 				$code = $msg["code"];
 			}
-			$priv = new priv(App::getSession());
+			
 			if($priv->check($msg["email"],$msg["pwd"],$code)){
 				$this->response->go("/priv");
 			}else{
@@ -47,11 +47,14 @@ var_dump($priv->isLogined()
 			}
 			
 		}else{
-			$priv = new priv(App::getSession());
 			$this->view->setPmcaiMsg($msg);
 			$this->view->loginUI($priv,"输入用户名和密码登陆");			
 		}
 
 	}
-
+	public function logoutAction(pmcaiMsg $msg){
+		$priv = new priv(App::getSession());
+		$priv->logout();
+		$this->response->go("/priv/login");
+	}
 }
