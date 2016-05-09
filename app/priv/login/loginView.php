@@ -4,11 +4,15 @@
  * Author: Awei.tian
  * Description: 
  */
+
 class loginView extends privView{
 	
 	
-	public function loginUI(){
-		$this->wrap($this->fetch("form"))->show();
+	public function loginUI($auth,$msg){
+		$this->wrap($this->fetch("form",array(
+				"auth" => $auth,
+				"msg" => $msg
+		)))->show();
 	}
 	
 	

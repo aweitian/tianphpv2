@@ -4,9 +4,11 @@
  * Author: Awei.tian
  * Description: 
  */
-//$auth = new priv($session);
+$auth = $data["auth"];
 
 $uidata = $auth->getUiData();
+
+
 ?>
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -14,14 +16,14 @@ $uidata = $auth->getUiData();
         <a href="<?php print HTTP_ENTRY?>"><b>Admin</b>LTE</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg"><?php print $data["msg"];?></p>
         <form action="<?php print HTTP_ENTRY?>/priv/login" method="post">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="Email">
+            <input type="email" name="email" class="form-control" placeholder="Email">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" name="pwd" class="form-control" placeholder="Password">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">

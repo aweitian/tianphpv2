@@ -7,6 +7,7 @@
 class loginModel extends privModel{
 	public function __construct(){
 		parent::__construct();
+		$this->initDb();
 	}
 	public function test(){
 		return "hi";

@@ -10,7 +10,7 @@ class session_captcha{
 	 * @var session
 	 */
 	private $session;
-	public function __construct(){
+	public function __construct(session $session){
 		$this->config=array(
 			"session_name"=>"captcha_session_name",
 			"session_img_type"=>"num",
@@ -18,7 +18,7 @@ class session_captcha{
 			"session_img_width"=>200,
 			"session_img_height"=>50,
 		);
-		$this->session=tian::$session;
+		$this->session=$session;
 	}
 	/**
 	 * @return bool
