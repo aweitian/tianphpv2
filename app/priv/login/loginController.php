@@ -4,7 +4,6 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY."/modules/priv/priv.php";
 require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/login/loginModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/login/loginView.php';
@@ -26,6 +25,10 @@ class loginController extends privController{
 		$this->initHttpResponse();
 	}
 	public function welcomeAction(pmcaiMsg $msg){
+		$priv = new priv(App::getSession());
+var_dump($priv->isLogined()
+		);exit;		
+		
 		if($msg->isPost()){
 			if(!isset($msg["email"],$msg["pwd"])){
 				$this->response->_404();
@@ -40,7 +43,7 @@ class loginController extends privController{
 				$this->response->go("/priv");
 			}else{
 				$this->view->setPmcaiMsg($msg);
-				$this->view->loginUI($priv,"用户名和密码不匹配");
+				$this->view->loginUI($priv,$priv->errorMsg);
 			}
 			
 		}else{
