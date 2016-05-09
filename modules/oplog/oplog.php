@@ -1,31 +1,26 @@
 <?php
-require_once FILE_SYSTEM_ENTRY."/lib/interfaces/IInstall.php";
-require_once FILE_SYSTEM_ENTRY.'/lib/modules/oplog/opValidator.php';
-class oplog implements IInstall{
+require_once FILE_SYSTEM_ENTRY.'/modules/oplog/opValidator.php';
+class oplog{
 	
 	
+	private $tb_prefix = "oplog";
 	private $tb_postfix = "oplog";
+	/**
+	 * 
+	 * @var mysqlPdoBase
+	 */
+	private $db;
 	
 	
-	
-	public function __construct() {
+	public function __construct($tb_prefix="") {
+		$this->tb_prefix = $tb_prefix;
 		if (is_null(mysqlPdo::getConnection())) {
 			tian::throwException("7399");
 		}
-		
-	}
-	public function install() {
-		$sql = file_get_contents("lib/modules/oplog/install.sql");
-		$sql = str_replace("xxxx_oplog",$this->getTabelName(),$sql);
-		tian::$pdoBase->exec($sql, array());
-	}
-	public function uninstall() {
-		$sql = file_get_contents("lib/modules/oplog/uninstall.sql");
-		$sql = str_replace("xxxx_oplog",$this->getTabelName(),$sql);
-		tian::$pdoBase->exec($sql, array());
+		$this->db = new mysqlPdoBase();
 	}
 	public function getTabelName() {
-		return  TABLE_PREFIX."_".$this->tb_postfix;
+		return  $this->tb_prefix.$this->tb_postfix;
 	}
 	/**
 	 * @return sid
@@ -34,7 +29,7 @@ class oplog implements IInstall{
 		if(!opValidator::isValidOptype($optype)){
 			tian::throwException("73c1");
 		}
-		$sid = tian::$pdoBase->insert("insert into `".$this->getTabelName()."` (
+		$sid = $this->db->insert("insert into `".$this->getTabelName()."` (
 			`optype`,`ipaddr`,`date`
 		) values (
 			:optype,:ipaddr,:date
@@ -46,7 +41,7 @@ class oplog implements IInstall{
 		if($sid>0){
 			return $sid;
 		}
-		$info = tian::$pdoBase->getErrorInfo();
+		$info = $this->db->getErrorInfo();
 		tian::newException($info[2],$info[0]);
 	}
 	/**
@@ -55,12 +50,12 @@ class oplog implements IInstall{
 	 * @throws Exception
 	 */
 	public function removeByDate($date){
-		return tian::$pdoBase->exec("DELETE FROM `".$this->getTabelName()."` WHERE `datetime`<:date", array(
+		return $this->db->exec("DELETE FROM `".$this->getTabelName()."` WHERE `datetime`<:date", array(
 				"date"=>$date
 		));
 	}
 	public function update($sid){
-		return tian::$pdoBase->exec("update `".$this->getTabelName()."` set `opflag` = 0 WHERE `sid`=:sid", array(
+		return $this->db->exec("update `".$this->getTabelName()."` set `opflag` = 0 WHERE `sid`=:sid", array(
 				"sid"=>$sid
 		));
 	}
@@ -69,14 +64,14 @@ class oplog implements IInstall{
 	 * @param string $ip
 	 */
 	public function removeByIp($ip){
-		return tian::$pdoBase->exec("DELETE FROM `".$this->getTabelName()."`
+		return $this->db->exec("DELETE FROM `".$this->getTabelName()."`
 			WHERE `datetime`=:date and `ipaddr`=:ipaddr", array(
 						"date"=>date("Y-m-d"),
 						"ipaddr"=>$ip
 				));
 	}
 	public function getCnt($optype,$ipaddr){
-		$row = tian::$pdoBase->fetch("select count(sid) as cnt from `".$this->getTabelName()."`
+		$row = $this->db->fetch("select count(sid) as cnt from `".$this->getTabelName()."`
 				where
 				`ipaddr` = :ipaddr and `optype`= :optype and `date`=:date and `opflag` = 0
 		", array(

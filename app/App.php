@@ -7,9 +7,20 @@
 require_once FILE_SYSTEM_ENTRY. "/app/AppInit.php";
 
 class App{
+	/**
+	 * 
+	 * @var session
+	 */
+	private static $session;
 	private function __construct(){
 		
 		
+	}
+	public static function getSession(){
+		if(is_null(self::$session)){
+			self::$session = new session();
+		}
+		return self::$session;
 	}
 	/**
 	 * 
