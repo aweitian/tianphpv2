@@ -28,8 +28,12 @@ $uidata = $auth->getUiData();
           </div>
           <div class="row">
           	<?php if(array_key_exists("Verification code", $uidata)):?>
-          <div class="col-xs-8">
+          <div class="col-xs-5">
               <input type="text" name="code" class="form-control" placeholder="Verification code">
+              
+            </div><!-- /.col -->
+            <div class="col-xs-3">
+              <img src="<?php print HTTP_ENTRY?>/captcha">
             </div><!-- /.col -->
             <div class="col-xs-4">
               <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
