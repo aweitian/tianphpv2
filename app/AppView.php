@@ -27,7 +27,7 @@ class AppView extends View{
 		$ctl = $this->pmcaiMsg->getControl();
 		ob_start();
 		if(strpos($tpl,'/') !== 0){
-			$tpl = FILE_SYSTEM_ENTRY."/app/modules/".$ctl."/tpl/".$tpl.$ext;
+			$tpl = FILE_SYSTEM_ENTRY.$this->pmcaiMsg->getModuleLoc()."/".$ctl."/tpl/".$tpl.$ext;
 				
 		}
 		include $tpl;
