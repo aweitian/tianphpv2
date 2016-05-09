@@ -234,27 +234,56 @@
 			<private_data>
 				<all>
 					LEFT JOIN `prvt_data` ON (
-						`prvt_data`.`code` = `table_tree`.`un_code_pc`
-						OR
-						`prvt_data`.`code` = `table_tree`.`un_code_m`
-						OR
-						FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_pc`)
-						OR
-						FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_m`)
+						(
+							`prvt_data`.`channel` = `table_tree`.`ch_id` 
+							AND 
+							`prvt_data`.`account` = `table_tree`.`ac_id` 
+						) 
+						AND
+						(
+							(
+								`prvt_data`.`code` = `table_tree`.`un_code_pc`
+								OR
+								`prvt_data`.`code` = `table_tree`.`un_code_m`
+							)
+							OR
+							(
+								FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_pc`)
+								OR
+								FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_m`)							
+							)						
+						)
 					)
 				</all>
 				<pc>
-					RIGHT JOIN `prvt_data` ON (
-						`prvt_data`.`code` = `table_tree`.`un_code_pc`
-						OR
-						FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_pc`)
+					LEFT JOIN `prvt_data` ON (
+						(
+							`prvt_data`.`channel` = `table_tree`.`ch_id` 
+							AND 
+							`prvt_data`.`account` = `table_tree`.`ac_id` 
+						) 
+						AND
+						(
+							`prvt_data`.`code` = `table_tree`.`un_code_pc`
+							OR
+							FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_pc`)						
+						)
+
 					)
 				</pc>
 				<m>
-					RIGHT JOIN `prvt_data` ON (
-						`prvt_data`.`code` = `table_tree`.`un_code_m`
-						OR
-						FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_m`)
+					LEFT JOIN `prvt_data` ON (
+						(
+							`prvt_data`.`channel` = `table_tree`.`ch_id` 
+							AND 
+							`prvt_data`.`account` = `table_tree`.`ac_id` 
+						) 
+						AND
+						(
+							`prvt_data`.`code` = `table_tree`.`un_code_m`
+							OR
+							FIND_IN_SET(`prvt_data`.`code` , `table_tree`.`grp_id_code_m`)						
+						)
 					)
 				</m>
 			</private_data>
