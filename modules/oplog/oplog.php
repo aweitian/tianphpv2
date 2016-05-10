@@ -3,7 +3,7 @@ require_once FILE_SYSTEM_ENTRY.'/modules/oplog/opValidator.php';
 class oplog{
 	
 	
-	private $tb_prefix = "oplog";
+	private $tb_prefix = "data_";
 	private $tb_postfix = "oplog";
 	/**
 	 * 
@@ -12,15 +12,18 @@ class oplog{
 	private $db;
 	
 	
-	public function __construct($tb_prefix="") {
-		$this->tb_prefix = $tb_prefix;
+	public function __construct($tb_prefix=null) {
+		if(is_string($tb_prefix)){
+			$this->tb_prefix = $tb_prefix;
+		}
+		
 		if (is_null(mysqlPdo::getConnection())) {
 			tian::throwException("7399");
 		}
 		$this->db = new mysqlPdoBase();
 	}
 	public function getTabelName() {
-		return  $this->tb_prefix.$this->tb_postfix;
+		return $this->tb_prefix.$this->tb_postfix;
 	}
 	/**
 	 * @return sid
@@ -41,8 +44,7 @@ class oplog{
 		if($sid>0){
 			return $sid;
 		}
-		$info = $this->db->getErrorInfo();
-		tian::newException($info[2],$info[0]);
+		tian::newException($this->db->getErrorInfo(),$this->db->getErrorCode());
 	}
 	/**
 	 * @return 返回影响的行数,删除小于指定日期的记录
