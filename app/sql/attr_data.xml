@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<getInfoById>
+		SELECT * 
+		FROM  `data_attr_data` WHERE `sid` = :sid
+	</getInfoById>
+	<getInfoesByGrp>
+		SELECT * 
+		FROM  `data_attr_data` WHERE `grp` = :grp
+		ORDER BY `level` ASC
+	</getInfoesByGrp>
+
+	<add>
+		INSERT INTO `data_attr_data`(`data`, `pid`, `grp`, `metaid`) 
+		VALUES (:data,:pid,:grp,:metaid)
+	</add>
+
+	<removeById>
+		DELETE FROM `data_attr_data` WHERE `sid` = :sid
+	</removeById>
+	<removeByGrp>
+		DELETE FROM `data_attr_data` WHERE `grp` = :grp
+	</removeByGrp>
+	
+	<updateById>
+		UPDATE `data_attr_data` SET 
+		`data`=:data,`pid`=:pid,`grp`=:grp,`metaid`=:metaid
+		WHERE `sid`=:sid
+	</updateById>
+	
+	<updateData>
+		UPDATE `data_attr_data` SET `data`=:data
+		WHERE `sid`=:sid
+	</updateData>
+	
+	<updateGrp>
+		UPDATE `data_attr_data` SET `grp`=:grp
+		WHERE `sid`=:sid
+	</updateGrp>
+	
+	<updateMetaid>
+		UPDATE `data_attr_data` SET `metaid`=:metaid
+		WHERE `sid`=:sid
+	</updateMetaid>
+	
+</sql>

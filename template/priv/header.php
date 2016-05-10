@@ -35,29 +35,27 @@ $info = $userInfo;
                   <li class="user-header">
                     <img src="<?php print HTTP_ENTRY?>/static/AdminLTE-2.3.0/img/user1-128x128.jpg" class="img-circle" alt="User Image">
                     <p>
-                      <?php print $info["email"]?> - <?php print $info["privilege"]?>
+                      <?php print $info["email"]?>
                       <small>Member since <?php print $info["time"]?></small>
                     </p>
                   </li>
                   <!-- Menu Body -->
                   <li class="user-body">
                     <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
+                      <a href="#"><?php print $info["privilege"]?></a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
                     </div>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href="<?php print HTTP_ENTRY?>/priv/user/resetpwd" class="btn btn-default btn-flat">修改密码</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php print HTTP_ENTRY?>/priv/login/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php print HTTP_ENTRY?>/priv/login/logout" class="btn btn-default btn-flat">退出</a>
                     </div>
                   </li>
                 </ul>

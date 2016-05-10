@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<getInfoById>
+		SELECT * 
+		FROM  `data_attr_meta` WHERE `sid` = :sid
+	</getInfoById>
+	<getInfoesByGrp>
+		SELECT * 
+		FROM  `data_attr_meta` WHERE `grp` = :grp
+		ORDER BY `level` ASC
+	</getInfoesByGrp>
+
+	<add>
+		INSERT INTO `data_attr_meta`(`val`, `level`, `grp`) 
+		VALUES (:val,:level,:grp)
+	</add>
+
+
+	<removeById>
+		DELETE FROM `data_attr_meta` WHERE `sid` = :sid
+	</removeById>
+	<removeByGrp>
+		DELETE FROM `data_attr_meta` WHERE `grp` = :grp
+	</removeByGrp>
+	
+	<updateById>
+		UPDATE `data_attr_meta` SET `val`=:val,`level`=:level,`grp`=:grp
+		WHERE `sid`=:sid
+	</updateById>
+	
+	<updateVal>
+		UPDATE `data_attr_meta` SET `val`=:val
+		WHERE `sid`=:sid
+	
+	</updateVal>
+	
+</sql>

@@ -24,7 +24,7 @@ class priv implements IOp{
 	private $oplog;
 	private $conf;
 	private $tb_postfix = "priv";
-	private $tb_prefix  = "";
+	private $tb_prefix  = "data_";
 	public $errorMsg;
 	public $remain_times = 0;
 	/**
@@ -44,9 +44,11 @@ class priv implements IOp{
 	 * @param string $tb_prefix
 	 * @param array $conf  u_try_times_max/u_try_times/open  是否需要验证码
 	 */
-	public function __construct(session $session,$tb_prefix = "",$conf = null,$roleCode = null) {
+	public function __construct(session $session,$tb_prefix = null,$conf = null,$roleCode = null) {
 		$this->session = $session;
-		$this->tb_prefix = $tb_prefix;
+		if(is_string($tb_prefix)){
+			$this->tb_prefix = $tb_prefix;
+		}
 		$this->db = new mysqlPdoBase();
 		$this->conf = is_array($conf) ? $conf : array(
 			"u_try_times"     => 5,

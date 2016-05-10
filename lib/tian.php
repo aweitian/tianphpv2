@@ -31,7 +31,11 @@ class tian{
 		if (count($replacement)) {
 			$msg = strtr($msg,$replacement);
 		}
-		throw new Exception($msg,$no);
+		if(DEBUG_FLAG){
+			debug_print_backtrace();
+			exit;
+		}
+// 		throw new Exception($msg,$no);
 	}
 	/**
 	 * 
