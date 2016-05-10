@@ -18,7 +18,7 @@
 
                     <!-- textarea -->
                     <div class="form-group">
-                      <label>病种,疾病数据</label>
+                      <label>病种,疾病数据(同一级前面的TAB个数要相同)</label>
                       <textarea id="main_data" name="data" class="form-control" rows="8" placeholder="每行一个批量导入"></textarea>
                     </div>
 

@@ -8,7 +8,7 @@ require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/disease/diseaseModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/disease/diseaseView.php';
 
-require_once FILE_SYSTEM_ENTRY.'/app/priv/disease/tabDataToArray.php';
+require_once FILE_SYSTEM_ENTRY.'/app/utility/tabDataToArray.php';
 class diseaseController extends privController{
 	/**
 	 * 
@@ -37,10 +37,9 @@ class diseaseController extends privController{
 			$ret = $demo->parse();
 			if($ret->isTrue()){
 				
-				var_dump($ret->return);
+				$this->model->import($ret->return);
 			}else{
-				echo $this->response->utf8Header();
-				echo $ret->info;
+				$this->response->showError($ret->info);
 			}
 		}else{
 			$this->view->setPmcaiMsg($msg);

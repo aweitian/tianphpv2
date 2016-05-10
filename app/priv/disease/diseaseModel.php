@@ -14,6 +14,32 @@ class diseaseModel extends privModel{
 	 * @return int rows
 	 */
 	public function import($data){
-		return "hi";
+		echo "<pre>";
+		$this->treeArrTra($data, array($this,"test"));
+		echo "</pre>";
+	}
+	
+	private function test($key,$arr,$depth,$index){
+		print str_repeat("\t", $depth) . $key."\n";
+	}
+	
+	/**
+	 * 
+	 * @param array $data
+	 * @param callback $callback
+	 */
+	private function treeArrTra($data,$callback){
+		//forest 遍历
+		$i = 0;
+		foreach ($data as $k => $v){
+			$this->_helper_treeArrTra($callback,$k,$v,0,$i++);
+		}
+	}
+	private function _helper_treeArrTra($callback,$key,$arr,$depth,$index){
+		call_user_func_array($callback, array($key,$arr,$depth,$index));
+		$i = 0;
+		foreach ($arr as $k => $v){
+			$this->_helper_treeArrTra($callback,$k,$v,$depth+1,$i++);
+		}
 	}
 }
