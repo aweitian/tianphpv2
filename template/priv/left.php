@@ -37,7 +37,7 @@ $info = $userInfo;
                 <i class="fa fa-medkit"></i> <span>病种管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> 添加病种</a></li>
+                <li class="active"><a href="<?php print HTTP_ENTRY?>/priv/disease/import"><i class="fa fa-circle-o"></i> 批量导入</a></li>
                 <li><a href="index2.html"><i class="fa fa-circle-o"></i> 病种列表</a></li>
               </ul>
             </li>

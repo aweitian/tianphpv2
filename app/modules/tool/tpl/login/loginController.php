@@ -19,10 +19,11 @@ class loginController extends privController{
 	 */
 	private $view;
 	public function __construct(){
+		$this->checkPriv();
 		$this->model = new loginModel();
 		$this->view = new loginView();
 	}
-	public function welcomeAction(){
+	public function welcomeAction(pmcaiMsg $msg){
 
 	}
 }

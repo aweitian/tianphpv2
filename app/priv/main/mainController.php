@@ -21,15 +21,9 @@ class mainController extends privController{
 	public function __construct(){
 		$this->model = new mainModel();
 		$this->view = new mainView();
-		$this->initHttpResponse();
+		$this->checkPriv();
 	}
 	public function welcomeAction(){
-		$priv = new priv(App::getSession());
-		if($priv->isLogined()){
-			$info = $priv->getUserInfo();
-			$this->view->main($info,"welcome");
-		}else{
-			$this->response->go("/priv/login");
-		}
+		$this->view->main($this->priv->getUserInfo(),"welcome");
 	}
 }

@@ -5,8 +5,7 @@
  * Description: 
  */
 ?>
- <!-- jQuery 2.1.4 -->
-    <script src="<?php print HTTP_ENTRY?>/static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+
     <!-- jQuery UI 1.11.4 -->
     <!-- 
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>

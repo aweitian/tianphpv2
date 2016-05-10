@@ -6,4 +6,10 @@
  */
 class loginView extends privView{
 	
+	
+	
+	
+	public function import(){
+		
+	}
 }

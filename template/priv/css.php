@@ -5,6 +5,10 @@
  * Description: 
  */
 ?>
+ 	<!-- jQuery 2.1.4 -->
+    <script src="<?php print HTTP_ENTRY?>/static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    
+    
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->

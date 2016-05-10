@@ -13,7 +13,19 @@ class privController extends Controller{
 	 */
 	protected $response;
 	
+	/**
+	 * 
+	 * @var priv
+	 */
+	protected $priv;
 	protected function initHttpResponse(){
 		$this->response = new httpResponse();
+	}
+	protected function checkPriv(){
+		$this->priv = new priv(App::getSession());
+		if(!$this->priv->isLogined()){
+			$this->response = new httpResponse();
+			$this->response->go("/priv/login");
+		}
 	}
 }
