@@ -5,9 +5,17 @@
  * Description: 
  */
 class AppModel extends Model{
+	/**
+	 * 
+	 * @var sqlManager
+	 */
+	protected $sqlManager;
 	public function __construct() {
 	}
 	protected function initDb(){
 		$this->initMySqlDb();
+	}
+	protected function initSqlManager($name){
+		$this->sqlManager = new sqlManager($name);
 	}
 }

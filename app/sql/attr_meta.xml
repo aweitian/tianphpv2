@@ -9,6 +9,12 @@
 		FROM  `data_attr_meta` WHERE `grp` = :grp
 		ORDER BY `level` ASC
 	</getInfoesByGrp>
+	
+	<getNextMetaIdByGrpLv>
+		SELECT `sid` FROM `data_attr_meta`
+		WHERE `level` = :level + 1 AND `grp` = :grp
+	</getNextMetaIdByGrpLv>
+
 
 	<add>
 		INSERT INTO `data_attr_meta`(`val`, `level`, `grp`) 

@@ -5,7 +5,7 @@
  * Description: 
  */
 define("HTTP_ENTRY",'');
-
+require_once FILE_SYSTEM_ENTRY.'/app/AppConst.php';
 require_once FILE_SYSTEM_ENTRY.'/app/hook404.php';
 
 
@@ -23,6 +23,7 @@ if(DEBUG_FLAG){
 	ini_set("display_errors","Off");
 }
 
+tian::addExceptionDir(FILE_SYSTEM_ENTRY."/app/exceptions");
 
 #define("TPL_404_CNF_PATH",FILE_SYSTEM_ENTRY."/lib/misc/404.tpl.php");
 #define("TPL_MSG_CNF_PATH",FILE_SYSTEM_ENTRY."/lib/misc/msg.tpl.php");

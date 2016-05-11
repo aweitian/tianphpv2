@@ -38,7 +38,7 @@ $info = $userInfo;
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="<?php print HTTP_ENTRY?>/priv/disease/import"><i class="fa fa-circle-o"></i> 批量导入</a></li>
-                <li><a href="index2.html"><i class="fa fa-circle-o"></i> 病种列表</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/disease"><i class="fa fa-circle-o"></i> 病种列表</a></li>
               </ul>
             </li>
             <li class="treeview">

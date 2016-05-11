@@ -22,7 +22,7 @@ class AppView extends View{
 	
 	public function fetch($tpl,$data=array(),$ext='.tpl.php'){
 		if(is_null($this->pmcaiMsg)){
-			tian::throwException(0x0000);
+			tian::throwException("0000");
 		}
 		$ctl = $this->pmcaiMsg->getControl();
 		ob_start();

@@ -5,10 +5,20 @@
 		FROM  `data_attr_data` WHERE `sid` = :sid
 	</getInfoById>
 	<getInfoesByGrp>
-		SELECT * 
-		FROM  `data_attr_data` WHERE `grp` = :grp
-		ORDER BY `level` ASC
+		SELECT `data_attr_data`.*,`data_attr_meta`.`level`
+		FROM  `data_attr_data` 
+		LEFT JOIN `data_attr_meta` ON `data_attr_data`.`metaid` = `data_attr_meta`.`sid`
+		WHERE 
+		`data_attr_data`.`grp` = :grp AND `data_attr_data`.`pid` = :pid
 	</getInfoesByGrp>
+
+	<getLvById>
+	SELECT `data_attr_meta`.`level`
+		FROM  `data_attr_data` 
+		LEFT JOIN `data_attr_meta` ON `data_attr_data`.`metaid` = `data_attr_meta`.`sid`
+		WHERE 
+		`data_attr_data`.`sid` = :sid
+	</getLvById>
 
 	<add>
 		INSERT INTO `data_attr_data`(`data`, `pid`, `grp`, `metaid`) 
@@ -18,6 +28,11 @@
 	<removeById>
 		DELETE FROM `data_attr_data` WHERE `sid` = :sid
 	</removeById>
+	<removeByPid>
+		DELETE FROM `data_attr_data` WHERE `pid` = :pid
+	</removeByPid>
+	
+	
 	<removeByGrp>
 		DELETE FROM `data_attr_data` WHERE `grp` = :grp
 	</removeByGrp>
