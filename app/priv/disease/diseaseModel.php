@@ -65,9 +65,9 @@ class diseaseModel extends privModel{
 				"data" => $data,
 				"sid" => $sid,
 		);
+		
 		$ret = $this->db->exec($sql, $data);
 		if($ret == 0){
-			var_dump($this->db->getErrorCode());
 			if($this->db->getErrorCode() == mysqlPdoBase::NONERRCODE){
 				return new rirResult(0,"ok",$ret);
 			}
