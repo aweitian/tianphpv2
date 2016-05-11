@@ -36,6 +36,10 @@ class mysqlPdoBase implements IPdoBase{
 	public function hasError(){
 		return $this->getErrorCode() !== self::NONERRCODE;
 	}
+	public function resetErr(){
+		$this->errorCode = self::NONERRCODE;
+		$this->errorInfo = "";
+	}
 	/**
 	 * 
 	 * @return last insert into id
@@ -43,6 +47,7 @@ class mysqlPdoBase implements IPdoBase{
 	 * @param array $data
 	 */
 	public function insert($sql,$data){
+		$this->resetErr();
 		$this->_parse_sqlExpression($sql, $data);
 		$sth=$this->connection->prepare($sql);
 		if(!$sth){
@@ -71,6 +76,7 @@ class mysqlPdoBase implements IPdoBase{
 	 * @param array $data
 	 */
 	public function fetch($sql,$data,$fetch_mode=PDO::FETCH_ASSOC){
+		$this->resetErr();
 		$this->_parse_sqlExpression($sql, $data);
 		$sth=$this->connection->prepare($sql);
 		if(!$sth){
@@ -101,6 +107,7 @@ class mysqlPdoBase implements IPdoBase{
 	 * @param array $data
 	 */
 	public function fetchAll($sql,$data,$fetch_mode=PDO::FETCH_ASSOC){
+		$this->resetErr();
 		$this->_parse_sqlExpression($sql, $data);
 		$sth=$this->connection->prepare($sql);
 		if(!$sth){
@@ -136,6 +143,7 @@ class mysqlPdoBase implements IPdoBase{
 	 * @param array $data
 	 */
 	public function exec($sql,$data){
+		$this->resetErr();
 		$this->_parse_sqlExpression($sql, $data);		
 		$sth=$this->connection->prepare($sql);
 		if(!$sth){
