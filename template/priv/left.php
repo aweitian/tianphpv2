@@ -48,13 +48,24 @@ $info = $userInfo;
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 添加医生</a></li>
-                <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 医生列表</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/lv"><i class="fa fa-circle-o"></i> 职位管理</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor"><i class="fa fa-circle-o"></i> 医生列表</a></li>
               </ul>
             </li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-user-md"></i>
+                <span>注册用户</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 搜索用户</a></li>
+                <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 用户列表</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-user"></i>
                 <span>后台用户</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>

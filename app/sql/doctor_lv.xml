@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<all>
+		SELECT * FROM `data_doctor_lv` WHERE 1
+	</all>
+
+	<add>
+		INSERT INTO `data_doctor_lv`(`data`) VALUES (:data)
+	</add>
+	
+	<update>
+		UPDATE `data_doctor_lv` SET `data`=:data WHERE `sid` = :sid
+	</update>
+	
+	<remove>
+		DELETE FROM `data_doctor_lv` WHERE `sid` = :sid
+	</remove>
+</sql>

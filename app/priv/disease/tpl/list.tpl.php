@@ -29,7 +29,7 @@ function isEnableAddSub($lv,$maxl){
                 </div><!-- /.box-header -->
                 <div class="box-body">
                 	 <a class="btn bg-olive btn-flat margin" href="<?php print HTTP_ENTRY?>/priv/disease/add?pid=<?php print $pid?>">
-                	 添加一个<?php print $meta?>
+                	 <i class="fa fa-plus"></i> 添加一个<?php print $meta?>
                 	 </a>
                         
                 
@@ -52,10 +52,11 @@ function isEnableAddSub($lv,$maxl){
                       	<?php endif?>
                       </td>
                       <td>
+                      	<!-- <i class="fa fa-edit"></i> -->
                       	<?php if(isEnableAddSub($item["level"],$maxl)):?>
                         <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/disease/add?pid=<?php print $item["sid"]?>">添加</a>
                         <?php endif?>
-                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/disease/edit?sid=<?php print $item["sid"]?>"><i class="fa fa-edit"></i> 编辑</a>
+                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/disease/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
                         <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/disease/rm?sid=<?php print $item["sid"]?>">删除</a>
                         
                       </td>

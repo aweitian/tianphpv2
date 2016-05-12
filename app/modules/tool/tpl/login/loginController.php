@@ -22,6 +22,7 @@ class loginController extends privController{
 		$this->checkPriv();
 		$this->model = new loginModel();
 		$this->view = new loginView();
+		$this->initHttpResponse();
 	}
 	public function welcomeAction(pmcaiMsg $msg){
 
