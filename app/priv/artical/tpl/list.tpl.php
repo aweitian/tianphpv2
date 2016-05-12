@@ -82,14 +82,14 @@ if(is_null($q)){
                   <div class="box-tools">
                     <ul class="pagination pagination-sm no-margin pull-right">
                     <?php if($pagination->hasPre()):?>
-                      <li><a href="<?php print $url->setQuery("page", $pagination->getPre());?>">&laquo;</a></li>
+                      <li><a href="<?php print $url->setQuery("page", $pagination->getPre())->getUrl();?>">&laquo;</a></li>
                       <?php endif;?>
                       
                       <?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
-                      <li><a href="<?php print $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a></li>
+                      <li><a href="<?php print $url->setQuery("page", $pagination->getStartPage() + $i)->getUrl()?>"><?php print $pagination->getStartPage() + $i?></a></li>
                       <?php endfor;?>
                       <?php if($pagination->hasNext()):?>
-                      <li><a href="<?php print $url->setQuery("page", $pagination->getNext())?>">&raquo;</a></li>
+                      <li><a href="<?php print $url->setQuery("page", $pagination->getNext())->getUrl()?>">&raquo;</a></li>
                       <?php endif;?>
                     </ul>
                   </div>
