@@ -79,9 +79,11 @@ class pmcaiUrl{
 	}
 	public function setQuery($k,$v){
 		$this->url->setQuery($k, $v);
+		return $this;
 	}
 	public function removeQuery($key){
 		$this->url->removeQuery($key);
+		return $this;
 	}
 	/**
 	 * @return "" or a/b/c?d=e or ?a=b&c=d
@@ -115,6 +117,7 @@ class pmcaiUrl{
 		$this->initConf();
 		$this->pmcaiArr = $this->getEmptyPmcai();
 		$this->parse();
+		return $this;
 	}
 	
 	private function getEmptyPmcai(){
