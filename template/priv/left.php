@@ -65,6 +65,20 @@ $info = $userInfo;
             </li>
             <li class="treeview">
               <a href="#">
+                <i class="fa fa-book"></i>
+                <span>文章管理</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+              	<li><a href="<?php print HTTP_ENTRY?>/priv/artical/add"><i class="fa fa-circle-o"></i> 添加文章</a></li>
+              	<li><a href="<?php print HTTP_ENTRY?>/priv/artical"><i class="fa fa-circle-o"></i> 文章列表</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldis"><i class="fa fa-circle-o"></i> 关联病种</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldoc"><i class="fa fa-circle-o"></i> 关联医生</a></li>
+                
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
                 <i class="fa fa-user"></i>
                 <span>后台用户</span>
                 <i class="fa fa-angle-left pull-right"></i>

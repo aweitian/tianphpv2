@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<all>
+		SELECT * FROM `data_artical` WHERE 1
+		LIMIT :offset,:length
+	</all>
+
+	<count>
+		SELECT count(*) as count FROM `data_artical` WHERE 1
+	</count>
+
+	<row>
+		SELECT * FROM `data_artical` WHERE `sid` = :sid
+	</row>
+
+	<add>
+		INSERT INTO `data_artical`(`title`, `content`, `date`) VALUES (:title,:content,:date)
+	</add>
+	
+	<update>
+		UPDATE `data_artical` SET 
+		`title`=:title,
+		`content`=:content,
+		`date`=:date
+		
+		WHERE `sid` = :sid
+	</update>
+	
+	<remove>
+		DELETE FROM `data_artical` WHERE `sid` = :sid
+	</remove>
+</sql>
