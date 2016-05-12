@@ -13,6 +13,20 @@
 		SELECT * FROM `data_artical` WHERE `sid` = :sid
 	</row>
 
+
+
+	<query>
+		SELECT * FROM `data_artical` WHERE 
+			`title` LIKE CONCAT(  '%',  :q,  '%' ) 
+		LIMIT :offset,:length
+	</query>
+	<query_count>
+		SELECT count(`sid`) as count FROM `data_artical` WHERE 
+			`title` LIKE CONCAT(  '%',  :q,  '%' ) 
+	</query_count>
+
+
+
 	<add>
 		INSERT INTO `data_artical`(`title`, `content`, `date`) VALUES (:title,:content,:date)
 	</add>

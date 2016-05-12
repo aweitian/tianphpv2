@@ -34,6 +34,10 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     <!-- text input -->
                     <div class="form-group">
                       <label>标题</label>
+                      <?php if($ua == "edit"):?>
+                      <input type="hidden" name="sid" value="<?php print $def["sid"]?>">
+                      
+                      <?php endif?>
                       <input value="<?php print $def["title"]?>" name="title" required type="text" class="form-control" placeholder="文章标题">
                     </div>
                     <!-- textarea -->

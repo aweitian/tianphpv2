@@ -129,7 +129,7 @@ class diseaseController extends privController{
 				}
 			}
 			$this->view->setPmcaiMsg($msg);
-			$this->view->showFormUI($this->priv->getUserInfo(), $sid,$meta[$lvRet->return]["val"],$info);
+			$this->view->showFormUI($this->priv->getUserInfo(), $sid,$meta[$lvRet->return]["val"],$info,$msg["?sid"]);
 		}
 	}
 	

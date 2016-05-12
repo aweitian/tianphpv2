@@ -11,6 +11,44 @@ class articalModel extends privModel{
 		$this->initSqlManager("artical");
 	}
 
+	
+	public function row($sid){
+		$ret = $this->db->fetch($this->sqlManager->getSql("/sql/row"), array(
+				"sid" => $sid
+		));
+		if(empty($ret)){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
+	
+	
+	public function q($q,$offset,$len){
+		$cnt = $this->db->fetch($this->sqlManager->getSql("/sql/query_count"), array(
+				"q" => $q
+		));
+		
+		$cnt = $cnt["count"];
+		
+		$ret = $this->db->fetchAll($this->sqlManager->getSql("/sql/query"), array(
+				"q" => $q,
+				"offset" => $offset,
+				"length" => $len
+		));
+		if(empty($ret)){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",array(
+				"data" => $ret,
+				"count" => $cnt
+		));
+	}
+	
+	
 	public function getList($offset=0,$len=10){
 		$cnt = $this->db->fetch($this->sqlManager->getSql("/sql/count"), array());
 		

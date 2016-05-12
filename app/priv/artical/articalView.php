@@ -9,12 +9,21 @@ class articalView extends privView{
 	
 	
 	
-	public function showForm($userInfo){
-		$this->priv_wrap($userInfo, $this->fetch("form"))->show();
+	public function showForm($userInfo,$def=null){
+		$this->priv_wrap($userInfo, $this->fetch(
+				"form",array(
+						"def" => $def
+				)
+			))->show();
 	}
 	
 	
-	public function showList($userinfo,$data){
+	public function showList(pmcaiUrl $url,$userinfo,$data,$page,$length,$q){
+		$data["pageSize"] = $length;
+		$data["pageBtnLen"] = 5;
+		$data["curPageNum"] = $page;
+		$data["url"] = $url;
+		$data["q"] = $q;
 		$content = $this->fetch("list",$data);
 		$this->priv_wrap($userinfo, $content)->show();
 	}

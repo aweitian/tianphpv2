@@ -4,28 +4,50 @@
  * Author: Awei.tian
  * Description: 
  */
+$q  = $data["q"];
+/**
+ * 
+ * @var pmcaiUrl $url
+ */
+$url  = $data["url"];
 $cnt  = $data["count"];
-
+$pageSize = $data["pageSize"];
+$pageBtnLen = $data["pageBtnLen"];
+$curPageNum = $data["curPageNum"];
 $data = $data["data"];
-var_dump($cnt);
+
+$pagination = new pagination($cnt, $curPageNum, $pageSize, $pageBtnLen);
+if(is_null($q)){
+	$q = "";
+}
 ?>
 <section class="content">
 
 		<div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title">文章列表</h3>
-                  <div class="box-tools">
-                    <ul class="pagination pagination-sm no-margin pull-right">
-                      <li><a href="#">&laquo;</a></li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">&raquo;</a></li>
-                    </ul>
+                   
+                   
+                   <div class="box-tools">
+                   <form action="<?php print HTTP_ENTRY?>/priv/artical/q">
+                    <div class="input-group" style="width: 256px;">
+                    
+                      <input name="q" value="<?php print $q?>" type="text" name="table_search" class="form-control input-sm pull-right" placeholder="输入标题查询">
+                      <div class="input-group-btn">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                      </div>
+                      
+                    </div>
+                    </form>
                   </div>
+                   
+                   
+                   
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                
+                <a class="btn bg-olive btn-flat margin" href="<?php print HTTP_ENTRY?>/priv/artical/add">
+                	 <i class="fa fa-plus"></i> 添加文章
+                	 </a>
                   <table class="table table-bordered">
                     <tr>
                       <th style="width: 20px">#</th>
@@ -41,8 +63,8 @@ var_dump($cnt);
                       
                       <td>
                       	<!-- <i class="fa fa-edit"></i> -->
-                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/disease/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
-                        <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/disease/rm?sid=<?php print $item["sid"]?>">删除</a>
+                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/artical/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
+                        <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/artical/rm?sid=<?php print $item["sid"]?>">删除</a>
                         
                       </td>
                     </tr>
@@ -54,6 +76,27 @@ var_dump($cnt);
                   </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
+ 
+ 
+ 
+                  <div class="box-tools">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                    <?php if($pagination->hasPre()):?>
+                      <li><a href="<?php print $url->setQuery("page", $pagination->getPre());?>">&laquo;</a></li>
+                      <?php endif;?>
+                      
+                      <?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+                      <li><a href="<?php print $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a></li>
+                      <?php endfor;?>
+                      <?php if($pagination->hasNext()):?>
+                      <li><a href="<?php print $url->setQuery("page", $pagination->getNext())?>">&raquo;</a></li>
+                      <?php endif;?>
+                    </ul>
+                  </div>
+ 
+ 
+ 
+ 
  
                 </div>
               </div><!-- /.box -->

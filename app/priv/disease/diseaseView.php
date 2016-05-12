@@ -41,11 +41,12 @@ class diseaseView extends privView{
 	}
 	
 	
-	public function showFormUI($info,$pid,$meta,$def=null){
+	public function showFormUI($info,$pid,$meta,$def=null,$sid=0){
 		$content = $this->fetch("form",array(
 				"pid" => $pid,
 				"meta" => $meta,
-				"def" => $def
+				"def" => $def,
+				"sid" => $sid
 		));
 		$this->priv_wrap($info, $content)->show();
 	}
