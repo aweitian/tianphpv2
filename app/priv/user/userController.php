@@ -1,37 +1,37 @@
 <?php
 /**
- * Date: 2016-05-12
+ * Date: 2016-05-13
  * Author: Awei.tian
  * Description: 
  */
 require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/artical/articalModel.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/artical/articalView.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/artical/artical_validator.php';
-
-
-class articalController extends privController{
+require_once FILE_SYSTEM_ENTRY.'/app/priv/user/userModel.php';
+require_once FILE_SYSTEM_ENTRY.'/app/priv/user/userView.php';
+require_once FILE_SYSTEM_ENTRY.'/app/priv/user/userValidator.php';
+require_once FILE_SYSTEM_ENTRY.'/app/priv/user/userFilter.php';
+class userController extends privController{
 	/**
 	 * 
-	 * @var articalModel
+	 * @var userModel
 	 */
 	private $model;
 	/**
 	 * 
-	 * @var articalView
+	 * @var userView
 	 */
 	private $view;
 	public function __construct(){
 		$this->checkPriv();
-		$this->model = new articalModel();
-		$this->view = new articalView();
+		$this->model = new userModel();
+		$this->view = new userView();
 		$this->initHttpResponse();
 	}
+
 	public function welcomeAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行
 		
-		if (isset($msg["?page"])){
+		if(isset($msg["?page"])){
 			$page = intval($msg["?page"]);
 		}else{
 			$page = 1;
@@ -52,6 +52,25 @@ class articalController extends privController{
 			$this->response->showError($retR->info);;
 		}
 	}
+	
+	public function forceresetpwdAction(pmcaiMsg $msg){
+		
+		if($msg->isPost()){
+			if(!isset($msg["sid"],$msg["pwd"])){
+				$this->response->_404();
+			}
+			$retR = $this->model->forceResetPwd($msg["sid"],$msg["pwd"]);
+			if($retR->isTrue()){
+				$this->response->redirect($_SERVER["HTTP_REFERER"]);
+				exit;
+			}else{
+				$this->response->showError($retR->info);;
+			}
+		}
+		$this->response->_404();
+	}
+	
+	
 	public function qAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行
 		
@@ -96,10 +115,11 @@ class articalController extends privController{
 	
 	public function editAction(pmcaiMsg $msg){
 		if($msg->isPost()){
-			if(!isset($msg["sid"],$msg["title"],$msg["content"],$msg["date"])){
+			
+			if(!isset($msg["sid"],$msg["email"],$msg["name"],$msg["phone"],$msg["avatar"],$msg["date"])){
 				$this->response->_404();
 			}
-			$retR = $this->model->update($msg["sid"],$msg["title"],$msg["content"],$msg["date"]);
+			$retR = $this->model->update($msg["sid"],$msg["email"],$msg["name"],$msg["phone"],$msg["avatar"],$msg["date"]);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
 					$ret_url = $msg["?returl"];
@@ -125,10 +145,10 @@ class articalController extends privController{
 	}
 	public function addAction(pmcaiMsg $msg){
 		if($msg->isPost()){
-			if(!isset($msg["title"],$msg["content"],$msg["date"])){
+			if(!isset($msg["email"],$msg["name"],$msg["pwd"],$msg["phone"],$msg["avatar"],$msg["rpq"],$msg["rpa"],$msg["date"])){
 				$this->response->_404();
 			}
-			$retR = $this->model->add($msg["title"],$msg["content"],$msg["date"]);
+			$retR = $this->model->add($msg["email"],$msg["name"],$msg["pwd"],$msg["phone"],$msg["avatar"],$msg["rpq"],$msg["rpa"],$msg["date"]);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
 					$ret_url = $msg["?returl"];

@@ -6,7 +6,7 @@
  */
 $info = $userInfo;
 ?>
-<aside class="main-sidebar">
+	<aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
@@ -59,8 +59,8 @@ $info = $userInfo;
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 搜索用户</a></li>
-                <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 用户列表</a></li>
+              	<li><a href="<?php print HTTP_ENTRY?>/priv/user/add"><i class="fa fa-circle-o"></i> 添加用户</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/user"><i class="fa fa-circle-o"></i> 用户列表</a></li>
               </ul>
             </li>
             <li class="treeview">

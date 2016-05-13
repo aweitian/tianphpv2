@@ -22,7 +22,9 @@ class dbgController extends Controller{
 		$this->view = new dbgView();
 	}
 	public function welcomeAction(){
-		var_dump("def/dbg/main");
+		require_once FILE_SYSTEM_ENTRY."/modules/algorithms/Security.php";
+		echo Security::encrypt("r7xxud");
+		//var_dump("def/dbg/main");
 	}
 	public function xxAction(){
 		var_dump($this->model->test());

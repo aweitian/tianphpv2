@@ -27,7 +27,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
  <!-- general form elements disabled -->
               <div class="box box-warning">
                 <div class="box-header with-border">
-                  <h3 class="box-title">添加文章</h3>
+                  <h3 class="box-title"><?php print $at?>文章</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/artical/<?php print $ua;?><?php print $ret_url?>">

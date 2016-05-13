@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<all>
+		SELECT * FROM `data_user` WHERE 1
+		LIMIT :offset,:length
+	</all>
+
+	<count>
+		SELECT count(*) as count FROM `data_user` WHERE 1
+	</count>
+
+	<row>
+		SELECT * FROM `data_user` WHERE `sid` = :sid
+	</row>
+
+
+	<getRpq>
+		SELECT
+		  `rpq`
+		FROM `data_user`
+		WHERE `sid` = :sid
+	</getRpq>
+
+
+
+	<resetpwd>
+		UPDATE `data_user` SET
+		`pwd`=:pwd
+		WHERE `sid`=:sid
+		AND `rpq`=:rpq
+		AND `rpa`=:rpa
+	</resetpwd>
+	
+	
+	<updateName>
+		UPDATE `data_user` SET
+		`name`=:name
+		WHERE `sid`=:sid
+	</updateName>
+	
+	<updateEml>
+		UPDATE `data_user` SET
+		`email`=:email
+		WHERE `sid`=:sid
+	</updateEml>
+	
+	<updatepwd>
+		UPDATE `data_user` SET
+		`pwd`=:npwd
+		WHERE `sid`=:sid
+		AND `pwd`=:opwd
+	</updatepwd>
+
+	<resetpwdForce>
+		UPDATE `data_user` SET
+		`pwd`=:pwd
+		WHERE `sid`=:sid
+	</resetpwdForce>
+
+	<update>
+	UPDATE `data_user` SET 
+	`email`=:email,`phone`=:phone,
+	`avatar`=:avatar,
+	`name`=:name,
+	`date`=:date
+ 	WHERE `sid`=:sid
+	
+	</update>
+
+
+
+
+
+	<query>
+		SELECT * FROM `data_user` WHERE 
+			`email` LIKE CONCAT(  '%',  :q,  '%' ) 
+		LIMIT :offset,:length
+	</query>
+	<query_count>
+		SELECT count(`sid`) as count FROM `data_user` WHERE 
+			`email` LIKE CONCAT(  '%',  :q,  '%' ) 
+	</query_count>
+
+
+
+	<add>
+		INSERT INTO `data_user` (
+			`email`,`name`,`pwd`,`phone`,`avatar`,`rpq`,`rpa`,`date`
+		) VALUES (
+			:email,:name,:pwd,:phone,:avatar,:rpq,:rpa,:date
+		)
+	</add>
+	
+	<remove>
+		DELETE FROM `data_user` WHERE `sid` = :sid
+	</remove>
+</sql>
