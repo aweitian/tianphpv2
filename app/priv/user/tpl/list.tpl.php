@@ -77,7 +77,7 @@ for ($i = 0; $i < 6; $i++) {
                       	<!-- <i class="fa fa-edit"></i> -->
                         <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/user/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
                         <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/user/rm?sid=<?php print $item["sid"]?>">删除</a>
-                        <a class="btn btn-default" data-toggle="modal" data-target="#myModal"> 重置密码</a>
+                        <a class="btn bg-orange" data-toggle="modal" data-target="#myModal"> 重置密码</a>
                       </td>
                     </tr>
                     

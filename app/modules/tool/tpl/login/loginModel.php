@@ -7,6 +7,8 @@
 class loginModel extends privModel{
 	public function __construct(){
 		parent::__construct();
+		$this->initMySqlDb();
+		$this->initSqlManager("login");
 	}
 	public function test(){
 		return "hi";

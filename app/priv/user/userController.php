@@ -157,14 +157,11 @@ class userController extends privController{
 				}
 				$this->view->showAddSucc($this->priv->getUserInfo(),$ret_url);
 			}else{
-				$this->response->showError($retR->info);;
+				$this->response->showError($retR->info);
 			}
-			
-			
 		}else{
 			$this->view->setPmcaiMsg($msg);
 			$this->view->showForm($this->priv->getUserInfo());			
 		}
-
 	}
 }

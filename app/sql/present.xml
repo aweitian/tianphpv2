@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<all>
+		SELECT * FROM `data_present` WHERE 1
+	</all>
+	
+	
+	<row>
+		SELECT * FROM `data_present` WHERE `sid` = :sid
+	</row>
+
+
+
+
+	<add>
+		INSERT INTO `data_present`
+            (
+             `cost`,
+             `data`,
+             `ben`,
+             `avatar`)
+		VALUES (
+		        :cost,
+		        :data,
+		        :ben,
+		        :avatar);
+	</add>
+	
+	<update>
+		UPDATE `data_present` SET 
+		`cost`=:cost ,
+		`data`=:data ,
+		`ben`=:ben ,
+		`avatar`=:avatar 
+		
+		WHERE `sid` = :sid
+	</update>
+	
+	<remove>
+		DELETE FROM `data_present` WHERE `sid` = :sid
+	</remove>
+</sql>
