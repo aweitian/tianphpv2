@@ -13,35 +13,18 @@
 		SELECT * FROM `data_doctor` WHERE `sid` = :sid
 	</row>
 
-
-
-	<resetpwd>
+	<updateId>
 		UPDATE `data_doctor` SET
-		`pwd`=:pwd
+		`id`=:id
 		WHERE `sid`=:sid
-		AND `rpq`=:rpq
-		AND `rpa`=:rpa
-	</resetpwd>
+	</updateId>
 	
-	
-	<updateName>
-		UPDATE `data_doctor` SET
-		`name`=:name
-		WHERE `sid`=:sid
-	</updateName>
-	
-	<updateEml>
-		UPDATE `data_doctor` SET
-		`email`=:email
-		WHERE `sid`=:sid
-	</updateEml>
-	
-	<updatepwd>
+	<updatePwd>
 		UPDATE `data_doctor` SET
 		`pwd`=:npwd
 		WHERE `sid`=:sid
 		AND `pwd`=:opwd
-	</updatepwd>
+	</updatePwd>
 
 	<resetpwdForce>
 		UPDATE `data_doctor` SET
@@ -50,36 +33,20 @@
 	</resetpwdForce>
 
 	<update>
-	UPDATE `data_doctor` SET 
-	`email`=:email,`phone`=:phone,
-	`avatar`=:avatar,
-	`name`=:name,
-	`date`=:date
- 	WHERE `sid`=:sid
-	
+		UPDATE `data_doctor` SET 
+		`id`=:id,
+		`avatar`=:avatar,
+		`name`=:name,
+		`date`=:date
+	 	WHERE `sid`=:sid
 	</update>
-
-
-
-
-
-	<query>
-		SELECT * FROM `data_doctor` WHERE 
-			`email` LIKE CONCAT(  '%',  :q,  '%' ) 
-		LIMIT :offset,:length
-	</query>
-	<query_count>
-		SELECT count(`sid`) as count FROM `data_doctor` WHERE 
-			`email` LIKE CONCAT(  '%',  :q,  '%' ) 
-	</query_count>
-
 
 
 	<add>
 		INSERT INTO `data_doctor` (
-			`email`,`name`,`pwd`,`phone`,`avatar`,`rpq`,`rpa`,`date`
+			`id`,`name`,`pwd`,`avatar`,`date`
 		) VALUES (
-			:email,:name,:pwd,:phone,:avatar,:rpq,:rpa,:date
+			:id,:name,:pwd,:avatar,:date
 		)
 	</add>
 	

@@ -27,13 +27,13 @@ $info = $userInfo;
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="<?php print HTTP_ENTRY?>/static/AdminLTE-2.3.0/img/user1-128x128.jpg" class="user-image" alt="User Image">
+                  <img src="<?php print HTTP_ENTRY?>/static/bower_components/AdminLTE/dist/img/user1-128x128.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs"><?php print $info["email"]?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="<?php print HTTP_ENTRY?>/static/AdminLTE-2.3.0/img/user1-128x128.jpg" class="img-circle" alt="User Image">
+                    <img src="<?php print HTTP_ENTRY?>/static/bower_components/AdminLTE/dist/img/user1-128x128.jpg" class="img-circle" alt="User Image">
                     <p>
                       <?php print $info["email"]?>
                       <small>Member since <?php print $info["time"]?></small>

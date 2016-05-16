@@ -10,6 +10,7 @@ require_once FILE_SYSTEM_ENTRY.'/app/priv/doctor/doctorModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/doctor/doctorView.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/doctor/doctor_lv_validator.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/doctor/doctorValidator.php';
+require_once FILE_SYSTEM_ENTRY.'/app/priv/doctor/doctorFilter.php';
 class doctorController extends privController{
 	/**
 	 * 
@@ -42,11 +43,19 @@ class doctorController extends privController{
 		
 		$offset = ($page - 1) * $length;
 		$data = $this->model->getList($offset,$length);
-		$dataRet = $this->model->doctor_lv_all();
 		if($data->isTrue()){
 			$this->view->setPmcaiMsg($msg);
-			$this->view->showList($msg->getPmcaiUrl(),
-					$this->priv->getUserInfo(),$data->return,$dataRet->return,$page,$length,$msg["?q"]);
+			$this->view->showList(
+					$msg->getPmcaiUrl(),
+					$this->priv->getUserInfo(),
+					$data->return,
+					$page,
+					$length,
+					$msg["?r"],
+					$msg["?q"],
+					$msg["?msg"],
+					$msg["?from"]
+			);
 		}else{
 			$this->response->showError($retR->info);;
 		}
@@ -75,10 +84,17 @@ class doctorController extends privController{
 		$data = $this->model->q($msg["?q"],$offset,$length);
 	
 		if($data->isTrue()){
-				
 			$this->view->setPmcaiMsg($msg);
-	
-			$this->view->showList($msg->getPmcaiUrl(),$this->priv->getUserInfo(),$data->return,$page,$length,$msg["?q"]);
+			$this->view->showList(
+					$msg->getPmcaiUrl(),
+					$this->priv->getUserInfo(),
+					$data->return,
+					$page,
+					$length,
+					$msg["?r"],
+					$msg["?q"],
+					$msg["?msg"]
+			);
 		}else{
 			$this->response->showError($data->info);;
 		}
@@ -97,17 +113,19 @@ class doctorController extends privController{
 	public function editAction(pmcaiMsg $msg){
 		if($msg->isPost()){
 				
-			if(!isset($msg["sid"],$msg["email"],$msg["name"],$msg["phone"],$msg["avatar"],$msg["date"])){
+			if(!isset($msg["sid"],$msg["id"],$msg["name"],$msg["avatar"],$msg["date"])){
 				$this->response->_404();
 			}
-			$retR = $this->model->update($msg["sid"],$msg["email"],$msg["name"],$msg["phone"],$msg["avatar"],$msg["date"]);
+			$retR = $this->model->update($msg["sid"],$msg["id"],$msg["name"],$msg["avatar"],$msg["date"]);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
-					$ret_url = $msg["?returl"];
+					$url = new pmcaiUrl($msg["?returl"]);
+					$url->setQuery("from", "edit");
+					$ret_url = $url->getUrl();
 				}else{
 					$ret_url = "";
 				}
-				$this->view->showEditSucc($this->priv->getUserInfo(),$ret_url);
+				$this->view->showOpSucc($this->priv->getUserInfo(),"更新",$ret_url);
 			}else{
 				$this->response->showError($retR->info);;
 			}
@@ -126,17 +144,20 @@ class doctorController extends privController{
 	}
 	public function addAction(pmcaiMsg $msg){
 		if($msg->isPost()){
-			if(!isset($msg["email"],$msg["name"],$msg["pwd"],$msg["phone"],$msg["avatar"],$msg["rpq"],$msg["rpa"],$msg["date"])){
+			if(!isset($msg["id"],$msg["name"],$msg["pwd"],$msg["avatar"],$msg["date"])){
 				$this->response->_404();
 			}
-			$retR = $this->model->add($msg["email"],$msg["name"],$msg["pwd"],$msg["phone"],$msg["avatar"],$msg["rpq"],$msg["rpa"],$msg["date"]);
+			$retR = $this->model->add($msg["id"],$msg["name"],$msg["pwd"],$msg["avatar"],$msg["date"]);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
-					$ret_url = $msg["?returl"];
+					$url = new pmcaiUrl($msg["?returl"]);
+					$url->setQuery("from", "add");
+					$ret_url = $url->getUrl();
 				}else{
 					$ret_url = "";
 				}
-				$this->view->showAddSucc($this->priv->getUserInfo(),$ret_url);
+				
+				$this->view->showOpSucc($this->priv->getUserInfo(),"添加",$ret_url);
 			}else{
 				$this->response->showError($retR->info);
 			}
@@ -170,7 +191,27 @@ class doctorController extends privController{
 	
 	
 	
+	public function forceresetpwdAction(pmcaiMsg $msg){
 	
+		if($msg->isPost()){
+			if(!isset($msg["sid"],$msg["pwd"])){
+				$this->response->_404();
+			}
+			$retR = $this->model->forceResetPwd($msg["sid"],$msg["pwd"]);
+			if($retR->isTrue()){
+				$url = new pmcaiUrl($_SERVER["HTTP_REFERER"]);
+				$url->setQuery("msg", "密码重置成功");
+				$url->setQuery("r", 1);
+				$url->setQuery("from", "frpw");
+				//url($_SERVER["HTTP_REFERER"]);
+				$this->response->redirect($url->getUrl());
+				exit;
+			}else{
+				$this->response->showError($retR->info);;
+			}
+		}
+		$this->response->_404();
+	}
 	
 	
 	

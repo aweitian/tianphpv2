@@ -14,7 +14,9 @@ $cnt  = $data["count"];
 $pageSize = $data["pageSize"];
 $pageBtnLen = $data["pageBtnLen"];
 $curPageNum = $data["curPageNum"];
-$doctor_lv = $data["doctor_lv"];
+$r = $data["r"];
+$msg = $data["msg"];
+$from = $data["from"];
 $data = $data["data"];
 
 $pagination = new pagination($cnt, $curPageNum, $pageSize, $pageBtnLen);
@@ -30,6 +32,11 @@ for ($i = 0; $i < 6; $i++) {
 }
 
 ?>
+<link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/lightbox2/dist/css/lightbox.min.css">
+<link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/jqnotifybar/css/jquery.notifyBar.css">
+<script type="text/javascript" src="<?php print HTTP_ENTRY?>/static/bower_components/lightbox2/dist/js/lightbox.min.js"></script>
+<script type="text/javascript" src="<?php print HTTP_ENTRY?>/static/bower_components/jqnotifybar/jquery.notifyBar.js"></script>
+
 <section class="content">
 
 		<div class="box">
@@ -49,16 +56,20 @@ for ($i = 0; $i < 6; $i++) {
                       <th style="width: 20px">#</th>
                       <th>登陆ID</th>
                       <th>姓名</th>
-                      <th>职称</th>
+                      <th>缩略图</th>
                       <th>日期</th>
                       <th width="30%">操作</th>
                     </tr>
                     <?php foreach ($data as $item):?>
                     <tr>
                       <td><?php print $item["sid"]?></td>
-                      <td><?php print $item["email"]?></td>
+                      <td><?php print $item["id"]?></td>
                       <td><?php print $item["name"]?></td>
-                      <td><?php print $item["phone"]?></td>
+                      <td>
+                      	<a href="<?php print HTTP_ENTRY?>/static/doctor/<?php print $item["avatar"]?>" data-lightbox="doctor" data-title="<?php print $item["name"]?>">
+                      	<img width="40" height="40" src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $item["avatar"]?>">
+                      	</a>
+                      </td>
                       <td><?php print $item["date"]?></td>
                       
                       <td>
@@ -167,7 +178,15 @@ for ($i = 0; $i < 6; $i++) {
 
 
 
-
+<style>
+<!--
+.jquery-notify-bar{
+	width:256px;
+	left:50%;
+	margin-left:-128px;
+}
+-->
+</style>
 
 <script>
 
@@ -180,5 +199,15 @@ $(".btn-danger").click(function(){
 	return confirm("?");
 });
 
+<?php if(!is_null($from) && $from == "frpw"):?>
+jQuery(function () {
+  jQuery.notifyBar({
+    html: "<?php print $msg?>",
+    delay: 2000,
+    cssClass: <?php if(!is_null($r) && $r == 1):?>"success"<?php else:?>"error"<?php endif?>,
+    animationSpeed: "normal"
+  });  
+});
+<?php endif;?>
 </script>
 

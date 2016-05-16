@@ -11,7 +11,49 @@ class doctorModel extends privModel{
 		$this->initSqlManager("doctor");
 	}
 	
+	public function add($id,$name,$pwd,$avatar,$date){
 	
+		//validate
+	
+		if(!doctorValidator::isValidId($id)){
+			return new rirResult(2,"无效的登陆名，只能是字母数字和下划线");
+		}
+		if(!doctorValidator::isValidName($name)){
+			return new rirResult(2,"姓名格式不正确");
+		}
+		if(!doctorValidator::isValidPwd($pwd)){
+			return new rirResult(2,"密码长度要大于2");
+		}
+	
+		if(!doctorValidator::isValidAvatar($avatar)){
+			return new rirResult(2,"头像必须以gif,jpg,png结尾");
+		}
+		if(!validator::isDate($date)){
+			return new rirResult(2,"时间格式不正确");
+		}
+	
+	
+		//filter
+	
+		$pwd = doctorFilter::filterPwd($pwd);
+	
+	
+		//insert
+		$ret = $this->db->insert($this->sqlManager->getSql("/sql/add"), array(
+				"id" => $id,
+				"name" => $name,
+				"pwd" => $pwd,
+				"avatar" => $avatar,
+				"date" => $date,
+	
+		));
+		if($ret == 0){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
 	
 	
 	public function row($sid){
@@ -45,8 +87,73 @@ class doctorModel extends privModel{
 		));
 	}
 	
+	public function update($sid,$id,$name,$avatar,$date){
 	
+		//validate
 	
+		if(!doctorValidator::isValidId($id)){
+			return new rirResult(2,"无效的登陆名，只能是字母数字和下划线");
+		}
+		if(!doctorValidator::isValidName($name)){
+			return new rirResult(2,"姓名格式不正确");
+		}
+	
+		if(!doctorValidator::isValidAvatar($avatar)){
+			return new rirResult(2,"头像必须以gif,jpg,png结尾");
+		}
+		if(!validator::isDate($date)){
+			return new rirResult(2,"时间格式不正确");
+		}
+	
+		$ret = $this->db->exec($this->sqlManager->getSql("/sql/update"), array(
+				"sid" => $sid,
+				"id" => $id,
+				"name" => $name,
+				"avatar" => $avatar,
+				"date" => $date
+		));
+		if($ret == 0){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
+	
+	public function forceResetPwd($sid,$pwd){
+		//validate
+	
+		if(!doctorValidator::isValidPwd($pwd)){
+			return new rirResult(2,"密码长度要大于2");
+		}
+	
+		//filter
+	
+		$pwd = doctorFilter::filterPwd($pwd);
+	
+		$ret = $this->db->exec($this->sqlManager->getSql("/sql/resetpwdForce"), array(
+			"sid" => $sid,
+			"pwd" => $pwd
+		));
+		if($ret == 0){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
+	
+	public function remove($sid){
+		$ret = $this->db->exec($this->sqlManager->getSql("/sql/remove"), array(
+				"sid" => $sid,
+		));
+		if($ret == 0){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
 	
 	
 	

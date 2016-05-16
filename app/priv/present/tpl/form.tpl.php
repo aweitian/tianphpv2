@@ -59,7 +59,7 @@ $avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/present","gif,jpg,png");
                       <label>礼物图片</label>
                       <div class="input-group">
                       	<span class="input-group-addon" style="width:50px;">
-                      	<img id="avatar_src" width="50" height="50" src="<?php print HTTP_ENTRY?>/static/present/<?php print $def["avatar"]?>">
+                      	<img id="avatar_src" title="<?php print $def["avatar"]?>" width="50" height="50" src="<?php print HTTP_ENTRY?>/static/present/<?php print $def["avatar"]?>">
                       	</span>
                       <select class="form-control btn-lg" style="height:70px;" name="avatar" class="btn btn-success">
                       <?php foreach ($avatar as $item):?>
@@ -87,7 +87,9 @@ $avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/present","gif,jpg,png");
 $(function(){
 
 	$("select[name=avatar]").on("change",function(){
-		$("#avatar_src").attr("src","<?php print HTTP_ENTRY?>/static/present/"+this.value);
+		$("#avatar_src")
+		.attr("src","<?php print HTTP_ENTRY?>/static/present/"+this.value)
+		.attr("title",this.value);
 // 		$("#example").popover({trigger: 'focus', delay: { show: 500, hide: 100}});
 		//$("#example").popover({title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});
 	});;

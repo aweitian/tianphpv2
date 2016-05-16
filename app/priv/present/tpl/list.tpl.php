@@ -10,6 +10,11 @@ $data = $data["data"];
 
 
 ?>
+<link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/lightbox2/dist/css/lightbox.min.css">
+<link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/jqnotifybar/css/jquery.notifyBar.css">
+<script type="text/javascript" src="<?php print HTTP_ENTRY?>/static/bower_components/lightbox2/dist/js/lightbox.min.js"></script>
+<script type="text/javascript" src="<?php print HTTP_ENTRY?>/static/bower_components/jqnotifybar/jquery.notifyBar.js"></script>
+
 <section class="content">
 
 		<div class="box">
@@ -26,7 +31,7 @@ $data = $data["data"];
                   <table class="table table-bordered">
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>职位名称</th>
+                      <th>礼物名称</th>
                       <th>缩略图</th>
                       <th>消耗积分</th>
                       <th>爱心点数</th>
@@ -36,7 +41,12 @@ $data = $data["data"];
                     <tr>
                       <td><?php print $item["sid"]?></td>
                       <td><?php print $item["data"]?></td>
-                      <td><img width="40" height="40" src="<?php print HTTP_ENTRY?>/static/present/<?php print $item["avatar"]?>"></td>
+                      <td>
+                      	<a href="<?php print HTTP_ENTRY?>/static/present/<?php print $item["avatar"]?>" data-lightbox="present" data-title="<?php print $item["data"]?>">
+                      	<img width="40" height="40" src="<?php print HTTP_ENTRY?>/static/present/<?php print $item["avatar"]?>">
+                      	</a>
+                      
+                      </td>
                       <td><?php print $item["cost"]?></td>
                       <td><?php print $item["ben"]?></td>
                       <td>
@@ -62,7 +72,15 @@ $data = $data["data"];
 </section>
 
 
-
+<style>
+<!--
+.jquery-notify-bar{
+	width:256px;
+	left:50%;
+	margin-left:-128px;
+}
+-->
+</style>
 
 <script>
 
@@ -73,5 +91,17 @@ $(".btn-danger").click(function(){
 	return confirm("?");
 });
 
+
+
+<?php if(!is_null($from) && $from == "frpw"):?>
+jQuery(function () {
+  jQuery.notifyBar({
+    html: "<?php print $msg?>",
+    delay: 2000,
+    cssClass: <?php if(!is_null($r) && $r == 1):?>"success"<?php else:?>"error"<?php endif?>,
+    animationSpeed: "normal"
+  });  
+});
+<?php endif;?>
 </script>
 

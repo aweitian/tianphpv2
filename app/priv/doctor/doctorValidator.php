@@ -14,19 +14,13 @@ class doctorValidator {
 			|| utility::endsWith(strtolower($v), "gif")
 		);
 	}
-	public static function isValidPhone($v){
-		return is_string($v) && preg_match("/^\d{3}-?\d{8}$/", $v);
+	public static function isValidId($v){
+		return is_string($v) && preg_match("/^\w+$/", $v);
 	}
 	public static function isValidName($v){
 		return is_string($v);
 	}
 	public static function isValidPwd($v){
 		return is_string($v) && strlen($v) > 2;
-	}
-	public static function isValidRpq($v){
-		return is_string($v) && $v !== "";
-	}
-	public static function isValidRpa($v){
-		return is_string($v) && $v !== "";
 	}
 }

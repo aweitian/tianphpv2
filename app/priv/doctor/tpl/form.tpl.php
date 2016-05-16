@@ -5,7 +5,7 @@
  * Description: 
  */
 
-$def_avatar_src = "181941301.png";
+$def_avatar_src = "1_133653_1_lit.jpg";
 
 if(isset($data["def"]) && !is_null($data["def"])){
 	$def = $data["def"];
@@ -13,14 +13,11 @@ if(isset($data["def"]) && !is_null($data["def"])){
 	$ua = "edit";
 }else{
 	$def = array(
-			"email" => "",
-			"name" => "",
-			"pwd" => "",
-			"phone" => "",
-			"avatar" => $def_avatar_src,
-			"rpq" => "",
-			"rpa" => "",
-			"date" => date("Y-m-d")
+		"id" => "",
+		"name" => "",
+		"pwd" => "",
+		"avatar" => $def_avatar_src,
+		"date" => date("Y-m-d")
 	);
 	$at = "添加";
 	$ua = "add";
@@ -30,7 +27,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
 }else{
 	$ret_url = "";
 }
-$avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/avatar","gif,jpg,png");
+$avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/doctor","gif,jpg,png");
 // var_dump($avatar);exit;
 
 ?>
@@ -39,21 +36,21 @@ $avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/avatar","gif,jpg,png");
  <!-- general form elements disabled -->
               <div class="box box-warning">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><?php print $at?>用户</h3>
+                  <h3 class="box-title"><?php print $at?>医生</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/user/<?php print $ua;?><?php print $ret_url?>">
+                  <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/doctor/<?php print $ua;?><?php print $ret_url?>">
                     <!-- text input -->
                     <div class="form-group">
-                      <label>邮箱</label>
+                      <label>登陆名</label>
                       <?php if($ua == "edit"):?>
                       <input type="hidden" name="sid" value="<?php print $def["sid"]?>">
                       <?php endif?>
-                      <input value="<?php print $def["email"]?>" name="email" required type="email" class="form-control" placeholder="user@qq.com">
+                      <input value="<?php print $def["id"]?>" name="id" required type="text" class="form-control" placeholder="如:test">
                     </div>
                     <div class="form-group">
-                      <label>昵称(可选)</label>
-                      <input value="<?php print $def["name"]?>" name="name" type="text" class="form-control" placeholder="请输入昵称用于显示，登陆使用邮箱">
+                      <label>医生名字:</label>
+                      <input value="<?php print $def["name"]?>" name="name" required type="text" class="form-control" placeholder="如:张三">
                     </div>
                     <?php if($ua == "add"):?>
                     <div class="form-group">
@@ -61,15 +58,11 @@ $avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/avatar","gif,jpg,png");
                       <input value="<?php print $def["pwd"]?>" name="pwd" required type="text" class="form-control" placeholder="至少3位">
                     </div>
                     <?php endif?>
-                    <div class="form-group">
-                      <label>手机(可选)</label>
-                      <input value="<?php print $def["phone"]?>" name="phone" type="tel" class="form-control" placeholder="13678780000">
-                    </div>
-                    <div class="form-group">
+                     <div class="form-group">
                       <label>头像</label>
                       <div class="input-group">
                       	<span class="input-group-addon" style="width:50px;">
-                      	<img id="avatar_src" width="50" height="50" src="<?php print HTTP_ENTRY?>/static/avatar/<?php print $def["avatar"]?>">
+                      	<img id="avatar_src" title="<?php print $def["avatar"]?>" width="50" height="50" src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $def["avatar"]?>">
                       	</span>
                       <select class="form-control btn-lg" style="height:70px;" name="avatar" class="btn btn-success">
                       <?php foreach ($avatar as $item):?>
@@ -109,7 +102,9 @@ $(function(){
 	});
 
 	$("select[name=avatar]").on("change",function(){
-		$("#avatar_src").attr("src","<?php print HTTP_ENTRY?>/static/avatar/"+this.value);
+		$("#avatar_src")
+		.attr("src","<?php print HTTP_ENTRY?>/static/doctor/"+this.value)
+		.attr("title",this.value);
 // 		$("#example").popover({trigger: 'focus', delay: { show: 500, hide: 100}});
 		//$("#example").popover({title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});
 	});;

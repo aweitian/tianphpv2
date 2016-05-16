@@ -12,7 +12,7 @@ $info = $userInfo;
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="<?php print HTTP_ENTRY?>/static/AdminLTE-2.3.0/img/user1-128x128.jpg" class="img-circle" alt="User Image">
+              <img src="<?php print HTTP_ENTRY?>/static/bower_components/AdminLTE/dist/img/user1-128x128.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
               <p><?php print $info["email"]?></p>
