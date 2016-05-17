@@ -15,6 +15,12 @@
 
 
 
+	<query_choose>
+		SELECT `sid`,`title` FROM `data_artical` WHERE 
+			`title` LIKE CONCAT(  '%',  :q,  '%' ) 
+		LIMIT :offset,:length
+	</query_choose>
+	
 	<query>
 		SELECT * FROM `data_artical` WHERE 
 			`title` LIKE CONCAT(  '%',  :q,  '%' ) 

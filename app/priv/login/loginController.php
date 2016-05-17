@@ -40,7 +40,11 @@ class loginController extends privController{
 			}
 			
 			if($priv->check($msg["email"],$msg["pwd"],$code)){
-				$this->response->go("/priv");
+				if(isset($msg["?redirect"])){
+					$this->response->redirect($msg["?redirect"]);
+				}else{
+					$this->response->go("/priv");
+				}
 			}else{
 				$this->view->setPmcaiMsg($msg);
 				$this->view->loginUI($priv,$priv->errorMsg);
@@ -48,7 +52,12 @@ class loginController extends privController{
 			
 		}else{
 			$this->view->setPmcaiMsg($msg);
-			$this->view->loginUI($priv,"输入用户名和密码登陆");			
+			if(isset($msg["?redirect"])){
+				$url = $msg["?redirect"];
+			}else{
+				$url = "";
+			}
+			$this->view->loginUI($priv,"输入用户名和密码登陆",$url);			
 		}
 
 	}

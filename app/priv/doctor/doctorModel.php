@@ -55,6 +55,37 @@ class doctorModel extends privModel{
 		return new rirResult(0,"ok",$ret);
 	}
 	
+	public function getCacheDisease(){
+		$ret = $this->db->fetchAll(sqlManager::getInstance("cache")->getSql("/sql/disease/all"), array(
+	
+		));
+		return $ret;
+	}
+	
+	
+	/**
+	 *
+	 * @param string $q
+	 * @param int $offset
+	 * @param int $len
+	 * @return array
+	 */
+	public function choose($q,$offset,$len){
+		$cnt = $this->db->fetch(sqlManager::getInstance("artical")->getSql("/sql/query_count"), array(
+				"q" => $q
+		));
+		$cnt = $cnt["count"];
+		$ret = $this->db->fetchAll(sqlManager::getInstance("artical")->getSql("/sql/query_choose"), array(
+				"q" => $q,
+				"offset" => $offset,
+				"length" => $len
+		));
+		return array(
+				"data" => $ret,
+				"count" => $cnt
+		);
+	}
+	
 	
 	public function row($sid){
 		$ret = $this->db->fetch($this->sqlManager->getSql("/sql/row"), array(

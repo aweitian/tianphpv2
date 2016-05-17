@@ -8,10 +8,11 @@
 class loginView extends privView{
 	
 	
-	public function loginUI($auth,$msg){
+	public function loginUI($auth,$msg,$url){
 		$this->wrap($this->fetch("form",array(
 				"auth" => $auth,
-				"msg" => $msg
+				"msg" => $msg,
+				"url" => $url,
 		)),"priv","template/priv/layout.php")->show();
 	}
 	

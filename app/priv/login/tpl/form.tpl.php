@@ -5,9 +5,14 @@
  * Description: 
  */
 $auth = $data["auth"];
+$url = $data["url"];
 
 $uidata = $auth->getUiData();
-
+if($url){
+	$url ="?redirect=".urlencode($url);
+}else{
+	$url = "";
+}
 
 ?>
 <body class="hold-transition login-page">
@@ -17,7 +22,7 @@ $uidata = $auth->getUiData();
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg"><?php print $data["msg"];?></p>
-        <form action="<?php print HTTP_ENTRY?>/priv/login" method="post">
+        <form action="<?php print HTTP_ENTRY?>/priv/login<?php print $url?>" method="post">
           <div class="form-group has-feedback">
             <input type="email" name="email" class="form-control" placeholder="Email">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

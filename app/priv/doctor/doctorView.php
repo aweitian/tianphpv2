@@ -6,6 +6,16 @@
  */
 class doctorView extends privView{
 	
+	
+	
+	public function showRelArtical($userInfo,$di){
+		$this->priv_wrap($userInfo, $this->fetch(
+				"rel-artical",array(
+					"doctor_infoes" => 	$di
+				)
+		))->show();
+	}
+	
 	public function showOpSucc($info,$op="操作",$ret_url){
 		if($ret_url != ""){
 			$ret = ",<a href='".$ret_url ."'>返回</a>";

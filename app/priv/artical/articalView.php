@@ -9,6 +9,8 @@ class articalView extends privView{
 	
 	
 	
+	
+	
 	public function showForm($userInfo,$def=null){
 		$this->priv_wrap($userInfo, $this->fetch(
 				"form",array(
@@ -18,6 +20,27 @@ class articalView extends privView{
 	}
 	
 	
+	public function showListForReldis(pmcaiUrl $url,$userinfo,$data,$dis_infoes,$page,$length,$dc,$di,$q){
+		$data["pageSize"] = $length;
+		$data["pageBtnLen"] = 5;
+		$data["curPageNum"] = $page;
+		$data["url"] = $url;
+		$data["dc"] = $dc;
+		$data["di"] = $di;
+		$data["q"] = $q;
+		$data["dis_infoes"] = $dis_infoes;
+		$content = $this->fetch("rel-dis",$data);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
+	public function showListForReldoc(pmcaiUrl $url,$userinfo,$data,$page,$length,$q){
+		$data["pageSize"] = $length;
+		$data["pageBtnLen"] = 5;
+		$data["curPageNum"] = $page;
+		$data["url"] = $url;
+		$data["q"] = $q;
+		$content = $this->fetch("rel-doctor",$data);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
 	public function showList(pmcaiUrl $url,$userinfo,$data,$page,$length,$q){
 		$data["pageSize"] = $length;
 		$data["pageBtnLen"] = 5;

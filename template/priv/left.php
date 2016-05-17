@@ -50,6 +50,9 @@ $info = $userInfo;
               <ul class="treeview-menu">
                 <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/lv"><i class="fa fa-circle-o"></i> 职位管理</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/doctor"><i class="fa fa-circle-o"></i> 医生列表</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/relartical"><i class="fa fa-circle-o"></i> 关联文章</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/rellv"><i class="fa fa-circle-o"></i> 关联职位</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/manwealth"><i class="fa fa-circle-o"></i> 赠送设置</a></li>
               </ul>
             </li>
             <li class="treeview">

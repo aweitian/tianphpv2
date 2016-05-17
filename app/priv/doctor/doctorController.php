@@ -31,7 +31,6 @@ class doctorController extends privController{
 	
 	public function welcomeAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行
-		
 		if(isset($msg["?page"])){
 			$page = intval($msg["?page"]);
 		}else{
@@ -46,20 +45,33 @@ class doctorController extends privController{
 		if($data->isTrue()){
 			$this->view->setPmcaiMsg($msg);
 			$this->view->showList(
-					$msg->getPmcaiUrl(),
-					$this->priv->getUserInfo(),
-					$data->return,
-					$page,
-					$length,
-					$msg["?r"],
-					$msg["?q"],
-					$msg["?msg"],
-					$msg["?from"]
+				$msg->getPmcaiUrl(),
+				$this->priv->getUserInfo(),
+				$data->return,
+				$page,
+				$length,
+				$msg["?r"],
+				$msg["?q"],
+				$msg["?msg"],
+				$msg["?from"]
 			);
 		}else{
 			$this->response->showError($retR->info);;
 		}
 	}
+	
+	
+	
+	public function relarticalAction(pmcaiMsg $msg){
+		$this->view->setPmcaiMsg($msg);
+		$this->view->showRelArtical(
+			$this->priv->getUserInfo(),
+			$this->model->getCacheDisease()
+		);
+	}
+	
+	
+	
 	
 	public function qAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行

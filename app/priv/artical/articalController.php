@@ -52,6 +52,96 @@ class articalController extends privController{
 			$this->response->showError($retR->info);;
 		}
 	}
+	public function reldocAction(pmcaiMsg $msg){
+		$length = 10;//每页显示多少行
+		
+		if (isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		
+		$offset = ($page - 1) * $length;
+		$data = $this->model->getList($offset,$length);
+		
+		if($data->isTrue()){
+			
+			$this->view->setPmcaiMsg($msg);
+		
+			$this->view->showListForReldoc($msg->getPmcaiUrl(),$this->priv->getUserInfo(),$data->return,$page,$length,$msg["?q"]);
+		}else{
+			$this->response->showError($retR->info);;
+		}
+	}
+	public function reldisAction(pmcaiMsg $msg){
+		$length = 10;//每页显示多少行
+		
+		if (isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		
+		$offset = ($page - 1) * $length;
+		$data = $this->model->getList($offset,$length);
+		
+		if($data->isTrue()){
+			
+			$this->view->setPmcaiMsg($msg);
+			
+			$this->view->showListForReldis(
+				$msg->getPmcaiUrl(),
+				$this->priv->getUserInfo(),
+				$data->return,
+				$this->model->getCacheDisease(),
+				$page,
+				$length,
+				$msg["?dc"],
+				$msg["?di"],
+				$msg["?q"]
+			);
+		}else{
+			$this->response->showError($retR->info);;
+		}
+	}
+	
+	
+	
+	public function ajaxQAction(pmcaiMsg $msg){
+		$length = 10;//每页显示多少行
+		
+		if (isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		
+		$offset = ($page - 1) * $length;
+		if(!isset($msg["?q"])){
+			$data = $this->model->getList($offset,$length);
+		}else if($msg["?q"] == ""){
+			$data = $this->model->getList($offset,$length);
+		}else{
+			$data = $this->model->choose($msg["?q"],$offset,$length);
+		}
+		
+		$this->response->ContentType(httpResponse::CONTENT_TYPE_JSON);
+		
+		print json_encode($data);
+		exit;
+		
+	}
+	
+	
 	public function qAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行
 		

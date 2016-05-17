@@ -24,8 +24,11 @@ class privController extends Controller{
 	protected function checkPriv(){
 		$this->priv = new priv(App::getSession());
 		if(!$this->priv->isLogined()){
+			$request = new httpRequest();
+			$url = $request->requestUri();
+			$ret = "?redirect=".urlencode($url);
 			$this->response = new httpResponse();
-			$this->response->go("/priv/login");
+			$this->response->go("/priv/login".$ret);
 		}
 	}
 }
