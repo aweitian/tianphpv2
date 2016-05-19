@@ -79,21 +79,62 @@
 			FROM `cache_artical_disease`
 		</all>
 		
-		<query_on_raw>
+		<query_on_raw_count>
 			SELECT 
-				`data_artical`.`sid` as `aid`,`data_artical`.`title` as `title`,
-				`data_attr_data`.`pid` AS `pid`,`p_data_attr_data`.`data` as `pd`,
-				`data_attr_data`.`sid` as `mid`,`data_attr_data`.`data` as `md`
+				COUNT(`data_artical`.`sid`) as `count`
 			FROM `data_attr_data`
-			LEFT JOIN `data_attr_data` `p_data_attr_data` ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+			LEFT JOIN `data_attr_data` `p_data_attr_data` 
+			ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
 			RIGHT JOIN `data_artical_ext`
 			ON `data_artical_ext`.`did` =  `data_attr_data`.`sid`    
 			LEFT JOIN `data_artical`
 			ON `data_artical`.`sid` = `data_artical_ext`.`aid`
+		</query_on_raw_count>
+		<query_on_raw>
+			SELECT 
+				`data_artical`.`sid` as `aid`,`data_artical`.`title` as `title`,
+				`data_artical`.`date` as `date`,
+				`data_attr_data`.`pid` AS `pid`,`p_data_attr_data`.`data` as `pd`,
+				`data_attr_data`.`sid` as `mid`,`data_attr_data`.`data` as `md`
+			FROM `data_attr_data`
+			LEFT JOIN `data_attr_data` `p_data_attr_data` 
+			ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+			RIGHT JOIN `data_artical_ext`
+			ON `data_artical_ext`.`did` =  `data_attr_data`.`sid`    
+			LEFT JOIN `data_artical`
+			ON `data_artical`.`sid` = `data_artical_ext`.`aid`
+			@WHERECLAUSE
+			LIMIT :offset,:length
 		</query_on_raw>
-		<where>
-			
-		</where>
+		<where_clause_dc>
+			`data_attr_data`.`pid` = :dcid
+		</where_clause_dc>
+		<where_clause_di>
+			`data_attr_data`.`sid` = :diid
+		</where_clause_di>
+		<where_clause_title>
+			`data_artical`.`title` like CONCAT('%',:title,'%')
+		</where_clause_title>
+		
+		
+		<reldis_homeless>
+			<count>
+				SELECT COUNT(`data_artical`.`sid`) as `count`
+				FROM `data_artical`
+				WHERE
+				`data_artical`.`sid`
+				NOT IN (SELECT `aid` FROM `data_artical_ext`)
+			</count>
+			<query>
+				SELECT `data_artical`.`sid`,`data_artical`.`title`,`data_artical`.`date`
+				FROM `data_artical`
+				WHERE
+				`data_artical`.`sid`
+				NOT IN (SELECT `aid` FROM `data_artical_ext`)
+				LIMIT :offset,:length 
+			</query>
+		</reldis_homeless>
+		
 	</artical_disease>
 
 </sql>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<exists>
+		SELECT
+		  `aid`,
+		  `did`
+		FROM `data_artical_ext`
+		WHERE `aid` = :aid AND `did` = :did
+	</exists>
+	<add>
+		INSERT INTO `data_artical_ext`
+	            (`aid`,
+	             `did`)
+		VALUES (:aid,
+		        :did);
+	</add>
+	
+	<rm>
+		DELETE
+		FROM `data_artical_ext`
+		WHERE `aid` = :aid
+		    AND `did` = :did;
+	</rm>
+</sql>

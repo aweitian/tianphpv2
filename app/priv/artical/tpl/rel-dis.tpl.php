@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
-$q  = $data["q"];
+//$q  = $data["q"];
 /**
  * 
  * @var pmcaiUrl $url
@@ -16,44 +16,44 @@ $pageBtnLen = $data["pageBtnLen"];
 $curPageNum = $data["curPageNum"];
 $dis_infoes = $data["dis_infoes"];
 
-//病种过滤
-$dc = $data["dc"];
-$di = $data["di"];
-//病种过滤默认值
-if(is_null($dc))
-{
-	$dc = 0;
-}
-if(is_null($di))
-{
-	$di = 0;
-}
+// //病种过滤
+// $dc = $data["dc"];
+// $di = $data["di"];
+// //病种过滤默认值
+// if(is_null($dc))
+// {
+// 	$dc = 0;
+// }
+// if(is_null($di))
+// {
+// 	$di = 0;
+// }
 	
-$di_data = array();
+// $di_data = array();
 
 $data = $data["data"];
 
 
 //分页
 $pagination = new pagination($cnt, $curPageNum, $pageSize, $pageBtnLen);
-if(is_null($q)){
-	$q = "";
-}
+// if(is_null($q)){
+// 	$q = "";
+// }
 
 
 //病种数组
-$pdc = array();
-foreach ($dis_infoes as $item){
-	if(!array_key_exists($item["pid"], $pdc)){
-		$pdc[$item["pid"]] = $item["pd"];
-	}
-	if($item["pid"] == $dc){
-		$di_data[$item["mid"]] = $item["md"];
-	}
-	//$dc[$item["pid"]][$item["mid"]] = array($item["md"],$item["pd"]);
-}
+// $pdc = array();
+// foreach ($dis_infoes as $item){
+// 	if(!array_key_exists($item["pid"], $pdc)){
+// 		$pdc[$item["pid"]] = $item["pd"];
+// 	}
+// 	if($item["pid"] == $dc){
+// 		$di_data[$item["mid"]] = $item["md"];
+// 	}
+// 	//$dc[$item["pid"]][$item["mid"]] = array($item["md"],$item["pd"]);
+// }
 
-// var_dump($di_data);exit;
+// var_dump($dis_infoes);exit;
 
 //classname function
 function cn($a,$b){
@@ -118,63 +118,6 @@ function chooseDi(o,a){
                 <div class="box-header with-border">
                   <h3 class="box-title">文章筛选</h3>
                    
-                   
-                   <form action="<?php print HTTP_ENTRY?>/priv/artical/reldis" class="form-horizontal">
-                   	<input type="hidden" name="dc" id="dc_val" value="<?php print $dc?>">
-                   	<input type="hidden" name="di" id="di_val" value="<?php print $di?>">
-                   	<div class="form-group">
-	                  <label for="inputEmail3" class="col-sm-1 control-label">病种:</label>
-	
-	                  <div class="col-sm-11">
-	                  	<p class="form-control-static">
-	                  	<span style="margin-right: 15px;" class="dc cate<?php if($dc == 0):?>-active<?php endif;?>" onclick="chooseDc(this,0)">全部</span>
-	                   
-	                    <?php foreach ($pdc as $pk => $pv):?>
-	                    
-	                    <span style="margin-right: 15px;" class="dc cate<?php if($dc == $pk):?>-active<?php endif;?>" onclick="chooseDc(this,<?php print $pk?>)"><?php print $pv?></span>
-	                    
-	                    <?php endforeach;?>
-	                    </p>
-	                  </div>
-	                </div>
-                   	<div class="form-group">
-	                  <label for="inputEmail3" class="col-sm-1 control-label">疾病:</label>
-	
-	                  <div class="col-sm-11">
-	                  <p class="form-control-static" id="di_con">
-	                  	<span style="margin-right: 15px;" class="di cate<?php if($di == 0):?>-active<?php endif;?>" onclick="chooseDi(this,0)">全部</span>
-	                   
-	                   <?php foreach ($di_data as $dk => $dv):?>
-	                    
-	                    <span style="margin-right: 15px;" class="dc cate<?php if($di == $dk):?>-active<?php endif;?>" onclick="chooseDi(this,<?php print $dk?>)"><?php print $dv?></span>
-	                    
-	                    <?php endforeach;?>
-	                   
-	                   </p>
-	                  </div>
-	                </div>
-                   
-                   
-                   <div class="form-group">
-	                  <label for="inputEmail3" class="col-sm-1 control-label">文章标题:</label>
-	
-	                  <div class="col-sm-11">
-	                    <input name="q" value="<?php print $q?>" class="form-control" id="inputEmail3" placeholder="Email">
-	                  </div>
-	                </div>
-         
-         		<div class="form-group">
-         			<div class="col-sm-12">
-                    <button type="submit" class="btn btn-primary">筛选</button>
-                    </div>
-                </div>
-         
-         
-         
-                    </form>
-                   
-                   
-                   
                 </div><!-- /.box-header -->
                 <div class="box-body">
     
@@ -183,7 +126,6 @@ function chooseDi(o,a){
                       <th style="width: 20px"><input type="checkbox" id="reverse"></th>
                       <th>标题</th>
                       <th>日期</th>
-                      <th width="30%">操作</th>
                     </tr>
                     <?php foreach ($data as $item):?>
                     <tr>
@@ -191,12 +133,7 @@ function chooseDi(o,a){
                       <td><?php print $item["title"]?></td>
                       <td><?php print $item["date"]?></td>
                       
-                      <td>
-                      	<!-- <i class="fa fa-edit"></i> -->
-                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/artical/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
-                        <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/artical/rm?sid=<?php print $item["sid"]?>">删除</a>
-                        
-                      </td>
+      
                     </tr>
                     
                     
@@ -209,10 +146,59 @@ function chooseDi(o,a){
  
  
  
-                  <div class="box-tools">
+                  <div class="box-tools clearfix">
                   
-                  	<div class="no-margin pull-left">
-                  	对选中项:
+                  	<div class="no-margin pull-left" style="width:30%">
+                  	
+                  	<form action="<?php print HTTP_ENTRY?>/priv/artical/con_reldis" method="post" class="form-horizontal">
+                  	<div class="form-group">
+                      <label for="inputEmail3" class="col-sm-4 control-label">对选中项分配到:</label>
+                      <div class="col-sm-6">
+                      	<?php  
+                      	/***
+                      	 * array(
+                      	 * 	"pid"=>array(
+                      	 * 		"text"=>"",
+                      	 * 		"children"=>array(
+                      	 * 			"id"=>"text"
+                      	 * 		)
+                      	 * 	)
+                      	 * )
+                      	 */
+                      	$tree_dis = array();
+                      	foreach ($dis_infoes as $item){
+                      		if(!array_key_exists($item["pid"], $tree_dis)){
+                      			$tree_dis[$item["pid"]] = array(
+                      				"text" => $item["pd"],
+                      				"children" => array()
+                      			);
+                      		}
+                      		$tree_dis[$item["pid"]]["children"][$item["mid"]] = $item["md"];
+                      	}
+                      	
+                      	
+                      	//var_dump($tree_dis);exit;
+                      	
+                      	?>
+                        <select class="form-control" name="di" id="sel_dd" onchange="submitBtnDisable()">
+                        <option value="0">请选择</option>
+                        <?php foreach ($tree_dis as $pid => $item):?>
+                        <optgroup label="<?php print $item["text"]?>">
+	                        <?php foreach ($item["children"] as $mid => $child):?>
+	                        <option value="<?php print $mid?>"><?php print $child?></option>
+	                        <?php endforeach;?>
+                        </optgroup>
+                        
+                        <?php endforeach;?>
+                        </select>
+                      </div>
+                      <div class="col-sm-2">
+                      <input id="artical_ids" value="" name="ds" type="hidden">
+                      <input id="btn_submit_conrel" type="submit" value="分配" class="btn bg-olive btn-flat" disabled>
+                      </div>
+                    </div>
+                  	
+                  	</form>
                   	
                   	</div>
                   
@@ -246,16 +232,27 @@ $(".btn-danger").click(function(){
 
 	return confirm("?");
 });
-
+function getChooseArticalIds(){
+	var ds = [];
+	$("input[name='sid[]'").each(function(){
+		this.checked && ds.push(this.value);
+	});
+	$("#artical_ids").val(ds.join());
+	submitBtnDisable();
+}
+function submitBtnDisable(){
+	$("#btn_submit_conrel")[0].disabled = !($("input[name='sid[]']:checked").length != 0 && $("#sel_dd").val() != "0");
+}
 $("#reverse").click(function(){
 	//console
+	
 	$(this).parents("table").eq(0)
 	.find("td>input[type=checkbox]").each(function(){
-
 		this.checked = !this.checked
-
 	});
-	
+	getChooseArticalIds();
 });
+
+$("input[name='sid[]'").click(getChooseArticalIds);
 </script>
 

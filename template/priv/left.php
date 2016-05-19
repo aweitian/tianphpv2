@@ -76,6 +76,7 @@ $info = $userInfo;
               	<li><a href="<?php print HTTP_ENTRY?>/priv/artical/add"><i class="fa fa-circle-o"></i> 添加文章</a></li>
               	<li><a href="<?php print HTTP_ENTRY?>/priv/artical"><i class="fa fa-circle-o"></i> 文章列表</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldis"><i class="fa fa-circle-o"></i> 关联病种</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/revreldis"><i class="fa fa-circle-o"></i> 修改已关联的病种</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldoc"><i class="fa fa-circle-o"></i> 关联医生</a></li>
               </ul>
             </li>
