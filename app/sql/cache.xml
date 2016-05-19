@@ -104,6 +104,7 @@
 			LEFT JOIN `data_artical`
 			ON `data_artical`.`sid` = `data_artical_ext`.`aid`
 			@WHERECLAUSE
+			ORDER BY `aid` ASC
 			LIMIT :offset,:length
 		</query_on_raw>
 		<where_clause_dc>

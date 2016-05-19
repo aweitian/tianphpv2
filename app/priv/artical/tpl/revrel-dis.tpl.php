@@ -189,14 +189,14 @@ function chooseDi(o,a){
                     </tr>
                     <?php foreach ($data as $item):?>
                     <tr>
-                      <td><input type="checkbox" name="sid[]" value="<?php print $item["aid"]?>"></td>
+                      <td><input type="checkbox" name="sid[]" value="<?php print $item["aid"]?>" data-mid="<?php print $item["mid"]?>"></td>
                       <td><?php print $item["title"]?></td>
                       <td><?php print $item["date"]?></td>
                       <td><?php print $item["pd"]?></td>
                       <td><?php print $item["md"]?></td>
                       <td>
                       
-                      <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/artical/rmreldis?aid=<?php print $item["aid"]?>&did=<?php print $item["mid"]?>">解除关系</a>
+                      <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/artical/rmreldis?aid=<?php print $item["aid"]?>&did=<?php print $item["mid"]?>">删除</a>
                         
                       </td>
   						
@@ -218,8 +218,8 @@ function chooseDi(o,a){
                   	
                   			<form action="<?php print HTTP_ENTRY?>/priv/artical/con_reldis" method="post" class="form-horizontal">
 		                  	<div class="form-group">
-		                      <label for="inputEmail3" class="col-sm-4 control-label">对选中项分配到:</label>
-		                      <div class="col-sm-6">
+		                      <label for="inputEmail3" class="col-sm-3 control-label">对选中项:</label>
+		                      <div class="col-sm-7">
 		                      	<?php  
 		                      	/***
 		                      	 * array(
@@ -247,7 +247,7 @@ function chooseDi(o,a){
 		                      	
 		                      	?>
 		                        <select class="form-control" name="di" id="sel_dd" onchange="submitBtnDisable()">
-		                        <option value="0">请选择</option>
+		                        <option value="0">删除</option>
 		                        <?php foreach ($tree_dis as $pid => $item):?>
 		                        <optgroup label="<?php print $item["text"]?>">
 			                        <?php foreach ($item["children"] as $mid => $child):?>
@@ -260,13 +260,12 @@ function chooseDi(o,a){
 		                      </div>
 		                      <div class="col-sm-2">
 		                      <input id="artical_ids" value="" name="ds" type="hidden">
-		                      <input id="btn_submit_conrel" type="submit" value="分配" class="btn bg-olive btn-flat" disabled>
+		                      <input id="artical_dds" value="" name="dd" type="hidden">
+		                      <input id="btn_submit_conrel" type="submit" value="确定" class="btn bg-olive btn-flat" disabled>
 		                      </div>
 		                    </div>
 		                  	
 		                  	</form>
-                  	
-                  	
                   	
                   	</div>
                   
@@ -302,15 +301,16 @@ $(".btn-danger").click(function(){
 });
 
 function getChooseArticalIds(){
-	var ds = [];
+	var ds = [],dd=[];
 	$("input[name='sid[]'").each(function(){
-		this.checked && ds.push(this.value);
+		this.checked && ds.push(this.value) && dd.push(this.getAttribute("data-mid"));
 	});
 	$("#artical_ids").val(ds.join());
+	$("#artical_dds").val(dd.join());
 	submitBtnDisable();
 }
 function submitBtnDisable(){
-	$("#btn_submit_conrel")[0].disabled = !($("input[name='sid[]']:checked").length != 0 && $("#sel_dd").val() != "0");
+	$("#btn_submit_conrel")[0].disabled = !($("input[name='sid[]']:checked").length != 0);
 }
 $("#reverse").click(function(){
 	//console

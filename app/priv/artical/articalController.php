@@ -116,13 +116,31 @@ class articalController extends privController{
 	}
 	
 	public function con_reldisAction(pmcaiMsg $msg){
-		var_dump($msg->getPostData());
+// 		var_dump($msg->getPostData());
 		if($msg->isPost()){
 			//di disease category
 			//ds artical id array
 			if(!isset($msg["ds"],$msg["di"])){
 				$this->response->_404();
 			}
+			if($msg["di"] == 0){
+				//remove rel
+				if(!isset($msg["dd"])){
+					$this->response->_404();
+				}
+				$dda = explode(",", $msg["dd"]);
+				$dds = explode(",", $msg["ds"]);
+				if(count($dda) != count($dds)){
+					$this->response->_404();
+				}
+				foreach ($dds as $ak => $aid){
+					$this->model->disconRelDis($aid, $dda[$ak]);
+				}
+				$this->response->redirect($_SERVER["HTTP_REFERER"]);
+				return ;
+			}
+			
+			
 			$this->model->con_reldis(explode(",", $msg["ds"]), $msg["di"]);
 			$this->view->showOpSucc($this->priv->getUserInfo(),"更新", $_SERVER["HTTP_REFERER"]);
 		}else{
