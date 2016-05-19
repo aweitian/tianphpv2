@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <sql>
 	<all>
-		SELECT * FROM `data_doctor_lv` WHERE 1
+		SELECT * FROM `data_doctor_lv_meta` WHERE 1
 	</all>
 
 	<add>
-		INSERT INTO `data_doctor_lv`(`data`) VALUES (:data)
+		INSERT INTO `data_doctor_lv_meta`(`data`) VALUES (:data)
 	</add>
 	
 	<update>
-		UPDATE `data_doctor_lv` SET `data`=:data WHERE `sid` = :sid
+		UPDATE `data_doctor_lv_meta` SET `data`=:data WHERE `sid` = :sid
 	</update>
 	
 	<remove>
-		DELETE FROM `data_doctor_lv` WHERE `sid` = :sid
+		DELETE FROM `data_doctor_lv_meta` WHERE `sid` = :sid
 	</remove>
 </sql>

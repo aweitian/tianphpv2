@@ -4,11 +4,11 @@
 		SELECT
 		  `aid`,
 		  `did`
-		FROM `data_artical_ext`
+		FROM `data_artical_dis`
 		WHERE `aid` = :aid AND `did` = :did
 	</exists>
 	<add>
-		INSERT INTO `data_artical_ext`
+		INSERT INTO `data_artical_dis`
 	            (`aid`,
 	             `did`)
 		VALUES (:aid,
@@ -17,7 +17,7 @@
 	
 	<rm>
 		DELETE
-		FROM `data_artical_ext`
+		FROM `data_artical_dis`
 		WHERE `aid` = :aid
 		    AND `did` = :did;
 	</rm>

@@ -124,19 +124,19 @@ CREATE TABLE `data_doctor` (
 
 /*Data for the table `data_doctor` */
 
-/*Table structure for table `data_doctor_lv` */
+/*Table structure for table `data_doctor_lv_meta` */
 
-DROP TABLE IF EXISTS `data_doctor_lv`;
+DROP TABLE IF EXISTS `data_doctor_lv_meta`;
 
-CREATE TABLE `data_doctor_lv` (
+CREATE TABLE `data_doctor_lv_meta` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `data` varchar(32) NOT NULL,
   PRIMARY KEY (`sid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
-/*Data for the table `data_doctor_lv` */
+/*Data for the table `data_doctor_lv_meta` */
 
-insert  into `data_doctor_lv`(`sid`,`data`) values (3,'ccccccc');
+insert  into `data_doctor_lv_meta`(`sid`,`data`) values (3,'ccccccc');
 
 /*Table structure for table `data_oplog` */
 

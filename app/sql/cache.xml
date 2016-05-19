@@ -63,10 +63,10 @@
 				`data_attr_data`.`sid`,`data_attr_data`.`data`
 			FROM `data_attr_data`
 			LEFT JOIN `data_attr_data` `p_data_attr_data` ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
-			RIGHT JOIN `data_artical_ext`
-			ON `data_artical_ext`.`did` =  `data_attr_data`.`sid`    
+			RIGHT JOIN `data_artical_dis`
+			ON `data_artical_dis`.`did` =  `data_attr_data`.`sid`    
 			LEFT JOIN `data_artical`
-			ON `data_artical`.`sid` = `data_artical_ext`.`aid`
+			ON `data_artical`.`sid` = `data_artical_dis`.`aid`
 		</update>
 		<all>
 			SELECT
@@ -85,10 +85,10 @@
 			FROM `data_attr_data`
 			LEFT JOIN `data_attr_data` `p_data_attr_data` 
 			ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
-			RIGHT JOIN `data_artical_ext`
-			ON `data_artical_ext`.`did` =  `data_attr_data`.`sid`    
+			RIGHT JOIN `data_artical_dis`
+			ON `data_artical_dis`.`did` =  `data_attr_data`.`sid`    
 			LEFT JOIN `data_artical`
-			ON `data_artical`.`sid` = `data_artical_ext`.`aid`
+			ON `data_artical`.`sid` = `data_artical_dis`.`aid`
 		</query_on_raw_count>
 		<query_on_raw>
 			SELECT 
@@ -99,10 +99,10 @@
 			FROM `data_attr_data`
 			LEFT JOIN `data_attr_data` `p_data_attr_data` 
 			ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
-			RIGHT JOIN `data_artical_ext`
-			ON `data_artical_ext`.`did` =  `data_attr_data`.`sid`    
+			RIGHT JOIN `data_artical_dis`
+			ON `data_artical_dis`.`did` =  `data_attr_data`.`sid`    
 			LEFT JOIN `data_artical`
-			ON `data_artical`.`sid` = `data_artical_ext`.`aid`
+			ON `data_artical`.`sid` = `data_artical_dis`.`aid`
 			@WHERECLAUSE
 			ORDER BY `aid` ASC
 			LIMIT :offset,:length
@@ -124,18 +124,115 @@
 				FROM `data_artical`
 				WHERE
 				`data_artical`.`sid`
-				NOT IN (SELECT `aid` FROM `data_artical_ext`)
+				NOT IN (SELECT `aid` FROM `data_artical_dis`)
 			</count>
 			<query>
 				SELECT `data_artical`.`sid`,`data_artical`.`title`,`data_artical`.`date`
 				FROM `data_artical`
 				WHERE
 				`data_artical`.`sid`
-				NOT IN (SELECT `aid` FROM `data_artical_ext`)
+				NOT IN (SELECT `aid` FROM `data_artical_dis`)
 				LIMIT :offset,:length 
 			</query>
 		</reldis_homeless>
 		
 	</artical_disease>
+	<artical_doctor>
+		<create>
+			CREATE TABLE `cache_artical_doctor` (
+			  `aid` INT(11) DEFAULT NULL,
+			  `title` VARCHAR(1024) DEFAULT NULL,
+			  `dod` INT(11) DEFAULT NULL,
+			  `dname` VARCHAR(64) DEFAULT NULL,
+			  `lv` VARCHAR(32) DEFAULT NULL
+			) ENGINE=MYISAM DEFAULT CHARSET=utf8
+		</create>
+		<update>
+			INSERT INTO `cache_artical_doctor` (`aid`,`title`,`dod`,`dname`,`lv`)
+
+			SELECT 
+				`data_artical`.`sid` AS `aid`,`data_artical`.`title` AS `title`,
+				`data_artical_doc`.`dod`,`data_doctor`.`name` AS `dname`,
+				`data_doctor_lv_meta`.`data` AS `lv`
+			FROM `data_artical_doc`
+			LEFT JOIN `data_artical`
+				ON `data_artical_doc`.`aid` = `data_artical`.`sid`
+			LEFT JOIN `data_doctor`
+				ON `data_doctor`.`sid` = `data_artical_doc`.`dod`
+			LEFT JOIN `data_doctor_ext`
+				ON `data_doctor_ext`.`dod` = `data_artical_doc`.`dod`
+			LEFT JOIN `data_doctor_lv_meta`
+				ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`
+
+		</update>
+		<all>
+			SELECT
+			  `aid`,
+			  `title`,
+			  `pid`,
+			  `pd`,
+			  `mid`,
+			  `md`
+			FROM `cache_artical_disease`
+		</all>
+		
+		<query_on_raw_count>
+			SELECT 
+				COUNT(`data_artical`.`sid`) as `count`
+			FROM `data_attr_data`
+			LEFT JOIN `data_attr_data` `p_data_attr_data` 
+			ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+			RIGHT JOIN `data_artical_doc`
+			ON `data_artical_doc`.`did` =  `data_attr_data`.`sid`    
+			LEFT JOIN `data_artical`
+			ON `data_artical`.`sid` = `data_artical_doc`.`aid`
+		</query_on_raw_count>
+		<query_on_raw>
+			SELECT 
+				`data_artical`.`sid` as `aid`,`data_artical`.`title` as `title`,
+				`data_artical`.`date` as `date`,
+				`data_attr_data`.`pid` AS `pid`,`p_data_attr_data`.`data` as `pd`,
+				`data_attr_data`.`sid` as `mid`,`data_attr_data`.`data` as `md`
+			FROM `data_attr_data`
+			LEFT JOIN `data_attr_data` `p_data_attr_data` 
+			ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+			RIGHT JOIN `data_artical_doc`
+			ON `data_artical_doc`.`did` =  `data_attr_data`.`sid`    
+			LEFT JOIN `data_artical`
+			ON `data_artical`.`sid` = `data_artical_doc`.`aid`
+			@WHERECLAUSE
+			ORDER BY `aid` ASC
+			LIMIT :offset,:length
+		</query_on_raw>
+		<where_clause_dc>
+			`data_attr_data`.`pid` = :dcid
+		</where_clause_dc>
+		<where_clause_di>
+			`data_attr_data`.`sid` = :diid
+		</where_clause_di>
+		<where_clause_title>
+			`data_artical`.`title` like CONCAT('%',:title,'%')
+		</where_clause_title>
+		
+		
+		<reldis_homeless>
+			<count>
+				SELECT COUNT(`data_artical`.`sid`) as `count`
+				FROM `data_artical`
+				WHERE
+				`data_artical`.`sid`
+				NOT IN (SELECT `aid` FROM `data_artical_doc`)
+			</count>
+			<query>
+				SELECT `data_artical`.`sid`,`data_artical`.`title`,`data_artical`.`date`
+				FROM `data_artical`
+				WHERE
+				`data_artical`.`sid`
+				NOT IN (SELECT `aid` FROM `data_artical_doc`)
+				LIMIT :offset,:length 
+			</query>
+		</reldis_homeless>
+		
+	</artical_doctor>
 
 </sql>

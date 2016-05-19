@@ -216,7 +216,7 @@ function chooseDi(o,a){
                   
                   	<div class="no-margin pull-left" style="width:30%">
                   	
-                  			<form action="<?php print HTTP_ENTRY?>/priv/artical/con_reldis" method="post" class="form-horizontal">
+                  			<form onsubmit="return chk(this)" action="<?php print HTTP_ENTRY?>/priv/artical/con_reldis" method="post" class="form-horizontal">
 		                  	<div class="form-group">
 		                      <label for="inputEmail3" class="col-sm-3 control-label">对选中项:</label>
 		                      <div class="col-sm-7">
@@ -299,7 +299,13 @@ $(".btn-danger").click(function(){
 
 	return confirm("?");
 });
+function chk(fo){
 
+	if(fo.di.value == "0"){
+		return confirm("?");
+	}
+	return true;
+}
 function getChooseArticalIds(){
 	var ds = [],dd=[];
 	$("input[name='sid[]'").each(function(){
