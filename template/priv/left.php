@@ -50,8 +50,9 @@ $info = $userInfo;
               <ul class="treeview-menu">
                 <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/lv"><i class="fa fa-circle-o"></i> 职位管理</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/doctor"><i class="fa fa-circle-o"></i> 医生列表</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/relartical"><i class="fa fa-circle-o"></i> 关联文章</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/rellv"><i class="fa fa-circle-o"></i> 关联职位</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldoc"><i class="fa fa-circle-o"></i> 关联文章</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/rellv"><i class="fa fa-circle-o"></i> 设置职位</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/revrellv"><i class="fa fa-circle-o"></i> 修改职位</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/manwealth"><i class="fa fa-circle-o"></i> 赠送设置</a></li>
               </ul>
             </li>
@@ -75,9 +76,9 @@ $info = $userInfo;
               <ul class="treeview-menu">
               	<li><a href="<?php print HTTP_ENTRY?>/priv/artical/add"><i class="fa fa-circle-o"></i> 添加文章</a></li>
               	<li><a href="<?php print HTTP_ENTRY?>/priv/artical"><i class="fa fa-circle-o"></i> 文章列表</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldis"><i class="fa fa-circle-o"></i> 关联病种</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldis"><i class="fa fa-circle-o"></i> 未关联病种的文章</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/artical/revreldis"><i class="fa fa-circle-o"></i> 修改已关联的病种</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldoc"><i class="fa fa-circle-o"></i> 关联医生</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldoc"><i class="fa fa-circle-o"></i> 未关联医生的文章</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/artical/revreldoc"><i class="fa fa-circle-o"></i> 修改已关联的医生</a></li>
               </ul>
             </li>

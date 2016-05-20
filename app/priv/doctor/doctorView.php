@@ -15,7 +15,22 @@ class doctorView extends privView{
 				)
 		))->show();
 	}
-	
+	public function showListForRevLv(pmcaiUrl $url,$userinfo,$data,$lvMeta){
+		$content = $this->fetch("rev-lv",array(
+			"data" => $data,
+			"meta" => $lvMeta
+		));
+		$this->priv_wrap($userinfo, $content)->show();
+	}
+	public function showListForRellv(pmcaiUrl $url,$userinfo,$data,$lv_infoes,$page,$length){
+		$data["pageSize"] = $length;
+		$data["pageBtnLen"] = 5;
+		$data["curPageNum"] = $page;
+		$data["url"] = $url;
+		$data["lv_infoes"] = $lv_infoes;
+		$content = $this->fetch("rel-lv",$data);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
 	public function showOpSucc($info,$op="操作",$ret_url){
 		if($ret_url != ""){
 			$ret = ",<a href='".$ret_url ."'>返回</a>";

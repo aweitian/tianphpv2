@@ -61,6 +61,84 @@ class doctorController extends privController{
 	}
 	
 	
+	public function revrellvAction(pmcaiMsg $msg){
+		$data = $this->model->getCacheDocInfo();
+		
+
+		$this->view->setPmcaiMsg($msg);
+	
+		$this->view->showListForRevLv(
+				$msg->getPmcaiUrl(),
+				$this->priv->getUserInfo(),
+				$data,
+				$this->model->doctor_lv_all()
+		);
+
+		
+	}
+	public function con_rellvAction(pmcaiMsg $msg){
+		//di 3
+		//ds 3,4,7,8,9,10
+		if(!$msg->isPost()){
+			$this->response->_404();
+		}
+		//var_dump($msg->getPostData());
+		$dsArr = explode(",", $msg["ds"]);
+		$dlv    = $msg["di"];
+		foreach ($dsArr as $dod){
+			$this->model->connectLv($dod, $dlv);
+		}		
+		$this->response->redirect($_SERVER["HTTP_REFERER"]);
+		
+	}
+	
+	public function resetlvAction(pmcaiMsg $msg){
+		//var_dump($msg->getPostData());
+		if(!$msg->isPost()){
+			$this->response->_404();
+		}
+		//["sid"]=> string(1) "1" ["lv"]=> string(1) "3"
+		$this->model->updateLv($msg["sid"], $msg["lv"]);
+		$this->response->redirect($_SERVER["HTTP_REFERER"]);
+	}
+	
+	
+	public function rellvAction(pmcaiMsg $msg){
+		$length = 10;//每页显示多少行
+	
+		if (isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+	
+	
+		$offset = ($page - 1) * $length;
+		$data = $this->model->q_relart($offset,$length);
+	
+		if($data->isTrue()){
+				
+			// 			var_dump($data->return);exit;
+				
+			$this->view->setPmcaiMsg($msg);
+				
+			$this->view->showListForRellv(
+					$msg->getPmcaiUrl(),
+					$this->priv->getUserInfo(),
+					$data->return,
+					$this->model->doctor_lv_all()->return,
+					$page,
+					$length,
+					$msg["?q"]
+			);
+		}else{
+			echo $data->info;exit;
+			$this->response->showError($retR->info);;
+		}
+	}
 	
 	public function relarticalAction(pmcaiMsg $msg){
 		$this->view->setPmcaiMsg($msg);

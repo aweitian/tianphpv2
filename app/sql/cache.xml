@@ -85,6 +85,50 @@
 		</query_on_raw>
 	</doctor>
 
+
+
+
+	<doctorlv>
+		<create>
+		
+		</create>
+		<update>
+		
+		</update>
+		<rel_homeless>
+			<count>
+				SELECT COUNT(`data_doctor`.`sid`) as `count`
+				FROM `data_doctor`
+				WHERE
+				`data_doctor`.`sid`
+				NOT IN (SELECT `dod` FROM `data_doctor_ext`)
+			</count>
+			<query>
+				SELECT 
+				`data_doctor`.`sid`,`data_doctor`.`name`,
+				`data_doctor`.`avatar`,`data_doctor`.`date`
+				
+				FROM `data_doctor`
+				WHERE
+				`data_doctor`.`sid`
+				NOT IN (SELECT `dod` FROM `data_doctor_ext`)
+
+				LIMIT :offset,:length 
+			</query>
+		</rel_homeless>
+	</doctorlv>
+
+
+
+
+
+
+
+
+
+
+
+
 	<artical_disease>
 		<create>
 			CREATE TABLE `cache_artical_disease` (

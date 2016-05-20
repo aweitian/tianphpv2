@@ -15,4 +15,22 @@
 	<remove>
 		DELETE FROM `data_doctor_lv_meta` WHERE `sid` = :sid
 	</remove>
+	
+	<lv>
+		<add>
+			INSERT INTO `data_doctor_ext` (
+				`dod`,`dlv`
+			) VALUES (
+				:dod,:dlv
+			)
+		</add>
+		<update>
+			UPDATE `data_doctor_ext` SET 
+			`dlv`=:dlv
+		 WHERE `dod`=:dod
+		</update>
+	
+	</lv>
+	
+	
 </sql>

@@ -10,6 +10,71 @@ class doctorModel extends privModel{
 		$this->initDb();
 		$this->initSqlManager("doctor");
 	}
+	public function q_relart($offset,$len){
+		$cache_sqlmanager = new sqlManager("cache");
+		$sql_count = $cache_sqlmanager->getSql("/sql/doctorlv/rel_homeless/count");
+	
+		$sql = $sql_count;
+		$cnt = $this->db->fetch($sql, array());
+	
+		$cnt = $cnt["count"];
+	
+		$sql = strtr($cache_sqlmanager->getSql("/sql/doctorlv/rel_homeless/query"),array());
+		$where_bind = array();
+		$where_bind["offset"] = $offset;
+		$where_bind["length"] = $len;
+		$ret = $this->db->fetchAll($sql,$where_bind);
+		if(empty($ret)){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",array(
+				"data" => $ret,
+				"count" => $cnt
+		));
+	}
+	
+	public function connectLv($dod,$dlv){
+		$sql = sqlManager::getInstance("doctor_lv")->getSql("/sql/lv/add");
+		$bind = array(
+			"dod" => $dod,
+			"dlv" => $dlv
+		);
+		$ret = $this->db->insert($sql, $bind);
+		if(0 == $ret){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",array(
+			"data" => $ret,
+			"count" => $cnt
+		));
+	}
+	
+	public function updateLv($dod,$dlv){
+		$sql = sqlManager::getInstance("doctor_lv")->getSql("/sql/lv/update");
+		$bind = array(
+				"dod" => $dod,
+				"dlv" => $dlv
+		);
+		$ret = $this->db->exec($sql, $bind);
+		if(0 == $ret){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
+	
+	
+	
+	public function getCacheDocInfo(){
+		$sql = sqlManager::getInstance("cache")->getSql("/sql/doctor/query_on_raw");
+		$bind = array();
+		return $this->db->fetchAll($sql, $bind);
+	}
 	
 	public function add($id,$name,$pwd,$avatar,$date){
 	
