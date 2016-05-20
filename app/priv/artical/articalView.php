@@ -32,6 +32,26 @@ class articalView extends privView{
 		$content = $this->fetch("revrel-dis",$data);
 		$this->priv_wrap($userinfo, $content)->show();
 	}
+	public function showListForRevReldoc(pmcaiUrl $url,$userinfo,$data,$doc_infoes,$page,$length,$do,$q){
+		$data["pageSize"] = $length;
+		$data["pageBtnLen"] = 5;
+		$data["curPageNum"] = $page;
+		$data["url"] = $url;
+		$data["doc_infoes"] = $doc_infoes;
+		$data["do"] = $do;
+		$data["q"] = $q;
+		$content = $this->fetch("revrel-doc",$data);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
+	public function showListForReldoc(pmcaiUrl $url,$userinfo,$data,$doc_infoes,$page,$length){
+		$data["pageSize"] = $length;
+		$data["pageBtnLen"] = 5;
+		$data["curPageNum"] = $page;
+		$data["url"] = $url;
+		$data["doc_infoes"] = $doc_infoes;
+		$content = $this->fetch("rel-doc",$data);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
 	public function showListForReldis(pmcaiUrl $url,$userinfo,$data,$dis_infoes,$page,$length){
 		$data["pageSize"] = $length;
 		$data["pageBtnLen"] = 5;
@@ -41,15 +61,15 @@ class articalView extends privView{
 		$content = $this->fetch("rel-dis",$data);
 		$this->priv_wrap($userinfo, $content)->show();
 	}
-	public function showListForReldoc(pmcaiUrl $url,$userinfo,$data,$page,$length,$q){
-		$data["pageSize"] = $length;
-		$data["pageBtnLen"] = 5;
-		$data["curPageNum"] = $page;
-		$data["url"] = $url;
-		$data["q"] = $q;
-		$content = $this->fetch("rel-doctor",$data);
-		$this->priv_wrap($userinfo, $content)->show();
-	}
+// 	public function showListForReldoc(pmcaiUrl $url,$userinfo,$data,$page,$length,$q){
+// 		$data["pageSize"] = $length;
+// 		$data["pageBtnLen"] = 5;
+// 		$data["curPageNum"] = $page;
+// 		$data["url"] = $url;
+// 		$data["q"] = $q;
+// 		$content = $this->fetch("rel-doctor",$data);
+// 		$this->priv_wrap($userinfo, $content)->show();
+// 	}
 	public function showList(pmcaiUrl $url,$userinfo,$data,$page,$length,$q){
 		$data["pageSize"] = $length;
 		$data["pageBtnLen"] = 5;

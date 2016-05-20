@@ -52,6 +52,30 @@ class articalController extends privController{
 			$this->response->showError($retR->info);;
 		}
 	}
+// 	public function reldocAction(pmcaiMsg $msg){
+// 		$length = 10;//每页显示多少行
+		
+// 		if (isset($msg["?page"])){
+// 			$page = intval($msg["?page"]);
+// 		}else{
+// 			$page = 1;
+// 		}
+// 		if($page < 1){
+// 			$page = 1;
+// 		}
+		
+// 		$offset = ($page - 1) * $length;
+// 		$data = $this->model->getList($offset,$length);
+		
+// 		if($data->isTrue()){
+			
+// 			$this->view->setPmcaiMsg($msg);
+		
+// 			$this->view->showListForReldoc($msg->getPmcaiUrl(),$this->priv->getUserInfo(),$data->return,$page,$length,$msg["?q"]);
+// 		}else{
+// 			$this->response->showError($retR->info);;
+// 		}
+// 	}
 	public function reldocAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行
 		
@@ -63,16 +87,27 @@ class articalController extends privController{
 		if($page < 1){
 			$page = 1;
 		}
+	
 		
 		$offset = ($page - 1) * $length;
-		$data = $this->model->getList($offset,$length);
+		$data = $this->model->q_reldoc($offset,$length);
 		
 		if($data->isTrue()){
 			
+// 			var_dump($data->return);exit;
+			
 			$this->view->setPmcaiMsg($msg);
-		
-			$this->view->showListForReldoc($msg->getPmcaiUrl(),$this->priv->getUserInfo(),$data->return,$page,$length,$msg["?q"]);
+			
+			$this->view->showListForReldoc(
+				$msg->getPmcaiUrl(),
+				$this->priv->getUserInfo(),
+				$data->return,
+				$this->model->getCacheDoctor(),
+				$page,
+				$length
+			);
 		}else{
+			echo $data->info;exit;
 			$this->response->showError($retR->info);;
 		}
 	}
@@ -148,6 +183,40 @@ class articalController extends privController{
 		}
 	}
 	
+	public function con_reldocAction(pmcaiMsg $msg){
+// 		var_dump($msg->getPostData());
+		if($msg->isPost()){
+			//di doctor id
+			//ds artical id array
+			if(!isset($msg["ds"],$msg["di"])){
+				$this->response->_404();
+			}
+			if($msg["di"] == 0){
+				//remove rel
+				if(!isset($msg["dd"])){
+					$this->response->_404();
+				}
+				$dda = explode(",", $msg["dd"]);
+				$dds = explode(",", $msg["ds"]);
+				if(count($dda) != count($dds)){
+					$this->response->_404();
+				}
+// 				exit(var_dump($msg->getPostData()));
+				foreach ($dds as $ak => $aid){
+					$this->model->disconRelDoc($aid, $dda[$ak]);
+				}
+				$this->response->redirect($_SERVER["HTTP_REFERER"]);
+				return ;
+			}
+			
+			
+			$this->model->con_reldoc(explode(",", $msg["ds"]), $msg["di"]);
+			$this->view->showOpSucc($this->priv->getUserInfo(),"更新", $_SERVER["HTTP_REFERER"]);
+		}else{
+			$this->response->_404();
+		}
+	}
+	
 	// 修改已关联的病种
 	public function revreldisAction(pmcaiMsg $msg){
 		//GET:page dc di q
@@ -206,7 +275,75 @@ class articalController extends privController{
 			$this->response->showError($retR->info);;
 		}
 	}
+	// 修改已关联的医生
+	public function revreldocAction(pmcaiMsg $msg){
+		//GET:page dc di q
+		
+		
+		$length = 10;//每页显示多少行
+		
+		if (isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		if(!isset($msg["?do"]) || is_null($msg["?do"])){
+			$do = 0;
+		}else{
+			$do = intval($msg["?do"]);
+		}
+		if(!isset($msg["?q"]) || is_null($msg["?q"])){
+			$q = "";
+		}else{
+			$q = $msg["?q"];
+		}
+		
+		
+		
+		$offset = ($page - 1) * $length;
+		$data = $this->model->q_revreldoc($do,$q,$offset,$length);
+		
+		if($data->isTrue()){
+				
+			// 			var_dump($data->return);exit;
+				
+			$this->view->setPmcaiMsg($msg);
+				
+			$this->view->showListForRevReldoc(
+					$msg->getPmcaiUrl(),
+					$this->priv->getUserInfo(),
+					$data->return,
+					$this->model->getCacheDoctor(),
+					$page,
+					$length,
+					$msg["?do"],
+					$msg["?q"]
+			);
+		}else{
+			echo $data->info;exit;
+			$this->response->showError($retR->info);;
+		}
+	}
 	
+	/**
+	 * 接受GET：aid,dod
+	 * @param pmcaiMsg $msg
+	 */
+	public function rmreldocAction(pmcaiMsg $msg){
+		if(!isset($msg["?aid"],$msg["?dod"])){
+			$this->response->_404();
+		}
+		$ret = $this->model->disconRelDoc($msg["?aid"],$msg["?dod"]);
+		if($ret->isTrue()){
+			$this->response->redirect($_SERVER["HTTP_REFERER"]);
+		}else{
+			$this->response->showError($ret->info);
+		}
+		
+	}
 	/**
 	 * 接受GET：aid,did
 	 * @param pmcaiMsg $msg

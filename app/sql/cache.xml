@@ -19,7 +19,7 @@
 		    FROM `data_attr_data`
 		    LEFT JOIN `data_attr_data` `p_data_attr_data` ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
 		    
-		     WHERE `data_attr_data`.`metaid` = 2 AND `data_attr_data`.`grp` = 1;		
+		    WHERE `data_attr_data`.`metaid` = 2 AND `data_attr_data`.`grp` = 1;		
 		
 		</update>
 		<all>
@@ -42,6 +42,48 @@
 		
 		</query_on_raw>
 	</disease>
+	<doctor>
+		<create>
+			CREATE TABLE `cache_doctor` (
+			  `sid` int(11) DEFAULT NULL,
+			  `name` varchar(64) DEFAULT NULL,
+			  `dmd` int(11) DEFAULT NULL,
+			  `lv` varchar(32) DEFAULT NULL,
+			  UNIQUE KEY `sid` (`sid`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8
+		
+		</create>
+		
+		<update>
+			INSERT INTO `cache_doctor` (`sid`,`name`,`dmd`,`lv`)
+		    SELECT 
+				`data_doctor`.`sid` AS `dod`,`data_doctor`.`name` AS `name`,
+				`data_doctor_lv_meta`.`sid` AS `dmd`,
+				`data_doctor_lv_meta`.`data` AS `lv`
+			FROM `data_doctor`
+			LEFT JOIN `data_doctor_ext`
+				ON `data_doctor_ext`.`dod` = `data_doctor`.`sid`
+			LEFT JOIN `data_doctor_lv_meta`
+				ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`	
+		
+		</update>
+		<all>
+			SELECT
+			  `sid`,`name`,`dmd`,`lv`
+			FROM `cache_doctor`
+		</all>
+		<query_on_raw>
+		  SELECT 
+				`data_doctor`.`sid` AS `dod`,`data_doctor`.`name` AS `name`,
+				`data_doctor_lv_meta`.`sid` AS `dmd`,
+				`data_doctor_lv_meta`.`data` AS `lv`
+			FROM `data_doctor`
+			LEFT JOIN `data_doctor_ext`
+				ON `data_doctor_ext`.`dod` = `data_doctor`.`sid`
+			LEFT JOIN `data_doctor_lv_meta`
+				ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`	
+		</query_on_raw>
+	</doctor>
 
 	<artical_disease>
 		<create>
@@ -169,53 +211,53 @@
 			SELECT
 			  `aid`,
 			  `title`,
-			  `pid`,
-			  `pd`,
-			  `mid`,
-			  `md`
-			FROM `cache_artical_disease`
+			  `dod`,
+			  `name`,
+			  `lv`
+			FROM `cache_artical_doctor`
 		</all>
 		
 		<query_on_raw_count>
 			SELECT 
 				COUNT(`data_artical`.`sid`) as `count`
-			FROM `data_attr_data`
-			LEFT JOIN `data_attr_data` `p_data_attr_data` 
-			ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
-			RIGHT JOIN `data_artical_doc`
-			ON `data_artical_doc`.`did` =  `data_attr_data`.`sid`    
+			FROM `data_artical_doc`
 			LEFT JOIN `data_artical`
-			ON `data_artical`.`sid` = `data_artical_doc`.`aid`
+				ON `data_artical_doc`.`aid` = `data_artical`.`sid`
+			LEFT JOIN `data_doctor`
+				ON `data_doctor`.`sid` = `data_artical_doc`.`dod`
+			LEFT JOIN `data_doctor_ext`
+				ON `data_doctor_ext`.`dod` = `data_artical_doc`.`dod`
+			LEFT JOIN `data_doctor_lv_meta`
+				ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`
 		</query_on_raw_count>
 		<query_on_raw>
 			SELECT 
-				`data_artical`.`sid` as `aid`,`data_artical`.`title` as `title`,
-				`data_artical`.`date` as `date`,
-				`data_attr_data`.`pid` AS `pid`,`p_data_attr_data`.`data` as `pd`,
-				`data_attr_data`.`sid` as `mid`,`data_attr_data`.`data` as `md`
-			FROM `data_attr_data`
-			LEFT JOIN `data_attr_data` `p_data_attr_data` 
-			ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
-			RIGHT JOIN `data_artical_doc`
-			ON `data_artical_doc`.`did` =  `data_attr_data`.`sid`    
+				`data_artical`.`sid` AS `aid`,`data_artical`.`title` AS `title`,
+				`data_artical`.`date` AS `date`,
+				`data_artical_doc`.`dod`,`data_doctor`.`name` AS `name`,
+				`data_doctor_lv_meta`.`data` AS `lv`
+			FROM `data_artical_doc`
 			LEFT JOIN `data_artical`
-			ON `data_artical`.`sid` = `data_artical_doc`.`aid`
+				ON `data_artical_doc`.`aid` = `data_artical`.`sid`
+			LEFT JOIN `data_doctor`
+				ON `data_doctor`.`sid` = `data_artical_doc`.`dod`
+			LEFT JOIN `data_doctor_ext`
+				ON `data_doctor_ext`.`dod` = `data_artical_doc`.`dod`
+			LEFT JOIN `data_doctor_lv_meta`
+				ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`
 			@WHERECLAUSE
 			ORDER BY `aid` ASC
 			LIMIT :offset,:length
 		</query_on_raw>
-		<where_clause_dc>
-			`data_attr_data`.`pid` = :dcid
-		</where_clause_dc>
-		<where_clause_di>
-			`data_attr_data`.`sid` = :diid
-		</where_clause_di>
+		<where_clause_do>
+			`data_artical_doc`.`dod` = :dod
+		</where_clause_do>
 		<where_clause_title>
 			`data_artical`.`title` like CONCAT('%',:title,'%')
 		</where_clause_title>
 		
 		
-		<reldis_homeless>
+		<reldoc_homeless>
 			<count>
 				SELECT COUNT(`data_artical`.`sid`) as `count`
 				FROM `data_artical`
@@ -231,7 +273,7 @@
 				NOT IN (SELECT `aid` FROM `data_artical_doc`)
 				LIMIT :offset,:length 
 			</query>
-		</reldis_homeless>
+		</reldoc_homeless>
 		
 	</artical_doctor>
 

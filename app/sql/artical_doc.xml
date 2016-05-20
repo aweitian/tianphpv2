@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<exists>
+		SELECT
+		  `aid`,
+		  `dod`
+		FROM `data_artical_doc`
+		WHERE `aid` = :aid AND `dod` = :dod
+	</exists>
+	<add>
+		INSERT INTO `data_artical_doc`
+	            (`aid`,
+	             `dod`)
+		VALUES (:aid,
+		        :dod);
+	</add>
+	
+	<rm>
+		DELETE
+		FROM `data_artical_doc`
+		WHERE `aid` = :aid
+		    AND `dod` = :dod;
+	</rm>
+</sql>

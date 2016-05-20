@@ -78,6 +78,7 @@ $info = $userInfo;
                 <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldis"><i class="fa fa-circle-o"></i> 关联病种</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/artical/revreldis"><i class="fa fa-circle-o"></i> 修改已关联的病种</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldoc"><i class="fa fa-circle-o"></i> 关联医生</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/revreldoc"><i class="fa fa-circle-o"></i> 修改已关联的医生</a></li>
               </ul>
             </li>
             <li class="treeview">

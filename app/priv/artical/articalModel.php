@@ -25,6 +25,12 @@ class articalModel extends privModel{
 	
 	
 	
+	public function getCacheDoctor(){
+		$ret = $this->db->fetchAll(sqlManager::getInstance("cache")->getSql("/sql/doctor/query_on_raw"), array(
+	
+		));
+		return $ret;
+	}
 	public function getCacheDisease(){
 		$ret = $this->db->fetchAll(sqlManager::getInstance("cache")->getSql("/sql/disease/query_on_raw"), array(
 	
@@ -35,15 +41,33 @@ class articalModel extends privModel{
 	public function con_reldis($idArr,$dd){
 // 		var_dump($dd);exit;
 		foreach ($idArr as $id){
-			$exists = $this->db->fetch(sqlManager::getInstance("artical_ext")->getSql("/sql/exists"), array(
+			$exists = $this->db->fetch(sqlManager::getInstance("artical_dis")->getSql("/sql/exists"), array(
 				"aid" => $id,
 				"did" => $dd
 			));	
 			if(empty($exists)){
 // 				var_dump($id);exit;
-				$this->db->exec(sqlManager::getInstance("artical_ext")->getSql("/sql/add"), array(
+				$this->db->exec(sqlManager::getInstance("artical_dis")->getSql("/sql/add"), array(
 						"aid" => $id,
 						"did" => $dd
+				));
+			}		
+		}
+
+		
+	}
+	public function con_reldoc($idArr,$dd){
+// 		var_dump($dd);exit;
+		foreach ($idArr as $id){
+			$exists = $this->db->fetch(sqlManager::getInstance("artical_doc")->getSql("/sql/exists"), array(
+				"aid" => $id,
+				"dod" => $dd
+			));	
+			if(empty($exists)){
+// 				var_dump($id);exit;
+				$this->db->exec(sqlManager::getInstance("artical_doc")->getSql("/sql/add"), array(
+						"aid" => $id,
+						"dod" => $dd
 				));
 			}		
 		}
@@ -53,6 +77,30 @@ class articalModel extends privModel{
 	
 	
 	
+	public function q_reldoc($offset,$len){
+		$cache_sqlmanager = new sqlManager("cache");
+		$sql_count = $cache_sqlmanager->getSql("/sql/artical_doctor/reldoc_homeless/count");
+
+		$sql = $sql_count;
+		$cnt = $this->db->fetch($sql, array());
+		
+		$cnt = $cnt["count"];
+		
+		$sql = strtr($cache_sqlmanager->getSql("/sql/artical_doctor/reldoc_homeless/query"),array());
+		$where_bind = array();
+		$where_bind["offset"] = $offset;
+		$where_bind["length"] = $len;
+		$ret = $this->db->fetchAll($sql,$where_bind);
+		if(empty($ret)){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",array(
+			"data" => $ret,
+			"count" => $cnt
+		));
+	}
 	public function q_reldis($offset,$len){
 		$cache_sqlmanager = new sqlManager("cache");
 		$sql_count = $cache_sqlmanager->getSql("/sql/artical_disease/reldis_homeless/count");
@@ -123,11 +171,66 @@ class articalModel extends privModel{
 			"count" => $cnt
 		));
 	}
+	public function q_revreldoc($doid,$q,$offset,$len){
+		$cache_sqlmanager = new sqlManager("cache");
+		$where_bind = array();
+		$sql_count = $cache_sqlmanager->getSql("/sql/artical_doctor/query_on_raw_count");
+		$where_clause = array();
+		if(intval($doid) != 0){
+			$where_clause[] = $cache_sqlmanager->getSql("/sql/artical_doctor/where_clause_do");
+			$where_bind["dod"] = $doid;
+		}
+
+		if($q != ""){
+			$where_clause[] = $cache_sqlmanager->getSql("/sql/artical_doctor/where_clause_title");
+			$where_bind["title"] = $q;
+		}
+		
+		$where_clause = join(" AND ", $where_clause);
+		if($where_clause != ""){
+			$where_clause = " WHERE " . $where_clause;
+		}
+		$sql = $sql_count . $where_clause;
+		$cnt = $this->db->fetch($sql, $where_bind);
+		
+		$cnt = $cnt["count"];
+		
+		$sql = strtr($cache_sqlmanager->getSql("/sql/artical_doctor/query_on_raw"),array(
+			"@WHERECLAUSE" => $where_clause
+		));
+		$where_bind["offset"] = $offset;
+		$where_bind["length"] = $len;
+		
+// 		var_dump($sql);exit;
+		
+		$ret = $this->db->fetchAll($sql,$where_bind);
+		if(empty($ret)){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",array(
+			"data" => $ret,
+			"count" => $cnt
+		));
+	}
 	
 	public function disconRelDis($aid,$did){
-		$ret = $this->db->exec(sqlManager::getInstance("artical_ext")->getSql("/sql/rm"), array(
+		$ret = $this->db->exec(sqlManager::getInstance("artical_dis")->getSql("/sql/rm"), array(
 				"aid" => $aid,
 				"did" => $did,
+		));
+		if($ret == 0){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
+	public function disconRelDoc($aid,$dod){
+		$ret = $this->db->exec(sqlManager::getInstance("artical_doc")->getSql("/sql/rm"), array(
+				"aid" => $aid,
+				"dod" => $dod,
 		));
 		if($ret == 0){
 			if($this->db->hasError()){
