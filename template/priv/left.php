@@ -84,6 +84,18 @@ $info = $userInfo;
             </li>
             <li class="treeview">
               <a href="#">
+                <i class="fa fa-question"></i>
+                <span>问答模块</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="<?php print HTTP_ENTRY?>/priv/ask/usr"><i class="fa fa-circle-o"></i> 选择用户提问</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/ask/usrec"><i class="fa fa-circle-o"></i> 用户提问记录</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/ask/doc"><i class="fa fa-circle-o"></i> 医生的问题</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
                 <i class="fa fa-gift"></i>
                 <span>心意礼物</span>
                 <i class="fa fa-angle-left pull-right"></i>

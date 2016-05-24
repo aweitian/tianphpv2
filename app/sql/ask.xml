@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ask>
+
+	<all_doctor>
+		
+		SELECT
+		  `sid`,
+		  `name`
+		FROM `data_doctor`
+	</all_doctor>
+	<add>
+		INSERT INTO `data_ask` (
+			`uid`,`dod`,`title`,`did`,`desc`,`svr`,`files`,`date`
+		) VALUES (
+			:uid,:dod,:title,:did,:desc,:svr,:files,:date
+		)
+	</add>
+
+
+	<update>
+		UPDATE `data_ask` SET 
+			`title`=:title,
+			`did`=:did,
+			`desc`=:desc,
+			`svr`=:svr,
+			`date`=:date
+		 WHERE `sid`=:sid AND `uid`=:uid
+	</update>
+	
+	<rm>
+		DELETE `data_ask`,`data_ask_append` 
+		FROM `data_ask`
+		LEFT JOIN `data_ask_append` ON `data_ask`.`sid` = `data_ask_append`.`askid`
+		WHERE 
+		`data_ask`.`sid` = :sid
+	</rm>
+	
+	
+	<all_dod>
+		<count>
+			SELECT 
+				count(*) as `count`
+			 FROM `data_ask` 
+			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_ask`.`did`
+			LEFT JOIN `data_user`      ON `data_user`.`sid` = `data_ask`.`uid`			
+			WHERE `data_ask`.`dod`=:dod
+		</count>
+		<query>
+			SELECT
+				`data_ask`.`sid`,
+				`data_ask`.`uid`,
+				`data_user`.`email`,
+				`data_ask`.`title`,
+				`data_ask`.`did`,
+				`data_attr_data`.`data`,
+				`data_ask`.`desc`,
+				`data_ask`.`svr`,
+				`data_ask`.`files`,
+				`data_ask`.`date`
+			FROM `data_ask`
+			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_ask`.`did`
+			LEFT JOIN `data_user`      ON `data_user`.`sid` = `data_ask`.`uid`			
+			WHERE `data_ask`.`dod`=:dod
+			 LIMIT :offset,:length
+		</query>
+
+	</all_dod>
+	<all_uid>
+		<count>
+			SELECT 
+				count(*) as `count`
+			FROM `data_ask`
+			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_ask`.`did`
+			LEFT JOIN `data_doctor`      ON `data_doctor`.`sid` = `data_ask`.`dod`			
+			WHERE `data_ask`.`uid`=:uid
+		</count>
+		<query>
+			SELECT
+				`data_ask`.`sid`,
+				`data_ask`.`uid`,
+				`data_doctor`.`name`,
+				`data_ask`.`title`,
+				`data_ask`.`did`,
+				`data_attr_data`.`data`,
+				`data_ask`.`desc`,
+				`data_ask`.`svr`,
+				`data_ask`.`files`,
+				`data_ask`.`date`
+			FROM `data_ask`
+			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_ask`.`did`
+			LEFT JOIN `data_doctor`      ON `data_doctor`.`sid` = `data_ask`.`dod`			
+			WHERE `data_ask`.`uid`=:uid
+			LIMIT :offset,:length
+		</query>
+
+	</all_uid>
+
+
+	<usr>
+		<condition>
+			<count>
+				SELECT count(`sid`) as count 
+				FROM `data_user`
+				 WHERE 
+					`email` LIKE CONCAT(  '%',  :q,  '%' ) 
+					OR
+					`name` LIKE CONCAT(  '%',  :q,  '%' ) 
+					OR
+					`phone` LIKE CONCAT(  '%',  :q,  '%' ) 
+					OR
+					`sid` = :q
+			</count>
+			<query>
+				SELECT * FROM `data_user` 
+				WHERE 
+					`email` LIKE CONCAT(  '%',  :q,  '%' ) 
+					OR
+					`name` LIKE CONCAT(  '%',  :q,  '%' ) 
+					OR
+					`phone` LIKE CONCAT(  '%',  :q,  '%' ) 
+					OR
+					`sid` = :q
+				LIMIT :offset,:length
+			</query>		
+		</condition>
+		<all>
+			<count>
+				SELECT count(`sid`) as count 
+				FROM `data_user`
+				 WHERE 
+					1
+			</count>
+			<query>
+				SELECT * FROM `data_user` 
+				WHERE 
+					1
+				LIMIT :offset,:length
+			</query>	
+		</all>
+		
+	</usr>
+
+
+
+
+</ask>

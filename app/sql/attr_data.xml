@@ -13,7 +13,7 @@
 	</getInfoesByGrp>
 
 	<getLvById>
-	SELECT `data_attr_meta`.`level`
+		SELECT `data_attr_meta`.`level`
 		FROM  `data_attr_data` 
 		LEFT JOIN `data_attr_meta` ON `data_attr_data`.`metaid` = `data_attr_meta`.`sid`
 		WHERE 
