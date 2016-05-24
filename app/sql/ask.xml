@@ -17,14 +17,21 @@
 	</add>
 
 
+	<row>
+		SELECT * FROM `data_ask`
+		 WHERE `sid`=:sid
+	</row>
 	<update>
 		UPDATE `data_ask` SET 
+			`uid`=:uid,
+			`dod`=:dod,
 			`title`=:title,
 			`did`=:did,
 			`desc`=:desc,
 			`svr`=:svr,
+			`files`=:files,
 			`date`=:date
-		 WHERE `sid`=:sid AND `uid`=:uid
+		 WHERE `sid`=:sid
 	</update>
 	
 	<rm>

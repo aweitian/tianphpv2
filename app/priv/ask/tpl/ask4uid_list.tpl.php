@@ -57,6 +57,7 @@ if(is_null($q)){
                    
                    
                    <div class="box-tools">
+                   <!-- 
                    <form action="<?php print HTTP_ENTRY?>/priv/ask/usrec">
                     <div class="input-group" style="width: 256px;">
                     
@@ -67,6 +68,7 @@ if(is_null($q)){
                       
                     </div>
                     </form>
+                     -->
                   </div>
                    
                    

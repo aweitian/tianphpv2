@@ -39,6 +39,65 @@ class askController extends privController{
 			$this->model->getAllDis()
 		);
 	}
+	
+	
+	
+	public function editAction(pmcaiMsg $msg){
+		if($msg->isPost()){
+			
+			$this->chkPost($msg, array("sid","uid","dod","title","did","desc","svr","date"));
+			if(!isset($msg["files"])){
+				$files = array();
+			}else{
+				$files = $msg["files"];
+			}
+			$ret = $this->model->update($msg["sid"],$msg["uid"], $msg["dod"], $msg["title"],
+					$msg["did"], $msg["desc"], $msg["svr"], $files, $msg["date"]);
+			
+			if($ret->isTrue()){
+				if(isset($msg["?returl"])){
+					$ret_url = $msg["?returl"];
+				}else{
+					$ret_url = "";
+				}
+				$this->view->showOpSucc($this->priv->getUserInfo(),"更新",$ret_url);
+			}else{
+				$this->response->showError($ret->info);
+			}
+			
+			
+		}else{
+			if(!isset($msg["?sid"])){
+				$this->response->_404();
+			}
+			
+			$row = $this->model->row($msg["?sid"]);
+			$this->view->setPmcaiMsg($msg);
+			if(isset($row["files"]) && $row["files"] != ""){
+				$row["files"] = explode(",", $row["files"]);
+			}else{
+				$row["files"] = array();
+			}
+	// 		var_dump($row);
+			$this->view->showForm(
+				$this->priv->getUserInfo(),
+				$msg["?uid"],
+				$this->model->getAllDoc(),
+				$this->model->getAllDis(),
+				$row
+			);			
+		}
+	}
+	
+	public function rmAction(pmcaiMsg $msg){
+		$ret_url = $_SERVER["HTTP_REFERER"];
+		if(!isset($msg["?sid"])){
+			$this->response->_404();
+		}
+		$this->model->remove(intval($msg["?sid"]));
+		$this->response->redirect($ret_url);
+	}
+	
 	/**
 	 * @param pmcaiMsg $msg
 	 */

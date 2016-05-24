@@ -53,7 +53,11 @@ class askModel extends privModel{
 	
 	
 	
-	
+	public function row($sid){
+		$sql = $this->sqlManager->getSql("/ask/row");
+		$bnd = array("sid" => $sid);
+		return $this->db->fetch($sql, $bnd);
+	}
 	
 	
 	
@@ -123,6 +127,85 @@ class askModel extends privModel{
 		}
 		return new rirResult(0,"ok",$sid);
 	}
+	/**
+	 * 
+	 * @param int $sid
+	 * @param int $dod
+	 * @param string $title
+	 * @param int $did
+	 * @param string $desc
+	 * @param string $svr
+	 * @param string $files
+	 * @param date $date
+	 * @return rirResult
+	 */
+	public function update($sid,$uid,$dod,$title,$did,$desc,$svr,$files,$date){
+		
+		//validate data
+		if(!validator::isUint($uid)){
+			return new rirResult(1,"invalid uid");
+		}
+		if(!validator::isUint($dod)){
+			return new rirResult(2,"invalid dod");
+		}
+		if(!askValidator::isValidTitle($title)){
+			return new rirResult(3,"invalid title");
+		}
+		if(!validator::isUint($did)){
+			return new rirResult(4,"invalid did");
+		}
+		if(!askValidator::isValidDesc($desc)){
+			return new rirResult(5,"invalid desc");
+		}
+		if(!askValidator::isValidSvr($svr)){
+			return new rirResult(6,"invalid svr");
+		}
+		if(!askValidator::isValidFiles($files)){
+			return new rirResult(7,"invalid files");
+		}
+		if(!validator::isDateTime($date)){
+			return new rirResult(8,"invalid date");
+		}
+		
+		//filter
+		$files = askFilter::fileFilter($files);
+		
+		$sql = $this->sqlManager->getSql("/ask/update");
+		$bind = array(
+			"sid" => $sid,
+			"uid" => $uid,
+			"dod" => $dod,
+			"title" => $title,
+			"did" => $did,
+			"desc" => $desc,
+			"svr" => $svr,
+			"files" => $files,
+			"date" => $date,
+		);
+		$sid = $this->db->exec($sql, $bind);
+		if($sid == 0){
+			if($this->db->hasError()){
+				return new rirResult(9,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$sid);
+	}
+	
+	
+	public function remove($sid){
+		$ret = $this->db->exec($this->sqlManager->getSql("/ask/rm"), array(
+				"sid" => $sid,
+		));
+		if($ret == 0){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
+	
+	
+	
 	/**
 	 * 成功，INFO字段为COUNT,RETURN为数据
 	 * @param int $uid

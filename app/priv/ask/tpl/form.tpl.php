@@ -15,12 +15,18 @@ if(isset($data["def"]) && !is_null($data["def"])){
 		"did" => "0",
 		"desc" => "",
 		"svr" => "",
-		"files" => "",
+		"files" => array(),
 		"date" => date("Y-m-d H:i:s")
 	);
 	$at = "添加";
 	$ua = "add";
 }
+
+$file_item_html = "<div class='input-group'><i class='glyphicon glyphicon-trash input-group-addon'></i><input name='files[]' class='form-control' placeholder='图片路径' value=''></div>";
+
+// var_dump($def);exit;
+
+
 if(isset($_SERVER['HTTP_REFERER'])){
 	$ret_url = "?returl=".urlencode($_SERVER['HTTP_REFERER']);
 }else{
@@ -29,7 +35,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
 
 $dis_infoes = $data["dis_infoes"];
 $doc_infoes = $data["doc_infoes"];
-// var_dump($doc_infoes);exit;
+// var_dump($def["dod"]);exit;
 ?>
 <script src="<?php print HTTP_ENTRY?>/static/bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
@@ -53,7 +59,7 @@ $doc_infoes = $data["doc_infoes"];
                       <label>医生</label>
                         <select class="form-control" name="dod" id="sel_dd">
                         <?php foreach ($doc_infoes as $item):?>
-	               		<option value="<?php print $item["sid"]?>"><?php print $item["name"]?></option>
+	               		<option value="<?php print $item["sid"]?>"<?php if($def["dod"] == $item["sid"]):?> selected<?php endif;?>><?php print $item["name"]?></option>
                         <?php endforeach;?>
                         </select>
                     </div>
@@ -99,7 +105,7 @@ $doc_infoes = $data["doc_infoes"];
                         <?php foreach ($tree_dis as $pid => $item):?>
                         <optgroup label="<?php print $item["text"]?>">
 	                        <?php foreach ($item["children"] as $mid => $child):?>
-	                        <option value="<?php print $mid?>"><?php print $child?></option>
+	                        <option value="<?php print $mid?>"<?php if($def["did"] == $mid):?> selected<?php endif;?>><?php print $child?></option>
 	                        <?php endforeach;?>
                         </optgroup>
                         
@@ -120,7 +126,13 @@ $doc_infoes = $data["doc_infoes"];
                     </div>
                     <div class="form-group">
                       <label>检查资料</label>
-                      <div id="upload_area"></div>
+                      <div id="upload_area">
+                      <?php foreach ($def["files"] as $f):?>
+                      
+                      <?php print str_replace("value=''","value='".$f."'",$file_item_html)?>
+                      
+                      <?php endforeach;?>
+                      </div>
                       	<div class="input-group">
                       	<button class="btn" type="button" id="upload_btn">
 	 					<i class="glyphicon glyphicon-plus"></i>
@@ -158,9 +170,7 @@ $(function(){
 });
 
 $("#upload_btn").click(function(){
-	$("#upload_area").append("<div class='input-group'><i class='glyphicon glyphicon-trash input-group-addon'></i><input name='files[]' class='form-control' placeholder='图片路径'></div>");
-
-	
+	$("#upload_area").append(<?php print json_encode($file_item_html)?>);
 });
 $("#upload_area").on( "click", "i.glyphicon.glyphicon-trash.input-group-addon", function(){
 
