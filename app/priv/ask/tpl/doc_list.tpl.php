@@ -4,32 +4,6 @@
  * Author: Awei.tian
  * Description: 
  */
-
-/* ***************************************************
- ["sid"]=>
- string(1) "1"
- ["uid"]=>
- string(1) "2"
- ["name"]=>
- string(9) "李美龙"
- ["title"]=>
- string(6) "adfadf"
- ["did"]=>
- string(1) "2"
- ["data"]=>
- string(12) "前列腺炎"
- ["desc"]=>
- string(5) "asdfa"
- ["svr"]=>
- string(8) "dfadsfad"
- ["files"]=>
- string(13) "aa.jpg,qq.png"
- ["date"]=>
- string(19) "2016-05-24 00:00:00"
- *  */
-
-
-
 $q  = $data["q"];
 /**
  * 
@@ -53,12 +27,11 @@ if(is_null($q)){
 
 		<div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">问答列表</h3>
+                  <h3 class="box-title">用户列表</h3>
                    
                    
                    <div class="box-tools">
-                   <!-- 
-                   <form action="<?php print HTTP_ENTRY?>/priv/ask/usrec">
+                   <form action="<?php print HTTP_ENTRY?>/priv/ask/doc">
                     <div class="input-group" style="width: 256px;">
                     
                       <input name="q" value="<?php print $q?>" type="text" name="table_search" class="form-control input-sm pull-right" placeholder="邮箱/手机号/UID/昵称">
@@ -68,39 +41,32 @@ if(is_null($q)){
                       
                     </div>
                     </form>
-                     -->
                   </div>
                    
                    
                    
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                
-                <a class="btn bg-olive btn-flat margin" href="<?php print HTTP_ENTRY?>/priv/ask?uid=<?php print $_REQUEST["uid"]?>">
-                	 <i class="fa fa-plus"></i> 添加提问
-                	 </a>
-                
-                
                   <table class="table table-bordered">
                     <tr>
                       <th style="width: 20px">#</th>
-                      <th>医生</th>
-                      <th>标题</th>
-                      <th>病种</th>
+                      <th>登陆ID</th>
+                      <th>姓名</th>
+                      <th>日期</th>
                       <th width="30%">操作</th>
                     </tr>
                     <?php foreach ($data as $item):?>
                     <tr>
                       <td><?php print $item["sid"]?></td>
+                      <td><?php print $item["id"]?></td>
                       <td><?php print $item["name"]?></td>
-                      <td><?php print $item["title"]?></td>
-                      <td><?php print $item["data"]?></td>
+                      <td><?php print $item["date"]?></td>
                       
                       <td>
-                      	
-  						<a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/ask/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
-                        <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/ask/rm?sid=<?php print $item["sid"]?>">删除</a>
-                      
+                      	<!-- <i class="fa fa-edit"></i> -->
+                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/ask/view?dod=<?php print $item["sid"]?>">
+                         		<i class="fa fa-question-circle"></i> 查看所有的问题
+                         	</a>
                       </td>
                     </tr>
                     

@@ -37,6 +37,19 @@ class askView extends privView{
 		$this->priv_wrap($userinfo, $content)->show();
 
 	}
+	public function showDodList(pmcaiUrl $url,$userinfo,$cnt,$data,$page,$length,$q){
+
+		$data["data"] = $data;
+		$data["pageSize"] = $length;
+		$data["pageBtnLen"] = 5;
+		$data["curPageNum"] = $page;
+		$data["url"] = $url;
+		$data["cnt"] = $cnt;
+		$data["q"] = $q;
+		$content = $this->fetch("ask4dod_list",$data);
+		$this->priv_wrap($userinfo, $content)->show();
+
+	}
 	
 	
 	public function showOpSucc($info,$op,$ret_url){
@@ -60,6 +73,17 @@ class askView extends privView{
 		$data["cnt"] = $cnt;
 		$data["q"] = $q;
 		$content = $this->fetch("usr_list",$data);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
+	public function showDocList(pmcaiUrl $url,$userinfo,$cnt,$data,$page,$length,$q){
+		$data["data"] = $data;
+		$data["pageSize"] = $length;
+		$data["pageBtnLen"] = 5;
+		$data["curPageNum"] = $page;
+		$data["url"] = $url;
+		$data["cnt"] = $cnt;
+		$data["q"] = $q;
+		$content = $this->fetch("doc_list",$data);
 		$this->priv_wrap($userinfo, $content)->show();
 	}
 }

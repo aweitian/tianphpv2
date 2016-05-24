@@ -52,6 +52,41 @@ class askModel extends privModel{
 	}
 	
 	
+	/**
+	 * 成功，INFO字段为COUNT,RETURN为数据
+	 * @param string $q
+	 * @param int $offset
+	 * @param int $len
+	 * @return rirResult
+	 */
+	public function queryDoc($q,$offset,$len){
+		if(!is_null($q) && $q != ""){
+			$sql_cnt = $this->sqlManager->getSql("/ask/doc/condition/count");
+			$sql_all = $this->sqlManager->getSql("/ask/doc/condition/query");
+			$cnt_bnd = array("q" => $q);
+			$all_bnd = array("q" => $q,"offset" => $offset,"length" => $len);
+		}else{
+			$sql_cnt = $this->sqlManager->getSql("/ask/doc/all/count");
+			$sql_all = $this->sqlManager->getSql("/ask/doc/all/query");
+			$cnt_bnd = array();
+			$all_bnd = array("offset" => $offset,"length" => $len);
+		}
+		
+		
+		$cnt = $this->db->fetch($sql_cnt,$cnt_bnd);
+	
+		$cnt = $cnt["count"];
+	
+		$ret = $this->db->fetchAll($sql_all, $all_bnd);
+		if(empty($ret)){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,$cnt,$ret);
+	}
+	
+	
 	
 	public function row($sid){
 		$sql = $this->sqlManager->getSql("/ask/row");

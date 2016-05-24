@@ -39,9 +39,7 @@ class askController extends privController{
 			$this->model->getAllDis()
 		);
 	}
-	
-	
-	
+
 	public function editAction(pmcaiMsg $msg){
 		if($msg->isPost()){
 			
@@ -161,6 +159,79 @@ class askController extends privController{
 			$this->response->showError($ret->info);;
 		}
 	}
+	//显示查询医生UI
+	public function docAction(pmcaiMsg $msg){
+		$length = 10;//每页显示多少行
+		
+		if(isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		$offset = ($page - 1) * $length;
+		
+		$ret = $this->model->queryDoc($msg["?q"], $offset, $length);
+			
+		if($ret->isTrue()){
+			$this->view->setPmcaiMsg($msg);
+			$this->view->showDocList(
+					$msg->getPmcaiUrl(),
+					$this->priv->getUserInfo(),
+					$ret->info,
+					$ret->return,$page,$length,$msg["?q"]);
+		}else{
+			$this->response->showError($ret->info);;
+		}
+	}
+	
+	
+	public function viewAction(pmcaiMsg $msg){
+		
+		if(!isset($msg["?dod"])){
+			$this->response->_404();
+		}
+		
+		$length = 10;
+		if(isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		$offset = ($page - 1) * $length;
+		
+		
+		$this->view->setPmcaiMsg($msg);
+		
+		$data = $this->model->getAllAskByDod($msg["?dod"], $offset, $length);
+		
+// 		var_dump($ret->return);
+		/*
+		 * 
+
+		 */
+		
+		$this->view->setPmcaiMsg($msg);
+		$this->view->showDodList(
+				$msg->getPmcaiUrl(),
+				$this->priv->getUserInfo(),
+				$data->info,
+				$data->return,
+				$page,
+				$length,
+				$msg["?q"]
+		);
+		
+		
+	}
+	
+	
+	
 	public function usrecAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行
 		

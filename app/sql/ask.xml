@@ -42,6 +42,29 @@
 		`data_ask`.`sid` = :sid
 	</rm>
 	
+	<append>
+		<add>
+			INSERT INTO `data_ask_append` (
+				`askid`,`role`,`content`,`files`,`date`
+			) VALUES (
+				:askid,:role,:content,:files,:date
+			)
+					
+		</add>
+		<update>
+			UPDATE `data_ask_append` SET 
+				`askid`=:askid,
+				`role`=:role,`content`=:content,
+				`files`=:files,`date`=:date
+			 WHERE `sid`=:sid
+					
+		</update>
+		<rm>
+			DELETE FROM `data_ask_append` WHERE `sid`=:sid
+		</rm>
+	</append>
+	
+	
 	
 	<all_dod>
 		<count>
@@ -49,8 +72,11 @@
 				count(*) as `count`
 			 FROM `data_ask` 
 			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_ask`.`did`
-			LEFT JOIN `data_user`      ON `data_user`.`sid` = `data_ask`.`uid`			
+			LEFT JOIN `data_user`      ON `data_user`.`sid` = `data_ask`.`uid`
+			LEFT JOIN `data_ask_append` ON `data_ask_append`.`askid` = `data_ask`.`sid`
 			WHERE `data_ask`.`dod`=:dod
+			GROUP BY `data_ask`.`sid`			
+			
 		</count>
 		<query>
 			SELECT
@@ -63,12 +89,16 @@
 				`data_ask`.`desc`,
 				`data_ask`.`svr`,
 				`data_ask`.`files`,
-				`data_ask`.`date`
+				`data_ask`.`date`,
+				SUM(IF (`data_ask_append`.`role` = 'doctor',1,0)) AS `dcnt`,
+				COUNT(`data_ask_append`.`sid`) AS `cnt`
 			FROM `data_ask`
 			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_ask`.`did`
-			LEFT JOIN `data_user`      ON `data_user`.`sid` = `data_ask`.`uid`			
+			LEFT JOIN `data_user`      ON `data_user`.`sid` = `data_ask`.`uid`
+			LEFT JOIN `data_ask_append` ON `data_ask_append`.`askid` = `data_ask`.`sid`
 			WHERE `data_ask`.`dod`=:dod
-			 LIMIT :offset,:length
+			GROUP BY `data_ask`.`sid`	
+			LIMIT :offset,:length
 		</query>
 
 	</all_dod>
@@ -146,6 +176,49 @@
 		</all>
 		
 	</usr>
+	
+	
+	
+	
+	<doc>
+		<condition>
+			<count>
+				SELECT count(`sid`) as count 
+				FROM `data_doctor`
+				 WHERE 
+					`id` LIKE CONCAT(  '%',  :q,  '%' ) 
+					OR
+					`name` LIKE CONCAT(  '%',  :q,  '%' ) 
+					OR
+					`sid` = :q
+			</count>
+			<query>
+				SELECT * FROM `data_doctor` 
+				WHERE 
+					`id` LIKE CONCAT(  '%',  :q,  '%' ) 
+					OR
+					`name` LIKE CONCAT(  '%',  :q,  '%' ) 
+					OR
+					`sid` = :q
+				LIMIT :offset,:length
+			</query>		
+		</condition>
+		<all>
+			<count>
+				SELECT count(`sid`) as count 
+				FROM `data_doctor`
+				 WHERE 
+					1
+			</count>
+			<query>
+				SELECT * FROM `data_doctor` 
+				WHERE 
+					1
+				LIMIT :offset,:length
+			</query>	
+		</all>
+		
+	</doc>
 
 
 

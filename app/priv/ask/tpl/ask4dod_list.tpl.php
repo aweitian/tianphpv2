@@ -6,26 +6,34 @@
  */
 
 /* ***************************************************
- ["sid"]=>
- string(1) "1"
- ["uid"]=>
- string(1) "2"
- ["name"]=>
- string(9) "李美龙"
- ["title"]=>
- string(6) "adfadf"
- ["did"]=>
- string(1) "2"
- ["data"]=>
- string(12) "前列腺炎"
- ["desc"]=>
- string(5) "asdfa"
- ["svr"]=>
- string(8) "dfadsfad"
- ["files"]=>
- string(13) "aa.jpg,qq.png"
- ["date"]=>
- string(19) "2016-05-24 00:00:00"
+
+array(1) {
+  [0]=>
+  array(11) {
+    ["sid"]=>
+    string(1) "2"
+    ["uid"]=>
+    string(1) "2"
+    ["email"]=>
+    string(11) "test@qq.com"
+    ["title"]=>
+    string(3) "ccc"
+    ["did"]=>
+    string(2) "18"
+    ["data"]=>
+    string(6) "梅毒"
+    ["desc"]=>
+    string(5) "asdfw"
+    ["svr"]=>
+    string(7) "qerqewr"
+    ["files"]=>
+    string(0) ""
+    ["date"]=>
+    string(19) "2016-05-24 00:00:00"
+    ["cnt"]=>
+    string(1) "2"
+  }
+}
  *  */
 
 
@@ -84,22 +92,26 @@ if(is_null($q)){
                   <table class="table table-bordered">
                     <tr>
                       <th style="width: 20px">#</th>
-                      <th>医生</th>
+                      <th>用户</th>
                       <th>标题</th>
                       <th>病种</th>
+                      <th>回答次数</th>
                       <th width="30%">操作</th>
                     </tr>
                     <?php foreach ($data as $item):?>
                     <tr>
                       <td><?php print $item["sid"]?></td>
-                      <td><?php print $item["name"]?></td>
+                      <td><?php print $item["email"]?></td>
                       <td><?php print $item["title"]?></td>
                       <td><?php print $item["data"]?></td>
+                      <td><?php print $item["dcnt"]?>/<?php print $item["cnt"]?></td>
                       
                       <td>
                       	
   						<a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/ask/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
                         <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/ask/rm?sid=<?php print $item["sid"]?>">删除</a>
+                        <a class="btn bg-olive" href="<?php print HTTP_ENTRY?>/priv/ask/rm?sid=<?php print $item["sid"]?>">回答</a>
+                        <a class="btn bg-purple" href="<?php print HTTP_ENTRY?>/priv/ask/rm?sid=<?php print $item["sid"]?>">追加提问</a>
                       
                       </td>
                     </tr>

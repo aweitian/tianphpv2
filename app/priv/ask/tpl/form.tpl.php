@@ -59,7 +59,7 @@ $doc_infoes = $data["doc_infoes"];
                       <label>医生</label>
                         <select class="form-control" name="dod" id="sel_dd">
                         <?php foreach ($doc_infoes as $item):?>
-	               		<option value="<?php print $item["sid"]?>"<?php if($def["dod"] == $item["sid"]):?> selected<?php endif;?>><?php print $item["name"]?></option>
+	               		<option value="<?php print $item["sid"]?>"<?php if(isset($def["dod"]) && $def["dod"] == $item["sid"]):?> selected<?php endif;?>><?php print $item["name"]?></option>
                         <?php endforeach;?>
                         </select>
                     </div>
