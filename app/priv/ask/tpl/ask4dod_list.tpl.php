@@ -51,6 +51,8 @@ $pageBtnLen = $data["pageBtnLen"];
 $curPageNum = $data["curPageNum"];
 $data = $data["data"];
 
+// var_dump($cnt);exit;
+
 $pagination = new pagination($cnt, $curPageNum, $pageSize, $pageBtnLen);
 if(is_null($q)){
 	$q = "";
@@ -84,11 +86,6 @@ if(is_null($q)){
                 </div><!-- /.box-header -->
                 <div class="box-body">
                 
-                <a class="btn bg-olive btn-flat margin" href="<?php print HTTP_ENTRY?>/priv/ask?uid=<?php print $_REQUEST["uid"]?>">
-                	 <i class="fa fa-plus"></i> 添加提问
-                	 </a>
-                
-                
                   <table class="table table-bordered">
                     <tr>
                       <th style="width: 20px">#</th>
@@ -108,10 +105,12 @@ if(is_null($q)){
                       
                       <td>
                       	
+  						<a class="btn bg-navy" href="<?php print HTTP_ENTRY?>/priv/ask/viewappend?sid=<?php print $item["sid"]?>"> 查看</a>
   						<a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/ask/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
                         <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/ask/rm?sid=<?php print $item["sid"]?>">删除</a>
-                        <a class="btn bg-olive" href="<?php print HTTP_ENTRY?>/priv/ask/rm?sid=<?php print $item["sid"]?>">回答</a>
-                        <a class="btn bg-purple" href="<?php print HTTP_ENTRY?>/priv/ask/rm?sid=<?php print $item["sid"]?>">追加提问</a>
+                        <a class="btn bg-olive" href="<?php print HTTP_ENTRY?>/priv/ask/append?r=d&askid=<?php print $item["sid"]?>">回答</a>
+                        <a class="btn bg-purple" href="<?php print HTTP_ENTRY?>/priv/ask/append?r=u&askid=<?php print $item["sid"]?>">追问</a>
+                        <a class="btn bg-maroon" href="<?php print HTTP_ENTRY?>/priv/ask/present?askid=<?php print $item["sid"]?>">送花</a>
                       
                       </td>
                     </tr>

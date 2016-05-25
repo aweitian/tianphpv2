@@ -45,16 +45,18 @@
 	<append>
 		<add>
 			INSERT INTO `data_ask_append` (
-				`askid`,`role`,`content`,`files`,`date`
+				`askid`,`role`,`conmeta`,`content`,`files`,`date`
 			) VALUES (
-				:askid,:role,:content,:files,:date
+				:askid,:role,:conmeta,:content,:files,:date
 			)
 					
 		</add>
 		<update>
 			UPDATE `data_ask_append` SET 
 				`askid`=:askid,
-				`role`=:role,`content`=:content,
+				`role`=:role,
+				`conmeta`=:conmeta,
+				`content`=:content,
 				`files`=:files,`date`=:date
 			 WHERE `sid`=:sid
 					
@@ -62,6 +64,38 @@
 		<rm>
 			DELETE FROM `data_ask_append` WHERE `sid`=:sid
 		</rm>
+		<view>
+			SELECT 
+				`data_ask`.`sid`,
+				`data_ask`.`uid`,
+				`data_user`.`email`,
+				`data_user`.`avatar` AS `usr_avatar`,
+				`data_doctor`.`name` AS `doc_name`,
+				`data_doctor`.`avatar` AS `doc_avatar`,
+				`data_ask`.`title`,
+				`data_ask`.`did`,
+				`data_attr_data`.`data`,
+				`data_ask`.`desc`,
+				`data_ask`.`svr`,
+				`data_ask`.`files`,
+				`data_ask`.`date`,
+				`data_ask_append`.`conmeta`,
+				`data_ask_append`.`content`,
+				`data_ask_append`.`date` AS `ap_date`,
+				`data_ask_append`.`files` AS `ap_files`,
+				`data_ask_append`.`role` AS `role`
+				
+			FROM `data_ask` 
+			LEFT JOIN `data_doctor` ON `data_ask`.`dod` = `data_doctor`.`sid`
+			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_ask`.`did` 
+			LEFT JOIN `data_user` ON `data_user`.`sid` = `data_ask`.`uid` 
+			LEFT JOIN `data_ask_append` ON `data_ask_append`.`askid` = `data_ask`.`sid` 
+
+			WHERE `data_ask`.`sid` = :askid
+			
+		</view>
+		
+		
 	</append>
 	
 	
@@ -178,6 +212,11 @@
 	</usr>
 	
 	
+	
+	<present>
+		SELECT * FROM `data_present`
+	
+	</present>
 	
 	
 	<doc>

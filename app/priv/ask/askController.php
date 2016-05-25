@@ -96,6 +96,68 @@ class askController extends privController{
 		$this->response->redirect($ret_url);
 	}
 	
+	
+	public function appendaddAction(pmcaiMsg $msg){
+		//["askid" ["role"] ["content"] ["date"]=> string(19) "2016-05-25 12:25:47" }
+		$this->chkPost($msg, array("askid","role","conmeta","content","date"));
+		
+		if(!isset($msg["files"])){
+			$files = array();
+		}else{
+			$files = $msg["files"];
+		}
+		
+		$ret = $this->model->appendAdd($msg["askid"], $msg["role"], $msg["conmeta"],
+				$msg["content"], $files, $msg["date"]);
+		if($ret->isTrue()){
+			if(isset($msg["?returl"])){
+				$ret_url = $msg["?returl"];
+			}else{
+				$ret_url = "";
+			}
+			$this->view->showOpSucc($this->priv->getUserInfo(),"添加",$ret_url);
+		}else{
+			$this->response->showError($ret->info);
+		}
+	}
+	
+	public function viewappendAction(pmcaiMsg $msg){
+		if(!isset($msg["?sid"])){
+			$this->response->_404();
+		}
+		
+		$data = $this->model->getAppendByAskid($msg["?sid"]);
+		
+		$this->view->setPmcaiMsg($msg);
+		$this->view->showAppendView($this->priv->getUserInfo(), $data);
+		
+	}
+	
+	
+	public function appendAction(pmcaiMsg $msg){
+		$this->chkGet($msg, array("r","askid"));
+		$present = $this->model->getAllPresent();
+		
+		$this->view->setPmcaiMsg($msg);
+		
+		
+		$this->view->showAppendForm(
+				$this->priv->getUserInfo(), 
+				$msg["?askid"], 
+				$msg["?r"] == "u" ? "user" : "doctor", 
+				$present
+		);
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * @param pmcaiMsg $msg
 	 */
@@ -210,7 +272,7 @@ class askController extends privController{
 		
 		$data = $this->model->getAllAskByDod($msg["?dod"], $offset, $length);
 		
-// 		var_dump($ret->return);
+// 		var_dump($data);
 		/*
 		 * 
 

@@ -24,6 +24,21 @@ class askView extends privView{
 		)->show();
 	}
 	
+	public function showAppendForm($userInfo,$askid,$role,$present,$def=null){
+// 		var_dump($docInfo);exit;
+		$this->priv_wrap($userInfo, 
+			$this->fetch(
+				"append",
+				array(
+					"def" => $def,
+					"askid" => $askid,
+					"role" => $role,
+					"present" => $present
+				)
+			)
+		)->show();
+	}
+	
 	public function showUidList(pmcaiUrl $url,$userinfo,$cnt,$data,$page,$length,$q){
 
 		$data["data"] = $data;
@@ -51,6 +66,11 @@ class askView extends privView{
 
 	}
 	
+	
+	public function showAppendView($userinfo,$data){
+		$content = $this->fetch("ap_view",$data);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
 	
 	public function showOpSucc($info,$op,$ret_url){
 		if($ret_url != ""){

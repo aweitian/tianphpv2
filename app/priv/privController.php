@@ -39,4 +39,12 @@ class privController extends Controller{
 			}
 		}
 	}
+	protected function chkGet(pmcaiMsg $msg,$data){
+		foreach ($data as $k){
+			if(!isset($msg["?".$k])){
+				var_dump($msg->getPostData());
+				$this->response->showError("提交的参数不全:".$k);
+			}
+		}
+	}
 }

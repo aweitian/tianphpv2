@@ -20,4 +20,16 @@
  	public static function isValidFiles($v){
  		return is_array($v);
  	}
+ 	
+ 	
+ 	//append validator
+ 	
+ 	public static function isValidRole($v){
+ 		return $v === "doctor" || $v === "user";
+ 	}
+ 	public static function isValidConmeta($v){
+ 		return $v === "text" || $v === "present";
+ 	}
+ 	
+ 	
  }
