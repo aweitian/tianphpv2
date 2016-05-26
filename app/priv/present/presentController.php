@@ -26,6 +26,14 @@ class presentController extends privController{
 		$this->view = new presentView();
 		$this->initHttpResponse();
 	}
+	
+	public function givePresentAction(pmcaiMsg $msg){
+		
+	}
+	
+	
+	
+	
 	public function welcomeAction(pmcaiMsg $msg){
 		$dataRet = $this->model->all();
 		if(!$dataRet->isTrue()){

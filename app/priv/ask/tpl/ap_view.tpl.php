@@ -52,6 +52,10 @@ if($hasData)
 	</dl>
   	<?php endif;?>
   	
+	<a class="btn bg-olive" href="<?php print HTTP_ENTRY?>/priv/ask/append?r=d&askid=<?php print $_REQUEST["sid"]?>">添加医生回答</a>
+	<a class="btn bg-purple" href="<?php print HTTP_ENTRY?>/priv/ask/append?r=u&askid=<?php print $_REQUEST["sid"]?>">添加患者追问</a>
+	<a class="btn bg-maroon" href="<?php print HTTP_ENTRY?>/priv/ask/present?askid=<?php print $_REQUEST["sid"]?>">给医生送花</a>
+                      
   	
   
   
@@ -67,7 +71,19 @@ if($hasData)
 		        </div><!-- /.direct-chat-info -->
 		        <img class="direct-chat-img" src="<?php print HTTP_ENTRY?>/static/avatar/<?php print $item["usr_avatar"]?>" alt="message user image"><!-- /.direct-chat-img -->
 		        <div class="direct-chat-text">
-		          <?php print $item["content"]?>
+		        	<?php if($item["conmeta"] == "text"):?>
+		        
+		          	<?php print $item["content"]?>
+		          	
+		          	<?php else:?>
+		          	
+		          	<?php $tmp = explode(",", $item["content"]);?>
+		          	<i class="fa fa-gift" style="font-size:28px;"></i> <?php print $tmp[1]?><br><br>
+		          	
+		          	<img style="width:64px;height:64px;" src="<?php print HTTP_ENTRY?>/static/present/<?php print $tmp[0]?>">
+        
+		          	
+		          	<?php endif;?>
 		        </div><!-- /.direct-chat-text -->
 		      </div><!-- /.direct-chat-msg -->
   	
@@ -89,10 +105,12 @@ if($hasData)
     
      </div><!--/.direct-chat-messages-->
     
-      <!-- Message. Default to the left -->
-      
 
-      <!-- Message to the right -->
+     	<a class="btn bg-olive" href="<?php print HTTP_ENTRY?>/priv/ask/append?r=d&askid=<?php print $_REQUEST["sid"]?>">添加医生回答</a>
+	<a class="btn bg-purple" href="<?php print HTTP_ENTRY?>/priv/ask/append?r=u&askid=<?php print $_REQUEST["sid"]?>">添加患者追问</a>
+	<a class="btn bg-maroon" href="<?php print HTTP_ENTRY?>/priv/ask/present?askid=<?php print $_REQUEST["sid"]?>">给医生送花</a>
+    
+     
    </div><!-- /.box-body -->
 
 </div><!--/.direct-chat -->

@@ -67,6 +67,11 @@ class askView extends privView{
 	}
 	
 	
+	public function showPresent($userinfo,$data){
+		$content = $this->fetch("present",$data);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
+	
 	public function showAppendView($userinfo,$data){
 		$content = $this->fetch("ap_view",$data);
 		$this->priv_wrap($userinfo, $content)->show();

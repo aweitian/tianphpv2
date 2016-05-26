@@ -101,7 +101,7 @@ $info = $userInfo;
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php print HTTP_ENTRY?>/priv/present/add"><i class="fa fa-circle-o"></i> 添加用户</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/present/add"><i class="fa fa-circle-o"></i> 添加礼物</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/present"><i class="fa fa-circle-o"></i> 礼物列表</a></li>
               </ul>
             </li>

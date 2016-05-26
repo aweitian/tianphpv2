@@ -12,6 +12,52 @@ class presentModel extends privModel{
 	}
 	
 	
+	//present no update
+	
+	public function presentGive($uid,$dod,$pid,$date){
+		//validate
+		if(!validator::isUint($uid)){
+			return new rirResult(1,"invalid uid");
+		}
+		if(!validator::isUint($dod)){
+			return new rirResult(2,"invalid dod");
+		}
+		if(!validator::isUint($pid)){
+			return new rirResult(3,"invalid pid");
+		}
+		if(!validator::isDateTime($date)){
+			return new rirResult(4,"invalid date");
+		}
+		
+		$sql = $this->sqlManager->getSql("/sql/present/give");
+		$bnd = array(
+			"uid" => $uid,
+			"dod" => $dod,
+			"pid" => $pid,
+			"date" => $date,
+		);
+		if($ret == 0){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
+	
+	public function presentRemove($sid){
+		$ret = $this->db->exec($this->sqlManager->getSql("/sql/present/rm"), array(
+				"sid" => $sid,
+		));
+		if($ret == 0){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
+	
+	
+	
 	
 	public function all(){
 		$ret = $this->db->fetchAll($this->sqlManager->getSql("/sql/all"), array());

@@ -134,6 +134,46 @@ class askController extends privController{
 	}
 	
 	
+	
+	public function presentAction(pmcaiMsg $msg){
+		
+		if($msg->isPost()){
+// 			var_dump($msg->getPostData());exit;
+			$this->chkPost($msg, array("askid","pid","present","name"));
+			
+			
+			//TODO 添加赠送礼物逻辑
+			
+			
+			$ret = $this->model->appendAdd($msg["askid"], 'user', 'present',
+				$msg["present"].",".$msg["name"], array(), date("Y-m-d H:i:s"));
+			if($ret->isTrue()){
+				if(isset($_SERVER['HTTP_REFERER'])){
+					$ret_url = $_SERVER['HTTP_REFERER'];
+				}else{
+					$ret_url = "";
+				}
+				$this->view->showOpSucc($this->priv->getUserInfo(),"赠送",$ret_url);
+			}else{
+				$this->response->showError($ret->info);
+			}
+		}else{
+			if(!isset($msg["?askid"])){
+				$this->response->_404();
+			}
+			$data = $this->model->getAllPresent();
+			
+			$this->view->setPmcaiMsg($msg);
+			$this->view->showPresent($this->priv->getUserInfo(), $data);			
+		}
+		
+
+		
+		
+	}
+	
+	
+	
 	public function appendAction(pmcaiMsg $msg){
 		$this->chkGet($msg, array("r","askid"));
 		$present = $this->model->getAllPresent();

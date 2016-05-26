@@ -51,6 +51,7 @@
 			)
 					
 		</add>
+		
 		<update>
 			UPDATE `data_ask_append` SET 
 				`askid`=:askid,
