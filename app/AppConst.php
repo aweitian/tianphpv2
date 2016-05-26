@@ -7,3 +7,4 @@
 
 
 define("DISEASE_GRP_ID",1);
+define("SYMPTOM_GRP_ID",2);

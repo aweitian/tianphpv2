@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<label>
+	<add>
+		INSERT INTO `data_label` (
+			`label`
+		) VALUES (
+			:label
+		)
+	</add>
+	<rm>
+		DELETE FROM `data_label` WHERE `sid`=:sid
+	</rm>
+	<update>
+		UPDATE `data_label` SET 
+			`label`=:label
+		 WHERE `sid`=:sid
+	</update>
+	<all>
+		SELECT 
+			`sid`,`label`
+		 FROM `data_label` WHERE 1
+	</all>
+
+</label>

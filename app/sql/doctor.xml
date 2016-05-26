@@ -5,6 +5,14 @@
 		LIMIT :offset,:length
 	</all>
 
+	<base>
+		SELECT
+		  `sid`,
+		  `name`
+		FROM `data_doctor`
+	</base>
+
+
 	<count>
 		SELECT count(*) as count FROM `data_doctor` WHERE 1
 	</count>

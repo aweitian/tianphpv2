@@ -4,6 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
+require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 class askView extends privView{
 	
 	

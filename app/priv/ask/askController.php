@@ -4,12 +4,9 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/ask/askModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/ask/askView.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/ask/askValidator.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/ask/askFilter.php';
 class askController extends privController{
 	/**
 	 * 
