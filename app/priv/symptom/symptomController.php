@@ -5,7 +5,6 @@
  * Description: 
  */
 require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/symptom/symptomValidator.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/symptom/symptomModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/symptom/symptomView.php';
 
@@ -68,13 +67,13 @@ class symptomController extends privController{
 	
 	public function importAction(pmcaiMsg $msg){
 		if($msg->isPost()){
-			echo $this->response->utf8Header();
+// 			echo $this->response->utf8Header();
 			$demo = new tabDataToArray($msg["data"]);
 			$ret = $demo->parse();
 			if($ret->isTrue()){
 				$row = $this->model->import($ret->return);
 				$this->view->priv_wrap($this->priv->getUserInfo(), $this->view->info(
-					"批量导入", "成功导入(".$row.")条记录,<a href='".HTTP_ENTRY."/priv/symptom'>病种管理</a>"
+					"批量导入", "成功导入(".$row.")条记录,<a href='".HTTP_ENTRY."/priv/symptom'>症状管理</a>"
 				))->show();
 				
 			}else{
@@ -216,8 +215,7 @@ class symptomController extends privController{
 					if(!$tmp->isTrue()){
 						$this->response->showError($tmp->info);
 					}
-					$lv = $tmp->return;
-
+					$lv = $tmp->return + 1;
 				}
 					
 			}

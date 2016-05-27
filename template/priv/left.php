@@ -34,11 +34,13 @@ $info = $userInfo;
             <li class="header">主控制面板</li>
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-stethoscope"></i> <span>病种管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-stethoscope"></i> <span>病种症状</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php print HTTP_ENTRY?>/priv/disease/import"><i class="fa fa-circle-o"></i> 批量导入</a></li>
+                <li class="active"><a href="<?php print HTTP_ENTRY?>/priv/disease/import"><i class="fa fa-circle-o"></i> 病种导入</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/disease"><i class="fa fa-circle-o"></i> 病种列表</a></li>
+                <li class="active"><a href="<?php print HTTP_ENTRY?>/priv/symptom/import"><i class="fa fa-circle-o"></i> 症状导入</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/symptom"><i class="fa fa-circle-o"></i> 症状列表</a></li>
               </ul>
             </li>
             <li class="treeview">

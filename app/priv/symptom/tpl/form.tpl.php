@@ -32,7 +32,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                   <h3 class="box-title"><?php print $at?>一个<?php print $meta?></h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/disease/<?php print $ua;?><?php print $ret_url?>">
+                <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/symptom/<?php print $ua;?><?php print $ret_url?>">
                   <div class="box-body">
                     <div class="form-group">
                       <label for="vv"><?php print $meta?></label>

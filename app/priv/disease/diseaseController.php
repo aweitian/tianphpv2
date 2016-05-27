@@ -214,15 +214,15 @@ class diseaseController extends privController{
 				if($pid == 0){
 					$lv = 0;
 				}else{
+					//根据PID获取的是父的LV
 					$tmp = $this->model->getLvBySid($pid);
 					if(!$tmp->isTrue()){
 						$this->response->showError($tmp->info);
 					}
-					$lv = $tmp->return;
-
+					$lv = $tmp->return + 1;
 				}
-					
 			}
+
 			$this->view->setPmcaiMsg($msg);
 			$this->view->showFormUI($this->priv->getUserInfo(), $pid,$meta[$lv]["val"]);
 		}

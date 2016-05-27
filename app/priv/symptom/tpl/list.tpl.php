@@ -12,7 +12,7 @@ $data = $data["data"];
 
 $str_path = "<ul class='breadcrumb'>";
 for($i=0;$i<count($path);$i++){
-	$str_path .= '<li><a href="'.HTTP_ENTRY.'/priv/disease?pid='.$path[$i][0].'">'.$path[$i][1].'</a></li>';
+	$str_path .= '<li><a href="'.HTTP_ENTRY.'/priv/symptom?pid='.$path[$i][0].'">'.$path[$i][1].'</a></li>';
 }
 $str_path .= "</ul>";
 
@@ -28,7 +28,7 @@ function isEnableAddSub($lv,$maxl){
                   <h3 class="box-title"><?php print $str_path?></h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                	 <a class="btn bg-olive btn-flat margin" href="<?php print HTTP_ENTRY?>/priv/disease/add?pid=<?php print $pid?>">
+                	 <a class="btn bg-olive btn-flat margin" href="<?php print HTTP_ENTRY?>/priv/symptom/add?pid=<?php print $pid?>">
                 	 <i class="fa fa-plus"></i> 添加一个<?php print $meta?>
                 	 </a>
                         
@@ -44,7 +44,7 @@ function isEnableAddSub($lv,$maxl){
                       <td><?php print $item["sid"]?></td>
                       <td>
                       	<?php if(isEnableAddSub($item["level"],$maxl)):?>
-	                      	<a href="<?php print HTTP_ENTRY?>/priv/disease?pid=<?php print $item["sid"]?>">
+	                      	<a href="<?php print HTTP_ENTRY?>/priv/symptom?pid=<?php print $item["sid"]?>">
 	                      	<?php print $item["data"]?>
 	                      	</a>
                       	<?php else:?>
@@ -54,10 +54,10 @@ function isEnableAddSub($lv,$maxl){
                       <td>
                       	<!-- <i class="fa fa-edit"></i> -->
                       	<?php if(isEnableAddSub($item["level"],$maxl)):?>
-                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/disease/add?pid=<?php print $item["sid"]?>">添加</a>
+                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/symptom/add?pid=<?php print $item["sid"]?>">添加</a>
                         <?php endif?>
-                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/disease/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
-                        <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/disease/rm?sid=<?php print $item["sid"]?>">删除</a>
+                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/symptom/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
+                        <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/symptom/rm?sid=<?php print $item["sid"]?>">删除</a>
                         
                       </td>
                     </tr>
