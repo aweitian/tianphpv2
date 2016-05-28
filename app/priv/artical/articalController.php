@@ -111,6 +111,14 @@ class articalController extends privController{
 			$this->response->showError($retR->info);;
 		}
 	}
+	
+	public function _d_xx74Action(pmcaiMsg $msg){
+		require FILE_SYSTEM_ENTRY."/app/data/artical_tags/artical_tags.api.php";
+		$api = new artical_tagsApi();
+		$api->update(2, array(10,2,9));
+	}
+	
+	
 	public function reldisAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行
 		
@@ -477,8 +485,6 @@ class articalController extends privController{
 			}else{
 				$this->response->showError($retR->info);;
 			}
-			
-			
 		}else{
 			$this->view->setPmcaiMsg($msg);
 			$this->view->showForm($this->priv->getUserInfo());			

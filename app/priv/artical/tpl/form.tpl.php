@@ -23,6 +23,8 @@ if(isset($_SERVER['HTTP_REFERER'])){
 	$ret_url = "";
 }
 ?>
+<link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+<script type="text/javascript" src="<?php print HTTP_ENTRY?>/static/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 <section class="content">
  <!-- general form elements disabled -->
               <div class="box box-warning">
@@ -74,3 +76,29 @@ $(function(){
 	});
 });
 </script>
+
+
+
+
+
+<!-- 
+<input id="debug" type="text">
+<script>
+// var elt = $('#debug');
+// elt.tagsinput({
+//   itemValue: 'value',
+//   itemText: 'text'
+// });
+// elt.tagsinput('add', { "value": 1 , "text": "Amsterdam" });
+// elt.tagsinput('add', { "value": 4 , "text": "Washington"});
+// elt.tagsinput('add', { "value": 7 , "text": "Sydney"    });
+// elt.tagsinput('add', { "value": 10, "text": "Beijing"  });
+// elt.tagsinput('add', { "value": 13, "text": "Cairo"     });
+</script> 
+-->
+
+
+
+
+
+

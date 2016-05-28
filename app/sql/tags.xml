@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tags>
+	<add>
+		INSERT INTO `data_tags` (
+			`text`
+		) VALUES (
+			:text
+		)
+	</add>
+	<rm>
+		DELETE FROM `data_tags` WHERE `sid`=:sid
+	</rm>
+	<update>
+		UPDATE `data_tags` SET 
+			`text`=:text
+		 WHERE `sid`=:sid
+	</update>
+	<all>
+		SELECT 
+			`sid`,`text`
+		 FROM `data_tags` WHERE 1
+	</all>
+
+	<artical>
+		<all>
+		SELECT 
+			`aid`,`tid`
+		 FROM `data_artical_tags` WHERE 1
+		</all>
+		<q>
+			SELECT 
+			`tid`
+		 FROM `data_artical_tags` WHERE `aid` = :aid
+		</q>
+		<add>
+			INSERT INTO `data_artical_tags` (
+				`aid`,`tid`
+			) VALUES (
+				:aid,:tid
+			)
+		</add>
+		<update>
+			UPDATE `data_artical_tags` SET 
+				`aid`=:aid,`tid`=:new_tid
+			 WHERE `aid`=:aid and `tid`=:old_tid
+		</update>
+		<rm>
+			DELETE FROM `data_artical_tags` WHERE `aid`=:aid and `tid`=:tid
+		</rm>
+	
+	
+	</artical>
+
+</tags>
