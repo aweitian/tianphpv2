@@ -6,7 +6,7 @@
  * 		
  */
 
- class artical_tagsApi {
+ class articalTagsApi {
  	private $sqlManager;
  	private $db;
  	public function __construct(){
@@ -15,6 +15,7 @@
  	}
  	
  	/**
+ 	 * 不管当前状态，以最少的操作变成新状态
  	 * aid + tid 唯一
  	 * @param int $aid
  	 * @param array $tidArr

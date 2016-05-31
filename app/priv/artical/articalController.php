@@ -4,12 +4,9 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/artical/articalModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/artical/articalView.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/artical/artical_validator.php';
-
 
 class articalController extends privController{
 	/**
@@ -113,9 +110,11 @@ class articalController extends privController{
 	}
 	
 	public function _d_xx74Action(pmcaiMsg $msg){
-		require FILE_SYSTEM_ENTRY."/app/data/artical_tags/artical_tags.api.php";
-		$api = new artical_tagsApi();
-		$api->update(2, array(10,2,9));
+// 		require FILE_SYSTEM_ENTRY."/app/data/artical_tags/artical_tags.api.php";
+// 		$api = new artical_tagsApi();
+// 		$api->update(2, array(10,2,9));
+		echo "just abandoned.";
+
 	}
 	
 	
@@ -465,15 +464,32 @@ class articalController extends privController{
 			if(!$rowR->isTrue()){
 				$this->response->_404();
 			}
-			$this->view->showForm($this->priv->getUserInfo(),$rowR->return);			
+			$this->view->showForm($this->priv->getUserInfo(),$this->getArticalInfo(),$rowR->return);			
 		}
 
 	}
+	private function getArticalInfo(){
+		return array(
+			"doctor" => $this->model->getInfo_doctor(),
+			"tags" => $this->model->getInfo_tags(),
+			"disease" => $this->model->getInfo_disease(),
+			"symptom" => $this->model->getInfo_symptom()
+		);
+	}
+	/**
+	 * 
+	 * @param pmcaiMsg $msg
+	 */
 	public function addAction(pmcaiMsg $msg){
 		if($msg->isPost()){
+			//2016-5-31 修改，提交参数为title,content,date,diid,syid,doid,tags
 			if(!isset($msg["title"],$msg["content"],$msg["date"])){
 				$this->response->_404();
 			}
+			if(!isset($msg["diid"],$msg["syid"],$msg["doid"],$msg["tags"])){
+				$this->response->_404();
+			}
+			
 			$retR = $this->model->add($msg["title"],$msg["content"],$msg["date"]);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
@@ -487,8 +503,7 @@ class articalController extends privController{
 			}
 		}else{
 			$this->view->setPmcaiMsg($msg);
-			$this->view->showForm($this->priv->getUserInfo());			
+			$this->view->showForm($this->priv->getUserInfo(),$this->getArticalInfo());			
 		}
-
 	}
 }

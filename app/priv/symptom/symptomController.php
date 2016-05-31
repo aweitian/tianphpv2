@@ -37,14 +37,14 @@ class symptomController extends privController{
 		$meta = $this->model->getMeta();
 		
 		if($pid == 0){
-			$path = array(array(0,"全部病种"));
+			$path = array(array(0,"全部症状"));
 			$mv = $meta[0]["val"];
 		} else {
 			$info = $this->model->row($pid);
 			if(empty($info)){
 				$this->response->showError("invalid pid:".$pid);
 			}
-			$path = array(array(0,"全部病种"),array($pid,$info["data"]));
+			$path = array(array(0,"全部症状"),array($pid,$info["data"]));
 			$mv = $meta[1]["val"];
 		}
 		

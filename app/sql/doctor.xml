@@ -61,4 +61,19 @@
 	<remove>
 		DELETE FROM `data_doctor` WHERE `sid` = :sid
 	</remove>
+	
+	
+	
+	<query_infoLv>
+		SELECT 
+			`data_doctor`.`sid` AS `dod`,
+			`data_doctor`.`name` AS `name`,
+			`data_doctor_lv_meta`.`sid` AS `dmd`,
+			`data_doctor_lv_meta`.`data` AS `lv`
+		FROM `data_doctor`
+		LEFT JOIN `data_doctor_ext`
+			ON `data_doctor_ext`.`dod` = `data_doctor`.`sid`
+		LEFT JOIN `data_doctor_lv_meta`
+			ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`	
+	</query_infoLv>
 </sql>

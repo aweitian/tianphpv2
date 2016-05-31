@@ -4,17 +4,14 @@
  * Author: Awei.tian
  * Description: 
  */
+require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 class articalView extends privView{
 	
-	
-	
-	
-	
-	
-	public function showForm($userInfo,$def=null){
+	public function showForm($userInfo,$info,$def=null){
 		$this->priv_wrap($userInfo, $this->fetch(
 				"form",array(
-						"def" => $def
+					"def" => $def,
+					"info" => $info
 				)
 			))->show();
 	}

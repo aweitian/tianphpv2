@@ -4,364 +4,126 @@
  * Author: Awei.tian
  * Description: 
  */
+require_once FILE_SYSTEM_ENTRY."/app/data/doctor/doctor.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/artical/artical.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/disease/disease.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/symptom/symptom.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/artical_disease/artical_disease.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/artical_symptom/artical_symptom.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/artical_doctor/artical_doctor.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/artical_tags/artical_tags.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/tags/tags.api.php";
+
 class articalModel extends privModel{
 	public function __construct(){
 		parent::__construct();
-		$this->initDb();
-		$this->initSqlManager("artical");
 	}
-
 	public function row($sid){
-		$ret = $this->db->fetch($this->sqlManager->getSql("/sql/row"), array(
-				"sid" => $sid
-		));
-		if(empty($ret)){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",$ret);
+		$api = new articalApi();
+		return $api->row($sid);
 	}
-	
-	
-	
 	public function getCacheDoctor(){
-		$ret = $this->db->fetchAll(sqlManager::getInstance("cache")->getSql("/sql/doctor/query_on_raw"), array(
-	
-		));
-		return $ret;
+		$api = new doctorApi();
+		return $api->getInfoLv();
 	}
 	public function getCacheDisease(){
-		$ret = $this->db->fetchAll(sqlManager::getInstance("cache")->getSql("/sql/disease/query_on_raw"), array(
+		$api = new diseaseApi();
+		return $api->getInfo();
+	}
 	
-		));
-		return $ret;
+	/* get INFOES  */
+	public function getInfo_disease(){
+		$api = new diseaseApi();
+		return $api->getInfo();
+	}
+	
+	public function getInfo_symptom(){
+		$api = new symptomApi();
+		return $api->getInfo();
+	}
+	
+	public function getInfo_doctor(){
+		$api = new doctorApi();
+		return $api->getBaseInfo();
+	}
+	
+	public function getInfo_tags(){
+		$api = new tagsApi();
+		$ret = $api->getAll();
+		if($ret->isTrue()){
+			return $ret->return;
+		}
+		return array();
+	}
+	
+	
+	public function con_relsym($idArr,$syd){
+		$api = new articalSymptomApi();
+		return $api->connect($idArr, $syd);
 	}
 	
 	public function con_reldis($idArr,$dd){
-// 		var_dump($dd);exit;
-		foreach ($idArr as $id){
-			$exists = $this->db->fetch(sqlManager::getInstance("artical_dis")->getSql("/sql/exists"), array(
-				"aid" => $id,
-				"did" => $dd
-			));	
-			if(empty($exists)){
-// 				var_dump($id);exit;
-				$this->db->exec(sqlManager::getInstance("artical_dis")->getSql("/sql/add"), array(
-						"aid" => $id,
-						"did" => $dd
-				));
-			}		
-		}
-
-		
+		$api = new articalDiseaseApi();
+		return $api->connect($idArr, $dd);
 	}
 	public function con_reldoc($idArr,$dd){
-// 		var_dump($dd);exit;
-		foreach ($idArr as $id){
-			$exists = $this->db->fetch(sqlManager::getInstance("artical_doc")->getSql("/sql/exists"), array(
-				"aid" => $id,
-				"dod" => $dd
-			));	
-			if(empty($exists)){
-// 				var_dump($id);exit;
-				$this->db->exec(sqlManager::getInstance("artical_doc")->getSql("/sql/add"), array(
-						"aid" => $id,
-						"dod" => $dd
-				));
-			}		
-		}
-
-		
+		$api = new articalDoctorApi();
+		return $api->connect($idArr, $dd);
 	}
-	
-	
 	
 	public function q_reldoc($offset,$len){
-		$cache_sqlmanager = new sqlManager("cache");
-		$sql_count = $cache_sqlmanager->getSql("/sql/artical_doctor/reldoc_homeless/count");
-
-		$sql = $sql_count;
-		$cnt = $this->db->fetch($sql, array());
-		
-		$cnt = $cnt["count"];
-		
-		$sql = strtr($cache_sqlmanager->getSql("/sql/artical_doctor/reldoc_homeless/query"),array());
-		$where_bind = array();
-		$where_bind["offset"] = $offset;
-		$where_bind["length"] = $len;
-		$ret = $this->db->fetchAll($sql,$where_bind);
-		if(empty($ret)){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",array(
-			"data" => $ret,
-			"count" => $cnt
-		));
+		$api = new articalDoctorApi();
+		return $api->allNotRel($offset, $len);
 	}
 	public function q_reldis($offset,$len){
-		$cache_sqlmanager = new sqlManager("cache");
-		$sql_count = $cache_sqlmanager->getSql("/sql/artical_disease/reldis_homeless/count");
-
-		$sql = $sql_count;
-		$cnt = $this->db->fetch($sql, array());
-		
-		$cnt = $cnt["count"];
-		
-		$sql = strtr($cache_sqlmanager->getSql("/sql/artical_disease/reldis_homeless/query"),array());
-		$where_bind = array();
-		$where_bind["offset"] = $offset;
-		$where_bind["length"] = $len;
-		$ret = $this->db->fetchAll($sql,$where_bind);
-		if(empty($ret)){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",array(
-			"data" => $ret,
-			"count" => $cnt
-		));
+		$api = new articalDiseaseApi();
+		return $api->allNotRel($offset, $len);
 	}
 	public function q_revreldis($dcid,$diid,$q,$offset,$len){
-		$cache_sqlmanager = new sqlManager("cache");
-		$where_bind = array();
-		$sql_count = $cache_sqlmanager->getSql("/sql/artical_disease/query_on_raw_count");
-		$where_clause = array();
-		if(intval($dcid) != 0){
-			$where_clause[] = $cache_sqlmanager->getSql("/sql/artical_disease/where_clause_dc");
-			$where_bind["dcid"] = $dcid;
-		}
-		if(intval($diid) != 0){
-			$where_clause[] = $cache_sqlmanager->getSql("/sql/artical_disease/where_clause_di");
-			$where_bind["diid"] = $diid;
-		}
-		if($q != ""){
-			$where_clause[] = $cache_sqlmanager->getSql("/sql/artical_disease/where_clause_title");
-			$where_bind["title"] = $q;
-		}
-		
-		$where_clause = join(" AND ", $where_clause);
-		if($where_clause != ""){
-			$where_clause = " WHERE " . $where_clause;
-		}
-		$sql = $sql_count . $where_clause;
-		$cnt = $this->db->fetch($sql, $where_bind);
-		
-		$cnt = $cnt["count"];
-		
-		$sql = strtr($cache_sqlmanager->getSql("/sql/artical_disease/query_on_raw"),array(
-			"@WHERECLAUSE" => $where_clause
-		));
-		$where_bind["offset"] = $offset;
-		$where_bind["length"] = $len;
-		
-// 		var_dump($sql);exit;
-		
-		$ret = $this->db->fetchAll($sql,$where_bind);
-		if(empty($ret)){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",array(
-			"data" => $ret,
-			"count" => $cnt
-		));
+		$api = new articalDiseaseApi();
+		return $api->query($dcid, $diid, $q, $offset, $len);
 	}
 	public function q_revreldoc($doid,$q,$offset,$len){
-		$cache_sqlmanager = new sqlManager("cache");
-		$where_bind = array();
-		$sql_count = $cache_sqlmanager->getSql("/sql/artical_doctor/query_on_raw_count");
-		$where_clause = array();
-		if(intval($doid) != 0){
-			$where_clause[] = $cache_sqlmanager->getSql("/sql/artical_doctor/where_clause_do");
-			$where_bind["dod"] = $doid;
-		}
-
-		if($q != ""){
-			$where_clause[] = $cache_sqlmanager->getSql("/sql/artical_doctor/where_clause_title");
-			$where_bind["title"] = $q;
-		}
-		
-		$where_clause = join(" AND ", $where_clause);
-		if($where_clause != ""){
-			$where_clause = " WHERE " . $where_clause;
-		}
-		$sql = $sql_count . $where_clause;
-		$cnt = $this->db->fetch($sql, $where_bind);
-		
-		$cnt = $cnt["count"];
-		
-		$sql = strtr($cache_sqlmanager->getSql("/sql/artical_doctor/query_on_raw"),array(
-			"@WHERECLAUSE" => $where_clause
-		));
-		$where_bind["offset"] = $offset;
-		$where_bind["length"] = $len;
-		
-// 		var_dump($sql);exit;
-		
-		$ret = $this->db->fetchAll($sql,$where_bind);
-		if(empty($ret)){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",array(
-			"data" => $ret,
-			"count" => $cnt
-		));
+		$api = new articalDoctorApi();
+		return $api->query($doid, $q, $offset, $len);
+	}
+	
+	public function addTags($aid,$tidArr){
+		$api = new articalTagsApi();
+		return $api->update($aid, $tidArr);
 	}
 	
 	public function disconRelDis($aid,$did){
-		$ret = $this->db->exec(sqlManager::getInstance("artical_dis")->getSql("/sql/rm"), array(
-				"aid" => $aid,
-				"did" => $did,
-		));
-		if($ret == 0){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",$ret);
+		$api = new articalDiseaseApi();
+		return $api->disconnect($aid, $did);
 	}
 	public function disconRelDoc($aid,$dod){
-		$ret = $this->db->exec(sqlManager::getInstance("artical_doc")->getSql("/sql/rm"), array(
-				"aid" => $aid,
-				"dod" => $dod,
-		));
-		if($ret == 0){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",$ret);
+		$api = new articalDoctorApi();
+		return $api->disconnect($aid, $dod);
 	}
-	
-	
 	
 	public function q($q,$offset,$len){
-		$cnt = $this->db->fetch($this->sqlManager->getSql("/sql/query_count"), array(
-				"q" => $q
-		));
-		
-		$cnt = $cnt["count"];
-		
-		$ret = $this->db->fetchAll($this->sqlManager->getSql("/sql/query"), array(
-				"q" => $q,
-				"offset" => $offset,
-				"length" => $len
-		));
-		if(empty($ret)){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",array(
-				"data" => $ret,
-				"count" => $cnt
-		));
-	}
-	
-	
-	public function getDisList(){
-		$cnt = $this->db->fetch(sqlManager::getInstance("")->getSql("/sql/count"), array());
-		
-		$cnt = $cnt["count"];
-		
-		$ret = $this->db->fetchAll($this->sqlManager->getSql("/sql/all"), array(
-			"offset" => $offset,
-			"length" => $len
-		));
-		if(empty($ret)){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",array(
-				"data" => $ret,
-				"count" => $cnt
-		));
+		$api = new articalApi();
+		return $api->query($q, $offset, $len);
 	}
 	
 	public function getList($offset=0,$len=10){
-		$cnt = $this->db->fetch($this->sqlManager->getSql("/sql/count"), array());
-		
-		$cnt = $cnt["count"];
-		
-		$ret = $this->db->fetchAll($this->sqlManager->getSql("/sql/all"), array(
-			"offset" => $offset,
-			"length" => $len
-		));
-		if(empty($ret)){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",array(
-				"data" => $ret,
-				"count" => $cnt
-		));
+		$api = new articalApi();
+		return $api->getList($offset,$len);
 	}
 	
 	public function add($title,$content,$date){
-		if(!artical_validator::isValidTitle($title)){
-			return new rirResult(2,"invalid title of post");
-		}
-		if(!artical_validator::isValidContent($content)){
-			return new rirResult(2,"invalid content of post");
-		}
-		if(!validator::isDate($date)){
-			return new rirResult(2,"invalid date of post");
-		}
-		$ret = $this->db->insert($this->sqlManager->getSql("/sql/add"), array(
-			"title" => $title,
-			"content" => $content,
-			"date" => $date
-		));
-		if($ret == 0){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",$ret);
+		$api = new articalApi();
+		return $api->add($title, $content, $date);
 	}
 	
 	public function update($sid,$title,$content,$date){
-		if(!artical_validator::isValidTitle($title)){
-			return new rirResult(2,"invalid title of post");
-		}
-		if(!artical_validator::isValidContent($content)){
-			return new rirResult(2,"invalid content of post");
-		}
-		if(!validator::isDate($date)){
-			return new rirResult(2,"invalid date of post");
-		}
-		$ret = $this->db->exec($this->sqlManager->getSql("/sql/update"), array(
-			"sid" => $sid,
-			"title" => $title,
-			"content" => $content,
-			"date" => $date
-		));
-		if($ret == 0){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",$ret);
+		$api = new articalApi();
+		return $api->update($sid, $title, $content, $date);
 	}
 	
 	public function remove($sid){
-		$ret = $this->db->exec($this->sqlManager->getSql("/sql/remove"), array(
-			"sid" => $sid,
-		));
-		if($ret == 0){
-			if($this->db->hasError()){
-				return new rirResult(1,$this->db->getErrorInfo());
-			}
-		}
-		return new rirResult(0,"ok",$ret);
+		$api = new articalApi();
+		return $api->remove($sid);
 	}
 }

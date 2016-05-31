@@ -22,4 +22,19 @@ class doctorApi{
 		$sql = $this->sqlManager->getSql("/sql/base");
 		return $this->db->fetchAll($sql, array());
 	}
+	
+	/**
+	 * 返回基本信息
+	 */
+	public function getInfo(){
+		
+	}
+	
+	/**
+	 * 返回医生职位相关的信息
+	 */
+	public function getInfoLv(){
+		$sql = $this->sqlManager->getSql("/sql/query_infoLv");
+		return $this->db->fetchAll($sql, array());
+	}
 }

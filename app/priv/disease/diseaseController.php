@@ -5,11 +5,8 @@
  * Description: 
  */
 require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/disease/diseaseValidator.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/disease/diseaseModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/disease/diseaseView.php';
-
-require_once FILE_SYSTEM_ENTRY.'/app/utility/tabDataToArray.php';
 class diseaseController extends privController{
 	/**
 	 * 
@@ -50,6 +47,7 @@ class diseaseController extends privController{
 		}
 		
 		$data = $this->model->getData($pid);
+// 		var_dump($data);exit;
 		$this->view->setPmcaiMsg($msg);
 		$this->view->showList($this->priv->getUserInfo(),$pid,$path,$mv,$data,count($meta));
 		
@@ -170,8 +168,7 @@ class diseaseController extends privController{
 					if($lv >= count($meta)){
 						$this->response->showError("invalid level of pid");
 					}
-					$pinfo = $this->model->row($pid);
-					$next_lv = $this->model->getNextMetaIdByGrpLv($pinfo["grp"], $lv);
+					$next_lv = $this->model->getNextMetaIdByGrpLv($lv);
 					if($next_lv->isTrue()){
 						$metaid = $next_lv->return;
 					}else{
@@ -180,21 +177,18 @@ class diseaseController extends privController{
 				}
 			
 			}
-			
 				
 			if($metaid == 0){
 				$this->response->showError("invalid next level");
 			}
-				
 				
 			//validate
 			if(!diseaseValidator::isValidData($msg["data"])){
 				$this->response->showError("invalid data");
 			}
 				
-				
 			//insert
-			$ret = $this->model->add($msg["data"], $pid, DISEASE_GRP_ID, $metaid);
+			$ret = $this->model->add($msg["data"], $pid, $metaid);
 			if($ret->isTrue()){
 				if(isset($msg["?returl"])){
 					$ret_url = $msg["?returl"];

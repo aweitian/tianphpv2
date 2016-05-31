@@ -16,7 +16,7 @@ class tagsApi{
 
 	/**
 	 * 只返回SID,tags
-	 * @return array;
+	 * @return rirResult;
 	 */
 	public function getAll(){
 		$sql = $this->sqlManager->getSql("/tags/all");

@@ -4,6 +4,11 @@
  * Author: Awei.tian
  * Description: 
  */
+/**
+ * array("doctor","tags","disease","symptom")
+ */
+$info = $data["info"];
+// var_dump($info["tags"]);exit;
 if(isset($data["def"]) && !is_null($data["def"])){
 	$def = $data["def"];
 	$at = "编辑";
@@ -57,6 +62,133 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     	</div>
                     </div>
 
+                    
+                    
+                     <div class="form-group">
+                      <label>选择医生</label>
+         				 <select class="form-control" name="doid">
+                        <option value="0">请选择</option>
+              
+                        <?php foreach ($info["doctor"] as $child):?>
+                        <option value="<?php print $child["sid"]?>"><?php print $child["name"]?></option>
+                        <?php endforeach;?>
+           
+                        </select>
+                    </div>
+                    
+                     <div class="form-group">
+                      <label>选择疾病</label>
+         				
+         				<?php  
+                      	/***
+                      	 * array(
+                      	 * 	"pid"=>array(
+                      	 * 		"text"=>"",
+                      	 * 		"children"=>array(
+                      	 * 			"id"=>"text"
+                      	 * 		)
+                      	 * 	)
+                      	 * )
+                      	 */
+                      	$tree_dis = array();
+                      	foreach ($info["disease"] as $item){
+                      		if(!array_key_exists($item["pid"], $tree_dis)){
+                      			$tree_dis[$item["pid"]] = array(
+                      				"text" => $item["pd"],
+                      				"children" => array()
+                      			);
+                      		}
+                      		$tree_dis[$item["pid"]]["children"][$item["mid"]] = $item["md"];
+                      	}
+                      	
+                      	
+//                       	var_dump($tree_dis);exit;
+                      	
+                      	?>
+                        <select class="form-control" name="diid">
+                        <option value="0">请选择</option>
+                        <?php foreach ($tree_dis as $pid => $item):?>
+                        <optgroup label="<?php print $item["text"]?>">
+	                        <?php foreach ($item["children"] as $mid => $child):?>
+	                        <option value="<?php print $mid?>"><?php print $child?></option>
+	                        <?php endforeach;?>
+                        </optgroup>
+                        
+                        <?php endforeach;?>
+                        </select> 
+                      
+                    </div>
+                    
+                    
+                    
+                     <div class="form-group">
+                      <label>选择症状</label>
+         				
+         				<?php  
+                      	/***
+                      	 * array(
+                      	 * 	"pid"=>array(
+                      	 * 		"text"=>"",
+                      	 * 		"children"=>array(
+                      	 * 			"id"=>"text"
+                      	 * 		)
+                      	 * 	)
+                      	 * )
+                      	 */
+                      	$tree_sym = array();
+                      	foreach ($info["symptom"] as $item){
+                      		if(!array_key_exists($item["pid"], $tree_sym)){
+                      			$tree_sym[$item["pid"]] = array(
+                      				"text" => $item["pd"],
+                      				"children" => array()
+                      			);
+                      		}
+                      		$tree_sym[$item["pid"]]["children"][$item["mid"]] = $item["md"];
+                      	}
+                      	
+                      	
+//                       	var_dump($tree_dis);exit;
+                      	
+                      	?>
+                        <select class="form-control" name="syid">
+                        <option value="0">请选择</option>
+                        <?php foreach ($tree_sym as $pid => $item):?>
+                        <optgroup label="<?php print $item["text"]?>">
+	                        <?php foreach ($item["children"] as $mid => $child):?>
+	                        <option value="<?php print $mid?>"><?php print $child?></option>
+	                        <?php endforeach;?>
+                        </optgroup>
+                        
+                        <?php endforeach;?>
+                        </select> 
+                      
+                    </div>
+                    
+                     <div class="form-group">
+                    
+	                      <label>标签</label>
+	                      
+	                      <?php foreach ($info["tags"] as $item):?>
+	    					<div class="checkbox">
+	    					<label>
+	    					<input type="checkbox" name="tags[]" value="<?php print $item["sid"]?>"><?php print $item["text"]?>
+		        
+	    					</label>
+	    					 </div>
+	                      <?php endforeach;?>  
+	                      
+	                     
+	                       
+	                      
+	                      
+	         				                   
+                     
+                     
+
+                    </div>
+                    
+                    
+                    
 					<div class="form-group">
                     <button type="submit" class="btn btn-primary">提交</button>
                   </div>

@@ -38,9 +38,9 @@ $info = $userInfo;
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="<?php print HTTP_ENTRY?>/priv/disease/import"><i class="fa fa-circle-o"></i> 病种导入</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/disease"><i class="fa fa-circle-o"></i> 病种列表</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/disease"><i class="fa fa-circle-o"></i> 病种管理</a></li>
                 <li class="active"><a href="<?php print HTTP_ENTRY?>/priv/symptom/import"><i class="fa fa-circle-o"></i> 症状导入</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/symptom"><i class="fa fa-circle-o"></i> 症状列表</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/symptom"><i class="fa fa-circle-o"></i> 症状管理</a></li>
               </ul>
             </li>
             <li class="treeview">

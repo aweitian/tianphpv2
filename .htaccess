@@ -1,5 +1,7 @@
+ExpiresActive On
+ExpiresDefault A600
 options +FollowSymLinks
-
+FileETag MTime Size
 IndexIgnore */*
 RewriteEngine on
 
