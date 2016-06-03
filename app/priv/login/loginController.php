@@ -47,7 +47,7 @@ class loginController extends privController{
 				}
 			}else{
 				$this->view->setPmcaiMsg($msg);
-				$this->view->loginUI($priv,$priv->errorMsg);
+				$this->view->loginUI($priv,$priv->errorMsg,"");
 			}
 			
 		}else{

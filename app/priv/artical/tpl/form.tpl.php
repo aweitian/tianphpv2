@@ -5,7 +5,8 @@
  * Description: 
  */
 /**
- * array("doctor","tags","disease","symptom")
+ * array("doctor","tags","disease","symptom","def")
+ * "dis" "doc "sym" "tag"
  */
 $info = $data["info"];
 // var_dump($info["tags"]);exit;
@@ -66,11 +67,15 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     
                      <div class="form-group">
                       <label>选择医生</label>
-         				 <select class="form-control" name="doid">
-                        <option value="0">请选择</option>
-              
+                      <?php 
+                      $hash_doc_rel = array();
+                      foreach ($info["def"]["doc"] as $doc_selected){
+                      	$hash_doc_rel[$doc_selected["dod"]] = $doc_selected["aid"];
+                      }
+                      ?>
+         				 <select multiple class="form-control" name="doid[]">
                         <?php foreach ($info["doctor"] as $child):?>
-                        <option value="<?php print $child["sid"]?>"><?php print $child["name"]?></option>
+                        <option value="<?php print $child["sid"]?>"<?php if(array_key_exists($child["sid"], $hash_doc_rel)):?>selected <?php endif;?>><?php print $child["name"]?></option>
                         <?php endforeach;?>
            
                         </select>
@@ -103,14 +108,18 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       	
                       	
 //                       	var_dump($tree_dis);exit;
-                      	
+
+//                       	var_dump($info["def"]["dis"]);
+                      	$hash_dis_rel = array();
+                      	foreach ($info["def"]["dis"] as $dis_selected){
+                      		$hash_dis_rel[$dis_selected["did"]] = $dis_selected["aid"];
+                      	}
                       	?>
-                        <select class="form-control" name="diid">
-                        <option value="0">请选择</option>
+                        <select multiple class="form-control" name="diid[]">
                         <?php foreach ($tree_dis as $pid => $item):?>
                         <optgroup label="<?php print $item["text"]?>">
 	                        <?php foreach ($item["children"] as $mid => $child):?>
-	                        <option value="<?php print $mid?>"><?php print $child?></option>
+	                        <option value="<?php print $mid?>"<?php if(array_key_exists($mid, $hash_dis_rel)):?>selected <?php endif;?>><?php print $child?></option>
 	                        <?php endforeach;?>
                         </optgroup>
                         
@@ -147,15 +156,19 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       	}
                       	
                       	
-//                       	var_dump($tree_dis);exit;
+						$hash_sym_rel = array();
+                      	foreach ($info["def"]["sym"] as $sym_selected){
+                      		$hash_sym_rel[$sym_selected["syd"]] = $sym_selected["aid"];
+                      	}
+                      	
+//                       	var_dump($info["def"]["sym"]);
                       	
                       	?>
-                        <select class="form-control" name="syid">
-                        <option value="0">请选择</option>
+                        <select multiple class="form-control" name="syid[]">
                         <?php foreach ($tree_sym as $pid => $item):?>
                         <optgroup label="<?php print $item["text"]?>">
 	                        <?php foreach ($item["children"] as $mid => $child):?>
-	                        <option value="<?php print $mid?>"><?php print $child?></option>
+	                        <option value="<?php print $mid?>"<?php if(array_key_exists($mid, $hash_sym_rel)):?> selected<?php endif;?>><?php print $child?></option>
 	                        <?php endforeach;?>
                         </optgroup>
                         
@@ -167,28 +180,22 @@ if(isset($_SERVER['HTTP_REFERER'])){
                      <div class="form-group">
                     
 	                      <label>标签</label>
-	                      
+	                		<?php 
+	                		$hash_tag_selected = array();
+	                		foreach($info["def"]["tag"] as $tag_selected_item){
+	                			$hash_tag_selected[$tag_selected_item["tid"]] = 1;
+	                		}
+// 	                		var_dump($hash_tag_selected);
+	                		?>      
 	                      <?php foreach ($info["tags"] as $item):?>
 	    					<div class="checkbox">
 	    					<label>
-	    					<input type="checkbox" name="tags[]" value="<?php print $item["sid"]?>"><?php print $item["text"]?>
-		        
+	    					<input type="checkbox" name="tags[]" value="<?php print $item["sid"]?>"<?php if(array_key_exists($item["sid"], $hash_tag_selected)):?> checked<?php endif?>><?php print $item["text"]?>
 	    					</label>
 	    					 </div>
 	                      <?php endforeach;?>  
-	                      
-	                     
-	                       
-	                      
-	                      
-	         				                   
-                     
-                     
 
                     </div>
-                    
-                    
-                    
 					<div class="form-group">
                     <button type="submit" class="btn btn-primary">提交</button>
                   </div>

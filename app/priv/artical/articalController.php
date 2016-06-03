@@ -444,6 +444,23 @@ class articalController extends privController{
 			if(!isset($msg["sid"],$msg["title"],$msg["content"],$msg["date"])){
 				$this->response->_404();
 			}
+			if(!isset($msg["diid"])){
+				$msg["diid"] = array();
+			}
+			if(!isset($msg["syid"])){
+				$msg["syid"] = array();
+			}
+			if(!isset($msg["doid"])){
+				$msg["doid"] = array();
+			}
+			if(!isset($msg["tags"])){
+				$msg["tags"] = array();
+			}
+			
+			$this->model->updateTags($msg["sid"], $msg["tags"]);
+			$this->model->con_reldis(array($msg["sid"]), $msg["diid"]);
+			$this->model->con_relsym(array($msg["sid"]), $msg["syid"]);
+			$this->model->con_reldoc(array($msg["sid"]), $msg["doid"]);
 			$retR = $this->model->update($msg["sid"],$msg["title"],$msg["content"],$msg["date"]);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
@@ -453,7 +470,7 @@ class articalController extends privController{
 				}
 				$this->view->showEditSucc($this->priv->getUserInfo(),$ret_url);
 			}else{
-				$this->response->showError($retR->info);;
+				$this->response->showError($retR->info);
 			}
 		}else{
 			if(!isset($msg["?sid"])){
@@ -464,12 +481,29 @@ class articalController extends privController{
 			if(!$rowR->isTrue()){
 				$this->response->_404();
 			}
-			$this->view->showForm($this->priv->getUserInfo(),$this->getArticalInfo(),$rowR->return);			
+			
+			$this->view->showForm($this->priv->getUserInfo(),$this->getArticalInfo($msg["?sid"]),$rowR->return);			
 		}
-
 	}
-	private function getArticalInfo(){
+	private function getArticalInfo($aid = 0){
+		if($aid) {
+			$def = array(
+				"dis" => $this->model->q_reldis_aid($aid),
+				"doc" => $this->model->q_reldoc_aid($aid),
+				"sym" => $this->model->q_relsym_aid($aid),
+				"tag" => $this->model->q_tags_aid($aid)
+			);
+		}else{
+			$def = array(
+				"dis" => array(),
+				"doc" => array(),
+				"sym" => array(),
+				"tag" => array()
+			);
+		}
+		
 		return array(
+			"def"    => $def,
 			"doctor" => $this->model->getInfo_doctor(),
 			"tags" => $this->model->getInfo_tags(),
 			"disease" => $this->model->getInfo_disease(),
@@ -489,14 +523,21 @@ class articalController extends privController{
 			if(!isset($msg["diid"],$msg["syid"],$msg["doid"],$msg["tags"])){
 				$this->response->_404();
 			}
-			
+
 			$retR = $this->model->add($msg["title"],$msg["content"],$msg["date"]);
+			
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
 					$ret_url = $msg["?returl"];
 				}else{
 					$ret_url = "";
 				}
+				$aid = $retR->return;
+				$this->model->updateTags($aid, $msg["tags"]);
+				$this->model->con_reldis(array($aid), $msg["diid"]);
+				$this->model->con_relsym(array($aid), $msg["syid"]);
+				$this->model->con_reldoc(array($aid), $msg["doid"]);
+				
 				$this->view->showAddSucc($this->priv->getUserInfo(),$ret_url);
 			}else{
 				$this->response->showError($retR->info);;

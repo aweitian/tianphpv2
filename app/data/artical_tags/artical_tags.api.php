@@ -22,7 +22,11 @@
  	 * @return int 插入，更新，删除的总行数
  	 */
  	public function update($aid,$tidArr){
+ 		if(!validator::isUint($aid) || !is_array($tidArr)){
+ 			return 0;
+ 		}
  		$hash = array();
+//  		var_dump($tidArr);exit;
  		foreach ($tidArr as $tid){
  			$hash[$tid] = 0;
  		}
@@ -84,5 +88,14 @@
  		//echo "删除",$len_old-$i;
  		return $len + ($len_new-$i) + ($len_old-$i);
  	}
- 	
+ 	/**
+ 	 *
+ 	 * @param int $aid
+ 	 * @return array int dod
+ 	 */
+ 	public function row($aid){
+ 		return $this->db->fetchAll($this->sqlManager->getSql("/tags/artical/q"), array(
+ 			"aid" => $aid,
+ 		));
+ 	}
  }

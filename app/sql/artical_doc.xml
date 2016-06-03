@@ -7,6 +7,13 @@
 		FROM `data_artical_doc`
 		WHERE `aid` = :aid AND `dod` = :dod
 	</exists>
+	<all>
+		SELECT
+		  `aid`,
+		  `dod`
+		FROM `data_artical_doc`
+		WHERE `aid` = :aid
+	</all>
 	<add>
 		INSERT INTO `data_artical_doc`
 	            (`aid`,
@@ -21,6 +28,12 @@
 		WHERE `aid` = :aid
 		    AND `dod` = :dod;
 	</rm>
+	<update>
+			UPDATE `data_artical_doc` SET 
+				`aid`=:aid,`dod`=:new_dod
+			 WHERE `aid`=:aid and `dod`=:old_dod
+	</update>
+	
 	<query_on_raw_count>
 		SELECT 
 			COUNT(`data_artical`.`sid`) as `count`

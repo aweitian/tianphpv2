@@ -7,6 +7,13 @@
 		FROM `data_artical_sym`
 		WHERE `aid` = :aid AND `syd` = :syd
 	</exists>
+	<all>
+		SELECT
+		  `aid`,
+		  `syd`
+		FROM `data_artical_sym`
+		WHERE `aid` = :aid
+	</all>
 	<add>
 		INSERT INTO `data_artical_sym`
 	            (`aid`,
@@ -20,7 +27,11 @@
 		WHERE `aid` = :aid
 		    AND `syd` = :syd;
 	</rm>
-	
+	<update>
+			UPDATE `data_artical_sym` SET 
+				`aid`=:aid,`syd`=:new_syd
+			 WHERE `aid`=:aid and `syd`=:old_syd
+	</update>
 	
 	<query_on_raw_count>
 		SELECT 

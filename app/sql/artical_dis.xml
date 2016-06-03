@@ -7,6 +7,13 @@
 		FROM `data_artical_dis`
 		WHERE `aid` = :aid AND `did` = :did
 	</exists>
+	<all>
+		SELECT
+		  `aid`,
+		  `did`
+		FROM `data_artical_dis`
+		WHERE `aid` = :aid
+	</all>
 	<add>
 		INSERT INTO `data_artical_dis`
 	            (`aid`,
@@ -20,7 +27,11 @@
 		WHERE `aid` = :aid
 		    AND `did` = :did;
 	</rm>
-	
+	<update>
+			UPDATE `data_artical_dis` SET 
+				`aid`=:aid,`did`=:new_did
+			 WHERE `aid`=:aid and `did`=:old_did
+	</update>
 	
 	<query_on_raw_count>
 		SELECT 

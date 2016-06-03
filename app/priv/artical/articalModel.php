@@ -58,18 +58,46 @@ class articalModel extends privModel{
 	
 	
 	public function con_relsym($idArr,$syd){
+		if(!is_array($syd)){
+			$syd = array($syd);
+		}
 		$api = new articalSymptomApi();
 		return $api->connect($idArr, $syd);
 	}
 	
 	public function con_reldis($idArr,$dd){
+		if(!is_array($dd)){
+			$dd = array($dd);
+		}
 		$api = new articalDiseaseApi();
 		return $api->connect($idArr, $dd);
 	}
 	public function con_reldoc($idArr,$dd){
+		if(!is_array($dd)){
+			$dd = array($dd);
+		}
 		$api = new articalDoctorApi();
 		return $api->connect($idArr, $dd);
 	}
+	
+	public function q_reldoc_aid($aid){
+		$api = new articalDoctorApi();
+		return $api->row($aid);
+	}
+	public function q_reldis_aid($aid){
+		$api = new articalDiseaseApi();
+		return $api->row($aid);
+	}
+	public function q_relsym_aid($aid){
+		$api = new articalSymptomApi();
+		return $api->row($aid);
+	}
+	public function q_tags_aid($aid){
+		$api = new articalTagsApi();
+		return $api->row($aid);
+	}
+	
+	
 	
 	public function q_reldoc($offset,$len){
 		$api = new articalDoctorApi();
@@ -88,7 +116,7 @@ class articalModel extends privModel{
 		return $api->query($doid, $q, $offset, $len);
 	}
 	
-	public function addTags($aid,$tidArr){
+	public function updateTags($aid,$tidArr){
 		$api = new articalTagsApi();
 		return $api->update($aid, $tidArr);
 	}
@@ -111,7 +139,13 @@ class articalModel extends privModel{
 		$api = new articalApi();
 		return $api->getList($offset,$len);
 	}
-	
+	/**
+	 * OK,RETURN is INSERT ID
+	 * @param string $title
+	 * @param string $content
+	 * @param datetime $date
+	 * @return rirResult
+	 */
 	public function add($title,$content,$date){
 		$api = new articalApi();
 		return $api->add($title, $content, $date);
