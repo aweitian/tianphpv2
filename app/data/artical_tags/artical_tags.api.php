@@ -94,7 +94,7 @@
  	 * @return array int dod
  	 */
  	public function row($aid){
- 		return $this->db->fetchAll($this->sqlManager->getSql("/tags/artical/q"), array(
+ 		return $this->db->fetchAll($this->sqlManager->getSql("/tags/all_sys"), array(
  			"aid" => $aid,
  		));
  	}

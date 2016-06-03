@@ -49,6 +49,30 @@ class articalController extends privController{
 			$this->response->showError($retR->info);;
 		}
 	}
+	public function commentAction(pmcaiMsg $msg){
+		$length = 10;//每页显示多少行
+		
+		if (isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		
+		$offset = ($page - 1) * $length;
+		$data = $this->model->getAllComments($msg["?q"],$offset,$length);
+		
+		if($data->isTrue()){
+			
+			$this->view->setPmcaiMsg($msg);
+		
+			$this->view->showComment($msg->getPmcaiUrl(),$this->priv->getUserInfo(),$data,$page,$length,$msg["?q"]);
+		}else{
+			$this->response->showError($data->info);;
+		}
+	}
 // 	public function reldocAction(pmcaiMsg $msg){
 // 		$length = 10;//每页显示多少行
 		

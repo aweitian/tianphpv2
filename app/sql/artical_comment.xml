@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artical_comment>
+
+	<add>
+		INSERT INTO `data_artical_comment` (
+			`aid`,`uid`,`comment`
+		) VALUES (
+			:aid,:uid,:comment
+		)
+	</add>
+	<update>
+		UPDATE `data_artical_comment` SET 
+		`comment`=:comment,`vertify`=:vertify
+	 WHERE `sid`=:sid
+	</update>
+	<vertify>
+		UPDATE `data_artical_comment` SET 
+			`vertify`='y'
+		 WHERE `sid`=:sid
+	</vertify>
+	<rm>
+		DELETE FROM `data_artical_comment` WHERE `sid`=:sid
+	</rm>
+	
+	<all>
+		<count>
+			SELECT
+			  count(`data_artical`.`sid`) as `count`
+			FROM `data_artical`
+			WHERE `data_artical`.`title` LIKE CONCAT('%',:q,'%')
+			GROUP BY `data_artical`.`sid`
+		</count>
+		<query>
+			SELECT
+			  `data_artical`.`sid`,
+			  `data_artical`.`title`,
+			  `data_artical`.`date`,
+			  COUNT(`data_artical_comment`.`sid`) AS `cnt`
+			FROM `data_artical`
+			LEFT JOIN `data_artical_comment` ON `data_artical_comment`.`aid` = `data_artical`.`sid`
+			WHERE `data_artical`.`title` LIKE CONCAT('%',:q,'%')
+			GROUP BY `data_artical`.`sid`
+			LIMIT :offset,:length
+		</query>
+	</all>
+	
+	
+	
+	<all_uid>
+		<count>
+			SELECT 
+				count(*) as `count`
+			FROM `data_artical_comment`
+			WHERE `data_artical_comment`.`uid`=:uid
+		</count>
+		<query>
+			SELECT
+				*
+			FROM `data_artical_comment`
+			WHERE `data_artical_comment`.`uid`=:uid
+			LIMIT :offset,:length
+		</query>
+
+	</all_uid>
+	
+	<all_aid>
+		<count>
+			SELECT 
+				count(*) as `count`
+			FROM `data_artical_comment`
+			WHERE `data_artical_comment`.`aid`=:aid
+		</count>
+		<query>
+			SELECT
+				*
+			FROM `data_artical_comment`
+			WHERE `data_artical_comment`.`aid`=:aid
+			LIMIT :offset,:length
+		</query>
+
+	</all_aid>
+	
+	
+</artical_comment>

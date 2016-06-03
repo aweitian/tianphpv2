@@ -13,6 +13,7 @@ require_once FILE_SYSTEM_ENTRY."/app/data/artical_symptom/artical_symptom.api.ph
 require_once FILE_SYSTEM_ENTRY."/app/data/artical_doctor/artical_doctor.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/artical_tags/artical_tags.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/tags/tags.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/comment/comment.api.php";
 
 class articalModel extends privModel{
 	public function __construct(){
@@ -96,8 +97,16 @@ class articalModel extends privModel{
 		$api = new articalTagsApi();
 		return $api->row($aid);
 	}
-	
-	
+	/**
+	 * 成功，INFO字段为COUNT,RETURN为数据
+	 * @param int $offset
+	 * @param int $length
+	 * @return rirResult
+	 */
+	public function getAllComments($q,$offset,$length){
+		$api = new commentApi();
+		return $api->getAllComments($q,$offset, $length);
+	}
 	
 	public function q_reldoc($offset,$len){
 		$api = new articalDoctorApi();

@@ -76,6 +76,18 @@ class articalView extends privView{
 		$content = $this->fetch("list",$data);
 		$this->priv_wrap($userinfo, $content)->show();
 	}
+	public function showComment(pmcaiUrl $url,$userinfo,rirResult $data,$page,$length,$q){
+		$tmp = array(
+				"pageSize" => $length,
+				"pageBtnLen" => 5,
+				"curPageNum" => $page,
+				"url" => $url,
+				"q" => $q,
+				"ori" => $data
+		);
+		$content = $this->fetch("list-comment",$tmp);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
 	
 	
 	public function showOpSucc($info,$op,$ret_url){
