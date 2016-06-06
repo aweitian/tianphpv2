@@ -36,7 +36,7 @@ class commentApi{
 		if(!validator::isUint($aid)){
 			return new rirResult(2,"invalid aid");
 		}
-		if(!commentValidator::isValidTitle($comment)){
+		if(!commentValidator::isValidComment($comment)){
 			return new rirResult(3,"invalid comment");
 		}
 	
@@ -54,21 +54,33 @@ class commentApi{
 		}
 		return new rirResult(0,"ok",$sid);
 	}
+	
+	public function vertify($sid){
+// 		var_dump($this->sqlManager->getSql("/artical_comment/vertify"));exit;
+		$sql = $this->sqlManager->getSql("/artical_comment/vertify");
+		$bind = array(
+			"sid" => $sid,
+		);
+		$row = $this->db->exec($sql, $bind);
+		if($row == 0){
+			if($this->db->hasError()){
+				return new rirResult(9,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$row);
+	}
+	
 	/**
 	 *
 	 * @param int $sid
-	 * @param bool $vertify
 	 * @param string $comment
 	 * @return rirResult
 	 */
-	public function update($sid,$vertify,$comment){
+	public function update($sid,$comment){
 	
 		//validate data
 		if(!validator::isUint($sid)){
 			return new rirResult(1,"invalid sid");
-		}
-		if(!commentValidator::isValidVertify($vertify)){
-			return new rirResult(5,"invalid vertify");
 		}
 		if(!commentValidator::isValidComment($comment)){
 			return new rirResult(6,"invalid comment");
@@ -77,7 +89,38 @@ class commentApi{
 		$sql = $this->sqlManager->getSql("/artical_comment/update");
 		$bind = array(
 				"sid" => $sid,
-				"vertify" => $vertify,
+				"comment" => $comment,
+		);
+		$sid = $this->db->exec($sql, $bind);
+		if($sid == 0){
+			if($this->db->hasError()){
+				return new rirResult(9,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$sid);
+	}
+	
+	/**
+	 *
+	 * @param int $sid
+	 * @param int $uid
+	 * @param string $comment
+	 * @param datetime $datetime
+	 * @return rirResult
+	 */
+	public function updatePriv($sid,$uid,$comment,$datetime){
+	
+		//validate data
+		if(!validator::isUint($sid)){
+			return new rirResult(1,"invalid sid");
+		}
+		if(!commentValidator::isValidComment($comment)){
+			return new rirResult(6,"invalid comment");
+		}
+	
+		$sql = $this->sqlManager->getSql("/artical_comment/update");
+		$bind = array(
+				"sid" => $sid,
 				"comment" => $comment,
 		);
 		$sid = $this->db->exec($sql, $bind);

@@ -15,7 +15,26 @@ class articalView extends privView{
 				)
 			))->show();
 	}
-	
+
+	public function showCommentForm($userInfo,$users,$def=null){
+		$this->priv_wrap($userInfo, $this->fetch(
+			"form-comment",array(
+				"def" => $def,
+				"user" => $users
+			)
+		))->show();
+	}
+	public function showListForComments(pmcaiUrl $url,$userinfo,rirResult $data,$page,$length){
+		$tmp = array(
+			"pageSize" => $length,
+			"pageBtnLen" => 5,
+			"curPageNum" => $page,
+			"url" => $url,
+			"ori" => $data
+		);
+		$content = $this->fetch("comments",$tmp);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
 	
 	public function showListForRevReldis(pmcaiUrl $url,$userinfo,$data,$dis_infoes,$page,$length,$dc,$di,$q){
 		$data["pageSize"] = $length;

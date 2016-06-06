@@ -22,6 +22,10 @@
 	</getRpq>
 
 
+	<getWaterArm>
+		SELECT * FROM `data_user` WHERE `wa` = 'y'
+	</getWaterArm>
+
 
 	<resetpwd>
 		UPDATE `data_user` SET

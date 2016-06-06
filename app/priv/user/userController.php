@@ -4,12 +4,9 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/user/userModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/user/userView.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/user/userValidator.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/user/userFilter.php';
 class userController extends privController{
 	/**
 	 * 

@@ -4,6 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
+require_once FILE_SYSTEM_ENTRY."/app/data/user/user.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/doctor/doctor.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/artical/artical.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/disease/disease.api.php";
@@ -23,6 +24,10 @@ class articalModel extends privModel{
 		$api = new articalApi();
 		return $api->row($sid);
 	}
+	public function row_comment($sid){
+		$api = new commentApi();
+		return $api->row($sid);
+	}
 	public function getCacheDoctor(){
 		$api = new doctorApi();
 		return $api->getInfoLv();
@@ -37,7 +42,10 @@ class articalModel extends privModel{
 		$api = new diseaseApi();
 		return $api->getInfo();
 	}
-	
+	public function getWaterArm(){
+		$api = new userApi();
+		return $api->getWaterArm();
+	}
 	public function getInfo_symptom(){
 		$api = new symptomApi();
 		return $api->getInfo();
@@ -107,6 +115,17 @@ class articalModel extends privModel{
 		$api = new commentApi();
 		return $api->getAllComments($q,$offset, $length);
 	}
+	/**
+	 * 成功，INFO字段为COUNT,RETURN为数据
+	 * @param int $aid
+	 * @param int $offset
+	 * @param int $length
+	 * @return rirResult
+	 */
+	public function getCommentsByAid($aid,$offset,$length){
+		$api = new commentApi();
+		return $api->getAllCommentsByAid($aid, $offset, $length);
+	}
 	
 	public function q_reldoc($offset,$len){
 		$api = new articalDoctorApi();
@@ -149,6 +168,23 @@ class articalModel extends privModel{
 		return $api->getList($offset,$len);
 	}
 	/**
+	 * 
+	 * @param int $aid
+	 * @param int $uid
+	 * @param string $comment
+	 * @return rirResult
+	 */
+	public function addComment($aid,$uid,$comment){
+		$api = new commentApi();
+		return $api->add($aid, $uid, $comment);
+	}
+	
+	public function vertifyComment($sid){
+		$api = new commentApi();
+		return $api->vertify($sid);
+	}
+	
+	/**
 	 * OK,RETURN is INSERT ID
 	 * @param string $title
 	 * @param string $content
@@ -164,9 +200,17 @@ class articalModel extends privModel{
 		$api = new articalApi();
 		return $api->update($sid, $title, $content, $date);
 	}
+	public function updateComment($sid,$uid,$comment,$datetime){
+		$api = new commentApi();
+		return $api->updatePriv($sid, $uid, $comment, $datetime);
+	}
 	
 	public function remove($sid){
 		$api = new articalApi();
+		return $api->remove($sid);
+	}
+	public function removeComment($sid){
+		$api = new commentApi();
 		return $api->remove($sid);
 	}
 }

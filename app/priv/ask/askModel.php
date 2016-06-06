@@ -7,6 +7,7 @@
 require_once FILE_SYSTEM_ENTRY."/app/data/ask/ask.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/ask/askAppend.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/doctor/doctor.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/disease/disease.api.php";
 class askModel extends privModel{
 	public function __construct(){
 		parent::__construct();
@@ -133,14 +134,14 @@ class askModel extends privModel{
 	}
 	
 	public function getAllDis(){
-		$sql = sqlManager::getInstance("cache")->getSql("/sql/disease/query_on_raw");
-		return $this->db->fetchAll($sql, array());
+		$api = new diseaseApi();
+		return $api->getInfo();
 	}
 	
 	
 	public function getAllPresent(){
-		$sql = $this->sqlManager->getSql("/ask/present");
-		return $this->db->fetchAll($sql, array());
+		$api = new askApi();
+		return $api->getAllPresent();
 	}
 	
 }

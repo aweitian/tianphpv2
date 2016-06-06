@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <artical_comment>
-
+	<row>
+		SELECT * FROM `data_artical_comment`  WHERE `sid`=:sid
+	</row>
 	<add>
 		INSERT INTO `data_artical_comment` (
 			`aid`,`uid`,`comment`
@@ -10,12 +12,17 @@
 	</add>
 	<update>
 		UPDATE `data_artical_comment` SET 
-		`comment`=:comment,`vertify`=:vertify
+		`comment`=:comment
 	 WHERE `sid`=:sid
 	</update>
+	<update_priv>
+		UPDATE `data_artical_comment` SET 
+			`comment`=:comment,`uid`=:uid,`datetime`=:datetime
+		 WHERE `sid`=:sid
+	</update_priv>
 	<vertify>
 		UPDATE `data_artical_comment` SET 
-			`vertify`='y'
+			`vertify` = NOT(`vertify`)
 		 WHERE `sid`=:sid
 	</vertify>
 	<rm>
@@ -72,8 +79,13 @@
 		</count>
 		<query>
 			SELECT
-				*
+				`data_artical_comment`.`sid`,
+				`data_user`.`name`,
+				`data_artical_comment`.`comment`,
+				`data_artical_comment`.`datetime`,
+				`data_artical_comment`.`vertify`
 			FROM `data_artical_comment`
+			LEFT JOIN `data_user` ON `data_user`.`sid` = `data_artical_comment`.`uid`
 			WHERE `data_artical_comment`.`aid`=:aid
 			LIMIT :offset,:length
 		</query>

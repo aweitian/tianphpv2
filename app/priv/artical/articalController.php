@@ -49,6 +49,69 @@ class articalController extends privController{
 			$this->response->showError($retR->info);;
 		}
 	}
+	
+	public function commentlistAction(pmcaiMsg $msg){
+		if (!isset($msg["?sid"])){
+			$this->response->_404();
+		}
+		$length = 10;//每页显示多少行
+		
+		if (isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		
+		$offset = ($page - 1) * $length;
+		$ret = $this->model->getCommentsByAid($msg["?sid"], $offset, $length);
+		if($ret->isTrue()) {
+			$this->view->setPmcaiMsg($msg);
+			$this->view->showListForComments($msg->getPmcaiUrl(), $this->priv->getUserInfo(), $ret, $page, $length);
+		}else{
+			$this->response->showError($ret->info);
+		}
+// 		var_dump($this->model->getCommentsByAid($msg["?sid"], $offset, $length)->return);
+	}
+	
+	public function addcommentAction(pmcaiMsg $msg){
+		
+		if ($msg->isPost()){
+
+// 			var_dump($msg->getPostData());
+			if (!isset($msg["aid"], $msg["uid"], $msg["comment"])){
+				$this->response->showError("invalid post data");
+			}
+			$ret = $this->model->addComment($msg["aid"], $msg["uid"], $msg["comment"]);
+			if($ret->isTrue()){
+				if(isset($msg["?returl"])){
+					$ret_url = $msg["?returl"];
+				}else{
+					$ret_url = "";
+				}	
+				$this->view->setPmcaiMsg($msg);
+				$this->view->showOpSucc($this->priv->getUserInfo(),"添加评论",$ret_url);
+			}else{
+				$this->response->showError($ret->info);;
+			}
+			
+		} else {
+			if (!isset($msg["?aid"])){
+				$this->response->_404();
+			}
+			$user = $this->model->getWaterArm();
+			//var_dump($user);
+			$this->view->setPmcaiMsg($msg);
+			$this->view->showCommentForm($this->priv->getUserInfo(), $user);			
+		}
+		
+
+		
+	}
+	
+	
 	public function commentAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行
 		
@@ -461,6 +524,23 @@ class articalController extends privController{
 		$this->model->remove(intval($msg["?sid"]));
 		$this->response->redirect($ret_url);
 	}
+	public function rmcommentAction(pmcaiMsg $msg){
+		$ret_url = $_SERVER["HTTP_REFERER"];
+		if(!isset($msg["?sid"])){
+			$this->response->_404();
+		}
+		$this->model->removeComment(intval($msg["?sid"]));
+		$this->response->redirect($ret_url);
+	}
+	
+	public function vercommentAction(pmcaiMsg $msg){
+		$ret_url = $_SERVER["HTTP_REFERER"];
+		if(!isset($msg["?sid"])){
+			$this->response->_404();
+		}
+		$this->model->vertifyComment(intval($msg["?sid"]));
+		$this->response->redirect($ret_url);
+	}
 	
 	
 	public function editAction(pmcaiMsg $msg){
@@ -507,6 +587,35 @@ class articalController extends privController{
 			}
 			
 			$this->view->showForm($this->priv->getUserInfo(),$this->getArticalInfo($msg["?sid"]),$rowR->return);			
+		}
+	}
+	
+	public function editcommentAction(pmcaiMsg $msg){
+		if($msg->isPost()){
+			if(!isset($msg["sid"],$msg["uid"],$msg["comment"],$msg["datetime"])){
+				$this->response->_404();
+			}
+			$retR = $this->model->updateComment($msg["sid"],$msg["uid"],$msg["comment"],$msg["datetime"]);
+			if($retR->isTrue()){
+				if(isset($msg["?returl"])){
+					$ret_url = $msg["?returl"];
+				}else{
+					$ret_url = "";
+				}
+				$this->view->showEditSucc($this->priv->getUserInfo(),$ret_url);
+			}else{
+				$this->response->showError($retR->info);
+			}
+		}else{
+			if(!isset($msg["?sid"])){
+				$this->response->_404();
+			}
+			$this->view->setPmcaiMsg($msg);
+			$row = $this->model->row_comment(intval($msg["?sid"]));
+			if(empty($row)){
+				$this->response->_404();
+			}
+			$this->view->showCommentForm($this->priv->getUserInfo(),$this->model->getWaterArm(),$row);			
 		}
 	}
 	private function getArticalInfo($aid = 0){
