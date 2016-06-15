@@ -4,6 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
+require_once FILE_SYSTEM_ENTRY."/app/data/user/user.api.php";
 class userModel extends privModel{
 	private $api;
 	public function __construct(){
@@ -48,7 +49,7 @@ class userModel extends privModel{
 	}
 	
 	public function add($email,$name,$pwd,$phone,$avatar,$rpq,$rpa,$date){
-		return $this->api->add($email, $name, $pwd, $phone, $avatar, $rpq, $rpa, $date);
+		return $this->api->add($email, $name, $pwd, $phone, $avatar, $rpq, $rpa, $date,true);
 	}
 	
 	public function update($sid,$email,$name,$phone,$avatar,$date){

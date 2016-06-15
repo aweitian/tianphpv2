@@ -185,7 +185,7 @@ class userApi{
 	
 	
 	
-	public function add($email,$name,$pwd,$phone,$avatar,$rpq,$rpa,$date){
+	public function add($email,$name,$pwd,$phone,$avatar,$rpq,$rpa,$date,$waf){
 	
 		//validate
 	
@@ -217,6 +217,9 @@ class userApi{
 		if(!validator::isDate($date)){
 			return new rirResult(2,"invalid date of post");
 		}
+		if(!userValidator::isValidWa($waf)){
+			return new rirResult(2,"invalid waf of post");
+		}
 	
 	
 		//filter
@@ -234,7 +237,7 @@ class userApi{
 				"rpq" => $rpq,
 				"rpa" => $rpa,
 				"date" => $date,
-	
+				"wa" => $waf,
 		));
 		if($ret == 0){
 			if($this->db->hasError()){

@@ -89,9 +89,9 @@
 
 	<add>
 		INSERT INTO `data_user` (
-			`email`,`name`,`pwd`,`phone`,`avatar`,`rpq`,`rpa`,`date`
+			`email`,`name`,`pwd`,`phone`,`avatar`,`rpq`,`rpa`,`wa`,`date`
 		) VALUES (
-			:email,:name,:pwd,:phone,:avatar,:rpq,:rpa,:date
+			:email,:name,:pwd,:phone,:avatar,:rpq,:rpa,:wa,:date
 		)
 	</add>
 	

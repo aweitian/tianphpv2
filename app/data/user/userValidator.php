@@ -29,4 +29,7 @@ class userValidator {
 	public static function isValidRpa($v){
 		return is_string($v) && $v !== "";
 	}
+	public static function isValidWa($v){
+		return is_bool($v);
+	}
 }
