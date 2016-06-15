@@ -55,7 +55,7 @@ $info = $userInfo;
                 <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldoc"><i class="fa fa-circle-o"></i> 关联文章</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/rellv"><i class="fa fa-circle-o"></i> 设置职位</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/revrellv"><i class="fa fa-circle-o"></i> 修改职位</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/manwealth"><i class="fa fa-circle-o"></i> 赠送设置</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/appraise"><i class="fa fa-circle-o"></i> 评价医生</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -100,12 +100,14 @@ $info = $userInfo;
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-gift"></i>
-                <span>心意礼物</span>
+                <span>礼物感谢信</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?php print HTTP_ENTRY?>/priv/present/add"><i class="fa fa-circle-o"></i> 添加礼物</a></li>
                 <li><a href="<?php print HTTP_ENTRY?>/priv/present"><i class="fa fa-circle-o"></i> 礼物列表</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/letter/add"><i class="fa fa-circle-o"></i> 添加感谢信</a></li>
+                <li><a href="<?php print HTTP_ENTRY?>/priv/letter"><i class="fa fa-circle-o"></i> 感谢信列表</a></li>
               </ul>
             </li>
            

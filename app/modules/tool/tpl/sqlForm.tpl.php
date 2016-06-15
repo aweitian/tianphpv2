@@ -6,7 +6,7 @@
  */
 extract($data);
 $method = array("SELECT","INSERT","UPDATE","DELETE");
-
+// var_dump($_REQUEST);exit;
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,12 +24,12 @@ $method = array("SELECT","INSERT","UPDATE","DELETE");
 <form action="/tool/sql" method="post">
 <select name="tb">
 <?php foreach($table as $t):?>
-<option value='<?php print $t?>'><?php print $t?></option>
+<option value='<?php print $t?>'<?php if(isset($_REQUEST["tb"]) && $_REQUEST["tb"] == $t):?> selected<?php endif;?>><?php print $t?></option>
 <?php endforeach;?>
 </select>
 <select name="method">
 <?php foreach($method as $t):?>
-<option value='<?php print $t?>'><?php print $t?></option>
+<option value='<?php print $t?>'<?php if(isset($_REQUEST["method"]) && $_REQUEST["method"] == $t):?> selected<?php endif;?>><?php print $t?></option>
 <?php endforeach;?>
 </select>
 <br>

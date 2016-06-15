@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appraise>
+	<add>
+		INSERT INTO `data_appraise` (
+			`uid`,`did`,`dod`,`txt`,`lv`,`date`
+		) VALUES (
+			:uid,:did,:dod,:txt,:lv,:date
+		)
+	</add>
+
+	<update>
+		UPDATE `data_appraise` SET 
+		`uid`=:uid,`did`=:did,`dod`=:dod,`txt`=:txt,`lv`=:lv,`date`=:date
+		 WHERE `sid`=:sid
+	</update>
+
+	<rm>
+		DELETE FROM `data_appraise` WHERE `sid`=:sid
+	</rm>
+	
+	<row>
+		SELECT * FROM `data_appraise` WHERE `sid`=:sid
+	</row>
+	
+	<all_uid>
+		<cnt>
+			SELECT count(`sid`) as `count` FROM `data_appraise` WHERE `uid`=:uid
+		</cnt>
+		<query>
+			SELECT * FROM `data_appraise` WHERE `uid`=:uid LIMIT :offset,:length
+		</query>
+	</all_uid>
+	
+	<all_dod>
+		<cnt>
+			SELECT count(`sid`) as `count` FROM `data_appraise` WHERE `dod`=:dod
+		</cnt>
+		<query>
+			SELECT * FROM `data_appraise` WHERE `dod`=:dod LIMIT :offset,:length
+		</query>
+	</all_dod>
+	
+	<all>
+		<cnt>SELECT count(`sid`) as `count` FROM `data_appraise` WHERE 1</cnt>
+		<query>
+			SELECT 
+				`data_appraise`.`sid`,
+				`data_appraise`.`lv`,
+				`data_user`.`name`,`data_user`.`email`,
+				`data_attr_data`.`data`,
+				`data_doctor`.`name`,`data_doctor`.`avatar`,
+				`data_appraise`.`txt`,`data_appraise`.`date`
+			FROM 
+				`data_appraise`
+			LEFT JOIN `data_user` ON `data_user`.`sid` = `data_appraise`.`uid`
+			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_appraise`.`did`
+			LEFT JOIN `data_doctor` ON `data_doctor`.`sid` = `data_appraise`.`dod`
+			WHERE 1
+			LIMIT :offset,:length 
+		</query>
+	</all>
+	
+</appraise>

@@ -29,6 +29,15 @@ class diseaseApi{
 	}
 	
 	/**
+	 * 获取大病种
+	 * @return array
+	 */
+	public function getLv0Infoes(){
+		$sql = $this->sqlManager->getSql("/disease/all_lv0");
+		return $this->db->fetchAll($sql, array());
+	}
+	
+	/**
 	 * @return 返回影响的行数
 	 * @param unknown $sid
 	 */

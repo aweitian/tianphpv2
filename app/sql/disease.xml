@@ -9,6 +9,9 @@
 		    	ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
 		     WHERE `data_attr_data`.`metaid` = 2 AND `data_attr_data`.`grp` = 1;		
 	</tree2table>
+	<all_lv0>
+	 	SELECT * FROM `data_attr_data` WHERE pid = 0 AND `data_attr_data`.`grp` = 1;		
+	</all_lv0>
 	
 	
 	<getInfoes>
