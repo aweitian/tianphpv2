@@ -61,6 +61,7 @@ for ($i = 0; $i < 6; $i++) {
                       <th style="width: 20px">#</th>
                       <th>邮箱</th>
                       <th>昵称</th>
+                      <th>标志</th>
                       <th>手机</th>
                       <th>日期</th>
                       <th width="30%">操作</th>
@@ -70,6 +71,7 @@ for ($i = 0; $i < 6; $i++) {
                       <td><?php print $item["sid"]?></td>
                       <td><?php print $item["email"]?></td>
                       <td><?php print $item["name"]?></td>
+                      <td><?php print $item["wa"] == 'y' ? '<font color=red>水军</font>' : '<font color=green>用户</font>'?></td>
                       <td><?php print $item["phone"]?></td>
                       <td><?php print $item["date"]?></td>
                       
