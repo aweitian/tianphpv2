@@ -59,6 +59,7 @@ array(3) {
 
 
 
+require_once dirname(__FILE__)."/IUpload.php";
 
 
 
@@ -66,8 +67,7 @@ array(3) {
 
 
 
-
-class uploadCommon {
+class uploadCommon implements IUpload {
 
 	private $Directroy; //上传至目录
 	private $MaxSize; //最大上传大小
