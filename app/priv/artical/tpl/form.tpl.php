@@ -1,6 +1,7 @@
 <?php
 /**
  * Date: May 12, 2016
+ * Author: Sihangzhang
  * Author: Awei.tian
  * Description: 
  */
@@ -18,7 +19,12 @@ if(isset($data["def"]) && !is_null($data["def"])){
 	$def = array(
 			"title" => "",
 			"content" => "",
+			"kw" => "",
+			"desc" => "",
+			"kw" => "",
+			"thumb" => "",
 			"date" => date("Y-m-d")
+		
 	);
 	$at = "添加";
 	$ua = "add";
@@ -52,6 +58,19 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     <div class="form-group">
                       <label>内容</label>
                       <textarea name="content" required class="form-control" rows="3" placeholder="内容"><?php print $def["content"]?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>关键词</label>
+                      <textarea name="kw" required class="form-control" rows="3" placeholder="关键词"><?php print $def["kw"]?></textarea>
+                    </div>
+					 <div class="form-group">
+                      <label>描述</label>
+                      <textarea name="desc" required class="form-control" rows="3" placeholder="描述"><?php print $def["desc"]?></textarea>
+                    </div>
+					 <div class="form-group">
+                      <label>缩略图</label>
+					  <input type="file"  name="thumb" value="<?php print $def["thumb"]?>"/>
+                     
                     </div>
                     <div class="form-group">
                       <label>日期</label>

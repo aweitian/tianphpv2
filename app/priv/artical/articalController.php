@@ -1,6 +1,7 @@
 <?php
 /**
  * Date: 2016-05-12
+ * Author: Sihangzhang
  * Author: Awei.tian
  * Description: 
  */
@@ -650,14 +651,14 @@ class articalController extends privController{
 	public function addAction(pmcaiMsg $msg){
 		if($msg->isPost()){
 			//2016-5-31 修改，提交参数为title,content,date,diid,syid,doid,tags
-			if(!isset($msg["title"],$msg["content"],$msg["date"])){
+			if(!isset($msg["kw"],$msg["desc"],$msg["thumb"],$msg["title"],$msg["content"],$msg["date"])){
 				$this->response->_404();
 			}
 			if(!isset($msg["diid"],$msg["syid"],$msg["doid"],$msg["tags"])){
 				$this->response->_404();
 			}
 
-			$retR = $this->model->add($msg["title"],$msg["content"],$msg["date"]);
+			$retR = $this->model->add($msg["kw"],$msg["desc"],$msg["thumb"],$msg["title"],$msg["content"],$msg["date"]);
 			
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){

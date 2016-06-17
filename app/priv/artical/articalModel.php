@@ -1,6 +1,7 @@
 <?php
 /**
  * Date: 2016-05-12
+ * Author: Sihangzhang
  * Author: Awei.tian
  * Description: 
  */
@@ -191,9 +192,9 @@ class articalModel extends privModel{
 	 * @param datetime $date
 	 * @return rirResult
 	 */
-	public function add($title,$content,$date){
+	public function add($kw,$desc,$thumb,$title,$content,$date){
 		$api = new articalApi();
-		return $api->add($title, $content, $date);
+		return $api->add($kw,$desc,$thumb,$title,$content, $date);
 	}
 	
 	public function update($sid,$title,$content,$date){

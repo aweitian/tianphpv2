@@ -15,6 +15,11 @@ require_once dirname(__FILE__)."/artical_validator.php";
  		$this->sqlManager = new sqlManager("artical");
  	}
  	
+ 	public function getHotArticals($limit=10){
+ 		
+ 	}
+ 	
+ 	
  	
  	public function row($sid){
  		$ret = $this->db->fetch($this->sqlManager->getSql("/sql/row"), array(
@@ -89,7 +94,16 @@ require_once dirname(__FILE__)."/artical_validator.php";
  	 * @param datetime $date
  	 * @return rirResult
  	 */
- 	public function add($title,$content,$date){
+ 	public function add($kw,$desc,$thumb,$title,$content,$date){
+ 		if(!artical_validator::isValidKw($kw)){
+ 			return new rirResult(2,"invalid kw of post");
+ 		}
+ 		if(!artical_validator::isValidDesc($desc)){
+ 			return new rirResult(2,"invalid desc of post");
+ 		}
+ 		if(!artical_validator::isValidThumb($thumb)){
+ 			return new rirResult(2,"invalid thumb of post");
+ 		}
  		if(!artical_validator::isValidTitle($title)){
  			return new rirResult(2,"invalid title of post");
  		}
@@ -100,6 +114,9 @@ require_once dirname(__FILE__)."/artical_validator.php";
  			return new rirResult(2,"invalid date of post");
  		}
  		$ret = $this->db->insert($this->sqlManager->getSql("/sql/add"), array(
+ 				"kw" => $kw,
+ 				"desc" => $desc,
+ 				"thumb" => $thumb,
  				"title" => $title,
  				"content" => $content,
  				"date" => $date

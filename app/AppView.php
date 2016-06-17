@@ -21,7 +21,9 @@ class AppView extends View{
 	}
 	
 	public function fetch($tpl,$data=array(),$ext='.tpl.php'){
-		if(is_null($this->pmcaiMsg)){
+		if(!is_null(appCtrl::$msg)){
+			$this->pmcaiMsg = appCtrl::$msg;
+		} elseif (is_null($this->pmcaiMsg)){
 			tian::throwException("0000");
 		}
 		$ctl = $this->pmcaiMsg->getControl();
@@ -35,5 +37,4 @@ class AppView extends View{
 		ob_end_clean();
 		return $ret;
 	}
-	
 }

@@ -34,7 +34,10 @@
 
 
 	<add>
-		INSERT INTO `data_artical`(`title`, `content`, `date`) VALUES (:title,:content,:date)
+		INSERT INTO `data_artical`
+		(`kw`,`desc`,`thumb`,`title`, `content`, `date`) 
+		VALUES 
+		(:kw,:desc,:thumb,:title,:content,:date)
 	</add>
 	
 	<update>

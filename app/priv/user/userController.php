@@ -25,6 +25,10 @@ class userController extends privController{
 		$this->initHttpResponse();
 	}
 
+	public function resetpwdAction(pmcaiMsg $msg){
+		
+	}
+	
 	public function welcomeAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行
 		
