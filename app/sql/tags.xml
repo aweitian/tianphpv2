@@ -17,37 +17,7 @@
 	</update>
 	<all>
 		SELECT 
-			`sid`,`text`
+			`sid`,`text`,`sys`
 		 FROM `data_tags` WHERE 1
 	</all>
-	<artical>
-		<all>
-		SELECT 
-			`aid`,`tid`
-		 FROM `data_artical_tags` WHERE 1 AND `sys` = 'n'
-		</all>
-		<q>
-			SELECT 
-			`tid`
-		 FROM `data_artical_tags` WHERE `aid` = :aid AND `sys` = 'n'
-		</q>
-		<add>
-			INSERT INTO `data_artical_tags` (
-				`aid`,`tid`
-			) VALUES (
-				:aid,:tid
-			)
-		</add>
-		<update>
-			UPDATE `data_artical_tags` SET 
-				`aid`=:aid,`tid`=:new_tid
-			 WHERE `aid`=:aid and `tid`=:old_tid AND `sys` = 'n'
-		</update>
-		<rm>
-			DELETE FROM `data_artical_tags` WHERE `aid`=:aid and `tid`=:tid AND `sys` = 'n'
-		</rm>
-	
-	
-	</artical>
-
 </tags>

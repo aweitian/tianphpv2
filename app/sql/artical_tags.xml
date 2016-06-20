@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artical_tags>
+	<all>
+		SELECT 
+			`aid`,`tid`
+	 	FROM `data_artical_tags` WHERE 1
+	</all>
+	<q>
+		SELECT 
+			`tid`
+		 FROM `data_artical_tags` WHERE `aid` = :aid
+	</q>
+	<add>
+		INSERT INTO `data_artical_tags` (
+			`aid`,`tid`
+		) VALUES (
+			:aid,:tid
+		)
+	</add>
+	<update>
+		UPDATE `data_artical_tags` SET 
+			`aid`=:aid,`tid`=:new_tid
+		 WHERE `aid`=:aid and `tid`=:old_tid
+	</update>
+	<rm>
+		DELETE FROM `data_artical_tags` WHERE `aid`=:aid and `tid`=:tid
+	</rm>
+</artical_tags>

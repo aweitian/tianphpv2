@@ -8,10 +8,13 @@ define("HTTP_ENTRY",'');
 require_once FILE_SYSTEM_ENTRY.'/app/AppConst.php';
 require_once FILE_SYSTEM_ENTRY."/lib/db/mysql/mysqlPdoBase.php";
 require_once FILE_SYSTEM_ENTRY."/modules/sqlManager/sqlManager.php";
+require_once FILE_SYSTEM_ENTRY.'/modules/upload/uploadFactory.php';
+
 require_once FILE_SYSTEM_ENTRY.'/app/AppCtrl.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppView.php';
 require_once FILE_SYSTEM_ENTRY.'/app/hook404.php';
+
 
 
 if(false !== strpos(FILE_SYSTEM_ENTRY, "openshift")){

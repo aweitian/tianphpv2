@@ -10,21 +10,28 @@
  * "dis" "doc "sym" "tag"
  */
 $info = $data["info"];
-// var_dump($info["tags"]);exit;
-if(isset($data["def"]) && !is_null($data["def"])){
+// var_dump($info["def"]["tag"]);exit;
+if(isset($data["def"]) && !is_null($data["def"])) {
+	$actionMode = "edit";
+}else{
+	$actionMode = "add";
+}
+
+
+
+if($actionMode == "edit"){
 	$def = $data["def"];
 	$at = "编辑";
 	$ua = "edit";
 }else{
 	$def = array(
-			"title" => "",
-			"content" => "",
-			"kw" => "",
-			"desc" => "",
-			"kw" => "",
-			"thumb" => "",
-			"date" => date("Y-m-d")
-		
+		"title" => "",
+		"content" => "",
+		"kw" => "",
+		"desc" => "",
+		"kw" => "",
+		"thumb" => "",
+		"date" => date("Y-m-d")
 	);
 	$at = "添加";
 	$ua = "add";
@@ -44,13 +51,12 @@ if(isset($_SERVER['HTTP_REFERER'])){
                   <h3 class="box-title"><?php print $at?>文章</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/artical/<?php print $ua;?><?php print $ret_url?>">
+                  <form <?php if($ua == "add"):?>enctype="multipart/form-data"<?php endif?> role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/artical/<?php print $ua;?><?php print $ret_url?>">
                     <!-- text input -->
                     <div class="form-group">
                       <label>标题</label>
                       <?php if($ua == "edit"):?>
                       <input type="hidden" name="sid" value="<?php print $def["sid"]?>">
-                      
                       <?php endif?>
                       <input value="<?php print $def["title"]?>" name="title" required type="text" class="form-control" placeholder="文章标题">
                     </div>
@@ -67,10 +73,9 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       <label>描述</label>
                       <textarea name="desc" required class="form-control" rows="3" placeholder="描述"><?php print $def["desc"]?></textarea>
                     </div>
-					 <div class="form-group">
+					<div class="form-group">
                       <label>缩略图</label>
-					  <input type="file"  name="thumb" value="<?php print $def["thumb"]?>"/>
-                     
+                      <input <?php if($ua == "edit"):?>type="text" class="form-control"<?php else:?>type="file"<?php endif?> name="thumb" value="<?php print $def["thumb"]?>"/>
                     </div>
                     <div class="form-group">
                       <label>日期</label>

@@ -42,10 +42,8 @@
 	
 	<update>
 		UPDATE `data_artical` SET 
-		`title`=:title,
-		`content`=:content,
-		`date`=:date
-		
+		`kw`=:kw,`desc`=:desc,`thumb`=:thumb,
+		`title`=:title,`content`=:content,`date`=:date
 		WHERE `sid` = :sid
 	</update>
 	

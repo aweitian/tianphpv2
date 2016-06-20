@@ -197,9 +197,9 @@ class articalModel extends privModel{
 		return $api->add($kw,$desc,$thumb,$title,$content, $date);
 	}
 	
-	public function update($sid,$title,$content,$date){
+	public function update($sid,$kw,$desc,$thumb,$title,$content,$date){
 		$api = new articalApi();
-		return $api->update($sid, $title, $content, $date);
+		return $api->update($sid,$kw,$desc,$thumb,$title,$content,$date);
 	}
 	public function updateComment($sid,$uid,$comment,$datetime){
 		$api = new commentApi();

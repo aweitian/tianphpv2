@@ -65,7 +65,7 @@ class tagsApi{
 		if(!tagsValidator::isValidtags($tags)){
 			return new rirResult(1,"invalid tags");
 		}
-		$sql = $this->sqlManager->getSql("/ask/update");
+		$sql = $this->sqlManager->getSql("/tags/update");
 		$bind = array(
 				"sid" => $sid,
 				"text" => $text,

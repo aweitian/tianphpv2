@@ -137,7 +137,16 @@ require_once dirname(__FILE__)."/artical_validator.php";
  	 * @param datetime $date
  	 * @return rirResult
  	 */
- 	public function update($sid,$title,$content,$date){
+ 	public function update($sid,$kw,$desc,$thumb,$title,$content,$date){
+ 		if(!artical_validator::isValidKw($kw)){
+ 			return new rirResult(2,"invalid kw of post");
+ 		}
+ 		if(!artical_validator::isValidDesc($desc)){
+ 			return new rirResult(2,"invalid desc of post");
+ 		}
+ 		if(!artical_validator::isValidThumb($thumb)){
+ 			return new rirResult(2,"invalid thumb of post");
+ 		}
  		if(!artical_validator::isValidTitle($title)){
  			return new rirResult(2,"invalid title of post");
  		}
@@ -148,10 +157,13 @@ require_once dirname(__FILE__)."/artical_validator.php";
  			return new rirResult(2,"invalid date of post");
  		}
  		$ret = $this->db->exec($this->sqlManager->getSql("/sql/update"), array(
- 				"sid" => $sid,
- 				"title" => $title,
- 				"content" => $content,
- 				"date" => $date
+			"sid" => $sid,
+			"kw" => $kw,
+			"desc" => $desc,
+			"thumb" => $thumb,
+			"title" => $title,
+			"content" => $content,
+			"date" => $date,
  		));
  		if($ret == 0){
  			if($this->db->hasError()){

@@ -18,10 +18,10 @@ class artical_validator {
 		return is_string($v) && $v !== "";
 	}
 	public static function isValidThumb($v){
-		return utility::endsWith($v, ".png")
+		return (utility::endsWith($v, ".png")
 		||
 		utility::endsWith($v, ".gif")
 		||
-		utility::endsWith($v, ".jpg");
+		utility::endsWith($v, ".jpg")) || $v === "";
 	}
 }

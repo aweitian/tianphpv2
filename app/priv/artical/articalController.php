@@ -546,7 +546,7 @@ class articalController extends privController{
 	
 	public function editAction(pmcaiMsg $msg){
 		if($msg->isPost()){
-			if(!isset($msg["sid"],$msg["title"],$msg["content"],$msg["date"])){
+			if(!isset($msg["kw"],$msg["desc"],$msg["thumb"],$msg["sid"],$msg["title"],$msg["content"],$msg["date"])){
 				$this->response->_404();
 			}
 			if(!isset($msg["diid"])){
@@ -561,12 +561,12 @@ class articalController extends privController{
 			if(!isset($msg["tags"])){
 				$msg["tags"] = array();
 			}
-			
+// 			var_dump($msg["tags"]);exit;
 			$this->model->updateTags($msg["sid"], $msg["tags"]);
 			$this->model->con_reldis(array($msg["sid"]), $msg["diid"]);
 			$this->model->con_relsym(array($msg["sid"]), $msg["syid"]);
 			$this->model->con_reldoc(array($msg["sid"]), $msg["doid"]);
-			$retR = $this->model->update($msg["sid"],$msg["title"],$msg["content"],$msg["date"]);
+			$retR = $this->model->update($msg["sid"],$msg["kw"],$msg["desc"],$msg["thumb"],$msg["title"],$msg["content"],$msg["date"]);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
 					$ret_url = $msg["?returl"];
@@ -650,15 +650,24 @@ class articalController extends privController{
 	 */
 	public function addAction(pmcaiMsg $msg){
 		if($msg->isPost()){
-			//2016-5-31 修改，提交参数为title,content,date,diid,syid,doid,tags
-			if(!isset($msg["kw"],$msg["desc"],$msg["thumb"],$msg["title"],$msg["content"],$msg["date"])){
-				$this->response->_404();
+// 			var_dump($_REQUEST);exit;
+			
+			
+			if(isset($_FILES) && isset($_FILES["thumb"]) && $_FILES["thumb"]["error"] == 0) {
+				$ur = uploadFactory::getInstance()->upload();
+				if($ur->info == 1) {
+					$thumb_url = $ur->return["succ"]["thumb"];
+				}
+			}else{
+				$thumb_url = "";
 			}
-			if(!isset($msg["diid"],$msg["syid"],$msg["doid"],$msg["tags"])){
+// 			var_dump($_REQUEST);exit;
+			//2016-5-31 修改，提交参数为title,content,date,diid,syid,doid,tags
+			if(!isset($_REQUEST["kw"],$_REQUEST["desc"],$_REQUEST["title"],$_REQUEST["content"],$_REQUEST["date"])){
 				$this->response->_404();
 			}
 
-			$retR = $this->model->add($msg["kw"],$msg["desc"],$msg["thumb"],$msg["title"],$msg["content"],$msg["date"]);
+			$retR = $this->model->add($_REQUEST["kw"],$_REQUEST["desc"],$thumb_url,$_REQUEST["title"],$_REQUEST["content"],$_REQUEST["date"]);
 			
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
@@ -667,11 +676,18 @@ class articalController extends privController{
 					$ret_url = "";
 				}
 				$aid = $retR->return;
-				$this->model->updateTags($aid, $msg["tags"]);
-				$this->model->con_reldis(array($aid), $msg["diid"]);
-				$this->model->con_relsym(array($aid), $msg["syid"]);
-				$this->model->con_reldoc(array($aid), $msg["doid"]);
-				
+				if(isset($_REQUEST["tags"])) {
+					$this->model->updateTags($aid, $_REQUEST["tags"]);
+				}
+				if(isset($_REQUEST["diid"])) {
+					$this->model->con_reldis(array($aid), $_REQUEST["diid"]);
+				}
+				if(isset($_REQUEST["syid"])) {
+					$this->model->con_relsym(array($aid), $_REQUEST["syid"]);
+				}
+				if(isset($_REQUEST["doid"])) {
+					$this->model->con_reldoc(array($aid), $_REQUEST["doid"]);
+				}
 				$this->view->showAddSucc($this->priv->getUserInfo(),$ret_url);
 			}else{
 				$this->response->showError($retR->info);;

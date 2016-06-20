@@ -11,7 +11,7 @@
  	private $db;
  	public function __construct(){
  		$this->db = new mysqlPdoBase();
- 		$this->sqlManager = new sqlManager("tags");
+ 		$this->sqlManager = new sqlManager("artical_tags");
  	}
  	
  	/**
@@ -31,10 +31,10 @@
  			$hash[$tid] = 0;
  		}
  		//从数据库中抓取AID的IDS
- 		$sql = $this->sqlManager->getSql("/tags/artical/q");
+ 		$sql = $this->sqlManager->getSql("/artical_tags/q");
  		$bnd = array("aid" => $aid);
  		$ret = $this->db->fetchAll($sql, $bnd);
- 		
+// var_dump($ret); 		
  		//从HASH中去除已存在的记录
  		$tAr = array();
  		foreach ($ret as $item){
@@ -55,8 +55,8 @@
  		}else{
  			$len = $len_new;
  		}
-
- 		$sql = $this->sqlManager->getSql("/tags/artical/update");
+// var_dump($old,$new);exit;
+ 		$sql = $this->sqlManager->getSql("/artical_tags/update");
  		for($i=0;$i<$len;$i++){
  			$bnd = array(
  				"aid" => $aid,
@@ -65,9 +65,9 @@
  			);
  			$this->db->exec($sql, $bnd);
  		}
- 		//echo "更新",$len;
+//  		echo "更新",$len;
  		//添加
- 		$sql = $this->sqlManager->getSql("/tags/artical/add");
+ 		$sql = $this->sqlManager->getSql("/artical_tags/add");
  		for($j=$i;$j<$len_new;$j++){
  			$bnd = array(
  				"aid" => $aid,
@@ -75,9 +75,9 @@
  			);
  			$this->db->exec($sql, $bnd);
  		}
- 		//echo "添加",$len_new-$i;
+//  		echo "添加",$len_new-$i;
  		//删除
- 		$sql = $this->sqlManager->getSql("/tags/artical/rm");
+ 		$sql = $this->sqlManager->getSql("/artical_tags/rm");
  		for($j=$i;$j<$len_old;$j++){
  			$bnd = array(
  				"aid" => $aid,
@@ -85,17 +85,18 @@
  			);
  			$this->db->exec($sql, $bnd);
  		}
- 		//echo "删除",$len_old-$i;
+//  		echo "删除",$len_old-$i;
  		return $len + ($len_new-$i) + ($len_old-$i);
  	}
  	/**
  	 *
  	 * @param int $aid
- 	 * @return array int dod
+ 	 * @return array int tid
  	 */
  	public function row($aid){
- 		return $this->db->fetchAll($this->sqlManager->getSql("/tags/all_sys"), array(
- 			"aid" => $aid,
+//  		var_dump($this->sqlManager->getSql("/artical_tags/q"));exit;
+ 		return $this->db->fetchAll($this->sqlManager->getSql("/artical_tags/q"), array(
+ 			"aid" => $aid
  		));
  	}
  }

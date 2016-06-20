@@ -6,4 +6,5 @@
  */
 class privModel extends AppModel{
 
+	
 }
