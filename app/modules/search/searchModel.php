@@ -27,8 +27,7 @@ class searchModel extends AppModel {
 		$xs = new XS(FILE_SYSTEM_ENTRY."/app/modules/search/cnf/search.ini");
 		$data = $xs->search->search("慢性前列腺");
 		//var_dump($data);
-		foreach ($data as $doc)
-		{
+		foreach ($data as $doc) {
 			$subject = $xs->search->highlight($doc->title_fc); // 高亮处理 subject 字段
 			$message = $xs->search->highlight($doc->content_fc); // 高亮处理 message 字段
 			echo $doc->rank() . '. ' . $subject . " [" . $doc->percent() . "%] - ";

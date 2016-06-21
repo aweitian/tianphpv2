@@ -4,6 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
+	return "";
 ?>
 <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
