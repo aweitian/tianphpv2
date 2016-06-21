@@ -657,6 +657,9 @@ class articalController extends privController{
 				$ur = uploadFactory::getInstance()->upload();
 				if($ur->info == 1) {
 					$thumb_url = $ur->return["succ"]["thumb"];
+				}else{
+					var_dump($ur->return);
+					$this->response->showError($ur->return["fail"]["thumb"]);
 				}
 			}else{
 				$thumb_url = "";

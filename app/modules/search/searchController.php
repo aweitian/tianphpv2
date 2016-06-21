@@ -4,6 +4,8 @@
  * Author:Awei.tian
  * Function:
  */
+require_once FILE_SYSTEM_ENTRY."/app/modules/search/searchModel.php";
+require_once FILE_SYSTEM_ENTRY."/app/modules/search/serachView.php";
 class searchController implements IController{
 	/**
 	 * 
@@ -28,6 +30,7 @@ class searchController implements IController{
 	
 	
 	public function welcomeAction(){
+		$this->model->testSearch();
 		echo "welcome";
 	}
 	private function ui(){

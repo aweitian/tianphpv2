@@ -75,7 +75,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     </div>
 					<div class="form-group">
                       <label>缩略图</label>
-                      <input <?php if($ua == "edit"):?>type="text" class="form-control"<?php else:?>type="file"<?php endif?> name="thumb" value="<?php print $def["thumb"]?>"/>
+                      <input <?php if($ua == "edit"):?>type="text" class="form-control"<?php else:?>type="file" accept="image/*"<?php endif?> name="thumb" value="<?php print $def["thumb"]?>"/>
                     </div>
                     <div class="form-group">
                       <label>日期</label>
