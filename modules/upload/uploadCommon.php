@@ -172,7 +172,7 @@ class uploadCommon implements IUpload {
 		if(!is_array($_FILES)){
 			return new rirResult($result,$info);
 		}
-		foreach ($_FILES as $file){
+		foreach ($_FILES as $fk => $file){
 			switch($this->chk($file)){
 				case 2:
 					$return["fail"][] = $file["name"]."文件大小过大";
@@ -202,11 +202,11 @@ class uploadCommon implements IUpload {
 					$tmpName  = $file["tmp_name"];
 					if (function_exists("move_uploaded_file") && @move_uploaded_file($tmpName, $this->Directroy . "/" . $filename)) {
 						@chmod($filename, 0777);
-						$return["succ"][$file["name"]] = HTTP_ENTRY."/uploads/".$this->path."/".$filename;
+						$return["succ"][$fk] = HTTP_ENTRY."/uploads/".$this->path."/".$filename;
 						break;
 					} elseif (@copy($tmpName, $this->Directroy . "/" . $filename)) {
 						@chmod($filename, 0777);
-						$return["succ"][$file["name"]] = HTTP_ENTRY."/uploads/".$this->path."/".$filename;
+						$return["succ"][$fk] = HTTP_ENTRY."/uploads/".$this->path."/".$filename;
 						break;
 					} else {
 						$return["fail"][] = $file["name"]."不能移动临时文件";
