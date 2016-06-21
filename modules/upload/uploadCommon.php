@@ -164,7 +164,7 @@ class uploadCommon implements IUpload {
 	 */
 	public function upload(){
 		$result = 1;
-		$info = "没有上传文件";
+		$info = 0;
 		$return = array(
 			"succ" => array(),
 			"fail" => array()
@@ -185,10 +185,10 @@ class uploadCommon implements IUpload {
 					break;
 				case 5:
 					$error = array(
-							"1" => "上传的文件超过了 php.ini 中 upload_max_filesize 选项限制的值。",
-							"2" => "上传文件的大小超过了 HTML 表单中 MAX_FILE_SIZE 选项指定的值。",
-							"3" => "文件只有部分被上传。",
-							"4" => "没有文件被上传。"
+						"1" => "上传的文件超过了 php.ini 中 upload_max_filesize 选项限制的值。",
+						"2" => "上传文件的大小超过了 HTML 表单中 MAX_FILE_SIZE 选项指定的值。",
+						"3" => "文件只有部分被上传。",
+						"4" => "没有文件被上传。"
 					);
 					$en = $file["error"];
 					if(array_key_exists(strval($en + 1), $error)){
@@ -213,7 +213,8 @@ class uploadCommon implements IUpload {
 					}
 			}
 		}
-		return new rirResult(count($return["succ"]),"上传成功".count($return["succ"])."个",$return);
+		$cnt = count($return["succ"]);
+		return new rirResult($cnt,$cnt,$return);
 	}
 	private function chk($file){
 		if($file["error"] != 0) return 5;
