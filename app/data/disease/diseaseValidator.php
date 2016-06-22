@@ -8,4 +8,7 @@ class diseaseValidator{
 	public static function isValidData($v){
 		return is_string($v) && $v !== "";
 	}
+	public static function isValidKey($v){
+		return preg_match("/^\w+$/", $v);
+	}
 }

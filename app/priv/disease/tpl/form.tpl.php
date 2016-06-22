@@ -11,7 +11,8 @@ if(isset($data["def"]) && !is_null($data["def"])){
 	$ua = "edit";
 }else{
 	$def = array(
-		"data" => ""
+		"data" => "",
+		"key" => ""
 	);
 	$at = "添加";
 	$ua = "add";
@@ -38,6 +39,10 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       <label for="vv"><?php print $meta?></label>
                       <input type="hidden" name="pid" value="<?php print $pid?>">
                       <input required id="vv" type="text" name="data" value="<?php print $def["data"]?>" class="form-control" placeholder="<?php print $meta?>名称">
+                    </div>
+                    <div class="form-group">
+                      <label for="vx">url</label>
+                      <input required id="vx" type="text" name="key" value="<?php print $def["key"]?>" class="form-control" placeholder="网址路径，只能是字母，数字和下划线">
                     </div>
                   </div><!-- /.box-body -->
 

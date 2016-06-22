@@ -35,6 +35,10 @@
 		INSERT INTO `data_attr_data`(`data`, `pid`, `grp`, `metaid`) 
 		VALUES (:data,:pid,1,:metaid)
 	</add>
+	<new_add>
+		INSERT INTO `data_attr_data`(`key`,`data`, `pid`, `grp`, `metaid`) 
+		VALUES (:key,:data,:pid,1,:metaid)
+	</new_add>
 	
 	
 	<removeTreeById>
@@ -46,12 +50,13 @@
 
 	<updateById>
 		UPDATE `data_attr_data` SET 
+		`key`=:key,
 		`data`=:data,`pid`=:pid,`grp`=:grp,`metaid`=:metaid
 		WHERE `sid`=:sid AND `data_attr_data`.`grp` = 1
 	</updateById>
 	
 	<updateData>
-		UPDATE `data_attr_data` SET `data`=:data
+		UPDATE `data_attr_data` SET `key`=:key,`data`=:data
 		WHERE `sid`=:sid
 	</updateData>
 	

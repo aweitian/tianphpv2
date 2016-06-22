@@ -5,11 +5,20 @@
  * Description: 
  */
 define("HTTP_ENTRY",'');
+if(DEBUG_FLAG){
+	error_reporting(E_ALL);
+	ini_set("display_errors","On");
+}else{
+	error_reporting(0);
+	ini_set("display_errors","Off");
+}
+
 require_once FILE_SYSTEM_ENTRY.'/app/AppConst.php';
 require_once FILE_SYSTEM_ENTRY."/lib/db/mysql/mysqlPdoBase.php";
 require_once FILE_SYSTEM_ENTRY."/modules/sqlManager/sqlManager.php";
-require_once FILE_SYSTEM_ENTRY.'/modules/upload/uploadFactory.php';
+require_once FILE_SYSTEM_ENTRY.'/app/uploadFactory.php';
 
+require_once FILE_SYSTEM_ENTRY.'/app/AppUrl.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppCtrl.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppView.php';
@@ -23,13 +32,7 @@ if(false !== strpos(FILE_SYSTEM_ENTRY, "openshift")){
 	require_once FILE_SYSTEM_ENTRY.'/app/runEnvir/default.php';
 }
 
-if(DEBUG_FLAG){
-	error_reporting(E_ALL);
-	ini_set("display_errors","On");
-}else{
-	error_reporting(0);
-	ini_set("display_errors","Off");
-}
+
 
 tian::addExceptionDir(FILE_SYSTEM_ENTRY."/app/exceptions");
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_disease>
+	<tree2table>
+	 	SELECT 
+			`data_attr_data`.`pid` as `pid`,`p_data_attr_data`.`data` as `pd`,
+			`data_attr_data`.`sid` as `mid`,`data_attr_data`.`data` as `md`,
+			`data_attr_data`.`key` as `url`
+		    FROM `data_attr_data`
+		    LEFT JOIN `data_attr_data` `p_data_attr_data` 
+		    	ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+		     WHERE `data_attr_data`.`metaid` = 2 AND `data_attr_data`.`grp` = 1;		
+	</tree2table>
+
+	<!-- 获取DISEASE ROW INFO BY URL KEY -->
+	<row_disease_url>
+		SELECT * FROM `data_attr_data`
+		WHERE 
+		`key` = :key AND
+		`data_attr_data`.`grp` = 1;	
+	</row_disease_url>
+	
+	
+
+</ui_disease>

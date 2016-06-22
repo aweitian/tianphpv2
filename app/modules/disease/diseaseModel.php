@@ -1,7 +1,6 @@
 <?php
-require_once FILE_SYSTEM_ENTRY."/app/data/disease.uiapi.php";
-class mainModel extends AppModel {
-	
+require_once FILE_SYSTEM_ENTRY."/app/data/artical.uiapi.php";
+class diseaseModel extends AppModel {
 	public function __construct() {
 		
 	}
@@ -15,19 +14,11 @@ class mainModel extends AppModel {
 	 * 322  	男性不育	326  	肾虚           		sx 
 	 */
 	public function getDisease() {
-		$api = new diseaseUIApi();
+		$api = new articalUIApi();
 		return $api->getInfo();
 	}
 	
 	
-	public function getDiseaseLv0(){
-		$api = new diseaseApi();
-		return $api->getLv0Infoes();
-	}
-	public function getArtical(){
-		$api = new articalApi();
-		return $api->getList();
-	}
 	
 	
 }

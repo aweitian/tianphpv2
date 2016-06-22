@@ -78,9 +78,10 @@ class diseaseApi{
 		return new rirResult(0,"ok",$data["level"]);
 	}
 	
-	public function edit($sid,$data){
+	public function edit($sid,$key,$data){
 		$sql = $this->sqlManager->getSql("/disease/updateData");
 		$data = array(
+				"key" => $key,
 				"data" => $data,
 				"sid" => $sid,
 		);
@@ -94,9 +95,11 @@ class diseaseApi{
 		}
 		return new rirResult(0,"ok",$ret);
 	}
-	public function add($data,$pid,$metaid){
-		$sql = $this->sqlManager->getSql("/disease/add");
+
+	public function add($key,$data,$pid,$metaid){
+		$sql = $this->sqlManager->getSql("/disease/new_add");
 		$data = array(
+				"key" => $key,
 				"data" => $data,
 				"pid" => $pid,
 				"metaid" => $metaid,

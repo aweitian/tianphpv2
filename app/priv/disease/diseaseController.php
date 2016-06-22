@@ -91,14 +91,17 @@ class diseaseController extends privController{
 	public function editAction(pmcaiMsg $msg){
 		$meta = $this->model->getMeta();
 		if($msg->isPost()){
-			if(!isset($msg["pid"],$msg["data"])){
+			if(!isset($msg["pid"],$msg["key"],$msg["data"])){
 				$this->response->_404();
 			}
 			$sid = intval($msg["pid"]);
 			if(!diseaseValidator::isValidData($msg["data"])){
 				$this->response->showError("invalid data");
 			}
-			$edit_rir = $this->model->edit($sid, $msg["data"]);
+			if(!diseaseValidator::isValidKey($msg["key"])){
+				$this->response->showError("invalid key");
+			}
+			$edit_rir = $this->model->edit($sid, $msg["key"],$msg["data"]);
 			
 			if($edit_rir->isTrue()){
 				if(isset($msg["?returl"])){
@@ -118,10 +121,13 @@ class diseaseController extends privController{
 			}else{
 				$sid = intval($msg["?sid"]);
 				$info = $this->model->row($sid);
+// 				var_dump($info);exit;
 				if(empty($info)){
 					$this->response->_404();
 				}
-				$lvRet = $this->model->getLvBySid($info["metaid"]);
+// 				var_dump($info["metaid"]);exit;
+				$lvRet = $this->model->getLvBySid($info["sid"]);
+// 				var_dump($lvRet);exit;
 				if(!$lvRet->isTrue()){
 					$this->response->_404();
 				}
@@ -136,6 +142,11 @@ class diseaseController extends privController{
 	public function addAction(pmcaiMsg $msg){
 		$meta = $this->model->getMeta();
 		if($msg->isPost()){
+			
+			if (!isset($msg["key"])) {
+				$this->response->showError("require key data of post");
+			}
+			
 			//检查PID的LV合法性
 			if(!isset($msg["pid"])){
 				$pid = 0;
@@ -183,12 +194,15 @@ class diseaseController extends privController{
 			}
 				
 			//validate
+			if(!diseaseValidator::isValidKey($msg["key"])){
+				$this->response->showError("invalid key");
+			}
 			if(!diseaseValidator::isValidData($msg["data"])){
 				$this->response->showError("invalid data");
 			}
 				
 			//insert
-			$ret = $this->model->add($msg["data"], $pid, $metaid);
+			$ret = $this->model->add($msg["key"],$msg["data"], $pid, $metaid);
 			if($ret->isTrue()){
 				if(isset($msg["?returl"])){
 					$ret_url = $msg["?returl"];

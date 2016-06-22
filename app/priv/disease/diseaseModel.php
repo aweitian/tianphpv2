@@ -33,11 +33,11 @@ class diseaseModel extends privModel{
 		return $this->api->getLvBySid($sid);
 	}
 	
-	public function edit($sid,$data){
-		return $this->api->edit($sid, $data);
+	public function edit($sid,$key,$data){
+		return $this->api->edit($sid,$key, $data);
 	}
-	public function add($data,$pid,$metaid){
-		return $this->api->add($data, $pid, $metaid);
+	public function add($key,$data,$pid,$metaid){
+		return $this->api->add($key,$data, $pid, $metaid);
 	}
 	
 	public function getNextMetaIdByGrpLv($lv){

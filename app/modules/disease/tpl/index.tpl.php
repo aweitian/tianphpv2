@@ -1,21 +1,21 @@
 <?php 
 /**
- * @var mainModel;
+ * @var diseaseModel;
  */
 $m = $model;
 // echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
 // var_dump($m->getDisease());
-// var_dump($m->getDiseaseLv0());exit;
+// var_dump($m->getDiseaseLv0());
 
 $tree_dis = array();
 foreach ($m->getDisease() as $item){
 	if(!array_key_exists($item["pid"], $tree_dis)){
 		$tree_dis[$item["pid"]] = array(
-			"text" => $item["pd"],
-			"children" => array()
+				"text" => $item["pd"],
+				"children" => array()
 		);
 	}
-	$tree_dis[$item["pid"]]["children"][$item["mid"]] = array($item["md"],$item["url"]);
+	$tree_dis[$item["pid"]]["children"][$item["mid"]] = $item["md"];
 }
  
 
@@ -54,7 +54,7 @@ foreach ($m->getDisease() as $item){
                 疾病</a></dt>
               <dd class="fr fz13">
               <?php foreach($dis["children"] as $sub_dis):?>
-              <a href="<?php print AppUrl::build("/disease/".$sub_dis[1])?>"><?php print $sub_dis[0]?></a>
+              <a href=""><?php print $sub_dis?></a>
               <?php endforeach;?>
               
               </dd>

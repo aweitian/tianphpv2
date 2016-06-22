@@ -37,6 +37,7 @@ function isEnableAddSub($lv,$maxl){
                     <tr>
                       <th style="width: 10px">#</th>
                       <th><?php print $meta?></th>
+                      <th>URL路径</th>
                       <th width="30%">操作</th>
                     </tr>
                     <?php foreach ($data as $item):?>
@@ -51,6 +52,7 @@ function isEnableAddSub($lv,$maxl){
                       		<?php print $item["data"]?>
                       	<?php endif?>
                       </td>
+                      <td><?php print $item["key"]?></td>
                       <td>
                       	<!-- <i class="fa fa-edit"></i> -->
                       	<?php if(isEnableAddSub($item["level"],$maxl)):?>
