@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctor_ext>
+	<add>
+		INSERT INTO `data_doctor_ext` (
+			`dod`,`dlv`,`start`,`hot`,`love`,`contribution`,`desc`,`spec`
+		) VALUES (
+			:dod,:dlv,:start,:hot,:love,:contribution,:desc,:spec
+		)
+	</add>
+
+	<update>
+		UPDATE `data_doctor_ext` SET 
+		`dlv`=:dlv,`start`=:start,`hot`=:hot,`love`=:love,`contribution`=:contribution,`desc`=:desc,`spec`=:spec
+		 WHERE `dod`=:dod
+	</update>
+
+	<rm>
+		DELETE FROM `data_doctor_ext` WHERE `dod`=:dod
+	</rm>
+	
+	<row>
+		SELECT * FROM `data_doctor_ext` WHERE `dod`=:dod
+	</row>
+	
+	<all>
+		<cnt>SELECT count(`dod`) as `count` FROM `data_doctor_ext` WHERE 1</cnt>
+		<query>
+			SELECT `data_doctor`.`name`,`data_doctor_ext`.*
+			FROM `data_doctor_ext`
+			LEFT JOIN `data_doctor_ext`.`dod` = `data_doctor`.`sid`
+			WHERE 1
+			LIMIT :offset,:length 
+		</query>
+	</all>
+
+
+</doctor_ext>

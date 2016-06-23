@@ -8,7 +8,8 @@
  * 
  * @var pmcaiUrl $url
  */
-$url  = $data["url"];
+$req = new httpRequest();
+$url  = new pmcaiUrl($req->requestUri());
 $pageSize = $data["pageSize"];
 $pageBtnLen = $data["pageBtnLen"];
 $curPageNum = $data["curPageNum"];

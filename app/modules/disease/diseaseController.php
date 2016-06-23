@@ -23,7 +23,12 @@ class diseaseController extends appCtrl implements IActionNotFound{
 		$this->view = new diseaseView();
 	}
 	public function _action_not_found(pmcaiMsg $msg){
-		echo "hi";
+		$action = $msg->getAction();
+		$data = $this->model->getRowByDiskey($action);
+		//echo "hi";
+		if(empty($data)){
+			
+		}
 	}
 	public function welcomeAction(){
 		$this->view->disease($this->model);

@@ -5,6 +5,29 @@
  * Description: 
  */
 $info = $userInfo;
+
+//PMCAI_MSG_CNF_ACTION_DEFAULT
+
+function css_active_action($match_link,$links){
+	$css = " class=\"active\"";
+	$url = privController::$msg->getPmcaiUrl()->getUrl();
+	$mca = explode("?", $url);
+	$mca = substr($mca[0],5);
+	return $match_link == $mca ? $css : "";
+}
+
+// var_dump(privController::$msg->getPmcaiUrl());
+// exit(privController::$msg->getPmcaiUrl()->getUrl());
+
+function css_active_control($links){
+	$css = " active";
+	$url = privController::$msg->getPmcaiUrl()->getUrl();
+	$mca = explode("?", $url);
+	$mca = substr($mca[0],5);
+	return array_key_exists($mca, $links) ? $css : "";
+
+}
+
 ?>
 	<aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
@@ -32,85 +55,111 @@ $info = $userInfo;
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">主控制面板</li>
-            <li class="active treeview">
+            <?php $links = array(
+            		"/disease/import"=>"病种导入",
+            		"/disease"=>"病种管理",
+            		"/symptom/import"=>"症状导入",
+            		"/symptom"=>"症状管理"
+            		
+            )?>
+            <li class="treeview<?php print css_active_control($links)?>">
               <a href="#">
-                <i class="fa fa-stethoscope"></i> <span>病种症状</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="<?php print HTTP_ENTRY?>/priv/disease/import"><i class="fa fa-circle-o"></i> 病种导入</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/disease"><i class="fa fa-circle-o"></i> 病种管理</a></li>
-                <li class="active"><a href="<?php print HTTP_ENTRY?>/priv/symptom/import"><i class="fa fa-circle-o"></i> 症状导入</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/symptom"><i class="fa fa-circle-o"></i> 症状管理</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-plus-square"></i>
-                <span>医生管理</span>
+                <i class="fa fa-database"></i> 
+                <span>病种症状</span> 
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/lv"><i class="fa fa-circle-o"></i> 职位管理</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor"><i class="fa fa-circle-o"></i> 医生列表</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldoc"><i class="fa fa-circle-o"></i> 关联文章</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/rellv"><i class="fa fa-circle-o"></i> 设置职位</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/doctor/revrellv"><i class="fa fa-circle-o"></i> 修改职位</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/appraise"><i class="fa fa-circle-o"></i> 评价医生</a></li>
+              	<?php foreach ($links as $link => $text):?>
+              	<li<?php print css_active_action($link,$links)?>><a href="<?php print AppUrl::build("/priv".$link)?>"><i class="fa fa-circle-o"></i> <?php print $text?></a></li>
+              	<?php endforeach;?>
               </ul>
             </li>
-            <li class="treeview">
+            <?php $links = array(
+            		"/doctor/add"=>"添加医生",
+            		"/doctor"=>"医生列表",
+            		"/doctor/lv"=>"职位管理",
+            		"/doctor/ext"=>"医生信息",
+            		"/doctor/relartical"=>"关联文章",
+            		"/doctor/rellv"=>"设置职位",
+            		"/doctor/revrellv"=>"修改职位",
+            		"/appraise"=>"评价医生",
+            		"/user/add"=>"添加水军",
+            		"/user"=>"用户列表"
+            		
+            )?>
+            <li class="treeview<?php print css_active_control($links)?>">
               <a href="#">
-                <i class="fa fa-user-md"></i>
-                <span>注册用户</span>
+                <i class="fa  fa-user-md"></i>
+                <span>医生/用户管理</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-              	<li><a href="<?php print HTTP_ENTRY?>/priv/user/add"><i class="fa fa-circle-o"></i> 添加水军</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/user"><i class="fa fa-circle-o"></i> 用户列表</a></li>
+               	<?php foreach ($links as $link => $text):?>
+              	<li<?php print css_active_action($link,$links)?>><a href="<?php print AppUrl::build("/priv".$link)?>"><i class="fa fa-circle-o"></i> <?php print $text?></a></li>
+              	<?php endforeach;?>
               </ul>
             </li>
-            <li class="treeview">
+            <?php $links = array(
+				"/artical/add"=>"添加文章",
+				"/artical"=>"文章列表",
+				"/artical/comment"=>"文章评论",
+				"/artical/reldis"=>"未关联病种的文章",
+				"/artical/revreldis"=>"修改已关联的病种",
+				"/artical/reldoc"=>"未关联医生的文章",
+				"/artical/revreldoc"=>"修改已关联的医生",
+				"/tags/add"=>"添加标签",
+				"/tags"=>"标签管理"
+            		
+            )?>
+            <li class="treeview<?php print css_active_control($links)?>">
               <a href="#">
                 <i class="fa fa-book"></i>
                 <span>文章管理</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-              	<li><a href="<?php print HTTP_ENTRY?>/priv/artical/add"><i class="fa fa-circle-o"></i> 添加文章</a></li>
-              	<li><a href="<?php print HTTP_ENTRY?>/priv/artical"><i class="fa fa-circle-o"></i> 文章列表</a></li>
-              	<li><a href="<?php print HTTP_ENTRY?>/priv/artical/comment"><i class="fa fa-circle-o"></i> 文章评论</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldis"><i class="fa fa-circle-o"></i> 未关联病种的文章</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/revreldis"><i class="fa fa-circle-o"></i> 修改已关联的病种</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/reldoc"><i class="fa fa-circle-o"></i> 未关联医生的文章</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/artical/revreldoc"><i class="fa fa-circle-o"></i> 修改已关联的医生</a></li>
+              	<?php foreach ($links as $link => $text):?>
+              	<li<?php print css_active_action($link,$links)?>><a href="<?php print AppUrl::build("/priv".$link)?>"><i class="fa fa-circle-o"></i> <?php print $text?></a></li>
+              	<?php endforeach;?>
               </ul>
             </li>
-            <li class="treeview">
+             <?php $links = array(
+				"/ask/usr"=>"选择用户提问",
+				"/ask/usrec"=>"用户提问记录",
+				"/ask/doc"=>"医生的问题"
+            		
+            )?>
+            <li class="treeview<?php print css_active_control($links)?>">
               <a href="#">
                 <i class="fa fa-question"></i>
                 <span>问答模块</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php print HTTP_ENTRY?>/priv/ask/usr"><i class="fa fa-circle-o"></i> 选择用户提问</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/ask/usrec"><i class="fa fa-circle-o"></i> 用户提问记录</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/ask/doc"><i class="fa fa-circle-o"></i> 医生的问题</a></li>
+                <?php foreach ($links as $link => $text):?>
+              	<li<?php print css_active_action($link,$links)?>><a href="<?php print AppUrl::build("/priv".$link)?>"><i class="fa fa-circle-o"></i> <?php print $text?></a></li>
+              	<?php endforeach;?>
               </ul>
             </li>
-            <li class="treeview">
+            <?php $links = array(
+				"/present/add"=>"添加礼物",
+				"/present"=>"礼物列表",
+				"/letter/add"=>"添加感谢信",
+				"/letter"=>"感谢信列表",
+            )?>
+            
+            <li class="treeview<?php print css_active_control($links)?>">
               <a href="#">
                 <i class="fa fa-gift"></i>
                 <span>礼物感谢信</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php print HTTP_ENTRY?>/priv/present/add"><i class="fa fa-circle-o"></i> 添加礼物</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/present"><i class="fa fa-circle-o"></i> 礼物列表</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/letter/add"><i class="fa fa-circle-o"></i> 添加感谢信</a></li>
-                <li><a href="<?php print HTTP_ENTRY?>/priv/letter"><i class="fa fa-circle-o"></i> 感谢信列表</a></li>
+              	<?php foreach ($links as $link => $text):?>
+              	<li<?php print css_active_action($link,$links)?>><a href="<?php print AppUrl::build("/priv".$link)?>"><i class="fa fa-circle-o"></i> <?php print $text?></a></li>
+              	<?php endforeach;?>  
               </ul>
             </li>
-           
           </ul>
         </section>
         <!-- /.sidebar -->

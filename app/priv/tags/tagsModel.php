@@ -1,6 +1,7 @@
 <?php
 /**
  * Date: 2016-06-18
+ * Author: Sihangzhang
  * Author: Awei.tian
  * Description: 
  */
@@ -21,7 +22,11 @@ class tagsModel extends privModel{
 		return $this->api->getAll();
 	}
 	
-	public function rm($sid){
+	public function row($sid){
+		return $this->api->row($sid);
+	}
+	
+	public function remove($sid){
 		return $this->api->rm($sid);
 	}
 	

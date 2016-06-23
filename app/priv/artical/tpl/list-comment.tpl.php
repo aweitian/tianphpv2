@@ -10,7 +10,8 @@ $q  = $data["q"];
  * 
  * @var pmcaiUrl $url
  */
-$url  = $data["url"];
+$req = new httpRequest();
+$url  = new pmcaiUrl($req->requestUri());
 $cnt  = $data["ori"]->info;
 $pageSize = $data["pageSize"];
 $pageBtnLen = $data["pageBtnLen"];

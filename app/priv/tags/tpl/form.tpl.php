@@ -34,7 +34,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                   <h3 class="box-title"><?php print $at?>标签</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/letter/<?php print $ua;?><?php print $ret_url?>">
+                  <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/tags/<?php print $ua;?><?php print $ret_url?>">
                     <?php if(isset($_REQUEST["sid"])):?>
                     
                     <input type="hidden" value="<?php print $_REQUEST["sid"]?>" name="sid">

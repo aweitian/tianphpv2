@@ -7,6 +7,16 @@
 require_once FILE_SYSTEM_ENTRY."/modules/priv/priv.php";
 class privController extends Controller{
 	/**
+	 *
+	 * @var pmcaiMsg
+	 */
+	public static $msg;
+	/**
+	 *
+	 * @var identityToken
+	 */
+	public static $identityToken;
+	/**
 	 * 
 	 * @var httpResponse
 	 */
@@ -17,6 +27,13 @@ class privController extends Controller{
 	 * @var priv
 	 */
 	protected $priv;
+	
+	public static function _checkPrivilege(pmcaiMsg $msg,identityToken $identityToken){
+		privController::$msg = $msg;
+		privController::$identityToken = $identityToken;
+		return parent::_checkPrivilege($msg, $identityToken);
+	}
+	
 	protected function initHttpResponse(){
 		$this->response = new httpResponse();
 	}

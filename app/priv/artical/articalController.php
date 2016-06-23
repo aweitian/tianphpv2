@@ -27,6 +27,9 @@ class articalController extends privController{
 		$this->initHttpResponse();
 	}
 	public function welcomeAction(pmcaiMsg $msg){
+		
+		
+		
 		$length = 10;//每页显示多少行
 		
 		if (isset($msg["?page"])){

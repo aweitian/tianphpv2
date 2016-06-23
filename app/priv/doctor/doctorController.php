@@ -120,19 +120,15 @@ class doctorController extends privController{
 		$data = $this->model->q_relart($offset,$length);
 	
 		if($data->isTrue()){
-				
-			// 			var_dump($data->return);exit;
-				
 			$this->view->setPmcaiMsg($msg);
-				
 			$this->view->showListForRellv(
-					$msg->getPmcaiUrl(),
-					$this->priv->getUserInfo(),
-					$data->return,
-					$this->model->doctor_lv_all()->return,
-					$page,
-					$length,
-					$msg["?q"]
+				$msg->getPmcaiUrl(),
+				$this->priv->getUserInfo(),
+				$data->return,
+				$this->model->doctor_lv_all()->return,
+				$page,
+				$length,
+				$msg["?q"]
 			);
 		}else{
 			echo $data->info;exit;
@@ -141,11 +137,12 @@ class doctorController extends privController{
 	}
 	
 	public function relarticalAction(pmcaiMsg $msg){
-		$this->view->setPmcaiMsg($msg);
-		$this->view->showRelArtical(
-			$this->priv->getUserInfo(),
-			$this->model->getCacheDisease()
-		);
+		$this->response->go("/priv/artical/reldoc");
+// 		$this->view->setPmcaiMsg($msg);
+// 		$this->view->showRelArtical(
+// 			$this->priv->getUserInfo(),
+// 			$this->model->getCacheDisease()
+// 		);
 	}
 	
 	
@@ -257,30 +254,7 @@ class doctorController extends privController{
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public function forceresetpwdAction(pmcaiMsg $msg){
 	
 		if($msg->isPost()){

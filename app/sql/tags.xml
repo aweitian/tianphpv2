@@ -15,6 +15,9 @@
 			`text`=:text
 		 WHERE `sid`=:sid AND `sys` = 'n'
 	</update>
+	<row>
+		SELECT * FROM `data_tags` WHERE `sid`=:sid
+	</row>
 	<all>
 		SELECT 
 			`sid`,`text`,`sys`

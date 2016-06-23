@@ -5,8 +5,8 @@
  * Desc:
  * 		
  */
- class labelValidator{
- 	public static function isValidLabel($label){
+ class tagsValidator{
+ 	public static function isValidTags($label){
  		return is_string($label) && $label !== "";
  	}
  }

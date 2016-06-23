@@ -1,6 +1,7 @@
 <?php
 /**
  * Date: 2016-06-18
+ * Author: Sihangzhang
  * Author: Awei.tian
  * Description: 
  */
@@ -25,14 +26,30 @@ class tagsController extends privController{
 		$this->initHttpResponse();
 	}
 	public function welcomeAction(pmcaiMsg $msg){
-		echo "tags";
+		//echo "tags";
+		//var_dump($this->model->getAll());
+
+
+		$data = $this->model->getAll();
+		if($data->isTrue()){
+			$this->view->setPmcaiMsg($msg);
+			$this->view->showList(
+					
+					$this->priv->getUserInfo(),
+					$data->return
+					
+			);
+		}else{
+			$this->response->showError($retR->info);;
+		}
 	}
+	
 	public function addAction(pmcaiMsg $msg){
 		if($msg->isPost()){
-			if(!isset($msg["uid"],$msg["dod"],$msg["did"],$msg["content"],$msg["date"])){
+			if(!isset($msg["text"])){
 				$this->response->_404();
 			}
-			$retR = $this->model->add($msg["uid"],$msg["dod"],$msg["did"],$msg["content"],$msg["date"]);
+			$retR = $this->model->add($msg["text"]);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
 					$ret_url = $msg["?returl"];
@@ -45,12 +62,54 @@ class tagsController extends privController{
 			}
 		}else{
 			
-			$usr = $this->model->getWaterArm();
-			$doc = $this->model->getInfo_doctor();
-			$dis = $this->model->getDisLv0();
+// 			$usr = $this->model->getWaterArm();
+// 			$doc = $this->model->getInfo_doctor();
+// 			$dis = $this->model->getDisLv0();
 				
 			$this->view->setPmcaiMsg($msg);
-			$this->view->showForm($this->priv->getUserInfo(),$usr,$doc,$dis);
+			$this->view->showForm($this->priv->getUserInfo());
 		}
+	}
+	
+	public function rmAction(pmcaiMsg $msg){
+		$ret_url = $_SERVER["HTTP_REFERER"];
+		if(!isset($msg["?sid"])){
+			$this->response->_404();
+		}
+		$this->model->remove(intval($msg["?sid"]));
+		$this->response->redirect($ret_url);
+	}
+	
+	public function editAction(pmcaiMsg $msg){
+		if($msg->isPost()){
+	
+			if(!isset($msg["sid"],$msg["text"])){
+				$this->response->_404();
+			}
+			$retR = $this->model->update($msg["sid"],$msg["text"]);
+			if($retR->isTrue()){
+				if(isset($msg["?returl"])){
+					$url = new pmcaiUrl($msg["?returl"]);
+					$url->setQuery("from", "edit");
+					$ret_url = $url->getUrl();
+				}else{
+					$ret_url = "";
+				}
+				$this->view->showOpSucc($this->priv->getUserInfo(),"更新",$ret_url);
+			}else{
+				$this->response->showError($retR->info);;
+			}
+		}else{
+			if(!isset($msg["?sid"])){
+				$this->response->_404();
+			}
+			$this->view->setPmcaiMsg($msg);
+			$rowR = $this->model->row(intval($msg["?sid"]));
+			if(!$rowR->isTrue()){
+				$this->response->_404();
+			}
+			$this->view->showForm($this->priv->getUserInfo(),$rowR->return);
+		}
+	
 	}
 }
