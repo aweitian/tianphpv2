@@ -4,11 +4,11 @@
  * Author: Awei.tian
  * Description: 
  */
-class hook404 implements IControlNotFound{
+class hookControllerNotFound implements IControlNotFound{
 	public function __construct(){
 
 	}
-	public function hook404(pmcaiMsg $msg){
+	public function _control_not_found(pmcaiMsg $msg){
 		$rep = new httpResponse();
 		$rep->_404();
 	}

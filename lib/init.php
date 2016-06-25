@@ -46,7 +46,7 @@ defined("PMCAI_MSG_CNF_ACTION_DEFAULT")
 #PMCAI DISPATCHER CONF
 defined("PMCAI_DISPATCHER_CNF_CONTROL_NOT_FOUND") 
 	or define("PMCAI_DISPATCHER_CNF_CONTROL_NOT_FOUND",
-	"hook404");/*这是一个类名,需要手动加载,要实现iControlNotFound接口*/
+	"hookControllerNotFound");/*这是一个类名,需要手动加载,要实现iControlNotFound接口*/
 defined("PMCAI_DISPATCHER_CNF_DEFAULT_MODULE_LOCATION") 
 	or define("PMCAI_DISPATCHER_CNF_DEFAULT_MODULE_LOCATION",FILE_SYSTEM_ENTRY."/app/modules");
 defined("PMCAI_DISPATCHER_CNF_ACTION_SUFFIX") 

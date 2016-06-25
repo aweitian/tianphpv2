@@ -9,5 +9,5 @@ interface IControlNotFound{
 	 * 
 	 * @param string $url requesturi
 	 */
-	function hook404(pmcaiMsg $msg);
+	function _control_not_found(pmcaiMsg $msg);
 }

@@ -308,7 +308,7 @@ class pmcaiDispatcher implements IDispatcher{
 		if ($rc->implementsInterface('IControlNotFound')) {
 			$this->traces[] = "dispatching://control name $control implements icontroller interface";
 			$controller = $rc->newInstance();
-			$method=$rc->getMethod("hook404");
+			$method=$rc->getMethod("_control_not_found");
 			$method->invokeArgs($controller, array($this->msg));
 			$this->ok();
 			$this->traces[] = "dispatching://invoke the hook404,dispatch end";
