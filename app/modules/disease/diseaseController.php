@@ -21,13 +21,19 @@ class diseaseController extends appCtrl implements IActionNotFound{
 	public function __construct(){
 		$this->model = new diseaseModel();
 		$this->view = new diseaseView();
+		$this->initHttpResponse();
 	}
 	public function _action_not_found(pmcaiMsg $msg){
 		$action = $msg->getAction();
 		$data = $this->model->getRowByDiskey($action);
 		//echo "hi";
 		if(empty($data)){
+			$this->response->_404();
+		}else{
+			//病种ID
+			$did = $data["sid"];
 			
+			var_dump($this->model->getArticalTag7ByDid($data["sid"]));
 		}
 	}
 	public function welcomeAction(){

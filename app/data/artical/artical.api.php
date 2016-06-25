@@ -61,6 +61,32 @@ require_once dirname(__FILE__)."/artical_validator.php";
  			"count" => $cnt
  		));
  	}
+ 	
+ 	
+ 	/**
+ 	 *
+ 	 * @param string $q
+ 	 * @param int $offset
+ 	 * @param int $len
+ 	 * @return array
+ 	 */
+ 	public function choose($q,$offset,$len){
+ 		$cnt = $this->db->fetch($this->sqlManager->getSql("/sql/query_count"), array(
+ 				"q" => $q
+ 		));
+ 		$cnt = $cnt["count"];
+ 		$ret = $this->db->fetchAll($this->sqlManager->getSql("/sql/query_choose"), array(
+ 				"q" => $q,
+ 				"offset" => $offset,
+ 				"length" => $len
+ 		));
+ 		return array(
+ 				"data" => $ret,
+ 				"count" => $cnt
+ 		);
+ 	}
+ 	
+ 	
  	/**
  	 * return => array(data=>array(),count=>int)
  	 * @param number $offset

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <sql>
+	<!-- 操作META 和 连接医生 -->
 	<all>
 		SELECT * FROM `data_doctor_lv_meta` WHERE 1
 	</all>
@@ -17,6 +18,9 @@
 	</remove>
 	
 	<lv>
+		<row>
+			SELECT * FROM `data_doctor_ext` WHERE `dod` = :dod
+		</row>
 		<add>
 			INSERT INTO `data_doctor_ext` (
 				`dod`,`dlv`
@@ -31,6 +35,37 @@
 		</update>
 	
 	</lv>
-	
-	
+	<homeless>
+		<count>
+			SELECT COUNT(`data_doctor`.`sid`) as `count`
+			FROM `data_doctor`
+			WHERE
+			`data_doctor`.`sid`
+			NOT IN (SELECT `dod` FROM `data_doctor_ext`)
+		</count>
+		<query>
+			SELECT 
+			`data_doctor`.`sid`,`data_doctor`.`name`,
+			`data_doctor`.`avatar`,`data_doctor`.`date`
+			
+			FROM `data_doctor`
+			WHERE
+			`data_doctor`.`sid`
+			NOT IN (SELECT `dod` FROM `data_doctor_ext`)
+
+			LIMIT :offset,:length 
+		</query>
+	</homeless>
+	<query_infoLv>
+		SELECT 
+			`data_doctor`.`sid` AS `dod`,
+			`data_doctor`.`name` AS `name`,
+			`data_doctor_lv_meta`.`sid` AS `dmd`,
+			`data_doctor_lv_meta`.`data` AS `lv`
+		FROM `data_doctor`
+		LEFT JOIN `data_doctor_ext`
+			ON `data_doctor_ext`.`dod` = `data_doctor`.`sid`
+		LEFT JOIN `data_doctor_lv_meta`
+			ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`	
+	</query_infoLv>
 </sql>

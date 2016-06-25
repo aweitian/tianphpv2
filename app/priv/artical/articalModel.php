@@ -16,6 +16,7 @@ require_once FILE_SYSTEM_ENTRY."/app/data/artical_doctor/artical_doctor.api.php"
 require_once FILE_SYSTEM_ENTRY."/app/data/artical_tags/artical_tags.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/tags/tags.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/comment/comment.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/doctor_lv/doctor_lv.api.php";
 
 class articalModel extends privModel{
 	public function __construct(){
@@ -30,8 +31,8 @@ class articalModel extends privModel{
 		return $api->row($sid);
 	}
 	public function getCacheDoctor(){
-		$api = new doctorApi();
-		return $api->getInfoLv();
+		$api = new doctorLvApi();
+		return $api->getLvInfo();
 	}
 	public function getCacheDisease(){
 		$api = new diseaseApi();

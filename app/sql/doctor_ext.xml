@@ -25,11 +25,10 @@
 	<all>
 		<cnt>SELECT count(`dod`) as `count` FROM `data_doctor_ext` WHERE 1</cnt>
 		<query>
-			SELECT `data_doctor`.`name`,`data_doctor_ext`.*
-			FROM `data_doctor_ext`
-			LEFT JOIN `data_doctor_ext`.`dod` = `data_doctor`.`sid`
-			WHERE 1
-			LIMIT :offset,:length 
+			SELECT `data_doctor`.`name`,`data_doctor_ext`.* 
+			FROM `data_doctor_ext` 
+			LEFT JOIN `data_doctor` ON `data_doctor_ext`.`dod` = `data_doctor`.`sid` 
+			WHERE 1 LIMIT :offset,:length
 		</query>
 	</all>
 

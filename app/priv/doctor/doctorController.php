@@ -4,13 +4,9 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/doctor/doctorModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/doctor/doctorView.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/doctor/doctor_lv_validator.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/doctor/doctorValidator.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/doctor/doctorFilter.php';
 class doctorController extends privController{
 	/**
 	 * 
@@ -254,7 +250,50 @@ class doctorController extends privController{
 		}
 	}
 	
+	
+	public function extAction(pmcaiMsg $msg){
+		
+		$length = 10;//每页显示多少行
+		if(isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		$offset = ($page - 1) * $length;
+		$this->view->setPmcaiMsg($msg);
+		$this->view->showExtList($this->priv->getUserInfo(),$this->model->ext_getAll($offset, $length),$page,$length,$msg["?q"]);
+	}
 
+	public function AddExtAction(pmcaiMsg $msg){
+		if($msg->isPost()){
+			if(!isset($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"])){
+				$this->response->_404();
+			}
+			$retR = $this->model->ext_add($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"]);
+			if($retR->isTrue()){
+				if(isset($msg["?returl"])){
+					$url = new pmcaiUrl($msg["?returl"]);
+					$url->setQuery("from", "add");
+					$ret_url = $url->getUrl();
+				}else{
+					$ret_url = "";
+				}
+	
+				$this->view->showOpSucc($this->priv->getUserInfo(),"添加",$ret_url);
+			}else{
+				$this->response->showError($retR->info);
+			}
+		}else{
+			$this->view->setPmcaiMsg($msg);
+			$this->view->showExdForm($this->priv->getUserInfo());
+		}
+	}
+	
+	
+	
 	public function forceresetpwdAction(pmcaiMsg $msg){
 	
 		if($msg->isPost()){

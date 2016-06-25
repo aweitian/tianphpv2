@@ -4,6 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
+require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 class doctorView extends privView{
 	
 	
@@ -66,5 +67,23 @@ class doctorView extends privView{
 			"err" => $err,
 		));
 		$this->priv_wrap($userinfo, $content)->show();
+	}
+	public function showExtList($userinfo,$data,$page,$length,$q){
+		$msg = array();
+		$msg["count"] = $data->info;
+		$msg["data"] = $data->return;
+		$msg["q"] = $q;
+		$msg["pageSize"] = $length;
+		$msg["pageBtnLen"] = 5;
+		$msg["curPageNum"] = $page;
+		$content = $this->fetch("extlist",$msg);
+		$this->priv_wrap($userinfo, $content)->show();
+	}
+	public function showExdForm($userInfo,$def=null){
+		$this->priv_wrap($userInfo, $this->fetch(
+				"extform",array(
+						"def" => $def
+				)
+		))->show();
 	}
 }

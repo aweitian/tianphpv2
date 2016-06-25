@@ -23,5 +23,16 @@ class diseaseModel extends AppModel {
 		return $api->getRowByDiskey($urlkey);
 	}
 	
-	
+	/**
+	 * 根据病种ID获取疾病知识的文章
+	 * 最多只返回一篇
+	 * sid  thumb                              title   desc    
+	 * 30  /uploads/user/201606211043371.png  tald    sdalfkwe
+	 * @param int $did
+	 * @return array fetch
+	 */
+	public function getArticalTag7ByDid($did){
+		$api = new diseaseUIApi();
+		return $api->getArticalTag7ByDid($did);
+	}
 }
