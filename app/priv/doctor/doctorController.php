@@ -267,7 +267,7 @@ class doctorController extends privController{
 		$this->view->showExtList($this->priv->getUserInfo(),$this->model->ext_getAll($offset, $length),$page,$length,$msg["?q"]);
 	}
 
-	public function AddExtAction(pmcaiMsg $msg){
+	public function addextAction(pmcaiMsg $msg){
 		if($msg->isPost()){
 			if(!isset($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"])){
 				$this->response->_404();
@@ -287,11 +287,65 @@ class doctorController extends privController{
 				$this->response->showError($retR->info);
 			}
 		}else{
+// 			var_dump($this->model->doctor_lv_all());exit;
 			$this->view->setPmcaiMsg($msg);
-			$this->view->showExdForm($this->priv->getUserInfo());
+			$this->view->showExdForm(
+					$this->priv->getUserInfo(),
+					$this->model->getNoExtInfo(),
+					$this->model->doctor_lv_all()->return
+			);
 		}
 	}
 	
+	
+	
+	public function rmextAction(pmcaiMsg $msg){
+		$ret_url = $_SERVER["HTTP_REFERER"];
+		if(!isset($msg["?sid"])){
+			$this->response->_404();
+		}
+		$this->model->ext_remove(intval($msg["?sid"]));
+		$this->response->redirect($ret_url);
+	}
+	
+	
+	
+	public function editextAction(pmcaiMsg $msg){
+		if($msg->isPost()){
+	
+			if(!isset($msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"])){
+				$this->response->_404();
+			}
+			$retR = $this->model->update($msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"]);
+			if($retR->isTrue()){
+				if(isset($msg["?returl"])){
+					$url = new pmcaiUrl($msg["?returl"]);
+// 					$url->setQuery("from", "edit");
+					$ret_url = $url->getUrl();
+				}else{
+					$ret_url = "";
+				}
+				$this->view->showOpSucc($this->priv->getUserInfo(),"更新",$ret_url);
+			}else{
+				$this->response->showError($retR->info);;
+			}
+		}else{
+			if(!isset($msg["?sid"])){
+				$this->response->_404();
+			}
+			$this->view->setPmcaiMsg($msg);
+			$rowR = $this->model->ext_row(intval($msg["?sid"]));
+// 			var_dump($rowR->return);exit;
+			if(!$rowR->isTrue()){
+				$this->response->_404();
+			}
+			$this->view->showForm($this->priv->getUserInfo(),$rowR->return);
+		}
+	
+	}
+	
+	
+
 	
 	
 	public function forceresetpwdAction(pmcaiMsg $msg){
@@ -369,4 +423,6 @@ class doctorController extends privController{
 		$this->view->setPmcaiMsg($msg);
 		$this->view->showDoctorLvList($this->priv->getUserInfo(), $dataRet->return,$msg["?err"]);
 	}
+	
+
 }

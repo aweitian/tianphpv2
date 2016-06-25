@@ -25,12 +25,29 @@
 	<all>
 		<cnt>SELECT count(`dod`) as `count` FROM `data_doctor_ext` WHERE 1</cnt>
 		<query>
-			SELECT `data_doctor`.`name`,`data_doctor_ext`.* 
+			SELECT 
+			`data_doctor`.`name`,
+			`data_doctor_lv_meta`.`data` AS lv,
+			`data_doctor_ext`.`dod`,
+			`data_doctor_ext`.`start`,
+			`data_doctor_ext`.`hot`,
+			`data_doctor_ext`.`love`,
+			`data_doctor_ext`.`contribution`,
+			`data_doctor_ext`.`desc`,
+			`data_doctor_ext`.`spec`
+			
 			FROM `data_doctor_ext` 
 			LEFT JOIN `data_doctor` ON `data_doctor_ext`.`dod` = `data_doctor`.`sid` 
+			LEFT JOIN `data_doctor_lv_meta` ON `data_doctor_ext`.`dlv` = `data_doctor_lv_meta`.`sid`
+			
 			WHERE 1 LIMIT :offset,:length
 		</query>
 	</all>
 
-
+	<!-- 获取没有补充信息的医生 -->
+	<noextinfo>
+		SELECT `data_doctor`.`sid`,`data_doctor`.`name`
+		FROM `data_doctor` WHERE `data_doctor`.`sid` 
+		NOT IN (SELECT `data_doctor_ext`.`dod` FROM `data_doctor_ext`)
+	</noextinfo>
 </doctor_ext>

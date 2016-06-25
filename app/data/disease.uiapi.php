@@ -1,6 +1,6 @@
 <?php
 /**
- * 前台TPL文件调用文章模块接口类
+ * 前台TPL文件调用疾病信息接口类
  * @author awei.tian
  * @date   2016-6-27
  */
@@ -53,25 +53,5 @@ class diseaseUIApi {
 			"did" => $did
 		));
 	}
-	
-	/**
-	 * 按病种ID倒序排列
-	 * 根据病种Id获取问答和回答(医生回答最多只获取一条)
-	 *    sid  title   date                    dod  avatar   name       id      content  
-	 *    ------  ------  -------------------  ------  -------  ---------  ------  ---------
-	 *    2  ccc     2016-05-24 00:00:00       1  lml.jpg  李美龙        lml     dddd  
-	 * @param int $did 病种ID
-	 * @param int $limit (最多返回多少条)
-	 * @return array fetchAll
-	 */
-	public function getAskByDid($did,$limit=4){
-		$sql = $this->sqlManager->getSql("/ui_disease/getAskAnswerByDid");
-		return $this->db->fetchAll($sql, array(
-			"did" => $did,
-			"length" => $limit
-		));
-	}
-	
-	
 	
 }

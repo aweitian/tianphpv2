@@ -50,13 +50,14 @@ for ($i = 0; $i < 6; $i++) {
                    
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                <a class="btn bg-olive btn-flat margin" href="<?php print HTTP_ENTRY?>/priv/doctor/add">
-                	 <i class="fa fa-plus"></i> 添加医生
+                <a class="btn bg-olive btn-flat margin" href="<?php print HTTP_ENTRY?>/priv/doctor/addext">
+                	 <i class="fa fa-plus"></i> 补充医生信息
                 	 </a>
                   <table class="table table-bordered">
                     <tr>
                      
                       <th>医生ID</th>
+                      <th>医生姓名</th>
                       <th>等级</th>
                       <th>服务星星</th>
                       <th>推荐热度</th>
@@ -69,7 +70,8 @@ for ($i = 0; $i < 6; $i++) {
                     <?php foreach ($data as $item):?>
                     <tr>
                       <td><?php print $item["dod"]?></td>
-                      <td><?php print $item["dlv"]?></td>
+                      <td><?php print $item["name"]?></td>
+                      <td><?php print $item["lv"]?></td>
                       <td><?php print $item["start"]?></td>
                        <td><?php print $item["hot"]?></td>
                       <td><?php print $item["love"]?></td>
@@ -81,21 +83,27 @@ for ($i = 0; $i < 6; $i++) {
                       
                       <td>
                       	<!-- <i class="fa fa-edit"></i> -->
-                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/doctor/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
-                        <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/doctor/rm?sid=<?php print $item["sid"]?>">删除</a>
-                     
+                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/doctor/editext?sid=<?php print $item["dod"]?>"> 编辑</a>
+                        <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/doctor/rmext?sid=<?php print $item["dod"]?>">删除</a>
                       </td>
                     </tr>
-                    
-                    
+
                     <?php endforeach;?>
-                    
-                    
+ 
                   </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
  
- 
+ <script>
+
+
+
+$(".btn-danger").click(function(){
+	return confirm("Sihangzhang友情提醒:是否要删除？");
+});
+
+
+</script>
  
                   <div class="box-tools">
                     <ul class="pagination pagination-sm no-margin pull-right">
@@ -112,22 +120,11 @@ for ($i = 0; $i < 6; $i++) {
                     </ul>
                   </div>
  
- 
- 
- 
- 
                 </div>
               </div><!-- /.box -->
 
 
 </section>
-
-
-
-
-
-
-
 
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
@@ -161,29 +158,6 @@ for ($i = 0; $i < 6; $i++) {
       </div><!-- /.modal-content -->
 </div><!-- /.modal -->
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <style>
 <!--

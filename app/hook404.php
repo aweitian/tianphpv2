@@ -9,7 +9,9 @@ class hook404 implements IControlNotFound{
 
 	}
 	public function hook404(pmcaiMsg $msg){
-		$rep = new httpResponse();
-		$rep->_404();
+		//$rep = new httpResponse();
+		//$rep->_404();
+		echo $msg->getControl(),"<br>";
+		echo $msg->getAction();
 	}
 }

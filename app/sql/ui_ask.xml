@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_ask>
+	<!-- 根据病种Id获取问答和回答(医生回答最多只获取一条) -->
+	<getAskAnswerByDid>
+		<ask>
+			SELECT 
+				`data_ask`.`sid`,
+				`data_ask`.`title`,
+				`data_ask`.`date`,
+				`data_ask`.`dod`
+				FROM `data_ask`
+				WHERE `data_ask`.`did` = :did
+				ORDER BY `data_ask`.`sid` DESC
+			LIMIT 0,:length
+		</ask>
+		
+		<answer>
+			SELECT 
+				`data_ask_append`.`content`
+				FROM `data_ask_append`
+				WHERE `data_ask_append`.`askid` = :askid
+				AND `data_ask_append`.`role` = 'doctor'
+				LIMIT 0,1
+		</answer>
+		
+		
+		<!-- 
+		SELECT 
+		`data_ask`.`sid`,
+		`data_ask`.`title`,
+		`data_ask`.`date`,
+		`data_ask`.`dod`,
+		`data_doctor`.`avatar`,
+		`data_doctor`.`name`,
+		`data_doctor`.`id`,
+		`data_ask_append`.`content`
+		FROM `data_ask`
+		LEFT JOIN `data_ask_append` ON `data_ask_append`.`askid` = `data_ask`.`sid`
+		LEFT JOIN `data_doctor` ON `data_doctor`.`sid` = `data_ask`.`dod`
+		WHERE `data_ask`.`did` = :did
+		AND `data_ask_append`.`role` = 'doctor'
+		GROUP BY `data_ask`.`sid`
+		ORDER BY `data_ask`.`sid` DESC
+		LIMIT 0,:length
+		-->
+		
+	</getAskAnswerByDid>
+
+</ui_ask>

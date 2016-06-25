@@ -11,8 +11,15 @@ class doctorExtApi {
 	
 	public function row($sid){
 		$sql = $this->sqlManager->getSql("/doctor_ext/row");
-		$bnd = array("sid" => $sid);
-		return $this->db->fetch($sql, $bnd);
+		$bnd = array("dod" => $sid);
+		$ret = $this->db->fetch($sql, $bnd);
+// 		var_dump($sql,$bnd);exit;
+		if(!empty($ret)){
+			if($this->db->hasError()){
+				return new rirResult(9,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
 	}
 	
 	/**
@@ -129,7 +136,7 @@ class doctorExtApi {
 	
 	public function remove($sid){
 		$ret = $this->db->exec($this->sqlManager->getSql("/doctor_ext/rm"), array(
-				"sid" => $sid,
+				"dod" => $sid,
 		));
 		if($ret == 0){
 			if($this->db->hasError()){
@@ -154,5 +161,9 @@ class doctorExtApi {
 		return new rirResult(0,$cnt,$data);
 	}
 	
+	public function getNoExtInfo() {
+		$sql = $this->sqlManager->getSql("/doctor_ext/noextinfo");
+		return $this->db->fetchAll($sql, array());
+	}
 	
 }

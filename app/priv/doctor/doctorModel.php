@@ -52,6 +52,16 @@ class doctorModel extends privModel{
 		return $api->getInfo();
 	}
 	
+	/**
+	 * 获取没有补充信息的医生
+	 * sid  name       
+	 * ------  -----------
+     * 1  李美龙  
+	 */
+	public function getNoExtInfo(){
+		$api = new doctorExtApi();
+		return $api->getNoExtInfo();
+	}
 	
 	/**
 	 *

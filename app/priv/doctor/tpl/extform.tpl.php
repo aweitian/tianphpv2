@@ -29,8 +29,9 @@ if(isset($_SERVER['HTTP_REFERER'])){
 }else{
 	$ret_url = "";
 }
-$avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/doctor","gif,jpg,png");
-// var_dump($avatar);exit;
+
+
+
 
 ?>
 
@@ -38,7 +39,7 @@ $avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/doctor","gif,jpg,png");
  <!-- general form elements disabled -->
               <div class="box box-warning">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><?php print $at?>医生</h3>
+                  <h3 class="box-title"><?php print $at?>医生信息</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/doctor/<?php print $ua;?><?php print $ret_url?>">
@@ -48,14 +49,25 @@ $avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/doctor","gif,jpg,png");
                       <?php if($ua == "editext"):?>
                       <input type="hidden" name="dod" value="<?php print $def["dod"]?>">
                       <?php endif?>
-                      <input value="<?php print $def["dod"]?>" name="dod" required type="text" class="form-control" placeholder="请输入整数">
+                      
+                      <select class="form-control" name="dod">
+                      <?php foreach($data["info"] as $doctor):?>
+                      <option value="<?php print $doctor["sid"]?>"><?php print $doctor["name"]?></option>
+                     <?php endforeach;?>
+                       </select>
                     </div>
                      <div class="form-group">
                       <label>医生等级</label>
                       <?php if($ua == "editext"):?>
                       <input type="hidden" name="dlv" value="<?php print $def["dlv"]?>">
+                      
                       <?php endif?>
-                      <input value="<?php print $def["dlv"]?>" name="dlv" required type="text" class="form-control" placeholder="请输入医生等级">
+					 <select class="form-control" name="dlv">
+	                      <?php foreach($data["lvMeta"] as $lv):?>
+	                      <option value="<?php print $lv["sid"]?>"><?php print $lv["data"]?></option>
+                      <?php endforeach;?>
+                           </select>
+
                     </div>
                     <div class="form-group">
                       <label>诊后服务星</label>
