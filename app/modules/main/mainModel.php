@@ -1,5 +1,5 @@
 <?php
-require_once FILE_SYSTEM_ENTRY."/app/data/disease.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/disease.uiapi.php";
 class mainModel extends AppModel {
 	
 	public function __construct() {

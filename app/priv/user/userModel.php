@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY."/app/data/user/user.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/user/user.api.php";
 class userModel extends privModel{
 	private $api;
 	public function __construct(){

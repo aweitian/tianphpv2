@@ -4,16 +4,14 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY."/app/data/doctor_ext/doctor_ext.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/doctor_lv/doctor_lv.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/doctor/doctor.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/artical/artical.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_ext/doctor_ext.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_lv/doctor_lv.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor/doctor.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/artical/artical.api.php";
 
 class doctorModel extends privModel{
 	public function __construct(){
 		parent::__construct();
-		$this->initDb();
-		$this->initSqlManager("doctor");
 	}
 	public function q_relart($offset,$len){
 		$api = new doctorLvApi();

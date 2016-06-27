@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY."/app/data/disease/disease.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/disease/disease.api.php";
 class diseaseModel extends privModel{
 	/**
 	 * 

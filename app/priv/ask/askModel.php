@@ -4,10 +4,10 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY."/app/data/ask/ask.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/ask/askAppend.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/doctor/doctor.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/disease/disease.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/ask/ask.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/ask/askAppend.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor/doctor.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/disease/disease.api.php";
 class askModel extends privModel{
 	public function __construct(){
 		parent::__construct();

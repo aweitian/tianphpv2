@@ -201,7 +201,7 @@ class articalController extends privController{
 	}
 	
 	public function _d_xx74Action(pmcaiMsg $msg){
-// 		require FILE_SYSTEM_ENTRY."/app/data/artical_tags/artical_tags.api.php";
+// 		require FILE_SYSTEM_ENTRY."/app/data/priv/artical_tags/artical_tags.api.php";
 // 		$api = new artical_tagsApi();
 // 		$api->update(2, array(10,2,9));
 		echo "just abandoned.";

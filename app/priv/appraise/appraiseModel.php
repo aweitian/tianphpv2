@@ -4,10 +4,10 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY."/app/data/appraise/appraise.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/user/user.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/doctor/doctor.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/disease/disease.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/appraise/appraise.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/user/user.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor/doctor.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/disease/disease.api.php";
 
 class appraiseModel extends privModel{
 	private $api;

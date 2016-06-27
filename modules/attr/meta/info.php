@@ -18,7 +18,7 @@ class attr_meta_info{
 	private $sqlManager;
 	public function __construct(){
 		$this->db = new mysqlPdoBase();
-		$this->sqlManager = new sqlManager("attr_meta");
+		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/priv/attr_meta.xml");
 	}
 	
 	/**

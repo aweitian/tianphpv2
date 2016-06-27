@@ -5,7 +5,7 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY."/app/data/tags/tags.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/tags/tags.api.php";
 
 class tagsModel extends privModel{
 	private $api;

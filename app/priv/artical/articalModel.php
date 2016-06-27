@@ -5,18 +5,18 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY."/app/data/user/user.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/doctor/doctor.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/artical/artical.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/disease/disease.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/symptom/symptom.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/artical_disease/artical_disease.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/artical_symptom/artical_symptom.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/artical_doctor/artical_doctor.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/artical_tags/artical_tags.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/tags/tags.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/comment/comment.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/doctor_lv/doctor_lv.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/user/user.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor/doctor.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/artical/artical.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/disease/disease.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/symptom/symptom.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/artical_disease/artical_disease.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/artical_symptom/artical_symptom.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/artical_doctor/artical_doctor.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/artical_tags/artical_tags.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/tags/tags.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/comment/comment.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_lv/doctor_lv.api.php";
 
 class articalModel extends privModel{
 	public function __construct(){

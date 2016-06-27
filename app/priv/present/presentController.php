@@ -7,7 +7,6 @@
 require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/present/presentModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/priv/present/presentView.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/present/presentValidator.php';
 
 class presentController extends privController{
 	/**
