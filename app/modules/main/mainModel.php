@@ -24,8 +24,8 @@ class mainModel extends AppModel {
 		$api = new diseaseApi();
 		return $api->getLv0Infoes();
 	}
-	public function getArtical(){
-		$api = new articalApi();
+	public function getArticle(){
+		$api = new articleApi();
 		return $api->getList();
 	}
 	

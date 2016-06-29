@@ -20,27 +20,27 @@
 	</row_disease_url>
 	
 	<!-- 根据病种Id获取疾病知识的文章 -->
-	<ArticalTag7>
+	<ArticleTag7>
 		<!-- 两条SQL返回结果一样，数据量达到一定程度时，BAK的效率可能更好 -->
 		<bak>
 			SELECT 
-			`data_artical`.sid,
-			`data_artical`.`thumb`,`data_artical`.`title`,`data_artical`.`desc`
-			FROM (SELECT `data_artical_tags`.`aid`,`data_artical_tags`.`tid` FROM `data_artical_tags` 
-			WHERE `data_artical_tags`.`tid` = 7) AS `data_artical_tags`
-			LEFT JOIN data_artical_dis ON `data_artical_tags`.`aid` = `data_artical_dis`.`aid`
-			LEFT JOIN `data_artical` ON `data_artical_tags`.`aid` = `data_artical`.`sid`
-			WHERE  `data_artical_dis`.`did` = :did		
+			`data_article`.sid,
+			`data_article`.`thumb`,`data_article`.`title`,`data_article`.`desc`
+			FROM (SELECT `data_article_tags`.`aid`,`data_article_tags`.`tid` FROM `data_article_tags` 
+			WHERE `data_article_tags`.`tid` = 7) AS `data_article_tags`
+			LEFT JOIN data_article_dis ON `data_article_tags`.`aid` = `data_article_dis`.`aid`
+			LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
+			WHERE  `data_article_dis`.`did` = :did		
 		</bak>
 		<main>
 			SELECT 
-				`data_artical`.sid,
-				`data_artical`.`thumb`,`data_artical`.`title`,`data_artical`.`desc`
-				 FROM `data_artical_tags` 
-				LEFT JOIN data_artical_dis ON `data_artical_tags`.`aid` = `data_artical_dis`.`aid`
-				LEFT JOIN `data_artical` ON `data_artical_tags`.`aid` = `data_artical`.`sid`
-				WHERE `data_artical_tags`.`tid` = 7
-				AND `data_artical_dis`.`did` = :did
+				`data_article`.sid,
+				`data_article`.`thumb`,`data_article`.`title`,`data_article`.`desc`
+				 FROM `data_article_tags` 
+				LEFT JOIN data_article_dis ON `data_article_tags`.`aid` = `data_article_dis`.`aid`
+				LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
+				WHERE `data_article_tags`.`tid` = 7
+				AND `data_article_dis`.`did` = :did
 		</main>
-	</ArticalTag7>
+	</ArticleTag7>
 </ui_disease>

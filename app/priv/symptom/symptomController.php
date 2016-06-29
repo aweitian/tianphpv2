@@ -28,14 +28,13 @@ class symptomController extends privController{
 	}
 	public function welcomeAction(pmcaiMsg $msg){
 		//目前按META来限制DATA树的深度
-		
 		if(isset($msg["?pid"])){
 			$pid = intval($msg["?pid"]);
 		}else{
 			$pid = 0;
 		}
 		$meta = $this->model->getMeta();
-		
+// 		var_dump($meta);exit;
 		if($pid == 0){
 			$path = array(array(0,"全部症状"));
 			$mv = $meta[0]["val"];
@@ -47,8 +46,9 @@ class symptomController extends privController{
 			$path = array(array(0,"全部症状"),array($pid,$info["data"]));
 			$mv = $meta[1]["val"];
 		}
-		
+// 		var_dump($mv);
 		$data = $this->model->getData($pid);
+// 		var_dump($data);exit;
 		$this->view->setPmcaiMsg($msg);
 		$this->view->showList($this->priv->getUserInfo(),$pid,$path,$mv,$data,count($meta));
 	}
@@ -94,9 +94,9 @@ class symptomController extends privController{
 				$this->response->_404();
 			}
 			$sid = intval($msg["pid"]);
-			if(!symptomValidator::isValidData($msg["data"])){
-				$this->response->showError("invalid data");
-			}
+// 			if(!symptomValidator::isValidData($msg["data"])){
+// 				$this->response->showError("invalid data");
+// 			}
 			$edit_rir = $this->model->edit($sid, $msg["data"]);
 			
 			if($edit_rir->isTrue()){
@@ -117,10 +117,13 @@ class symptomController extends privController{
 			}else{
 				$sid = intval($msg["?sid"]);
 				$info = $this->model->row($sid);
+// 				var_dump($info);exit;
 				if(empty($info)){
 					$this->response->_404();
 				}
-				$lvRet = $this->model->getLvBySid($info["metaid"]);
+// 				$lvRet = $this->model->getLvBySid($info["metaid"]);
+				$lvRet = $this->model->getLvBySid($sid);
+// 				var_dump($lvRet);exit;
 				if(!$lvRet->isTrue()){
 					$this->response->_404();
 				}
@@ -182,13 +185,6 @@ class symptomController extends privController{
 			if($metaid == 0){
 				$this->response->showError("invalid next level");
 			}
-				
-				
-			//validate
-			if(!symptomValidator::isValidData($msg["data"])){
-				$this->response->showError("invalid data");
-			}
-				
 				
 			//insert
 			$ret = $this->model->add($msg["data"], $pid, SYMPTOM_GRP_ID, $metaid);

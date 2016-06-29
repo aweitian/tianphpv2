@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<all>
+		SELECT * FROM `data_article` WHERE 1
+		LIMIT :offset,:length
+	</all>
+
+	<count>
+		SELECT count(*) as count FROM `data_article` WHERE 1
+	</count>
+
+	<row>
+		SELECT * FROM `data_article` WHERE `sid` = :sid
+	</row>
+
+
+
+	<query_choose>
+		SELECT `sid`,`title` FROM `data_article` WHERE 
+			`title` LIKE CONCAT(  '%',  :q,  '%' ) 
+		LIMIT :offset,:length
+	</query_choose>
+	
+	<query>
+		SELECT * FROM `data_article` WHERE 
+			`title` LIKE CONCAT(  '%',  :q,  '%' ) 
+		LIMIT :offset,:length
+	</query>
+	<query_count>
+		SELECT count(`sid`) as count FROM `data_article` WHERE 
+			`title` LIKE CONCAT(  '%',  :q,  '%' ) 
+	</query_count>
+
+
+
+	<add>
+		INSERT INTO `data_article`
+		(`kw`,`desc`,`thumb`,`title`, `content`, `date`) 
+		VALUES 
+		(:kw,:desc,:thumb,:title,:content,:date)
+	</add>
+	
+	<update>
+		UPDATE `data_article` SET 
+		`kw`=:kw,`desc`=:desc,`thumb`=:thumb,
+		`title`=:title,`content`=:content,`date`=:date
+		WHERE `sid` = :sid
+	</update>
+	
+	<remove>
+		DELETE FROM `data_article` WHERE `sid` = :sid
+	</remove>
+</sql>

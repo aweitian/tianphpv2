@@ -8,9 +8,10 @@
 class symptomApi{
 	private $sqlManager;
 	private $db;
+	private $meta;
 	public function __construct(){
 		$this->db = new mysqlPdoBase();
-		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/symptom/priv/symptom.xml");
+		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/priv/symptom.xml");
 	}
 
 	/**
@@ -26,12 +27,7 @@ class symptomApi{
 
 
 	public function rm($sid){
-		$child_sql = $this->sqlManager->getSql("/symptom/removeByPid");
-		$this->db->exec($child_sql, array(
-				"pid" => $sid
-		));
-	
-		$sql = $this->sqlManager->getSql("/symptom/removeById");
+		$sql = $this->sqlManager->getSql("/symptom/removeTreeById");
 		$this->db->exec($sql, array(
 				"sid" => $sid
 		));
@@ -40,10 +36,9 @@ class symptomApi{
 	
 	
 	public function getData($pid){
-		$sql = $this->sqlManager->getSql("/symptom/getInfoesByGrp");
+		$sql = $this->sqlManager->getSql("/symptom/getInfoes");
 		$data = array(
-				"grp" => SYMPTOM_GRP_ID,
-				"pid" => $pid
+			"pid" => $pid
 		);
 		return $this->db->fetchAll($sql, $data);
 	}
@@ -54,9 +49,10 @@ class symptomApi{
 	public function getLvBySid($sid){
 		$sql = $this->sqlManager->getSql("/symptom/getLvById");
 		$data = array(
-				"sid" => $sid
+			"sid" => $sid
 		);
 		$data = $this->db->fetch($sql, $data);
+// 		var_dump($sid);exit;
 		if(empty($data)){
 			return new rirResult(1,"invalid pid");
 		}
@@ -85,7 +81,6 @@ class symptomApi{
 				"data" => $data,
 				"pid" => $pid,
 				"metaid" => $metaid,
-				"grp" => $grp
 		);
 		$ret = $this->db->insert($sql, $data);
 		if($ret == 0){
@@ -95,7 +90,7 @@ class symptomApi{
 	}
 	
 	public function getNextMetaIdByGrpLv($grp,$lv){
-		$sql = $this->meta_sqlManager->getSql("/symptom/getNextMetaIdByGrpLv");
+		$sql = $this->sqlManager->getSql("/symptom/meta/getNextMetaIdByGrpLv");
 		$data = array(
 				"level" => intval($lv),
 				"grp" => $grp
@@ -118,15 +113,11 @@ class symptomApi{
 	
 	
 	public function getMeta(){
-		$this->meta = $this->db->fetchAll($this->meta_sqlManager->getSql("/symptom/getInfoesByGrp"), array(
+		$this->meta = $this->db->fetchAll($this->sqlManager->getSql("/symptom/meta/getInfoesByGrp"), array(
 				"grp" => SYMPTOM_GRP_ID
 		));
 		return $this->meta;
 	}
-	
-	
-	
-	
 	
 	
 	/**
@@ -151,7 +142,6 @@ class symptomApi{
 		$data = array(
 				"data" => $key,
 				"pid"  => $pid,
-				"grp"  => $this->meta[$depth]["grp"],
 				"metaid" => $this->meta[$depth]["sid"]
 		);
 	

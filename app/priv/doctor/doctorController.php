@@ -132,10 +132,10 @@ class doctorController extends privController{
 		}
 	}
 	
-	public function relarticalAction(pmcaiMsg $msg){
-		$this->response->go("/priv/artical/reldoc");
+	public function relarticleAction(pmcaiMsg $msg){
+		$this->response->go("/priv/article/reldoc");
 // 		$this->view->setPmcaiMsg($msg);
-// 		$this->view->showRelArtical(
+// 		$this->view->showRelArticle(
 // 			$this->priv->getUserInfo(),
 // 			$this->model->getCacheDisease()
 // 		);

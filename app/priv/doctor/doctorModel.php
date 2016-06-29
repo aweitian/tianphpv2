@@ -7,7 +7,7 @@
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_ext/doctor_ext.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_lv/doctor_lv.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor/doctor.api.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/priv/artical/artical.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/article/article.api.php";
 
 class doctorModel extends privModel{
 	public function __construct(){
@@ -69,7 +69,7 @@ class doctorModel extends privModel{
 	 * @return array
 	 */
 	public function choose($q,$offset,$len){
-		$api = new articalApi();
+		$api = new articleApi();
 		return $api->choose($q, $offset, $len);
 	}
 	

@@ -47,8 +47,8 @@ class diseaseUIApi {
 	 * @param int $did
 	 * @return array fetch
 	 */
-	public function getArticalTag7ByDid($did){
-		$sql = $this->sqlManager->getSql("/ui_disease/ArticalTag7/main");
+	public function getArticleTag7ByDid($did){
+		$sql = $this->sqlManager->getSql("/ui_disease/ArticleTag7/main");
 		return $this->db->fetch($sql, array(
 			"did" => $did
 		));

@@ -11,11 +11,11 @@ class commentApi{
 	private $db;
 	public function __construct(){
 		$this->db = new mysqlPdoBase();
-		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/priv/artical_comment.xml");
+		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/priv/article_comment.xml");
 	}
 	
 	public function row($sid){
-		$sql = $this->sqlManager->getSql("/artical_comment/row");
+		$sql = $this->sqlManager->getSql("/article_comment/row");
 		$bnd = array("sid" => $sid);
 		return $this->db->fetch($sql, $bnd);
 	}
@@ -40,7 +40,7 @@ class commentApi{
 			return new rirResult(3,"invalid comment");
 		}
 	
-		$sql = $this->sqlManager->getSql("/artical_comment/add");
+		$sql = $this->sqlManager->getSql("/article_comment/add");
 		$bind = array(
 				"uid" => $uid,
 				"aid" => $aid,
@@ -56,8 +56,8 @@ class commentApi{
 	}
 	
 	public function vertify($sid){
-// 		var_dump($this->sqlManager->getSql("/artical_comment/vertify"));exit;
-		$sql = $this->sqlManager->getSql("/artical_comment/vertify");
+// 		var_dump($this->sqlManager->getSql("/article_comment/vertify"));exit;
+		$sql = $this->sqlManager->getSql("/article_comment/vertify");
 		$bind = array(
 			"sid" => $sid,
 		);
@@ -86,7 +86,7 @@ class commentApi{
 			return new rirResult(6,"invalid comment");
 		}
 	
-		$sql = $this->sqlManager->getSql("/artical_comment/update");
+		$sql = $this->sqlManager->getSql("/article_comment/update");
 		$bind = array(
 				"sid" => $sid,
 				"comment" => $comment,
@@ -118,7 +118,7 @@ class commentApi{
 			return new rirResult(6,"invalid comment");
 		}
 	
-		$sql = $this->sqlManager->getSql("/artical_comment/update");
+		$sql = $this->sqlManager->getSql("/article_comment/update");
 		$bind = array(
 				"sid" => $sid,
 				"comment" => $comment,
@@ -133,7 +133,7 @@ class commentApi{
 	}
 	
 	public function remove($sid){
-		$ret = $this->db->exec($this->sqlManager->getSql("/artical_comment/rm"), array(
+		$ret = $this->db->exec($this->sqlManager->getSql("/article_comment/rm"), array(
 				"sid" => $sid,
 		));
 		if($ret == 0){
@@ -153,7 +153,7 @@ class commentApi{
 	 * @return rirResult
 	 */
 	public function getAllComments($q,$offset,$length){
-		$sql = $this->sqlManager->getSql("/artical_comment/all/count");
+		$sql = $this->sqlManager->getSql("/article_comment/all/count");
 		$bin = array("q" => $q ? $q : "");
 		$row = $this->db->fetch($sql, $bin);
 		if(empty($row)){
@@ -162,7 +162,7 @@ class commentApi{
 		$cnt = $row["count"];
 		$bin["offset"] = $offset;
 		$bin["length"] = $length;
-		$sql = $this->sqlManager->getSql("/artical_comment/all/query");
+		$sql = $this->sqlManager->getSql("/article_comment/all/query");
 		$data = $this->db->fetchAll($sql, $bin);
 		return new rirResult(0,$cnt,$data);
 	}
@@ -174,7 +174,7 @@ class commentApi{
 	 * @return rirResult
 	 */
 	public function getAllCommentsByUid($uid,$offset,$length){
-		$sql = $this->sqlManager->getSql("/artical_comment/all_uid/count");
+		$sql = $this->sqlManager->getSql("/article_comment/all_uid/count");
 		$bin = array("uid" => $uid);
 		$row = $this->db->fetch($sql, $bin);
 		if(empty($row)){
@@ -183,7 +183,7 @@ class commentApi{
 		$cnt = $row["count"];
 		$bin["offset"] = $offset;
 		$bin["length"] = $length;
-		$sql = $this->sqlManager->getSql("/artical_comment/all_uid/query");
+		$sql = $this->sqlManager->getSql("/article_comment/all_uid/query");
 		$data = $this->db->fetchAll($sql, $bin);
 		return new rirResult(0,$cnt,$data);
 	}
@@ -195,7 +195,7 @@ class commentApi{
 	 * @return rirResult
 	 */
 	public function getAllCommentsByAid($aid,$offset,$length){
-		$sql = $this->sqlManager->getSql("/artical_comment/all_aid/count");
+		$sql = $this->sqlManager->getSql("/article_comment/all_aid/count");
 		$bin = array("aid" => $aid);
 		$row = $this->db->fetch($sql, $bin);
 		if(empty($row)){
@@ -204,7 +204,7 @@ class commentApi{
 		$cnt = $row["count"];
 		$bin["offset"] = $offset;
 		$bin["length"] = $length;
-		$sql = $this->sqlManager->getSql("/artical_comment/all_aid/query");
+		$sql = $this->sqlManager->getSql("/article_comment/all_aid/query");
 		$data = $this->db->fetchAll($sql, $bin);
 		return new rirResult(0,$cnt,$data);
 	}

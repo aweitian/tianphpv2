@@ -31,8 +31,8 @@ class diseaseModel extends AppModel {
 	 * @param int $did
 	 * @return array fetch
 	 */
-	public function getArticalTag7ByDid($did){
+	public function getArticleTag7ByDid($did){
 		$api = new diseaseUIApi();
-		return $api->getArticalTag7ByDid($did);
+		return $api->getArticleTag7ByDid($did);
 	}
 }

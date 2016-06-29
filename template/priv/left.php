@@ -79,7 +79,7 @@ function css_active_control($links){
             		"/doctor"=>"医生列表",
             		"/doctor/lv"=>"职位管理",
             		"/doctor/ext"=>"医生信息",
-            		"/doctor/relartical"=>"关联文章",
+            		"/doctor/relarticle"=>"关联文章",
             		"/doctor/rellv"=>"设置职位",
             		"/doctor/revrellv"=>"修改职位",
             		"/appraise"=>"评价医生",
@@ -100,13 +100,13 @@ function css_active_control($links){
               </ul>
             </li>
             <?php $links = array(
-				"/artical/add"=>"添加文章",
-				"/artical"=>"文章列表",
-				"/artical/comment"=>"文章评论",
-				"/artical/reldis"=>"未关联病种的文章",
-				"/artical/revreldis"=>"修改已关联的病种",
-				"/artical/reldoc"=>"未关联医生的文章",
-				"/artical/revreldoc"=>"修改已关联的医生",
+				"/article/add"=>"添加文章",
+				"/article"=>"文章列表",
+				"/article/comment"=>"文章评论",
+				"/article/reldis"=>"未关联病种的文章",
+				"/article/revreldis"=>"修改已关联的病种",
+				"/article/reldoc"=>"未关联医生的文章",
+				"/article/revreldoc"=>"修改已关联的医生",
 				"/tags/add"=>"添加标签",
 				"/tags"=>"标签管理"
             		

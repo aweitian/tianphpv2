@@ -9,9 +9,9 @@ class doctorView extends privView{
 	
 	
 	
-	public function showRelArtical($userInfo,$di){
+	public function showRelArticle($userInfo,$di){
 		$this->priv_wrap($userInfo, $this->fetch(
-				"rel-artical",array(
+				"rel-article",array(
 					"doctor_infoes" => 	$di
 				)
 		))->show();

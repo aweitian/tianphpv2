@@ -33,7 +33,7 @@ class diseaseController extends appCtrl implements IActionNotFound{
 			//病种ID
 			$did = $data["sid"];
 			
-			var_dump($this->model->getArticalTag7ByDid($data["sid"]));
+			var_dump($this->model->getArticleTag7ByDid($data["sid"]));
 		}
 	}
 	public function welcomeAction(){

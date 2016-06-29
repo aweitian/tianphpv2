@@ -36,11 +36,11 @@ CREATE TABLE `bbb` (
   `c` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `cache_artical_disease` */
+/*Table structure for table `cache_article_disease` */
 
-DROP TABLE IF EXISTS `cache_artical_disease`;
+DROP TABLE IF EXISTS `cache_article_disease`;
 
-CREATE TABLE `cache_artical_disease` (
+CREATE TABLE `cache_article_disease` (
   `aid` int(11) DEFAULT NULL,
   `title` varchar(1024) DEFAULT NULL,
   `pid` int(11) DEFAULT NULL,
@@ -49,11 +49,11 @@ CREATE TABLE `cache_artical_disease` (
   `md` varbinary(1024) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*Table structure for table `cache_artical_doctor` */
+/*Table structure for table `cache_article_doctor` */
 
-DROP TABLE IF EXISTS `cache_artical_doctor`;
+DROP TABLE IF EXISTS `cache_article_doctor`;
 
-CREATE TABLE `cache_artical_doctor` (
+CREATE TABLE `cache_article_doctor` (
   `aid` int(11) DEFAULT NULL,
   `title` varchar(1024) DEFAULT NULL,
   `did` int(11) DEFAULT NULL,
@@ -99,11 +99,11 @@ CREATE TABLE `data_appraise` (
   PRIMARY KEY (`sid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-/*Table structure for table `data_artical` */
+/*Table structure for table `data_article` */
 
-DROP TABLE IF EXISTS `data_artical`;
+DROP TABLE IF EXISTS `data_article`;
 
-CREATE TABLE `data_artical` (
+CREATE TABLE `data_article` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `kw` varchar(1024) NOT NULL,
   `desc` text,
@@ -114,11 +114,11 @@ CREATE TABLE `data_artical` (
   PRIMARY KEY (`sid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
-/*Table structure for table `data_artical_comment` */
+/*Table structure for table `data_article_comment` */
 
-DROP TABLE IF EXISTS `data_artical_comment`;
+DROP TABLE IF EXISTS `data_article_comment`;
 
-CREATE TABLE `data_artical_comment` (
+CREATE TABLE `data_article_comment` (
   `sid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `aid` int(11) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
@@ -128,42 +128,42 @@ CREATE TABLE `data_artical_comment` (
   PRIMARY KEY (`sid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-/*Table structure for table `data_artical_dis` */
+/*Table structure for table `data_article_dis` */
 
-DROP TABLE IF EXISTS `data_artical_dis`;
+DROP TABLE IF EXISTS `data_article_dis`;
 
-CREATE TABLE `data_artical_dis` (
+CREATE TABLE `data_article_dis` (
   `aid` int(11) DEFAULT NULL,
   `did` int(11) DEFAULT NULL COMMENT 'disease id',
   UNIQUE KEY `aid` (`aid`,`did`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*Table structure for table `data_artical_doc` */
+/*Table structure for table `data_article_doc` */
 
-DROP TABLE IF EXISTS `data_artical_doc`;
+DROP TABLE IF EXISTS `data_article_doc`;
 
-CREATE TABLE `data_artical_doc` (
+CREATE TABLE `data_article_doc` (
   `aid` int(11) DEFAULT NULL,
   `dod` int(11) DEFAULT NULL COMMENT 'doctor id',
   UNIQUE KEY `aid` (`aid`,`dod`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*Table structure for table `data_artical_sym` */
+/*Table structure for table `data_article_sym` */
 
-DROP TABLE IF EXISTS `data_artical_sym`;
+DROP TABLE IF EXISTS `data_article_sym`;
 
-CREATE TABLE `data_artical_sym` (
+CREATE TABLE `data_article_sym` (
   `aid` int(11) DEFAULT NULL,
   `syd` int(11) DEFAULT NULL COMMENT 'symptom id',
   UNIQUE KEY `aid` (`aid`,`syd`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*Table structure for table `data_artical_tags` */
+/*Table structure for table `data_article_tags` */
 
-DROP TABLE IF EXISTS `data_artical_tags`;
+DROP TABLE IF EXISTS `data_article_tags`;
 
-CREATE TABLE `data_artical_tags` (
-  `aid` int(11) DEFAULT NULL COMMENT 'artical id',
+CREATE TABLE `data_article_tags` (
+  `aid` int(11) DEFAULT NULL COMMENT 'article id',
   `tid` int(11) DEFAULT NULL COMMENT 'tag id',
   UNIQUE KEY `aid` (`aid`,`tid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -365,7 +365,7 @@ DROP TABLE IF EXISTS `data_url`;
 
 CREATE TABLE `data_url` (
   `sid` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `mod` enum('artical','ask') NOT NULL COMMENT '模块',
+  `mod` enum('article','ask') NOT NULL COMMENT '模块',
   `url` varchar(64) NOT NULL COMMENT 'URL名，不带/',
   `mid` int(11) NOT NULL COMMENT '模块ID',
   PRIMARY KEY (`sid`),

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<exists>
+		SELECT
+		  `aid`,
+		  `did`
+		FROM `data_article_dis`
+		WHERE `aid` = :aid AND `did` = :did
+	</exists>
+	<all>
+		SELECT
+		  `aid`,
+		  `did`
+		FROM `data_article_dis`
+		WHERE `aid` = :aid
+	</all>
+	<add>
+		INSERT INTO `data_article_dis`
+	            (`aid`,
+	             `did`)
+		VALUES (:aid,
+		        :did);
+	</add>
+	<rm>
+		DELETE
+		FROM `data_article_dis`
+		WHERE `aid` = :aid
+		    AND `did` = :did;
+	</rm>
+	<update>
+			UPDATE `data_article_dis` SET 
+				`aid`=:aid,`did`=:new_did
+			 WHERE `aid`=:aid and `did`=:old_did
+	</update>
+	
+	<query_on_raw_count>
+		SELECT 
+			COUNT(`data_article`.`sid`) as `count`
+		FROM `data_attr_data`
+		LEFT JOIN `data_attr_data` `p_data_attr_data` 
+		ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+		RIGHT JOIN `data_article_dis`
+		ON `data_article_dis`.`did` =  `data_attr_data`.`sid`    
+		LEFT JOIN `data_article`
+		ON `data_article`.`sid` = `data_article_dis`.`aid`
+	</query_on_raw_count>
+	<query_on_raw>
+		SELECT 
+			`data_article`.`sid` as `aid`,`data_article`.`title` as `title`,
+			`data_article`.`date` as `date`,
+			`data_attr_data`.`pid` AS `pid`,`p_data_attr_data`.`data` as `pd`,
+			`data_attr_data`.`sid` as `mid`,`data_attr_data`.`data` as `md`
+		FROM `data_attr_data`
+		LEFT JOIN `data_attr_data` `p_data_attr_data` 
+		ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+		RIGHT JOIN `data_article_dis`
+		ON `data_article_dis`.`did` =  `data_attr_data`.`sid`    
+		LEFT JOIN `data_article`
+		ON `data_article`.`sid` = `data_article_dis`.`aid`
+		@WHERECLAUSE
+		ORDER BY `aid` ASC
+		LIMIT :offset,:length
+	</query_on_raw>
+	<where_clause_dc>
+		`data_attr_data`.`pid` = :dcid
+	</where_clause_dc>
+	<where_clause_di>
+		`data_attr_data`.`sid` = :diid
+	</where_clause_di>
+	<where_clause_title>
+		`data_article`.`title` like CONCAT('%',:title,'%')
+	</where_clause_title>
+	
+	
+	<reldis_homeless>
+		<count>
+			SELECT COUNT(`data_article`.`sid`) as `count`
+			FROM `data_article`
+			WHERE
+			`data_article`.`sid`
+			NOT IN (SELECT `aid` FROM `data_article_dis`)
+		</count>
+		<query>
+			SELECT `data_article`.`sid`,`data_article`.`title`,`data_article`.`date`
+			FROM `data_article`
+			WHERE
+			`data_article`.`sid`
+			NOT IN (SELECT `aid` FROM `data_article_dis`)
+			LIMIT :offset,:length 
+		</query>
+	</reldis_homeless>
+	
+	
+	
+</sql>

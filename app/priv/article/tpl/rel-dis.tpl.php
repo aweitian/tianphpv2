@@ -15,7 +15,7 @@ $cnt  = $data["count"];
 $pageSize = $data["pageSize"];
 $pageBtnLen = $data["pageBtnLen"];
 $curPageNum = $data["curPageNum"];
-$lv_infoes = $data["lv_infoes"];
+$dis_infoes = $data["dis_infoes"];
 
 // //病种过滤
 // $dc = $data["dc"];
@@ -54,7 +54,7 @@ $pagination = new pagination($cnt, $curPageNum, $pageSize, $pageBtnLen);
 // 	//$dc[$item["pid"]][$item["mid"]] = array($item["md"],$item["pd"]);
 // }
 
-// var_dump($doc_infoes);exit;
+// var_dump($dis_infoes);exit;
 
 //classname function
 function cn($a,$b){
@@ -78,7 +78,7 @@ span.cate-active{
 -->
 </style>
 <script>
-var g_data = <?php print json_encode($doc_infoes);?>;
+var g_data = <?php print json_encode($dis_infoes);?>;
 function di_item(id,text){
 	return '<span style="margin-right: 15px;" class="di cate" onclick="chooseDi(this,'+id+')">'+text+'</span>';
 }
@@ -117,7 +117,7 @@ function chooseDi(o,a){
 
 		<div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">医生筛选</h3>
+                  <h3 class="box-title">文章筛选</h3>
                    
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -125,17 +125,13 @@ function chooseDi(o,a){
                   <table class="table table-bordered">
                     <tr>
                       <th style="width: 20px"><input type="checkbox" id="reverse"></th>
-                      <th>姓名</th>
-                      <th>缩略图</th>
+                      <th>标题</th>
                       <th>日期</th>
                     </tr>
                     <?php foreach ($data as $item):?>
                     <tr>
                       <td><input type="checkbox" name="sid[]" value="<?php print $item["sid"]?>"></td>
-                      <td><?php print $item["name"]?></td>
-                      <td>
-                      	<img width="40" height="40" src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $item["avatar"]?>">
-                		</td>
+                      <td><?php print $item["title"]?></td>
                       <td><?php print $item["date"]?></td>
                       
       
@@ -155,17 +151,46 @@ function chooseDi(o,a){
                   
                   	<div class="no-margin pull-left" style="width:30%">
                   	
-                  	<form action="<?php print HTTP_ENTRY?>/priv/doctor/con_rellv" method="post" class="form-horizontal">
+                  	<form action="<?php print HTTP_ENTRY?>/priv/article/con_reldis" method="post" class="form-horizontal">
                   	<div class="form-group">
                       <label for="inputEmail3" class="col-sm-4 control-label">对选中项分配到:</label>
                       <div class="col-sm-6">
-                           <select class="form-control" name="di" id="sel_dd" onchange="submitBtnDisable()">
+                      	<?php  
+                      	/***
+                      	 * array(
+                      	 * 	"pid"=>array(
+                      	 * 		"text"=>"",
+                      	 * 		"children"=>array(
+                      	 * 			"id"=>"text"
+                      	 * 		)
+                      	 * 	)
+                      	 * )
+                      	 */
+                      	$tree_dis = array();
+                      	foreach ($dis_infoes as $item){
+                      		if(!array_key_exists($item["pid"], $tree_dis)){
+                      			$tree_dis[$item["pid"]] = array(
+                      				"text" => $item["pd"],
+                      				"children" => array()
+                      			);
+                      		}
+                      		$tree_dis[$item["pid"]]["children"][$item["mid"]] = $item["md"];
+                      	}
+                      	
+                      	
+                      	//var_dump($tree_dis);exit;
+                      	
+                      	?>
+                        <select class="form-control" name="di" id="sel_dd" onchange="submitBtnDisable()">
                         <option value="0">请选择</option>
-              
-                        <?php foreach ($lv_infoes as $child):?>
-                        <option value="<?php print $child["sid"]?>"><?php print $child["data"]?></option>
+                        <?php foreach ($tree_dis as $pid => $item):?>
+                        <optgroup label="<?php print $item["text"]?>">
+	                        <?php foreach ($item["children"] as $mid => $child):?>
+	                        <option value="<?php print $mid?>"><?php print $child?></option>
+	                        <?php endforeach;?>
+                        </optgroup>
+                        
                         <?php endforeach;?>
-           
                         </select>
                       </div>
                       <div class="col-sm-2">

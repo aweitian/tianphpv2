@@ -125,9 +125,9 @@
 
 
 
-	<artical_disease>
+	<article_disease>
 		<create>
-			CREATE TABLE `cache_artical_disease` (
+			CREATE TABLE `cache_article_disease` (
 			  `aid` int(11) DEFAULT NULL,
 			  `title` varchar(1024) DEFAULT NULL,
 			  `pid` int(11) DEFAULT NULL,
@@ -137,18 +137,18 @@
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8
 		</create>
 		<update>
-			INSERT INTO `cache_artical_disease` (`aid`,`title`,`pid`,`pd`,`mid`,`md`)
+			INSERT INTO `cache_article_disease` (`aid`,`title`,`pid`,`pd`,`mid`,`md`)
 
 			SELECT 
-				`data_artical`.`sid`,`data_artical`.`title`,
+				`data_article`.`sid`,`data_article`.`title`,
 				`data_attr_data`.`pid` AS `pid`,`p_data_attr_data`.`data`,
 				`data_attr_data`.`sid`,`data_attr_data`.`data`
 			FROM `data_attr_data`
 			LEFT JOIN `data_attr_data` `p_data_attr_data` ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
-			RIGHT JOIN `data_artical_dis`
-			ON `data_artical_dis`.`did` =  `data_attr_data`.`sid`    
-			LEFT JOIN `data_artical`
-			ON `data_artical`.`sid` = `data_artical_dis`.`aid`
+			RIGHT JOIN `data_article_dis`
+			ON `data_article_dis`.`did` =  `data_attr_data`.`sid`    
+			LEFT JOIN `data_article`
+			ON `data_article`.`sid` = `data_article_dis`.`aid`
 		</update>
 		<all>
 			SELECT
@@ -158,12 +158,12 @@
 			  `pd`,
 			  `mid`,
 			  `md`
-			FROM `cache_artical_disease`
+			FROM `cache_article_disease`
 		</all>
-	</artical_disease>
-	<artical_doctor>
+	</article_disease>
+	<article_doctor>
 		<create>
-			CREATE TABLE `cache_artical_doctor` (
+			CREATE TABLE `cache_article_doctor` (
 			  `aid` INT(11) DEFAULT NULL,
 			  `title` VARCHAR(1024) DEFAULT NULL,
 			  `dod` INT(11) DEFAULT NULL,
@@ -172,19 +172,19 @@
 			) ENGINE=MYISAM DEFAULT CHARSET=utf8
 		</create>
 		<update>
-			INSERT INTO `cache_artical_doctor` (`aid`,`title`,`dod`,`dname`,`lv`)
+			INSERT INTO `cache_article_doctor` (`aid`,`title`,`dod`,`dname`,`lv`)
 
 			SELECT 
-				`data_artical`.`sid` AS `aid`,`data_artical`.`title` AS `title`,
-				`data_artical_doc`.`dod`,`data_doctor`.`name` AS `dname`,
+				`data_article`.`sid` AS `aid`,`data_article`.`title` AS `title`,
+				`data_article_doc`.`dod`,`data_doctor`.`name` AS `dname`,
 				`data_doctor_lv_meta`.`data` AS `lv`
-			FROM `data_artical_doc`
-			LEFT JOIN `data_artical`
-				ON `data_artical_doc`.`aid` = `data_artical`.`sid`
+			FROM `data_article_doc`
+			LEFT JOIN `data_article`
+				ON `data_article_doc`.`aid` = `data_article`.`sid`
 			LEFT JOIN `data_doctor`
-				ON `data_doctor`.`sid` = `data_artical_doc`.`dod`
+				ON `data_doctor`.`sid` = `data_article_doc`.`dod`
 			LEFT JOIN `data_doctor_ext`
-				ON `data_doctor_ext`.`dod` = `data_artical_doc`.`dod`
+				ON `data_doctor_ext`.`dod` = `data_article_doc`.`dod`
 			LEFT JOIN `data_doctor_lv_meta`
 				ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`
 
@@ -196,8 +196,8 @@
 			  `dod`,
 			  `name`,
 			  `lv`
-			FROM `cache_artical_doctor`
+			FROM `cache_article_doctor`
 		</all>
-	</artical_doctor>
+	</article_doctor>
 
 </sql>
