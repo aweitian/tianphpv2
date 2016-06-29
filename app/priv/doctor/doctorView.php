@@ -79,7 +79,7 @@ class doctorView extends privView{
 		$content = $this->fetch("extlist",$msg);
 		$this->priv_wrap($userinfo, $content)->show();
 	}
-	public function showExdForm($userInfo,$noextinfo,$lvMeta,$def=null){
+	public function showExtForm($userInfo,$noextinfo,$lvMeta,$def=null){
 		$this->priv_wrap($userInfo, $this->fetch(
 				"extform",array(
 						"lvMeta" => $lvMeta,

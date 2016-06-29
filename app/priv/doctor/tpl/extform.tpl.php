@@ -50,11 +50,23 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       <input type="hidden" name="dod" value="<?php print $def["dod"]?>">
                       <?php endif?>
                       
+                      
+                      <?php if ($ua == "editext"):?>
+                      
+                      <?php foreach($data["info"] as $doctor):?>
+                      <div>
+                      <?php if($doctor["dod"] == $def["dod"])print $doctor["name"]?>
+                      </div>
+                      <?php endforeach;?>
+                      
+                      <?php else :?>
                       <select class="form-control" name="dod">
                       <?php foreach($data["info"] as $doctor):?>
                       <option value="<?php print $doctor["sid"]?>"><?php print $doctor["name"]?></option>
-                     <?php endforeach;?>
+                     	<?php endforeach;?>
                        </select>
+                       
+                       <?php endif;?>
                     </div>
                      <div class="form-group">
                       <label>医生等级</label>
@@ -64,7 +76,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       <?php endif?>
 					 <select class="form-control" name="dlv">
 	                      <?php foreach($data["lvMeta"] as $lv):?>
-	                      <option value="<?php print $lv["sid"]?>"><?php print $lv["data"]?></option>
+	                      <option<?php if($lv["sid"] == $def["dlv"]):?> selected<?php endif;?> value="<?php print $lv["sid"]?>"><?php print $lv["data"]?></option>
                       <?php endforeach;?>
                            </select>
 
