@@ -9,7 +9,7 @@ class doctorLvApi {
 	}
 	
 	public function getAllHomeless($offset,$length){
-		$sql = $this->sqlManager->getSql("/doctor_lv/homeless/count");
+		$sql = $this->sqlManager->getSql("/sql/homeless/count");
 		$bin = array();
 		$row = $this->db->fetch($sql, $bin);
 		if(empty($row)){
@@ -18,7 +18,7 @@ class doctorLvApi {
 		$cnt = $row["count"];
 		$bin["offset"] = $offset;
 		$bin["length"] = $length;
-		$sql = $this->sqlManager->getSql("/doctor_lv/homeless/query");
+		$sql = $this->sqlManager->getSql("/sql/homeless/query");
 		$ret = $this->db->fetchAll($sql, $bin);
 		if(empty($ret)){
 			if($this->db->hasError()){
