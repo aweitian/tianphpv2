@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_appraise>
+	<!-- 获取所有对医生的评价,排序按ID倒序 -->
+	<!-- 参数:length -->
+	<!-- 返回字段:sid,uid,did,dod,txt,lv,date -->
+	<all>
+		SELECT * FROM `data_appraise`
+			ORDER BY `sid` DESC
+			LIMIT 0,:length
+	</all>
+
+</ui_appraise>

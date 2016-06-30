@@ -54,7 +54,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       <?php if ($ua == "editext"):?>
                       
                       <?php foreach($data["info"] as $doctor):?>
-                      <div>
+                      <div class="text-danger">
                       <?php if($doctor["dod"] == $def["dod"])print $doctor["name"]?>
                       </div>
                       <?php endforeach;?>

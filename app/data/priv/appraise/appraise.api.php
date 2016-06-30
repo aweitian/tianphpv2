@@ -21,7 +21,7 @@ class appraiseApi{
 	}
 	
 	public static function getAppraiseMeta($i=null){
-		$meta = array("一般","满意","很满意");
+		$meta = require FILE_SYSTEM_ENTRY."/app/data/_meta/appraiseLvMeta.php";
 		if(is_numeric($i) && $i >=0 && $i < count($meta)){
 			return $meta[$i];
 		}

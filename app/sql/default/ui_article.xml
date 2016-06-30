@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui_article>
-	
 
+	<!-- 获取一篇带THUMBNAIL文章 -->
+	<!-- 参数:did -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<row_thumb_did>
+		SELECT 
+			`data_article`.`sid` as `aid`,
+			`data_article`.`kw`,
+			`data_article`.`desc`,
+			`data_article`.`thumb`,
+			`data_article`.`title`,
+			`data_article`.`date`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article_dis`.`did` = :did
+			AND
+			`data_article`.`thumb` IS NOT NULL 
+			ORDER BY `aid` DESC 
+			LIMIT 0,1
+	</row_thumb_did>
+
+	<!-- 获取病种下所有文章,按从新到旧的排序方式 -->
+	<!-- 参数:did,length -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<allByDid>
+		SELECT 
+			`data_article`.`sid` as `aid`,
+			`data_article`.`kw`,
+			`data_article`.`desc`,
+			`data_article`.`thumb`,
+			`data_article`.`title`,
+			`data_article`.`date`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article_dis`.`did` = :did
+			ORDER BY `aid` DESC
+			LIMIT 0,:length
+	</allByDid>
+	
+	
+	<!-- 获取病种不包括传递的AID的所有文章,按从新到旧的排序方式 -->
+	<!-- 参数:did,exc,length -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<allByDid_Exc>
+		SELECT 
+			`data_article`.`sid` as `aid`,
+			`data_article`.`kw`,
+			`data_article`.`desc`,
+			`data_article`.`thumb`,
+			`data_article`.`title`,
+			`data_article`.`date`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article_dis`.`did` = :did
+			AND
+			`data_article`.`sid` != :exc
+			ORDER BY `aid` DESC
+			LIMIT 0,:length
+	</allByDid_Exc>
+	
+	
 </ui_article>

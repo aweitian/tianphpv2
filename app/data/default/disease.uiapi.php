@@ -41,6 +41,29 @@ class diseaseUIApi {
 	}
 	
 	/**
+	 * 
+	 * @return array fetchAll;
+	 */
+	public function getLv0Infoes(){
+		$sql = $this->sqlManager->getSql("/ui_disease/lv0Infoes");
+		return $this->db->fetch($sql, array());
+	}
+	
+	
+	/**
+	 * 返回字段:key,data,pid 
+	 * @param int $did
+	 * @return array(fetch);
+	 */
+	public function getRowByDid($did){
+		$sql = $this->sqlManager->getSql("/ui_disease/rowBySid");
+		return $this->db->fetch($sql, array(
+			"did" => $did
+		));
+	}
+	
+	
+	/**
 	 * sid  thumb                              title   desc    
 	 * 30  /uploads/user/201606211043371.png  tald    sdalfkwe  
 	 * 根据病种ID获取疾病知识的文章

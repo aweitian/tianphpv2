@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui_user>
-	
+	<!-- 获取信息 -->
+	<!-- 参数:uid -->
+	<!-- 返回字段:sid,email,name,phone,avatar,rpq,rpa,wa,date -->
+	<row_uid>
+		SELECT
+		  `sid`,
+		  `email`,
+		  `name`,
+		  `pwd`,
+		  `phone`,
+		  `avatar`,
+		  `rpq`,
+		  `rpa`,
+		  `wa`,
+		  `date`
+		FROM `data_user`
+		WHERE `sid` = :uid
+	</row_uid>
 
 </ui_user>

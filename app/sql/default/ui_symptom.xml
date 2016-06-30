@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_symptom>
+	
+	<!-- 随机获取二级症状 -->
+	<!-- 参数:length -->
+	<!-- 返回字段:sid,key,data,pid,grp,metaid -->
+	<all_rand>
+		SELECT * FROM `data_attr_data`
+			WHERE `grp` = 2
+			AND `metaid` = 4
+			ORDER BY RAND()
+			LIMIT 0,:length
+	</all_rand>
+	
+
+</ui_symptom>
