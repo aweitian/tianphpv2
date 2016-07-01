@@ -269,10 +269,14 @@ class doctorController extends privController{
 
 	public function addextAction(pmcaiMsg $msg){
 		if($msg->isPost()){
-			if(!isset($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"])){
+			
+// 			var_dump($msg->getPostData());exit;
+			
+			
+			if(!isset($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"],$msg["duty"])){
 				$this->response->_404();
 			}
-			$retR = $this->model->ext_add($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"]);
+			$retR = $this->model->ext_add($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"],$msg["duty"]);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
 					$url = new pmcaiUrl($msg["?returl"]);
@@ -289,7 +293,7 @@ class doctorController extends privController{
 		}else{
 // 			var_dump($this->model->doctor_lv_all());exit;
 			$this->view->setPmcaiMsg($msg);
-			$this->view->showExdForm(
+			$this->view->showExtForm(
 					$this->priv->getUserInfo(),
 					$this->model->getNoExtInfo(),
 					$this->model->doctor_lv_all()->return
@@ -313,13 +317,13 @@ class doctorController extends privController{
 	public function editextAction(pmcaiMsg $msg){
 		if($msg->isPost()){
 	
-			if(!isset($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"])){
+			if(!isset($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"],$msg["duty"])){
 				$this->response->_404();
 			}
 			$retR = $this->model->ext_update(
 					$msg["dod"], $msg["dlv"], $msg["start"], 
 					$msg["hot"], $msg["love"], $msg["contribution"], 
-					$msg["desc"],$msg["spec"]
+					$msg["desc"],$msg["spec"],$msg["duty"]
 			);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){

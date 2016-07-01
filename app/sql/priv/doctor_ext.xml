@@ -2,15 +2,17 @@
 <doctor_ext>
 	<add>
 		INSERT INTO `data_doctor_ext` (
-			`dod`,`dlv`,`start`,`hot`,`love`,`contribution`,`desc`,`spec`
+			`dod`,`dlv`,`start`,`hot`,`love`,`contribution`,`desc`,`spec`,`duty`
 		) VALUES (
-			:dod,:dlv,:start,:hot,:love,:contribution,:desc,:spec
+			:dod,:dlv,:start,:hot,:love,:contribution,:desc,:spec,CONV(:duty,4,10)
 		)
 	</add>
 
 	<update>
 		UPDATE `data_doctor_ext` SET 
-		`dlv`=:dlv,`start`=:start,`hot`=:hot,`love`=:love,`contribution`=:contribution,`desc`=:desc,`spec`=:spec
+		`dlv`=:dlv,`start`=:start,`hot`=:hot,
+		`love`=:love,`contribution`=:contribution,
+		`desc`=:desc,`spec`=:spec,`duty`=CONV(:duty,4,10)
 		 WHERE `dod`=:dod
 	</update>
 
@@ -19,7 +21,17 @@
 	</rm>
 	
 	<row>
-		SELECT * FROM `data_doctor_ext` WHERE `dod`=:dod
+		SELECT 
+		  `dod`,
+		  `dlv`,
+		  `start`,
+		  `hot`,
+		  `love`,
+		  `contribution`,
+		  `desc`,
+		  `spec`,
+		  LPAD(CONV(`data_doctor_ext`.`duty`,10,4),21,'0') as `duty`
+		 FROM `data_doctor_ext` WHERE `dod`=:dod
 	</row>
 	
 	<all>
@@ -34,6 +46,7 @@
 			`data_doctor_ext`.`love`,
 			`data_doctor_ext`.`contribution`,
 			`data_doctor_ext`.`desc`,
+			LPAD(CONV(`data_doctor_ext`.`duty`,10,4),21,'0') as `duty`,
 			`data_doctor_ext`.`spec`
 			
 			FROM `data_doctor_ext` 

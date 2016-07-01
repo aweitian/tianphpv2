@@ -65,7 +65,7 @@ class diseaseUIApi {
 	 * @param int $length (最多返回多少条,默认值8条)
 	 * @return array fetchAll
 	 */
-	public function getQuestionByLv0Did($did,$length=8){
+	public function getQuestionsByLv0Did($did,$length=8){
 		$sql = $this->sqlManager->getSql("/ui_ask/getAllByLv0Did");
 		return $this->db->fetchAll($sql, array(
 				"dod" => $dod,

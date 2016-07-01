@@ -31,7 +31,7 @@ class doctorExtApi {
 	 * @param date $date
 	 * @return rirResult
 	 */
-	public function add($dod,$dlv,$start,$hot,$love,$contribution,$desc,$spec){
+	public function add($dod,$dlv,$start,$hot,$love,$contribution,$desc,$spec,$duty){
 		//validate data
 		if(!validator::isUint($dod)){
 			return new rirResult(2,"invalid dod");
@@ -57,6 +57,10 @@ class doctorExtApi {
 		if(!doctorExtValidator::isValidSpec($spec)){
 			return new rirResult(5,"invalid spec");
 		}
+		if(!doctorExtValidator::isValidDuty($duty)){
+			return new rirResult(5,"invalid duty");
+		}
+
 	
 		$sql = $this->sqlManager->getSql("/doctor_ext/add");
 		$bind = array(
@@ -68,6 +72,8 @@ class doctorExtApi {
 			"contribution" => $contribution,
 			"desc" => $desc,
 			"spec" => $spec,
+			"duty" => $duty,
+
 		);
 		$sid = $this->db->insert($sql, $bind);
 		if($sid == 0){
@@ -84,7 +90,7 @@ class doctorExtApi {
 	 * @param string $letter
 	 * @return rirResult
 	 */
-	public function update($dod,$dlv,$start,$hot,$love,$contribution,$desc,$spec){
+	public function update($dod,$dlv,$start,$hot,$love,$contribution,$desc,$spec,$duty){
 	
 		//validate data
 		if(!validator::isUint($dod)){
@@ -111,9 +117,13 @@ class doctorExtApi {
 		if(!doctorExtValidator::isValidSpec($spec)){
 			return new rirResult(5,"invalid spec");
 		}
-	
+		if(!doctorExtValidator::isValidDuty($duty)){
+			return new rirResult(5,"invalid duty");
+		}
+
+		
 		$sql = $this->sqlManager->getSql("/doctor_ext/update");
-		$bind =array(
+		$bind = array(
 			"dod" => $dod,
 			"dlv" => $dlv,
 			"start" => $start,
@@ -122,6 +132,7 @@ class doctorExtApi {
 			"contribution" => $contribution,
 			"desc" => $desc,
 			"spec" => $spec,
+			"duty" => $duty,
 		
 		);
 		$sid = $this->db->exec($sql, $bind);

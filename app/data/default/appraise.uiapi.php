@@ -12,7 +12,14 @@ class appraiseUIApi {
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_appraise.xml");
 	}
 	
-	
+	/**
+	 * 
+	 * @param int $length
+	 */
+	public function getData($length){
+		
+	}
+	 
 	
 	
 }

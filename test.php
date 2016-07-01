@@ -1,4 +1,7 @@
 <?php 
+$def = array(
+	"sid" => 22
+);
 $test = array(
 	array(
 		"sid" => 11,
@@ -18,7 +21,7 @@ $test = array(
 	)
 		
 );
-
+var_dump(1<<31);exit;
 ?>
 <select name="nanme">
 <?php foreach ($test as $item):?>
