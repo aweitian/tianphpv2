@@ -19,4 +19,19 @@
 		WHERE `sid` = :uid
 	</row_uid>
 
+	<waterarm>
+		SELECT
+		  `sid`,
+		  `email`,
+		  `name`,
+		  `pwd`,
+		  `phone`,
+		  `avatar`,
+		  `rpq`,
+		  `rpa`,
+		  `wa`,
+		  `date`
+		FROM `data_user`
+		WHERE `wa` = 'y'
+	</waterarm>
 </ui_user>

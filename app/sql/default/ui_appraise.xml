@@ -3,10 +3,27 @@
 	<!-- 获取所有对医生的评价,排序按ID倒序 -->
 	<!-- 参数:length -->
 	<!-- 返回字段:sid,uid,did,dod,txt,lv,date -->
-	<all>
+	<data>
 		SELECT * FROM `data_appraise`
 			ORDER BY `sid` DESC
 			LIMIT 0,:length
-	</all>
+	</data>
 
+	<!-- 获取所有对医生的评价,排序按ID倒序 -->
+	<!-- 参数:dod,length -->
+	<!-- 返回字段:sid,uid,did,dod,txt,lv,date -->
+	<rows_dod>
+		SELECT * FROM `data_appraise`
+		WHERE `dod` = :dod
+		LIMIT 0,:length
+	</rows_dod>
+	
+	<!-- 获取所有对医生的评价,排序按ID倒序 -->
+	<!-- 参数:uid,length -->
+	<!-- 返回字段:sid,uid,did,dod,txt,lv,date -->
+	<rows_uid>
+		SELECT * FROM `data_appraise`
+		WHERE `uid` = :uid
+		LIMIT 0,:length
+	</rows_uid>
 </ui_appraise>

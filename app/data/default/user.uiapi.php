@@ -10,9 +10,12 @@ class userUIApi {
 	private $db;
 	private $cache = array();
 	
+	private $waterArmCache = array();
 	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_user.xml");
+		$this->initWaterArm();
+		
 	}
 	
 	public static function getInstance(){
@@ -21,6 +24,28 @@ class userUIApi {
 		}
 		return appraiseUIApi::$inst;
 	}
+	
+	
+	/**
+	 * 获取用户姓名
+	 * @param int $uid
+	 * @return string;
+	 */
+	public function getNameByUid($uid){
+		$cache_key = "getNameByUid-".$uid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$ret = $this->row($uid);
+		if(empty($ret)){
+			$ret = "";
+		}else{
+			$ret = $ret["name"];
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
 	
 	/**
 	 * 返回字段:sid,email,name,phone,avatar,rpq,rpa,wa,date
@@ -36,12 +61,26 @@ class userUIApi {
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
-		$sql = $this->sqlManager->getSql("/ui_user/row_uid");
-		$ret = $this->db->fetch($sql, array(
-			"uid" => $uid
-		));
+		if (!array_key_exists($uid, $this->waterArmCache)){
+			$sql = $this->sqlManager->getSql("/ui_user/row_uid");
+			$ret = $this->db->fetch($sql, array(
+				"uid" => $uid
+			));			
+		}else{
+			$ret = $this->waterArmCache[$uid];
+		}
+
 		$this->cache[$cache_key] = $ret;
 		return $ret;
+	}
+	
+	
+	private function initWaterArm(){
+		$data = $this->db->fetchAll(
+				$this->sqlManager->getSql("/ui_user/waterarm"), array());
+		foreach($data as $item){
+			$this->waterArmCache[$item["sid"]] = $item;
+		}
 	}
 	
 }

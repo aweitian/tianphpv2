@@ -21,7 +21,9 @@ $test = array(
 	)
 		
 );
-var_dump(1<<31);exit;
+$a=array("red"=>"red","green","blue","yellow","brown");
+print_r(array_slice($a,0,40,true));
+exit;
 ?>
 <select name="nanme">
 <?php foreach ($test as $item):?>

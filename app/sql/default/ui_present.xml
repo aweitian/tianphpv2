@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui_present>
+	<!-- 获取所有的礼物信息数据 -->
+	<!-- 参数:无 -->
+	<!-- 返回字段:sid,cost,data,ben,avatar -->
+	<!-- 示例数据:14,10000,幸福美满,40,36922814.jpg -->
+	<meta>
+		SELECT * FROM `data_present`
+	</meta>
+
+
+	<!-- 获取所有的感谢信,排序按ID倒序 -->
+	<!-- 参数:length -->
+	<!-- 返回字段:sid,uid,dod,pid,date -->
+	<data>
+		SELECT * FROM `data_doctor_present`
+			ORDER BY `sid` DESC
+			LIMIT 0,:length
+	</data>
+	<!-- 获取所有对医生的礼物,排序按ID倒序 -->
+	<!-- 参数:dod,length -->
+	<!-- 返回字段:sid,uid,dod,pid,date -->
+	<rows_dod>
+		SELECT * FROM `data_doctor_present`
+		WHERE `dod` = :dod
+		LIMIT 0,:length
+	</rows_dod>
 	
+	<!-- 获取所有对医生的礼物,排序按ID倒序 -->
+	<!-- 参数:uid,length -->
+	<!-- 返回字段:sid,uid,dod,pid,date -->
+	<rows_uid>
+		SELECT * FROM `data_doctor_present`
+		WHERE `uid` = :uid
+		LIMIT 0,:length
+	</rows_uid>
 
 </ui_present>

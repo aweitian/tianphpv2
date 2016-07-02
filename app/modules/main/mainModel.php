@@ -17,23 +17,11 @@ class mainModel extends AppModel {
 	 * 322  	男性不育	326  	肾虚           		sx 
 	 */
 	public function getDisease() {
-		$api = new diseaseUIApi();
-		return $api->getInfo();
-	}
-	
-	
-	public function getDiseaseLv0(){
-		$api = new diseaseApi();
-		return $api->getLv0Infoes();
-	}
-	public function getArticle(){
-		$api = new articleApi();
-		return $api->getList();
+		return diseaseUIApi::getInstance()->getInfo();
 	}
 	
 	public function getDoctors($length=4){
-		$api = new doctorUIApi();
-		return $api->getInfoes($length);
+		return doctorUIApi::getInstance()->getInfoes($length);
 	}
 	
 	/**
@@ -43,8 +31,7 @@ class mainModel extends AppModel {
 	 * @return array
 	 */
 	public function getAskQuestionByDod($dod){
-		$api = new askUIApi();
-		$data = $api->getQuestionsByDod($dod,1);
+		$data = askUIApi::getInstance()->getQuestionsByDod($dod,1);
 		if(count($data) == 1){
 			return $data[0];
 		}else{

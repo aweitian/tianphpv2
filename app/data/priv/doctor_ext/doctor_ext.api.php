@@ -1,4 +1,5 @@
 <?php
+require_once FILE_SYSTEM_ENTRY."/app/data/_meta/doctorDutyMeta.php";
 require_once dirname(__FILE__)."/doctor_ext.validator.php";
 class doctorExtApi {
 	private $sqlManager;

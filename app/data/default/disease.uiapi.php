@@ -19,6 +19,30 @@ class diseaseUIApi {
 		}
 		return diseaseUIApi::$inst;
 	}
+	
+	
+	/**
+	 * 获取疾病名称
+	 * @param int $did
+	 * @return string;
+	 */
+	public function getNameByDid($did){
+		$cache_key = "getNameByDid-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+	
+		$ret = $this->getRowByDid($did);
+		if(empty($ret)){
+			$ret = "";
+		}else{
+			$ret = $ret["data"];
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	
 	/**
 	 * 
 	 * 返回类似下面的二维数组

@@ -4,15 +4,17 @@
  * @author awei.tian
  * @date   2016-6-25
  */
+require_once FILE_SYSTEM_ENTRY."/app/data/_meta/doctorDutyMeta.php";
 class doctorUIApi {
 	private static $inst = null;
 	private $sqlManager;
 	private $db;
 	private $cache = array();
-	
+	private $docache = array();
 	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_doctor.xml");
+		$this->initCache();
 	}
 
 	public static function getInstance(){
@@ -32,8 +34,7 @@ class doctorUIApi {
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
-		
-		$ret = $this->db->fetch($this->sqlManager->getSql("/ui_doctor/name"), array("dod"=>$dod));
+		$ret = $this->getInfoByDod($dod);
 		if(empty($ret)){
 			$ret = "";
 		}else{
@@ -54,9 +55,11 @@ class doctorUIApi {
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
-		$ret = $this->db->fetch($this->sqlManager->getSql("/ui_doctor/infoByDid"), array(
-			"dod" => $dod
-		));
+		if (array_key_exists($dod, $this->docache)){
+			$ret = $this->docache[$dod];
+		}else{
+			$ret = array();
+		}
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
@@ -66,11 +69,15 @@ class doctorUIApi {
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
-		$ret = $this->db->fetchAll($this->sqlManager->getSql("/ui_doctor/infoes"), array(
-			"length" => $length
-		));
+		$ret = array_slice($this->docache, 0,$length);
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
-	
+	private function initCache(){
+		$data = $this->db->fetchAll(
+				$this->sqlManager->getSql("/ui_doctor/all"), array());
+		foreach($data as $item){
+			$this->docache[$item["sid"]] = $item;
+		}
+	}
 }

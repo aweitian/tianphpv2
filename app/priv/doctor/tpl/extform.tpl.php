@@ -109,7 +109,6 @@ if(isset($_SERVER['HTTP_REFERER'])){
  					<div class="form-group">
                       <label>医生值班表</label>
                       
-                      <?php require_once FILE_SYSTEM_ENTRY."/app/data/_meta/doctorDutyMeta.php"?>
                       <?php $meta_duty = doctorDutyMeta::getDay()?>
                       <?php $meta_status = doctorDutyMeta::getDayStaus()?>
                       <?php $meta_daynight = doctorDutyMeta::getDayNight()?>

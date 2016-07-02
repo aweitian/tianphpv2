@@ -5,6 +5,7 @@
  * Desc:
  * 		
  */
+require FILE_SYSTEM_ENTRY."/app/data/_meta/appraiseLvMeta.php";
 require_once dirname(__FILE__)."/appraiseValidator.php";
 class appraiseApi{
 	private $sqlManager;
@@ -21,7 +22,7 @@ class appraiseApi{
 	}
 	
 	public static function getAppraiseMeta($i=null){
-		$meta = require FILE_SYSTEM_ENTRY."/app/data/_meta/appraiseLvMeta.php";
+		$meta = appraiseLvMeta::getMeta();
 		if(is_numeric($i) && $i >=0 && $i < count($meta)){
 			return $meta[$i];
 		}
