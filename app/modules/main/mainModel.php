@@ -1,5 +1,7 @@
 <?php
 require_once FILE_SYSTEM_ENTRY."/app/data/default/disease.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/doctor.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/ask.uiapi.php";
 class mainModel extends AppModel {
 	
 	public function __construct() {
@@ -29,5 +31,24 @@ class mainModel extends AppModel {
 		return $api->getList();
 	}
 	
+	public function getDoctors($length=4){
+		$api = new doctorUIApi();
+		return $api->getInfoes($length);
+	}
 	
+	/**
+	 * 根据医生ID获取一个问答
+	 * @param int $dod
+	 * @param int $length
+	 * @return array
+	 */
+	public function getAskQuestionByDod($dod){
+		$api = new askUIApi();
+		$data = $api->getQuestionsByDod($dod,1);
+		if(count($data) == 1){
+			return $data[0];
+		}else{
+			return array();
+		}
+	}
 }

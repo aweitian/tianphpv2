@@ -5,11 +5,21 @@
  * @date   2016-6-27
  */
 class userUIApi {
+	private static $inst = null;
 	private $sqlManager;
 	private $db;
-	public function __construct(){
+	private $cache = array();
+	
+	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_user.xml");
+	}
+	
+	public static function getInstance(){
+		if(is_null(appraiseUIApi::$inst)){
+			appraiseUIApi::$inst = new appraiseUIApi();
+		}
+		return appraiseUIApi::$inst;
 	}
 	
 	/**
@@ -22,10 +32,16 @@ class userUIApi {
 	 * @return array;
 	 */
 	public function row($uid){
+		$cache_key = "row-".$uid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
 		$sql = $this->sqlManager->getSql("/ui_user/row_uid");
-		return $this->db->fetch($sql, array(
+		$ret = $this->db->fetch($sql, array(
 			"uid" => $uid
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 }

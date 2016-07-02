@@ -4,15 +4,23 @@
  * @author awei.tian
  * @date   2016-6-27
  */
-class userUIApi {
+class letterUIApi {
+	private static $inst = null;
 	private $sqlManager;
 	private $db;
-	public function __construct(){
+	private $cache = array();
+	
+	private function __construct(){
 		$this->db = new mysqlPdoBase();
-		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_user.xml");
+		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_letter.xml");
 	}
 	
-	
+	public static function getInstance(){
+		if(is_null(letterUIApi::$inst)){
+			letterUIApi::$inst = new letterUIApi();
+		}
+		return letterUIApi::$inst;
+	}
 	
 	
 }

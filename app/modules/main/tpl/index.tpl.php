@@ -101,76 +101,45 @@ foreach ($m->getDisease() as $item){
           </div>
           <div class="blank20"></div>
           <div class="fromzxzjbox2">
+		  
+		
+		  
+		  <?php
+		  //echo "<pre>";
+		//var_dump($m->getDoctors(5));
+		  ?>
+		   	<?php foreach($m->getDoctors(5) as $doc):?>
+          
             <dl class="clearfix graybg">
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj2.jpg" width="68" height="68" /></dt>
+              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" width="68" height="68" /></dt>
               <dd class="dd1 fl fz13">
-                <p><a class="blue">陈希球</a> 副主任医师</p>
+                <p><a class="blue"><?php print $doc["name"]; ?></a> <?php print $doc["lv"]; ?></p>
                 <p>上海九龙男子医院</p>
-                <p>男科手术</p>
+                <p> <?php print $doc["spec"]; ?></p>
               </dd>
+			  <?php $askdata = $m->getAskQuestionByDod($doc["sid"])?>
+			  <?php
+			   if(!empty($askdata)):
+			  ?>
               <dd class="dd2 fl">
-                <p>性功能不好、甲不好...</p>
-                <p class="gray">最近通话：05-19</p>
+                <p>
+				<?php  print $askdata["title"]?></p>
+                <p class="gray">最近通话<?php  print $askdata["date"]?></p>
                 <p class="blue"><a href="">查看最新用户分享 >></a></p>
               </dd>
               <dd class="dd3 fr orange tc fz16"><a href="">即刻预约</a></dd>
+			  <?php
+			   else:
+			  ?> 
+			  暂无问答
+			  <?php endif;?>
             </dl>
-            <dl class="clearfix">
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj2.jpg" width="68" height="68" /></dt>
-              <dd class="dd1 fl fz13">
-                <p><a class="blue">陈希球</a> 副主任医师</p>
-                <p>上海九龙男子医院</p>
-                <p>男科手术</p>
-              </dd>
-              <dd class="dd2 fl">
-                <p>性功能不好、甲不好...</p>
-                <p class="gray">最近通话：05-19</p>
-                <p class="blue"><a href="">查看最新用户分享 >></a></p>
-              </dd>
-              <dd class="dd3 fr orange tc fz16"><a href="">即刻预约</a></dd>
-            </dl>
-            <dl class="clearfix graybg">
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj2.jpg" width="68" height="68" /></dt>
-              <dd class="dd1 fl fz13">
-                <p><a class="blue">陈希球</a> 副主任医师</p>
-                <p>上海九龙男子医院</p>
-                <p>男科手术</p>
-              </dd>
-              <dd class="dd2 fl">
-                <p>性功能不好、甲不好...</p>
-                <p class="gray">最近通话：05-19</p>
-                <p class="blue"><a href="">查看最新用户分享 >></a></p>
-              </dd>
-              <dd class="dd3 fr orange tc fz16"><a href="">即刻预约</a></dd>
-            </dl>
-            <dl class="clearfix">
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj2.jpg" width="68" height="68" /></dt>
-              <dd class="dd1 fl fz13">
-                <p><a class="blue">陈希球</a> 副主任医师</p>
-                <p>上海九龙男子医院</p>
-                <p>男科手术</p>
-              </dd>
-              <dd class="dd2 fl">
-                <p>性功能不好、甲不好...</p>
-                <p class="gray">最近通话：05-19</p>
-                <p class="blue"><a href="">查看最新用户分享 >></a></p>
-              </dd>
-              <dd class="dd3 fr orange tc fz16"><a href="">即刻预约</a></dd>
-            </dl>
-            <dl class="clearfix graybg last">
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj2.jpg" width="68" height="68" /></dt>
-              <dd class="dd1 fl fz13">
-                <p><a class="blue">陈希球</a> 副主任医师</p>
-                <p>上海九龙男子医院</p>
-                <p>男科手术</p>
-              </dd>
-              <dd class="dd2 fl">
-                <p>性功能不好、甲不好...</p>
-                <p class="gray">最近通话：05-19</p>
-                <p class="blue"><a href="">查看最新用户分享 >></a></p>
-              </dd>
-              <dd class="dd3 fr orange tc fz16"><a href="">即刻预约</a></dd>
-            </dl>
+          	<?php endforeach;?>
+     
+          
+		  
+		  	
+		  
           </div>
         </div>
       </div>
@@ -402,22 +371,28 @@ foreach ($m->getDisease() as $item){
       <div class="fromjyfx clearfix">
         <div class="fromjyfxl fl">
           <div class="fromjyfxlt fz16">
-            <p><strong class="orange">69,948</strong> 篇看病经验</p>
+            <p>患者评价</p>
           </div>
           <div class="fromjyfxlc">
             <dl class="fz13">
-              <dt><span class="gray">就诊医生：</span> <span class="blue">陈希球</span></dt>
-              <dd>我因胆结石引起胆囊炎,求医隐陈希球医生作XXXXX手术,在住院的几天内对毛大夫精湛的医技和髙尚的医徳深...<a class="black" href="">[详情]</a></dd>
+              <dt><span class="gray">疾病：</span> <span class="blue">前列腺炎</span></dt>
+                <dd>谢谢医生，很有耐心，解答很及时，让我低落的心情好了很多，真的很感谢！
+                <p class="clr"><font class="fl"><span class="gray">满意度： </span><span class="yellow">很满意</span></font>
+                <font class="fr"><span class="gray">接诊医生：</span><span class="blue">陈希球</span></font></p></dd>
             </dl>
             <dl class="fz13">
-              <dt><span class="gray">就诊医生：</span> <span class="blue">陈希球</span></dt>
-              <dd>我因胆结石引起胆囊炎,求医隐陈希球医生作XXXXX手术,在住院的几天内对毛大夫精湛的医技和髙尚的医徳深...<a class="black" href="">[详情]</a></dd>
+              <dt><span class="gray">疾病：</span> <span class="blue">前列腺炎</span></dt>
+                <dd>谢谢医生，很有耐心，解答很及时，让我低落的心情好了很多，真的很感谢！
+                <p class="clr"><font class="fl"><span class="gray">满意度： </span><span class="yellow">很满意</span></font>
+                <font class="fr"><span class="gray">接诊医生：</span><span class="blue">陈希球</span></font></p></dd>
             </dl>
             <dl class="fz13">
-              <dt><span class="gray">就诊医生：</span> <span class="blue">陈希球</span></dt>
-              <dd>我因胆结石引起胆囊炎,求医隐陈希球医生作XXXXX手术,在住院的几天内对毛大夫精湛的医技和髙尚的医徳深...<a class="black" href="">[详情]</a></dd>
+              <dt><span class="gray">疾病：</span> <span class="blue">前列腺炎</span></dt>
+                <dd>谢谢医生，很有耐心，解答很及时，让我低落的心情好了很多，真的很感谢！
+                <p class="clr"><font class="fl"><span class="gray">满意度： </span><span class="yellow">很满意</span></font>
+                <font class="fr"><span class="gray">接诊医生：</span><span class="blue">陈希球</span></font></p></dd>
             </dl>
-            <div class="fromjyfxlb fromjyfxbsm fz12"><a class="blue">写我的看病经验</a></div>
+            <div class="fromjyfxlb fromjyfxbsm fz12"><a class="blue" href="">写我的看病经验</a></div>
           </div>
         </div>
         <div class="fromjyfxr fr">
@@ -439,7 +414,7 @@ foreach ($m->getDisease() as $item){
               </dt>
               <dd>我父亲XXXXX坏死长达20多年，一直未得到良好的医治。2015年7月，我在上看到了陈主任的信息，得知他是...<a class="black" href="">看详情>></a></dd>
             </dl>
-            <div class="fromjyfxrb fromjyfxbsm fz12"><a class="orange">写感谢信给医生</a></div>
+            <div class="fromjyfxrb fromjyfxbsm fz12"><a class="orange" href="">写感谢信给医生</a></div>
           </div>
         </div>
       </div>

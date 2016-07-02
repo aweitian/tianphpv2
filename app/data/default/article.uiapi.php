@@ -5,11 +5,20 @@
  * @date   2016-6-27
  */
 class articleUIApi {
+	private static $inst = null;
 	private $sqlManager;
 	private $db;
-	public function __construct(){
+	private $cache = array();
+	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_article.xml");
+	}
+	
+	public static function getInstance(){
+		if(is_null(articleUIApi::$inst)){
+			articleUIApi::$inst = new articleUIApi();
+		}
+		return articleUIApi::$inst;
 	}
 	
 	/**
@@ -20,6 +29,12 @@ class articleUIApi {
 	 * @return array fetchAll
 	 */
 	public function getAllThumbnail($did,$length){
+		$cache_key = "getAllThumbnail-".$did."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		
 		$sql = $this->sqlManager->getSql("/ui_article/row_thumb_did");
 		$thumbnail = $this->db->fetch($sql, array(
 				"did" => $did
@@ -32,13 +47,17 @@ class articleUIApi {
 					"exc" => $thumbnail["aid"],
 					"length" => $length
 			));
-			return array_merge($thumbnail,$others);
+			$ret = array_merge($thumbnail,$others);
+			$this->cache[$cache_key] = $ret;
+			return $ret;
 		}else{
 			$sql = $this->sqlManager->getSql("/ui_article/allByDid");
-			return $this->db->fetchAll($sql, array(
+			$ret = $this->db->fetchAll($sql, array(
 					"did" => $did,
 					"length" => $length
 			));
+			$this->cache[$cache_key] = $ret;
+			return $ret;
 		}
 	}
 	
@@ -49,11 +68,17 @@ class articleUIApi {
 	 * @return array fetch
 	 */
 	public function getRowThumbnailByDid($did){
+		$cache_key = "getRowThumbnailByDid-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
 		$sql = $this->sqlManager->getSql("/ui_article/row_thumb_did");
-		$thumbnail = $this->db->fetch($sql, array(
+		$ret = $this->db->fetch($sql, array(
 			"did" => $did
 		));
-		return $thumbnail;
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 	/**
@@ -64,11 +89,18 @@ class articleUIApi {
 	 * @return array fetchAll
 	 */
 	public function getAll($did,$length){
+		$cache_key = "getAll-".$did."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
 		$sql = $this->sqlManager->getSql("/ui_article/allByDid");
-		return $this->db->fetchAll($sql, array(
+		$ret = $this->db->fetchAll($sql, array(
 			"did" => $did,
 			"length" => $length
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 	
@@ -81,12 +113,19 @@ class articleUIApi {
 	 * @return array fetchAll
 	 */
 	public function getAllExc($did,$exc,$length){
+		$cache_key = "getAllExc-".$did."-".$exc."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
 		$sql = $this->sqlManager->getSql("/ui_article/allByDid_Exc");
-		return $this->db->fetchAll($sql, array(
+		$ret = $this->db->fetchAll($sql, array(
 			"did" => $did,
 			"exc" => $exc,
 			"length" => $length
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 	

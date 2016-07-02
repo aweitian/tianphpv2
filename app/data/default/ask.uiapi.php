@@ -4,14 +4,23 @@
  * @author awei.tian
  * @date   2016-6-25
  */
-class diseaseUIApi {
+class askUIApi {
+	private static $inst = null;
 	private $sqlManager;
 	private $db;
-	public function __construct(){
+	private $cache = array();
+	
+	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_ask.xml");
 	}
 	
+	public static function getInstance(){
+		if(is_null(askUIApi::$inst)){
+			askUIApi::$inst = new askUIApi();
+		}
+		return askUIApi::$inst;
+	}
 	
 	/**
 	 * 按病种ID倒序排列
@@ -22,11 +31,18 @@ class diseaseUIApi {
 	 * @return array fetchAll
 	 */
 	public function getQuestionsByDid($did,$length=4){
+		$cache_key = "getQuestionsByDid-".$did."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
 		$sql = $this->sqlManager->getSql("/ui_ask/getAskByDid");
-		return $this->db->fetchAll($sql, array(
+		$ret = $this->db->fetchAll($sql, array(
 			"did" => $did,
 			"length" => $length
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 	/**
@@ -36,10 +52,16 @@ class diseaseUIApi {
 	 * @return array fetch
 	 */
 	public function getAnswerByAskid($askid){
+		$cache_key = "getAnswerByAskid-".$askid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
 		$sql = $this->sqlManager->getSql("/ui_ask/getAnswerByAskid");
-		return $this->db->fetch($sql, array(
+		$ret = $this->db->fetch($sql, array(
 			"askid" => $askid
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 	/**
@@ -50,11 +72,18 @@ class diseaseUIApi {
 	 * @return array fetchAll
 	 */
 	public function getQuestionsByDod($dod,$length=5){
+		$cache_key = "getQuestionsByDod-".$dod."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
 		$sql = $this->sqlManager->getSql("/ui_ask/getAskByDod");
-		return $this->db->fetchAll($sql, array(
+		$ret = $this->db->fetchAll($sql, array(
 				"dod" => $dod,
 				"length" => $length
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 	
@@ -66,11 +95,18 @@ class diseaseUIApi {
 	 * @return array fetchAll
 	 */
 	public function getQuestionsByLv0Did($did,$length=8){
+		$cache_key = "getQuestionsByLv0Did-".$did."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
 		$sql = $this->sqlManager->getSql("/ui_ask/getAllByLv0Did");
-		return $this->db->fetchAll($sql, array(
+		$ret = $this->db->fetchAll($sql, array(
 				"dod" => $dod,
 				"length" => $length
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 }

@@ -174,6 +174,15 @@ $(function(){
 					 .siblings().hide();
 	})
 	
+	var tab_rpd_nav_li = $('.rtpawdtit li');//切换样式
+	tab_rpd_nav_li.click(function(){
+		$(this).addClass('selected')
+				 .siblings().removeClass('selected');
+	var tab_rpd_nav_li_index = tab_rpd_nav_li.index(this);
+	$('.rtpform .rtpcon').eq(tab_rpd_nav_li_index).show()
+					 .siblings().hide();
+	})
+	
 		
 	var tab_qus_nav_li = $('.quesnav li');//切换样式
 	tab_qus_nav_li.mouseover(function(){
@@ -204,9 +213,32 @@ $(function(){
 					 .siblings().hide();
 	})
 	
-
-
-
+		var tab_ss1_nav_li = $('.jb_sstab li');//切换样式
+	tab_ss1_nav_li.mouseover(function(){
+		$(this).addClass('selected')
+				 .siblings().removeClass('selected');
+	var tab_ss1_nav_li_index = tab_ss1_nav_li.index(this);
+	$('.jb_ssall .jb_ssbox').eq(tab_ss1_nav_li_index).show()
+					 .siblings().hide();
+	})
+	var tab_yyjs_nav_li = $('.yyjs_sstab li');//切换样式
+	tab_yyjs_nav_li.mouseover(function(){
+		$(this).addClass('selected')
+				 .siblings().removeClass('selected');
+	var tab_yyjs_nav_li_index = tab_yyjs_nav_li.index(this);
+	$('.yyjs_ssall .yyjs_ssbox').eq(tab_yyjs_nav_li_index).show()
+					 .siblings().hide();
+	})
+	
+		var tab_zs_nav_li = $('.jb_zstab li');//切换样式
+	tab_zs_nav_li.mouseover(function(){
+		$(this).addClass('selected')
+				 .siblings().removeClass('selected');
+	var tab_zs_nav_li_index = tab_zs_nav_li.index(this);
+	$('.jb_zsall .jb_zsbox').eq(tab_zs_nav_li_index).show()
+					 .siblings().hide();
+	})
+	
  var tab_menu_li = $('.allfrombz dl');//高亮当前选项
   tab_menu_li.mouseover(function(){
   	$(this).addClass('selected')
@@ -214,6 +246,24 @@ $(function(){
   });
 
 
+ var tab_menu_li = $('.zjtd_r2 dl');//高亮当前选项
+  tab_menu_li.mouseover(function(){
+  	$(this).addClass('selected')
+  			 .siblings().removeClass('selected');
+  });
+  
+var explorer = navigator.userAgent ;
+if (explorer.indexOf("MSIE") >= 0) {
+    $(function(){    
+        $("a.message").css("margin-right", "4px");
+        $("li.item").first().css("margin-left", "8px");
+     });
+}
+/*	$('.boxgrid.captionfull').hover(function(){
+		$(".cover", this).stop().animate({top:'0px'},{queue:false,duration:0});
+	}, function() {
+		$(".cover", this).stop().animate({top:'230px'},{queue:false,duration:230});
+	});	*/
 
 
 });

@@ -5,13 +5,20 @@
  * @date   2016-6-27
  */
 class diseaseUIApi {
+	private static $inst = null;
 	private $sqlManager;
 	private $db;
-	public function __construct(){
+	private $cache = array();
+	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_disease.xml");
 	}
-	
+	public static function getInstance(){
+		if(is_null(diseaseUIApi::$inst)){
+			diseaseUIApi::$inst = new diseaseUIApi();
+		}
+		return diseaseUIApi::$inst;
+	}
 	/**
 	 * 
 	 * 返回类似下面的二维数组
@@ -23,8 +30,14 @@ class diseaseUIApi {
 	 * @return array(fetchAll);
 	 */
 	public function getInfo() {
+		$cache_key = "getInfo";
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
 		$sql = $this->sqlManager->getSql("/ui_disease/tree2table");
-		return $this->db->fetchAll($sql, array());
+		$ret = $this->db->fetchAll($sql, array());
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 	/**
@@ -34,10 +47,16 @@ class diseaseUIApi {
 	 * @return array(fetch);
 	 */
 	public function getRowByDiskey($urlkey) {
+		$cache_key = "getRowByDiskey-".$urlkey;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
 		$sql = $this->sqlManager->getSql("/ui_disease/row_disease_url");
-		return $this->db->fetch($sql, array(
+		$ret = $this->db->fetch($sql, array(
 			"key" => $urlkey
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 	/**
@@ -45,8 +64,14 @@ class diseaseUIApi {
 	 * @return array fetchAll;
 	 */
 	public function getLv0Infoes(){
+		$cache_key = "getLv0Infoes";
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
 		$sql = $this->sqlManager->getSql("/ui_disease/lv0Infoes");
-		return $this->db->fetch($sql, array());
+		$ret = $this->db->fetch($sql, array());
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 	
@@ -56,10 +81,16 @@ class diseaseUIApi {
 	 * @return array(fetch);
 	 */
 	public function getRowByDid($did){
+		$cache_key = "getRowByDid-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
 		$sql = $this->sqlManager->getSql("/ui_disease/rowBySid");
-		return $this->db->fetch($sql, array(
+		$ret = $this->db->fetch($sql, array(
 			"did" => $did
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 	
@@ -71,10 +102,16 @@ class diseaseUIApi {
 	 * @return array fetch
 	 */
 	public function getArticleTag7ByDid($did){
+		$cache_key = "getArticleTag7ByDid-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
 		$sql = $this->sqlManager->getSql("/ui_disease/ArticleTag7/main");
-		return $this->db->fetch($sql, array(
+		$ret = $this->db->fetch($sql, array(
 			"did" => $did
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 	}
 	
 }
