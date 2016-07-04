@@ -90,26 +90,31 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     
                     
                      <div class="form-group">
-                      <label>选择医生</label>
                       <?php 
                       $hash_doc_rel = array();
                       foreach ($info["def"]["doc"] as $doc_selected){
                       	$hash_doc_rel[$doc_selected["dod"]] = $doc_selected["aid"];
                       }
                       ?>
-         				 <select multiple class="form-control" name="doid[]">
-                        <?php foreach ($info["doctor"] as $child):?>
-                        <option value="<?php print $child["sid"]?>"<?php if(array_key_exists($child["sid"], $hash_doc_rel)):?>selected <?php endif;?>><?php print $child["name"]?></option>
-                        <?php endforeach;?>
-           
-                        </select>
+                      <fieldset>
+                      	<legend>选择医生</legend>
+         
+	                        <?php foreach ($info["doctor"] as $child):?>
+	                        <label style="font-weight:normal;padding-right:12px;">
+	                        <input type="checkbox" name="doid[]" value="<?php print $child["sid"]?>"<?php if(array_key_exists($child["sid"], $hash_doc_rel)):?>checked <?php endif;?>><?php print $child["name"]?>
+	                        </label>
+	                        <?php endforeach;?>
+                      	</fieldset>  
+                        
+                        
                     </div>
                     
                      <div class="form-group">
-                      <label>选择疾病</label>
+                      
          				
          				<?php  
                       	/***
+                      	 * 选择疾病
                       	 * array(
                       	 * 	"pid"=>array(
                       	 * 		"text"=>"",
@@ -139,26 +144,32 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       		$hash_dis_rel[$dis_selected["did"]] = $dis_selected["aid"];
                       	}
                       	?>
-                        <select multiple class="form-control" name="diid[]">
-                        <?php foreach ($tree_dis as $pid => $item):?>
-                        <optgroup label="<?php print $item["text"]?>">
+                      	<fieldset>
+                      	<legend>选择疾病</legend>
+                      	 <?php foreach ($tree_dis as $pid => $item):?>
+                        <b><?php print $item["text"]?>:</b>
 	                        <?php foreach ($item["children"] as $mid => $child):?>
-	                        <option value="<?php print $mid?>"<?php if(array_key_exists($mid, $hash_dis_rel)):?>selected <?php endif;?>><?php print $child?></option>
+	                        <label style="font-weight:normal;padding-right:12px;">
+	                        <input type="checkbox" name="diid[]" value="<?php print $mid?>"<?php if(array_key_exists($mid, $hash_dis_rel)):?>checked <?php endif;?>><?php print $child?>
+	                        </label>
 	                        <?php endforeach;?>
-                        </optgroup>
-                        
+                        <br>
                         <?php endforeach;?>
-                        </select> 
+                      	
+                      	
+                      	</fieldset>
+<!--                         <select multiple class="form-control" name="diid[]"> -->
+                       
+<!--                         </select>  -->
                       
                     </div>
                     
                     
                     
                      <div class="form-group">
-                      <label>选择症状</label>
-         				
          				<?php  
                       	/***
+                      	 * 选择症状
                       	 * array(
                       	 * 	"pid"=>array(
                       	 * 		"text"=>"",
@@ -188,16 +199,23 @@ if(isset($_SERVER['HTTP_REFERER'])){
 //                       	var_dump($info["def"]["sym"]);
                       	
                       	?>
-                        <select multiple class="form-control" name="syid[]">
-                        <?php foreach ($tree_sym as $pid => $item):?>
-                        <optgroup label="<?php print $item["text"]?>">
-	                        <?php foreach ($item["children"] as $mid => $child):?>
-	                        <option value="<?php print $mid?>"<?php if(array_key_exists($mid, $hash_sym_rel)):?> selected<?php endif;?>><?php print $child?></option>
+                      
+                      	<fieldset>
+                      	<legend>选择症状</legend>
+                      	 <?php foreach ($tree_sym as $pid => $item):?>
+                        <b><?php print $item["text"]?>:</b><br>
+	                       <?php foreach ($item["children"] as $mid => $child):?>
+	                        <label style="font-weight:normal;padding-right:12px;">
+	                        <input type="checkbox" name="syid[]" value="<?php print $mid?>"<?php if(array_key_exists($mid, $hash_sym_rel)):?>checked <?php endif;?>><?php print $child?>
+	                        </label>
 	                        <?php endforeach;?>
-                        </optgroup>
-                        
+                        <br>
                         <?php endforeach;?>
-                        </select> 
+                      	
+                      	
+                      	</fieldset>
+                      
+                      
                       
                     </div>
                     

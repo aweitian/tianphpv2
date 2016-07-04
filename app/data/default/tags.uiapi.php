@@ -9,10 +9,11 @@ class tagsUIApi {
 	private $sqlManager;
 	private $db;
 	private $cache = array();
-	
+	private $dataCache = array();
 	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_tags.xml");
+		$this->init();
 	}
 	public static function getInstance(){
 		if(is_null(tagsUIApi::$inst)){
@@ -21,40 +22,33 @@ class tagsUIApi {
 		return tagsUIApi::$inst;
 	}
 	
-// 	/**
-// 	 * 按病种ID获取所有兄弟结点
-// 	 * aid,kw,desc,thumb,title,date
-// 	 * @param int $did 病种ID
-// 	 * @param int $length
-// 	 * @return array fetchAll
-// 	 */
-// 	public function getAll($did,$length){
+	/**
+	 * 根据标签获取ID
+	 * @param string $text
+	 * @return int 0表示没有找到
+	 */
+	public function getTagId($text){
+		$cache_key = "getTagId-".$text;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		if(array_key_exists($text,$this->dataCache)){
+			$ret = $this->dataCache[$text]["sid"];
+		}else{
+			$ret = 0;
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
 		
-// 		$cache_key = "getAll-".$did."-".$length;
-// 		if (array_key_exists($cache_key, $this->cache)){
-// 			return $this->cache[$cache_key];
-// 		}
-		
-// 		$sql = $this->sqlManager->getSql("/ui_article/row_thumb_did");
-// 		$thumbnail = $this->db->fetch($sql, array(
-// 				"did" => $did
-// 		));
-// 		if(!empty($thumbnail)){
-// 			$length--;
-// 			$sql = $this->sqlManager->getSql("/ui_article/allByDid_Exc");
-// 			$others = $this->db->fetchAll($sql, array(
-// 					"did" => $did,
-// 					"exc" => $thumbnail["aid"],
-// 					"length" => $length
-// 			));
-// 			return array_merge($thumbnail,$others);
-// 		}else{
-// 			$sql = $this->sqlManager->getSql("/ui_article/allByDid");
-// 			return $this->db->fetchAll($sql, array(
-// 					"did" => $did,
-// 					"length" => $length
-// 			));
-// 		}
-// 	}
+	}
 	
+	
+	private function init(){
+		$data = $this->db->fetchAll(
+				$this->sqlManager->getSql("/ui_tags/all"), array());
+		foreach($data as $item){
+			$this->dataCache[$item["text"]] = $item;
+		}
+	}
+
 }

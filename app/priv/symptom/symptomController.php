@@ -100,6 +100,9 @@ class symptomController extends privController{
 			$edit_rir = $this->model->edit($sid, $msg["data"]);
 			
 			if($edit_rir->isTrue()){
+				if(is_array($msg["diid"])){
+					$this->model->addSymptomDisease($sid, $msg["diid"]);
+				}
 				if(isset($msg["?returl"])){
 					$ret_url = $msg["?returl"];
 				}else{
@@ -127,9 +130,11 @@ class symptomController extends privController{
 				if(!$lvRet->isTrue()){
 					$this->response->_404();
 				}
+				$info["dis"] = $this->model->getDiseasesBySyd($sid);
+				
 			}
 			$this->view->setPmcaiMsg($msg);
-			$this->view->showFormUI($this->priv->getUserInfo(), $sid,$meta[$lvRet->return]["val"],$info,$msg["?sid"]);
+			$this->view->showFormUI($this->priv->getUserInfo(), $sid,$meta[$lvRet->return]["val"],$this->model->getInfo_disease(),$info,$msg["?sid"]);
 		}
 	}
 	
@@ -189,6 +194,9 @@ class symptomController extends privController{
 			//insert
 			$ret = $this->model->add($msg["data"], $pid, SYMPTOM_GRP_ID, $metaid);
 			if($ret->isTrue()){
+				if(is_array($msg["diid"])){
+					$this->model->addSymptomDisease($ret->return, $msg["diid"]);
+				}
 				if(isset($msg["?returl"])){
 					$ret_url = $msg["?returl"];
 				}else{
@@ -213,10 +221,9 @@ class symptomController extends privController{
 					}
 					$lv = $tmp->return + 1;
 				}
-					
 			}
 			$this->view->setPmcaiMsg($msg);
-			$this->view->showFormUI($this->priv->getUserInfo(), $pid,$meta[$lv]["val"]);
+			$this->view->showFormUI($this->priv->getUserInfo(), $pid,$meta[$lv]["val"],$this->model->getInfo_disease());
 		}
 	}
 	

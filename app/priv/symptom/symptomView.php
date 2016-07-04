@@ -41,10 +41,11 @@ class symptomView extends privView{
 	}
 	
 	
-	public function showFormUI($info,$pid,$meta,$def=null,$sid=0){
+	public function showFormUI($info,$pid,$meta,$dis,$def=null,$sid=0){
 		$content = $this->fetch("form",array(
 				"pid" => $pid,
 				"meta" => $meta,
+				"dis" => $dis,
 				"def" => $def,
 				"sid" => $sid
 		));

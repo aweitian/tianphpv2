@@ -5,6 +5,8 @@
  * Description: 
  */
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/symptom/symptom.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/disease/disease.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/symptom_disease/symptom_disease.api.php";
 class symptomModel extends privModel{
 	/**
 	 * 
@@ -24,7 +26,10 @@ class symptomModel extends privModel{
 		return $api->rm($sid);
 	}
 	
-	
+	public function getInfo_disease(){
+		$api = new diseaseApi();
+		return $api->getInfo();
+	}
 	
 	public function getData($pid){
 		$api = new symptomApi();
@@ -65,9 +70,20 @@ class symptomModel extends privModel{
 		return $api->getMeta();
 	}
 	
+	/**
+	 * 根据症状获取疾病ID
+	 * @param symid $syd
+	 * @return array
+	 */
+	public function getDiseasesBySyd($syd){
+		$api = new symptomDiseaseApi();
+		return $api->rows($syd);
+	}
 	
-	
-	
+	public function addSymptomDisease($syd,$disArr){
+		$api = new symptomDiseaseApi();
+		return $api->connect(array($syd), $disArr);
+	}
 	
 	
 	/**
