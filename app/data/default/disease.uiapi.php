@@ -9,9 +9,13 @@ class diseaseUIApi {
 	private $sqlManager;
 	private $db;
 	private $cache = array();
+	
+	private $sidCache = array();
+	private $keyCache = array();
 	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_disease.xml");
+		$this->initCache();
 	}
 	public static function getInstance(){
 		if(is_null(diseaseUIApi::$inst)){
@@ -65,8 +69,8 @@ class diseaseUIApi {
 	}
 	
 	/**
-	 * sid  key     data         pid     grp  	metaid  
-	 * 327  nxbyz   男性不育症                  322       1 	2
+	 * sid  key     data         pid metaid  
+	 * 327  nxbyz   男性不育症                  322 2
 	 * @param string $urlkey
 	 * @return array(fetch);
 	 */
@@ -75,16 +79,13 @@ class diseaseUIApi {
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
-		$sql = $this->sqlManager->getSql("/ui_disease/row_disease_url");
-		$ret = $this->db->fetch($sql, array(
-			"key" => $urlkey
-		));
+		$ret = array_key_exists($urlkey, $this->keyCache) ? $this->keyCache[$urlkey] : array();
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
 	
 	/**
-	 * 
+	 * 返回字段:sid,key,data
 	 * @return array fetchAll;
 	 */
 	public function getLv0Infoes(){
@@ -92,15 +93,24 @@ class diseaseUIApi {
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
-		$sql = $this->sqlManager->getSql("/ui_disease/lv0Infoes");
-		$ret = $this->db->fetch($sql, array());
+
+		$ret = array();
+		foreach ($this->sidCache as $item){
+			if($item["pid"] == 0){
+				$ret[] = array(
+					"sid" =>  $item["sid"],
+					"key" =>  $item["key"],
+					"data" =>  $item["data"],
+				);
+			}
+		}
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
 	
 	
 	/**
-	 * 返回字段:key,data,pid 
+	 * 返回字段:sid,key,data,pid,metaid
 	 * @param int $did
 	 * @return array(fetch);
 	 */
@@ -109,13 +119,11 @@ class diseaseUIApi {
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
-		$sql = $this->sqlManager->getSql("/ui_disease/rowBySid");
-		$ret = $this->db->fetch($sql, array(
-			"did" => $did
-		));
+		$ret = array_key_exists($did, $this->sidCache) ? $this->sidCache[$did] : array();
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
+	
 	
 	
 	/**
@@ -138,4 +146,17 @@ class diseaseUIApi {
 		return $ret;
 	}
 	
+	/**
+	 * sid  key     data                   pid     grp  metaid  
+	 */
+	public function initCache(){
+		$sql = $this->sqlManager->getSql("/ui_disease/all");
+		$ret = $this->db->fetchAll($sql, array());
+		foreach ($ret as $item){
+			$this->sidCache[$item["sid"]] = $item;
+			if ($item["key"]) {
+				$this->keyCache[$item["key"]] = $item;
+			}
+		}
+	}
 }
