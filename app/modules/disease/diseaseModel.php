@@ -14,13 +14,11 @@ class diseaseModel extends AppModel {
 	 * 322  	男性不育	326  	肾虚           		sx 
 	 */
 	public function getDisease() {
-		$api = new diseaseUIApi();
-		return $api->getInfo();
+		return diseaseUIApi::getInstance()->getInfo();
 	}
 	
 	public function getRowByDiskey($urlkey) {
-		$api = new diseaseUIApi();
-		return $api->getRowByDiskey($urlkey);
+		return diseaseUIApi::getInstance()->getRowByDiskey($urlkey);
 	}
 	
 	/**

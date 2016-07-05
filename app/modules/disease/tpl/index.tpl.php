@@ -30,602 +30,600 @@ foreach ($m->getDisease() as $item){
 
 // exit;
 ?>
-
-<div class="blank20"></div>
-  <div id="focusindex">
-    <ul class="index_banner_box clearfix">
-      <li><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/sybanner1.jpg" width="998" height="238" /></a></li>
-      <li><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/sybanner1.jpg" width="998" height="238" /></a></li>
-      <li><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/sybanner1.jpg" width="998" height="238" /></a></li>
-    </ul>
-  </div>
-  <div class="blank20"></div>
+ <div class="blank15"></div>
+  <div class="con_tit fz13">当前位置：<a href="">首页</a> > <a href="">医护团队</a> > <a href="">医师</a></div>
+  
+  <div class="blank15"></div>
   <div class="sybox clearfix">
-    <div class="fl wid680">
-      <div class="fromjb border1">
-         <div class="fromtit fz18 black">按疾病找医生<span class="fz12 gray">By disease doctor</span></div>
-        <div class="fromjbbox  clearfix">
-          <div class="fromjbboxnr">
+    <div>
+      
+      <div class="clr">
+      	
+        <div class="jb_tit clr">
+        	<h2 class="fl tc fz24">前列腺炎<br /><span class="fz12">prostatitis</span></h2>
+            <ul class="fr fz16">
+            	<li><a href="" class="navdq">疾病首页</a></li><span>|</span>
+                <li><a href="">疾病知识</a></li><span>|</span>
+                <li><a href="">专家观点</a></li><span>|</span>
+                <li><a href="">好评医生</a></li><span>|</span>
+                <li><a href="">患者咨询</a></li>
+            </ul>
+        </div>
           
-          	<?php foreach($tree_dis as $dis):?>
-          
-          	<dl class="clearfix fl">
-              <dt class="fl tc orange fz15"><a href=""><?php print str_replace("疾病","",$dis["text"])?><br />
-                疾病</a></dt>
-              <dd class="fr fz13">
-              <?php foreach($dis["children"] as $sub_dis):?>
-              <a href=""><?php print $sub_dis?></a>
-              <?php endforeach;?>
-              
-              </dd>
-            </dl>
-          	<?php endforeach;?>
+          <div class="fz13">
+            
+            <div class="blank20"></div>
+                
+               <div class="clr">
+               	<div class="wid680 fl">
+                
+                	<div class="padd20 border2 clr">
+                    	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img1.jpg" class="fl" />
+                        <div class="jb_box1 fr">
+                        	<div class="blank10"></div>
+                        	<span class="fz18 bule">前列腺炎知识介绍</span>
+                            <div class="blank10"></div>
+                            <p class="fz13 color3">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾...<a href="" class="bule">疾病介绍→</a></p>
+                            <div class="blank10"></div>
+                            <div class="jbbox1_sm1 fz13">
+                                <p>
+                                <a href="">前列腺炎吃什么药，前列腺炎怎么治疗</a>
+                                <a href="">前列腺检查项目在线</a>
+                                </p>
+                                <p>
+                                <a href="">前列腺炎的发病原因</a>
+                                <a href="">【病因】 前列腺炎是怎么引起的</a>
+                                </p>
+                                <p>
+                                <a href="">【误诊】你是前列腺炎还是尿路？</a>
+                                <a href="">更多...</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                	
+                    <div class="blank20"></div>
+                    
+                    <div class="padd20 border2">
+                    	<div class="zjtdwztit fz18"><span></span>相关问答<a href="" class="fr fz13 color9">+更多</a></div>
+                        <div class="blank20"></div>
+                        <div class="clr jb_box2">
+                        
+                        	<div class="jbbox2_sm1 fl" style="width:290px; padding-right:30px; border-bottom:1px dotted #d7d7d7;">
+                            
+                            	<div class="jbbox2_sm1top clr">
+                                	<div class="fl jbbox2_p1 tc fz16 jb_ys1">尖锐<br />湿疣</div>
+                                    <div class="fr">
+                                    	<p>治疗一星期花了几万.没什么区别. 我与其他同治疗尖锐湿疣的 ...<a href="" class="bule"> 详细→</a></p>
+                                        <p class="fr color9">5分钟前</p>
+                                    </div>
+                                </div>
+                                <div class="blank20"></div>
+                                <div class="jbbox2_sm1top clr">
+                                	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img2.jpg" class="fl" />
+                                    <div class="fr">
+                                    	<span class="jb_ys1col">张英娣，副主任医师</span>
+                                        <p>这个肯定不是尖锐湿疣，建议去做个活检看看，就是取一块下来去化</p>
+                                    </div>
+                                	
+                                </div>
+                                <div class="blank25"></div>
+                            </div>
+                            
+                            <div class="jbbox2_sm1 fr" style="width:290px; padding-left:26px; border-left:1px dotted #d7d7d7; border-bottom:1px dotted #d7d7d7;">
+                            
+                            	<div class="jbbox2_sm1top clr">
+                                	<div class="fl jbbox2_p1 tc fz16 jb_ys2">尖锐<br />湿疣</div>
+                                    <div class="fr">
+                                    	<p>治疗一星期花了几万.没什么区别. 我与其他同治疗尖锐湿疣的 ...<a href="" class="bule"> 详细→</a></p>
+                                        <p class="fr color9">5分钟前</p>
+                                    </div>
+                                </div>
+                                <div class="blank20"></div>
+                                <div class="jbbox2_sm1top clr">
+                                	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img3.jpg" class="fl" />
+                                    <div class="fr">
+                                    	<span class="jb_ys2col">张俊峰，主治医师</span>
+                                        <p>这个肯定不是尖锐湿疣，建议去做个活检看看，就是取一块下来去化验的</p>
+                                    </div>
+                                	
+                                </div>
+                                <div class="blank25"></div>
+                            </div>
+                            
+                            <div class="jbbox2_sm1 fl" style="width:290px; padding-right:30px;">
+                            	<div class="blank20"></div>
+                            	<div class="jbbox2_sm1top clr">
+                                	<div class="fl jbbox2_p1 tc fz16 jb_ys3">尖锐<br />湿疣</div>
+                                    <div class="fr">
+                                    	<p>治疗一星期花了几万.没什么区别. 我与其他同治疗尖锐湿疣的 ...<a href="" class="bule"> 详细→</a></p>
+                                        <p class="fr color9">5分钟前</p>
+                                    </div>
+                                </div>
+                                <div class="blank20"></div>
+                                <div class="jbbox2_sm1top clr">
+                                	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img2.jpg" class="fl" />
+                                    <div class="fr">
+                                    	<span class="jb_ys3col">张英娣，副主任医师</span>
+                                        <p>这个肯定不是尖锐湿疣，建议去做个活检看看，就是取一块下来去化</p>
+                                    </div>
+                                	
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="jbbox2_sm1 fr" style="width:290px; padding-left:26px; border-left:1px dotted #d7d7d7;">
+                            	<div class="blank20"></div>
+                            	<div class="jbbox2_sm1top clr">
+                                	<div class="fl jbbox2_p1 tc fz16 jb_ys4">尖锐<br />湿疣</div>
+                                    <div class="fr">
+                                    	<p>治疗一星期花了几万.没什么区别. 我与其他同治疗尖锐湿疣的 ...<a href="" class="bule"> 详细→</a></p>
+                                        <p class="fr color9">5分钟前</p>
+                                    </div>
+                                </div>
+                                <div class="blank20"></div>
+                                <div class="jbbox2_sm1top clr">
+                                	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img3.jpg" class="fl" />
+                                    <div class="fr">
+                                    	<span class="jb_ys4col">张俊峰，主治医师</span>
+                                        <p>这个肯定不是尖锐湿疣，建议去做个活检看看，就是取一块下来去化验的</p>
+                                    </div>
+                                	
+                                </div>
+                                <div class="blank25"></div>
+                            </div>
+                            
+                        </div>
+                        
+                	</div>
+                    
+                    <div class="blank20"></div>
+                    <div class="padd20 border2">
+                    	<div class="zjtdwztit fz18" style="border-bottom:0;"><span></span>前列腺炎全面详解</div>
+                        
+                        <div class="jb_sstab clearfix dgray fz13 color6">
+                            <ul class="clr">
+                              <li class="selected">病因</li>
+                              <li>症状</li>
+                              <li>检查</li>
+                              <li>治疗</li>
+                              <li>危害</li>
+                              <li class="last">保键</li>
+                            </ul>
+                        </div>
+      
+      					<div class="jb_ssall">
+                        <div class="jb_ssbox selected">
+                        	
+                            <div class="clr jb_ssbox_sm1">
+                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
+                                <div class="fr">
+                                	<span class="fz16 color3">1前列腺炎的病因有哪些？</span>
+                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
+                                </div>
+                                <div class="blank20"></div>
+                            </div>
+                            <div class="blank15"></div>
+                            <div class="jb_ssbox_sm2 clr">
+                        	<ul class="fl">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                            <ul class="fr">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                        </div>
+                            
+                        </div>
+                        <div class="jb_ssbox">
+                        	<div class="clr jb_ssbox_sm1">
+                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
+                                <div class="fr">
+                                	<span class="fz16 color3">2前列腺炎的病因有哪些？</span>
+                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
+                                </div>
+                                <div class="blank20"></div>
+                            </div>
+                            <div class="blank15"></div>
+                            <div class="jb_ssbox_sm2 clr">
+                        	<ul class="fl">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                            <ul class="fr">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="jb_ssbox">
+                        	<div class="clr jb_ssbox_sm1">
+                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
+                                <div class="fr">
+                                	<span class="fz16 color3">3前列腺炎的病因有哪些？</span>
+                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
+                                </div>
+                                <div class="blank20"></div>
+                            </div>
+                            <div class="blank15"></div>
+                            <div class="jb_ssbox_sm2 clr">
+                        	<ul class="fl">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                            <ul class="fr">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="jb_ssbox">
+                        	<div class="clr jb_ssbox_sm1">
+                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
+                                <div class="fr">
+                                	<span class="fz16 color3">4前列腺炎的病因有哪些？</span>
+                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
+                                </div>
+                                <div class="blank20"></div>
+                            </div>
+                            <div class="blank15"></div>
+                            <div class="jb_ssbox_sm2 clr">
+                        	<ul class="fl">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                            <ul class="fr">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="jb_ssbox">
+                        	<div class="clr jb_ssbox_sm1">
+                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
+                                <div class="fr">
+                                	<span class="fz16 color3">5前列腺炎的病因有哪些？</span>
+                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
+                                </div>
+                                <div class="blank20"></div>
+                            </div>
+                            <div class="blank15"></div>
+                            <div class="jb_ssbox_sm2 clr">
+                        	<ul class="fl">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                            <ul class="fr">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="jb_ssbox">
+                        	<div class="clr jb_ssbox_sm1">
+                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
+                                <div class="fr">
+                                	<span class="fz16 color3">6前列腺炎的病因有哪些？</span>
+                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
+                                </div>
+                                <div class="blank20"></div>
+                            </div>
+                            <div class="blank15"></div>
+                            <div class="jb_ssbox_sm2 clr">
+                        	<ul class="fl">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                            <ul class="fr">
+                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
+                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
+                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                            </ul>
+                        </div>
+                        </div>
+                      </div>
+                        
+                	</div>
+                    
+                    <div class="blank20"></div>
+                    
+                    <div class="padd20 border2 clr">
+                    	<div class="zjtdwztit fz18"><span></span>好评医生<a href="" class="fr fz13 color9">+更多推荐</a></div>
+                        
+                        <ul class="hp_doc1 clearfix">
+                        
+                            <li class="hp_doc_box1">
+                            <div class="clr">
+                            <div class="hp_doc_box2">
+                                <div class="fl pr20">
+                                <p class="tc">
+                                    <a href="" target="_blank">
+                                    <img alt="" src="<?php print HTTP_ENTRY?>/static/images/jb_img5.jpg">
+                                    </a>
+                                </p>
+                                        <a target="_blank" href="" class="personweb-sickness-btn">个人网站</a>
+                                </div>
+                                <div class="fl">
+                                    <p>张俊峰&nbsp;&nbsp;&nbsp;&nbsp;主治医师</p>
+                                    <p>
+                                        <span class="patient_recommend">患者推荐热度：
+                                        <a href=""><i class="blue" style="margin-left:-5px;">5.0</i></a></span>
+                                        <span><img src="<?php print HTTP_ENTRY?>/static/images/jian.png" style="vertical-align:-3px;"></span>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;近两周回复<b class="yellow">37</b>问 
+                                        </span>
+                                    </p>
+                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img6.png" class="fl" style="margin:5px 5px 0 0;" />擅长：擅长于泌尿系感染、前列腺炎、性功能障碍、男性不育等...</p>
+                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a href="" class="colora">查看张俊峰的全部文章、全部咨询</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="doc_rela_link">
+                                <p><a href="" class="online_btn"><span>点击咨询</span></a><p>
+                                <p><a href="" class="jiahao_btn"><span>预约挂号</span></a><p>
+                            </div>
+                            </div>
+                            </li>
+                            
+                            <li class="hp_doc_box1">
+                            <div class="clr">
+                            <div class="hp_doc_box2">
+                                <div class="fl pr20">
+                                <p class="tc">
+                                    <a href="" target="_blank">
+                                    <img alt="" src="<?php print HTTP_ENTRY?>/static/images/jb_img5.jpg">
+                                    </a>
+                                </p>
+                                        <a target="_blank" href="" class="personweb-sickness-btn">个人网站</a>
+                                </div>
+                                <div class="fl">
+                                    <p>张俊峰&nbsp;&nbsp;&nbsp;&nbsp;主治医师</p>
+                                    <p>
+                                        <span class="patient_recommend">患者推荐热度：
+                                        <a href=""><i class="blue" style="margin-left:-5px;">5.0</i></a></span>
+                                        <span><img src="<?php print HTTP_ENTRY?>/static/images/jian.png" style="vertical-align:-3px;"></span>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;近两周回复<b class="yellow">37</b>问 
+                                        </span>
+                                    </p>
+                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img6.png" class="fl" style="margin:5px 5px 0 0;" />擅长：擅长于泌尿系感染、前列腺炎、性功能障碍、男性不育等...</p>
+                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a href="" class="colora">查看张俊峰的全部文章、全部咨询</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="doc_rela_link">
+                                <p><a href="" class="online_btn"><span>点击咨询</span></a><p>
+                                <p><a href="" class="jiahao_btn"><span>预约挂号</span></a><p>
+                            </div>
+                            </div>
+                            </li>
+                            
+                            <li class="hp_doc_box1">
+                            <div class="clr">
+                            <div class="hp_doc_box2">
+                                <div class="fl pr20">
+                                <p class="tc">
+                                    <a href="" target="_blank">
+                                    <img alt="" src="<?php print HTTP_ENTRY?>/static/images/jb_img5.jpg">
+                                    </a>
+                                </p>
+                                        <a target="_blank" href="" class="personweb-sickness-btn">个人网站</a>
+                                </div>
+                                <div class="fl">
+                                    <p>张俊峰&nbsp;&nbsp;&nbsp;&nbsp;主治医师</p>
+                                    <p>
+                                        <span class="patient_recommend">患者推荐热度：
+                                        <a href=""><i class="blue" style="margin-left:-5px;">5.0</i></a></span>
+                                        <span><img src="<?php print HTTP_ENTRY?>/static/images/jian.png" style="vertical-align:-3px;"></span>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;近两周回复<b class="yellow">37</b>问 
+                                        </span>
+                                    </p>
+                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img6.png" class="fl" style="margin:5px 5px 0 0;" />擅长：擅长于泌尿系感染、前列腺炎、性功能障碍、男性不育等...</p>
+                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a href="" class="colora">查看张俊峰的全部文章、全部咨询</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="doc_rela_link">
+                                <p><a href="" class="online_btn"><span>点击咨询</span></a><p>
+                                <p><a href="" class="jiahao_btn"><span>预约挂号</span></a><p>
+                            </div>
+                            </div>
+                            </li>
+                            
+                            <li class="hp_doc_box1" style="border:0; padding-bottom:0;">
+                            <div class="clr">
+                            <div class="hp_doc_box2">
+                                <div class="fl pr20">
+                                <p class="tc">
+                                    <a href="" target="_blank">
+                                    <img alt="" src="<?php print HTTP_ENTRY?>/static/images/jb_img5.jpg">
+                                    </a>
+                                </p>
+                                        <a target="_blank" href="" class="personweb-sickness-btn">个人网站</a>
+                                </div>
+                                <div class="fl">
+                                    <p>张俊峰&nbsp;&nbsp;&nbsp;&nbsp;主治医师</p>
+                                    <p>
+                                        <span class="patient_recommend">患者推荐热度：
+                                        <a href=""><i class="blue" style="margin-left:-5px;">5.0</i></a></span>
+                                        <span><img src="<?php print HTTP_ENTRY?>/static/images/jian.png" style="vertical-align:-3px;"></span>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;近两周回复<b class="yellow">37</b>问 
+                                        </span>
+                                    </p>
+                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img6.png" class="fl" style="margin:5px 5px 0 0;" />擅长：擅长于泌尿系感染、前列腺炎、性功能障碍、男性不育等...</p>
+                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a href="" class="colora">查看张俊峰的全部文章、全部咨询</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="doc_rela_link">
+                                <p><a href="" class="online_btn"><span>点击咨询</span></a><p>
+                                <p><a href="" class="jiahao_btn"><span>预约挂号</span></a><p>
+                            </div>
+                            </div>
+                            </li>
+                            
+                        </ul>
+                        
+                	</div>
+                </div>
+               
+               
+    			<!--left end-->
+                
+                <div class="fr wid300 fz13">
+                	
+                    <div class="jb_rg">
+                        <textarea placeholder="在此咨询，专业医师在线提供就医指导" class="jb_rg1 fl color9"></textarea>
+                        <input type="button" class="jb_rg2 fl" />
+                    </div>
+                	
+                   <div class="blank20"></div>
+                	
+                    <div class="docsug border2">
+                        <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师观点</a><a class="fz13 blue fr" href="">+更多</a></div>
+                        <div class="docsugbox fz13"><dl class="clearfix"><dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/wlgd1.jpg" width="80" height="60" /></dt>
+                          <dd class="fl"><p>前列腺炎患者夏季排尿减少并非是好兆头</p>
+                          <p class="p2 clearfix"><a class="fl gray">2015-12-26</a><a class="fr gray">1011人阅读</a></p></dd></dl>
+                          <p class="blank15"></p>
+                          <ul class="othsug">
+                          <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
+                          <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
+                          <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
+                          <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
+                          <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
+                          </ul>      
+                          </div>          
+                    </div>
+                  
+                  <div class="blank20"></div>
+                  
+                  <div class="hotbq border2">
+                        <div class="syrboxtit fz18 graybg clearfix"><a class="fl">症状自查</a></div>
+                        <div class="jb_jbzc fz13">
+                          <ul class="clearfix">
+                            <li><a href="">尿频</a></li>
+                            <li><a href="">尿急</a></li>
+                            <li><a href="">尿不尽</a></li>
+                            <li><a href="">前列腺痛</a></li>
+                            <li><a href="">前列腺肥大</a></li>
+                            <li><a href="">早泄</a></li>
+                            <li><a href="">前列腺囊肿</a></li>
+                            <li><a href="">前列腺癌</a></li>
+                            <li><a href="">前列腺炎</a></li>
+                            <li><a href="">前列腺增生</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      
+                  <div class="blank20"></div>
+                  
+                  <div class="syrbox4 border2">
+                    <div class="syrboxtit fz18 graybg">预约挂号</div>
+                    <div class="syrbox4nr fz13">
+                      <form method="post" action="">
+                        <table>
+                          <tr>
+                            <td height="26" width="62">姓      名</td>
+                            <td><input class="input1 border2" type="text" /></td>
+                          </tr>
+                          <tr height="14">
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td width="62">联系电话</td>
+                            <td><input class="input1 border2" type="text" /></td>
+                          </tr>
+                          <tr height="14" >
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td width="62">预约时间</td>
+                            <td><input class="input2 gray border2" onclick="WdatePicker()" placeholder="请选择预约时间" type="text" /></td>
+                          </tr>
+                          <tr height="14" >
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td width="62">就诊状态</td>
+                            <td><input type="radio" name="zd"  checked="checked" />
+                              <label> 初诊</label>
+                              <input class="input3" type="radio" name="zd" />
+                              <label> 复诊</label></td>
+                          </tr>
+                          <tr height="14" >
+                            <td></td>
+                          </tr>
+                        </table>
+                        <div class="sybtn">
+                          <button class="sybtn1" type="submit" value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth8.jpg" width="120" height="40" /></button>
+                          <button value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth9.jpg" width="120" height="40" /></button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  
+                  <div class="blank20"></div>
+                  
+                  <div class="hotbq border2">
+                        <div class="syrboxtit fz18 graybg clearfix"><a class="fl">热门标签</a></div>
+                        <div class="hotbqbox fz13">
+                          <ul class="clearfix">
+                            <li><a href="">前列腺炎</a></li>
+                            <li><a href="">前列腺增生</a></li>
+                            <li><a href="">包皮包茎</a></li>
+                            <li><a href="">前列腺痛</a></li>
+                            <li><a href="">前列腺肥大</a></li>
+                            <li><a href="">早泄</a></li>
+                            <li><a href="">前列腺囊肿</a></li>
+                            <li><a href="">前列腺癌</a></li>
+                            <li><a href="">前列腺炎</a></li>
+                            <li><a href="">前列腺增生</a></li>
+                            <li><a href="">包皮包茎</a></li>
+                            <li><a href="">前列腺痛</a></li>
+                            <li><a href="">前列腺肥大</a></li>
+                            <li><a href="">早泄</a></li>
+                            <li><a href="">前列腺囊肿</a></li>
+                            <li><a href="">前列腺癌</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      
+                  <div class="blank20"></div>
+                  
+                  <div class="syrbox2">
+                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth1.jpg" width="300" height="100" /></p>
+                    <p class="blank10"></p>
+                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth2.jpg" width="300" height="100" /></p>
+                    <p class="blank10"></p>
+                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth3.jpg" width="300" height="100" /></p>
+                  </div>
+                  
+                </div>
+                
+                <!--right end-->
+             </div>
             
           </div>
-        </div>
+          <!--zjtd_con2 end-->
+        
       </div>
       
       <!--fromjb end-->
-      <div class="blank20"></div>
-      <div class="fromzxzj border1">
-        <div class="fromtit fz18 black">咨询专家<span class="fz12 gray">Expert cvonsultants</span></div>
-        <div class="fromzxzjbox">
-          <div class="fromzxzjbox1 clearfix">
-            <div class="fromzxzjbox1l fl"><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/syask.gif" width="449" height="60" /></a></div>
-            <div class="fromzxzjbox1r fr" id="topzj">
-              <dl>
-                <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj.jpg" width="60" height="60" /></dt>
-                <dd class="fl fz12">
-                  <p><a class="blue">陈希球1</a> 副主任医师 </p>
-                  <p>男科手术</p>
-                  <p class="gray">今天</p>
-                </dd>
-              </dl>
-              <dl>
-                <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj.jpg" width="60" height="60" /></dt>
-                <dd class="fl fz12">
-                  <p><a class="blue">陈希球2</a> 副主任医师 </p>
-                  <p>男科手术</p>
-                  <p class="gray">今天</p>
-                </dd>
-              </dl>
-              <dl>
-                <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj.jpg" width="60" height="60" /></dt>
-                <dd class="fl fz12">
-                  <p><a class="blue">陈希球3</a> 副主任医师 </p>
-                  <p>男科手术</p>
-                  <p class="gray">今天</p>
-                </dd>
-              </dl>
-            </div>
-          </div>
-          <div class="blank20"></div>
-          <div class="fromzxzjbox2">
-            <dl class="clearfix graybg">
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj2.jpg" width="68" height="68" /></dt>
-              <dd class="dd1 fl fz13">
-                <p><a class="blue">陈希球</a> 副主任医师</p>
-                <p>上海九龙男子医院</p>
-                <p>男科手术</p>
-              </dd>
-              <dd class="dd2 fl">
-                <p>性功能不好、甲不好...</p>
-                <p class="gray">最近通话：05-19</p>
-                <p class="blue"><a href="">查看最新用户分享 >></a></p>
-              </dd>
-              <dd class="dd3 fr orange tc fz16"><a href="">即刻预约</a></dd>
-            </dl>
-            <dl class="clearfix">
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj2.jpg" width="68" height="68" /></dt>
-              <dd class="dd1 fl fz13">
-                <p><a class="blue">陈希球</a> 副主任医师</p>
-                <p>上海九龙男子医院</p>
-                <p>男科手术</p>
-              </dd>
-              <dd class="dd2 fl">
-                <p>性功能不好、甲不好...</p>
-                <p class="gray">最近通话：05-19</p>
-                <p class="blue"><a href="">查看最新用户分享 >></a></p>
-              </dd>
-              <dd class="dd3 fr orange tc fz16"><a href="">即刻预约</a></dd>
-            </dl>
-            <dl class="clearfix graybg">
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj2.jpg" width="68" height="68" /></dt>
-              <dd class="dd1 fl fz13">
-                <p><a class="blue">陈希球</a> 副主任医师</p>
-                <p>上海九龙男子医院</p>
-                <p>男科手术</p>
-              </dd>
-              <dd class="dd2 fl">
-                <p>性功能不好、甲不好...</p>
-                <p class="gray">最近通话：05-19</p>
-                <p class="blue"><a href="">查看最新用户分享 >></a></p>
-              </dd>
-              <dd class="dd3 fr orange tc fz16"><a href="">即刻预约</a></dd>
-            </dl>
-            <dl class="clearfix">
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj2.jpg" width="68" height="68" /></dt>
-              <dd class="dd1 fl fz13">
-                <p><a class="blue">陈希球</a> 副主任医师</p>
-                <p>上海九龙男子医院</p>
-                <p>男科手术</p>
-              </dd>
-              <dd class="dd2 fl">
-                <p>性功能不好、甲不好...</p>
-                <p class="gray">最近通话：05-19</p>
-                <p class="blue"><a href="">查看最新用户分享 >></a></p>
-              </dd>
-              <dd class="dd3 fr orange tc fz16"><a href="">即刻预约</a></dd>
-            </dl>
-            <dl class="clearfix graybg last">
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syaskzj2.jpg" width="68" height="68" /></dt>
-              <dd class="dd1 fl fz13">
-                <p><a class="blue">陈希球</a> 副主任医师</p>
-                <p>上海九龙男子医院</p>
-                <p>男科手术</p>
-              </dd>
-              <dd class="dd2 fl">
-                <p>性功能不好、甲不好...</p>
-                <p class="gray">最近通话：05-19</p>
-                <p class="blue"><a href="">查看最新用户分享 >></a></p>
-              </dd>
-              <dd class="dd3 fr orange tc fz16"><a href="">即刻预约</a></dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-      <!--fromzxzj end-->
-      <div class="blank20"></div>
-      <div class="fromtit fz18 black border1">网络咨询<span class="fz12 gray">On-line consulting</span></div>
-      <div class="blank20"></div>
-      <div class="fromwlzxbox">
-        <ul class="fromwlzxtit tab_jb_nav fz13 clearfix">
-          <li class="selected">前列腺疾病</li>
-          <li>性功能障碍</li>
-          <li>性传播疾病</li>
-          <li>男科手术</li>
-          <li>泌尿感染</li>
-          <li class="last">男性不育</li>
-        </ul>
-        <div class="fromwlzxboxnr tab_jb_switch">
-          <div class="wlzxnr tabcon selected fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">1跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-          <div class="wlzxnr tabcon fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">2跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-          <div class="wlzxnr tabcon fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">3跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-          <div class="wlzxnr tabcon fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">4跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-          <div class="wlzxnr tabcon fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">5跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-          <div class="wlzxnr tabcon fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">6跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-        </div>
-      </div>
       
-      <!--fromwlzx end-->
       <div class="blank20"></div>
-      <div class="fromtit fz18 black border1 clearfix">经验分享<span class="fz12 gray">Experience sharing</span><span class="fr fz13 gray">把感谢信送给九龙，把经验留给患友！</span></div>
-      <div class="blank20"></div>
-      <div class="fromjyfx clearfix">
-        <div class="fromjyfxl fl">
-          <div class="fromjyfxlt fz16">
-            <p><strong class="orange">69,948</strong> 篇看病经验</p>
-          </div>
-          <div class="fromjyfxlc">
-            <dl class="fz13">
-              <dt><span class="gray">就诊医生：</span> <span class="blue">陈希球</span></dt>
-              <dd>我因胆结石引起胆囊炎,求医隐陈希球医生作XXXXX手术,在住院的几天内对毛大夫精湛的医技和髙尚的医徳深...<a class="black" href="">[详情]</a></dd>
-            </dl>
-            <dl class="fz13">
-              <dt><span class="gray">就诊医生：</span> <span class="blue">陈希球</span></dt>
-              <dd>我因胆结石引起胆囊炎,求医隐陈希球医生作XXXXX手术,在住院的几天内对毛大夫精湛的医技和髙尚的医徳深...<a class="black" href="">[详情]</a></dd>
-            </dl>
-            <dl class="fz13">
-              <dt><span class="gray">就诊医生：</span> <span class="blue">陈希球</span></dt>
-              <dd>我因胆结石引起胆囊炎,求医隐陈希球医生作XXXXX手术,在住院的几天内对毛大夫精湛的医技和髙尚的医徳深...<a class="black" href="">[详情]</a></dd>
-            </dl>
-            <div class="fromjyfxlb fromjyfxbsm fz12"><a class="blue">写我的看病经验</a></div>
-          </div>
-        </div>
-        <div class="fromjyfxr fr">
-          <div class="fromjyfxrt fz16">
-            <p><strong class="orange">948</strong> 封感谢信</p>
-          </div>
-          <div class="fromjyfxrc">
-            <dl class="fz13">
-              <dt><span class="orange">感谢陈希球医生</span></dt>
-              <dd>我父亲XXXXX坏死长达20多年，一直未得到良好的医治。2015年7月，我在上看到了陈主任的信息，得知他是...<a class="black" href="">看详情>></a></dd>
-            </dl>
-            <dl class="fz13">
-              <dt><span class="orange">感谢陈希球医生</span></dt>
-              </dt>
-              <dd>我父亲XXXXX坏死长达20多年，一直未得到良好的医治。2015年7月，我在上看到了陈主任的信息，得知他是...<a class="black" href="">看详情>></a></dd>
-            </dl>
-            <dl class="fz13">
-              <dt><span class="orange">感谢陈希球医生</span></dt>
-              </dt>
-              <dd>我父亲XXXXX坏死长达20多年，一直未得到良好的医治。2015年7月，我在上看到了陈主任的信息，得知他是...<a class="black" href="">看详情>></a></dd>
-            </dl>
-            <div class="fromjyfxrb fromjyfxbsm fz12"><a class="orange">写感谢信给医生</a></div>
-          </div>
-        </div>
-      </div>
+      
     </div>
     <!--syboxl end-->
-    <div class="fr wid300 fz13">
-      <div class="syrbox1 clearfix">
-        <dl class="dll dl1">
-          <a href="">
-          <dt></dt>
-          <dd>门诊流程</dd>
-          </a>
-        </dl>
-        <dl class="dl2">
-          <a href="">
-          <dt></dt>
-          <dd>住院须知</dd>
-          </a>
-        </dl>
-        <dl class="dl3">
-          <a href="">
-          <dt></dt>
-          <dd>预约服务</dd>
-          </a>
-        </dl>
-        <dl class="dll dl4">
-          <a href="">
-          <dt></dt>
-          <dd>预约挂号</dd>
-          </a>
-        </dl>
-        <dl class="dl5">
-          <a href="">
-          <dt></dt>
-          <dd>隐私声明</dd>
-          </a>
-        </dl>
-        <dl class="dl6">
-          <a href="">
-          <dt></dt>
-          <dd>先进设备</dd>
-          </a>
-        </dl>
-        <dl class="dll dl7">
-          <a href="">
-          <dt></dt>
-          <dd>投诉与建议</dd>
-          </a>
-        </dl>
-        <dl class="dl8">
-          <a href="">
-          <dt></dt>
-          <dd>价格与收费</dd>
-          </a>
-        </dl>
-        <dl class="dl9">
-          <a href="">
-          <dt></dt>
-          <dd class="">就诊环境</dd>
-          </a>
-        </dl>
-      </div>
-      <div class="blank20"></div>
-      <div class="syrbox2">
-        <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth1.jpg" width="300" height="100" /></p>
-        <p class="blank10"></p>
-        <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth2.jpg" width="300" height="100" /></p>
-        <p class="blank10"></p>
-        <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth3.jpg" width="300" height="100" /></p>
-      </div>
-      <div class="blank20"></div>
-      <div class="syrbox3 border2">
-        <div class="syrboxtit fz18 graybg">热门文章</div>
-        <div class="syrbox3nr fz13">
-          <ul>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="blank20"></div>
-      <div><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth4.jpg" width="300" height="90" /></a></div>
-      <div class="blank20"></div>
-      <div><img src="<?php print HTTP_ENTRY?>/static/images/syrth5.jpg" /></div>
-      <div><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth6.jpg" /></a></div>
-      <div class="blank20"></div>
-      <div class="syrbox4 border2">
-        <div class="syrboxtit fz18 graybg">预约挂号</div>
-        <div class="syrbox4nr fz13">
-          <form method="post" action="">
-            <table>
-              <tr>
-                <td height="26" width="62">姓      名</td>
-                <td><input class="input1 border2" type="text" /></td>
-              </tr>
-              <tr height="14">
-                <td></td>
-              </tr>
-              <tr>
-                <td width="62">联系电话</td>
-                <td><input class="input1 border2" type="text" /></td>
-              </tr>
-              <tr height="14" >
-                <td></td>
-              </tr>
-              <tr>
-                <td width="62">预约时间</td>
-                <td><input class="input2 gray border2" onclick="WdatePicker()" placeholder="请选择预约时间" type="text" /></td>
-              </tr>
-              <tr height="14" >
-                <td></td>
-              </tr>
-              <tr>
-                <td width="62">就诊状态</td>
-                <td><input type="radio" name="zd"  checked="checked" />
-                  <label> 初诊</label>
-                  <input class="input3" type="radio" name="zd" />
-                  <label> 复诊</label></td>
-              </tr>
-              <tr height="14" >
-                <td></td>
-              </tr>
-            </table>
-            <div class="sybtn">
-              <button class="sybtn1" type="submit" value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth8.jpg" width="120" height="40" /></button>
-              <button value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth9.jpg" width="120" height="40" /></button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="blank20"></div>
-      <div class="syrbox5 border2">
-        <div class="syrboxtit fz18 graybg">大家都在送什么?</div>
-        <div class="syrbox5nr">
-          <div class="syrbox5nr_1" id="toplw">
-            <dl class="clearfix" >
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syrth10.jpg" width="61" height="57" /></dt>
-              <dd class="fl">
-                <p class="ddp1"><strong>陈希球</strong>医生收到了<strong>h***</strong>精心挑选的礼物<strong>医患同心</strong>医生爱心值+100</p>
-                <p class="ddp2 fr blue"><a href="">我也要送</a></p>
-              </dd>
-            </dl>
-            <dl class="clearfix" >
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syrth10.jpg" width="61" height="57" /></dt>
-              <dd class="fl">
-                <p class="ddp1"><strong>陈希球</strong>医生收到了<strong>h***</strong>精心挑选的礼物<strong>医患同心</strong>医生爱心值+100</p>
-                <p class="ddp2 fr blue"><a href="">我也要送</a></p>
-              </dd>
-            </dl>
-            <dl class="clearfix" >
-              <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syrth10.jpg" width="61" height="57" /></dt>
-              <dd class="fl">
-                <p class="ddp1"><strong>陈希球</strong>医生收到了<strong>h***</strong>精心挑选的礼物<strong>医患同心</strong>医生爱心值+100</p>
-                <p class="ddp2 fr blue"><a href="">我也要送</a></p>
-              </dd>
-            </dl>
-          </div>
-          <div class="blank10"></div>
-          <div class="fz13">共有<em class="orange">7,572</em>位患者送出<em class="orange">95,756</em>件礼物，下一个是你么? 我也要送</div>
-          <div class="blank10"></div>
-          <div class="syrbox5nr_3 clearfix"><a href="" class="fl blue">什么是“心意礼物”？</a><a class="fr" href=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth11.jpg" width="80" height="26" /></a></div>
-        </div>
-      </div>
-    </div>
-    <!--syboxr end--> 
   </div>
-  <div class="blank20"></div>
   <!--sybox end-->
   
-  <div class="jgdwbox">
-    <div class="jgdwboxtit fz18 gray clearfix">
-      <ul>
-        <li class="selected">监管单位</li>
-        <li>友情链接</li>
-      </ul>
-    </div>
-    <div class="jgdwboxnr">
-      <div class="tabconjg selected"><img src="<?php print HTTP_ENTRY?>/static/images/jgdw1.jpg" width="970" height="85" /></div>
-      <div class="tabconjg">上海九龙男子医院</div>
-    </div>
-  </div>

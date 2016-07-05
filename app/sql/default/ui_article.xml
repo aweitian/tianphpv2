@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui_article>
-
+	<!-- 获取最新的文章 -->
+	<!-- 参数:length -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<all>
+		SELECT
+			  `sid` as `aid`,
+			  `kw`,
+			  `desc`,
+			  `thumb`,
+			  `title`,
+			  `date`
+			FROM `data_article`
+			ORDER BY `sid` DESC
+			LIMIT 0, :length;
+	</all>
+	
+	<!-- 获取第一个写这篇文章的医生ID -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:dod -->
+	<first_author_byaid>
+		SELECT `dod`
+			FROM `data_article_doc`
+			WHERE `aid`=:aid
+			LIMIT 0, 1
+	</first_author_byaid>
+	
+	<!-- 获取所有写这篇文章的医生ID -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:dod -->
+	<!-- 
+	<getAuthors_byaid>
+		SELECT `dod`
+			FROM `data_article_doc`
+			WHERE `aid`=:aid
+	</getAuthors_byaid>
+	 -->
+	
+	
 	<!-- 获取一篇带THUMBNAIL文章 -->
 	<!-- 参数:did -->
 	<!-- 返回字段:aid,kw,desc,thumb,title,date -->

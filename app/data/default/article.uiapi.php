@@ -22,6 +22,34 @@ class articleUIApi {
 	}
 	
 	/**
+	 * 根据文章查找医生，返回一个医生的ID,数据出错的情况下返回0
+	 * @param int $aid
+	 * @return number
+	 */
+	public function getFirstDod($aid){
+		$cache_key = "getFirstDod-".$aid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/first_author_byaid");
+		$ret = $this->db->fetch($sql, array(
+				"aid" => $aid
+		));
+		if (!empty($ret)){
+			$ret = $ret["dod"];
+		}else{
+			$ret = 0;
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	
+	
+	
+	
+	
+	/**
 	 * 按病种ID获取文章,第一篇带THUMBNAIL(最多返回一个，有可能为0)
 	 * aid,kw,desc,thumb,title,date
 	 * @param int $did 病种ID
