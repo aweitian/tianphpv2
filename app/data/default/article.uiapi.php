@@ -93,10 +93,11 @@ class articleUIApi {
 	/**
 	 * aid,kw,desc,thumb,title,content,date
 	 * @param int $aid
+	 * @param int $textlength,如果不想截取，传递0
 	 * @return array fetch
 	 */
 	public function row($aid,$textlength){
-		$cache_key = "rowNoContent-".$aid;
+		$cache_key = "row-".$aid."-".$textlength;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
@@ -104,8 +105,8 @@ class articleUIApi {
 			$ret = $this->aidCache[$aid];
 		}else{
 			$ret = $this->db->fetch($this->sqlManager->getSql("/ui_article/row_nocontent"), array("aid"=>$aid));
-			if(!empty($ret)){
-				$ret["content"] = substr($string, $start)
+			if($textlength > 0 && !empty($ret)){
+				$ret["content"] = utility::utf8Substr(strip_tags($ret["content"]), 0, $textlength);
 			}
 		}
 		$this->cache[$cache_key] = $ret;
@@ -132,7 +133,7 @@ class articleUIApi {
 		return $ret;
 	}
 	
-	
+	//public function knowledge
 	
 	
 	

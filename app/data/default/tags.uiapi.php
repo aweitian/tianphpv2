@@ -50,5 +50,4 @@ class tagsUIApi {
 			$this->dataCache[$item["text"]] = $item;
 		}
 	}
-
 }

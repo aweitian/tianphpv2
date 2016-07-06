@@ -3,5 +3,4 @@
 	<all>
 		SELECT * FROM `data_tags` WHERE 1
 	</all>
-
 </ui_tags>
