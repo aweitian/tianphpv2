@@ -4,6 +4,17 @@
  * Author: Awei.tian
  * Description: 
  */
+require_once FILE_SYSTEM_ENTRY."/app/data/default/appraise.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/article.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/ask.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/disease.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/doctor.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/letter.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/present.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/symptom.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/tags.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/user.uiapi.php";
+
 class AppModel extends Model{
 	/**
 	 * 

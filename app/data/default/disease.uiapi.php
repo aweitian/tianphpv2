@@ -17,6 +17,9 @@ class diseaseUIApi {
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_disease.xml");
 		$this->initCache();
 	}
+	/**
+	 * @return diseaseUIApi
+	 */
 	public static function getInstance(){
 		if(is_null(diseaseUIApi::$inst)){
 			diseaseUIApi::$inst = new diseaseUIApi();

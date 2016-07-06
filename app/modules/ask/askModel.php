@@ -1,7 +1,5 @@
 <?php
-require_once FILE_SYSTEM_ENTRY."/app/data/default/disease.uiapi.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/default/doctor.uiapi.php";
-require_once FILE_SYSTEM_ENTRY."/app/data/default/ask.uiapi.php";
+
 class askModel extends AppModel {
 	
 	public function __construct() {

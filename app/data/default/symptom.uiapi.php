@@ -17,6 +17,9 @@ class symptomUIApi {
 		$this->initCache();
 	}
 	
+	/**
+	 * @return symptomUIApi
+	 */
 	public static function getInstance(){
 		if(is_null(symptomUIApi::$inst)){
 			symptomUIApi::$inst = new symptomUIApi();

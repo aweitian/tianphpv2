@@ -1,5 +1,4 @@
 <?php
-require_once FILE_SYSTEM_ENTRY."/app/data/default/disease.uiapi.php";
 class diseaseModel extends AppModel {
 	public function __construct() {
 		
@@ -30,7 +29,6 @@ class diseaseModel extends AppModel {
 	 * @return array fetch
 	 */
 	public function getArticleTag7ByDid($did){
-		$api = new diseaseUIApi();
-		return $api->getArticleTag7ByDid($did);
+		return diseaseUIApi::getInstance()->getArticleTag7ByDid($did);
 	}
 }

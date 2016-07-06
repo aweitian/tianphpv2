@@ -50,11 +50,11 @@ foreach ($m->getDisease() as $item){
           	<?php foreach($tree_dis as $dis):?>
           
           	<dl class="clearfix fl">
-              <dt class="fl tc orange fz15"><a href=""><?php print str_replace("疾病","",$dis["text"])?><br />
-                疾病</a></dt>
+              <dt class="fl tc orange fz15"><?php print str_replace("疾病","",$dis["text"])?><br />
+                疾病</dt>
               <dd class="fr fz13">
               <?php foreach($dis["children"] as $sub_dis):?>
-              <a href="<?php print AppUrl::build("/disease/".$sub_dis[1])?>"><?php print $sub_dis[0]?></a>
+              <a href="<?php print AppUrl::getUrlByDiseasekey($sub_dis[1])?>"><?php print $sub_dis[0]?></a>
               <?php endforeach;?>
               
               </dd>

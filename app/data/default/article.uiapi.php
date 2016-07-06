@@ -9,11 +9,15 @@ class articleUIApi {
 	private $sqlManager;
 	private $db;
 	private $cache = array();
+	private $aidCache = array();
 	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_article.xml");
 	}
 	
+	/**
+	 * @return articleUIApi
+	 */
 	public static function getInstance(){
 		if(is_null(articleUIApi::$inst)){
 			articleUIApi::$inst = new articleUIApi();
@@ -39,6 +43,90 @@ class articleUIApi {
 			$ret = $ret["dod"];
 		}else{
 			$ret = 0;
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	/**
+	 * 获取症状的第一篇文章id,没有找到返回0
+	 * @param int $syd
+	 * @return int
+	 */
+	public function getFirstAidBySyd($syd){
+		$cache_key = "getFirstAidBySyd-".$syd;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/first_aid_bysyd");
+		$ret = $this->db->fetch($sql, array(
+				"syd" => $syd
+		));
+		if (!empty($ret)){
+			$ret = $ret["aid"];
+		}else{
+			$ret = 0;
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	/**
+	 * aid,kw,desc,thumb,title,date
+	 * @param int $aid
+	 * @return array fetch
+	 */
+	public function rowNoContent($aid){
+		$cache_key = "rowNoContent-".$aid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		if(array_key_exists($aid, $this->aidCache)){
+			$ret = $this->aidCache[$aid];
+		}else{
+			$ret = $this->db->fetch($this->sqlManager->getSql("/ui_article/row_nocontent"), array("aid"=>$aid));
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	/**
+	 * aid,kw,desc,thumb,title,content,date
+	 * @param int $aid
+	 * @return array fetch
+	 */
+	public function row($aid,$textlength){
+		$cache_key = "rowNoContent-".$aid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		if(array_key_exists($aid, $this->aidCache)){
+			$ret = $this->aidCache[$aid];
+		}else{
+			$ret = $this->db->fetch($this->sqlManager->getSql("/ui_article/row_nocontent"), array("aid"=>$aid));
+			if(!empty($ret)){
+				$ret["content"] = substr($string, $start)
+			}
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * aid,kw,desc,thumb,title,date
+	 * @param int $did
+	 * @param int $length
+	 * @return array fetchAll
+	 */
+	public function getEssenceAidByDid($did,$length){
+		$cache_key = "getEssenceAidByDid-".$aid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/getEssenceAidByDid");
+		$data = $this->db->fetchAll($sql, array("did" => $did,"length" => $length));
+		$ret = array();
+		foreach ($data as $item){
+			$ret[] = $this->rowNoContent($item["aid"]);
 		}
 		$this->cache[$cache_key] = $ret;
 		return $ret;
@@ -76,6 +164,9 @@ class articleUIApi {
 					"length" => $length
 			));
 			$ret = array_merge($thumbnail,$others);
+			foreach ($ret as $item){
+				$this->aidCache[$item["aid"]] = $item;
+			}
 			$this->cache[$cache_key] = $ret;
 			return $ret;
 		}else{
@@ -84,6 +175,9 @@ class articleUIApi {
 					"did" => $did,
 					"length" => $length
 			));
+			foreach ($ret as $item){
+				$this->aidCache[$item["aid"]] = $item;
+			}
 			$this->cache[$cache_key] = $ret;
 			return $ret;
 		}

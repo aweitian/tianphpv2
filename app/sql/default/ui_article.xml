@@ -26,6 +26,70 @@
 			LIMIT 0, 1
 	</first_author_byaid>
 	
+	<!-- 获取与症状ID相关的第一篇文章的ID -->
+	<!-- 参数:syd -->
+	<!-- 返回字段:aid -->
+	<first_aid_bysyd>
+		SELECT `aid` FROM `data_article_sym`
+			WHERE syd = :syd LIMIT 0,1
+	</first_aid_bysyd>
+	
+	
+	<!-- 获取疾病知识文章带内容 -->
+	<!-- 参数:dis -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<allKnowledge>
+		<![CDATA[
+		SELECT `aid` FROM `data_article_tags`  WHERE `data_article_tags`.`tid` < 7
+		]]>
+	</allKnowledge>
+	
+	<!-- 获取一篇文章信息，带内容 -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,content,date -->
+	<row>
+		SELECT
+		  `sid`,
+		  `kw`,
+		  `desc`,
+		  `thumb`,
+		  `title`,
+		  `content`,
+		  `date`
+		FROM `data_article`
+		WHERE `data_article`.`sid` = :aid
+	</row>
+	
+	
+	
+	
+	<!-- 获取一篇文章信息，不带内容 -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<row_nocontent>
+		SELECT
+		  `sid`,
+		  `kw`,
+		  `desc`,
+		  `thumb`,
+		  `title`,
+		  `date`
+		FROM `data_article`
+		WHERE `data_article`.`sid` = :aid
+	</row_nocontent>
+	
+	<!-- 根据病种ID获取精华文章AID -->
+	<!-- 参数:did,length -->
+	<!-- 返回字段:aid -->
+	<getEssenceAidByDid>
+		SELECT `data_article_dis`.`aid` FROM `data_article_dis`
+			WHERE `data_article_dis`.`aid` IN (
+				SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` = 8
+			) AND `data_article_dis`.`did` = :did
+			LIMIT 0,:length
+	</getEssenceAidByDid>
+	
+	
 	<!-- 获取所有写这篇文章的医生ID -->
 	<!-- 参数:aid -->
 	<!-- 返回字段:dod -->

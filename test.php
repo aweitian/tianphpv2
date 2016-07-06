@@ -1,33 +1,12 @@
-<?php 
-$def = array(
-	"sid" => 22
-);
-$test = array(
-	array(
-		"sid" => 11,
-		"data" => "aaa"
-	),
-	array(
-		"sid" => 22,
-		"data" => "adgfasaa"
-	),
-	array(
-		"sid" => 44,
-		"data" => "aweeaa"
-	),
-	array(
-		"sid" => 56,
-		"data" => "aa332a"
-	)
-		
-);
-$a=array("red"=>"red","green","blue","yellow","brown");
-print_r(array_slice($a,0,40,true));
-exit;
-?>
-<select name="nanme">
-<?php foreach ($test as $item):?>
-<option value="<?php print $item["sid"]?>"><?php print $item["data"]?></option>
+<?php
+function utf8Substr($str, $from, $len)
+{
+    return preg_replace('#^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$from.'}'.
+                       '((?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$len.'}).*#s',
+                       '$1',$str);
+}
 
-<?php endforeach;?>
-</select>
+
+
+echo utf8Substr("taw我是中国人，我爱中国..", 0,9);
+?>
