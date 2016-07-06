@@ -29,4 +29,7 @@ class AppModel extends Model{
 	protected function initSqlManager($name){
 		$this->sqlManager = new sqlManager($name);
 	}
+	public function utf8cut($str, $from, $len){
+		return utility::utf8Substr(strip_tags($str), $from, $len);
+	}
 }

@@ -1,6 +1,6 @@
 <?php
 require_once FILE_SYSTEM_ENTRY."/app/data/_meta/appraiseLvMeta.php";
-class mainModel extends AppModel {
+class letterModel extends AppModel {
 	
 	public function __construct() {
 		

@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui_letter>
+
+	<!-- 获取感谢信的总数 -->
+	<!-- 参数:无 -->
+	<!-- 返回字段:cnt -->
+	<cnt>
+		SELECT COUNT(`sid`) AS `cnt` FROM `data_letter`
+	</cnt>
+
+
+
 	<!-- 获取所有的感谢信,排序按ID倒序 -->
-	<!-- 参数:length -->
+	<!-- 参数:offset,length -->
 	<!-- 返回字段:sid,uid,dod,did,content,date -->
 	<data>
 		SELECT * FROM `data_letter`
 			ORDER BY `sid` DESC
-			LIMIT 0,:length
+			LIMIT :offset,:length
 	</data>
 
 	<!-- 获取所有对医生的感谢信,排序按ID倒序 -->
-	<!-- 参数:dod,length -->
+	<!-- 参数:dod,offset,length -->
 	<!-- 返回字段:sid,uid,dod,did,content,date -->
 	<rows_dod>
 		SELECT * FROM `data_letter`
 		WHERE `dod` = :dod
-		LIMIT 0,:length
+		LIMIT :offset,:length
 	</rows_dod>
 	
 	<!-- 获取所有对医生的感谢信,排序按ID倒序 -->
-	<!-- 参数:uid,length -->
+	<!-- 参数:uid,offset,length -->
 	<!-- 返回字段:sid,uid,dod,did,content,date -->
 	<rows_uid>
 		SELECT * FROM `data_letter`
 		WHERE `uid` = :uid
-		LIMIT 0,:length
+		LIMIT :offset,:length
 	</rows_uid>
 </ui_letter>

@@ -133,7 +133,60 @@ class articleUIApi {
 		return $ret;
 	}
 	
-	//public function knowledge
+	/**
+	 * aid,kw,desc,thumb,title,content,date
+	 * @param int $did
+	 * @param int $txtlength,截取内容长度，如果不想截取，传递0
+	 * @param int $offset 偏移值
+	 * @param int $length
+	 * @return array fetchAll
+	 */
+	public function allKnowledges($did,$txtlength,$offset,$length){
+		$cache_key = "allKnowledges-".$did."-".$txtlength."-".$offset."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/allKnowledge");
+		$data = $this->db->fetchAll($sql, array(
+			"did" => $did,
+			"length" => $length,
+			"offset" => $offset
+		));
+		$ret = array();
+		foreach ($data as $item){
+			$ret[] = $this->row($item["aid"],$txtlength);
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	/**
+	 * aid,kw,desc,thumb,title,date
+	 * @param int $did
+	 * @param int $txtlength,截取内容长度，如果不想截取，传递0
+	 * @param int $offset 偏移值
+	 * @param int $length
+	 * @return array fetchAll
+	 */
+	public function knowledge($did,$tid,$txtlength,$offset,$length){
+		$cache_key = "knowledge-".$did."-".$tid."-".$txtlength."-".$offset."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/knowledge_kind");
+		$data = $this->db->fetchAll($sql, array(
+			"did" => $did,
+			"tid" => $tid,
+			"length" => $length,
+			"offset" => $offset
+		));
+		$ret = array();
+		foreach ($data as $item){
+			$ret[] = $this->row($item["aid"],$txtlength);
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
 	
 	
 	
@@ -222,6 +275,32 @@ class articleUIApi {
 			"did" => $did,
 			"length" => $length
 		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * 根据DID获取病种下所有文章,带内容
+	 * aid,kw,desc,thumb,title,content,date
+	 * @param int $did
+	 * @param int $length
+	 * @return array fetchAll
+	 */
+	public function getAllFull($did,$textlength,$offset,$length){
+		$cache_key = "getAllFull-".$did."-".$textlength."-".$offset."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		$sql = $this->sqlManager->getSql("/ui_article/all_bydid");
+		$data = $this->db->fetchAll($sql, array(
+			"did" => $did,
+			"offset" => $offset,
+			"length" => $length
+		));
+		$ret = array();
+		foreach ($data as $item){
+			$ret[] = $this->row($item["aid"],$txtlength);
+		}
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}

@@ -1,5 +1,43 @@
 <?php
 class AppUrl {
+#医生评价
+	/**
+	 * @return string
+	 */
+	public static function appraisePut(){
+		return AppUrl::build("/appraise");
+	}
+#感谢信PUT
+	/**
+	 * @return string
+	 */
+	public static function letterPut(){
+		return AppUrl::build("/letter");
+	}	
+	
+	
+#问答URl生成
+	/**
+	 * @param string $docid
+	 * @param int $asd  askid
+	 * @return string
+	 */
+	public static function askByAsdDocidAsd($docid,$asd){
+		return AppUrl::build("/".$docid."/ask?id=".$asd);
+	}
+	/**
+	 * @param int $dod
+	 * @param int $asd  askid
+	 * @return string
+	 */
+	public static function askByAsdDocid($dod,$asd){
+		$row = doctorUIApi::getInstance()->getInfoByDod($dod);
+		if(empty($row)){
+			return AppUrl::_404();
+		}
+		return AppUrl::build("/".$row["id"]."/ask?id=".$asd);
+	}
+	
 	
 	
 #医生URL生成	
@@ -9,7 +47,7 @@ class AppUrl {
 	 * @param string $diskey
 	 * @return string
 	 */
-	public static function getDocHomeByDocid($docid){
+	public static function docHomeByDocid($docid){
 		return AppUrl::build("/".$docid);
 	}
 	/**
@@ -17,14 +55,35 @@ class AppUrl {
 	 * @param int $dod
 	 * @return string
 	 */
-	public static function getDocHomeByDod($dod){
+	public static function docHomeByDod($dod){
 		$row = doctorUIApi::getInstance()->getInfoByDod($dod);
 		if(empty($row)){
 			return AppUrl::_404();
 		}
-		return AppUrl::getDocHomeByDocid($row["id"]);
+		return AppUrl::docHomeByDocid($row["id"]);
 	}
 	
+	/**
+	 * 生成医生感谢信URl
+	 * @param string $docid
+	 * @param int $led
+	 * @return string
+	 */
+	public static function docLetterByDocidLed($docid,$led){
+		return AppUrl::build("/".$docid."/letter?id=".$led);
+	}
+	/**
+	 * 生成医生感谢信URl
+	 * @param int $led
+	 * @return string
+	 */
+	public static function docLetterByDodLed($dod,$led){
+		$row = doctorUIApi::getInstance()->getInfoByDod($dod);
+		if(empty($row)){
+			return AppUrl::_404();
+		}
+		return AppUrl::docLetterByDocidLed($row["id"],$led);
+	}
 	
 #疾病URL生成	
 	/**
@@ -32,8 +91,20 @@ class AppUrl {
 	 * @param string $diskey
 	 * @return string
 	 */
-	public static function getUrlByDiseasekey($diskey){
+	public static function disHomeByDiseasekey($diskey){
 		return AppUrl::build("/disease/".$diskey);
+	}
+	/**
+	 * 根据病种ID生成URL
+	 * @param int $did
+	 * @return string
+	 */
+	public static function disHomeByDid($did){
+		$row = diseaseUIApi::getInstance()->getRowByDid($did);
+		if(empty($row)){
+			return AppUrl::_404();
+		}
+		return AppUrl::build("/disease/".$row["key"]);
 	}
 	
 	
@@ -47,12 +118,12 @@ class AppUrl {
 	 * @param int $syd
 	 * @return string
 	 */
-	public static function getSymptomUrlBySyd($syd){
+	public static function articleBySyd($syd){
 		$aid = articleUIApi::getInstance()->getFirstAidBySyd($syd);
 		if ($aid == 0){
 			return AppUrl::_404();
 		}else{
-			return AppUrl::getArticleUrlByAid($aid);
+			return AppUrl::articleByAid($aid);
 		}
 	}	
 	/**
@@ -60,12 +131,12 @@ class AppUrl {
 	 * @param int $aid
 	 * @return string
 	 */
-	public static function getArticleUrlByAid($aid){
+	public static function articleByAid($aid){
 		$dod = articleUIApi::getInstance()->getFirstDod($aid);
 		if ($dod == 0) {
 			return AppUrl::_404();
 		}else{
-			return AppUrl::getUrlByDodAid($dod,$aid);
+			return AppUrl::articleByDodAid($dod,$aid);
 		}
 	}
 	
@@ -75,12 +146,12 @@ class AppUrl {
 	 * @param int $aid
 	 * @return string
 	 */
-	public static function getUrlByDodAid($dod,$aid){
+	public static function articleByDodAid($dod,$aid){
 		$row = doctorUIApi::getInstance()->getInfoByDod($dod);
 		if(empty($row)){
 			return AppUrl::_404();
 		}
-		return AppUrl::getUrlByDocidAid($row["id"],$aid);
+		return AppUrl::articleByDocidAid($row["id"],$aid);
 	}
 	
 	/**
@@ -89,7 +160,7 @@ class AppUrl {
 	 * @param int $aid
 	 * @return string
 	 */
-	public static function getUrlByDocidAid($doc_id,$aid){
+	public static function articleByDocidAid($doc_id,$aid){
 		return AppUrl::build("/".$doc_id."/article?id=".$aid);
 	}
 	
@@ -114,7 +185,7 @@ class AppUrl {
 	 * @return string
 	 */
 	public static function getSwtUrl(){
-		return "";
+		return "/swt";
 	}
 	/**
 	 * 404路径

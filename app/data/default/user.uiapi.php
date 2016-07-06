@@ -18,11 +18,14 @@ class userUIApi {
 		
 	}
 	
+	/**
+	 * @return userUIApi
+	 */
 	public static function getInstance(){
-		if(is_null(appraiseUIApi::$inst)){
-			appraiseUIApi::$inst = new appraiseUIApi();
+		if(is_null(userUIApi::$inst)){
+			userUIApi::$inst = new userUIApi();
 		}
-		return appraiseUIApi::$inst;
+		return userUIApi::$inst;
 	}
 	
 	

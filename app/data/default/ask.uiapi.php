@@ -14,7 +14,9 @@ class askUIApi {
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_ask.xml");
 	}
-	
+	/**
+	 * @return askUIApi
+	 */
 	public static function getInstance(){
 		if(is_null(askUIApi::$inst)){
 			askUIApi::$inst = new askUIApi();
@@ -90,6 +92,7 @@ class askUIApi {
 	
 	/**
 	 * 获取大病种下的问答,倒序排序
+	 * 返回字段:sid,uid,dod,title,did,desc,svr,files,date
 	 * @param int $did 大病种ID
 	 * @param int $length (最多返回多少条,默认值8条)
 	 * @return array fetchAll
@@ -102,7 +105,7 @@ class askUIApi {
 		
 		$sql = $this->sqlManager->getSql("/ui_ask/getAllByLv0Did");
 		$ret = $this->db->fetchAll($sql, array(
-				"dod" => $dod,
+				"did" => $did,
 				"length" => $length
 		));
 		$this->cache[$cache_key] = $ret;

@@ -1,6 +1,6 @@
 <?php 
 /**
- * @var mainModel;
+ * @var letterModel;
  */
 $m = $model;
 // echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
@@ -200,7 +200,7 @@ foreach ($m->getDisease() as $item){
               <dd><?php print $m->utf8cut($let["content"],0,64)?>...<a class="black" href="<?php print AppUrl::docLetterByDodLed($let["dod"], $let["sid"])?>">看详情>></a></dd>
             </dl>
 			<?php endforeach;?>
-            <div class="fromjyfxrb fromjyfxbsm fz12"><a class="orange" href="<?php print AppUrl::letterPut()?>">写感谢信给医生</a></div>
+            <div class="fromjyfxrb fromjyfxbsm fz12"><a class="orange" href="">写感谢信给医生</a></div>
           </div>
         </div>
       </div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_comment>
+	<!-- 获取文章审核通过的评论数 -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:cnt -->
+	<count>
+		SELECT COUNT(`sid`) AS cnt FROM `data_article_comment` WHERE `aid`=:aid AND `vertify` = 1
+	</count>
+	
+	
+	<!-- 获取文章审核通过的评论 -->
+	<!-- 参数:aid,offset,length -->
+	<!-- 返回字段:aid,comment,datetime,uid -->
+	<data>
+		SELECT 
+		`data_article_comment`.`aid`,
+		`data_article_comment`.`comment`,
+		`data_article_comment`.`datetime`,
+		`data_article_comment`.`uid`
+		 FROM `data_article_comment` 
+		WHERE `aid`=:aid AND `vertify` = 1
+		ORDER BY `sid` DESC
+		LIMIT :offset,:length
+	</data>
+</ui_comment>

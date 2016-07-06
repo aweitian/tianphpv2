@@ -15,6 +15,9 @@ class appraiseUIApi {
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_appraise.xml");
 	}
 	
+	/**
+	 * @return appraiseUIApi
+	 */
 	public static function getInstance(){
 		if(is_null(appraiseUIApi::$inst)){
 			appraiseUIApi::$inst = new appraiseUIApi();
