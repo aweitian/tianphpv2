@@ -63,11 +63,13 @@ class mainModel extends AppModel {
 		$m = appraiseLvMeta::getMeta();
 		return $m[$i];
 	}
-	
 	public function getLetterCnt(){
 		return letterUIApi::getInstance()->cnt();
 	}
 	public function getLetter($length){
 		return letterUIApi::getInstance()->data($length);
+	}
+	public function getNewest($length){
+		return articleUIApi::getInstance()->getNewest($length);
 	}
 }

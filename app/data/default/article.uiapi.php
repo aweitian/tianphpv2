@@ -104,7 +104,7 @@ class articleUIApi {
 		if(array_key_exists($aid, $this->aidCache)){
 			$ret = $this->aidCache[$aid];
 		}else{
-			$ret = $this->db->fetch($this->sqlManager->getSql("/ui_article/row_nocontent"), array("aid"=>$aid));
+			$ret = $this->db->fetch($this->sqlManager->getSql("/ui_article/row"), array("aid"=>$aid));
 			if($textlength > 0 && !empty($ret)){
 				$ret["content"] = utility::utf8Substr(strip_tags($ret["content"]), 0, $textlength);
 			}
@@ -329,6 +329,23 @@ class articleUIApi {
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
-	
+	/**
+	 * 获取最新的N个文章
+	 * aid,kw,desc,thumb,title,date
+	 * @param int $length
+	 * @return array fetchAll;
+	 */
+	public function getNewest($length){
+		$cache_key = "getNewest-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/all");
+		$ret = $this->db->fetchAll($sql, array(
+				"length" => $length
+		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
 	
 }

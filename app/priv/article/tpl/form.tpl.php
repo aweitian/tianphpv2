@@ -62,8 +62,8 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     </div>
                     <!-- textarea -->
                     <div class="form-group">
-                      <label>内容</label>
-                      <textarea name="content" required class="form-control" rows="3" placeholder="内容"><?php print $def["content"]?></textarea>
+                      <label>内容</label>&nbsp;<a href="javascript:window.open('<?php print HTTP_ENTRY?>/editor')">使用kindeditor编辑器编辑</a>
+                      <textarea id="articlecontent" name="content" required class="form-control" rows="3" placeholder="内容"><?php print $def["content"]?></textarea>
                     </div>
                     <div class="form-group">
                       <label>关键词</label>

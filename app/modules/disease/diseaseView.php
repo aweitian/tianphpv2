@@ -5,7 +5,7 @@ class diseaseView extends AppView {
 	
 	
 	public function disease($model){
-		$title = "";
+		var_dump($model);
 		ob_start();
 		include dirname(__FILE__)."/tpl/index.tpl.php";
 		$content = ob_get_contents();

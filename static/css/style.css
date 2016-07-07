@@ -1603,12 +1603,16 @@ _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizing
 
 .zjtdcon1_box1{ border:1px solid #e8e8e8;}
 .zjtdcon1box1_sm1{ width:640px; margin:20px;}
-.zjtdcon1box1_sm1 div{ width:420px; color:#666;}
-.zjtdcon1box1_sm1 div h4{ color:#fe8100; border-bottom:1px dotted #d4d4d4; line-height:55px;}
-.zjtdcon1box1_sm1 div p{ line-height:24px;}
-.zjtdcon1box1_sm1 div p a{ color:#377bee;}
-.zjtdcon1box1_sm1 div p b{ margin-left:30px; color:#333;}
-.zjtdcon1box1_sm1 div p img{ margin:5px 10px 10px 0;}
+.zjtdcon1box1_sm1 div.fl{ position:relative; width:200px; height:220px;}
+.zjtd_swt{ display:block; position:absolute; bottom:10px; right:10px; width:100px; height:40px; line-height:40px; font-size:18px; color:#fe8100;  background:url(../images/zjtd_zjswt.png) no-repeat; padding-left:10px;}
+
+
+.zjtdcon1box1_sm1 div.fr{ width:420px; color:#666;}
+.zjtdcon1box1_sm1 div.fr h4{ color:#fe8100; border-bottom:1px dotted #d4d4d4; line-height:55px;}
+.zjtdcon1box1_sm1 div.fr p{ line-height:24px;}
+.zjtdcon1box1_sm1 div.fr p a{ color:#377bee;}
+.zjtdcon1box1_sm1 div.fr p b{ margin-left:30px; color:#333;}
+.zjtdcon1box1_sm1 div.fr p img{ margin:5px 10px 10px 0;}
 
 .zjtdcon1box1_sm2{ border-left:1px solid #e8e8e8; width:300px; height:260px;}
 .zjtdcon1box1_sm3{ height:128px; border-bottom:1px solid #e8e8e8;}
@@ -2600,5 +2604,65 @@ rtpboxnrl {
 .zt_box3 ul li a{ color:#333; font-size:16px;}
 .zt_box3 ul li p{ color:#999;}
 .zt_box3 ul li a:hover{ color:#377bee;}
+
+/*--------------------------zxgh‘⁄œﬂπ“∫≈------------------------------------*/
+.ghhead {padding:19px 0;background:#377bee;}
+.ghhead li{float:left;font-size:16px;width:108px;height:32px;line-height:32px;border-radius:32px;border:1px solid #9bbdf7;text-align:center;margin:6px 0 0 10px;}
+.ghhead li a{color:#fff;}
+.ghbanner {background: url(../images/ghbanner.jpg) no-repeat center top;height:758px;}
+.ghbannerbox {position: relative;height: 758px;width: 1140px;margin: 0 auto;}
+.ghbannerbox .ghbox {display: block;position: absolute;right: 0;bottom: 66px;padding: 25px 30px;box-shadow: 2px 2px 2px #cdccbf;background: #fff;}
+.ghbox h2 {text-align: center;font-size: 22px;margin-bottom: 20px;color: #666d71;font-weight: normal;}
+.ghbox table td {padding-left:15px;color:#666d71;border:1px solid #d6d7d8;}
+.ghbox table td input, .ghbox table td select {color: #3a4951;}
+.ghbox table td.td2 {width:135px;}
+.ghbox table td select {width:50px;border:1px solid #d6d7d8;}
+.ghbox table input.xhline1 {border: none;border-bottom: 1px solid #d6d7d8;width:79px;outline:none;}
+.ghbox table input.xhline2 {border: none;border-bottom: 1px solid #d6d7d8;width:143px;outline:none;}
+.ghbox table textarea.xhline3 {height:74px;border:none;border-bottom:1px solid #d6d7d8;width:385px;outline:none;}
+.ghbox table.table2 td {border:1px solid #d6d7d8;border-top:none;}
+.ghbox button {text-align:center;background:#01a1df;height:35px;line-height:35px;padding:0 75px;color:#fff;border:none;font-size:18px;border-radius: 3px;margin-left:115px;cursor:pointer;}
+.ghbox .ghlc {margin-top:20px;}
+.step .sdbt {margin:57px 0 50px;}
+.step dl {float:left;margin-right:30px;}
+.step dl dt img{ width:227px; height:157px;}
+.step dl.last {margin-right:0;}
+.step dl dd {text-align:center;color:#666d71;}
+.step dl dd.dd1 {margin-top:25px;font-size:18px;}
+.step dl dd.dd1 span{ border-bottom:1px solid #377bee; padding-bottom:5px;}
+.step dl dd.dd2 {font-size:14px;margin-top:18px;}
+.ghfoot {border-top:1px solid #e2e2e2;margin-top:60px;font-size:14px;color:#666;padding-bottom:50px;}
+.ghfoot .ghfootnav {width:565px;margin:0 auto;text-align:center;}
+.ghfoot .ghfootnav a {float:left;display:block;color:#666;padding:0 17px;border-right:1px solid #ddd;}
+.ghfoot .ghfootnav a.last {border: none;}
+.ghfoot p {margin-top:13px;}
+
+/*====================================*/
+
+
+.jbcx_con div{ width:332px; height:190px; border-top:1px solid #ddd; border-right:1px solid #ddd; float:left;}
+.jbcx_con div.jbcx_box1{ width:305px;}
+.jbcx_con div h6{ color:#377bee; font-size:24px; line-height:22px; margin-left:15px;}
+.jbcx_con div h6 span{ color:#bbb; font-weight:400; font-size:6px;-webkit-transform:scale(1);-o-transform:scale(1);  text-transform:uppercase;}
+.jbcx_sm1{ font-size:14px; line-height:24px; width:290px;}
+.jbcx_sm1 a{ color:#333; float:left;}
+.jbcx_sm1 span{ float:left; margin:0 10px; display:block; width:1px; height:14px; background:#9a9a9a; overflow:hidden; margin-top:5px;}
+
+.pl40{ padding-left:40px;}
+.borrg0{ border-right:0 !important;}
+.borbt1{ border-bottom:1px solid #ddd;}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -51,6 +51,30 @@ class AppUrl {
 		return AppUrl::build("/".$docid);
 	}
 	/**
+	 * 根据医生ID(NAME那个)生成医生问答的URL
+	 * @param string $diskey
+	 * @return string
+	 */
+	public static function docAskHomeByDocid($docid){
+		return AppUrl::build("/".$docid."/ask");
+	}
+	/**
+	 * 根据医生ID(NAME那个)生成医生文章的URL
+	 * @param string $diskey
+	 * @return string
+	 */
+	public static function docArticleHomeByDocid($docid){
+		return AppUrl::build("/".$docid."/article");
+	}
+	/**
+	 * 根据医生ID(NAME那个)生成医生收到礼物的URL
+	 * @param string $diskey
+	 * @return string
+	 */
+	public static function docPresentHomeByDocid($docid){
+		return AppUrl::build("/".$docid."/present");
+	}
+	/**
 	 * 根据医生ID生成医生首页的URL
 	 * @param int $dod
 	 * @return string

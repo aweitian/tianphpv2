@@ -5,7 +5,6 @@ class appraiseView extends AppView {
 	
 	
 	public function appraise($model){
-		$title = "";
 		ob_start();
 		include dirname(__FILE__)."/tpl/index.tpl.php";
 		$content = ob_get_contents();

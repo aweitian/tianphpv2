@@ -5,6 +5,7 @@
  * Description: 
  * 		Specail for pmcai view
  */
+require_once FILE_SYSTEM_ENTRY.'/template/default/defTplData.php';
 class AppView extends View{
 	/**
 	 * 

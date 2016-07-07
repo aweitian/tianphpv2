@@ -31,6 +31,6 @@ class privView extends AppView{
 		include $tpl;
 		$body = ob_get_contents();
 		ob_end_clean();
-		return View::wrap($body,"priv","template/priv/layout.php");
+		return View::wrap($body,"template/priv/layout.php");
 	}
 }

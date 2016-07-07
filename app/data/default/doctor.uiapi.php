@@ -79,8 +79,8 @@ class doctorUIApi {
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
-		if (array_key_exists($id, $this->docache)){
-			$ret = $this->idcache[$dod];
+		if (array_key_exists($id, $this->idcache)){
+			$ret = $this->idcache[$id];
 		}else{
 			$ret = array();
 		}

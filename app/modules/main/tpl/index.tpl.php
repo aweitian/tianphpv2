@@ -3,6 +3,7 @@
  * @var mainModel;
  */
 $m = $model;
+
 // echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
 // var_dump($m->getDisease());
 // var_dump($m->getDiseaseLv0());exit;
@@ -276,16 +277,12 @@ foreach ($m->getDisease() as $item){
         <div class="syrboxtit fz18 graybg">热门文章</div>
         <div class="syrbox3nr fz13">
           <ul>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
-            <li><a href="">早日摆脱前列腺增生的困扰 </a></li>
+          	<?php /*aid,kw,desc,thumb,title,date*/?>
+          	<?php foreach($m->getNewest(10) as $aitem):?>
+          	<li><a href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print $aitem["title"]?> </a></li>
+          	
+          	<?php endforeach;?>
+  
           </ul>
         </div>
       </div>

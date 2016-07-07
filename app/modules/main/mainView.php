@@ -1,17 +1,11 @@
 <?php
 class mainView extends AppView {
-
-	
-	
 	
 	public function main($model){
-		$title = "";
-		ob_start();
-		include dirname(__FILE__)."/tpl/index.tpl.php";
-		$content = ob_get_contents();
-		ob_end_clean();
-		$this->wrap($content,$title,"template/default/layout.php")->show(); 
-		return;
+		return defTplData::getInstance()
+		->feed(dirname(__FILE__)."/tpl/index.tpl.php", array("model"=>$model))
+		->setLayout()
+		->reponse();
 	}
 	
 	

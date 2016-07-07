@@ -2,6 +2,7 @@
 <sql>
 	<all>
 		SELECT * FROM `data_article` WHERE 1
+		ORDER BY `sid` DESC
 		LIMIT :offset,:length
 	</all>
 
