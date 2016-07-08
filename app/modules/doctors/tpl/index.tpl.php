@@ -41,22 +41,12 @@ foreach ($m->getDisease() as $item){
   <div class="blank15"></div>
   <div class="con_tit fz13">当前位置：<a href="">首页</a> > <a href="">医护团队</a> > <a href="">医师</a></div>
   
-  <div class="blank15"></div>
   <div class="sybox clearfix">
     <div>
       
       <div class="clr">
       	
-        <div class="jb_tit clr">
-        	<h2 class="fl tc fz24">前列腺炎<br /><span class="fz12">prostatitis</span></h2>
-            <ul class="fr fz16">
-            	<li><a href="">疾病首页</a></li><span>|</span>
-                <li><a href="">疾病知识</a></li><span>|</span>
-                <li><a href="">专家观点</a></li><span>|</span>
-                <li><a href="" class="navdq">好评医生</a></li><span>|</span>
-                <li><a href="">患者咨询</a></li>
-            </ul>
-        </div>
+
           
           <div class="fz13">
             

@@ -22,7 +22,11 @@ class editorController extends appCtrl{
 		$this->model = new editorModel();
 		$this->view = new editorView();
 	}
-	public function welcomeAction(){
+	public function welcomeAction(pmcaiMsg $msg){
 		$this->view->editor($this->model);
+	}
+	public function uploadAction(pmcaiMsg $msg){
+		uploadFactory::getInstance()->upload();
+		
 	}
 }

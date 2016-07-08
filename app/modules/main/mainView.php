@@ -3,7 +3,13 @@ class mainView extends AppView {
 	
 	public function main($model){
 		return defTplData::getInstance()
-		->feed(dirname(__FILE__)."/tpl/index.tpl.php", array("model"=>$model))
+		->push(
+				defTplData::TYPE_INCLUDE_NOW,
+				array(
+					dirname(__FILE__)."/tpl/index.tpl.php", 
+					array("model"=>$model)
+				)
+		)
 		->setLayout()
 		->reponse();
 	}

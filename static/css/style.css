@@ -23,7 +23,7 @@ table {
 	border-spacing: 0;
 	font-family: "Microsoft YaHei";
 }
-/* ¹²ÓÃ */
+/* ï¿½ï¿½ï¿½ï¿½ */
 a {
 	text-decoration: none;moz-transition: all 0.1s linear; -webkit-transition: all 0.1s linear; -o-transition: all 0.1s linear; transition: all 0.1s linear;
 }
@@ -194,7 +194,7 @@ em {
 }
 .gd1s{moz-transition: all 0.1s linear; -webkit-transition: all 0.1s linear; -o-transition: all 0.1s linear; transition: all 0.1s linear;}
 .hx{ border-bottom:1px solid #ccc; overflow:hidden; clear:both; height:0px;}
-/*==============Ê×Ò³style==============*/
+/*==============ï¿½ï¿½Ò³style==============*/
 .logo {
 	padding: 29px 0 20px;
 }
@@ -888,7 +888,7 @@ padding: 0px 0 20px 0px; width:320px;
 .regxy1 input {
 	margin-right: 8px;
 }
-/*============ÍøÂç×ÉÑ¯==============*/
+/*============ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯==============*/
 .listpos a {
 	color: #377bee;
 	height: 42px;
@@ -999,7 +999,7 @@ padding: 0px 0 20px 0px; width:320px;
 .doctjbox dl dd p.p3:hover a {
 	color: #fff;
 }
-/*============ÎÊ´ðÌá½»============*/
+/*============ï¿½Ê´ï¿½ï¿½á½»============*/
 .quetwbox {
 	padding: 0 29px 30px;
 }
@@ -1108,7 +1108,7 @@ padding: 0px 0 20px 0px; width:320px;
 	line-height: 64px;
 	border-bottom: 1px solid #e8e8e8;
 }
-/*===============Ê×Ò³ËÑË÷ÎÊ´ð================*/
+/*===============ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Ê´ï¿½================*/
 .loginlogo dl {
 	width: 590px;
 	height: 47px;
@@ -1203,7 +1203,7 @@ padding: 0px 0 20px 0px; width:320px;
 .hotbqbox ul li:hover a {
 	color: #fff;
 }
-/*============Ê×Ò³ËÑË÷×ÛºÏ================*/
+/*============ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Ûºï¿½================*/
 .sszhboxnr_zj dl dt {
 	padding-left: 20px;
 	background: url(../images/syjbtb2.png) no-repeat 0 2px;
@@ -1221,7 +1221,7 @@ padding: 0px 0 20px 0px; width:320px;
 	padding: 28px 0 20px 30px;
 	border-bottom: 1px dashed #ccc;
 }
-/*============°´Ö¢×´²éÕÒ================*/
+/*============ï¿½ï¿½Ö¢×´ï¿½ï¿½ï¿½ï¿½================*/
 .allfrombz {
 	padding: 0 19px 20px;
 }
@@ -1313,7 +1313,7 @@ padding: 0px 0 20px 0px; width:320px;
 .fromzzrzj dl dd p.p2 {
 	line-height: 24px;
 }
-/*============°´¼²²¡²éÕÒ================*/
+/*============ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½================*/
 .quesnuml {
 	padding: 21px 40px 33px 19px;
 	margin-top: 26px;
@@ -1691,7 +1691,7 @@ _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizing
 .zjtd_zxfw textarea{ width:238px; height:70px; padding:10px;}
 .zjtd_zxfw p a.zjtd_rgzx{ display:block; width:120px; height:30px; line-height:30px; color:#fff; background:#76c000;-moz-border-radius: 4px;-webkit-border-radius: 4px;border-radius: 4px;}
 
-/*============Ò½Ê¦Ê×Ò³================*/
+/*============Ò½Ê¦ï¿½ï¿½Ò³================*/
 
 .zjtdhzfw_tit{ border:1px solid #d7e5fc; background:#ebf2fd; color:#000; padding:20px; font-size:20px;}
 
@@ -1711,12 +1711,12 @@ _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizing
 .zjtd_pageset_inp1{ width:518px; padding:0 5px; height:38px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;}
 .zjtd_pageset_inp2{ width:140px; height:40px; border:0; text-align:center; line-height:40px; color:#fff; font-size:14px; background:#fe8100;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px; cursor:pointer; font-weight:700; font-family:"Microsoft YaHei";}
 
-/*==Ò½Ê¦ÎÄÕÂÄÚÈÝÒ³ start==*/
+/*==Ò½Ê¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ start==*/
 
 .bg_yl{ background:#ffe500;}
 .zjtd_pagetit{ line-height:34px; border-bottom:1px dotted #d9d9d9; padding-bottom:10px;}
 .zjtd_pagetit h2{ font-weight:400;}
-.zjtd_pagenr p{ text-indent:2em;}
+.zjtd_pagenr p{ text-indent:2em; font-size:14px; line-height:160%;}
 
 .page_tit1{ background:#eee; height:30px; line-height:30px; padding-left:20px;}
 .page_tit1 span{ margin-left:15px; font-weight:400;}
@@ -1784,7 +1784,7 @@ a.td_link, a.td_link_read {
 .zjtdwztit_sel{ width:185px; padding:0 5px; height:21px; border:1px solid #e4e4e4; border-right:0;}
 .zjtdwztit_sel2{ width:40px; height:23px; border:0; text-align:center; line-height:23px; color:#fff; font-size:14px; background:#fe8100;cursor:pointer; font-family:"Microsoft YaHei";}
 
-/*============Ò½Ê¦-ÐÄÒâÀñÎï start================*/
+/*============Ò½Ê¦-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ start================*/
 
 .gift_bg {
 	background:#fff2e5;
@@ -2008,7 +2008,7 @@ a.td_link, a.td_link_read {
 	color:#000
 }
 
-/*============Ò½Ê¦Ò³Ãæ end================*/
+/*============Ò½Ê¦Ò³ï¿½ï¿½ end================*/
 
 
 .jb_tit h2{ background:url(../images/jb_titbg.png) no-repeat top left; width:201px; height:50px; line-height:22px; padding-top:10px; color:#d1ddfa; font-weight:400;}
@@ -2311,7 +2311,7 @@ a.td_link, a.td_link_read {
 .advise_box ul li:nth-child(2n){
 	margin-right:0;
 	}
-/*============¼²²¡Àà end================*/
+/*============ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ end================*/
 
 
 
@@ -2395,7 +2395,7 @@ a.td_link, a.td_link_read {
 .yyjs_ssbox_sm1{ border-bottom:1px dashed #ccc;}
 .yyjs_ssbox_sm1 div{ width:465px; line-height:24px;}
 
-/*============Ò½Ôº½éÉÜ end================*/
+/*============Ò½Ôºï¿½ï¿½ï¿½ï¿½ end================*/
 
 .pj_myd input{ margin:10px 5px 0 10px;}
 .pj_myd textarea{ border:1px solid #e8e8e8; width:539px; height:153px;}
@@ -2605,7 +2605,7 @@ rtpboxnrl {
 .zt_box3 ul li p{ color:#999;}
 .zt_box3 ul li a:hover{ color:#377bee;}
 
-/*--------------------------zxghÔÚÏß¹ÒºÅ------------------------------------*/
+/*--------------------------zxghï¿½ï¿½ï¿½ß¹Òºï¿½------------------------------------*/
 .ghhead {padding:19px 0;background:#377bee;}
 .ghhead li{float:left;font-size:16px;width:108px;height:32px;line-height:32px;border-radius:32px;border:1px solid #9bbdf7;text-align:center;margin:6px 0 0 10px;}
 .ghhead li a{color:#fff;}

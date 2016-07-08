@@ -51,17 +51,28 @@ class doctorsControllerNotFound implements IControlNotFound{
 	
 	
 	
+	protected function ask(pmcaiMsg $msg){
+		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
+		$this->model->data = $row;
+		$this->view->ask($this->model);
+	}
 	protected function welcome(pmcaiMsg $msg){
 		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
-		var_dump($row);
+		$this->model->data = $row;
+		$this->view->home($this->model);
+	}
+	protected function present(pmcaiMsg $msg){
+		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
+		$this->model->data = $row;
+		$this->view->present($this->model);
 	}
 	protected function article(pmcaiMsg $msg){
 		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
+		$this->model->data = $row;
 		if(isset($msg["?id"])){
-			$this->model->data = $row;
 			$this->view->content($this->model);
 		}else{
-			echo "article list";
+			$this->view->article($this->model);
 		}
 	}
 }
