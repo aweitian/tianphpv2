@@ -158,6 +158,7 @@ class uploadCommon implements IUpload {
 		}
 	}
 	/**
+	 * 有一个成功返回成功，全部失败返回失败，RESULT为失败个数
 	 * info		为上传成功多少个
 	 * return 	包含两个数组succ,fail,SUCC以NAME为KEY，FAIL普通数组，一级错误信息
 	 * @return rirResult
@@ -214,7 +215,7 @@ class uploadCommon implements IUpload {
 			}
 		}
 		$cnt = count($return["succ"]);
-		return new rirResult($cnt,$cnt,$return);
+		return new rirResult($cnt > 0 ? 0 : count($return["fail"]),$cnt,$return);
 	}
 	private function chk($file){
 		if($file["error"] != 0) return 5;
