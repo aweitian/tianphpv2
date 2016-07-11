@@ -1,5 +1,6 @@
 <?php
-class diseaseModel extends AppModel {
+class diseaseControllerNotFoundModel extends AppModel {
+	public $data;
 	public function __construct() {
 		
 	}
@@ -19,16 +20,6 @@ class diseaseModel extends AppModel {
 	public function getRowByDiskey($urlkey) {
 		return diseaseUIApi::getInstance()->getRowByDiskey($urlkey);
 	}
-	
-	public function getLv0Infoes() {
-		return diseaseUIApi::getInstance()->getLv0Infoes();
-	}
-	
-	public function getLv1InfoesByDid($did) {
-		return diseaseUIApi::getInstance()->getLv1InfoesByDid($did);
-	}
-	
-	
 	
 	/**
 	 * 根据病种ID获取疾病知识的文章

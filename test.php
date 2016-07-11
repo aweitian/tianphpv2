@@ -1,12 +1,25 @@
 <?php
-function utf8Substr($str, $from, $len)
-{
-    return preg_replace('#^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$from.'}'.
-                       '((?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$len.'}).*#s',
-                       '$1',$str);
-}
+$d = array(
+			"前列腺疾病" => array(
+				"en" => "PROSTATIC DISEASES"	
+			),
+			"性功能障碍" => array(
+				"en" => "SEXUAL DYSFUNCTION"	
+			),
+			"男科手术" => array(
+				"en" => "MALE DIVISION OPERATION"	
+			),
+			"性传播疾病" => array(
+				"en" => "SEXUALLY TRANSMITTED DISEASES"	
+			),
+			"泌尿感染" => array(
+				"en" => "URINARY TRACT INFECTION"	
+			),
+			"男性不育" => array(
+				"en" => "MALE INFERTILITY"	
+			),
+		);
 
-
-
-echo utf8Substr("taw我是中国人，我爱中国..", 0,9);
+$key = "男性不育";
+// echo $d[$key]["en"];
 ?>

@@ -191,6 +191,48 @@
 			ORDER BY `aid` DESC
 			LIMIT 0,:length
 	</allByDid_Exc>
+	<!-- 根据病种Id获取疾病知识的文章 -->
 	
+	
+	<!-- 获取知识介绍的文章 -->
+	<!-- 参数:did,length -->
+	<!-- 返回字段:  `aid`,`kw`,`desc`,`thumb`,`title`,`content`,`date` -->
+	<ArticleTag7>
+		<!-- 两条SQL返回结果一样，数据量达到一定程度时，BAK的效率可能更好 -->
+		<bak>
+			SELECT 
+				`data_article`.`sid` as `aid`,
+				`data_article`.`thumb`,
+				`data_article`.`title`,
+				`data_article`.`desc`,
+				`data_article`.`thumb`,
+				`data_article`.`content`,
+				`data_article`.`date`
+			FROM (SELECT `data_article_tags`.`aid`,`data_article_tags`.`tid` FROM `data_article_tags` 
+			WHERE `data_article_tags`.`tid` = 7) AS `data_article_tags`
+			LEFT JOIN data_article_dis ON `data_article_tags`.`aid` = `data_article_dis`.`aid`
+			LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
+			WHERE  `data_article_dis`.`did` = :did	
+			ORDER BY `sid` DESC
+			LIMIT 0,:length	
+		</bak>
+		<main>
+			SELECT 
+				`data_article`.`sid` as `aid`,
+				`data_article`.`thumb`,
+				`data_article`.`title`,
+				`data_article`.`desc`,
+				`data_article`.`thumb`,
+				`data_article`.`content`,
+				`data_article`.`date`
+			FROM `data_article_tags` 
+				LEFT JOIN data_article_dis ON `data_article_tags`.`aid` = `data_article_dis`.`aid`
+				LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
+				WHERE `data_article_tags`.`tid` = 7
+				AND `data_article_dis`.`did` = :did
+				ORDER BY `sid` DESC
+				LIMIT 0,:length
+		</main>
+	</ArticleTag7>
 	
 </ui_article>

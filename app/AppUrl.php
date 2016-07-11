@@ -1,5 +1,37 @@
 <?php
 class AppUrl {
+#导航栏URL
+	public static function navHome(){
+		return AppUrl::build("/");
+	}	
+	
+	public static function navDisease(){
+		return AppUrl::build("/disease");
+	}
+	
+	public static function navDoctors(){
+		return AppUrl::build("/doctors");
+	}
+	
+	public static function navSymptom(){
+		return AppUrl::build("/symptom");
+	}
+	
+	public static function navAsk(){
+		return AppUrl::build("/ask");
+	}
+		
+	public static function navArticle(){
+		return AppUrl::build("/article");
+	}	
+	
+	public static function navSubscribe(){
+		return AppUrl::build("/subscribe");
+	}	
+	
+	public static function navPut(){
+		return AppUrl::build("/put");
+	}	
 #医生评价
 	/**
 	 * @return string
@@ -116,7 +148,7 @@ class AppUrl {
 	 * @return string
 	 */
 	public static function disHomeByDiseasekey($diskey){
-		return AppUrl::build("/disease/".$diskey);
+		return AppUrl::build("/".$diskey);
 	}
 	/**
 	 * 根据病种ID生成URL
@@ -128,10 +160,30 @@ class AppUrl {
 		if(empty($row)){
 			return AppUrl::_404();
 		}
-		return AppUrl::build("/disease/".$row["key"]);
+		return AppUrl::build("/".$row["key"]);
 	}
 	
-	
+	/**
+	 * 
+	 * @param string $diskey
+	 */
+	public static function disKnowledgeByDiseasekey($diskey){
+		return AppUrl::build("/".$diskey."/knowledge");
+	}
+	/**
+	 * 
+	 * @param string $diskey
+	 */
+	public static function disAskByDiseasekey($diskey){
+		return AppUrl::build("/".$diskey."/ask");
+	}
+	/**
+	 * 
+	 * @param string $diskey
+	 */
+	public static function disArticleByDiseasekey($diskey){
+		return AppUrl::build("/".$diskey."/article");
+	}
 	
 	
 	

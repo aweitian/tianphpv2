@@ -47,8 +47,8 @@ document.getElementById("content").value = opener.document.getElementById("artic
 KindEditor.ready(function(K) {
 	editor1 = K.create('textarea', {
 		cssPath : '<?php print HTTP_ENTRY?>/static/css/kindeditor.css',
-		uploadJson : '<?php print HTTP_ENTRY?>/verdor/kindeditor/php/upload_json.php',
-		fileManagerJson : '<?php print HTTP_ENTRY?>/verdor/kindeditor/php/file_manager_json.php',
+		uploadJson : '<?php print HTTP_ENTRY?>/priv/upload',
+		fileManagerJson : '<?php print HTTP_ENTRY?>/priv/upload/list',
 		allowFileManager : true,
 		afterCreate : function() {
 			var self = this;

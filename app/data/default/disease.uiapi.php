@@ -49,7 +49,14 @@ class diseaseUIApi {
 		return $ret;
 	}
 	
-	
+	/**
+	 * 
+	 * @param string $key
+	 * @return boolean
+	 */
+	public function exists($key){
+		return array_key_exists($key, $this->keyCache);
+	}
 	/**
 	 * 
 	 * 返回类似下面的二维数组
@@ -111,6 +118,33 @@ class diseaseUIApi {
 		return $ret;
 	}
 	
+	/**
+	 * 根据大病种获取小病种信息
+	 * sid  key     data pid     grp  metaid  
+	 * 返回字段sid  key     data
+	 * @param int $did
+	 * @return array fet
+	 */
+	public function getLv1InfoesByDid($did){
+		$cache_key = "getLv1InfoesByDid-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		//$this->sidCache
+		$ret = array();
+		foreach ($this->sidCache as $item){
+			if($item["pid"] == $did){
+				$ret[] = array(
+						"sid" =>  $item["sid"],
+						"key" =>  $item["key"],
+						"data" =>  $item["data"],
+				);
+			}
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
 	
 	/**
 	 * 返回字段:sid,key,data,pid,metaid
@@ -129,30 +163,11 @@ class diseaseUIApi {
 	
 	
 	
-	/**
-	 * sid  thumb                              title   desc    
-	 * 30  /uploads/user/201606211043371.png  tald    sdalfkwe  
-	 * 根据病种ID获取疾病知识的文章
-	 * @param int $did
-	 * @return array fetch
-	 */
-	public function getArticleTag7ByDid($did){
-		$cache_key = "getArticleTag7ByDid-".$did;
-		if (array_key_exists($cache_key, $this->cache)){
-			return $this->cache[$cache_key];
-		}
-		$sql = $this->sqlManager->getSql("/ui_disease/ArticleTag7/main");
-		$ret = $this->db->fetch($sql, array(
-			"did" => $did
-		));
-		$this->cache[$cache_key] = $ret;
-		return $ret;
-	}
 	
 	/**
 	 * sid  key     data                   pid     grp  metaid  
 	 */
-	public function initCache(){
+	private function initCache(){
 		$sql = $this->sqlManager->getSql("/ui_disease/all");
 		$ret = $this->db->fetchAll($sql, array());
 		foreach ($ret as $item){

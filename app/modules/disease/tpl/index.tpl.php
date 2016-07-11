@@ -2,31 +2,10 @@
 /**
  * @var diseaseModel;
  */
+ //var_dump(diseaseExtInfoes::getExtData());exit;
 $m = $model;
-// echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-// var_dump($m->getDisease());
-// var_dump($m->getDiseaseLv0());
 
-$tree_dis = array();
-foreach ($m->getDisease() as $item){
-	if(!array_key_exists($item["pid"], $tree_dis)){
-		$tree_dis[$item["pid"]] = array(
-				"text" => $item["pd"],
-				"children" => array()
-		);
-	}
-	$tree_dis[$item["pid"]]["children"][$item["mid"]] = $item["md"];
-}
- 
-
-
-
-
-// foreach($m->getDisease() as $item)
-// {
-	
-
-// }
+$d = diseaseExtInfoes::getExtData();
 
 // exit;
 ?>
@@ -38,25 +17,44 @@ foreach ($m->getDisease() as $item){
       <div class="clr">
       	
           <div class="fz13 jbcx_con">
-                
+           <?php $x=1;?>
+                  <?php foreach($m->getLv0Infoes() as $dis):?> 
                <div class="jbcx_box1">
                		<p class="blank30"></p>
                		<p>
+                    	<img src="<?php print HTTP_ENTRY?>/static/images/<?php print($d[$dis["data"]]["ico"])?>" class="fl" />
+                        <h6 class="fl"><?php print($dis["data"])?><br /><span><?php print($d[$dis["data"]]["en"])?></span></h6>
+                    </p>
+                    <p class="blank15"></p>    
+                    <p class="clr jbcx_sm1">
+   
+                    
+                     <?php foreach ($m->getLv1InfoesByDid($dis["sid"]) as $xbz):?>
+                    	<a href="<?php print AppUrl::disHomeByDiseasekey($xbz['key'])?>"><?php print ($xbz['data']) ?></a><span></span>
+                       	<?php endforeach;?>
+                    </p>
+               </div>
+                <?php $x++;?>
+               <?php endforeach;?>
+               
+             
+             	 	
+             	 	 <div class="jbcx_box1">
+               		<p class="blank30"></p>
+               		<p>
                     	<img src="<?php print HTTP_ENTRY?>/static/images/jbcx_img1.png" class="fl" />
-                        <h6 class="fl">前列腺疾病<br /><span>Prostatic diseases</span></h6>
+                        <h6 class="fl">性功能障碍<br /><span>sexual dysfunction</span></h6>
                     </p>
                     <p class="blank15"></p>
                     <p class="clr jbcx_sm1">
-                    	<a href="">前列腺炎</a><span></span>
-                        <a href="">前列腺痛</a><span></span>
-                        <a href="">前列腺肥大</a><br />
-                        <a href="">前列腺囊</a><span></span>
-                        <a href="">肿前列腺增生</a><span></span>
-                        <a href="">前列腺癌</a>
+                    	<a href="">阳痿</a><span></span>
+                        <a href="">早泄</a><span></span>
+                        <a href="">过度手淫</a><span></span>
+                        <a href="">射精功能障碍</a><br />
+                        <a href="">勃起功能障碍</a>
                     </p>
                     
                </div>
-               
                <div class="jbcx_box1 pl40">
                		<p class="blank30"></p>
                		<p>
@@ -150,6 +148,7 @@ foreach ($m->getDisease() as $item){
                     </p>
                     
                </div>
+             	
             
           </div>
           <!--zjtd_con2 end-->

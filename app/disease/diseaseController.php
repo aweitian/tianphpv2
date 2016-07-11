@@ -1,0 +1,69 @@
+<?php
+/**
+ * Date:2015年6月5日
+ * Author:Awei.tian
+ * Function:
+ */
+require_once FILE_SYSTEM_ENTRY."/app/disease/diseaseView.php";
+require_once FILE_SYSTEM_ENTRY."/app/disease/diseaseModel.php";
+class diseaseControllerNotFound{
+	/**
+	 *
+	 * @var diseaseControllerNotFoundModel
+	 */
+	private $model;
+	/**
+	 *
+	 * @var diseaseControllerNotFoundView
+	 */
+	private $view;
+	private $allowAct;
+	public function __construct(pmcaiMsg $msg){
+		$this->model = new diseaseControllerNotFoundModel();
+		$this->view = new diseaseControllerNotFoundView();
+		if (method_exists($this,$msg->getAction())){
+			$this->{$msg->getAction()}($msg);
+		}else{
+			$this->_404();
+		}
+	}
+	private function welcome(pmcaiMsg $msg){
+		$row = diseaseUIApi::getInstance()->getRowByDiskey($msg->getControl());
+// 		var_dump($row);exit;
+		$this->model->data = $row;
+		$this->view->disease($this->model);
+	}
+	private function knowledge(pmcaiMsg $msg){
+		
+	}
+	private function article(pmcaiMsg $msg){
+		
+	}
+	private function doctors(pmcaiMsg $msg){
+		
+	}
+	private function ask(pmcaiMsg $msg){
+		
+	}
+	
+	
+	private function _404(){
+		$res = new httpResponse();
+		$res->_404();
+	}
+// 	public function _action_not_found(pmcaiMsg $msg){
+// 		$action = $msg->getAction();
+// 		$data = $this->model->getRowByDiskey($action);
+// 		//echo "hi";
+// 		if(empty($data)){
+// 			$this->response->_404();
+// 		}else{
+// 			//病种ID
+// 			$did = $data["sid"];
+			
+// 			//var_dump($this->model->getArticleTag7ByDid($data["sid"]));
+// 			$this->view->home($this->model);
+// 		}
+// 	}
+
+}

@@ -14,7 +14,7 @@ class uploadFactory {
 	 * @return IUpload
 	 */
 	public static function getInstance($scenario="default"){
-		if(is_null(self::$_inst[$scenario])){
+		if(!isset(self::$_inst[$scenario])){
 			switch ($scenario){
 				case "disease":
 					require_once FILE_SYSTEM_ENTRY."/modules/upload/uploadCommon.php";
@@ -23,17 +23,15 @@ class uploadFactory {
 					$u->setUploadPath("disease");
 					self::$_inst[$scenario] = $u;
 					break;
-				
-				
 				default:
 					require_once FILE_SYSTEM_ENTRY."/modules/upload/uploadCommon.php";
 					$u = new uploadCommon();
+					
 					$u->init();
+					$u->addAllowType(httpResponse::CONTENT_TYPE_BIN);
 					self::$_inst[$scenario] = $u;	
 					break;				
 			}
-			
-
 		}
 		return self::$_inst[$scenario];
 	}

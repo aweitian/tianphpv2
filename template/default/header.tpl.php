@@ -12,13 +12,13 @@
   </div>
   <div class="dhnav">
     <ul class="clearfix">
-      <li><a href="<?php print AppUrl::build("/")?>">网站首页</a></li>
-      <li><a href="<?php print AppUrl::build("/disease")?>">按疾病找</a></li>
-      <li><a href="<?php print AppUrl::build("/symptom")?>">按症状找</a></li>
-      <li><a href="<?php print AppUrl::build("/doctors")?>">找大夫咨询</a></li>
-      <li><a href="<?php print AppUrl::build("/ask")?>">网络咨询</a></li>
-      <li><a href="<?php print AppUrl::build("/article")?>">疾病专题</a></li>
-      <li><a href="<?php print AppUrl::build("/subscribe")?>">预约挂号</a></li>
-      <li class="nobor"><a href="<?php print AppUrl::build("/put")?>">在线咨询</a></li>
+      <li><a href="<?php print AppUrl::navHome()?>">网站首页</a></li>
+      <li><a href="<?php print AppUrl::navDisease()?>">按疾病找</a></li>
+      <li><a href="<?php print AppUrl::navSymptom()?>">按症状找</a></li>
+      <li><a href="<?php print AppUrl::navDoctors()?>">找大夫咨询</a></li>
+      <li><a href="<?php print AppUrl::navAsk()?>">网络咨询</a></li>
+      <li><a href="<?php print AppUrl::navArticle()?>">疾病专题</a></li>
+      <li><a href="<?php print AppUrl::navSubscribe()?>">预约挂号</a></li>
+      <li class="nobor"><a href="<?php print AppUrl::navPut()?>">在线咨询</a></li>
     </ul>
   </div>

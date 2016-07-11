@@ -129,7 +129,7 @@ class symptomUIApi {
 	/**
 	 * sid  key     data                   pid     grp  metaid
 	 */
-	public function initCache(){
+	private function initCache(){
 		$sql = $this->sqlManager->getSql("/ui_symptom/all");
 		$ret = $this->db->fetchAll($sql, array());
 		foreach ($ret as $item){

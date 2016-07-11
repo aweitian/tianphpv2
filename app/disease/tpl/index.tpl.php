@@ -1,6 +1,14 @@
 <?php
-
-
+/**
+ * ["sid"]=> string(3) "325" 
+ * ["key"]=> string(4) "gwxc" 
+ * ["data"]=> string(12) "睾丸异常" 
+ * ["pid"]=> string(3) "322" 
+ * ["metaid"]=> string(1) "2"
+ */
+$row = $model->data;
+// var_dump($row);
+$ext = diseaseExtInfoes::getExtData();
 ?>
   <div class="blank15"></div>
   <div class="sybox clearfix">
@@ -9,13 +17,13 @@
       <div class="clr">
       	
         <div class="jb_tit clr">
-        	<h2 class="fl tc fz24">前列腺炎<br /><span class="fz12">prostatitis</span></h2>
+        	<h2 class="fl tc fz24"><?php print $row["data"]?><br /><span class="fz12"><?php print $ext[$row["data"]]["en"]?></span></h2>
             <ul class="fr fz16">
-            	<li><a href="" class="navdq">疾病首页</a></li><span>|</span>
-                <li><a href="">疾病知识</a></li><span>|</span>
-                <li><a href="">专家观点</a></li><span>|</span>
-                <li><a href="">好评医生</a></li><span>|</span>
-                <li><a href="">患者咨询</a></li>
+            	<li><a href="<?php print AppUrl::disHomeByDiseasekey($row["key"])?>" class="navdq">疾病首页</a></li><span>|</span>
+                <li><a href="<?php print AppUrl::disKnowledgeByDiseasekey($row["key"])?>">疾病知识</a></li><span>|</span>
+                <li><a href="<?php print AppUrl::disArticleByDiseasekey($row["key"])?>">专家观点</a></li><span>|</span>
+                <li><a href="<?php print AppUrl::navDoctors()?>">好评医生</a></li><span>|</span>
+                <li><a href="<?php print AppUrl::disAskByDiseasekey($row["key"])?>">患者咨询</a></li>
             </ul>
         </div>
           

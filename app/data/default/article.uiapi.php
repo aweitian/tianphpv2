@@ -188,6 +188,26 @@ class articleUIApi {
 		return $ret;
 	}
 	
+	/**
+	 * 获取 知识介绍 的文章
+	 * sid  thumb                              title   desc    
+	 * 30  /uploads/user/201606211043371.png  tald    sdalfkwe  
+	 * 根据病种ID获取疾病知识的文章(一篇)
+	 * @param int $did
+	 * @return array fetch
+	 */
+	public function getArticleTag7ByDid($did){
+		$cache_key = "getArticleTag7ByDid-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/ArticleTag7/main");
+		$ret = $this->db->fetch($sql, array(
+			"did" => $did
+		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
 	
 	
 	
