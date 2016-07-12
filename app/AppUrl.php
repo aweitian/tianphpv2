@@ -69,7 +69,13 @@ class AppUrl {
 		}
 		return AppUrl::build("/".$row["id"]."/ask?id=".$asd);
 	}
-	
+	/**
+	 * @param string $lv0key
+	 * @return string
+	 */
+	public static function askByLv0key($lv0key){
+		return AppUrl::build("/ask/".$lv0key);
+	}
 	
 	
 #医生URL生成	
@@ -183,6 +189,13 @@ class AppUrl {
 	 */
 	public static function disArticleByDiseasekey($diskey){
 		return AppUrl::build("/".$diskey."/article");
+	}
+	/**
+	 * 
+	 * @param string $diskey
+	 */
+	public static function disDoctorsByDiseasekey($diskey){
+		return AppUrl::build("/".$diskey."/doctors");
 	}
 	
 	

@@ -25,6 +25,25 @@ class askUIApi {
 	}
 	
 	/**
+	 * 根据病种Id获取问题个数
+	 * @param int $did 病种ID
+	 * @return int
+	 */
+	public function getQuestionsCountByDid($did){
+		$cache_key = "getQuestionsCountByDid-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		$sql = $this->sqlManager->getSql("/ui_ask/getAskByDidCnt");
+		$ret = $this->db->fetchAll($sql, array(
+			"did" => $did,
+		));
+		$ret = $ret["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
 	 * 按病种ID倒序排列
 	 * 根据病种Id获取问题
 	 * sid title date dod
@@ -32,8 +51,8 @@ class askUIApi {
 	 * @param int $length (最多返回多少条,默认值4条)
 	 * @return array fetchAll
 	 */
-	public function getQuestionsByDid($did,$length=4){
-		$cache_key = "getQuestionsByDid-".$did."-".$length;
+	public function getQuestionsByDid($did,$length=4,$offset=0){
+		$cache_key = "getQuestionsByDid-".$did."-".$length."-".$offset;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
@@ -41,6 +60,7 @@ class askUIApi {
 		$sql = $this->sqlManager->getSql("/ui_ask/getAskByDid");
 		$ret = $this->db->fetchAll($sql, array(
 			"did" => $did,
+			"offset" => $offset,
 			"length" => $length
 		));
 		$this->cache[$cache_key] = $ret;
@@ -67,14 +87,33 @@ class askUIApi {
 	}
 	
 	/**
+	 * 按医生ID获取提问问题个数
+	 * @param int $dod ID
+	 * @return int
+	 */
+	public function getQuestionsCountByDod($dod){
+		$cache_key = "getQuestionsCountByDod-".$dod;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		$sql = $this->sqlManager->getSql("/ui_ask/getAskByDodCnt");
+		$ret = $this->db->fetchAll($sql, array(
+				"dod" => $dod,
+		));
+		$ret = $ret["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
 	 * 按医生ID获取提问问题,倒序排列
 	 * sid title date did
 	 * @param int $dod ID
 	 * @param int $length (最多返回多少条,默认值5条)
 	 * @return array fetchAll
 	 */
-	public function getQuestionsByDod($dod,$length=5){
-		$cache_key = "getQuestionsByDod-".$dod."-".$length;
+	public function getQuestionsByDod($dod,$length=5,$offset=0){
+		$cache_key = "getQuestionsByDod-".$dod."-".$length."-".$offset;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
@@ -82,6 +121,7 @@ class askUIApi {
 		$sql = $this->sqlManager->getSql("/ui_ask/getAskByDod");
 		$ret = $this->db->fetchAll($sql, array(
 				"dod" => $dod,
+				"offset" => $offset,
 				"length" => $length
 		));
 		$this->cache[$cache_key] = $ret;
@@ -91,14 +131,33 @@ class askUIApi {
 	
 	
 	/**
+	 * 获取大病种下的问答的个数
+	 * @param int $did 大病种ID
+	 * @return int
+	 */
+	public function getQuestionsCountByLv0Did($did){
+		$cache_key = "getQuestionsCountByLv0Did-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		$sql = $this->sqlManager->getSql("/ui_ask/getAllByLv0DidCnt");
+		$ret = $this->db->fetch($sql, array(
+				"did" => $did
+		));
+		$ret = $ret["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
 	 * 获取大病种下的问答,倒序排序
 	 * 返回字段:sid,uid,dod,title,did,desc,svr,files,date
 	 * @param int $did 大病种ID
 	 * @param int $length (最多返回多少条,默认值8条)
 	 * @return array fetchAll
 	 */
-	public function getQuestionsByLv0Did($did,$length=8){
-		$cache_key = "getQuestionsByLv0Did-".$did."-".$length;
+	public function getQuestionsByLv0Did($did,$length=8,$offset=0){
+		$cache_key = "getQuestionsByLv0Did-".$did."-".$length."-".$offset;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
@@ -106,10 +165,40 @@ class askUIApi {
 		$sql = $this->sqlManager->getSql("/ui_ask/getAllByLv0Did");
 		$ret = $this->db->fetchAll($sql, array(
 				"did" => $did,
+				"offset" => $offset,
 				"length" => $length
 		));
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
 	
+	/**
+	 * 返回COUNT,DATA数组
+	 * DATA的字段为:sid,title,date,dod
+	 * @param int $offset
+	 * @param int $length
+	 * @return array;
+	 */
+	public function getAllQuestions($offset,$length){
+		$cache_key = "getAllQuestions-".$offset."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		$sql = $this->sqlManager->getSql("/ui_ask/cnt");
+		$cnt = $this->db->fetch($sql, array());
+// 		var_dump($sql);exit;
+		$cnt = $cnt["cnt"];
+		$sql = $this->sqlManager->getSql("/ui_ask/all");
+		$data = $this->db->fetchAll($sql, array(
+			"offset" => $offset,
+			"length" => $length
+		));
+		$ret = array(
+			"count" => $cnt,
+			"data"  => $data
+		);
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
 }

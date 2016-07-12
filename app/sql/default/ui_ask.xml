@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui_ask>
+	<!-- -->
+	<cnt>
+		SELECT 
+			count(`data_ask`.`sid`) as cnt
+			FROM `data_ask`
+	</cnt>
+	<all>
+		SELECT 
+			`data_ask`.`sid`,
+			`data_ask`.`title`,
+			`data_ask`.`date`,
+			`data_ask`.`dod`
+			FROM `data_ask`
+			ORDER BY `data_ask`.`sid` DESC
+		LIMIT :offset,:length
+	</all>
+
+
 	<!-- 根据病种Id获取问答和回答(医生回答最多只获取一条) -->
 	<getAskByDid>
 		SELECT 
@@ -10,8 +28,14 @@
 			FROM `data_ask`
 			WHERE `data_ask`.`did` = :did
 			ORDER BY `data_ask`.`sid` DESC
-		LIMIT 0,:length
+		LIMIT :offset,:length
 	</getAskByDid>
+	<getAskByDidCnt>
+		SELECT 
+			count(`data_ask`.`sid`) as `cnt`
+			FROM `data_ask`
+			WHERE `data_ask`.`did` = :did
+	</getAskByDidCnt>
 	<getAskByDod>
 		SELECT 
 			`data_ask`.`sid`,
@@ -21,8 +45,14 @@
 			FROM `data_ask`
 			WHERE `data_ask`.`dod` = :dod
 			ORDER BY `data_ask`.`sid` DESC
-		LIMIT 0,:length
+		LIMIT :offset,:length
 	</getAskByDod>
+	<getAskByDodCnt>
+		SELECT 
+			count(`data_ask`.`sid`) as `cnt`
+			FROM `data_ask`
+			WHERE `data_ask`.`dod` = :dod
+	</getAskByDodCnt>
 	<getAnswerByAskid>
 		SELECT 
 			`data_ask_append`.`content`
@@ -34,7 +64,7 @@
 	
 	
 	<!-- 获取大病种下的问答,倒序排序 -->
-	<!-- 参数:did,length -->
+	<!-- 参数:did,offset,length -->
 	<!-- 返回字段:sid,uid,dod,title,did,desc,svr,files,date -->
 	<getAllByLv0Did>
 		SELECT `data_ask`.*
@@ -47,8 +77,19 @@
 					AND `grp` = 1
 			)
 			ORDER BY `sid` DESC	
-			LIMIT 0,:length
+			LIMIT :offset,:length
 	</getAllByLv0Did>
+	<getAllByLv0DidCnt>
+		SELECT count(`data_ask`.`sid`) as `cnt`
+			FROM `data_ask`
+			WHERE `did` IN (
+				SELECT `data_attr_data`.`sid` 
+				FROM `data_attr_data` 
+				WHERE 
+					`data_attr_data`.`pid` = :did
+					AND `grp` = 1
+			)
+	</getAllByLv0DidCnt>
 	
 	
 	

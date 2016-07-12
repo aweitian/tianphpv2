@@ -279,7 +279,7 @@ foreach ($m->getDisease() as $item){
           <ul>
           	<?php /*aid,kw,desc,thumb,title,date*/?>
           	<?php foreach($m->getNewest(10) as $aitem):?>
-          	<li><a href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print $aitem["title"]?> </a></li>
+          	<li><a href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print utility::utf8Substr($aitem["title"], 0, 18) ?> </a></li>
           	
           	<?php endforeach;?>
   

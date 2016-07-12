@@ -1,26 +1,31 @@
 <?php 
 /**
+ * Sihangzhang
  * @var askModel;
  */
 $m = $model;
-// echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-// var_dump($m->getDisease());
-// var_dump($m->getDiseaseLv0());exit;
+$row = $m->data;
 
-$tree_dis = array();
-foreach ($m->getDisease() as $item){
-	if(!array_key_exists($item["pid"], $tree_dis)){
-		$tree_dis[$item["pid"]] = array(
-			"text" => $item["pd"],
-			"children" => array()
-		);
-	}
-	$tree_dis[$item["pid"]]["children"][$item["mid"]] = array($item["md"],$item["url"]);
+
+$pageSize = 20;
+if(isset($_REQUEST["page"])){
+	$page = intval($_REQUEST["page"]);
+} else{
+	$page = 1;
 }
- 
+if ($row["sid"] == 0) {
+	$all = $m->getAllQuestions(($page - 1) * $pageSize,$pageSize);
+} else {
+	$data = $m->getQuestionsByLv0Did($row["sid"],$pageSize,($page - 1) * $pageSize);
+	$cnt = $m->getQuestionsCountByLv0Did($row["sid"]);
+	$all = array(
+		"count" => $cnt,
+		"data"  => $data	
+	);
+}
 
 
-
+$pagination = new pagination($all["count"], $page, $pageSize, 10);
 
 // foreach($m->getDisease() as $item)
 // {
@@ -29,6 +34,9 @@ foreach ($m->getDisease() as $item){
 // }
 
 // exit;
+$req = new httpRequest();
+$url = new url($req->requestUri());
+
 ?>
  <div class="blank20"></div>
   <div id="focusindex">
@@ -46,230 +54,43 @@ foreach ($m->getDisease() as $item){
         <p class="blank20"></p>
         <div class="quesnav fz13">
           <ul class="clearfix">
-            <li class="selected">全部</li>
-            <li>前列腺炎</li>
-            <li>前列腺增生</li>
-            <li>前列腺痛</li>
-            <li>前列腺肥大</li>
-            <li>前列腺囊肿</li>
-            <li>前列腺癌</li>
+            <li<?php if($row["key"] =="all"):?> class="selected"<?php endif?>><a href="<?php print AppUrl::askByLv0key("")?>">全部</a></li>
+           <?php for($i=0,$D=$m->getLv0Ask(),$I=count($D);$i<$I;$i++):?>
+        <li<?php if($D[$i]["key"] == $row["key"]):?> class="selected"<?php endif?>><a href="<?php print AppUrl::askByLv0key($D[$i]["key"])?>"><?php print $D[$i]["data"]?></a></li>
+        <?php endfor;?>
           </ul>
         </div>
         <p class="blank15"></p>
         <div class="quesall">
+        
+        
           <div class="wlzxnr quescon selected fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">1跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
+          	<?php foreach ($all["data"] as $allitem):?>
+          	 <dl>
+              <dt class="fl"><a href=""><span class="fl"><?php print $allitem["title"]?></span><span class="fr"><?php print $m->getNameByDod($allitem["dod"])?></span></a></dt>
               <dd class="fr gray"><a>回复</a></dd>
             </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
+          	
+          	<?php endforeach;?>
+
+  
           </div>
-          <div class="wlzxnr quescon fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">2跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-          <div class="wlzxnr quescon  fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">3跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-          <div class="wlzxnr quescon  fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">4跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-          <div class="wlzxnr quescon fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">5跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-          <div class="wlzxnr quescon fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">6跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
-          <div class="wlzxnr quescon fz13">
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">7跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-            <dl>
-              <dt class="fl"><a href=""><span class="fl">跟我老婆做爱，阴茎总是疼，这是怎么回事...</span><span class="fr">韩用涛</span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          </div>
+          
+ 
+
         </div>
         <p class="blank25"></p>
-        <div class="pagenum tc gray fz13"> <a><</a> <a>1</a> <a>2</a> <a>3</a> <a>4</a> <a>5</a> <a>...</a> <a>52</a> <a>></a> </div>
+        <div class="pagenum tc gray fz13"> 
+        	<?php if ($pagination->hasPre()):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($pagination->hasNext()):?>
+            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?>
+       </div>
       </div>
     </div>
     <!--left end-->

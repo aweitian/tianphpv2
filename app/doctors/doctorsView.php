@@ -5,6 +5,7 @@ class doctorsViewControllerNotFound extends AppView {
 	
 	
 	
+	
 	public function content($model){
 		return defTplData::getInstance()
 		->push(

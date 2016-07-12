@@ -19,6 +19,7 @@ require_once FILE_SYSTEM_ENTRY."/modules/sqlManager/sqlManager.php";
 require_once FILE_SYSTEM_ENTRY.'/app/uploadFactory.php';
 
 require_once FILE_SYSTEM_ENTRY.'/app/AppFulltextSearch.php';
+require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppCtrl.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppView.php';

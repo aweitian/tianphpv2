@@ -44,7 +44,7 @@ class doctorsControllerNotFound{
 		$res = new httpResponse();
 		$res->_404();
 	}
-	protected function ask(){
+	protected function ask(pmcaiMsg $msg){
 		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
 		$this->model->data = $row;
 		$this->view->ask($this->model);

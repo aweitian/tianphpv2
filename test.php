@@ -20,6 +20,5 @@ $d = array(
 			),
 		);
 
-$key = "男性不育";
-// echo $d[$key]["en"];
+echo join(" | ",array_keys($d));
 ?>

@@ -113,18 +113,35 @@ class articleUIApi {
 		return $ret;
 	}
 	/**
-	 * aid,kw,desc,thumb,title,date
+	 * 获取疾病精华文章个数
+	 * @param int $did
+	 * @return int
+	 */
+	public function getEssenceAidCntByDid($did){
+		$cache_key = "getEssenceAidCntByDid-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/getEssenceAidByDidCnt");
+		$data = $this->db->fetch($sql, array("did" => $did));
+		$ret = $data["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * 获取疾病精华文章
+	 * 返回字段:aid,kw,desc,thumb,title,date
 	 * @param int $did
 	 * @param int $length
 	 * @return array fetchAll
 	 */
-	public function getEssenceAidByDid($did,$length){
-		$cache_key = "getEssenceAidByDid-".$aid;
+	public function getEssenceAidByDid($did,$length,$offset=0){
+		$cache_key = "getEssenceAidByDid-".$did."-".$length."-".$offset;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
 		$sql = $this->sqlManager->getSql("/ui_article/getEssenceAidByDid");
-		$data = $this->db->fetchAll($sql, array("did" => $did,"length" => $length));
+		$data = $this->db->fetchAll($sql, array("did" => $did,"length" => $length,"offset" => $offset));
 		$ret = array();
 		foreach ($data as $item){
 			$ret[] = $this->rowNoContent($item["aid"]);
@@ -134,7 +151,26 @@ class articleUIApi {
 	}
 	
 	/**
-	 * aid,kw,desc,thumb,title,content,date
+	 * 获取疾病的知识文章个数
+	 * @param int $did
+	 * @return int
+	 */
+	public function allKnowledgesCnt($did){
+		$cache_key = "allKnowledges-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/allKnowledgeCnt");
+		$data = $this->db->fetch($sql, array(
+			"did" => $did,
+		));
+		$ret = $data["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * 获取疾病的知识文章
+	 * 返回字段:aid,kw,desc,thumb,title,content,date
 	 * @param int $did
 	 * @param int $txtlength,截取内容长度，如果不想截取，传递0
 	 * @param int $offset 偏移值
@@ -161,8 +197,29 @@ class articleUIApi {
 	}
 	
 	/**
+	 * 返回知识文章个数
+	 * @param int $did
+	 * @param int $tid tagid
+	 * @return int
+	 */
+	public function knowledgeCnt($did,$tid){
+		$cache_key = "knowledge-".$did."-".$tid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/knowledge_kindCnt");
+		$data = $this->db->fetch($sql, array(
+			"did" => $did,
+			"tid" => $tid,
+		));
+		$ret = $data["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
 	 * aid,kw,desc,thumb,title,date
 	 * @param int $did
+	 * @param int $tid tagid
 	 * @param int $txtlength,截取内容长度，如果不想截取，传递0
 	 * @param int $offset 偏移值
 	 * @param int $length
@@ -189,21 +246,41 @@ class articleUIApi {
 	}
 	
 	/**
+	 * 获取疾病 知识介绍 的文章个数
+	 * @param int $did
+	 * @return int
+	 */
+	public function getArticleTag7ByDidCnt($did){
+		$cache_key = "getArticleTag7ByDidCnt-".$did;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_article/ArticleTag7/mainCnt");
+		$ret = $this->db->fetch($sql, array(
+			"did" => $did,
+		));
+		$ret = $ret["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
 	 * 获取 知识介绍 的文章
 	 * sid  thumb                              title   desc    
 	 * 30  /uploads/user/201606211043371.png  tald    sdalfkwe  
-	 * 根据病种ID获取疾病知识的文章(一篇)
+	 * 根据病种ID获取疾病知识的文章
 	 * @param int $did
 	 * @return array fetch
 	 */
-	public function getArticleTag7ByDid($did){
-		$cache_key = "getArticleTag7ByDid-".$did;
+	public function getArticleTag7ByDid($did,$length=1,$offset=0){
+		$cache_key = "getArticleTag7ByDid-".$did."-".$length."-".$offset;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
 		$sql = $this->sqlManager->getSql("/ui_article/ArticleTag7/main");
-		$ret = $this->db->fetch($sql, array(
-			"did" => $did
+		$ret = $this->db->fetchAll($sql, array(
+			"did" => $did,
+			"length" => $length,
+			"offset" => $offset
 		));
 		$this->cache[$cache_key] = $ret;
 		return $ret;
@@ -218,8 +295,8 @@ class articleUIApi {
 	 * @param int $length
 	 * @return array fetchAll
 	 */
-	public function getAllThumbnail($did,$length){
-		$cache_key = "getAllThumbnail-".$did."-".$length;
+	public function getAllThumbnail($did,$length,$offset=0){
+		$cache_key = "getAllThumbnail-".$did."-".$length."-".$offset;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
@@ -234,6 +311,7 @@ class articleUIApi {
 			$sql = $this->sqlManager->getSql("/ui_article/allByDid_Exc");
 			$others = $this->db->fetchAll($sql, array(
 					"did" => $did,
+					"offset" => $offset,
 					"exc" => $thumbnail["aid"],
 					"length" => $length
 			));
@@ -247,6 +325,7 @@ class articleUIApi {
 			$sql = $this->sqlManager->getSql("/ui_article/allByDid");
 			$ret = $this->db->fetchAll($sql, array(
 					"did" => $did,
+					"offset" => $offset,
 					"length" => $length
 			));
 			foreach ($ret as $item){
@@ -284,7 +363,7 @@ class articleUIApi {
 	 * @param int $length
 	 * @return array fetchAll
 	 */
-	public function getAll($did,$length){
+	public function getAll($did,$length,$offset=0){
 		$cache_key = "getAll-".$did."-".$length;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
@@ -293,6 +372,7 @@ class articleUIApi {
 		$sql = $this->sqlManager->getSql("/ui_article/allByDid");
 		$ret = $this->db->fetchAll($sql, array(
 			"did" => $did,
+			"offset" => $offset,
 			"length" => $length
 		));
 		$this->cache[$cache_key] = $ret;
@@ -334,7 +414,7 @@ class articleUIApi {
 	 * @param int $length
 	 * @return array fetchAll
 	 */
-	public function getAllExc($did,$exc,$length){
+	public function getAllExc($did,$exc,$length,$offset=0){
 		$cache_key = "getAllExc-".$did."-".$exc."-".$length;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
@@ -343,6 +423,7 @@ class articleUIApi {
 		$sql = $this->sqlManager->getSql("/ui_article/allByDid_Exc");
 		$ret = $this->db->fetchAll($sql, array(
 			"did" => $did,
+			"offset" => $offset,
 			"exc" => $exc,
 			"length" => $length
 		));
@@ -355,13 +436,14 @@ class articleUIApi {
 	 * @param int $length
 	 * @return array fetchAll;
 	 */
-	public function getNewest($length){
+	public function getNewest($length,$offset=0){
 		$cache_key = "getNewest-".$length;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
 		$sql = $this->sqlManager->getSql("/ui_article/all");
 		$ret = $this->db->fetchAll($sql, array(
+				"offset" => $offset,
 				"length" => $length
 		));
 		$this->cache[$cache_key] = $ret;

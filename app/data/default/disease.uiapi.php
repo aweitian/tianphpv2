@@ -119,6 +119,31 @@ class diseaseUIApi {
 	}
 	
 	/**
+	 * 返回字段:sid,key,data
+	 * @return array fetchAll;
+	 */
+	public function getLv0KeyInfoes(){
+		$cache_key = "getLv0KeyInfoes";
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		$ret = array();
+		foreach ($this->sidCache as $item){
+			if($item["pid"] == 0 && $item["key"]){
+				$ret[$item["key"]] = array(
+						"sid" =>  $item["sid"],
+						"key" =>  $item["key"],
+						"data" =>  $item["data"],
+				);
+			}
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	
+	/**
 	 * 根据大病种获取小病种信息
 	 * sid  key     data pid     grp  metaid  
 	 * 返回字段sid  key     data

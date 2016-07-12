@@ -34,16 +34,24 @@ class diseaseControllerNotFound{
 		$this->view->disease($this->model);
 	}
 	private function knowledge(pmcaiMsg $msg){
-		
+		$row = diseaseUIApi::getInstance()->getRowByDiskey($msg->getControl());
+		$this->model->data = $row;
+		$this->view->knowledge($this->model);
 	}
 	private function article(pmcaiMsg $msg){
-		
+		$row = diseaseUIApi::getInstance()->getRowByDiskey($msg->getControl());
+		$this->model->data = $row;
+		$this->view->article($this->model);
 	}
 	private function doctors(pmcaiMsg $msg){
-		
+		$row = diseaseUIApi::getInstance()->getRowByDiskey($msg->getControl());
+		$this->model->data = $row;
+		$this->view->doctors($this->model);
 	}
 	private function ask(pmcaiMsg $msg){
-		
+		$row = diseaseUIApi::getInstance()->getRowByDiskey($msg->getControl());
+		$this->model->data = $row;
+		$this->view->ask($this->model);
 	}
 	
 	

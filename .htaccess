@@ -1,8 +1,4 @@
-ExpiresActive On
-ExpiresDefault A600
 options +FollowSymLinks
-FileETag MTime Size
-IndexIgnore */*
 RewriteEngine on
 
 # if a directory or a file exists, use it directly

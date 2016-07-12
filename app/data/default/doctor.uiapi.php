@@ -98,7 +98,14 @@ class doctorUIApi {
 	}
 	
 	
-	
+	/**
+	 * 返回字段:
+	 * 		sid,id,name,lv,avatar,date,
+	 * 		dod,dlv,start,hot,love,
+	 * 		contribution,desc,spec
+	 * @param int $length
+	 * @return array:
+	 */
 	public function getInfoes($length){
 		$cache_key = "getInfoes-".$length;
 		if (array_key_exists($cache_key, $this->cache)){

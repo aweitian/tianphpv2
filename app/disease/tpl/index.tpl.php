@@ -1,5 +1,7 @@
 <?php
 /**
+ *Author
+ * Sihangzhang
  * ["sid"]=> string(3) "325" 
  * ["key"]=> string(4) "gwxc" 
  * ["data"]=> string(12) "睾丸异常" 
@@ -22,7 +24,7 @@ $ext = diseaseExtInfoes::getExtData();
             	<li><a href="<?php print AppUrl::disHomeByDiseasekey($row["key"])?>" class="navdq">疾病首页</a></li><span>|</span>
                 <li><a href="<?php print AppUrl::disKnowledgeByDiseasekey($row["key"])?>">疾病知识</a></li><span>|</span>
                 <li><a href="<?php print AppUrl::disArticleByDiseasekey($row["key"])?>">专家观点</a></li><span>|</span>
-                <li><a href="<?php print AppUrl::navDoctors()?>">好评医生</a></li><span>|</span>
+                <li><a href="<?php print AppUrl::disDoctorsByDiseasekey($row["key"])?>">好评医生</a></li><span>|</span>
                 <li><a href="<?php print AppUrl::disAskByDiseasekey($row["key"])?>">患者咨询</a></li>
             </ul>
         </div>

@@ -1,7 +1,7 @@
 <?php
 
 class askModel extends AppModel {
-	
+	public $data = array( "sid"=> 0, "key"=> "all", "data" => "全部" );
 	public function __construct() {
 		
 	}
@@ -35,5 +35,43 @@ class askModel extends AppModel {
 		}else{
 			return array();
 		}
+	}
+	public function getLv0(){
+		return diseaseUIApi::getInstance()->getLv0KeyInfoes();
+	}
+	
+	
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function getLv0Ask(){
+		return diseaseUIApi::getInstance()->getLv0Infoes();
+	}
+	/**
+	 * Author
+	 * sihangzhang
+	 */	
+	public function getQuestionsByLv0Did($did,$length=8,$offset=0){
+		return askUIApi::getInstance()->getQuestionsByLv0Did($did,$length,$offset);
+	}
+	public function getQuestionsCountByLv0Did($did){
+		return askUIApi::getInstance()->getQuestionsCountByLv0Did($did);
+	}
+	
+
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function getNameByDod($dod){
+		return doctorUIApi::getInstance()->getNameByDod($dod);
+	}
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function getAllQuestions($off,$len){
+		return askUIApi::getInstance()->getAllQuestions($off,$len);
 	}
 }

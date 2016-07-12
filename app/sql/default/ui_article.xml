@@ -15,6 +15,11 @@
 			ORDER BY `sid` DESC
 			LIMIT 0, :length;
 	</all>
+	<allCnt>
+		SELECT
+			  count(`sid`) as `cnt`
+			FROM `data_article`
+	</allCnt>
 	
 	<!-- 获取某病种下最新的文章 -->
 	<!-- 参数:did,offset,length -->
@@ -27,6 +32,12 @@
 			ORDER BY `sid` DESC
 			LIMIT :offset, :length;
 	</all_bydid>
+	<all_bydidCnt>
+		SELECT
+			  count(`aid`) as `cnt`
+			FROM `data_article_dis`
+			WHERE `did` = :did
+	</all_bydidCnt>
 	
 	<!-- 获取第一个写这篇文章的医生ID -->
 	<!-- 参数:aid -->
@@ -59,6 +70,14 @@
 			LIMIT :offset,:length
 		]]>
 	</allKnowledge>
+	<allKnowledgeCnt>
+		<![CDATA[
+			SELECT count(`data_article_dis`.`aid`) as `cnt` FROM `data_article_dis`
+			WHERE `data_article_dis`.`aid` IN (
+				SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` < 7
+			) AND `data_article_dis`.`did` = :did
+		]]>
+	</allKnowledgeCnt>
 	
 	
 	<!-- 获取疾病知识某一类文章ID -->
@@ -71,6 +90,12 @@
 		) AND `data_article_dis`.`did` = :did
 		LIMIT :offset,:length
 	</knowledge_kind>
+	<knowledge_kindCnt>
+		SELECT count(`data_article_dis`.`aid`) as `cnt` FROM `data_article_dis`
+		WHERE `data_article_dis`.`aid` IN (
+			SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` = :tid
+		) AND `data_article_dis`.`did` = :did
+	</knowledge_kindCnt>
 	
 	<!-- 获取一篇文章信息，带内容 -->
 	<!-- 参数:aid -->
@@ -114,8 +139,14 @@
 			WHERE `data_article_dis`.`aid` IN (
 				SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` = 8
 			) AND `data_article_dis`.`did` = :did
-			LIMIT 0,:length
+			LIMIT :offset,:length
 	</getEssenceAidByDid>
+	<getEssenceAidByDidCnt>
+		SELECT `data_article_dis`.`aid` FROM `data_article_dis`
+			WHERE `data_article_dis`.`aid` IN (
+				SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` = 8
+			) AND `data_article_dis`.`did` = :did
+	</getEssenceAidByDidCnt>
 	
 	
 	<!-- 获取所有写这篇文章的医生ID -->
@@ -167,8 +198,16 @@
 			WHERE 
 			`data_article_dis`.`did` = :did
 			ORDER BY `aid` DESC
-			LIMIT 0,:length
+			LIMIT :offset,:length
 	</allByDid>
+	<allByDidCnt>
+		SELECT 
+			count(`data_article`.`sid`) as `cnt`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article_dis`.`did` = :did
+	</allByDidCnt>
 	
 	
 	<!-- 获取病种不包括传递的AID的所有文章,按从新到旧的排序方式 -->
@@ -189,8 +228,18 @@
 			AND
 			`data_article`.`sid` != :exc
 			ORDER BY `aid` DESC
-			LIMIT 0,:length
+			LIMIT :offset,:length
 	</allByDid_Exc>
+	<allByDid_ExcCnt>
+		SELECT 
+			count(`data_article`.`sid`) as `cnt`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article_dis`.`did` = :did
+			AND
+			`data_article`.`sid` != :exc
+	</allByDid_ExcCnt>
 	<!-- 根据病种Id获取疾病知识的文章 -->
 	
 	
@@ -214,8 +263,18 @@
 			LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
 			WHERE  `data_article_dis`.`did` = :did	
 			ORDER BY `sid` DESC
-			LIMIT 0,:length	
+			LIMIT :offset,:length	
 		</bak>
+		<bakCnt>
+			SELECT 
+				count(`data_article`.`sid`) as `cnt`
+			FROM (SELECT `data_article_tags`.`aid`,`data_article_tags`.`tid` FROM `data_article_tags` 
+			WHERE `data_article_tags`.`tid` = 7) AS `data_article_tags`
+			LEFT JOIN data_article_dis ON `data_article_tags`.`aid` = `data_article_dis`.`aid`
+			LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
+			WHERE  `data_article_dis`.`did` = :did	
+			ORDER BY `sid` DESC
+		</bakCnt>
 		<main>
 			SELECT 
 				`data_article`.`sid` as `aid`,
@@ -231,8 +290,17 @@
 				WHERE `data_article_tags`.`tid` = 7
 				AND `data_article_dis`.`did` = :did
 				ORDER BY `sid` DESC
-				LIMIT 0,:length
+				LIMIT :offset,:length	
 		</main>
+		<mainCnt>
+			SELECT 
+				count(`data_article`.`sid`) as `cnt`
+			FROM `data_article_tags` 
+				LEFT JOIN data_article_dis ON `data_article_tags`.`aid` = `data_article_dis`.`aid`
+				LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
+				WHERE `data_article_tags`.`tid` = 7
+				AND `data_article_dis`.`did` = :did
+		</mainCnt>
 	</ArticleTag7>
 	
 </ui_article>
