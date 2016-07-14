@@ -134,11 +134,11 @@ class doctorModel extends privModel{
 	 * @param date $date
 	 * @return rirResult
 	 */
-	public function ext_add($dod,$dlv,$start,$hot,$love,$contribution,$desc,$spec,$duty){
+	public function ext_add($dod,$dlv,$star,$hot,$love,$contribution,$desc,$spec,$duty){
 		$api = new doctorExtApi();
 		$duty = join("", $duty);
 		//exit($duty);
-		return $api->add($dod, $dlv, $start, $hot, $love, $contribution, $desc, $spec,$duty);
+		return $api->add($dod, $dlv, $star, $hot, $love, $contribution, $desc, $spec,$duty);
 	}
 	
 	/**
@@ -147,10 +147,10 @@ class doctorModel extends privModel{
 	 * @param string $letter
 	 * @return rirResult
 	 */
-	public function ext_update($dod,$dlv,$start,$hot,$love,$contribution,$desc,$spec,$duty){
+	public function ext_update($dod,$dlv,$star,$hot,$love,$contribution,$desc,$spec,$duty){
 		$api = new doctorExtApi();
 		$duty = join("",$duty);
-		return $api->update($dod, $dlv, $start, $hot, $love, $contribution, $desc, $spec,$duty);
+		return $api->update($dod, $dlv, $star, $hot, $love, $contribution, $desc, $spec,$duty);
 	}
 	
 	

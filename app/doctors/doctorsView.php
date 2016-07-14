@@ -38,7 +38,7 @@ class doctorsViewControllerNotFound extends AppView {
 		->push(
 				defTplData::TYPE_INCLUDE_NOW,
 				array(
-						dirname(__FILE__)."/tpl/ask.tpl.php",
+						dirname(__FILE__)."/tpl/asklist.tpl.php",
 						array("m" => $model)
 				)
 				

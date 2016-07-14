@@ -1,4 +1,25 @@
 <?php
+
+defTplData::getInstance()->title = $m->data["name"] . " - 医师首页";
+/**
+  ["sid"]=> 	11
+  ["id"]=>  	string(3) "zyl"
+  ["name"]=>  	string(9) "张耀龙"
+  ["lv"]=>  	string(7) "ccccccc"
+  ["avatar"]=>  string(7) "zyl.jpg"
+  ["date"]=>  	string(10) "2016-05-16"
+  ["dod"]=>  	string(1) "2"
+  ["dlv"]=>  	string(1) "3"
+  ["star"]=>  	string(2) "10"
+  ["hot"]=>  	string(2) "22"
+  ["love"]=>  	string(1) "2"
+  ["contribution"]=>  string(1) "2"
+  ["desc"]=>  	string(2) "33"
+  ["spec"]=>  	string(1) "3"
+}
+ */
+// var_dump($m->data);exit;
+
 ?>
 
   <div class="blank15"></div>
@@ -23,17 +44,16 @@
                   
                   <div class="zjtdcon1box1_sm1 fl">
                   	
-                   	 <a href=""><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img1.jpg" class="fl" /></a>
+                   	 <a href=""><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $m->data["avatar"]?>" class="fl" /></a>
                      
                      <div class="fr">
-                          <h4 class="fz24 tc">陈希球大夫的个人网站</h4>
+                          <h4 class="fz24 tc"><?php print $m->data["name"]?>大夫的个人网站</h4>
                           <div class="blank20"></div>
-                          <p><b class="fz18">陈希球  副主任医师 </b></p>
+                          <p><b class="fz18"><?php print $m->data["name"]?>  <?php print $m->data["lv"]?> </b></p>
                           <div class="blank10"></div>
                           <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img2.png" class="fl" />所属科室：上海九龙男子医院生殖整形专科</p>
-                          <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />擅长项目：高难度男性生殖整形手术：阴茎背神经修复手术，阴茎再造术，阴茎延长，阴茎增粗，阴茎矫正，先天性尿道下裂，阴茎冠状沟缺损等，精索静脉曲张，尿道等…<a href=""> [点击咨询]</a></p>
+                          <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />擅长项目：<?php print $m->data["spec"]?><a href=""> [点击咨询]</a></p>
                      </div>
-                     
                   </div>
                   
                   <div class="fr zjtdcon1box1_sm2">
@@ -265,33 +285,17 @@
                   	<div class="syrbox4nr zjtd_r1">
                         <div>
                         	<table cellpadding="0" cellspacing="0" border="0">
+                        	<?php for($i=0;$i<3;$i++):?>
                             	<tr>
-                                	<td><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_time1.jpg" /></td>
-                                    <td></td>
-                                    <td><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_time2.jpg" /></td>
-                                    <td><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_time2.jpg" /></td>
-                                    <td><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_time1.jpg" /></td>
-                                    <td></td>
-                                    <td><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_time1.jpg" /></td>
+                            	<?php for($j=0;$j<7;$j++):?>
+                            	<?php if(substr($m->data["duty"],$i * 7 + $j,1) == "0"):?>
+                            	<td></td>
+                            	<?php else:?>
+                            	<td><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_time<?php print substr($m->data["duty"],$i * 7 + $j,1)?>.jpg" /></td>
+                            	<?php endif;?>
+                            	<?php endfor;?>
                                 </tr>
-                                <tr>
-                                	<td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_time2.jpg" /></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                	<td></td>
-                                    <td><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_time3.jpg" /></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                             <?php endfor;?>
                             </table>
                         </div>
                         <p class="tc color9" style="margin:10px 0; line-height:20px;">注：所有门诊时间仅供参考，最终以医院当日公布为准。</p>

@@ -6,7 +6,7 @@
 	<data>
 		SELECT * FROM `data_appraise`
 			ORDER BY `sid` DESC
-			LIMIT 0,:length
+			LIMIT :offset,:length
 	</data>
 
 	<!-- 获取所有对医生的评价,排序按ID倒序 -->
@@ -15,7 +15,7 @@
 	<rows_dod>
 		SELECT * FROM `data_appraise`
 		WHERE `dod` = :dod
-		LIMIT 0,:length
+		LIMIT :offset,:length
 	</rows_dod>
 	
 	<!-- 获取所有对医生的评价,排序按ID倒序 -->
@@ -24,6 +24,6 @@
 	<rows_uid>
 		SELECT * FROM `data_appraise`
 		WHERE `uid` = :uid
-		LIMIT 0,:length
+		LIMIT :offset,:length
 	</rows_uid>
 </ui_appraise>

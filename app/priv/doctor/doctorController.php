@@ -273,10 +273,10 @@ class doctorController extends privController{
 // 			var_dump($msg->getPostData());exit;
 			
 			
-			if(!isset($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"],$msg["duty"])){
+			if(!isset($msg["dod"],$msg["dlv"],$msg["star"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"],$msg["duty"])){
 				$this->response->_404();
 			}
-			$retR = $this->model->ext_add($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"],$msg["duty"]);
+			$retR = $this->model->ext_add($msg["dod"],$msg["dlv"],$msg["star"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"],$msg["duty"]);
 			if($retR->isTrue()){
 				if(isset($msg["?returl"])){
 					$url = new pmcaiUrl($msg["?returl"]);
@@ -317,11 +317,11 @@ class doctorController extends privController{
 	public function editextAction(pmcaiMsg $msg){
 		if($msg->isPost()){
 	
-			if(!isset($msg["dod"],$msg["dlv"],$msg["start"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"],$msg["duty"])){
+			if(!isset($msg["dod"],$msg["dlv"],$msg["star"],$msg["hot"],$msg["love"],$msg["contribution"],$msg["desc"],$msg["spec"],$msg["duty"])){
 				$this->response->_404();
 			}
 			$retR = $this->model->ext_update(
-					$msg["dod"], $msg["dlv"], $msg["start"], 
+					$msg["dod"], $msg["dlv"], $msg["star"], 
 					$msg["hot"], $msg["love"], $msg["contribution"], 
 					$msg["desc"],$msg["spec"],$msg["duty"]
 			);

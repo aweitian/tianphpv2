@@ -34,4 +34,9 @@
 		FROM `data_user`
 		WHERE `wa` = 'y'
 	</waterarm>
+	
+	<cnt>
+		SELECT count(`sid`) as `cnt`
+		FROM `data_user`
+	</cnt>
 </ui_user>

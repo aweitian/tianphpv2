@@ -10,12 +10,13 @@
 			  `data_doctor`.`date`,
 			  `data_doctor_ext`.`dod`,
 			  `data_doctor_ext`.`dlv`,
-			  `data_doctor_ext`.`start`,
+			  `data_doctor_ext`.`star`,
 			  `data_doctor_ext`.`hot`,
 			  `data_doctor_ext`.`love`,
 			  `data_doctor_ext`.`contribution`,
 			  `data_doctor_ext`.`desc`,
-			  `data_doctor_ext`.`spec`  
+			  `data_doctor_ext`.`spec`,  
+			  CONV(`data_doctor_ext`.`duty`,10,4) as `duty`
 			FROM `data_doctor`
 			LEFT JOIN `data_doctor_ext` ON `data_doctor`.`sid` = `data_doctor_ext`.`dod`
 			LEFT JOIN `data_doctor_lv_meta` ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`  

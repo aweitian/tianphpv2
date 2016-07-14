@@ -67,7 +67,7 @@ $url = new url($req->requestUri());
           <div class="wlzxnr quescon selected fz13">
           	<?php foreach ($all["data"] as $allitem):?>
           	 <dl>
-              <dt class="fl"><a href=""><span class="fl"><?php print $allitem["title"]?></span><span class="fr"><?php print $m->getNameByDod($allitem["dod"])?></span></a></dt>
+              <dt class="fl"><a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><span class="fl"><?php print $allitem["title"]?></span></a><a href="<?php print AppUrl::docHomeByDod($allitem["dod"])?>"><span class="fr"><?php print $m->getNameByDod($allitem["dod"])?></span></a></dt>
               <dd class="fr gray"><a>回复</a></dd>
             </dl>
           	
@@ -96,20 +96,39 @@ $url = new url($req->requestUri());
     <!--left end-->
     
     <div class="wid300 fr">
+    
     <p><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth4.jpg" width="300" height="90" /></a></p>
     <p class="blank20"></p>
+    
     <div class="docsug border2">
-    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师观点</a><a class="fz13 blue fr" href="">+更多</a></div>
-    <div class="docsugbox fz13"><dl class="clearfix"><dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/wlgd1.jpg" width="80" height="60" /></dt>
-      <dd class="fl"><p>前列腺炎患者夏季排尿减少并非是好兆头</p>
-      <p class="p2 clearfix"><a class="fl gray">2015-12-26</a><a class="fr gray">1011人阅读</a></p></dd></dl>
+    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师观点</a><a class="fz13 blue fr" href="<?php print AppUrl::navArticle()?>">+更多</a></div>
+    <div class="docsugbox fz13">
+    
+    <?php $thumb = $m->getRowThumbnail()?>
+    <?php if (!empty($thumb)):?>
+    <?php /*var_dump($thumb)*/?>
+    <dl class="clearfix">
+    	<dt class="fl">
+    		<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print $thumb["thumb"]?>" width="80" height="60" /></a>
+    	</dt>
+      <dd class="fl">
+      <p><a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></p>
+      
+      <p class="p2 clearfix">
+      <a class="fl gray"><?php print $thumb["date"]?></a>
+      </p>
+      </dd>
+      </dl>
+      <?php endif?>
+      
       <p class="blank15"></p>
       <ul class="othsug">
-      <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
-      <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
-      <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
-      <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
-      <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
+      	
+          
+          	
+       <?php foreach($m->getNewest(5) as $aitem):?>   	
+      <li><p class="p1"><a class="black" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print utility::utf8Substr($aitem["title"], 0, 18) ?></a></p><p class="p2"><a class="gray" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print $m->getContent($aitem["aid"],18)?>...[全文]</a></p></li>
+     <?php endforeach;?>
       </ul>      
       </div>          
     </div>
@@ -117,35 +136,24 @@ $url = new url($req->requestUri());
     
     <div class="doctj border2">
     
-    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a><a class="fz13 blue fr" href="">+更多</a></div>
+    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a><a class="fz13 blue fr" href="<?php print AppUrl::navDoctors() ?>">+更多</a></div>
     <div class="doctjbox">
-    <dl class="clearfix nobor"><dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/wltjzj1.jpg" width="80" height="80" /></dt>
+    <?php foreach($m->getDoctors(3) as $doc):?>
+      <dl class="clearfix"><dt class="fl"><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
       <dd class="fl">
       <p class="blank5"></p>
-      <p class="fz18">陈希球  <span class="gray fz13">副主任医师</span></p>
+      <p class="fz18"><?php print $doc["name"]; ?><span class="gray fz13"><?php print $doc["lv"]; ?></span></p>
       <p class="blank5"></p>
-      <p class="fz13 gray">擅长：其独特的治疗方法对久</p>
+      <p class="fz13 gray">擅长：<?php print $doc["spec"]; ?></p>
       <p class="blank5"></p>
-      <p class="p3 tc"><a href="">咨询</a></p>
+      <p class="p3 tc"><a href="<?php print AppUrl::getSwtUrl()?>">咨询</a></p>
       </dd></dl>
-      <dl class="clearfix"><dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/wltjzj1.jpg" width="80" height="80" /></dt>
-      <dd class="fl">
-      <p class="blank5"></p>
-      <p class="fz18">陈希球  <span class="gray fz13">副主任医师</span></p>
-      <p class="blank5"></p>
-      <p class="fz13 gray">擅长：其独特的治疗方法对久</p>
-      <p class="blank5"></p>
-      <p class="p3 tc"><a href="">咨询</a></p>
-      </dd></dl>
-      <dl class="clearfix"><dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/wltjzj1.jpg" width="80" height="80" /></dt>
-      <dd class="fl">
-      <p class="blank5"></p>
-      <p class="fz18">陈希球  <span class="gray fz13">副主任医师</span></p>
-      <p class="blank5"></p>
-      <p class="fz13 gray">擅长：其独特的治疗方法对久</p>
-      <p class="blank5"></p>
-      <p class="p3 tc"><a href="">咨询</a></p>
-      </dd></dl>
+      	<?php endforeach;?>
+      
+      
+        	
+      
+      
       </div>
     
     

@@ -30,6 +30,23 @@ class userUIApi {
 	
 	
 	/**
+	 * 获取全部用户个数
+	 * @return int;
+	 */
+	public function getAllCnt(){
+		$cache_key = "getAllCnt";
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_user/cnt");
+		$row = $this->db->fetch($sql, array());
+		$ret = $row["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	
+	/**
 	 * 获取用户姓名
 	 * @param int $uid
 	 * @return string;

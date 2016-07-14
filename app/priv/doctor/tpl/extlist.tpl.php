@@ -72,7 +72,7 @@ for ($i = 0; $i < 6; $i++) {
                       <td><?php print $item["dod"]?></td>
                       <td><?php print $item["name"]?></td>
                       <td><?php print $item["lv"]?></td>
-                      <td><?php print $item["start"]?></td>
+                      <td><?php print $item["star"]?></td>
                        <td><?php print $item["hot"]?></td>
                       <td><?php print $item["love"]?></td>
                       <td><?php print $item["contribution"]?></td>

@@ -5,9 +5,46 @@
  * Description: 
  */
 define("HTTP_ENTRY",'');
+
+
+
+
 if(DEBUG_FLAG){
 	error_reporting(E_ALL);
 	ini_set("display_errors","On");
+	function myErrorHandler($errno, $errstr, $errfile, $errline) {
+		if (!(error_reporting() & $errno)) {
+			// This error code is not included in error_reporting
+			return;
+		}
+	
+		switch ($errno) {
+			case E_USER_ERROR:
+				echo "<b>My ERROR</b> [$errno] $errstr<br />\n";
+				echo "  Fatal error on line $errline in file $errfile";
+				echo ", PHP " . PHP_VERSION . " (" . PHP_OS . ")<br />\n";
+				echo "Aborting...<br />\n";
+				exit(1);
+				break;
+	
+			case E_USER_WARNING:
+				echo "<b>My WARNING</b> [$errno] $errstr<br />\n";
+				break;
+	
+			case E_USER_NOTICE:
+				echo "<b>My NOTICE</b> [$errno] $errstr<br />\n";
+				break;
+	
+			default:
+				debug_print_backtrace();
+				echo "Unknown error type: [$errno] $errstr<br />\n";
+				break;
+		}
+	
+		/* Don't execute PHP internal error handler */
+		return true;
+	}
+	set_error_handler("myErrorHandler");
 }else{
 	error_reporting(0);
 	ini_set("display_errors","Off");
@@ -39,5 +76,5 @@ if(false !== strpos(FILE_SYSTEM_ENTRY, "openshift")){
 
 tian::addExceptionDir(FILE_SYSTEM_ENTRY."/app/exceptions");
 
-#define("TPL_404_CNF_PATH",FILE_SYSTEM_ENTRY."/lib/misc/404.tpl.php");
+
 #define("TPL_MSG_CNF_PATH",FILE_SYSTEM_ENTRY."/lib/misc/msg.tpl.php");

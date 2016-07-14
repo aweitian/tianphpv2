@@ -32,7 +32,7 @@ class doctorExtApi {
 	 * @param date $date
 	 * @return rirResult
 	 */
-	public function add($dod,$dlv,$start,$hot,$love,$contribution,$desc,$spec,$duty){
+	public function add($dod,$dlv,$star,$hot,$love,$contribution,$desc,$spec,$duty){
 		//validate data
 		if(!validator::isUint($dod)){
 			return new rirResult(2,"invalid dod");
@@ -40,8 +40,8 @@ class doctorExtApi {
 		if(!validator::isUint($dlv)){
 			return new rirResult(3,"invalid dlv");
 		}
-		if(!validator::isUint($start)){
-			return new rirResult(4,"invalid start");
+		if(!validator::isUint($star)){
+			return new rirResult(4,"invalid star");
 		}
 		if(!validator::isFloat($hot)){
 			return new rirResult(4,"invalid hot");
@@ -67,7 +67,7 @@ class doctorExtApi {
 		$bind = array(
 			"dod" => $dod,
 			"dlv" => $dlv,
-			"start" => $start,
+			"star" => $star,
 			"hot" => $hot,
 			"love" => $love,
 			"contribution" => $contribution,
@@ -91,7 +91,7 @@ class doctorExtApi {
 	 * @param string $letter
 	 * @return rirResult
 	 */
-	public function update($dod,$dlv,$start,$hot,$love,$contribution,$desc,$spec,$duty){
+	public function update($dod,$dlv,$star,$hot,$love,$contribution,$desc,$spec,$duty){
 	
 		//validate data
 		if(!validator::isUint($dod)){
@@ -100,8 +100,8 @@ class doctorExtApi {
 		if(!validator::isUint($dlv)){
 			return new rirResult(3,"invalid dlv");
 		}
-		if(!validator::isUint($start)){
-			return new rirResult(4,"invalid start");
+		if(!validator::isUint($star)){
+			return new rirResult(4,"invalid star");
 		}
 		if(!validator::isFloat($hot)){
 			return new rirResult(4,"invalid hot");
@@ -127,7 +127,7 @@ class doctorExtApi {
 		$bind = array(
 			"dod" => $dod,
 			"dlv" => $dlv,
-			"start" => $start,
+			"star" => $star,
 			"hot" => $hot,
 			"love" => $love,
 			"contribution" => $contribution,

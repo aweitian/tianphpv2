@@ -49,7 +49,7 @@ class doctorUIApi {
 	}
 	
 	/**
-	 * sid,id,name,lv,avatar,date,dod,dlv,start,hot,love,contribution,desc,spec
+	 * sid,id,name,lv,avatar,date,dod,dlv,star,hot,love,contribution,desc,spec
 	 * 3  zdz     郑殿增        ccccccc  zdz.jpg  2016-05-16       3       3       0       0       0             0  doc     spce    
 	 * @param int $dod
 	 * @return array fetch;
@@ -69,7 +69,30 @@ class doctorUIApi {
 	}
 	
 	/**
-	 * sid,id,name,lv,avatar,date,dod,dlv,start,hot,love,contribution,desc,spec
+	 * 获取诊后服务星医生
+	 * @param int $length
+	 */
+	public function getRandom($length){
+		$cache_key = "getInfoById-".$id;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	private function _cpm($a,$b){
+		if ($a["star"] == $b["star"]) {
+			return 0;
+		} else {
+			return $a["star"] > $b["star"] ? 1 : -1;
+		}
+	}
+	
+	/**
+	 * sid,id,name,lv,avatar,date,dod,dlv,star,hot,love,contribution,desc,spec
 	 * 3  zdz     郑殿增        ccccccc  zdz.jpg  2016-05-16       3       3       0       0       0             0  doc     spce    
 	 * @param int $id
 	 * @return array fetch;
@@ -101,7 +124,7 @@ class doctorUIApi {
 	/**
 	 * 返回字段:
 	 * 		sid,id,name,lv,avatar,date,
-	 * 		dod,dlv,start,hot,love,
+	 * 		dod,dlv,star,hot,love,
 	 * 		contribution,desc,spec
 	 * @param int $length
 	 * @return array:

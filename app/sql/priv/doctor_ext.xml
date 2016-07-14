@@ -2,15 +2,15 @@
 <doctor_ext>
 	<add>
 		INSERT INTO `data_doctor_ext` (
-			`dod`,`dlv`,`start`,`hot`,`love`,`contribution`,`desc`,`spec`,`duty`
+			`dod`,`dlv`,`star`,`hot`,`love`,`contribution`,`desc`,`spec`,`duty`
 		) VALUES (
-			:dod,:dlv,:start,:hot,:love,:contribution,:desc,:spec,CONV(:duty,4,10)
+			:dod,:dlv,:star,:hot,:love,:contribution,:desc,:spec,CONV(:duty,4,10)
 		)
 	</add>
 
 	<update>
 		UPDATE `data_doctor_ext` SET 
-		`dlv`=:dlv,`start`=:start,`hot`=:hot,
+		`dlv`=:dlv,`star`=:star,`hot`=:hot,
 		`love`=:love,`contribution`=:contribution,
 		`desc`=:desc,`spec`=:spec,`duty`=CONV(:duty,4,10)
 		 WHERE `dod`=:dod
@@ -24,7 +24,7 @@
 		SELECT 
 		  `dod`,
 		  `dlv`,
-		  `start`,
+		  `star`,
 		  `hot`,
 		  `love`,
 		  `contribution`,
@@ -41,7 +41,7 @@
 			`data_doctor`.`name`,
 			`data_doctor_lv_meta`.`data` AS lv,
 			`data_doctor_ext`.`dod`,
-			`data_doctor_ext`.`start`,
+			`data_doctor_ext`.`star`,
 			`data_doctor_ext`.`hot`,
 			`data_doctor_ext`.`love`,
 			`data_doctor_ext`.`contribution`,

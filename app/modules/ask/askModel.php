@@ -74,4 +74,30 @@ class askModel extends AppModel {
 	public function getAllQuestions($off,$len){
 		return askUIApi::getInstance()->getAllQuestions($off,$len);
 	}
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function getRowThumbnail(){
+		return articleUIApi::getInstance()->getRowThumbnail();
+	}
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function getNewest($length){
+		return articleUIApi::getInstance()->getNewest($length);
+	}
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function getContent($aid,$len){
+		$row = articleUIApi::getInstance()->row($aid,$len);
+		if (empty($row)){
+			return "";
+		} else {
+			return $row["content"];
+		}
+	}
 }

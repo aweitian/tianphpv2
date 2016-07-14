@@ -91,6 +91,39 @@
 			)
 	</getAllByLv0DidCnt>
 	
+	<!-- 根据ASKID获取问题回答 -->
+	<!-- 参数:askid -->
+	<!-- 返回字段:sid,askid,role,conmeta,content,files,date -->
+	<rows_answer>
+		SELECT
+			  `sid`,
+			  `askid`,
+			  `role`,
+			  `conmeta`,
+			  `content`,
+			  `files`,
+			  `date`
+			FROM `data_ask_append`
+			WHERE `sid` = :askid
+			ORDER BY `sid` DESC
+			LIMIT :offset, :length;
+	</rows_answer>
+	<rows_answerCnt>
+		SELECT
+			  count(`sid`) as `cnt
+			FROM `data_ask_append`
+			WHERE `sid` = :askid
+	</rows_answerCnt>
+	<rows_answerDocReplyCnt>
+		SELECT
+			  count(`sid`) as `cnt
+			FROM `data_ask_append`
+			WHERE `sid` = :askid
+			AND
+			`role` = 'doctor'
+	</rows_answerDocReplyCnt>
+	
+	
 	
 	
 	<getAskAnswerByDid>

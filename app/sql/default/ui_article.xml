@@ -13,7 +13,7 @@
 			  `date`
 			FROM `data_article`
 			ORDER BY `sid` DESC
-			LIMIT 0, :length;
+			LIMIT :offset, :length;
 	</all>
 	<allCnt>
 		SELECT
@@ -164,6 +164,24 @@
 	<!-- 获取一篇带THUMBNAIL文章 -->
 	<!-- 参数:did -->
 	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<row_thumb>
+		SELECT 
+			`data_article`.`sid` as `aid`,
+			`data_article`.`kw`,
+			`data_article`.`desc`,
+			`data_article`.`thumb`,
+			`data_article`.`title`,
+			`data_article`.`date`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article`.`thumb` IS NOT NULL 
+			ORDER BY `aid` DESC 
+			LIMIT 0,1
+	</row_thumb>
+	<!-- 获取一篇带THUMBNAIL文章 -->
+	<!-- 参数:did -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
 	<row_thumb_did>
 		SELECT 
 			`data_article`.`sid` as `aid`,
@@ -210,6 +228,24 @@
 	</allByDidCnt>
 	
 	
+	<!-- 获取病种不包括传递的AID的所有文章,按从新到旧的排序方式 -->
+	<!-- 参数:exc,length -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<all_Exc>
+		SELECT 
+			`data_article`.`sid` as `aid`,
+			`data_article`.`kw`,
+			`data_article`.`desc`,
+			`data_article`.`thumb`,
+			`data_article`.`title`,
+			`data_article`.`date`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article`.`sid` != :exc
+			ORDER BY `aid` DESC
+			LIMIT :offset,:length
+	</all_Exc>
 	<!-- 获取病种不包括传递的AID的所有文章,按从新到旧的排序方式 -->
 	<!-- 参数:did,exc,length -->
 	<!-- 返回字段:aid,kw,desc,thumb,title,date -->

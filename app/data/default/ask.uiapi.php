@@ -201,4 +201,64 @@ class askUIApi {
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
+	
+	/**
+	 * 
+	 * @param int $askid
+	 * @param int $offset
+	 * @param int $length
+	 */
+	public function getAnswers($askid,$length,$offset=0){
+		$cache_key = "getAnswers-".$askid."-".$offset."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_ask/rows_answer");
+		$bnd = array(
+			"askid" => $askid,
+			"offset" => $offset,
+			"length" => $length	
+		);
+		$ret = $this->db->fetchAll($sql, $bnd);
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * 
+	 * @param int $askid
+	 * @return int
+	 */
+	public function getAnswersCnt($askid){
+		$cache_key = "getAnswersCnt-".$askid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_ask/rows_answerCnt");
+		$bnd = array(
+			"askid" => $askid,
+		);
+		$data = $this->db->fetch($sql, $bnd);
+		$ret = $data["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * 获取医生回答的个数
+	 * @param int $askid
+	 * @return int
+	 */
+	public function getAnswersDocReplyCnt($askid){
+		$cache_key = "getAnswersDocReplyCnt-".$askid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_ask/rows_answerDocReplyCnt");
+		$bnd = array(
+			"askid" => $askid,
+		);
+		$data = $this->db->fetch($sql, $bnd);
+		$ret = $data["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
 }

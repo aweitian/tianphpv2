@@ -14,7 +14,7 @@ if(isset($data["def"]) && !is_null($data["def"])){
 	$def = array(
 		"dod" => "",
 		"dlv" => "",
-		"start" => "",
+		"star" => "",
 		"hot" => "",
 		"love" => "",
 		"contribution" => "",
@@ -83,7 +83,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     </div>
                     <div class="form-group">
                       <label>诊后服务星</label>
-                        <input value="<?php print $def["start"]?>" name="start" required type="number" min="1" max="10" class="form-control" placeholder="请输入医生等级">
+                        <input value="<?php print $def["star"]?>" name="star" required type="number" min="1" max="10" class="form-control" placeholder="请输入医生等级">
                     </div>
                       <div class="form-group">
                       <label>患者推荐热度</label>
