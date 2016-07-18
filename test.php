@@ -1,27 +1,30 @@
 <?php
-// $d = array(
-// 			"前列腺疾病" => array(
-// 				"en" => "PROSTATIC DISEASES"	
-// 			),
-// 			"性功能障碍" => array(
-// 				"en" => "SEXUAL DYSFUNCTION"	
-// 			),
-// 			"男科手术" => array(
-// 				"en" => "MALE DIVISION OPERATION"	
-// 			),
-// 			"性传播疾病" => array(
-// 				"en" => "SEXUALLY TRANSMITTED DISEASES"	
-// 			),
-// 			"泌尿感染" => array(
-// 				"en" => "URINARY TRACT INFECTION"	
-// 			),
-// 			"男性不育" => array(
-// 				"en" => "MALE INFERTILITY"	
-// 			),
-// 		);
+class a{
+	private $docache;
+	public function __construct(){
+		$this->docache = array(
+			array("star" => 2,"name" => "ccc"),	
+			array("star" => 12,"name" => "safd"),	
+			array("star" => 33,"name" => "qwer"),	
+			array("star" => 1,"name" => "ccwewec"),	
+			array("star" => 63,"name" => "casfdcc"),	
+			array("star" => 23,"name" => "qe"),	
+		);
+	}
+	public function getTopStar($length){
+		$ret = $this->docache;
+		$ret = sort($ret,array($this,"_cpm"));
+		var_dump($ret) ;
+	}
+	
+	private function _cpm($a,$b){
+		if ($a["star"] == $b["star"]) {
+			return 0;
+		} else {
+			return $a["star"] > $b["star"] ? 1 : -1;
+		}
+	}
+}
 
-// echo join(" | ",array_keys($d));
-$a = "dddd";
-$a = explode("/", $a);
-var_dump($a);
+(new a())->getTopStar(2);
 ?>

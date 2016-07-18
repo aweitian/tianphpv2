@@ -16,11 +16,24 @@ class articleModel extends AppModel {
 	public function getDisease() {
 		return diseaseUIApi::getInstance()->getInfo();
 	}
-	
+	/**
+	 * Sihangzhang
+	 */
 	public function getDoctors($length=4){
 		return doctorUIApi::getInstance()->getInfoes($length);
 	}
-	
+	/**
+	 * Sihangzhang
+	 */
+	public function getAnswerByAskid($askid){
+		return askUIApi::getInstance()->getAnswerByAskid($askid);
+	}
+	/**
+	 * Sihangzhang
+	 */
+	public function getAllQuestions($offset,$length){
+		return askUIApi::getInstance()->getAllQuestions($offset,$length);
+	}
 	/**
 	 * 根据医生ID获取一个问答
 	 * @param int $dod

@@ -44,7 +44,7 @@ defTplData::getInstance()->title = $m->data["name"] . " - 医师首页";
                   
                   <div class="zjtdcon1box1_sm1 fl">
                   	
-                   	 <a href=""><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $m->data["avatar"]?>" class="fl" /></a>
+                   	 <a href=""><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $m->data["avatar"]?>" class="fl" width="165" height="175" /></a>
                      
                      <div class="fr">
                           <h4 class="fz24 tc"><?php print $m->data["name"]?>大夫的个人网站</h4>

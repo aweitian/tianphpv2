@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui_user>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<!-- 获取信息 -->
 	<!-- 参数:uid -->
 	<!-- 返回字段:sid,email,name,phone,avatar,rpq,rpa,wa,date -->
@@ -39,4 +58,30 @@
 		SELECT count(`sid`) as `cnt`
 		FROM `data_user`
 	</cnt>
+	
+	
+	<row_eml_pwd>
+		SELECT
+		  `sid`
+		FROM `data_user`
+		WHERE 
+			`email` = :email AND `pwd` = :pwd AND `email` IS NOT NULL
+	</row_eml_pwd>
+	
+	<row_name_pwd>
+		SELECT
+		  `sid`
+		FROM `data_user`
+		WHERE `name` = :name AND `pwd` = :pwd AND `name` IS NOT NULL
+	</row_name_pwd>
+	
+	
+	<row_phone_pwd>
+		SELECT
+		  `sid`
+		FROM `data_user`
+		WHERE `phone` = :phone AND `pwd` = :pwd AND `phone` IS NOT NULL
+	</row_phone_pwd>
+	
+	
 </ui_user>

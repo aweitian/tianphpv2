@@ -1,5 +1,6 @@
 <?php 
 /**
+ * Sihangzhang
  * @var articleModel;
  */
 $m = $model;
@@ -163,35 +164,22 @@ foreach ($m->getDisease() as $item){
                 	
                     <div class="doctj border2">
     
-    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a><a class="fz13 blue fr" href="">+更多</a></div>
+    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a><a class="fz13 blue fr" href="<?php print AppUrl::navDoctors() ?>">+更多</a></div>
     <div class="doctjbox">
-    <dl class="clearfix nobor"><dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/wltjzj1.jpg" width="80" height="80" /></dt>
+    
+        <?php foreach($m->getDoctors(3) as $doc):?>
+      <dl class="clearfix"><dt class="fl"><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
       <dd class="fl">
       <p class="blank5"></p>
-      <p class="fz18">陈希球  <span class="gray fz13">副主任医师</span></p>
+      <p class="fz18"><?php print $doc["name"]; ?><span class="gray fz13"><?php print $doc["lv"]; ?></span></p>
       <p class="blank5"></p>
-      <p class="fz13 gray">擅长：其独特的治疗方法对久</p>
+      <p class="fz13 gray">擅长：<?php print $doc["spec"]; ?></p>
       <p class="blank5"></p>
-      <p class="p3 tc"><a href="">咨询</a></p>
+      <p class="p3 tc"><a href="<?php print AppUrl::getSwtUrl()?>">咨询</a></p>
       </dd></dl>
-      <dl class="clearfix"><dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/wltjzj1.jpg" width="80" height="80" /></dt>
-      <dd class="fl">
-      <p class="blank5"></p>
-      <p class="fz18">陈希球  <span class="gray fz13">副主任医师</span></p>
-      <p class="blank5"></p>
-      <p class="fz13 gray">擅长：其独特的治疗方法对久</p>
-      <p class="blank5"></p>
-      <p class="p3 tc"><a href="">咨询</a></p>
-      </dd></dl>
-      <dl class="clearfix"><dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/wltjzj1.jpg" width="80" height="80" /></dt>
-      <dd class="fl">
-      <p class="blank5"></p>
-      <p class="fz18">陈希球  <span class="gray fz13">副主任医师</span></p>
-      <p class="blank5"></p>
-      <p class="fz13 gray">擅长：其独特的治疗方法对久</p>
-      <p class="blank5"></p>
-      <p class="p3 tc"><a href="">咨询</a></p>
-      </dd></dl>
+      	<?php endforeach;?>
+
+      
       </div>
     
     
@@ -201,34 +189,21 @@ foreach ($m->getDisease() as $item){
                   <div class="blank20"></div>
 
                     <div class="syrbox5 border2">
-                    <div class="syrboxtit fz18 graybg">相关问答<a href="" class="blue fz13 fr">+更多</a></div>
+                    <div class="syrboxtit fz18 graybg">相关问答<a href="<?php print AppUrl::navAsk() ?>" class="blue fz13 fr">+更多</a></div>
                     
                     <div class="zjtd_r2">
                     	<div class="blank10"></div>
-                        <dl class="selected">
-                          <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
+                    	
+                     <?php $y=1;?>	
+                    	<?php $asks = $m->getAllQuestions(0,4);foreach($asks["data"] as $ask):?>
+                        <dl <?php if($y==1){?> class="selected"<?php } ?> >
+                          <dt class="fz18 blue"><a href=""><?php print $ask["title"]?></a></dt>
                           <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
+                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl"><?php $content = $m->getAnswerByAskid($ask["sid"]); print empty($content) ? "" :$content["content"]?>...</p>
                           </dd>
                         </dl>
-                        <dl>
-                          <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
-                          </dd>
-                        </dl>
-                        <dl>
-                         <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
-                          </dd>
-                        </dl>
-                        <dl>
-                          <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
-                          </dd>
-                        </dl>
+                   <?php $y++;?>      
+<?php endforeach;?>
                         
                       </div>
                     

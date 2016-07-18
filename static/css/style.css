@@ -1387,9 +1387,9 @@ padding: 0px 0 20px 0px; width:320px;
 	padding-top: 20px;
 }
 .fromjbzj ul li {
-	width: 199px;
+	width: 195px;
 	float: left;
-	margin-right: 19px;
+	margin-right: 15px;
 }
 .fromjbzj ul li.last {
 	margin-right: 0;
@@ -2664,3 +2664,7 @@ rtpboxnrl {
 .pl40{ padding-left:40px;}
 .borrg0{ border-right:0 !important;}
 .borbt1{ border-bottom:1px solid #ddd;}
+
+.header-out{border-bottom:1px solid #ddd; color:#bebebe;}
+.header,.header-out{height:32px;line-height:32px;overflow:hidden;background:#eee;}
+.header div,.header a{color:#333;}.header p a{color:#333;}

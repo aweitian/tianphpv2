@@ -199,11 +199,10 @@ class userApi{
 			return new rirResult(2,"密码长度要大于2");
 		}
 	
-		if($phone != ""){
-			if(!userValidator::isValidPhone($phone)){
-				return new rirResult(2,"手机格式不正确");
-			}
+		if(!userValidator::isValidPhone($phone)){
+			return new rirResult(2,"手机格式不正确");
 		}
+
 	
 		if(!userValidator::isValidAvatar($avatar)){
 			return new rirResult(2,"头像必须以gif,jpg,png结尾");

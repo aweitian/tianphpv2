@@ -4,7 +4,19 @@ class doctorsViewControllerNotFound extends AppView {
 
 	
 	
-	
+	public function askcontent($model){
+		return defTplData::getInstance()
+		->push(
+				defTplData::TYPE_INCLUDE_NOW,
+				array(
+						dirname(__FILE__)."/tpl/ask.tpl.php",
+						array("m" => $model)
+				)
+		
+		)
+		->setLayout()
+		->reponse();
+	}
 	
 	public function content($model){
 		return defTplData::getInstance()

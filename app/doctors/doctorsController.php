@@ -47,7 +47,12 @@ class doctorsControllerNotFound{
 	protected function ask(pmcaiMsg $msg){
 		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
 		$this->model->data = $row;
-		$this->view->ask($this->model);
+		if (isset($msg["?id"])){
+			
+			$this->view->askcontent($this->model);
+		}else{
+			$this->view->ask($this->model);
+		}
 	}
 	protected function welcome(pmcaiMsg $msg){
 		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());

@@ -70,14 +70,19 @@ class doctorUIApi {
 	
 	/**
 	 * 获取诊后服务星医生
+	 * 返回字段:
+	 * 		sid,id,name,lv,avatar,date,
+	 * 		dod,dlv,star,hot,love,
+	 * 		contribution,desc,spec
 	 * @param int $length
 	 */
-	public function getRandom($length){
-		$cache_key = "getInfoById-".$id;
+	public function getTopStar($length){
+		$cache_key = "getTopStar-".$length;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
-		
+		$ret = array();
+		$ret = array_slice($this->docache, -3,$length);
 		
 		$this->cache[$cache_key] = $ret;
 		return $ret;
@@ -129,15 +134,23 @@ class doctorUIApi {
 	 * @param int $length
 	 * @return array:
 	 */
-	public function getInfoes($length){
+	public function getInfoes($length,$offset=0){
 		$cache_key = "getInfoes-".$length;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
-		$ret = array_slice($this->docache, 0,$length);
+		$ret = array_slice($this->docache, $offset,$length);
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
+	/**
+	 * 获取所有医生的个数
+	 * @return number
+	 */
+	public function getAllCnt(){
+		return count($this->docache);
+	}
+	
 	private function initCache(){
 		$data = $this->db->fetchAll(
 				$this->sqlManager->getSql("/ui_doctor/all"), array());

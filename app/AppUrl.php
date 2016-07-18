@@ -1,6 +1,6 @@
 <?php
 class AppUrl {
-#导航栏URL
+#全局URL
 	public static function navHome(){
 		return AppUrl::build("/");
 	}	
@@ -31,7 +31,20 @@ class AppUrl {
 	
 	public static function navPut(){
 		return AppUrl::build("/put");
+	}
+
+	
+#用户管理
+	public static function userLogin(){
+		return AppUrl::build("/user/login");
 	}	
+	public static function userResetPwd(){
+		return AppUrl::build("/user/resetpwd");
+	}	
+	public static function userRegister(){
+		return AppUrl::build("/user/register");
+	}	
+	
 #医生评价
 	/**
 	 * @return string

@@ -70,9 +70,16 @@ class httpRequest{
 		return isset($_SERVER["HTTP_SCENARIO"]) ? $_SERVER["HTTP_SCENARIO"] : '';
 	}
 	public function currentUrl(){
-		$http = isset($_SERVER["HTTPS"])&&$_SERVER["HTTPS"] ? 'https' : 'http';
-		$http .= '://';
-		return $http.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		$url = 'http://';
+		if (isset ( $_SERVER ['HTTPS'] ) && $_SERVER ['HTTPS'] == 'on') {
+			$url = 'https://';
+		}
+		if ($_SERVER ['SERVER_PORT'] != '80') {
+			$url .= $_SERVER ['SERVER_NAME'] . ':' . $_SERVER ['SERVER_PORT'] . $_SERVER ['REQUEST_URI'];
+		} else {
+			$url .= $_SERVER ['SERVER_NAME'] . $_SERVER ['REQUEST_URI'];
+		}
+		return $url;
 	}
 	/**
 	 * http://localhost/we/werw?wer=fwer#sdfsd => /we/werw?wer=fwer

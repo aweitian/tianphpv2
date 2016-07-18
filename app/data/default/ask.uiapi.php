@@ -82,6 +82,7 @@ class askUIApi {
 		$ret = $this->db->fetch($sql, array(
 			"askid" => $askid
 		));
+// 		var_dump($sql,$askid);exit;
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
