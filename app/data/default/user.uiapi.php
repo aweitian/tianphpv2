@@ -121,32 +121,88 @@ class userUIApi implements IOp {
 	}
 	
 	/**
-	 * 
-	 * @param string $name
-	 * @param string $pwd
-	 * @param string $sq
-	 * @param string $sa
-	 * @param string $eml
-	 * @param string $code
+	 *
+	 * @param string $name        	
+	 * @param string $pwd        	
+	 * @param string $sq        	
+	 * @param string $sa        	
+	 * @param string $eml        	
+	 * @param string $code        	
 	 * @return rirResult
 	 */
-	public function register_normal($name,$pwd,$sq,$sa,$eml,$code){
+	public function register_normal($name, $pwd, $sq, $sa, $eml, $code) {
+		// 23000
+		// string(5) "23000" string(37) "Duplicate entry 'awei' for key 'name'"
+		$op_type = "user_register";
+		$oplog = new oplog ();
+		$try_cnt = $oplog->getCnt ( $op_type, identityToken::getInstance ()->getIp () );
+		if (USER_REGIST_TRY_MAX - $try_cnt <= 0) {
+			return new rirResult ( 1, "您所在的IP今天注册次数过多。" );
+		}
+		$opsid = $oplog->add ( $op_type, identityToken::getInstance ()->getIp () );
 		
-		return new rirResult(0);
+		$captcha = new session_captcha ( new session () );
+		if (! $captcha->check ( $code )) {
+			return new rirResult ( 2, "验证码校验失败" );
+		}
+		
+		// 开始校验提交数据
+		if ($name == "" || strlen ( $name ) > 64) {
+			return new rirResult ( 3, "用户为空或者长度大于64" );
+		}
+		// 防止前台忘记转义
+		if (strpos ( $name, "<" ) !== false) {
+			return new rirResult ( 0xb, "用户含有非法字符" );
+		}
+		if ($pwd == "" || strlen ( $pwd ) < 3) {
+			return new rirResult ( 4, "密码为空或者长度小于3" );
+		}
+		if ($sq == "" || strlen ( $sq ) > 64) {
+			return new rirResult ( 5, "密码安全问题为空或者长度大于64" );
+		}
+		if ($sa == "" || strlen ( $sa ) > 64) {
+			return new rirResult ( 6, "密码安全答案为空或者长度大于64" );
+		}
+		
+		if ($eml) {
+			if (! validator::isEmail ( $eml ) || strlen ( $eml )) {
+				return new rirResult ( 7, "EMAIL格式不正确或者长度大于64" );
+			}
+			$sql = $this->sqlManager->getSql ( "/ui_user/reg_normal" );
+			$bnd = array (
+					"email" => $eml,
+					"name" => $name,
+					"pwd" => Security::encrypt ( $pwd ),
+					"rpq" => $sq,
+					"rpa" => $sa 
+			);
+		} else {
+			$sql = $this->sqlManager->getSql ( "/ui_user/reg_normal_noeml" );
+			$bnd = array (
+					"name" => $name,
+					"pwd" => Security::encrypt ( $pwd ),
+					"rpq" => $sq,
+					"rpa" => $sa 
+			);
+		}
+		$ret = $this->db->exec ( $sql, $bnd );
+		if ($ret == 0) {
+			if ($this->db->getErrorCode () == "23000") {
+				// 索引唯一约束
+				$info = $this->db->getErrorInfo ();
+				if (preg_match ( "/for key '(name|email|phone)'$/", $info, $matches )) {
+					if ($matches [1] == "name") {
+						return new rirResult ( 8, "用户名已存在" );
+					} else {
+						return new rirResult ( 0x9, "EMAIL已存在" );
+					}
+				}
+			}
+			return new rirResult ( 0xa, $info );
+		}
+		$oplog->update ( $opsid );
+		return new rirResult ( 0, "注册成功", $ret );
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	private function initWaterArm() {
 		$data = $this->db->fetchAll ( $this->sqlManager->getSql ( "/ui_user/waterarm" ), array () );
 		foreach ( $data as $item ) {
@@ -163,34 +219,47 @@ class userUIApi implements IOp {
 				"open" => USER_LOGIN_USE_VC 
 		); // 是否需要验证码
 		
-		$this->idtoken = identityToken::getInstance ();
 		$auth = new session_userAuth ( $this->session );
-		$this->idtoken->setInfo ( $auth->getInfo () );
-		$this->idtoken->setRoleCode ( $auth->getRoleCode () );
+		identityToken::getInstance ()->setInfo ( $auth->getInfo () );
+		identityToken::getInstance ()->setRoleCode ( $auth->getRoleCode () );
 		$role = array (
 				"guest" => "Guest",
 				"member" => "Member" 
 		);
-		if (! array_key_exists ( $this->idtoken->getRoleCode (), $role )) {
-			$this->idtoken->setRoleCode ( "guest" );
+		if (! array_key_exists ( identityToken::getInstance ()->getRoleCode (), $role )) {
+			identityToken::getInstance ()->setRoleCode ( "guest" );
 		}
 		return $this;
 	}
 	public function getRemainTryTimes() {
 		return $this->conf ["u_try_times_max"] - $this->getOpFailCnt ();
 	}
-	private function _checkVc($code){
-		if($this->conf["open"]){
-			//检查是否需要验证码
-			$failCnt = $this->getOpFailCnt();
-			if($failCnt>$this->conf["u_try_times"]){
-				$helper = new session_captcha($this->session);
-				return $helper->check($code);
+	private function _checkVc($code) {
+		if ($this->conf ["open"]) {
+			// 检查是否需要验证码
+			$failCnt = $this->getOpFailCnt ();
+			if ($failCnt > $this->conf ["u_try_times"]) {
+				$helper = new session_captcha ( $this->session );
+				return $helper->check ( $code );
 			}
 			return true;
 		}
 		return true;
 	}
+	
+	/**
+	 * 检查这个IP今天是否允许登陆
+	 *
+	 * @return boolean
+	 */
+	public function chkLoginPermit() {
+		$this->remain_times = $this->getRemainTryTimes ();
+		if ($this->remain_times <= 0) {
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 *
 	 * @param string $nep
@@ -200,8 +269,7 @@ class userUIApi implements IOp {
 	 * @return rirResult
 	 */
 	public function check($nep, $pwd, $code = "") {
-		$this->remain_times = $this->getRemainTryTimes ();
-		if ($this->remain_times <= 0) {
+		if (! $this->chkLoginPermit ()) {
 			return new rirResult ( 1, "密码错误次数过多" );
 		}
 		$this->opStart ();
@@ -238,18 +306,19 @@ class userUIApi implements IOp {
 	/**
 	 * 获取下次密码验证时是否需要验证码
 	 * 返回真需要验证码
+	 *
 	 * @return bool
 	 */
 	public function getVcFlag() {
-		return  $this->getOpFailCnt () > $this->conf ["u_try_times"];
+		return $this->getOpFailCnt () > $this->conf ["u_try_times"];
 	}
 	private function _saveInfo($ret) {
 		$auth = new session_userAuth ( $this->session );
 		$info = $this->row ( $ret ["sid"] );
 		$auth->saveInfo ( $info );
-		$auth->saveRoleCode ( "member" );
-		$this->idtoken->setInfo ( $info );
-		$this->idtoken->setRoleCode ( "member" );
+		$auth->saveRoleCode ( session_userAuth::$roleCode );
+		identityToken::getInstance ()->setInfo ( $info );
+		identityToken::getInstance ()->setRoleCode ( session_userAuth::$roleCode );
 		return new rirResult ( 0, "登陆成功", $info );
 	}
 	public function getOpType() {
@@ -257,7 +326,7 @@ class userUIApi implements IOp {
 	}
 	public function opStart() {
 		$this->oplog = new oplog ();
-		$this->opsid = $this->oplog->add ( $this->getOpType (), $this->idtoken->getIp () );
+		$this->opsid = $this->oplog->add ( $this->getOpType (), identityToken::getInstance ()->getIp () );
 	}
 	public function opUpdate() {
 		if ($this->opsid) {
@@ -266,7 +335,7 @@ class userUIApi implements IOp {
 	}
 	public function getOpFailCnt() {
 		$priv = new oplog ();
-		return $priv->getCnt ( $this->getOpType (), $this->idtoken->getIp () );
+		return $priv->getCnt ( $this->getOpType (), identityToken::getInstance ()->getIp () );
 	}
 }
 class session_userAuth {
@@ -277,6 +346,7 @@ class session_userAuth {
 	private $session;
 	private $session_key = "user_usr_auth_info";
 	private $session_key_rc = "user_usr_auth_rolecode";
+	public static $roleCode = "member";
 	public function __construct(session $session) {
 		$this->session = $session;
 	}
@@ -290,7 +360,7 @@ class session_userAuth {
 		return $this->session->get ( $this->session_key_rc );
 	}
 	public function isLogined() {
-		return $this->session->get ( $this->session_key_rc ) == "userUsr";
+		return $this->session->get ( $this->session_key_rc ) == session_userAuth::$roleCode;
 	}
 	public function getInfo() {
 		return $this->session->get ( $this->session_key );

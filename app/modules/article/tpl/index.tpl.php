@@ -8,20 +8,29 @@ $m = $model;
 // var_dump($m->getDisease());
 // var_dump($m->getDiseaseLv0());exit;
 
-$tree_dis = array();
-foreach ($m->getDisease() as $item){
-	if(!array_key_exists($item["pid"], $tree_dis)){
-		$tree_dis[$item["pid"]] = array(
-			"text" => $item["pd"],
-			"children" => array()
-		);
-	}
-	$tree_dis[$item["pid"]]["children"][$item["mid"]] = array($item["md"],$item["url"]);
+
+
+$pageSize = 12;
+if(isset($_REQUEST["page"])){
+	$page = intval($_REQUEST["page"]);
+} else{
+	$page = 1;
 }
- 
 
 
 
+$pagination = new pagination($m->getAllFullCnt(), $page, $pageSize, 10);
+
+$req = new httpRequest();
+$url = new url($req->requestUri());
+
+
+$a=$m->allThumbnail($pageSize,($page-1)*$pageSize);
+if(count($a)>1){$a1=array_shift($a);}else{$a1=array();}
+if(count($a)>1){$a2=array_shift($a);}else{$a2=array();}
+if(count($a)>1){$a3=array_shift($a);}else{$a3=array();}
+if(count($a)>1){$a4=array_shift($a);}else{$a4=array();}
+if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
 
 // foreach($m->getDisease() as $item)
 // {
@@ -56,55 +65,66 @@ foreach ($m->getDisease() as $item){
                
                	<div class="wid680 fl">
                     <div class="padd20 border2">
-                    
+                 
+                        <?php if (!empty($a1)):?>
                     	<dl class="clr zt_box1">
-                        	<dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/zt_img1.jpg" /></dt>
+                        	<dt class="fl">
+                        	<?php if (!empty($a1["thumb"])):?>
+                        	<img src="<?php print ($a1["thumb"])?>" width="135" height="92" />
+                        	<?php else:  ?>
+                        	<img src="<?php print HTTP_ENTRY?>/static/images/zt_img1.jpg" />
+                        	           <?php endif?>
+                        	</dt>
                             <dd class="fl">
-                            	<b class="fz18 color3">阿拉伯兄弟来上海九龙男子医院参观交流</b>
-                                <p class="color9">2014年12月20日，印上海九龙男子医院迎来了几位特殊的客人——阿拉伯兄弟，来我院参观交流，并接受九龙先进的设备仪器检查身体。阿拉伯兄弟对我院的规模环境、人才配备、管理模式等相关情况做了详细了解...<a href="" class="bule">[查看全文]</a></p>
+                            	<b class="fz18 color3"><a href="<?php print AppUrl::articleByAid($a1["aid"])?>"><?php print utility::utf8Substr($a1["title"], 0, 30) ?></a></b>
+                                <p class="color9"><?php print utility::utf8Substr($a1["desc"], 0, 80) ?>...<a href="<?php print AppUrl::articleByAid($a1["aid"])?>" class="bule">[查看全文]</a></p>
                             </dd>
-                        </dl>
+                        </dl>                  
+                        <?php endif?>
                     
                         <div class="blank20"></div>
                         <div class="clr jb_box2">
-                        
+                        <?php if (!empty($a2)):?>
                         	<div class="zt_box2 fl" style="padding-right:30px; border-bottom:1px dotted #d7d7d7;">
                             
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syhot1.jpg" /></span>
-                                    	<p class="fr">国际成人展开幕，上海九龙男子医院引领两性健康正能量...</p>
+                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a2["aid"])?>"><?php print utility::utf8Substr($a2["title"], 0, 30) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                             </div>
-                            
+                           <?php endif?>   
+                                     <?php if (!empty($a3)):?>
                             <div class="zt_box2 fr" style="padding-left:15px; border-left:1px dotted #d7d7d7; border-bottom:1px dotted #d7d7d7;">
-                            
+                    
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syhot1.jpg" /></span>
-                                    	<p class="fr">国际成人展开幕，上海九龙男子医院引领两性健康正能量...</p>
+                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a3["aid"])?>"><?php print utility::utf8Substr($a3["title"], 0, 30) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                             </div>
-                            
+                               <?php endif?>
+                                      <?php if (!empty($a4)):?>
                             <div class="zt_box2 fl" style="width:290px; padding-right:30px;">
                             	<div class="blank15"></div>
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syhot1.jpg" /></span>
-                                    	<p class="fr">国际成人展开幕，上海九龙男子医院引领两性健康正能量...</p>
+                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a4["aid"])?>"><?php print utility::utf8Substr($a4["title"], 0, 30) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                                 
                             </div>
-                            
+                             <?php endif?>
+                                 <?php if (!empty($a5)):?>
                             <div class="zt_box2 fr" style="width:290px; padding-left:20px; border-left:1px dotted #d7d7d7;">
                             	<div class="blank15"></div>
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syhot1.jpg" /></span>
-                                    	<p class="fr">国际成人展开幕，上海九龙男子医院引领两性健康正能量...</p>
+                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a5["aid"])?>"><?php print utility::utf8Substr($a5["title"], 0, 30) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                             </div>
-                            
+                                    <?php endif?>
                         </div>
                         <div class="blank20"></div>
                         <div class="hx"></div>
@@ -113,47 +133,28 @@ foreach ($m->getDisease() as $item){
                         <div class="zt_box3">
                         	
                             <ul class="clr">
+                            
+                               	<?php foreach($a as $lb):?>
                             	<li>
-                                	<a href="">阿拉伯兄弟来上海九龙男子医院参观交流</a>
-                                    <p>2014年12月20日，印上海九龙男子医院迎来了几位特殊的客人——阿拉伯兄弟，来我院参观交流...</p>
+                                	<a href="<?php print AppUrl::articleByAid($lb["aid"])?>"><?php print utility::utf8Substr($lb["title"], 0, 30) ?></a>
+                                    <p><?php print utility::utf8Substr($lb["desc"], 0, 80) ?>...</p>
                                 </li>
-                                <li class="ztbox3_bg">
-                                	<a href="">阿拉伯兄弟来上海九龙男子医院参观交流</a>
-                                    <p>2014年12月20日，印上海九龙男子医院迎来了几位特殊的客人——阿拉伯兄弟，来我院参观交流...</p>
-                                </li>
-                                
-                                <li>
-                                	<a href="">阿拉伯兄弟来上海九龙男子医院参观交流</a>
-                                    <p>2014年12月20日，印上海九龙男子医院迎来了几位特殊的客人——阿拉伯兄弟，来我院参观交流...</p>
-                                </li>
-                                <li class="ztbox3_bg">
-                                	<a href="">阿拉伯兄弟来上海九龙男子医院参观交流</a>
-                                    <p>2014年12月20日，印上海九龙男子医院迎来了几位特殊的客人——阿拉伯兄弟，来我院参观交流...</p>
-                                </li>
-                                
-                                <li>
-                                	<a href="">阿拉伯兄弟来上海九龙男子医院参观交流</a>
-                                    <p>2014年12月20日，印上海九龙男子医院迎来了几位特殊的客人——阿拉伯兄弟，来我院参观交流...</p>
-                                </li>
-                                <li class="ztbox3_bg">
-                                	<a href="">阿拉伯兄弟来上海九龙男子医院参观交流</a>
-                                    <p>2014年12月20日，印上海九龙男子医院迎来了几位特殊的客人——阿拉伯兄弟，来我院参观交流...</p>
-                                </li>
-                                
-                                <li>
-                                	<a href="">阿拉伯兄弟来上海九龙男子医院参观交流</a>
-                                    <p>2014年12月20日，印上海九龙男子医院迎来了几位特殊的客人——阿拉伯兄弟，来我院参观交流...</p>
-                                </li>
-                                <li class="ztbox3_bg">
-                                	<a href="">阿拉伯兄弟来上海九龙男子医院参观交流</a>
-                                    <p>2014年12月20日，印上海九龙男子医院迎来了几位特殊的客人——阿拉伯兄弟，来我院参观交流...</p>
-                                </li>
+                                   	<?php endforeach;?>
+                              
                             </ul>
                             
                         </div>
                         
                         <div class="blank35"></div>
-                        <div class="pagenum tc gray fz13"> <a><</a> <a>1</a> <a>2</a> <a>3</a> <a>4</a> <a>5</a> <a>...</a> <a>52</a> <a>></a> </div>
+                        <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($pagination->hasNext()):?>
+            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?> </div>
                 	</div>
                 </div>
                

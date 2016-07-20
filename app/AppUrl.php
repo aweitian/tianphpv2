@@ -4,7 +4,6 @@ class AppUrl {
 	public static function navHome(){
 		return AppUrl::build("/");
 	}	
-	
 	public static function navDisease(){
 		return AppUrl::build("/disease");
 	}
@@ -35,6 +34,9 @@ class AppUrl {
 
 	
 #用户管理
+	public static function userHome(){
+		return AppUrl::build("/user");
+	}	
 	public static function userLogin(){
 		return AppUrl::build("/user/login");
 	}	

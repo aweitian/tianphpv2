@@ -31,6 +31,10 @@ class diseaseExtInfoes{
 				"en" => "MALE INFERTILITY",
 				"ico" => "jbcx_img6.png"		
 			),
+			"男性不育症" => array(
+				"en" => "MALE INFERTILITY",
+				"ico" => "jbcx_img6.png"		
+			),
 		);
 	} 
 }

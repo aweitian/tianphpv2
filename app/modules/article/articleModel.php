@@ -48,4 +48,19 @@ class articleModel extends AppModel {
 			return array();
 		}
 	}
+	/**
+	 * Sihangzhang
+	 */
+	public function allThumbnail($length, $offset){
+		return articleUIApi::getInstance()->allThumbnail($length, $offset);
+	}
+
+	/**
+	 * Sihangzhang
+	 */
+	public function getAllFullCnt(){
+		return articleUIApi::getInstance()->getAllFullCnt();
+	}
+	
+	
 }

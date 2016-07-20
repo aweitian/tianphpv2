@@ -1,6 +1,9 @@
 <?php
 //aid,kw,desc,thumb,title,content,date
 $data = $m->row($_REQUEST["id"]);
+if(empty($data)){
+	exit("removed.");
+}
 defTplData::getInstance()->title = $data["title"];
 defTplData::getInstance()->keyword = $data["kw"];
 defTplData::getInstance()->description = $data["desc"];

@@ -5,7 +5,7 @@
  * Description: 
  */
 
-$def_avatar_src = "181941301.png";
+$def_avatar_src = "memer_tx1.jpg";
 
 if(isset($data["def"]) && !is_null($data["def"])){
 	$def = $data["def"];

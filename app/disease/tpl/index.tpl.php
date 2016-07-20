@@ -11,6 +11,7 @@
 $row = $model->data;
 // var_dump($row);
 $ext = diseaseExtInfoes::getExtData();
+// var_dump($ext);exit;
 ?>
   <div class="blank15"></div>
   <div class="sybox clearfix">
@@ -19,7 +20,7 @@ $ext = diseaseExtInfoes::getExtData();
       <div class="clr">
       	
         <div class="jb_tit clr">
-        	<h2 class="fl tc fz24"><?php print $row["data"]?><br /><span class="fz12"><?php print $ext[$row["data"]]["en"]?></span></h2>
+        	<h2 class="fl tc fz24"><?php print $row["data"]?><br /><span class="fz12"><?php print isset($ext[$row["data"]]["en"]) ? $ext[$row["data"]]["en"] : ""?></span></h2>
             <ul class="fr fz16">
             	<li><a href="<?php print AppUrl::disHomeByDiseasekey($row["key"])?>" class="navdq">疾病首页</a></li><span>|</span>
                 <li><a href="<?php print AppUrl::disKnowledgeByDiseasekey($row["key"])?>">疾病知识</a></li><span>|</span>
@@ -459,135 +460,7 @@ $ext = diseaseExtInfoes::getExtData();
                
     			<!--left end-->
                 
-                <div class="fr wid300 fz13">
-                	
-                    <div class="jb_rg">
-                        <textarea placeholder="在此咨询，专业医师在线提供就医指导" class="jb_rg1 fl color9"></textarea>
-                        <input type="button" class="jb_rg2 fl" />
-                    </div>
-                	
-                   <div class="blank20"></div>
-                	
-                    <div class="docsug border2">
-                        <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师观点</a><a class="fz13 blue fr" href="">+更多</a></div>
-                        <div class="docsugbox fz13"><dl class="clearfix"><dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/wlgd1.jpg" width="80" height="60" /></dt>
-                          <dd class="fl"><p>前列腺炎患者夏季排尿减少并非是好兆头</p>
-                          <p class="p2 clearfix"><a class="fl gray">2015-12-26</a><a class="fr gray">1011人阅读</a></p></dd></dl>
-                          <p class="blank15"></p>
-                          <ul class="othsug">
-                          <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
-                          <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
-                          <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
-                          <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
-                          <li><p class="p1"><a class="black" href="">前列腺炎患者夏季排尿减少并非是好兆头</a></p><p class="p2"><a class="gray" href="">勃起时间短经久拖延不治反而会导致...[全文]</a></p></li>
-                          </ul>      
-                          </div>          
-                    </div>
-                  
-                  <div class="blank20"></div>
-                  
-                  <div class="hotbq border2">
-                        <div class="syrboxtit fz18 graybg clearfix"><a class="fl">症状自查</a></div>
-                        <div class="jb_jbzc fz13">
-                          <ul class="clearfix">
-                            <li><a href="">尿频</a></li>
-                            <li><a href="">尿急</a></li>
-                            <li><a href="">尿不尽</a></li>
-                            <li><a href="">前列腺痛</a></li>
-                            <li><a href="">前列腺肥大</a></li>
-                            <li><a href="">早泄</a></li>
-                            <li><a href="">前列腺囊肿</a></li>
-                            <li><a href="">前列腺癌</a></li>
-                            <li><a href="">前列腺炎</a></li>
-                            <li><a href="">前列腺增生</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      
-                  <div class="blank20"></div>
-                  
-                  <div class="syrbox4 border2">
-                    <div class="syrboxtit fz18 graybg">预约挂号</div>
-                    <div class="syrbox4nr fz13">
-                      <form method="post" action="">
-                        <table>
-                          <tr>
-                            <td height="26" width="62">姓      名</td>
-                            <td><input class="input1 border2" type="text" /></td>
-                          </tr>
-                          <tr height="14">
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">联系电话</td>
-                            <td><input class="input1 border2" type="text" /></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">预约时间</td>
-                            <td><input class="input2 gray border2" onclick="WdatePicker()" placeholder="请选择预约时间" type="text" /></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">就诊状态</td>
-                            <td><input type="radio" name="zd"  checked="checked" />
-                              <label> 初诊</label>
-                              <input class="input3" type="radio" name="zd" />
-                              <label> 复诊</label></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                        </table>
-                        <div class="sybtn">
-                          <button class="sybtn1" type="submit" value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth8.jpg" width="120" height="40" /></button>
-                          <button value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth9.jpg" width="120" height="40" /></button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  
-                  <div class="blank20"></div>
-                  
-                  <div class="hotbq border2">
-                        <div class="syrboxtit fz18 graybg clearfix"><a class="fl">热门标签</a></div>
-                        <div class="hotbqbox fz13">
-                          <ul class="clearfix">
-                            <li><a href="">前列腺炎</a></li>
-                            <li><a href="">前列腺增生</a></li>
-                            <li><a href="">包皮包茎</a></li>
-                            <li><a href="">前列腺痛</a></li>
-                            <li><a href="">前列腺肥大</a></li>
-                            <li><a href="">早泄</a></li>
-                            <li><a href="">前列腺囊肿</a></li>
-                            <li><a href="">前列腺癌</a></li>
-                            <li><a href="">前列腺炎</a></li>
-                            <li><a href="">前列腺增生</a></li>
-                            <li><a href="">包皮包茎</a></li>
-                            <li><a href="">前列腺痛</a></li>
-                            <li><a href="">前列腺肥大</a></li>
-                            <li><a href="">早泄</a></li>
-                            <li><a href="">前列腺囊肿</a></li>
-                            <li><a href="">前列腺癌</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      
-                  <div class="blank20"></div>
-                  
-                  <div class="syrbox2">
-                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth1.jpg" width="300" height="100" /></p>
-                    <p class="blank10"></p>
-                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth2.jpg" width="300" height="100" /></p>
-                    <p class="blank10"></p>
-                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth3.jpg" width="300" height="100" /></p>
-                  </div>
-                  
-                </div>
+            <?php include dirname(__FILE__)."/right.tpl.php";?>
                 
                 <!--right end-->
              </div>

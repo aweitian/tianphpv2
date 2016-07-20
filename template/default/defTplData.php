@@ -30,7 +30,8 @@ class defTplData{
 	}
 	/**
 	 * 直接设置CONTENT
-	 * @param string $html
+	 * @param string $type (defTplData::TYPE_INCLUDE_NOW/TYPE_INCLUDE_DELAY/TYPE_STATIC_HTML)
+	 * @param string $data(一维的) 如果是前两个类型，DATA的元素为两个，第一个为TPL文件路径，两个为数组，进行EXTRACT
 	 * @return defTplData
 	 */
 	public function push($type,$data){
@@ -75,7 +76,7 @@ class defTplData{
 	 * @param unknown $data  tpl文件数据环境
 	 */
 	private function feed($tpl,$data){
-		$this->tpl[] = array(1,array($tpl,$data));
+		$this->html[] = array(1,array($tpl,$data));
 		return $this;
 	}
 	

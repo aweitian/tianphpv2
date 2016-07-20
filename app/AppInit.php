@@ -61,6 +61,7 @@ require_once FILE_SYSTEM_ENTRY.'/app/AppCtrl.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppModel.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppView.php';
 require_once FILE_SYSTEM_ENTRY.'/app/AppUrl.php';
+require_once FILE_SYSTEM_ENTRY.'/app/AppUser.php';
 require_once FILE_SYSTEM_ENTRY.'/app/hookControllerNotFound.php';
 
 

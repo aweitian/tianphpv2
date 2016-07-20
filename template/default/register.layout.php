@@ -28,27 +28,27 @@
 <div class="blank20"></div>
 <div class="registerform fz13">
 <div class="registercon regway selected">
-<form action="" method="post">
+<form action="<?php print AppUrl::userRegister()."?t=n"?>" method="post">
 <input class="reginp1 gray border2" required placeholder='用户名' name="name" />
 <div class="blank20"></div>
-<input class="reginp1 gray  border2" required placeholder='密码' name="pwd[]"/>
+<input class="reginp1 gray  border2" required placeholder='密码' name="pwd"/>
 <div class="blank20"></div>
-<input class="reginp1 gray  border2" required placeholder='确认密码' name="pwd[]"/>
+<input class="reginp1 gray  border2" required placeholder='确认密码' name="pwd_repeat"/>
 <div class="blank20"></div>
 <input class="reginp1 gray  border2" required placeholder='密码安全问题,如：我的第一个女朋友的名字' name="sq"/>
 <div class="blank20"></div>
 <input class="reginp1 gray  border2" required placeholder='密码安全答案,如：JLM' name="sa"/>
 <div class="blank20"></div>
-<input class="reginp1 gray  border2" required placeholder='输入常用邮箱' name="eml"/>
+<input class="reginp1 gray  border2" placeholder='输入常用邮箱' name="eml"/> (可选)
 <div class="blank20"></div>
-<div class="regyzm clearfix gray"><input class="regyzminp fl border2 gray" placeholder='验证码'/><span class="yzmpic fl"><img src="<?php print HTTP_ENTRY?>/captcha" width="86" height="32" id="captcha"/></span><span style="cursor:pointer" onclick="$('#captcha').attr('src','<?php print HTTP_ENTRY?>/captcha?t='+(new Date()).getTime())" class="yzmchange fl">换一张</span></div>
+<div class="regyzm clearfix gray"><input name="code" class="regyzminp fl border2 gray" placeholder='验证码'/><span class="yzmpic fl"><img src="<?php print HTTP_ENTRY?>/captcha" width="86" height="32" id="captcha"/></span><span style="cursor:pointer" onclick="$('#captcha').attr('src','<?php print HTTP_ENTRY?>/captcha?t='+(new Date()).getTime())" class="yzmchange fl">换一张</span></div>
 <div class="blank30"></div>
-<div class="regxy1 gray"><input type="checkbox" />我已看过并同意 <a class="blue">注册协议</a></div>
+<div class="regxy1 gray"><input type="checkbox" checked/>我已看过并同意 <a class="blue">注册协议</a></div>
 <div class="blank30"></div>
 <button class="regsub1" type="submit"><img src="<?php print HTTP_ENTRY?>/static/images/regbtn.jpg" width="162" height="40" /></button>
 </form></div>
 <div class="registercon regway">
-<form action="" method="post">
+<form action="<?php print AppUrl::userRegister()."?t=m"?>" method="post">
 <input class="reginp1 gray border2" value='请输入手机号码' onClick='this.value = ""' onblur='if(value == ""){value="请输入手机号码"}'   type="email" />
 <div class="blank20"></div>
 <div class="regyzm clearfix gray"><input class="regyzminp fl border2 gray" value='验证码' onClick='this.value = ""' onblur='if(value == ""){value="验证码"}' /><div class="getyzm fl tc">点击获取验证码</div></div>

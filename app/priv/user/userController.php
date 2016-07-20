@@ -30,28 +30,7 @@ class userController extends privController{
 	}
 	
 	public function welcomeAction(pmcaiMsg $msg){
-		$length = 10;//每页显示多少行
 		
-		if(isset($msg["?page"])){
-			$page = intval($msg["?page"]);
-		}else{
-			$page = 1;
-		}
-		if($page < 1){
-			$page = 1;
-		}
-		
-		$offset = ($page - 1) * $length;
-		$data = $this->model->getList($offset,$length);
-		
-		if($data->isTrue()){
-			
-			$this->view->setPmcaiMsg($msg);
-		
-			$this->view->showList($msg->getPmcaiUrl(),$this->priv->getUserInfo(),$data->return,$page,$length,$msg["?q"]);
-		}else{
-			$this->response->showError($retR->info);;
-		}
 	}
 	
 	public function forceresetpwdAction(pmcaiMsg $msg){

@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui_user>
-
+	<reg_normal>
+		INSERT INTO `data_user`
+	            (
+	             `email`,
+	             `name`,
+	             `pwd`,
+	             `rpq`,
+	             `rpa`
+		) VALUES (
+		        :email,
+		        :name,
+		        :pwd,
+		        :rpq,
+		        :rpa
+		);
+	</reg_normal>
+	<reg_normal_noeml>
+		INSERT INTO `data_user`
+		(
+	             `name`,
+	             `pwd`,
+	             `rpq`,
+	             `rpa`
+		) VALUES (
+		        :name,
+		        :pwd,
+		        :rpq,
+		        :rpa
+		);
+	</reg_normal_noeml>
 	
 
 
