@@ -29,7 +29,7 @@ class diseaseUIApi {
 	
 	/**
 	 * 获取疾病名称
-	 * 
+	 *
 	 * @param int $did        	
 	 * @return string;
 	 */
@@ -52,7 +52,7 @@ class diseaseUIApi {
 	/**
 	 * 根据二级病种ID获取一级病种ID
 	 * 不存在返回0
-	 * 
+	 *
 	 * @param int $lv1id
 	 *        	return int
 	 */
@@ -61,6 +61,30 @@ class diseaseUIApi {
 			return $this->sidCache [$lv1id] ["pid"];
 		}
 		return 0;
+	}
+	
+	/**
+	 * 获取同级的数据
+	 * 返回字段:sid key data
+	 *
+	 * @param $did 二级的病种ID        	
+	 * @return array
+	 */
+	public function getSiblingDids($did) {
+		$cache_key = "getSiblingDids-" . $did;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$ret = array ();
+		$pid = $this->getParent ( $did );
+		if ($pid == 0) {
+			$this->cache [$cache_key] = $ret;
+			return array ();
+		}
+		
+		$ret = $this->getLv1InfoesByDid ( $pid );
+		$this->cache [$cache_key] = $ret;
+		return $ret;
 	}
 	
 	/**
@@ -79,7 +103,7 @@ class diseaseUIApi {
 	 * ------ ------ ------ -------- --------
 	 * 322 男性不育 327 男性不育症 nxbyz
 	 * 322 男性不育 326 肾虚 sx
-	 * 
+	 *
 	 * @return array(fetchAll);
 	 */
 	public function getInfo() {
@@ -95,7 +119,7 @@ class diseaseUIApi {
 	
 	/**
 	 * 返回一维数组，里面是`syd`
-	 * 
+	 *
 	 * @param int $did        	
 	 * @return array
 	 */
@@ -105,7 +129,9 @@ class diseaseUIApi {
 			return $this->cache [$cache_key];
 		}
 		$sql = $this->sqlManager->getSql ( "/ui_disease/symptoms_did" );
-		$data = $this->db->fetchAll ( $sql, array ("did" => $did) );
+		$data = $this->db->fetchAll ( $sql, array (
+				"did" => $did 
+		) );
 		$ret = array ();
 		foreach ( $data as $item ) {
 			$ret [] = $item ["syd"];
@@ -117,7 +143,7 @@ class diseaseUIApi {
 	/**
 	 * sid key data pid metaid
 	 * 327 nxbyz 男性不育症 322 2
-	 * 
+	 *
 	 * @param string $urlkey        	
 	 * @return array(fetch);
 	 */
@@ -133,7 +159,7 @@ class diseaseUIApi {
 	
 	/**
 	 * 返回字段:sid,key,data
-	 * 
+	 *
 	 * @return array fetchAll;
 	 */
 	public function getLv0Infoes() {
@@ -158,7 +184,7 @@ class diseaseUIApi {
 	
 	/**
 	 * 返回字段:sid,key,data
-	 * 
+	 *
 	 * @return array fetchAll;
 	 */
 	public function getLv0KeyInfoes() {
@@ -183,9 +209,8 @@ class diseaseUIApi {
 	
 	/**
 	 * 根据大病种获取小病种信息
-	 * sid key data pid grp metaid
 	 * 返回字段sid key data
-	 * 
+	 *
 	 * @param int $did        	
 	 * @return array fet
 	 */
@@ -211,7 +236,7 @@ class diseaseUIApi {
 	
 	/**
 	 * 返回字段:sid,key,data,pid,metaid
-	 * 
+	 *
 	 * @param int $did        	
 	 * @return array(fetch);
 	 */

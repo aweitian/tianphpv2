@@ -111,9 +111,10 @@
                         <div class="syrboxtit fz18 graybg clearfix"><a class="fl">热门标签</a></div>
                         <div class="hotbqbox fz13">
                           <ul class="clearfix">
-                          
-                            <li><a href="">前列腺炎</a></li>
-                 
+                    <?php foreach($model->getSiblingDids($row["sid"]) as $xbz):?>   	
+                  
+                            <li><a href="<?php print AppUrl::disHomeByDiseasekey($xbz["key"])?>"><?php print $xbz["data"] ?></a></li>
+            <?php endforeach;?>
                           </ul>
                         </div>
                       </div>

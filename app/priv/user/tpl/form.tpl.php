@@ -4,7 +4,7 @@
  * Author: Awei.tian
  * Description: 
  */
-
+require_once FILE_SYSTEM_ENTRY."/app/data/_meta/avatarMeta.php";
 $def_avatar_src = "memer_tx1.jpg";
 
 if(isset($data["def"]) && !is_null($data["def"])){
@@ -30,7 +30,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
 }else{
 	$ret_url = "";
 }
-$avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/avatar","gif,jpg,png");
+$avatar = avatarMeta::getAllAvatar();
 // var_dump($avatar);exit;
 
 ?>
@@ -73,7 +73,7 @@ $avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/avatar","gif,jpg,png");
                       	</span>
                       <select class="form-control btn-lg" style="height:70px;" name="avatar" class="btn btn-success">
                       <?php foreach ($avatar as $item):?>
-                      <option<?php if(pathinfo($item,PATHINFO_BASENAME) == $def["avatar"]):?> selected<?php endif;?> value="<?php print pathinfo($item,PATHINFO_BASENAME)?>"><?php print pathinfo($item,PATHINFO_FILENAME)?></option>
+                      <option<?php if($item == $def["avatar"]):?> selected<?php endif;?> value="<?php print $item?>"><?php print $item?></option>
                       <?php endforeach;?>
                       </select>
                       </div>

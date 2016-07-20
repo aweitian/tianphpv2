@@ -31,8 +31,55 @@
 		);
 	</reg_normal_noeml>
 	
+	
+	<reset_pwd>
+		<name>
+			UPDATE `data_user`
+				SET
+				  `pwd` = :pwd
+				WHERE `name` = :name AND `rpq` = :rpq AND `rpa` = :rpa;
+		</name>
+		<email>
+			UPDATE `data_user`
+				SET
+				  `pwd` = :pwd
+				WHERE `email` = :email AND `rpq` = :rpq AND `rpa` = :rpa;
+		</email>
+		<phone>
+			UPDATE `data_user`
+				SET
+				  `pwd` = :pwd
+				WHERE `phone` = :phone AND `rpq` = :rpq AND `rpa` = :rpa;
+		</phone>
+		
+	</reset_pwd>
+	
 
-
+	<profile>
+		<base>
+			UPDATE `data_user`
+				SET
+				  `name` = :name,
+				  @nep
+				  `rpq` = :rpq,
+				  `rpa` = :rpa
+				WHERE `sid` = :uid;
+		</base>
+	
+		<avatar>
+			UPDATE `data_user`
+				SET
+				  `avatar` = :avatar
+				WHERE `sid` = :uid
+		</avatar>
+		
+		<pwd>
+			UPDATE `data_user`
+				SET 
+				  `pwd` = :newpwd
+				WHERE `sid` = :uid AND `pwd` = :oldpwd;
+		</pwd>
+	</profile>
 
 
 

@@ -5,31 +5,16 @@
  * @Desc: 
  * 依赖:
  */
+$userinfo = AppUser::getInstance ()->auth->getInfo ();
+// var_dump($userinfo);exit;
 ?>
 <div class="blank15"></div>
 
 
 <div class="clr">
-	<div class="fl memer_box1 border2">
-		<dl class="clr">
-			<dt class="fl">
-				<img src="<?php print HTTP_ENTRY?>/static/images/hy_img1.png" />
-			</dt>
-			<dd class="fl">
-				<p class="blank10"></p>
-				<p class="color3 fz18 fw700">有点心动</p>
-				<p class="blank10"></p>
-				<p class="color9 fz13">139*****000</p>
-			</dd>
-		</dl>
-		<ul>
-			<li><a href="" class="memer_lidq1">帐号设置</a></li>
-			<li><a href="" class="memer_li2">我写的感谢信</a></li>
-			<li><a href="" class="memer_li3">我发表的评价</a></li>
-			<li><a href="" class="memer_li4">我的提问</a></li>
-			<li><a href="" class="memer_li5">心意礼物</a></li>
-		</ul>
-	</div>
+
+
+	<?php include dirname(__FILE__)."/common/left.tpl.php";?>
 
 	<div class="fr border2 wid738 memer_box2">
 
@@ -45,50 +30,41 @@
 		</dl>
 		<div class="memer_box4">
 
-			<ul class="memertit fz14 clr">
-				<li class="selected"><a href="">个人信息</a></li>
-				<li><a href="">修改密码</a></li>
-				<li><a href="">头像设置</a></li>
-			</ul>
+			<?php include dirname(__FILE__)."/common/setting_links.php"?>
 
+			<?php print $info?>
 			<div class="memer_box5 clr color6 fz13">
-
-				<p>
-					<label>登&nbsp;&nbsp;录&nbsp;&nbsp;名：</label>139*****000
-				</p>
-				<p class="blank25"></p>
-				<p>
-					<label>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</label> <input
-						placeholder="有点心动" type="text" /> <span>4~14字符英文、汉字、数字等组成</span>
-				</p>
-				<p class="blank25"></p>
-				<p>
-					<label>所&nbsp;&nbsp;在&nbsp;&nbsp;地：</label> <select
-						style="width: 130px">
-						<option>--请选择--</option>
-						<option>--地址1--</option>
-						<option>--地址2--</option>
-						<option>--地址3--</option>
-					</select> <select style="width: 80px">
-						<option>--请选择--</option>
-						<option>--地址1--</option>
-						<option>--地址2--</option>
-						<option>--地址3--</option>
-					</select>
-				</p>
-				<p class="blank25"></p>
-				<p>
-					<label>生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日：</label> <input
-						placeholder="1990-01-01" type="text" />
-				</p>
-				<p class="blank25"></p>
-				<p>
-					<label>注册时间：</label>2015-08-11 15:07:40
-				</p>
-				<p class="blank25"></p>
-				<p>
-					<button class="tc gd1s">保存</button>
-				</p>
+				<form method="post" action="<?php print AppUrl::userProfile()?>">
+					<p>
+						<label>昵称：</label> 
+						<input value="<?php print $userinfo["name"]?>" name="name" type="text" /> 
+						<span>4~14字符英文、汉字、数字等组成</span>
+					</p>
+					<p class="blank25"></p>
+					<p>
+						<label>Email:</label> 
+						<input value="<?php print $userinfo["email"]?>" name="email" type="email" /> 
+					</p>
+					<p class="blank25"></p>
+					<p>
+						<label>手机:</label> 
+						<input value="<?php print $userinfo["phone"]?>" name="phone" type="text" />
+					</p>
+					<p class="blank25"></p>
+					<p>
+						<label>安全问题:</label> 
+						<input value="<?php print $userinfo["rpq"]?>" name="rpq" type="text" />
+					</p>
+					<p class="blank25"></p>
+					<p>
+						<label>安全答案：</label>
+						<input value="<?php print $userinfo["rpa"]?>" name="rpa" type="text" />
+					</p>
+					<p class="blank25"></p>
+					<p>
+						<button class="tc gd1s" type="submit">保存</button>
+					</p>
+				</form>
 			</div>
 
 		</div>

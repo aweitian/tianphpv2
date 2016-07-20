@@ -23,8 +23,12 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 			<span>中午好！</span><b>游客</b> , <a href="<?php print AppUrl::userLogin().$loginReturnUrl?>" class="yellow">请登陆</a>
 		<?php else:?>
 		<?php $userinfo = AppUser::getInstance()->auth->getInfo()?>
-			<span>中午好！</span> , <a href="<?php print AppUrl::userHome()?>" class="yellow"><b><?php print $userinfo["name"]?></b></a>
-				
+			<span>中午好！</span> , 
+			<a href="<?php print AppUrl::userHome()?>" class="yellow">
+			<b><?php print AppFilter::filter($userinfo["name"]) ?></b>
+			</a>
+			&nbsp;
+			<a href="<?php print AppUrl::userLogout()?>">退出</a>	
 		<?php endif?>
 		</div>
 		<p class="fr">

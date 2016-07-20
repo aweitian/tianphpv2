@@ -8,15 +8,14 @@
 
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>找回密码</title>
 <link href="<?php print HTTP_ENTRY?>/static/css/style.css" rel="stylesheet" />
 <script src="<?php print HTTP_ENTRY?>/static/js/jquery.js"></script>
 <script src="<?php print HTTP_ENTRY?>/static/js/jtClite.js"></script>
-<base target="_blank" />
 </head>
 
 <body>
@@ -27,32 +26,33 @@
       <div class="rtpboxnrl fl">
         <div class="rtpawdtit">
           <ul class="clearfix fz24 gray">
-            <li class="fl selected li1"><b>1</b><br />填写登录名</li>
-            <li class="li2 fl"><b>2</b><br />设置新密码</li>
+            <li class="fl li1<?php if(isset($_REQUEST["s"]) && $_REQUEST["s"] == "1"):?><?php else:?> selected<?php endif?>"><b>1</b><br />填写登录名</li>
+            <li class="li2 fl<?php if(isset($_REQUEST["s"]) && $_REQUEST["s"] == "1"):?> selected<?php else:?><?php endif?>"><b>2</b><br />设置新密码</li>
           </ul>
         </div>
         <div class="blank40"></div>
         <div class="rtpform fz13">
-          <div class="rtpcon regway selected">
-            <form action="" method="post">
-              <input class="reginp1 gray border2" value='登录名' onClick='this.value = ""' onblur='if(value == ""){value="登录名"}'   type="text" />
+        	<?php print $info;?>
+          <div class="rtpcon regway<?php if(isset($_REQUEST["s"]) && $_REQUEST["s"] == "1"):?><?php else:?> selected<?php endif?>">
+            <form action="<?php print AppUrl::userResetPwd()?>?s=1" method="post">
+              <input class="reginp1 gray border2" name="n" placeholder='登录名' type="text" />
               <div class="blank20"></div>
-              <select class="reginp1 gray border2">
-              	<option>密码安全问题</option>
-                <option>密码安全问题1</option>
-              </select>
+              <input class="reginp1 gray border2" name="q" placeholder='密码安全问题'>
               <div class="blank20"></div>
-              <input class="reginp1 gray  border2" value='安全问题答案' onClick='this.value = ""' onblur='if(value == ""){value="安全问题答案"}' />
+              <input class="reginp1 gray border2" name="a" placeholder='密码安全答案' />
               
               <div class="blank30"></div>
               <button class="regsub1" type="submit"><img src="<?php print HTTP_ENTRY?>/static/images/zh_btn.png" width="162" height="40" /></button>
             </form>
           </div>
-          <div class="rtpcon regway">
-            <form action="" method="post">
-              <input class="reginp1 gray border2" value='填写新密码' onClick='this.value = ""' onblur='if(value == ""){value="填写新密码"}'   type="text" />
+          <div class="rtpcon regway<?php if(isset($_REQUEST["s"]) && $_REQUEST["s"] == "1"):?> selected<?php else:?><?php endif?>">
+            <form action="<?php print AppUrl::userResetPwd()?>?s=2" method="post" onsubmit="return chk(this)">
+              <input name="n" value='<?php print isset($_REQUEST["n"]) ? AppFilter::filter($_REQUEST["n"]) : ""?>' type="hidden" />
+              <input name="q" value='<?php print isset($_REQUEST["q"]) ? AppFilter::filter($_REQUEST["q"]) : ""?>' type="hidden" />
+              <input name="a" value='<?php print isset($_REQUEST["a"]) ? AppFilter::filter($_REQUEST["a"]) : ""?>' type="hidden" />
+              <input class="reginp1 gray border2" name="p" placeholder='填写新密码' type="text" />
               <div class="blank20"></div>
-              <input class="reginp1 gray  border2" value='确认新密码' onClick='this.value = ""' onblur='if(value == ""){value="确认新密码"}' />
+              <input class="reginp1 gray border2" name="pp" placeholder='确认新密码' />
               <div class="blank30"></div>
               <button class="regsub1" type="submit"><img src="<?php print HTTP_ENTRY?>/static/images/zh_btn1.png" width="162" height="40" /></button>
             </form>
@@ -62,6 +62,12 @@
     </div>
   </div>
 </div>
+<script>
+function chk(f)
+{
+	return f.p.value === f.pp.value && f.p.value !== "" ? true : (alert("两次密码不一样 / 密码为空"),false);	
+}
+</script>
 <div class="blank20"></div>
 <div class="blank10"></div>
 <div class="loginfooter dgray fz13 wid1000">

@@ -2081,9 +2081,9 @@ a.td_link, a.td_link_read {
 .jb_ssbox_sm1{ border-bottom:1px dashed #ccc;}
 .jb_ssbox_sm1 div{ width:465px; line-height:24px;}
 
-
-.jb_ssbox_sm2 ul{ width:250px; padding-left:20px;}
-.jb_ssbox_sm2 ul li{ background:url(../images/bzdot.jpg) no-repeat left; padding-left:10px; line-height:28px;}
+.
+.jb_ssbox_sm2 ul{ padding-left:10px;}
+.jb_ssbox_sm2 ul li{ width:300px; float:left; background:url(../images/bzdot.jpg) no-repeat left; padding-left:10px; line-height:28px;}
 .jb_ssbox_sm2 ul li a{ color:#333;}
 
 
@@ -2668,3 +2668,6 @@ rtpboxnrl {
 .header-out{border-bottom:1px solid #ddd; color:#bebebe;}
 .header,.header-out{height:32px;line-height:32px;overflow:hidden;background:#eee;}
 .header div,.header a{color:#333;}.header p a{color:#333;}
+
+
+.jbbox2_sm1{width:290px; padding-right:25px; }

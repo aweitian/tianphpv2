@@ -21,18 +21,7 @@ class diseaseControllerNotFoundModel extends AppModel {
 		return diseaseUIApi::getInstance()->getRowByDiskey($urlkey);
 	}
 	
-	/**
-	 * 根据病种ID获取疾病知识的文章
-	 * 最多只返回一篇
-	 * sid  thumb                              title   desc    
-	 * 30  /uploads/user/201606211043371.png  tald    sdalfkwe
-	 * @param int $did
-	 * @return array fetch
-	 */
-	public function getArticleTag7ByDid($did){
-		return diseaseUIApi::getInstance()->getArticleTag7ByDid($did);
-	}
-	
+
 	/**
 	 * Author
 	 * sihangzhang
@@ -78,6 +67,67 @@ class diseaseControllerNotFoundModel extends AppModel {
 	 * Author
 	 * sihangzhang
 	 */
-
 	
+	public function getSiblingDids($did){
+		return diseaseUIApi::getInstance()->getSiblingDids($did);
+	}
+	
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	
+	public function getArticleTag7ByDid($did, $length, $offset){
+		return articleUIApi::getInstance()->getArticleTag7ByDid($did, $length, $offset);
+	}
+	
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	
+	public function getAll($did, $length, $offset = 0){
+		return articleUIApi::getInstance()->getAll($did, $length, $offset = 0);
+	}
+	
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function getTopStar($length){
+		return doctorUIApi::getInstance()->getTopStar($length);
+	}
+	
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function knowledge($did, $tid, $txtlength, $offset, $length){
+		return articleUIApi::getInstance()->knowledge($did, $tid, $txtlength, $offset, $length);
+	}
+	
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function getTagId($text){
+		return tagsUIApi::getInstance()->getTagId($text);
+	}
+	
+	public function getQuestionsByDid($did,$length=4,$offset=0){
+		return askUIApi::getInstance()->getQuestionsByDid($did,$length,$offset);
+	}
+	
+	public function getDisnameByDid($did){
+		return diseaseUIApi::getInstance()->getNameByDid($did);
+	}
+	
+	
+	public function getDocRowByDod($dod){
+		return doctorUIApi::getInstance()->getInfoByDod($dod);
+	}
+	
+	public function getAnswerByAskid($askid){
+		return askUIApi::getInstance()->getAnswerByAskid($askid);
+	}
 }

@@ -6,16 +6,34 @@ class userView extends AppView {
 	public function register($model) {
 		include dirname ( __FILE__ ) . "/tpl/register.tpl.php";
 	}
-	public function resetpwd($model) {
+	public function resetpwd($model, $info = "") {
 		include dirname ( __FILE__ ) . "/tpl/resetpwd.tpl.php";
 	}
-	public function profile($model) {
+	public function profile($model, $info = "") {
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
 				dirname ( __FILE__ ) . "/tpl/profile.tpl.php",
 				array (
-						"model" => $model 
+						"model" => $model,
+						"info" => $info 
 				) 
 		) )->setLayout ()->reponse ();
-		// include dirname(__FILE__)."/tpl/profile.tpl.php";
+	}
+	public function modify($model, $info = "") {
+		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
+				dirname ( __FILE__ ) . "/tpl/modify.tpl.php",
+				array (
+						"model" => $model,
+						"info" => $info 
+				) 
+		) )->setLayout ()->reponse ();
+	}
+	public function avatar($model, $info = "") {
+		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
+				dirname ( __FILE__ ) . "/tpl/avatar.tpl.php",
+				array (
+						"model" => $model,
+						"info" => $info 
+				) 
+		) )->setLayout ()->reponse ();
 	}
 }

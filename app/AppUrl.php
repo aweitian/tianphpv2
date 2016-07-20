@@ -35,10 +35,13 @@ class AppUrl {
 	
 #用户管理
 	public static function userHome(){
-		return AppUrl::build("/user");
+		return AppUrl::userProfile();
 	}	
 	public static function userLogin(){
 		return AppUrl::build("/user/login");
+	}	
+	public static function userLogout(){
+		return AppUrl::build("/user/logout");
 	}	
 	public static function userResetPwd(){
 		return AppUrl::build("/user/resetpwd");
@@ -46,7 +49,15 @@ class AppUrl {
 	public static function userRegister(){
 		return AppUrl::build("/user/register");
 	}	
-	
+	public static function userAvatar(){
+		return AppUrl::build("/user/avatar");
+	}	
+	public static function userModifypwd(){
+		return AppUrl::build("/user/modpwd");
+	}
+	public static function userProfile(){
+		return AppUrl::build("/user");
+	}	
 #医生评价
 	/**
 	 * @return string

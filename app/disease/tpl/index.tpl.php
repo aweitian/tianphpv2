@@ -41,23 +41,33 @@ $ext = diseaseExtInfoes::getExtData();
                     	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img1.jpg" class="fl" />
                         <div class="jb_box1 fr">
                         	<div class="blank10"></div>
-                        	<span class="fz18 bule">前列腺炎知识介绍</span>
+                        	<span class="fz18 bule"><?php print $row["data"]?>知识介绍</span>
                             <div class="blank10"></div>
-                            <p class="fz13 color3">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾...<a href="" class="bule">疾病介绍→</a></p>
+                           
+          
+             <?php foreach($model->getArticleTag7ByDid($row["sid"],1,0) as $aitem):?> 
+               
+
+                            <p class="fz13 color3"> <?php print utility::utf8substr($aitem["desc"],0,80); ?>...<a href="<?php print AppUrl::articleByAid($aitem["aid"]) ?>" class="bule">疾病介绍→</a></p>
+                        
+                              <?php endforeach;?>    
                             <div class="blank10"></div>
                             <div class="jbbox1_sm1 fz13">
-                                <p>
-                                <a href="">前列腺炎吃什么药，前列腺炎怎么治疗</a>
-                                <a href="">前列腺检查项目在线</a>
-                                </p>
-                                <p>
-                                <a href="">前列腺炎的发病原因</a>
-                                <a href="">【病因】 前列腺炎是怎么引起的</a>
-                                </p>
-                                <p>
-                                <a href="">【误诊】你是前列腺炎还是尿路？</a>
-                                <a href="">更多...</a>
-                                </p>
+      <?php $xy = 0; ?>
+  <?php foreach($model->getAll($row["sid"],6,0) as $wz):?> 
+<?php $xy++; ?>
+<?php if ($xy % 2 == 1) { ?>
+            <p>
+<?php } ?>
+               <a href="<?php print AppUrl::articleByAid($wz["aid"]) ?>"><?php print utility::utf8substr($wz["title"],0,12); ?></a>
+<?php if ($xy % 2 == 0) { ?>
+            </p>
+<?php } ?>
+  <?php endforeach;?>  
+<?php if ($xy % 2 != 0) { ?>
+            </p>
+<?php } ?>       
+                      
                             </div>
                         </div>
                     </div>
@@ -69,89 +79,75 @@ $ext = diseaseExtInfoes::getExtData();
                         <div class="blank20"></div>
                         <div class="clr jb_box2">
                         
-                        	<div class="jbbox2_sm1 fl" style="width:290px; padding-right:30px; border-bottom:1px dotted #d7d7d7;">
+                        <?php $data = $model->getQuestionsByDid($row["sid"])?>
+                        <!-- sid title date dod -->
+                        <?php foreach ($data as $ask):?>
+                        	<div class="jbbox2_sm1 fl">
+                            
                             
                             	<div class="jbbox2_sm1top clr">
-                                	<div class="fl jbbox2_p1 tc fz16 jb_ys1">尖锐<br />湿疣</div>
+                                	<div class="fl jbbox2_p1 tc fz16 jb_ys1"><?php print $row["data"]?></div>
                                     <div class="fr">
-                                    	<p>治疗一星期花了几万.没什么区别. 我与其他同治疗尖锐湿疣的 ...<a href="" class="bule"> 详细→</a></p>
-                                        <p class="fr color9">5分钟前</p>
+                                    	<p><?php print $ask["title"]?> ...<a href="" class="bule"> 详细→</a></p>
+                                        <p class="fr color9"></p>
                                     </div>
                                 </div>
                                 <div class="blank20"></div>
                                 <div class="jbbox2_sm1top clr">
-                                	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img2.jpg" class="fl" />
+                                	<?php $doc = $model->getDocRowByDod($ask["dod"])?>
+                                	<?php $ans = $model->getAnswerByAskid($ask["sid"])?>
+                                	<img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" class="fl" />
                                     <div class="fr">
-                                    	<span class="jb_ys1col">张英娣，副主任医师</span>
-                                        <p>这个肯定不是尖锐湿疣，建议去做个活检看看，就是取一块下来去化</p>
+                                    <!-- sid,id,name,lv,avatar,date,dod,dlv,star,hot,love,contribution,desc,spec -->
+                                    	<span class="jb_ys1col"><?php print $doc["name"]?>，<?php print $doc["lv"]?></span>
+                                        <p><?php print utility::utf8Substr($ans["content"], 0, 20) ?></p>
                                     </div>
                                 	
                                 </div>
                                 <div class="blank25"></div>
                             </div>
-                            
-                            <div class="jbbox2_sm1 fr" style="width:290px; padding-left:26px; border-left:1px dotted #d7d7d7; border-bottom:1px dotted #d7d7d7;">
-                            
-                            	<div class="jbbox2_sm1top clr">
-                                	<div class="fl jbbox2_p1 tc fz16 jb_ys2">尖锐<br />湿疣</div>
-                                    <div class="fr">
-                                    	<p>治疗一星期花了几万.没什么区别. 我与其他同治疗尖锐湿疣的 ...<a href="" class="bule"> 详细→</a></p>
-                                        <p class="fr color9">5分钟前</p>
-                                    </div>
-                                </div>
-                                <div class="blank20"></div>
-                                <div class="jbbox2_sm1top clr">
-                                	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img3.jpg" class="fl" />
-                                    <div class="fr">
-                                    	<span class="jb_ys2col">张俊峰，主治医师</span>
-                                        <p>这个肯定不是尖锐湿疣，建议去做个活检看看，就是取一块下来去化验的</p>
-                                    </div>
-                                	
-                                </div>
-                                <div class="blank25"></div>
-                            </div>
-                            
-                            <div class="jbbox2_sm1 fl" style="width:290px; padding-right:30px;">
-                            	<div class="blank20"></div>
-                            	<div class="jbbox2_sm1top clr">
-                                	<div class="fl jbbox2_p1 tc fz16 jb_ys3">尖锐<br />湿疣</div>
-                                    <div class="fr">
-                                    	<p>治疗一星期花了几万.没什么区别. 我与其他同治疗尖锐湿疣的 ...<a href="" class="bule"> 详细→</a></p>
-                                        <p class="fr color9">5分钟前</p>
-                                    </div>
-                                </div>
-                                <div class="blank20"></div>
-                                <div class="jbbox2_sm1top clr">
-                                	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img2.jpg" class="fl" />
-                                    <div class="fr">
-                                    	<span class="jb_ys3col">张英娣，副主任医师</span>
-                                        <p>这个肯定不是尖锐湿疣，建议去做个活检看看，就是取一块下来去化</p>
-                                    </div>
-                                	
-                                </div>
-                                
-                            </div>
-                            
-                            <div class="jbbox2_sm1 fr" style="width:290px; padding-left:26px; border-left:1px dotted #d7d7d7;">
-                            	<div class="blank20"></div>
-                            	<div class="jbbox2_sm1top clr">
-                                	<div class="fl jbbox2_p1 tc fz16 jb_ys4">尖锐<br />湿疣</div>
-                                    <div class="fr">
-                                    	<p>治疗一星期花了几万.没什么区别. 我与其他同治疗尖锐湿疣的 ...<a href="" class="bule"> 详细→</a></p>
-                                        <p class="fr color9">5分钟前</p>
-                                    </div>
-                                </div>
-                                <div class="blank20"></div>
-                                <div class="jbbox2_sm1top clr">
-                                	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img3.jpg" class="fl" />
-                                    <div class="fr">
-                                    	<span class="jb_ys4col">张俊峰，主治医师</span>
-                                        <p>这个肯定不是尖锐湿疣，建议去做个活检看看，就是取一块下来去化验的</p>
-                                    </div>
-                                	
-                                </div>
-                                <div class="blank25"></div>
-                            </div>
+                   
+                        <?php endforeach;?>  
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
                             
                         </div>
                         
@@ -159,160 +155,57 @@ $ext = diseaseExtInfoes::getExtData();
                     
                     <div class="blank20"></div>
                     <div class="padd20 border2">
-                    	<div class="zjtdwztit fz18" style="border-bottom:0;"><span></span>前列腺炎全面详解</div>
-                        
+                    	<div class="zjtdwztit fz18" style="border-bottom:0;"><span></span><?php print $row["data"]?>全面详解</div>
+                        <?php 
+                          $all=array("病因","症状","检查","治疗","危害","保键")
+                        ?>
                         <div class="jb_sstab clearfix dgray fz13 color6">
                             <ul class="clr">
-                              <li class="selected">病因</li>
-                              <li>症状</li>
-                              <li>检查</li>
-                              <li>治疗</li>
-                              <li>危害</li>
-                              <li class="last">保键</li>
+                             <?php $m=1;?>
+                            <?php foreach ($all as $al):?>
+                              <li <?php if($m==1){?> class="selected"<?php } ?> ><?php print $al?></li>
+                               <?php $m++;?>
+                         <?php endforeach; ?>
                             </ul>
                         </div>
       
       					<div class="jb_ssall">
-                        <div class="jb_ssbox selected">
-                        	
+      					  <?php $y=1;?>
+      				       <?php foreach ($all as $al):?>
+      					<?php $tid= ($model->getTagId("$al")) ?>
+                        <div class="jb_ssbox <?php if($y==1){?>selected<?php } ?>">
                             <div class="clr jb_ssbox_sm1">
-                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
-                                <div class="fr">
-                                	<span class="fz16 color3">1前列腺炎的病因有哪些？</span>
-                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
-                                </div>
-                                <div class="blank20"></div>
-                            </div>
-                            <div class="blank15"></div>
-                            <div class="jb_ssbox_sm2 clr">
-                        	<ul class="fl">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
-                            <ul class="fr">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
-                        </div>
                             
-                        </div>
-                        <div class="jb_ssbox">
-                        	<div class="clr jb_ssbox_sm1">
-                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
+                          
+                         
+                            	<img src="////" class="fl" />
                                 <div class="fr">
-                                	<span class="fz16 color3">2前列腺炎的病因有哪些？</span>
-                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
+                                	<span class="fz16 color3"><a href="/">111</a></span>
+                                    <p class="fz13 color6">111...<a href="" class="bule">[详细]</a></p>
                                 </div>
+           
+                                
+
+                                
                                 <div class="blank20"></div>
                             </div>
                             <div class="blank15"></div>
                             <div class="jb_ssbox_sm2 clr">
                         	<ul class="fl">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
+                        	
+     <?php foreach ($model->knowledge($row["sid"],$tid,10,0,6) as $wz):?>
+     
+                            	<li><a href="<?php print AppUrl::articleByAid($wz["sid"]) ?>"><?php print utility::utf8substr($wz["title"],0,20);?></a></li>
+     <?php endforeach; ?>
                             </ul>
-                            <ul class="fr">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
+                        </div>             
                         </div>
-                        </div>
-                        <div class="jb_ssbox">
-                        	<div class="clr jb_ssbox_sm1">
-                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
-                                <div class="fr">
-                                	<span class="fz16 color3">3前列腺炎的病因有哪些？</span>
-                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
-                                </div>
-                                <div class="blank20"></div>
-                            </div>
-                            <div class="blank15"></div>
-                            <div class="jb_ssbox_sm2 clr">
-                        	<ul class="fl">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
-                            <ul class="fr">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
-                        </div>
-                        </div>
-                        <div class="jb_ssbox">
-                        	<div class="clr jb_ssbox_sm1">
-                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
-                                <div class="fr">
-                                	<span class="fz16 color3">4前列腺炎的病因有哪些？</span>
-                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
-                                </div>
-                                <div class="blank20"></div>
-                            </div>
-                            <div class="blank15"></div>
-                            <div class="jb_ssbox_sm2 clr">
-                        	<ul class="fl">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
-                            <ul class="fr">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
-                        </div>
-                        </div>
-                        <div class="jb_ssbox">
-                        	<div class="clr jb_ssbox_sm1">
-                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
-                                <div class="fr">
-                                	<span class="fz16 color3">5前列腺炎的病因有哪些？</span>
-                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
-                                </div>
-                                <div class="blank20"></div>
-                            </div>
-                            <div class="blank15"></div>
-                            <div class="jb_ssbox_sm2 clr">
-                        	<ul class="fl">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
-                            <ul class="fr">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
-                        </div>
-                        </div>
-                        <div class="jb_ssbox">
-                        	<div class="clr jb_ssbox_sm1">
-                            	<img src="<?php print HTTP_ENTRY?>/static/images/jb_img4.jpg" class="fl" />
-                                <div class="fr">
-                                	<span class="fz16 color3">6前列腺炎的病因有哪些？</span>
-                                    <p class="fz13 color6">前列腺，素有男性"生命腺"之称，可见前列腺对于男性的重要性。然而，作为人体大腺体，前列腺却很脆弱，其中，前列腺炎就是男性为常见的男科疾病之一。上海九龙 ...<a href="" class="bule">[详细]</a></p>
-                                </div>
-                                <div class="blank20"></div>
-                            </div>
-                            <div class="blank15"></div>
-                            <div class="jb_ssbox_sm2 clr">
-                        	<ul class="fl">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
-                            <ul class="fr">
-                            	<li><a href="">前列腺炎吃什么药，前列腺炎怎么治疗？</a></li>
-                                <li><a href="">以前尿一丈，现在尿无力，怎么办？</a></li>
-                                <li><a href="">【误诊】你是前列腺炎还是尿路感染？</a></li>
-                            </ul>
-                        </div>
-                        </div>
+                       <?php $y++;?>
+                        <?php endforeach; ?>
+                      
+                      
+                      
+                      
                       </div>
                         
                 	</div>
@@ -320,138 +213,48 @@ $ext = diseaseExtInfoes::getExtData();
                     <div class="blank20"></div>
                     
                     <div class="padd20 border2 clr">
-                    	<div class="zjtdwztit fz18"><span></span>好评医生<a href="" class="fr fz13 color9">+更多推荐</a></div>
+                    	<div class="zjtdwztit fz18"><span></span>好评医生<a href="<?php print AppUrl::navDoctors() ?>" class="fr fz13 color9">+更多推荐</a></div>
                         
                         <ul class="hp_doc1 clearfix">
                         
+                  
+                        	<?php foreach($model->getTopStar(4) as $doc):?>
                             <li class="hp_doc_box1">
                             <div class="clr">
                             <div class="hp_doc_box2">
                                 <div class="fl pr20">
                                 <p class="tc">
                                     <a href="" target="_blank">
-                                    <img alt="" src="<?php print HTTP_ENTRY?>/static/images/jb_img5.jpg">
+                                   <a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" width="80" height="65" /></a>
                                     </a>
                                 </p>
-                                        <a target="_blank" href="" class="personweb-sickness-btn">个人网站</a>
+                                        <a target="_blank" href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="personweb-sickness-btn">个人网站</a>
                                 </div>
                                 <div class="fl">
-                                    <p>张俊峰&nbsp;&nbsp;&nbsp;&nbsp;主治医师</p>
+                                    <p><?php print $doc["name"]; ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php print $doc["lv"]; ?></p>
                                     <p>
                                         <span class="patient_recommend">患者推荐热度：
-                                        <a href=""><i class="blue" style="margin-left:-5px;">5.0</i></a></span>
+                                        <a href=""><i class="blue" style="margin-left:-5px;"><?php print $doc["hot"]; ?></i></a></span>
                                         <span><img src="<?php print HTTP_ENTRY?>/static/images/jian.png" style="vertical-align:-3px;"></span>
                                         &nbsp;&nbsp;&nbsp;&nbsp;近两周回复<b class="yellow">37</b>问 
                                         </span>
                                     </p>
-                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img6.png" class="fl" style="margin:5px 5px 0 0;" />擅长：擅长于泌尿系感染、前列腺炎、性功能障碍、男性不育等...</p>
-                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a href="" class="colora">查看张俊峰的全部文章、全部咨询</a></p>
+                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img6.png" class="fl" style="margin:5px 5px 0 0;" />擅长：<?php print $doc["spec"]; ?>...</p>
+                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="colora">查看<?php print $doc["name"]; ?>的全部文章、全部咨询</a></p>
                                 </div>
                             </div>
                             
                             <div class="doc_rela_link">
-                                <p><a href="" class="online_btn"><span>点击咨询</span></a><p>
-                                <p><a href="" class="jiahao_btn"><span>预约挂号</span></a><p>
+                                <p><a href="<?php print AppUrl::getSwtUrl()?>" class="online_btn"><span>点击咨询</span></a><p>
+                                <p><a href="<?php print AppUrl::getSwtUrl()?>" class="jiahao_btn"><span>预约挂号</span></a><p>
                             </div>
                             </div>
                             </li>
-                            
-                            <li class="hp_doc_box1">
-                            <div class="clr">
-                            <div class="hp_doc_box2">
-                                <div class="fl pr20">
-                                <p class="tc">
-                                    <a href="" target="_blank">
-                                    <img alt="" src="<?php print HTTP_ENTRY?>/static/images/jb_img5.jpg">
-                                    </a>
-                                </p>
-                                        <a target="_blank" href="" class="personweb-sickness-btn">个人网站</a>
-                                </div>
-                                <div class="fl">
-                                    <p>张俊峰&nbsp;&nbsp;&nbsp;&nbsp;主治医师</p>
-                                    <p>
-                                        <span class="patient_recommend">患者推荐热度：
-                                        <a href=""><i class="blue" style="margin-left:-5px;">5.0</i></a></span>
-                                        <span><img src="<?php print HTTP_ENTRY?>/static/images/jian.png" style="vertical-align:-3px;"></span>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;近两周回复<b class="yellow">37</b>问 
-                                        </span>
-                                    </p>
-                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img6.png" class="fl" style="margin:5px 5px 0 0;" />擅长：擅长于泌尿系感染、前列腺炎、性功能障碍、男性不育等...</p>
-                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a href="" class="colora">查看张俊峰的全部文章、全部咨询</a></p>
-                                </div>
-                            </div>
-                            
-                            <div class="doc_rela_link">
-                                <p><a href="" class="online_btn"><span>点击咨询</span></a><p>
-                                <p><a href="" class="jiahao_btn"><span>预约挂号</span></a><p>
-                            </div>
-                            </div>
-                            </li>
-                            
-                            <li class="hp_doc_box1">
-                            <div class="clr">
-                            <div class="hp_doc_box2">
-                                <div class="fl pr20">
-                                <p class="tc">
-                                    <a href="" target="_blank">
-                                    <img alt="" src="<?php print HTTP_ENTRY?>/static/images/jb_img5.jpg">
-                                    </a>
-                                </p>
-                                        <a target="_blank" href="" class="personweb-sickness-btn">个人网站</a>
-                                </div>
-                                <div class="fl">
-                                    <p>张俊峰&nbsp;&nbsp;&nbsp;&nbsp;主治医师</p>
-                                    <p>
-                                        <span class="patient_recommend">患者推荐热度：
-                                        <a href=""><i class="blue" style="margin-left:-5px;">5.0</i></a></span>
-                                        <span><img src="<?php print HTTP_ENTRY?>/static/images/jian.png" style="vertical-align:-3px;"></span>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;近两周回复<b class="yellow">37</b>问 
-                                        </span>
-                                    </p>
-                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img6.png" class="fl" style="margin:5px 5px 0 0;" />擅长：擅长于泌尿系感染、前列腺炎、性功能障碍、男性不育等...</p>
-                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a href="" class="colora">查看张俊峰的全部文章、全部咨询</a></p>
-                                </div>
-                            </div>
-                            
-                            <div class="doc_rela_link">
-                                <p><a href="" class="online_btn"><span>点击咨询</span></a><p>
-                                <p><a href="" class="jiahao_btn"><span>预约挂号</span></a><p>
-                            </div>
-                            </div>
-                            </li>
-                            
-                            <li class="hp_doc_box1" style="border:0; padding-bottom:0;">
-                            <div class="clr">
-                            <div class="hp_doc_box2">
-                                <div class="fl pr20">
-                                <p class="tc">
-                                    <a href="" target="_blank">
-                                    <img alt="" src="<?php print HTTP_ENTRY?>/static/images/jb_img5.jpg">
-                                    </a>
-                                </p>
-                                        <a target="_blank" href="" class="personweb-sickness-btn">个人网站</a>
-                                </div>
-                                <div class="fl">
-                                    <p>张俊峰&nbsp;&nbsp;&nbsp;&nbsp;主治医师</p>
-                                    <p>
-                                        <span class="patient_recommend">患者推荐热度：
-                                        <a href=""><i class="blue" style="margin-left:-5px;">5.0</i></a></span>
-                                        <span><img src="<?php print HTTP_ENTRY?>/static/images/jian.png" style="vertical-align:-3px;"></span>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;近两周回复<b class="yellow">37</b>问 
-                                        </span>
-                                    </p>
-                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img6.png" class="fl" style="margin:5px 5px 0 0;" />擅长：擅长于泌尿系感染、前列腺炎、性功能障碍、男性不育等...</p>
-                                    <p><img src="<?php print HTTP_ENTRY?>/static/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a href="" class="colora">查看张俊峰的全部文章、全部咨询</a></p>
-                                </div>
-                            </div>
-                            
-                            <div class="doc_rela_link">
-                                <p><a href="" class="online_btn"><span>点击咨询</span></a><p>
-                                <p><a href="" class="jiahao_btn"><span>预约挂号</span></a><p>
-                            </div>
-                            </div>
-                            </li>
-                            
+                           
+                               	<?php endforeach;?>
+                           
+                           
+                           
                         </ul>
                         
                 	</div>

@@ -82,7 +82,7 @@ class doctorUIApi {
 			return $this->cache[$cache_key];
 		}
 		$ret = array();
-		$ret = array_slice($this->docache, -3,$length);
+		$ret = array_slice($this->docache, -1*$length,$length);
 		
 		$this->cache[$cache_key] = $ret;
 		return $ret;

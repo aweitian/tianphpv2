@@ -9,6 +9,7 @@ require_once FILE_SYSTEM_ENTRY . "/app/data/priv/user/userFilter.php";
 require_once FILE_SYSTEM_ENTRY . "/modules/oplog/IOp.php";
 require_once FILE_SYSTEM_ENTRY . "/modules/oplog/oplog.php";
 require_once FILE_SYSTEM_ENTRY . "/modules/captcha/captcha.php";
+require_once FILE_SYSTEM_ENTRY . "/app/data/_meta/avatarMeta.php";
 class userUIApi implements IOp {
 	private static $inst = null;
 	private $sqlManager;
@@ -118,6 +119,218 @@ class userUIApi implements IOp {
 		
 		$this->cache [$cache_key] = $ret;
 		return $ret;
+	}
+	// 前端操作
+	
+	/**
+	 *
+	 * @param int $uid        	
+	 * @param string $newavatar
+	 *        	(只要BASENAME部分)
+	 * @return rirResult
+	 */
+	public function avatar($uid, $newavatar) {
+		$op_type = "user_modify";
+		$oplog = new oplog ();
+		$try_cnt = $oplog->getCnt ( $op_type, $uid );
+		if (USER_MOD_PROFILE_TRY_MAX - $try_cnt <= 0) {
+			return new rirResult ( 1, "今天编辑次数过多" );
+		}
+		$opsid = $oplog->add ( $op_type, $uid );
+		$oplog->update ( $opsid );
+		$avatarMeta = avatarMeta::getAllAvatar ();
+		
+		if (! in_array ( $newavatar, $avatarMeta )) {
+			return new rirResult ( 2, "头像不存在" );
+		}
+		
+		$sql = $this->sqlManager->getSql ( "/ui_user/profile/avatar" );
+		$row = $this->db->exec ( $sql, array (
+				"uid" => $uid,
+				"avatar" => $newavatar 
+		) );
+		if ($row == 1) {
+			$sql = $this->sqlManager->getSql ( "/ui_user/row_uid" );
+			$ret = $this->db->fetch ( $sql, array (
+					"uid" => $uid 
+			) );
+			return new rirResult ( 0, "ok", $ret );
+		}
+		return new rirResult ( 3, "头像没有变化" );
+	}
+	
+	/**
+	 *
+	 * @param int $uid        	
+	 * @param string $op
+	 *        	旧密码
+	 * @param string $np
+	 *        	新密码
+	 * @return rirResult
+	 */
+	public function modpwd($uid, $op, $np) {
+		$op_type = "user_modify";
+		$oplog = new oplog ();
+		$try_cnt = $oplog->getCnt ( $op_type, $uid );
+		if (USER_MOD_PROFILE_TRY_MAX - $try_cnt <= 0) {
+			return new rirResult ( 1, "今天编辑次数过多" );
+		}
+		$opsid = $oplog->add ( $op_type, $uid );
+		$oplog->update ( $opsid );
+		
+		$sql = $this->sqlManager->getSql ( "/ui_user/profile/pwd" );
+		$row = $this->db->exec ( $sql, array (
+				"uid" => $uid,
+				"oldpwd" => Security::encrypt ( $op ),
+				"newpwd" => Security::encrypt ( $np ) 
+		) );
+		if ($row == 1) {
+			return new rirResult ( 0, "ok" );
+		}
+		return new rirResult ( 2, "原密码错误 或 与新密码相同" );
+	}
+	
+	/**
+	 *
+	 * @param string $nep        	
+	 * @param string $sq
+	 *        	问题
+	 * @param string $sa
+	 *        	回答
+	 * @param string $pwd
+	 *        	新密码
+	 * @return rirResult
+	 */
+	public function resetPwd($nep, $sq, $sa, $pwd) {
+		$op_type = "user_reset_pwd";
+		$op_id = identityToken::getInstance ()->getIp ();
+		$oplog = new oplog ();
+		$try_cnt = $oplog->getCnt ( $op_type, $op_id );
+		if (USER_RESET_PWD_TRY_MAX - $try_cnt <= 0) {
+			return new rirResult ( 1, "今天找回密码功能使用次数过多" );
+		}
+		$opsid = $oplog->add ( $op_type, $op_id );
+		$oplog->update ( $opsid );
+		
+		if (validator::isEmail ( $nep )) {
+			$sql = $this->sqlManager->getSql ( "/ui_user/reset_pwd/email" );
+			$bnd = array (
+					"email" => $nep,
+					"rpq" => $sq,
+					"rpa" => $sa,
+					"pwd" => Security::encrypt ( $pwd ) 
+			);
+		} else if (userValidator::isValidPhone ( $nep )) {
+			$sql = $this->sqlManager->getSql ( "/ui_user/reset_pwd/phone" );
+			$bnd = array (
+					"phone" => $nep,
+					"rpq" => $sq,
+					"rpa" => $sa,
+					"pwd" => Security::encrypt ( $pwd ) 
+			);
+		} else {
+			$sql = $this->sqlManager->getSql ( "/ui_user/reset_pwd/name" );
+			$bnd = array (
+					"name" => $nep,
+					"rpq" => $sq,
+					"rpa" => $sa,
+					"pwd" => Security::encrypt ( $pwd ) 
+			);
+		}
+		// var_dump($sql,$bnd);exit;
+		$row = $this->db->exec ( $sql, $bnd );
+		if ($row == 1) {
+			return new rirResult ( 0, "密码已重置" );
+		}
+		return new rirResult ( 2, "密码问题和答案不匹配 或者 您新输入的密码与原来的密码一至" );
+	}
+	
+	/**
+	 *
+	 * @param int $uid        	
+	 * @param string $name        	
+	 * @param string $sq        	
+	 * @param string $sa        	
+	 * @param string $eml        	
+	 * @param string $phone        	
+	 * @return rirResult
+	 */
+	public function modProfile($uid, $name, $eml, $phone, $sq, $sa) {
+		// 23000
+		// string(5) "23000" string(37) "Duplicate entry 'awei' for key 'name'"
+		$op_type = "user_modify";
+		$oplog = new oplog ();
+		$try_cnt = $oplog->getCnt ( $op_type, $uid );
+		if (USER_MOD_PROFILE_TRY_MAX - $try_cnt <= 0) {
+			return new rirResult ( 1, "今天编辑次数过多" );
+		}
+		$opsid = $oplog->add ( $op_type, $uid );
+		$oplog->update ( $opsid );
+		
+		// 开始校验提交数据
+		if ($name == "" || strlen ( $name ) > 64) {
+			return new rirResult ( 3, "用户为空或者长度大于64" );
+		}
+		// 防止前台忘记转义
+		if (strpos ( $name, "<" ) !== false) {
+			return new rirResult ( 0xb, "用户含有非法字符" );
+		}
+		if ($sq == "" || strlen ( $sq ) > 64) {
+			return new rirResult ( 5, "密码安全问题为空或者长度大于64" );
+		}
+		if ($sa == "" || strlen ( $sa ) > 64) {
+			return new rirResult ( 6, "密码安全答案为空或者长度大于64" );
+		}
+		$nep = "";
+		$bnd = array ();
+		if ($eml) {
+			if (! validator::isEmail ( $eml ) || strlen ( $eml ) > 64) {
+				return new rirResult ( 7, "EMAIL格式不正确或者长度大于64" );
+			}
+			
+			$nep .= "`email` = :email,";
+			$bnd ["email"] = $eml;
+		}
+		
+		if ($phone) {
+			if (! userValidator::isValidPhone ( $phone )) {
+				return new rirResult ( 8, "手机号码格式不对" );
+			}
+			// `phone` = :phone,
+			$nep .= "`phone` = :phone,";
+			$bnd ["phone"] = $phone;
+		}
+		$sql = strtr ( $this->sqlManager->getSql ( "/ui_user/profile/base" ), array (
+				"@nep" => $nep 
+		));
+// 		exit($sql);
+		$bnd ["name"] = $name;
+		$bnd ["rpq"] = $sq;
+		$bnd ["rpa"] = $sa;
+		$bnd ["uid"] = $uid;
+		
+		$ret = $this->db->exec ( $sql, $bnd );
+		if ($ret == 0) {
+			if ($this->db->getErrorCode () == "23000") {
+				// 索引唯一约束
+				$info = $this->db->getErrorInfo ();
+				if (preg_match ( "/for key '(name|email|phone)'$/", $info, $matches )) {
+					if ($matches [1] == "name") {
+						return new rirResult ( 8, "用户名已存在" );
+					} else if ($matches [1] == "phone") {
+						return new rirResult ( 0x9, "手机号码已存在" );
+					} else {
+						return new rirResult ( 0xe, "EMAIL已存在" );
+					}
+				}
+			}
+			return new rirResult ( 0xa, $info );
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_user/row_uid" );
+		$ret = $this->db->fetch ( $sql, array (
+				"uid" => $uid 
+		) );
+		return new rirResult ( 0, "更新成功", $ret );
 	}
 	
 	/**
