@@ -15,16 +15,7 @@ $ext = diseaseExtInfoes::getExtData();
       
       <div class="clr">
       	
-        <div class="jb_tit clr">
-        	<h2 class="fl tc fz24">前列腺炎<br /><span class="fz12">prostatitis</span></h2>
-            <ul class="fr fz16">
-            	<li><a href="<?php print AppUrl::disHomeByDiseasekey($row["key"])?>">疾病首页</a></li><span>|</span>
-                <li><a href="<?php print AppUrl::disKnowledgeByDiseasekey($row["key"])?>" class="navdq">疾病知识</a></li><span>|</span>
-                <li><a href="<?php print AppUrl::disArticleByDiseasekey($row["key"])?>">专家观点</a></li><span>|</span>
-                <li><a href="<?php print AppUrl::disDoctorsByDiseasekey($row["key"])?>">好评医生</a></li><span>|</span>
-                <li><a href="<?php print AppUrl::disAskByDiseasekey($row["key"])?>">患者咨询</a></li>
-            </ul>
-        </div>
+        <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
           
           <div class="fz13">
             
@@ -2618,7 +2609,7 @@ $ext = diseaseExtInfoes::getExtData();
                 
     			<!--left end-->
                 
-               <?php include dirname(__FILE__)."/right.tpl.php";?>
+               <?php include dirname(__FILE__)."/common/right.tpl.php";?>
                 <!--right end-->
              </div>
             

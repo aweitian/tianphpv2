@@ -70,7 +70,7 @@ if(is_null($q)){
                       	<?php if($item["cnt"] > 0):?>
                         <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/article/commentlist?sid=<?php print $item["sid"]?>"><i class="glyphicon glyphicon-eye-open"></i> 查看甩有评论</a>
                         <?php else:?>
-                        <i class="glyphicon glyphicon-ban-circle" style="color:#aaa"></i>
+                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/article/addcomment?aid=<?php print $item["sid"]?>"><i class="glyphicon glyphicon glyphicon-plus"></i> 添加评论</a>
                         <?php endif;?>
                       </td>
                     </tr>

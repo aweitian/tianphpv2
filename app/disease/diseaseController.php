@@ -19,6 +19,7 @@ class diseaseControllerNotFound{
 	private $view;
 	private $allowAct;
 	public function __construct(pmcaiMsg $msg){
+		appCtrl::$msg = $msg;
 		$this->model = new diseaseControllerNotFoundModel();
 		$this->view = new diseaseControllerNotFoundView();
 		if (method_exists($this,$msg->getAction())){

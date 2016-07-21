@@ -3,22 +3,6 @@
  * @var letterModel;
  */
 $m = $model;
-// echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-// var_dump($m->getDisease());
-// var_dump($m->getDiseaseLv0());exit;
-
-$tree_dis = array();
-foreach ($m->getDisease() as $item){
-	if(!array_key_exists($item["pid"], $tree_dis)){
-		$tree_dis[$item["pid"]] = array(
-			"text" => $item["pd"],
-			"children" => array()
-		);
-	}
-	$tree_dis[$item["pid"]]["children"][$item["mid"]] = array($item["md"],$item["url"]);
-}
- 
-
 
 
 ?>

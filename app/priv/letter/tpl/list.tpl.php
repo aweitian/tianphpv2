@@ -28,9 +28,10 @@ $data = $data["data"];
                   <table class="table table-bordered">
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Email</th>
+                      <th>用户</th>
                       <th>医生</th>
                       <th>病种</th>
+                      <th>是否通过验证</th>
                       <th>感谢信内容</th>
                       <th>时间</th>
                       <th width="30%">操作</th>
@@ -38,14 +39,17 @@ $data = $data["data"];
                     <?php foreach ($data as $item):?>
                     <tr>
                       <td><?php print $item["sid"]?></td>
-                      <td><?php print $item["email"]?></td>
-                      <td><?php print $item["name"]?></td>
+                      <td><?php print $item["username"]?></td>
+                      <td><?php print $item["docname"]?></td>
                       <td><?php print $item["data"]?></td>
+                      <td><?php if( $item["verify"] == "1" ):?>已通过<?php else:?>侍审核<?php endif;?></td>
                       <td><?php print $item["content"]?></td>
                       <td><?php print $item["date"]?></td>
                       <td>
                         <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/letter/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
                         <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/letter/rm?sid=<?php print $item["sid"]?>">删除</a>
+                      	<a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/letter/verify?sid=<?php print $item["sid"]?>"><?php if( $item["verify"] == "1" ):?><i class="glyphicon glyphicon-remove"></i> 取消<?php else:?><i class="glyphicon glyphicon-ok"></i> 通过<?php endif;?>验证</a>
+                        
                       </td>
                     </tr>
                     

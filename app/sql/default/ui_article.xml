@@ -102,7 +102,7 @@
 	<!-- 返回字段:aid,kw,desc,thumb,title,content,date -->
 	<row>
 		SELECT
-		  `sid`,
+		  `sid` as `aid`,
 		  `kw`,
 		  `desc`,
 		  `thumb`,

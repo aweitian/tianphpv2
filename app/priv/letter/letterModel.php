@@ -29,7 +29,10 @@ class letterModel extends privModel{
 		return $api->getLv0Infoes();
 	}
 	
-	
+	public function verify($sid){
+		$api = new letterApi();
+		return $api->verify($sid);
+	}
 	
 	
 	public function row($sid){

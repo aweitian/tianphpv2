@@ -36,4 +36,22 @@ class userView extends AppView {
 				) 
 		) )->setLayout ()->reponse ();
 	}
+	public function letter($model, $info = "") {
+		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
+				dirname ( __FILE__ ) . "/tpl/letter.tpl.php",
+				array (
+						"model" => $model,
+						"info" => $info 
+				) 
+		) )->setLayout ()->reponse ();
+	}
+	public function writeletter($model, $info = "") {
+		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
+				dirname ( __FILE__ ) . "/tpl/write-letter.tpl.php",
+				array (
+						"model" => $model,
+						"info" => $info 
+				) 
+		) )->setLayout ()->reponse ();
+	}
 }

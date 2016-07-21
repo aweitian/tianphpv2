@@ -26,6 +26,22 @@ class letterUIApi {
 	}
 	
 	/**
+	 * 
+	 * @param int $led
+	 * @param int $uid
+	 * 删除感谢信
+	 * @return int 1/0
+	 */
+	public function rm($uid,$led){
+		$sql = $this->sqlManager->getSql("/ui_letter/rm");
+		$bnd = array(
+			"uid" => $uid,
+			"led" => $led
+		);
+		return $this->db->exec($sql, $bnd);
+	}
+	
+	/**
 	 * cnt
 	 * @return int;
 	 */

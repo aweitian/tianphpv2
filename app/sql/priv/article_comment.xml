@@ -20,11 +20,11 @@
 			`comment`=:comment,`uid`=:uid,`datetime`=:datetime
 		 WHERE `sid`=:sid
 	</update_priv>
-	<vertify>
+	<verify>
 		UPDATE `data_article_comment` SET 
-			`vertify` = NOT(`vertify`)
+			`verify` = NOT(`verify`)
 		 WHERE `sid`=:sid
-	</vertify>
+	</verify>
 	<rm>
 		DELETE FROM `data_article_comment` WHERE `sid`=:sid
 	</rm>
@@ -83,7 +83,7 @@
 				`data_user`.`name`,
 				`data_article_comment`.`comment`,
 				`data_article_comment`.`datetime`,
-				`data_article_comment`.`vertify`
+				`data_article_comment`.`verify`
 			FROM `data_article_comment`
 			LEFT JOIN `data_user` ON `data_user`.`sid` = `data_article_comment`.`uid`
 			WHERE `data_article_comment`.`aid`=:aid

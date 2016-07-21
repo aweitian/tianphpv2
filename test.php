@@ -37,14 +37,19 @@
 // $pdo->exec("INSERT `data_user` (`name`) VALUES ('awei')", array());
 // preg_match("/for key '(name|email|phone)'$/",$pdo->getErrorInfo(),$matches);
 // var_dump($matches);
-$some_string = "test\ntext text\r\n";
+// $some_string = "test\ntext text\r\n";
 
-//echo convert_uuencode($some_string);
+// //echo convert_uuencode($some_string);
 
-//var_dump(get_html_translation_table(HTML_ENTITIES, ENT_QUOTES | ENT_HTML5));
-echo htmlspecialchars('<font color=\'red\'>red</font>');
-$text = '<textarea>h\'"aha</textarea>';
+// //var_dump(get_html_translation_table(HTML_ENTITIES, ENT_QUOTES | ENT_HTML5));
+// echo htmlspecialchars('<font color=\'red\'>red</font>');
+// $text = '<textarea>h\'"aha</textarea>';
+function utf8Substr($str, $from, $len) {
+	return preg_replace('#^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$from.'}'.
+			'((?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$len.'}).*#s',
+			'$1',$str);
+}
+$test = "我爱中国国";
+echo preg_match_all('/([\xC0-\xFF][\x80-\xBF]+){2}|([\xC0-\xFF][\x80-\xBF]+)/',$test,$match) ? join("<br>",$match[0]) : "";
+
 ?>
-<textarea><?php print htmlspecialchars($text,ENT_QUOTES)?></textarea>
-<br>
-<input value='<?php print htmlspecialchars($text,ENT_QUOTES)?>'>

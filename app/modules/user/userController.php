@@ -54,6 +54,15 @@ class userController extends appCtrl {
 // 		$this->view->profile($this->model);
 	}
 	
+	public function writeletterAction(pmcaiMsg $msg){
+		$this->view->writeletter($this->model);
+	}
+	public function rmletterAction(pmcaiMsg $msg){
+		$info = AppUser::getInstance()->auth->getInfo();
+		$this->model->rmLetter($info["sid"], $msg["?sid"]);
+		$this->response->redirect(AppUrl::userLetter());
+	}
+	
 	public function profileAction(pmcaiMsg $msg){
 		if($msg->isPost()){
 			$i = AppUser::getInstance()->auth->getInfo();
@@ -88,6 +97,19 @@ class userController extends appCtrl {
 			}
 		}
 		$this->view->avatar($this->model);
+	}
+	public function letterAction(pmcaiMsg $msg){
+		if($msg->isPost()){
+			$i = AppUser::getInstance()->auth->getInfo();
+			$ret = $this->model->letter($i["sid"], $msg["i"]);
+			if($ret->isTrue()){
+				AppUser::getInstance()->auth->saveInfo($ret->return);
+				$this->view->letter($this->model,"修改成功");
+			}else{
+				$this->view->letter($this->model,$ret->info);
+			}
+		}
+		$this->view->letter($this->model);
 	}
 	
 	

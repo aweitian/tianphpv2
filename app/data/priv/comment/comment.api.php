@@ -55,9 +55,9 @@ class commentApi{
 		return new rirResult(0,"ok",$sid);
 	}
 	
-	public function vertify($sid){
-// 		var_dump($this->sqlManager->getSql("/article_comment/vertify"));exit;
-		$sql = $this->sqlManager->getSql("/article_comment/vertify");
+	public function verify($sid){
+// 		var_dump($this->sqlManager->getSql("/article_comment/verify"));exit;
+		$sql = $this->sqlManager->getSql("/article_comment/verify");
 		$bind = array(
 			"sid" => $sid,
 		);

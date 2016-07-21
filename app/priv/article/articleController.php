@@ -542,7 +542,7 @@ class articleController extends privController{
 		if(!isset($msg["?sid"])){
 			$this->response->_404();
 		}
-		$this->model->vertifyComment(intval($msg["?sid"]));
+		$this->model->verifyComment(intval($msg["?sid"]));
 		$this->response->redirect($ret_url);
 	}
 	

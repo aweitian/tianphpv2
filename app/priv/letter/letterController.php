@@ -88,6 +88,18 @@ class letterController extends privController{
 			);
 		}
 	}
+	
+	public function verifyAction(pmcaiMsg $msg){
+		$ret_url = $_SERVER["HTTP_REFERER"];
+		if(!isset($msg["?sid"])){
+			$this->response->_404();
+		}
+		$this->model->verify(intval($msg["?sid"]));
+		$this->response->redirect($ret_url);
+		
+	}
+	
+	
 	public function addAction(pmcaiMsg $msg){
 		if($msg->isPost()){
 			if(!isset($msg["uid"],$msg["dod"],$msg["did"],$msg["content"],$msg["date"])){

@@ -59,6 +59,37 @@ class userModel extends AppModel {
 		return userUIApi::getInstance ()->modProfile ( $uid, $name, $eml, $phone, $sq, $sa );
 	}
 	
+	public function getDocNameByDod($dod){
+		return doctorUIApi::getInstance()->getNameByDod($dod);
+	}
+	
+	/**
+	 * sid,uid,dod,did,verify,content,date
+	 *
+	 * @param int $length
+	 * @param int $offset
+	 * @return array(fetchAll);
+	 */
+	public function getDataByDod($dod, $length, $offset = 0) {
+		return letterUIApi::getInstance ()->getDataByDod ( $dod, $length, $offset );
+	}
+	/**
+	 * sid,uid,dod,did,verify,content,date
+	 *
+	 * @param int $length
+	 * @param int $offset
+	 * @return array(fetchAll);
+	 */
+	public function getDataByUid( $length, $offset = 0) {
+		$info = AppUser::getInstance()->auth->getInfo();
+		return letterUIApi::getInstance ()->getDataByUid ($info["sid"] , $length, $offset );
+	}
+	
+	public function rmLetter($uid,$led){
+		return letterUIApi::getInstance()->rm($uid, $led);
+	}
+	
+	
 	/**
 	 * 返回真表示正常
 	 * 

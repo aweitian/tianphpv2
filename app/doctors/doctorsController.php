@@ -22,6 +22,7 @@ class doctorsControllerNotFound{
 	private $doc;
 	private $allowAct;
 	public function __construct(pmcaiMsg $msg){
+		appCtrl::$msg = $msg;
 		$this->allowAct = array(
 				"welcome" => 1,
 				"article" => 1,

@@ -4,7 +4,7 @@
 	<!-- 参数:aid -->
 	<!-- 返回字段:cnt -->
 	<count>
-		SELECT COUNT(`sid`) AS cnt FROM `data_article_comment` WHERE `aid`=:aid AND `vertify` = 1
+		SELECT COUNT(`sid`) AS cnt FROM `data_article_comment` WHERE `aid`=:aid AND `verify` = 1
 	</count>
 	
 	
@@ -18,7 +18,7 @@
 		`data_article_comment`.`datetime`,
 		`data_article_comment`.`uid`
 		 FROM `data_article_comment` 
-		WHERE `aid`=:aid AND `vertify` = 1
+		WHERE `aid`=:aid AND `verify` = 1
 		ORDER BY `sid` DESC
 		LIMIT :offset,:length
 	</data>

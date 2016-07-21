@@ -239,7 +239,7 @@ class articleUIApi {
 		return $ret;
 	}
 	/**
-	 * aid,kw,desc,thumb,title,date
+	 * aid,kw,desc,thumb,title,content,date
 	 *
 	 * @param int $did        	
 	 * @param int $tid
@@ -427,6 +427,18 @@ class articleUIApi {
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}
+	/**
+	 * 根据文章查找医生，返回一个医生的ID,数据出错的情况下返回0
+	 * 别名(getFirstDod)
+	 * @param int $aid (文章ID)
+	 * @return int
+	 */
+	public function getOwner($aid){
+		return $this->getFirstDod($aid);
+	}
+	
+	
+	
 	/**
 	 * 根据DID获取病种下所有文章
 	 * aid,kw,desc,thumb,title,date

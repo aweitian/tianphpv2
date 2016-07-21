@@ -245,7 +245,8 @@ class diseaseUIApi {
 		if (array_key_exists ( $cache_key, $this->cache )) {
 			return $this->cache [$cache_key];
 		}
-		$ret = array_key_exists ( $did, $this->sidCache ) ? $this->sidCache [$did] : array ();
+		
+		$ret = array_key_exists ( $did,  $this->sidCache) ? $this->sidCache [$did] : array ();
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}

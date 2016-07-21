@@ -20,6 +20,21 @@ class letterApi{
 		return $this->db->fetch($sql, $bnd);
 	}
 	
+	public function verify($sid){
+		$sql = $this->sqlManager->getSql("/letter/verify");
+		$bind = array(
+				"sid" => $sid,
+		);
+		$row = $this->db->exec($sql, $bind);
+		if($row == 0){
+			if($this->db->hasError()){
+				return new rirResult(9,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$row);
+	}
+	
+	
 	/**
 	 *
 	 * @param int $uid

@@ -47,14 +47,14 @@ $pagination = new pagination($cnt, $curPageNum, $pageSize, $pageBtnLen);
                       <td><?php print $item["sid"]?></td>
                       <td><?php print $item["name"]?></td>
                       <td><?php print $item["comment"]?></td>
-                      <td><span class="<?php if( $item["vertify"] == "1" ):?>text-green<?php else:?>text-muted<?php endif;?>"><?php print $item["vertify"] == "1" ? "已" : "未"?>验证</span></td>
+                      <td><span class="<?php if( $item["verify"] == "1" ):?>text-green<?php else:?>text-muted<?php endif;?>"><?php print $item["verify"] == "1" ? "已" : "未"?>验证</span></td>
                       <td><?php print $item["datetime"]?></td>
                       
                       <td>
                       	<!-- <i class="fa fa-edit"></i> -->
                         <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/article/editcomment?sid=<?php print $item["sid"]?>"> 编辑</a>
                         <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/article/rmcomment?sid=<?php print $item["sid"]?>">删除</a>
-                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/article/vercomment?sid=<?php print $item["sid"]?>"><?php if( $item["vertify"] == "1" ):?><i class="glyphicon glyphicon-remove"></i> 取消<?php else:?><i class="glyphicon glyphicon-ok"></i> 通过<?php endif;?>验证</a>
+                        <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/article/vercomment?sid=<?php print $item["sid"]?>"><?php if( $item["verify"] == "1" ):?><i class="glyphicon glyphicon-remove"></i> 取消<?php else:?><i class="glyphicon glyphicon-ok"></i> 通过<?php endif;?>验证</a>
                         
                       </td>
                     </tr>

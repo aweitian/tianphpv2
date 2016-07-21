@@ -19,16 +19,7 @@ $ext = diseaseExtInfoes::getExtData();
       
       <div class="clr">
       	
-        <div class="jb_tit clr">
-        	<h2 class="fl tc fz24"><?php print $row["data"]?><br /><span class="fz12"><?php print isset($ext[$row["data"]]["en"]) ? $ext[$row["data"]]["en"] : ""?></span></h2>
-            <ul class="fr fz16">
-            	<li><a href="<?php print AppUrl::disHomeByDiseasekey($row["key"])?>" class="navdq">疾病首页</a></li><span>|</span>
-                <li><a href="<?php print AppUrl::disKnowledgeByDiseasekey($row["key"])?>">疾病知识</a></li><span>|</span>
-                <li><a href="<?php print AppUrl::disArticleByDiseasekey($row["key"])?>">专家观点</a></li><span>|</span>
-                <li><a href="<?php print AppUrl::disDoctorsByDiseasekey($row["key"])?>">好评医生</a></li><span>|</span>
-                <li><a href="<?php print AppUrl::disAskByDiseasekey($row["key"])?>">患者咨询</a></li>
-            </ul>
-        </div>
+      <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
           
           <div class="fz13">
             
@@ -64,9 +55,7 @@ $ext = diseaseExtInfoes::getExtData();
             </p>
 <?php } ?>
   <?php endforeach;?>  
-<?php if ($xy % 2 != 0) { ?>
-            </p>
-<?php } ?>       
+
                       
                             </div>
                         </div>
@@ -78,17 +67,23 @@ $ext = diseaseExtInfoes::getExtData();
                     	<div class="zjtdwztit fz18"><span></span>相关问答<a href="" class="fr fz13 color9">+更多</a></div>
                         <div class="blank20"></div>
                         <div class="clr jb_box2">
-                        
+                     
                         <?php $data = $model->getQuestionsByDid($row["sid"])?>
                         <!-- sid title date dod -->
+                           <?php $m=1;?>
+                           
                         <?php foreach ($data as $ask):?>
-                        	<div class="jbbox2_sm1 fl">
-                            
-                            
+                  
+                          
+                        	<div class="jbbox2_sm1 fl">                    
                             	<div class="jbbox2_sm1top clr">
-                                	<div class="fl jbbox2_p1 tc fz16 jb_ys1"><?php print $row["data"]?></div>
+                                	<div class="fl jbbox2_p1 tc fz16 jb_ys<?php print $m ?>">
+                                	<?php print preg_match_all('/([\xC0-\xFF][\x80-\xBF]+){2}|([\xC0-\xFF][\x80-\xBF]+)/',$model->getDisnameByDid($row["pid"]),$match) ? join("<br>",$match[0]) : ""?>
+                                	
+                                	
+                                	</div>
                                     <div class="fr">
-                                    	<p><?php print $ask["title"]?> ...<a href="" class="bule"> 详细→</a></p>
+                                    	<p><?php print $ask["title"]?> ...<a href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>" class="bule"> 详细→</a></p>
                                         <p class="fr color9"></p>
                                     </div>
                                 </div>
@@ -96,59 +91,19 @@ $ext = diseaseExtInfoes::getExtData();
                                 <div class="jbbox2_sm1top clr">
                                 	<?php $doc = $model->getDocRowByDod($ask["dod"])?>
                                 	<?php $ans = $model->getAnswerByAskid($ask["sid"])?>
-                                	<img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" class="fl" />
+                                	<img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" width="66" height="66" class="fl" />
                                     <div class="fr">
                                     <!-- sid,id,name,lv,avatar,date,dod,dlv,star,hot,love,contribution,desc,spec -->
-                                    	<span class="jb_ys1col"><?php print $doc["name"]?>，<?php print $doc["lv"]?></span>
+                                    	<span class="jb_ys<?php print $m ?>col"><?php print $doc["name"]?>，<?php print $doc["lv"]?></span>
                                         <p><?php print utility::utf8Substr($ans["content"], 0, 20) ?></p>
                                     </div>
                                 	
                                 </div>
                                 <div class="blank25"></div>
                             </div>
-                   
+                 <?php $m++;?>
                         <?php endforeach;?>  
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                          
-                            
+
                         </div>
                         
                 	</div>
@@ -171,45 +126,58 @@ $ext = diseaseExtInfoes::getExtData();
       
       					<div class="jb_ssall">
       					  <?php $y=1;?>
-      				       <?php foreach ($all as $al):?>
-      					<?php $tid= ($model->getTagId("$al")) ?>
+      			<?php foreach ($all as $al):?>
+      			<?php $tid= ($model->getTagId("$al")) ?>
+      			<?php $data = $model->knowledge($row["sid"], $tid, 25, 0, 7)?>
+      			<?php $thumb = array_shift($data)?>
                         <div class="jb_ssbox <?php if($y==1){?>selected<?php } ?>">
+                        
+                        	<?php if(!is_null($thumb)):?>
                             <div class="clr jb_ssbox_sm1">
                             
                           
-                         
-                            	<img src="////" class="fl" />
+                         		<?php if($thumb["thumb"]):?>
+                            	<img src="<?php print $thumb["thumb"]?>" class="fl" />
+                            	<?php else:?>
+                            	<img width="105" height="106" src="<?php print HTTP_ENTRY?>/static/images/default.png" class="fl" />
+                            	<?php endif?>
                                 <div class="fr">
-                                	<span class="fz16 color3"><a href="/">111</a></span>
-                                    <p class="fz13 color6">111...<a href="" class="bule">[详细]</a></p>
+                                	<span class="fz16 color3"><a href="/"><?php print $thumb["title"]?></a></span>
+                                    <p class="fz13 color6"><?php print $thumb["content"]?>...<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>" class="bule">[详细]</a></p>
                                 </div>
            
                                 
-
-                                
                                 <div class="blank20"></div>
                             </div>
+                            <?php endif;?>
                             <div class="blank15"></div>
                             <div class="jb_ssbox_sm2 clr">
                         	<ul class="fl">
-                        	
-     <?php foreach ($model->knowledge($row["sid"],$tid,10,0,6) as $wz):?>
+                        		<?php foreach ($data as $art):?>
+
      
-                            	<li><a href="<?php print AppUrl::articleByAid($wz["sid"]) ?>"><?php print utility::utf8substr($wz["title"],0,20);?></a></li>
-     <?php endforeach; ?>
+                            	<li><a href="<?php print AppUrl::articleByAid($art["aid"]) ?>"><?php print utility::utf8substr($art["title"],0,20);?></a></li>
+ 	
+ 	
+ 	
+ 								<?php endforeach;?>
                             </ul>
                         </div>             
                         </div>
                        <?php $y++;?>
-                        <?php endforeach; ?>
+                       
                       
-                      
+             	<?php endforeach; ?>
                       
                       
                       </div>
                         
                 	</div>
                     
+                     
+                     
+                     
+                     
                     <div class="blank20"></div>
                     
                     <div class="padd20 border2 clr">
@@ -263,7 +231,7 @@ $ext = diseaseExtInfoes::getExtData();
                
     			<!--left end-->
                 
-            <?php include dirname(__FILE__)."/right.tpl.php";?>
+            <?php include dirname(__FILE__)."/common/right.tpl.php";?>
                 
                 <!--right end-->
              </div>

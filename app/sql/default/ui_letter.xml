@@ -8,7 +8,14 @@
 		SELECT COUNT(`sid`) AS `cnt` FROM `data_letter`
 	</cnt>
 
-
+	<rm>
+		DELETE
+			FROM `data_letter`
+			WHERE 
+			`sid` = :led
+			AND `uid` = :uid
+			AND `verify` = 0
+	</rm>
 
 	<!-- 获取所有的感谢信,排序按ID倒序 -->
 	<!-- 参数:offset,length -->

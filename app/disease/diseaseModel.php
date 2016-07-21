@@ -87,7 +87,7 @@ class diseaseControllerNotFoundModel extends AppModel {
 	 */
 	
 	public function getAll($did, $length, $offset = 0){
-		return articleUIApi::getInstance()->getAll($did, $length, $offset = 0);
+		return articleUIApi::getInstance()->getAll($did, $length, $offset);
 	}
 	
 	/**
@@ -130,4 +130,22 @@ class diseaseControllerNotFoundModel extends AppModel {
 	public function getAnswerByAskid($askid){
 		return askUIApi::getInstance()->getAnswerByAskid($askid);
 	}
+	
+	public function getOwner($aid){
+			return articleUIApi::getInstance()->getFirstDod($aid);
+	}
+	public function getInfoByDod($dod){
+		return doctorUIApi::getInstance()->getInfoByDod($dod);
+	}
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function getAllCnt($did){
+		return doctorUIApi::getInstance()->getAllCnt($did);
+	}
+	public function getDoctors($length=4,$offset=0){
+		return doctorUIApi::getInstance()->getInfoes($length,$offset);
+	}
+	
 }

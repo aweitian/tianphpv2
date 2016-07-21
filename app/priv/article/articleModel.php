@@ -181,9 +181,9 @@ class articleModel extends privModel{
 		return $api->add($aid, $uid, $comment);
 	}
 	
-	public function vertifyComment($sid){
+	public function verifyComment($sid){
 		$api = new commentApi();
-		return $api->vertify($sid);
+		return $api->verify($sid);
 	}
 	
 	/**

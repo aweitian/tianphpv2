@@ -58,6 +58,27 @@ class AppUrl {
 	public static function userProfile(){
 		return AppUrl::build("/user");
 	}	
+	public static function userLetter(){
+		return AppUrl::build("/user/letter");
+	}
+	public static function userWriteLetter(){
+		return AppUrl::build("/user/writeletter");
+	}
+	public static function userRemoveLetter(){
+		return AppUrl::build("/user/rmletter");
+	}
+	
+	public static function userAppraise(){
+		return AppUrl::build("/user/appraise");
+	}
+	public static function userQuestions(){
+		return AppUrl::build("/user/questions");
+	}
+	public static function userPresents(){
+		return AppUrl::build("/user/presents");
+	}
+	
+	
 #医生评价
 	/**
 	 * @return string

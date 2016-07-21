@@ -61,7 +61,7 @@ $url = new url($req->requestUri());
                     	<div class="zjtdwztit fz18"><span></span>诊后服务星<a href="" class="fr fz13 color9">+更多</a></div>
                         <div class="fromjbzj clearfix">
                           <ul class="ulbot clearfix">
-                           	<?php foreach($m->getTopStar(3) as $doc):?>
+                           	<?php foreach($model->getTopStar(3) as $doc):?>
                             <li>
                               <dl class="clearfix">
                                 <dt class="fl"><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
