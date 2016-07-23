@@ -4,6 +4,10 @@
  * @author awei.tian
  * @date   2016-6-27
  */
+require_once FILE_SYSTEM_ENTRY . "/modules/oplog/IOp.php";
+require_once FILE_SYSTEM_ENTRY . "/modules/oplog/oplog.php";
+require_once FILE_SYSTEM_ENTRY . "/modules/captcha/captcha.php";
+require_once FILE_SYSTEM_ENTRY . "/app/data/_meta/avatarMeta.php";
 class letterUIApi {
 	private static $inst = null;
 	private $sqlManager;
@@ -24,6 +28,57 @@ class letterUIApi {
 		}
 		return letterUIApi::$inst;
 	}
+	
+	
+	
+	/**
+	 *
+	 * @param int $uid
+	 * @param int $dod
+	 * @param string $content
+	 * @return rirResult
+	 */
+	public function add($uid, $dod, $content) {
+		$op_type = "user_submit";
+		$op_id = $uid;
+		$oplog = new oplog ();
+		$try_cnt = $oplog->getCnt ( $op_type, $op_id );
+		if (USER_SUBMIT_TRY_MAX - $try_cnt <= 0) {
+			return new rirResult ( 1, "今天向网站提交的数据过多" );
+		}
+		$opsid = $oplog->add ( $op_type, $op_id );
+		$oplog->update ( $opsid );
+	
+		if(utility::utf8Strlen($content) > 2048){
+			return new rirResult ( 2, "内容过长" );
+		}
+		$sql = $this->sqlManager->getSql("/ui_letter/add");
+		$bnd = array(
+			"uid" => $uid,	
+			"dod" => $dod,	
+			"content" => $content,	
+		);
+		// var_dump($sql,$bnd);exit;
+		$row = $this->db->insert ( $sql, $bnd );
+		if ($row > 0) {
+			return new rirResult ( 0, "提交成功，审核通过后会出现在页面上" );
+		}
+		return new rirResult ( 0, $this->db->getErrorInfo() );
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 

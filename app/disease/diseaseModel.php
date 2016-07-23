@@ -118,6 +118,9 @@ class diseaseControllerNotFoundModel extends AppModel {
 		return askUIApi::getInstance()->getQuestionsByDid($did,$length,$offset);
 	}
 	
+	public function getQuestionsByDidCnt($did){
+		return askUIApi::getInstance()->getQuestionsByDidCnt($did);
+	}
 	public function getDisnameByDid($did){
 		return diseaseUIApi::getInstance()->getNameByDid($did);
 	}
@@ -148,4 +151,13 @@ class diseaseControllerNotFoundModel extends AppModel {
 		return doctorUIApi::getInstance()->getInfoes($length,$offset);
 	}
 	
+	public function getLv1InfoesByDid($did){
+		return diseaseUIApi::getInstance()->getLv1InfoesByDid($did);
+	}
+	
+	public function row($uid){
+		return userUIApi::getInstance()->row($uid);
+	}
+	
+
 }

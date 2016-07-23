@@ -27,6 +27,51 @@ class articleUIApi {
 	}
 	
 	/**
+	 * 根据医生ID获取文章
+	 * 
+	 * @param int $dod
+	 * @return array(aid1,aid2,....)
+	 */
+	public function allByDod($dod,$length,$offset=0){
+		$cache_key = "allByDod-" . $dod ."-".$length."-".$offset;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_article/allByDod" );
+		$data = $this->db->fetchAll ( $sql, array (
+				"dod" => $dod,
+				"length" => $length,
+				"offset" => $offset,
+		) );
+		$ret = array();
+		foreach($data as $item){
+			$ret[] = $item["aid"];
+		}
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * 根据医生ID获取文章的个数
+	 * 
+	 * @param int $dod
+	 * @return int
+	 */
+	public function allByDodCnt($dod){
+		$cache_key = "allByDodCnt-" . $dod;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_article/allByDodCnt" );
+		$data = $this->db->fetch ( $sql, array (
+				"dod" => $dod,
+		) );
+		$ret = $data["cnt"];
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	
+	
+	/**
 	 * 根据文章查找医生，返回一个医生的ID,数据出错的情况下返回0
 	 *
 	 * @param int $aid        	

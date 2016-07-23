@@ -5,7 +5,7 @@
  * Desc:
  * 		
  */
-require FILE_SYSTEM_ENTRY."/app/data/_meta/appraiseLvMeta.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/_meta/appraiseLvMeta.php";
 require_once dirname(__FILE__)."/appraiseValidator.php";
 class appraiseApi{
 	private $sqlManager;

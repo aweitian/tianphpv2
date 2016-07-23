@@ -88,6 +88,19 @@ class userModel extends AppModel {
 	public function rmLetter($uid,$led){
 		return letterUIApi::getInstance()->rm($uid, $led);
 	}
+	public function getAllDoc(){
+		return doctorUIApi::getInstance()->getAll();
+	}
+	/**
+	 * 
+	 * @param int $dod
+	 * @param string $content
+	 * @return rirResult
+	 */
+	public function writeLetter($dod,$content){
+		$info = AppUser::getInstance()->auth->getInfo();
+		return letterUIApi::getInstance()->add($info["sid"] , $dod, $content);
+	}
 	
 	
 	/**

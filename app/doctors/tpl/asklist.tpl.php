@@ -14,12 +14,7 @@
       
       <div class="zjtd">
       
-        <ul class="zjtdtit fz16 clearfix">
-          <li><a href="">医师首页</a></li>
-          <li class="selected"><a href="">患者服务区</a></li>
-          <li><a href="">文章</a></li>
-          <li><a href="">心意礼物</a></li>
-        </ul>
+      <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
           
           <div class="tabcon selected fz13">
             

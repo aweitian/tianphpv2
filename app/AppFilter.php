@@ -6,7 +6,12 @@
  * 依赖:
  */
 class AppFilter {
-	public static function filter($html){
+	/**
+	 * 用户数据输出时过滤
+	 * @param string $html
+	 * @return string
+	 */
+	public static function filterOut($html){
 		return htmlspecialchars($html,ENT_QUOTES);
 	}
 }

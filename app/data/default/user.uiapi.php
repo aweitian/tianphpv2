@@ -245,6 +245,16 @@ class userUIApi implements IOp {
 		return new rirResult ( 2, "密码问题和答案不匹配 或者 您新输入的密码与原来的密码一至" );
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 *
 	 * @param int $uid        	

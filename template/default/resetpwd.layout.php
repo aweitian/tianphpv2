@@ -47,9 +47,9 @@
           </div>
           <div class="rtpcon regway<?php if(isset($_REQUEST["s"]) && $_REQUEST["s"] == "1"):?> selected<?php else:?><?php endif?>">
             <form action="<?php print AppUrl::userResetPwd()?>?s=2" method="post" onsubmit="return chk(this)">
-              <input name="n" value='<?php print isset($_REQUEST["n"]) ? AppFilter::filter($_REQUEST["n"]) : ""?>' type="hidden" />
-              <input name="q" value='<?php print isset($_REQUEST["q"]) ? AppFilter::filter($_REQUEST["q"]) : ""?>' type="hidden" />
-              <input name="a" value='<?php print isset($_REQUEST["a"]) ? AppFilter::filter($_REQUEST["a"]) : ""?>' type="hidden" />
+              <input name="n" value='<?php print isset($_REQUEST["n"]) ? AppFilter::filterOut($_REQUEST["n"]) : ""?>' type="hidden" />
+              <input name="q" value='<?php print isset($_REQUEST["q"]) ? AppFilter::filterOut($_REQUEST["q"]) : ""?>' type="hidden" />
+              <input name="a" value='<?php print isset($_REQUEST["a"]) ? AppFilter::filterOut($_REQUEST["a"]) : ""?>' type="hidden" />
               <input class="reginp1 gray border2" name="p" placeholder='填写新密码' type="text" />
               <div class="blank20"></div>
               <input class="reginp1 gray border2" name="pp" placeholder='确认新密码' />

@@ -339,4 +339,24 @@
 		</mainCnt>
 	</ArticleTag7>
 	
+	<allByDod>
+	
+		SELECT
+			  `aid`,
+			  `dod`
+			FROM `data_article_doc`
+			WHERE `dod` = :dod
+			ORDER BY `aid` DESC
+			LIMIT :offset,:length
+	</allByDod>
+	<allByDodCnt>
+	
+		SELECT
+			  count(`aid`) as `cnt`
+			FROM `data_article_doc`
+			WHERE `dod` = :dod
+	</allByDodCnt>
+	
+	
+	
 </ui_article>

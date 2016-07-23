@@ -8,6 +8,10 @@
 			ORDER BY `sid` DESC
 			LIMIT :offset,:length
 	</data>
+	<dataCnt>
+		SELECT count(`sid`) as `cnt` 
+			FROM `data_appraise`
+	</dataCnt>
 
 	<!-- 获取所有对医生的评价,排序按ID倒序 -->
 	<!-- 参数:dod,length -->
@@ -17,6 +21,11 @@
 		WHERE `dod` = :dod
 		LIMIT :offset,:length
 	</rows_dod>
+	<rows_dodCnt>
+		SELECT count(`sid`) as `cnt` 
+		FROM `data_appraise`
+		WHERE `dod` = :dod
+	</rows_dodCnt>
 	
 	<!-- 获取所有对医生的评价,排序按ID倒序 -->
 	<!-- 参数:uid,length -->
@@ -26,4 +35,9 @@
 		WHERE `uid` = :uid
 		LIMIT :offset,:length
 	</rows_uid>
+	<rows_uidCnt>
+		SELECT count(`sid`) as `cnt` 
+		FROM `data_appraise`
+		WHERE `uid` = :uid
+	</rows_uidCnt>
 </ui_appraise>

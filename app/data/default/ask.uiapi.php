@@ -36,12 +36,20 @@ class askUIApi {
 		}
 		
 		$sql = $this->sqlManager->getSql("/ui_ask/getAskByDidCnt");
-		$ret = $this->db->fetchAll($sql, array(
+		$ret = $this->db->fetch($sql, array(
 			"did" => $did,
 		));
 		$ret = $ret["cnt"];
 		$this->cache[$cache_key] = $ret;
 		return $ret;
+	}
+	/**
+	 * 根据病种Id获取问题个数
+	 * @param int $did
+	 * @return int
+	 */
+	public function getQuestionsByDidCnt($did){
+		return $this->getQuestionsCountByDid($did);
 	}
 	/**
 	 * 按病种ID倒序排列

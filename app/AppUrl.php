@@ -71,11 +71,29 @@ class AppUrl {
 	public static function userAppraise(){
 		return AppUrl::build("/user/appraise");
 	}
+	public static function userAddAppraise(){
+		return AppUrl::build("/user/addappraise");
+	}
+	public static function userRmAppraise(){
+		return AppUrl::build("/user/rmappraise");
+	}
 	public static function userQuestions(){
 		return AppUrl::build("/user/questions");
 	}
+	public static function userAddQuestions(){
+		return AppUrl::build("/user/addquestions");
+	}
+	public static function userRmQuestions(){
+		return AppUrl::build("/user/rmquestions");
+	}
 	public static function userPresents(){
 		return AppUrl::build("/user/presents");
+	}
+	public static function userAddPresents(){
+		return AppUrl::build("/user/addpresents");
+	}
+	public static function userRmPresents(){
+		return AppUrl::build("/user/rmpresents");
 	}
 	
 	

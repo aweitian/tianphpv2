@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui_letter>
+	<add>
+		INSERT INTO `data_letter`
+		(
+             `uid`,
+             `dod`,
+             `content`
+	    ) VALUES (
+	        :uid,
+	        :dod,
+	        :content
+		)
+	</add>
+
 
 	<!-- 获取感谢信的总数 -->
 	<!-- 参数:无 -->

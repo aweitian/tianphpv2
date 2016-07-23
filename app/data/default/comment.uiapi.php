@@ -9,8 +9,6 @@ class commentUIApi {
 	private $sqlManager;
 	private $db;
 	private $cache = array();
-	
-	private $waterArmCache = array();
 	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_comment.xml");

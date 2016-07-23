@@ -20,6 +20,17 @@ defTplData::getInstance()->title = $m->data["name"] . " - 医师首页";
  */
 // var_dump($m->data);exit;
 
+$pageSize = 8;
+if(isset($_REQUEST["page"])){
+	$page = intval($_REQUEST["page"]);
+} else{
+	$page = 1;
+}
+$pagination = new pagination($m->getDataByDodCnt($m->data["sid"]), $page, $pageSize, 6);
+$req = new httpRequest();
+$url = new url($req->requestUri());
+
+
 ?>
 
   <div class="blank15"></div>
@@ -31,12 +42,7 @@ defTplData::getInstance()->title = $m->data["name"] . " - 医师首页";
       
       <div class="zjtd">
       
-        <ul class="zjtdtit fz16 clearfix">
-          <li class="selected"><a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>">医师首页</a></li>
-          <li><a href="<?php print AppUrl::docAskHomeByDocid($m->data["id"])?>">患者服务区</a></li>
-          <li><a href="<?php print AppUrl::docArticleHomeByDocid($m->data["id"])?>">文章</a></li>
-          <li><a href="<?php print AppUrl::docPresentHomeByDocid($m->data["id"])?>">心意礼物</a></li>
-        </ul>
+    <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
         
           <div class="tabcon selected fz13">
               <div class="blank20"></div>
@@ -45,14 +51,14 @@ defTplData::getInstance()->title = $m->data["name"] . " - 医师首页";
                   <div class="zjtdcon1box1_sm1 fl">
                   	
                    	 <a href=""><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $m->data["avatar"]?>" class="fl" width="165" height="175" /></a>
-                     
+                 
                      <div class="fr">
                           <h4 class="fz24 tc"><?php print $m->data["name"]?>大夫的个人网站</h4>
                           <div class="blank20"></div>
                           <p><b class="fz18"><?php print $m->data["name"]?>  <?php print $m->data["lv"]?> </b></p>
                           <div class="blank10"></div>
-                          <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img2.png" class="fl" />所属科室：上海九龙男子医院生殖整形专科</p>
-                          <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />擅长项目：<?php print $m->data["spec"]?><a href=""> [点击咨询]</a></p>
+                          <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img2.png" class="fl" />所属医院：上海九龙男子医院</p>
+                          <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />擅长项目：<?php print $m->data["spec"]?><a href="<?php print AppUrl::getSwtUrl()?>"> [点击咨询]</a></p>
                      </div>
                   </div>
                   
@@ -122,45 +128,30 @@ defTplData::getInstance()->title = $m->data["name"] . " - 医师首页";
                    </div>
                    
                    <div class="blank20"></div>
-                   
+
                   <div class="norques border2">
-                    <div class="zjtdwztit fz18"><span></span>陈希球文章列表</div>
+                    <div class="zjtdwztit fz18"><span></span><?php print $m->data["name"]?>文章列表</div>
                     <p class="blank20"></p>
                     
                     <div class="zjtd_box3">
                     	
+                  <?php foreach($m->allByDod($m->data["sid"],4,0) as $aitem):?>           
+                 <?php $a= $m->rowNoContent($aitem)?> 
+ 
                         <dl class="clr">
                         	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                         <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                         <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                         <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                         <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
+                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" />
+                        		<a href="<?php print AppUrl::articleByAid($a["sid"])?>">
+                        		<?php print ($a["title"])?>
+                        		</a>
+                        		</dt>
+                            <dd class="fr"> 发表于<?php print ($a["date"])?></dd>
                             <p class="blank20"></p>
                         </dl>
                         
-                        <div class="tc"><div class="blank20"></div><a href="" class="blue">查看全部文章(共574篇)</a></div>
+                            <?php endforeach;?>  
+                        
+                        <div class="tc"><div class="blank20"></div><a href="<?php print AppUrl::docArticleHomeByDocid($m->data["id"])?>" class="blue">查看全部文章</a></div>
                         
                     </div>
                     
@@ -172,93 +163,44 @@ defTplData::getInstance()->title = $m->data["name"] . " - 医师首页";
                   <div class="norques border2">
                     <div class="zjtdwztit fz18"><span></span>患者评价</div>
 
-                    	
-                    <div class="zjtd_box4 clr">
-                      <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img5.png" class="fl" />
-                      <div class="zjtd_box4_sm1 fr">
-                          <dl>
-                              <dt class="color9">
-                                  <p class="fl" style=" width:250px;">疾病： <span class="color3">前列腺炎</span></p>
-                                  <p class="fl" style=" width:250px;">满意度： <span class="yellow">很满意</span></p>
-                              </dt>
-                              <dd class=" fz15">谢谢医生，很有耐心，解答很及时，让我低落的心情好了很多，真的很感谢！</dd>
-                              <dd class="color9">2016-04-05 19:00:19  来源： 前列腺炎</dd>
-                          </dl>
-                      </div>
-                  </div>
                     
-                    <div class="zjtd_box4 clr">
-                      <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img5.png" class="fl" />
-                      <div class="zjtd_box4_sm1 fr">
-                          <dl>
-                              <dt class="color9">
-                                  <p class="fl" style=" width:250px;">疾病： <span class="color3">前列腺炎</span></p>
-                                  <p class="fl" style=" width:250px;">满意度： <span class="yellow">很满意</span></p>
-                              </dt>
-                              <dd class=" fz15">谢谢医生，很有耐心，解答很及时，让我低落的心情好了很多，真的很感谢！</dd>
-                              <dd class="color9">2016-04-05 19:00:19  来源： 前列腺炎</dd>
-                          </dl>
-                      </div>
-                  </div>
-                  
-                  	<div class="zjtd_box4 clr">
-                      <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img5.png" class="fl" />
-                      <div class="zjtd_box4_sm1 fr">
-                          <dl>
-                              <dt class="color9">
-                                  <p class="fl" style=" width:250px;">疾病： <span class="color3">前列腺炎</span></p>
-                                  <p class="fl" style=" width:250px;">满意度： <span class="yellow">很满意</span></p>
-                              </dt>
-                              <dd class=" fz15">谢谢医生，很有耐心，解答很及时，让我低落的心情好了很多，真的很感谢！</dd>
-                              <dd class="color9">2016-04-05 19:00:19  来源： 前列腺炎</dd>
-                          </dl>
-                      </div>
-                  </div>
-                     
-                    <div class="zjtd_box4 clr">
-                      <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img5.png" class="fl" />
-                      <div class="zjtd_box4_sm1 fr">
-                          <dl>
-                              <dt class="color9">
-                                  <p class="fl" style=" width:250px;">疾病： <span class="color3">前列腺炎</span></p>
-                                  <p class="fl" style=" width:250px;">满意度： <span class="yellow">很满意</span></p>
-                              </dt>
-                              <dd class=" fz15">谢谢医生，很有耐心，解答很及时，让我低落的心情好了很多，真的很感谢！</dd>
-                              <dd class="color9">2016-04-05 19:00:19  来源： 前列腺炎</dd>
-                          </dl>
-                      </div>
-                  </div>
                     
+                    
+                      <?php foreach($m->getDataByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $dodpj):?> 
+                      <?php $a=appraiseLvMeta::getMeta() ?>
+                      <?php $b= $m->getNameByDid($dodpj["did"])?> 
+					<?php  $c=$m->rowuser($m->data["sid"])?>
+
+
                     <div class="zjtd_box4 clr">
-                      <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img5.png" class="fl" />
+                      <img src="<?php print HTTP_ENTRY?>/static/avatar/<?php print ($c["avatar"]) ?>"  width="60" height="60" class="fl" />
                       <div class="zjtd_box4_sm1 fr">
                           <dl>
                               <dt class="color9">
-                                  <p class="fl" style=" width:250px;">疾病： <span class="color3">前列腺炎</span></p>
-                                  <p class="fl" style=" width:250px;">满意度： <span class="yellow">很满意</span></p>
+                                  <p class="fl" style=" width:250px;">疾病： <span class="color3"> <?php print ($b)  ?></span></p>
+                                  <p class="fl" style=" width:250px;">满意度： <span class="yellow"> <?php print ($a[$dodpj["lv"]]) ?></span></p>
                               </dt>
-                              <dd class=" fz15">谢谢医生，很有耐心，解答很及时，让我低落的心情好了很多，真的很感谢！</dd>
-                              <dd class="color9">2016-04-05 19:00:19  来源： 前列腺炎</dd>
+                              <dd class=" fz15">
+                              <?php print AppFilter::filterOut(utility::utf8substr($dodpj["txt"],0,40)); ?>
+                              </dd>
+                              <dd class="color9"><?php print ($dodpj["date"]) ?>  来源： <?php print ($b)  ?></dd>
                           </dl>
                       </div>
                   </div>
-                  
-                  	<div class="zjtd_box4 clr">
-                      <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img5.png" class="fl" />
-                      <div class="zjtd_box4_sm1 fr">
-                          <dl>
-                              <dt class="color9">
-                                  <p class="fl" style=" width:250px;">疾病： <span class="color3">前列腺炎</span></p>
-                                  <p class="fl" style=" width:250px;">满意度： <span class="yellow">很满意</span></p>
-                              </dt>
-                              <dd class=" fz15">谢谢医生，很有耐心，解答很及时，让我低落的心情好了很多，真的很感谢！</dd>
-                              <dd class="color9">2016-04-05 19:00:19  来源： 前列腺炎</dd>
-                          </dl>
-                      </div>
-                  </div>
-                     
+                     <?php endforeach;?>   
+
                     <div class="blank20"></div>  
-                    <div class="pagenum tc gray fz13"> <a><</a> <a>1</a> <a>2</a> <a>3</a> <a>4</a> <a>5</a> <a>...</a> <a>52</a> <a>></a> </div>
+                    <div class="pagenum tc gray fz13"> 
+               <?php if ($pagination->hasPre()):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($pagination->hasNext()):?>
+            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?>
+                    </div>
                      
                   </div>
                   <div class="blank20"></div>

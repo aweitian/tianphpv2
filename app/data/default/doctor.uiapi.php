@@ -151,6 +151,14 @@ class doctorUIApi {
 		return count($this->docache);
 	}
 	
+	/**
+	 * sid,id,name,lv,avatar,date,dod,dlv,star,hot,love,contribution,desc,spec
+	 * @return array
+	 */
+	public function getAll(){
+		return $this->docache;
+	}
+	
 	private function initCache(){
 		$data = $this->db->fetchAll(
 				$this->sqlManager->getSql("/ui_doctor/all"), array());

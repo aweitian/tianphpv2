@@ -91,11 +91,20 @@ $ext = diseaseExtInfoes::getExtData();
                                 <div class="jbbox2_sm1top clr">
                                 	<?php $doc = $model->getDocRowByDod($ask["dod"])?>
                                 	<?php $ans = $model->getAnswerByAskid($ask["sid"])?>
+                                
+                                	
                                 	<img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" width="66" height="66" class="fl" />
                                     <div class="fr">
                                     <!-- sid,id,name,lv,avatar,date,dod,dlv,star,hot,love,contribution,desc,spec -->
                                     	<span class="jb_ys<?php print $m ?>col"><?php print $doc["name"]?>，<?php print $doc["lv"]?></span>
-                                        <p><?php print utility::utf8Substr($ans["content"], 0, 20) ?></p>
+                                        <p>
+                                        
+                                             <?php if (!empty($ans["content"]))  :?>
+                             
+                              	<?php print utility::utf8Substr($ans["content"], 0, 40) ?>
+                             <?php endif; ?>
+                                        
+                                        </p>
                                     </div>
                                 	
                                 </div>

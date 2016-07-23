@@ -25,7 +25,7 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 		<?php $userinfo = AppUser::getInstance()->auth->getInfo()?>
 			<span>中午好！</span> , 
 			<a href="<?php print AppUrl::userHome()?>" class="yellow">
-			<b><?php print AppFilter::filter($userinfo["name"]) ?></b>
+			<b><?php print AppFilter::filterOut($userinfo["name"]) ?></b>
 			</a>
 			&nbsp;
 			<a href="<?php print AppUrl::userLogout()?>">退出</a>	

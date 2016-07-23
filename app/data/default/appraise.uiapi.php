@@ -4,7 +4,7 @@
  * @author awei.tian
  * @date   2016-6-27
  */
-require FILE_SYSTEM_ENTRY . "/app/data/_meta/appraiseLvMeta.php";
+require_once FILE_SYSTEM_ENTRY . "/app/data/_meta/appraiseLvMeta.php";
 class appraiseUIApi {
 	private static $inst = null;
 	private $sqlManager;
@@ -47,6 +47,23 @@ class appraiseUIApi {
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}
+	/**
+	 * 获取全部评价的个数
+	 * @return int
+	 */
+	public function getDataCnt() {
+		$cache_key = "getDataCnt";
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_appraise/dataCnt" );
+		$data = $this->db->fetch ( $sql, array (
+
+		) );
+		$ret = $data["cnt"];
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
 	
 	/**
 	 * 根据DOD获取 患者评价
@@ -71,6 +88,24 @@ class appraiseUIApi {
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}
+	/**
+	 * 根据DOD获取 患者评价个数
+	 * @param int $dod
+	 * @return int
+	 */
+	public function getDataByDodCnt($dod) {
+		$cache_key = "getDataByDodCnt-" . $dod;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_appraise/rows_dodCnt" );
+		$data = $this->db->fetch ( $sql, array (
+				"dod" => $dod,
+		) );
+		$ret = $data["cnt"];
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
 	
 	/**
 	 * 根据UID获取 患者评价
@@ -92,6 +127,24 @@ class appraiseUIApi {
 				"offset" => $offset,
 				"length" => $length 
 		) );
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * 根据UID获取 患者评价个数
+	 * @param int $uid
+	 * @return int
+	 */
+	public function getDataByUidCnt($uid) {
+		$cache_key = "getDataByUid-" . $uid;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_appraise/rows_uidCnt" );
+		$data = $this->db->fetch ( $sql, array (
+				"uid" => $uid,
+		) );
+		$ret = $data["cnt"];
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}
