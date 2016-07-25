@@ -44,12 +44,14 @@
 // //var_dump(get_html_translation_table(HTML_ENTITIES, ENT_QUOTES | ENT_HTML5));
 // echo htmlspecialchars('<font color=\'red\'>red</font>');
 // $text = '<textarea>h\'"aha</textarea>';
-function utf8Substr($str, $from, $len) {
-	return preg_replace('#^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$from.'}'.
-			'((?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$len.'}).*#s',
-			'$1',$str);
-}
-$test = "我爱中国国";
-echo preg_match_all('/([\xC0-\xFF][\x80-\xBF]+){2}|([\xC0-\xFF][\x80-\xBF]+)/',$test,$match) ? join("<br>",$match[0]) : "";
-
+// function utf8Substr($str, $from, $len) {
+// 	return preg_replace('#^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$from.'}'.
+// 			'((?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$len.'}).*#s',
+// 			'$1',$str);
+// }
+// $test = "我爱中国国";
+// echo preg_match_all('/([\xC0-\xFF][\x80-\xBF]+){2}|([\xC0-\xFF][\x80-\xBF]+)/',$test,$match) ? join("<br>",$match[0]) : "";
+$ret = range(1,9);
+shuffle($ret);
+var_dump(array_slice($ret,0,$length)) ;
 ?>

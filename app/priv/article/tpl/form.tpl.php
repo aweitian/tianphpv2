@@ -88,7 +88,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     </div>
 
                     
-                    
+                    <!-- 
                      <div class="form-group">
                       <?php 
                       $hash_doc_rel = array();
@@ -108,7 +108,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                         
                         
                     </div>
-                    
+                     
                      <div class="form-group">
                       
          				
@@ -158,9 +158,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       	
                       	
                       	</fieldset>
-<!--                         <select multiple class="form-control" name="diid[]"> -->
-                       
-<!--                         </select>  -->
+                      
                       
                     </div>
                     
@@ -238,6 +236,10 @@ if(isset($_SERVER['HTTP_REFERER'])){
 	                      <?php endforeach;?>  
 
                     </div>
+                    
+                    	-->
+                    
+                    
 					<div class="form-group">
                     <button type="submit" class="btn btn-primary">提交</button>
                   </div>

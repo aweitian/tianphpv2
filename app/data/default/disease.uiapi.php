@@ -50,6 +50,16 @@ class diseaseUIApi {
 	}
 	
 	/**
+	 * 随机的获取几个二级病种ID
+	 */
+	public function getRandomDid($length){
+		$ret = $this->sidCache;
+		shuffle($ret);
+		return array_slice($ret,0,$length);
+	}
+	
+	
+	/**
 	 * 根据二级病种ID获取一级病种ID
 	 * 不存在返回0
 	 *
