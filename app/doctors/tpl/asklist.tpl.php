@@ -21,14 +21,14 @@
             <div class="blank20"></div>
                 
            <div class="border2 padd20 clr zjtd_hzfwtw">
-           		<img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img17.jpg" class="fl" style="border:1px solid #fff;" />
+           		<img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $m->data["avatar"]?>" width="210" height="160" class="fl" style="border:1px solid #fff;" />
                 <div class="fr">
                 	<div class="zjtd_page_set clr">
-                    	<input type="text" class="zjtd_pageset_inp1 border2 fl color9 fz16" placeholder="在此简单描述病情，向刘迎龙大夫提问" />
+                    	<input type="text" class="zjtd_pageset_inp1 border2 fl color9 fz16" placeholder="在此简单描述病情，向<?php print $m->data["name"]?>大夫提问" />
                         <input type="button" class="zjtd_pageset_inp2 fr" style="background:#76c000;" value="个人网站站内搜索" />
                     </div>
                     <div class="blank20"></div>
-                    <p class="color3 clr"><b>陈希球的咨询范围：</b>男性生殖手术，如：精索静脉曲张、阴茎延长、阴茎弯曲矫正、阴茎增粗、成人尿道下裂、隐睾、附睾切除等。</p>
+                    <p class="color3 clr"><b><?php print $m->data["name"]?>的咨询范围：</b><?php print $m->data["spec"]?></p>
                     <div class="blank20"></div>
                 </div>
                 
@@ -43,8 +43,11 @@
       
       <div class="blank20"></div>
       	
+        <?php foreach ($m->getQuestionsByDod($m->data["sid"],4,0) as $ask): ?>
         
+        <?php var_dump($ask) ?>
         
+        <?php endforeach; ?>   
      <!--服务区 start-->
     <div class="padd20  border2 clr">
       <div class="zjtdwztit fz18 clr"><span class="fl"></span><h5 class="fl fz18">服务区</h5>

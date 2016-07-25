@@ -1,5 +1,15 @@
 <?php
+$pageSize = 10;
+if(isset($_REQUEST["page"])){
+	$page = intval($_REQUEST["page"]);
+} else{
+	$page = 1;
+}
+$pagination = new pagination($m->allByDodCnt($m->data["sid"]), $page, $pageSize, 6);
 
+
+$req = new httpRequest();
+$url = new url($req->requestUri());
 
 ?>
   <div class="blank15"></div>
@@ -26,73 +36,31 @@
                     </div>
                    <p class="blank20"></p>
                   <div class="norques border2">
-                    <div class="zjtdwztit fz18"><span></span>陈希球文章列表</div>
+                    <div class="zjtdwztit fz18"><span></span><?php print $m->data["name"]?>文章列表</div>
                     <p class="blank20"></p>
                     
                     <div class="zjtd_box3">
-                    	
+                             <?php foreach($m->allByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $aitem):?>           
+                 <?php $a= $m->rowNoContent($aitem)?> 	
                         <dl class="clr">
                         	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
+                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /><a href="<?php print AppUrl::articleByAid($a["sid"])?>"><?php print ($a["title"])?></a> </dt>
+                            <dd class="fr"> 发表于<?php print ($a["date"])?></dd>
                             <p class="blank20"></p>
                         </dl>
-                         <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                         <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                         <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                         <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                        <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                        <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                        <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                        <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
-                        <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><img src="<?php print HTTP_ENTRY?>/static/images/bzdot.jpg" class="fl" /> 张江丑男爆丑被扣奖金，上海九龙男子医院伸出援手</dt>
-                            <dd class="fr"><span class="color9">1208</span>	人已读  发表于2014-05-27</dd>
-                            <p class="blank20"></p>
-                        </dl>
+                    <?php endforeach;?> 
+                  
+                  
                         <div class="blank40"></div>
-                       <div class="pagenum tc gray fz13"> <a><</a> <a>1</a> <a>2</a> <a>3</a> <a>4</a> <a>5</a> <a>...</a> <a>52</a> <a>></a> </div>
+                       <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($pagination->hasNext()):?>
+            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?></div>
                          <div class="blank20"></div>
                     </div>
                     
@@ -107,9 +75,9 @@
                     	
                     	<textarea placeholder="在此简单描述病情，向陈希球医生提问" class="border4"></textarea>
                         <p class="blank10"></p>
-                        <p class="color6"><b>陈希球的咨询范围： </b>各类先天性心脏病，包括小儿和成人；房缺，室缺，四联症以及二尖... <a href="" class="blue">[更多]</a></p>
+                        <p class="color6"><b><?php print $m->data["name"]?>的咨询范围： </b><?php print $m->data["spec"]?>... <a href="<?php print AppUrl::getSwtUrl()?>" class="blue">[更多]</a></p>
                         <p class="blank10"></p>
-                        <p><a href="" class="zjtd_rgzx tc">咨询陈希球医生</a></p>
+                        <p><a href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_rgzx tc">咨询<?php print $m->data["name"]?>医生</a></p>
                     </div>
                     
                   	<div class="blank20"></div>
@@ -118,22 +86,14 @@
                         <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a></div>
                         <div class="hotbqbox fz13">
                           <ul class="clearfix">
-                            <li><a href="">前列腺炎</a></li>
-                            <li><a href="">前列腺增生</a></li>
-                            <li><a href="">包皮包茎</a></li>
-                            <li><a href="">前列腺痛</a></li>
-                            <li><a href="">前列腺肥大</a></li>
-                            <li><a href="">早泄</a></li>
-                            <li><a href="">前列腺囊肿</a></li>
-                            <li><a href="">前列腺癌</a></li>
-                            <li><a href="">前列腺炎</a></li>
-                            <li><a href="">前列腺增生</a></li>
-                            <li><a href="">包皮包茎</a></li>
-                            <li><a href="">前列腺痛</a></li>
-                            <li><a href="">前列腺肥大</a></li>
-                            <li><a href="">早泄</a></li>
-                            <li><a href="">前列腺囊肿</a></li>
-                            <li><a href="">前列腺癌</a></li>
+       
+                                  
+                                  
+                                    
+                          <?php foreach($m->getRandomDid(8) as $dis):?>
+                  
+                            <li><a href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><?php print $dis["data"] ?></a></li>
+                       <?php endforeach;?> 
                           </ul>
                         </div>
                       </div>

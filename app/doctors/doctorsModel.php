@@ -19,7 +19,7 @@ class doctorsModelControllerNotFound extends AppModel {
 		return articleUIApi::getInstance()->rowNoContent($aid, 0);
 	}
 	public function allByDod($dod,$length,$offset=0){
-		return articleUIApi::getInstance()->allByDod($dod,$length,0);
+		return articleUIApi::getInstance()->allByDod($dod,$length,$offset);
 	}
 	
 	
@@ -37,5 +37,29 @@ class doctorsModelControllerNotFound extends AppModel {
 	public function rowuser($uid){
 		return userUIApi::getInstance()->row($uid);
 	}
+	
+	
+	public function getQuestionsByDod($dod,$length=5,$offset=0){
+		return askUIApi::getInstance()->getQuestionsByDod($dod,$length,$offset);
+	}
+	
 
+	public function getAnswerByAskid($askid){
+		return askUIApi::getInstance()->getAnswerByAskid($askid);
+	}
+	
+	public function getDocRowByDod($dod){
+		return doctorUIApi::getInstance()->getInfoByDod($dod);
+	}
+	public function allByDodCnt($dod){
+		return articleUIApi::getInstance()->allByDodCnt($dod);
+	}
+	
+	public  function  getRandomDid($length){
+		
+		return diseaseUIApi::getInstance()->getRandomDid($length);
+	}
+	
+
+	
 }

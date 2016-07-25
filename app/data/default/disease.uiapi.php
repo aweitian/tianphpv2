@@ -264,4 +264,16 @@ class diseaseUIApi {
 			}
 		}
 	}
+	
+	
+	
+	/**
+	 * zhangsihang
+	 * 随机的获取几个二级病种ID
+	 */
+	public function getRandomDid($length){
+		$ret = $this->sidCache;
+		shuffle($ret);
+		return array_slice($ret,0,$length);
+	}
 }

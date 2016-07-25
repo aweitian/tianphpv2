@@ -223,7 +223,7 @@ $url = new url($req->requestUri());
                   </div>
                   <div class="blank20"></div>
                   <div class="syrbox3 border2">
-                    <div class="syrboxtit fz18 graybg">陈希球 &middot; 出诊时间</div>
+                    <div class="syrboxtit fz18 graybg"><?php print $m->data["name"]?>&middot; 出诊时间</div>
                   	<div class="syrbox4nr zjtd_r1">
                         <div>
                         	<table cellpadding="0" cellspacing="0" border="0">
@@ -292,61 +292,41 @@ $url = new url($req->requestUri());
                   </div>
                   <div class="blank20"></div>
                   <div class="syrbox5 border2">
-                    <div class="syrboxtit fz18 graybg">陈希球医生的最新咨询<a href="" class="blue fz13 fr">+更多</a></div>
+                    <div class="syrboxtit fz18 graybg"><?php print $m->data["name"]?>医生的最新咨询<a href="<?php print AppUrl::docAskHomeByDocid($m->data["id"])?>" class="blue fz13 fr">+更多</a></div>
+
+                      
+                    
+           
+                   
+                   
+                
                     
                     <div class="zjtd_r2">
                     	<div class="blank10"></div>
-                        <dl class="selected">
-                          <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
+                    	
+        <?php $x=1;?>            	
+                    <?php foreach($m->getQuestionsByDod($m->data["sid"],8) as $ask):?> 
+              
+                  <?php $ans = $m->getAnswerByAskid($m->data["sid"])?>
+
+               
+                        <dl <?php if($x==1){?> class="selected"<?php }?>>
+                          <dt class="fz18 blue"><a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><?php print utility::utf8Substr($ask["title"],0,15) ?></a></dt>
                           <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
+                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl"><?php if (!empty($ans["content"]))  :?>
+                             
+                              <a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>">	<?php print utility::utf8Substr($ans["content"], 0, 40) ?></a>
+                             <?php endif; ?>...</p>
                           </dd>
                         </dl>
-                        <dl>
-                          <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
-                          </dd>
-                        </dl>
-                        <dl>
-                         <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
-                          </dd>
-                        </dl>
-                        <dl>
-                          <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
-                          </dd>
-                        </dl>
-                        <dl>
-                          <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
-                          </dd>
-                        </dl>
-                        <dl>
-                          <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
-                          </dd>
-                        </dl>
-                        <dl>
-                          <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
-                          </dd>
-                        </dl>
-                        <dl>
-                          <dt class="fz18 blue">尿失禁有哪些类型？这些有什么区别</dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">前列腺增生又称前列腺肥大,是男性中老年人的多发病...</p>
-                          </dd>
-                        </dl>
+                      <?php $x++;?>
+                         <?php endforeach; ?> 
+                      
+                      
+                      
                       </div>
                     
-                    <div class="zjtd_r3 clr"><a href="">立刻咨询</a></div>
+                    <div class="zjtd_r3 clr"><a href="<?php print AppUrl::getSwtUrl()?>">立刻咨询</a></div>
                     <div class="blank20"></div>
                   </div>
                 </div>
@@ -354,44 +334,54 @@ $url = new url($req->requestUri());
                 <!--right end-->
              </div>   
              
-             <!--zjtdcon1_box2 end-->
+             <!--zjtdcon1_box2 end
              
              <div class="clr">
              	<div class="norques border2">
-                    <div class="zjtdwztit fz18"><span></span>陈希球 &middot; 最新回复<a href="" class="fr fz13 blue">查看全部问答<img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img9.png" style="margin:2px 0 0 5px;" /></a></div>
+                    <div class="zjtdwztit fz18"><span></span><?php print $m->data["name"]?>&middot; 最新回复<a href="" class="fr fz13 blue">查看全部问答<img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img9.png" style="margin:2px 0 0 5px;" /></a></div>
                     <p class="blank20"></p>
                     
                     <div class="clr">
                     
-                    	<div class="zjtd_box5 selected fl">
+                    
+                     <?php $nx=1;?>            	
+                    <?php foreach($m->getQuestionsByDod($m->data["sid"],2) as $newask):?> 
+          <?php $newans = $m->getAnswerByAskid($m->data["sid"])?>
+
+
+                    	<div class="zjtd_box5  fr">
                         	<div class="zjtd_box5_sm1">
-                                <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img10.png" />五六年了一直没宝宝，咨询下有什么好方法？  
-                                <span class="color9 fz14">2015-10-23</span>
+                                <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img10.png" />  <a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><?php print utility::utf8Substr($newask["title"],0,18) ?></a>
+                                <span class="color9 fz14"><?php print $newask["date"] ?></span>
                             </div>
                             <div class="blank10"></div>
                         	<div class="zjtd_box5_sm2">
                             	<img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img11.png" class="fl" />
                                 <div class="fr">
                                 	<p class="color9 fz14">陈开亮，副主任医师  6秒前回复   </p>
-                                    <p class="color6">男性不育的发病原因复杂，很多疾病或因素均可精液异常引起的，其原因很多，具体如下男性不育的发病原因复杂，很多疾病或因素均可…<a href="" class="blue">详细→</a></p>
+                                    <p class="color6"><?php print utility::utf8Substr($newans["content"], 0, 40) ?>…<a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="blue">详细→</a></p>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="zjtd_box5 fr">
+                        	<div class="zjtd_box5  fl">
                         	<div class="zjtd_box5_sm1">
-                                <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img10.png" />五六年了一直没宝宝，咨询下有什么好方法？  
-                                <span class="color9 fz14">2015-10-23</span>
+                                <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img10.png" />  <a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><?php print utility::utf8Substr($newask["title"],0,18) ?></a>
+                                <span class="color9 fz14"><?php print $newask["date"] ?></span>
                             </div>
                             <div class="blank10"></div>
                         	<div class="zjtd_box5_sm2">
                             	<img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img11.png" class="fl" />
                                 <div class="fr">
-                                	<p class="color9">陈开亮，副主任医师  6秒前回复   </p>
-                                    <p class="color6">男性不育的发病原因复杂，很多疾病或因素均可精液异常引起的，其原因很多，具体如下男性不育的发病原因复杂，很多疾病或因素均可…<a href="" class="blue">详细→</a></p>
+                                	<p class="color9 fz14">陈开亮，副主任医师  6秒前回复   </p>
+                                    <p class="color6"><?php print utility::utf8Substr($newans["content"], 0, 40) ?>…<a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="blue">详细→</a></p>
                                 </div>
                             </div>
                         </div>
+                       <?php $nx++;?>
+                         <?php endforeach; ?>  
+                       
+                       
+                       
                     	
                     </div>
                     
@@ -399,7 +389,7 @@ $url = new url($req->requestUri());
              </div>
              
           </div>
-          
+          -->
           <!--zjtd_con1 end-->
       </div>
       
