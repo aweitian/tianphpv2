@@ -1,3 +1,21 @@
+<?php
+/**
+ * @Author: zhangsihang
+ * @Date: 2016年7月25日
+ */
+
+
+
+$pageSize = 8;
+
+$pagination = new pagination($model->getAllCnt(), $page, $pageSize, 6);
+
+
+$req = new httpRequest();
+$url = new url($req->requestUri());
+?>
+
+
 <div class="w-1000">
 	<div class="blank15"></div>
 	<div class="con_tit fz14">当前位置：<a href="">首页</a> > <a href="">问答</a> > <a href="">生殖整形</a></div>
@@ -30,10 +48,11 @@
             <div class="padd20 border2 bg_fff list_con">
             	
                 <dl class="clr">
-                	<dt class="clr"><i></i><a href="" class="color4">什么是前列腺炎</a></dt>
+                	<dt class="clr"><i></i><a href="" class="color4">111什么是前列腺炎</a></dt>
                     <dd>前列腺炎是泌尿外科的常见病，在泌尿外科男性患者50岁以下中占首位。1995年NIH制定了一种新的前列腺炎分类方法，I型：相当于传统分类方法中的急性细菌性前列腺炎...<a href="#" class="big-link blue" data-reveal-id="myModal" data-animation="fade">[详细]</a>
 </dd>
                 </dl>
+            
                 
                 <div id="myModal" class="reveal-modal">
                 <div class="reveal_warp">
@@ -83,77 +102,46 @@
                    
                    <div class="bz_box2">
                    
+                   
+                   	<?php foreach($model->all($pageSize,($page-1)*$pageSize) as $list):?>
+    
+                   	<?php $con= $model->row($list["aid"],20) ?>
+              
+               
                    		<dl class="fl">
                         	<dt class="fl">
-                            	<b>20</b><br />
-                                <p>2016-06</p>
+                            	<b><?php print utility::utf8Substr($list["date"], 8, 9)?></b><br />
+                                <p><?php print utility::utf8Substr($list["date"], 0, 7)?></p>
                             </dt>
                             <dd class="fr">
-                            	<a href="">包皮过长的危害有哪些？</a>
-                                <p class="fz14 color9">包皮过长的危害有哪些？对男性的身体健康或生活有哪些不良影响...</p>
+                            	<a href="<?php print AppUrl::articleHosipitalByAid($list["aid"]) ?>">
+                            	
+                           	<?php print utility::utf8Substr($list["title"], 0, 12) ?></a>
+                                <p class="fz14 color9">
+                                <?php print $con["content"] ?>
+                                ...</p>
                             </dd>
                         </dl>
-                        
-                        <dl class="fr">
-                        	<dt class="fl">
-                            	<b>20</b><br />
-                                <p>2016-06</p>
-                            </dt>
-                            <dd class="fr">
-                            	<a href="">包皮过长的危害有哪些？</a>
-                                <p class="fz14 color9">包皮过长的危害有哪些？对男性的身体健康或生活有哪些不良影响...</p>
-                            </dd>
-                        </dl>
-                        
-                        <dl class="fl">
-                        	<dt class="fl">
-                            	<b>20</b><br />
-                                <p>2016-06</p>
-                            </dt>
-                            <dd class="fr">
-                            	<a href="">包皮过长的危害有哪些？</a>
-                                <p class="fz14 color9">包皮过长的危害有哪些？对男性的身体健康或生活有哪些不良影响...</p>
-                            </dd>
-                        </dl>
-                        
-                        <dl class="fr">
-                        	<dt class="fl">
-                            	<b>20</b><br />
-                                <p>2016-06</p>
-                            </dt>
-                            <dd class="fr">
-                            	<a href="">包皮过长的危害有哪些？</a>
-                                <p class="fz14 color9">包皮过长的危害有哪些？对男性的身体健康或生活有哪些不良影响...</p>
-                            </dd>
-                        </dl>
-                        
-                        <dl class="fl">
-                        	<dt class="fl">
-                            	<b>20</b><br />
-                                <p>2016-06</p>
-                            </dt>
-                            <dd class="fr">
-                            	<a href="">包皮过长的危害有哪些？</a>
-                                <p class="fz14 color9">包皮过长的危害有哪些？对男性的身体健康或生活有哪些不良影响...</p>
-                            </dd>
-                        </dl>
-                        
-                        <dl class="fr">
-                        	<dt class="fl">
-                            	<b>20</b><br />
-                                <p>2016-06</p>
-                            </dt>
-                            <dd class="fr">
-                            	<a href="">包皮过长的危害有哪些？</a>
-                                <p class="fz14 color9">包皮过长的危害有哪些？对男性的身体健康或生活有哪些不良影响...</p>
-                            </dd>
-                        </dl>
-                        
+                     	<?php endforeach;?>   
+
                    </div>
                 	<div>
                     
                 </div>
-                <div class="pagenum tc gray fz13"> <a>首页</a> <a>上一页</a> <a>1</a> <a>2</a> <a>下一页</a> <a>尾页</a> </div>
+                <div class="pagenum tc gray fz13"> 
+                
+                
+             <?php if ($pagination->hasPre()):?>
+        	<a href="<?php echo AppUrl::articleHosipitalListByPage($pagination->getPre())  ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+        	<a href="<?php echo AppUrl::articleHosipitalListByPage($pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($pagination->hasNext()):?>
+            <a href="<?php echo AppUrl::articleHosipitalListByPage($pagination->getNext())?>">&gt;</a>
+       		<?php endif;?>
+                
+                 </div>
                 <div class="blank40"></div>
                 <div class="hd_hx"></div>
                 <div class="blank30"></div>

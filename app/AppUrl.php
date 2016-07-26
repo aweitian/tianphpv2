@@ -15,7 +15,7 @@ class AppUrl {
 	 * @param int $aid
 	 * @return string
 	 */
-	public static function articleByAid($aid){
+	public static function articleHosipitalByAid($aid){
 		return AppUrl::build("/hosipital/$aid.html");
 	}
 	/**
@@ -23,7 +23,7 @@ class AppUrl {
 	 * @param int $aid
 	 * @return string
 	 */
-	public static function articleListByPage($page){
+	public static function articleHosipitalListByPage($page){
 		return AppUrl::build("/hosipital/index_$page.html");
 	}
 	

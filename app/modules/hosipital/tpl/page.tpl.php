@@ -1,6 +1,6 @@
 <?php 
 
-$page=$model->row($aid);
+$page=$model->row($aid,0);
 
 ?>
 <div class="w-1000">
@@ -24,8 +24,8 @@ $page=$model->row($aid);
                <div class="blank20"></div>
                
                <div class=" clr">
-                    <a href=""><img src="<?php print HTTP_ENTRY?>/static/images/page_zx1.png" style="margin-left:125px;" /></a>
-                    <a href=""><img src="<?php print HTTP_ENTRY?>/static/images/page_zx2.png" style="margin-left:40px;" /></a>
+                    <a href="<?php AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/images/page_zx1.png" style="margin-left:125px;" /></a>
+                    <a href="<?php AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/images/page_zx2.png" style="margin-left:40px;" /></a>
                 </div>
           		<div class="blank30"></div>
                 <div class="con_tit fz14">

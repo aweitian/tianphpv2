@@ -55,11 +55,9 @@ function css_active_control($links){
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">主控制面板</li>
-            <?php $links = array(
-            		"/disease/import"=>"病种导入",
-            		"/disease"=>"病种管理",
-            		"/symptom/import"=>"症状导入",
-            		"/symptom"=>"症状管理"
+            <?php 
+            $links = array(
+            		"/tree"=>"栏目管理",
             		
             )?>
             <li class="treeview<?php print css_active_control($links)?>">

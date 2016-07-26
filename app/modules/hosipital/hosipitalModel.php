@@ -10,7 +10,13 @@ class hosipitalModel extends AppModel {
 		return articleUIApi::getInstance()->all($length,$offset);
 	}
 	
-	public function row($aid){
-		return articleUIApi::getInstance()->row($aid, 0);
+	public function row($aid,$textlength){
+		return articleUIApi::getInstance()->row($aid,$textlength);
 	}
+	public function getAllCnt(){
+		return articleUIApi::getInstance()->getAllCnt();
+	}
+	
+	
+	
 }

@@ -424,7 +424,7 @@ h1{font-size:22px;padding:25px 0 10px;}
 .reply p{ width:580px; margin:15px; font-size:14px; line-height:24px;}
 .reply div{ width:580px; margin:2px 15px; font-size:14px; line-height:24px;}
 
-.bz_box2 dl{ width:315px; margin-bottom:40px;}
+.bz_box2 dl{ width:315px; margin-bottom:40px; height:66px}
 .bz_box2 dl dt{ width:80px; height:60px; text-align:center; color:#fff; font-size:12px; background:#dbdbdb;}
 .bz_box2 dl dt b{ font-size:40px; line-height:40px;}
 .bz_box2 dl dt p{ line-height:20px;}
