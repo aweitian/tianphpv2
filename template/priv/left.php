@@ -63,7 +63,7 @@ function css_active_control($links){
             <li class="treeview<?php print css_active_control($links)?>">
               <a href="#">
                 <i class="fa fa-database"></i> 
-                <span>病种症状</span> 
+                <span>栏目管理</span> 
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">

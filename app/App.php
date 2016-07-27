@@ -36,6 +36,7 @@ class App{
 // 		require_once FILE_SYSTEM_ENTRY.'/app/routes/svc/svcRoute.php';
 		require_once FILE_SYSTEM_ENTRY.'/lib/route/routes/pmcai/pmcaiRoute.php';
 // 		require_once FILE_SYSTEM_ENTRY.'/app/routes/svc/svcDispatcher.php';
+		
 	}
 	public static function run(){
 		//初始化httpRequest
@@ -46,13 +47,13 @@ class App{
 		
 		//初始化SVC路由规则(它只要是以HTTP_ENTRY/svc开头就行，
 		//具体参考app/routes/svc/svcRoute.php的match方法
-		#$svcRoute = new svcRoute();
+		$pmiRoute = new pmiRoute();
 		
 		//初始化路由器
 		$router = new router();
 		
 		//把默认路由规则和SVC路由规则添加到路由器中,第一个参数是路由规则名称
-		#$router->addRoute("svc", $svcRoute);
+		$router->addRoute("pmi", $pmiRoute);
 		$router->addRoute("default", $defRoute);
 		
 		//把当前URL传递到路由器，让它匹配
@@ -64,14 +65,9 @@ class App{
 		//获取匹配的路由规则名称
 		$routeName = $router->getMatchedRouteName();
 		switch ($routeName){
-// 			case "svc":
-// 				//svc消息类初始化
-// 				$msg = new svcMsg($req, $svcRoute->getSvcPath());
-// 				//SVC派遣器初始化
-// 				$dispatcher = new svcDispatcher();
-// 				//派遣器svc消息
-// 				$dispatcher->dispatch($msg);
-// 				break;
+			case "pmi":
+				$pmiRoute->route();
+				break;
 			case "default":
 			
 				//如果是PMCAI路由规则匹配

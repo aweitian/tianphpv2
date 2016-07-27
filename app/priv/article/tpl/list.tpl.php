@@ -64,7 +64,7 @@ if(is_null($q)){
                       
                       <td>
                       	<!-- <i class="fa fa-edit"></i> -->
-                        <a class="btn btn-default" target="_blank" href="<?php print AppUrl::articleByAid($item["sid"]) ?>"> 查看前台效果</a>
+                        <a class="btn btn-default" target="_blank" href="<?php print AppUrl::articleHosipitalByAid($item["sid"]) ?>"> 查看前台效果</a>
                         <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/article/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
                         <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/article/rm?sid=<?php print $item["sid"]?>">删除</a>
                         

@@ -51,6 +51,8 @@ if(DEBUG_FLAG){
 }
 
 require_once FILE_SYSTEM_ENTRY.'/app/AppConst.php';
+require_once FILE_SYSTEM_ENTRY.'/app/pmi.php';
+require_once FILE_SYSTEM_ENTRY.'/app/pmiRoute.php';
 require_once FILE_SYSTEM_ENTRY."/lib/db/mysql/mysqlPdoBase.php";
 require_once FILE_SYSTEM_ENTRY."/modules/sqlManager/sqlManager.php";
 require_once FILE_SYSTEM_ENTRY.'/app/uploadFactory.php';
