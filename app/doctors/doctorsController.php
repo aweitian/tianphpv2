@@ -50,7 +50,7 @@ class doctorsControllerNotFound{
 		$this->model->data = $row;
 		if (isset($msg["?id"])){
 			
-			$this->view->askcontent($this->model);
+			$this->view->askcontent($this->model,$msg["?id"]);
 		}else{
 			$this->view->ask($this->model);
 		}

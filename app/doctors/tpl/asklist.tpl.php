@@ -5,6 +5,20 @@
  * @Desc: 
  */
 
+$pageSize = 6;
+if(isset($_REQUEST["page"])){
+	$page = intval($_REQUEST["page"]);
+} else{
+	$page = 1;
+}
+
+
+$pagination = new pagination($m->getQuestionsCountByDod($m->data["sid"]), $page, $pageSize, 6);
+
+
+
+$req = new httpRequest();
+$url = new url($req->requestUri());
 
 ?>
   
@@ -43,11 +57,7 @@
       
       <div class="blank20"></div>
       	
-        <?php foreach ($m->getQuestionsByDod($m->data["sid"],4,0) as $ask): ?>
-        
-        <?php var_dump($ask) ?>
-        
-        <?php endforeach; ?>   
+   
      <!--服务区 start-->
     <div class="padd20  border2 clr">
       <div class="zjtdwztit fz18 clr"><span class="fl"></span><h5 class="fl fz18">服务区</h5>
@@ -69,127 +79,39 @@
             <td width="15%">时间</td>
           </tr>
           
+    <?php foreach ($m->getQuestionsByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $ask): ?>
+ 
+        <?php $user=$m->getNameByUid($ask["uid"])  ?>
+        <?php $dis=$m->getNameByDid($ask["did"])?>
+        
+		<?php $count=$m->getAnswersCnt($ask["sid"]) ?>
+		<?php $docount= $m->getAnswersDocReplyCnt($ask["sid"]) ?>
+    
+        
+    
           <tr>
             <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
+            <td><p><?php print ($user) ?></p></td>
+            <td><p><a target="_blank" href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="td_link" ><?php print($ask["title"]) ?></a> </p></td>
+            <td ><a target="_blank" href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="rela_dis"  ><?php print($dis) ?></a></td>
+            <td> (<font class="green3 pl5 pr5 green"><?php print($docount) ?>/<?php print($count) ?></font>) </td>
+            <td class="color9"><?php print($ask["date"]) ?></td>
           </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
-          
-          <tr>
-            <td></td>
-            <td><p>1***</p></td>
-            <td><p><a target="_blank" href="" class="td_link" >龟头瘙痒是怎么回事，应该怎么处理？</a> </p></td>
-            <td ><a target="_blank" href="" class="rela_dis"  >龟头疼痛</a></td>
-            <td> 13 (<font class="green3 pl5 pr5 green">4/9</font>) </td>
-            <td class="color9">2015-10-20</td>
-          </tr>
+        <?php endforeach; ?>  
+    
         </table>
         
  		 </div>
   		<div class="blank20"></div>
-        <div class="pagenum tc gray fz13"> <a><</a> <a>1</a> <a>2</a> <a>3</a> <a>4</a> <a>5</a> <a>...</a> <a>52</a> <a>></a> </div>
+        <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($pagination->hasNext()):?>
+            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?> </div>
         <div class="blank20"></div>
 	</div>
     <!--服务区 end-->

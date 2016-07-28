@@ -59,7 +59,50 @@ class doctorsModelControllerNotFound extends AppModel {
 		
 		return diseaseUIApi::getInstance()->getRandomDid($length);
 	}
+	public  function  getNameByUid($uid){
 	
+		return userUIApi::getInstance()->getNameByUid($uid);
+	}
+	
+	public  function  getQuestionsCountByDod($dod){
+	
+		return askUIApi::getInstance()->getQuestionsCountByDod($dod);
+	}
+	
+	public  function  getAnswersCnt($askid){
+	
+		return askUIApi::getInstance()->getAnswersCnt($askid);
+	}
+	
+	public  function  getAnswersDocReplyCnt($askid){
+	
+		return askUIApi::getInstance()->getAnswersDocReplyCnt($askid);
+	}
+	
+	public function getRowThumbnail(){
+		return articleUIApi::getInstance()->getRowThumbnail();
+	}
+	public function getNewest($length){
+		return articleUIApi::getInstance()->getNewest($length);
+	}
+	public function getContent($aid,$len){
+		$row = articleUIApi::getInstance()->row($aid,$len);
+		if (empty($row)){
+			return "";
+		} else {
+			return $row["content"];
+		}
+	}
 
+	public  function  getAnswers($askid,$length,$offset=0){
+	
+		return askUIApi::getInstance()->getAnswers($askid,$length,$offset);
+	}
+	public  function  getQuestionByAskid($askid){
+	
+		return askUIApi::getInstance()->getQuestionByAskid($askid);
+	}
+
+	
 	
 }

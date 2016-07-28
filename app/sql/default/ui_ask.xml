@@ -16,7 +16,10 @@
 			ORDER BY `data_ask`.`sid` DESC
 		LIMIT :offset,:length
 	</all>
-
+	<row>
+		SELECT * FROM `data_ask`
+		 WHERE `sid`=:sid
+	</row>
 
 	<!-- 根据病种Id获取问答和回答(医生回答最多只获取一条) -->
 	<getAskByDid>
@@ -42,6 +45,7 @@
 	<getAskByDod>
 		SELECT 
 			`data_ask`.`sid`,
+			`data_ask`.`uid`,
 			`data_ask`.`title`,
 			`data_ask`.`date`,
 			`data_ask`.`did`
@@ -107,21 +111,21 @@
 			  `files`,
 			  `date`
 			FROM `data_ask_append`
-			WHERE `sid` = :askid
+			WHERE `askid` = :askid
 			ORDER BY `sid` DESC
 			LIMIT :offset, :length;
 	</rows_answer>
 	<rows_answerCnt>
 		SELECT
-			  count(`sid`) as `cnt
+			  count(`sid`) as `cnt`
 			FROM `data_ask_append`
-			WHERE `sid` = :askid
+			WHERE `askid` = :askid
 	</rows_answerCnt>
 	<rows_answerDocReplyCnt>
 		SELECT
-			  count(`sid`) as `cnt
+			  count(`sid`) as `cnt`
 			FROM `data_ask_append`
-			WHERE `sid` = :askid
+			WHERE `askid` = :askid
 			AND
 			`role` = 'doctor'
 	</rows_answerDocReplyCnt>

@@ -107,7 +107,7 @@ class askUIApi {
 		}
 		
 		$sql = $this->sqlManager->getSql("/ui_ask/getAskByDodCnt");
-		$ret = $this->db->fetchAll($sql, array(
+		$ret = $this->db->fetch($sql, array(
 				"dod" => $dod,
 		));
 		$ret = $ret["cnt"];
@@ -210,6 +210,24 @@ class askUIApi {
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
+	
+	/**
+	 * sid,uid,dod,title,did,desc,svr,files,date   
+	 * @param int $askid 
+	 * @return array;
+	 */
+	public function getQuestionByAskid($askid){
+		$cache_key = "getQuestionByAskid-".$askid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		$sql = $this->sqlManager->getSql("/ui_ask/row");
+		$ret = $this->db->fetch($sql, array("sid" => $askid));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
 	
 	/**
 	 * 
