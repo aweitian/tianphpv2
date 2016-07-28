@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <filter>
 	
-
-
-
-	<!-- mid是第几个条件 -->
+	<!-- mid是data_hosipital_filter_meta表中的ID -->
 	<!-- nid是条件中的ID值 -->
 	<!-- 返回一个集合，data_hosipital_rel表中FSID存在于这个集合中就是命中 -->
 	<cond_set>

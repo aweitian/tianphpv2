@@ -58,7 +58,7 @@ function css_active_control($links){
             <?php 
             $links = array(
             		"/tree"=>"栏目管理",
-            		
+            		"/filter"=>"条件管理",
             )?>
             <li class="treeview<?php print css_active_control($links)?>">
               <a href="#">

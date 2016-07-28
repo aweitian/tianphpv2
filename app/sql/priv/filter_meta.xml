@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<filter_meta>
+	<add>
+		INSERT INTO `data_hosipital_filter_meta`
+	    (
+	             `type`,
+	             `data`,
+	             `order`
+	    ) VALUES (
+		        :type,
+		        :data,
+		        :order
+		);
+	</add>
+
+	<toggle_enabled>
+		UPDATE `data_hosipital_filter_meta`
+			SET
+			  `enabled` = NOT `enabled`
+			WHERE `sid` = :sid;
+	</toggle_enabled>
+
+	<update>
+		UPDATE `data_hosipital_filter_meta`
+			SET
+			  `data` = :data,
+			  `order` = :order
+			WHERE `sid` = :sid;
+	</update>
+
+	<rm>
+		DELETE
+			FROM `data_hosipital_filter_meta`
+			WHERE `sid` = :sid;
+	</rm>
+
+	<row>
+		SELECT
+			  `sid`,
+			  `type`,
+			  `data`,
+			  `enabled`,
+			  `order`
+			FROM `data_hosipital_filter_meta`
+			WHERE `sid` = :sid
+	</row>
+	<all>
+		SELECT
+			  `sid`,
+			  `type`,
+			  `data`,
+			  `enabled`,
+			  `order`
+			FROM `data_hosipital_filter_meta`
+			WHERE `enabled` = 1
+			ORDER BY `order` DESC
+	</all>
+	<exist>
+		<!-- 数据库字段:data -->
+		<range_chk>
+			SELECT
+				  `sid`
+				FROM `data_hosipital_filter_meta`
+				WHERE 
+					`data` = :data
+					AND `type` = 'range'
+		</range_chk>
+		<likestr_chk>
+			SELECT
+				  `sid`
+				FROM `data_hosipital_filter_meta`
+				WHERE 
+					`type` = 'likestr'
+		</likestr_chk>
+	</exist>
+	<_dev_all>
+		SELECT
+			  `sid`,
+			  `type`,
+			  `data`,
+			  `enabled`,
+			  `order`
+			FROM `data_hosipital_filter_meta`
+			ORDER BY `order` DESC
+	</_dev_all>
+</filter_meta>

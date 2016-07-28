@@ -137,6 +137,11 @@ class mysqlColumnInfo implements IColumnInfo{
 				'type' => $matches[1],
 				'len' => str_replace("'","",$matches[2])
 			);
+		} else if (preg_match("/^([a-z]+)\((\d+)\) unsigned$/",$t,$matches)) {
+			return array(
+					'type' => $matches[1],
+					'len' => $matches[2]
+			);
 		}else{
 			return array(
 				'type' => null,

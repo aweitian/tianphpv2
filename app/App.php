@@ -39,6 +39,13 @@ class App{
 		
 	}
 	public static function run(){
+// 		require_once FILE_SYSTEM_ENTRY."/lib/db/mysql/mysqlColumnInfo.php";
+		
+// 		$colinfo = new mysqlColumnInfo("data_hosipital_filter_meta","type");
+// 		$d = $colinfo->getLen();
+		
+// 		var_dump($d);exit;
+		
 		//初始化httpRequest
 		$req = new httpRequest();
 		
