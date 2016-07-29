@@ -34,11 +34,8 @@ $url = new url($req->requestUri());
             <div class="blank20"></div>
                 
                <div class="clr">
-               		
-                     <?php $askq= $m->getQuestionByAskid($askid) ?>
-                   
+                     <?php $askq= $m->getQuestionByAskid($askid) ?>            
                <div class="wid680 fl">
-                   
                   <div class="zjtdhzfw_tit"><?php print($askq["title"]) ?></div>
                   
                   <div class="blank20"></div>

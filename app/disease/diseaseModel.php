@@ -1,6 +1,7 @@
 <?php
 class diseaseControllerNotFoundModel extends AppModel {
 	public $data;
+	public $subid = 0;
 	public function __construct() {
 		
 	}
@@ -103,7 +104,10 @@ class diseaseControllerNotFoundModel extends AppModel {
 	 * sihangzhang
 	 */
 	public function knowledge($did, $tid, $txtlength, $offset, $length){
-		return articleUIApi::getInstance()->knowledge($did, $tid, $txtlength, $offset, $length);
+		if ($tid > 0)
+			return articleUIApi::getInstance()->knowledge($did, $tid, $txtlength, $offset, $length);
+		else
+			return articleUIApi::getInstance()->allKnowledges($did, $txtlength, $offset, $length);
 	}
 	
 	/**
@@ -158,6 +162,25 @@ class diseaseControllerNotFoundModel extends AppModel {
 	public function row($uid){
 		return userUIApi::getInstance()->row($uid);
 	}
+	public function getEssenceAidByDid($did, $length, $offset = 0){
+		return articleUIApi::getInstance()->getEssenceAidByDid($did, $length, $offset);
+	}
 	
-
+	public function knowledgeCnt($did, $tid) {
+		
+		if ($tid > 0)
+				return articleUIApi::getInstance()->knowledgeCnt($did, $tid);
+		else
+		return articleUIApi::getInstance()->allKnowledgesCnt($did);
+		
+		
+	
+	}
+	public function getTag($tid) {
+		return tagsUIApi::getInstance()->getTag($tid);
+	}
+	
+	
+	
+	
 }

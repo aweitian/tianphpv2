@@ -10,6 +10,7 @@ class tagsUIApi {
 	private $db;
 	private $cache = array();
 	private $dataCache = array();
+	private $idCache = array();
 	private function __construct(){
 		$this->db = new mysqlPdoBase();
 		$this->sqlManager = new sqlManager(FILE_SYSTEM_ENTRY."/app/sql/default/ui_tags.xml");
@@ -42,12 +43,26 @@ class tagsUIApi {
 		
 	}
 	
+	/**
+	 * 
+	 * @param int $tid
+	 * @return string
+	 */
+	public function getTag($tid){
+		if(array_key_exists($tid, $this->idCache)){
+			return $this->idCache[$tid];
+		}
+		return "";
+	}
 	
 	private function init(){
 		$data = $this->db->fetchAll(
 				$this->sqlManager->getSql("/ui_tags/all"), array());
 		foreach($data as $item){
 			$this->dataCache[$item["text"]] = $item;
+			$this->idCache[$item["sid"]] = $item["text"];
 		}
 	}
+	
+	
 }

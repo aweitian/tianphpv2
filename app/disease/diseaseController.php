@@ -37,6 +37,9 @@ class diseaseControllerNotFound{
 	private function knowledge(pmcaiMsg $msg){
 		$row = diseaseUIApi::getInstance()->getRowByDiskey($msg->getControl());
 		$this->model->data = $row;
+		if(isset($msg["?s"])){
+			$this->model->subid = intval($msg["?s"]);
+		}
 		$this->view->knowledge($this->model);
 	}
 	private function article(pmcaiMsg $msg){

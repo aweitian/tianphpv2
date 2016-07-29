@@ -2206,6 +2206,8 @@ a.td_link, a.td_link_read {
 	color:#fff;
 	border-bottom: none;
 }
+.jb_zstab ul li a{display:block; width:95px; height:30px;}
+.jb_zstab ul li.selected a{ color:#fff;}
 .jb_zstab .last{ border:0; }
 
 .recommand_box ul li, .hdf_affiche .affiche_icon, .category_title, .b_arrow, .b_arrow_t, .l_arrow, .b_arrow1, .order_btn, .g_arrow2, .g_arrow3, .g_praise, .g_respond, .g_arrow4, .line_font, .g_eye, .g_advise, .b_arrow2, .or_block_a , .b_arrow3, .article li.b_dot, .article li.g_dot , .dis_detail .box1 .title1, .dis_detail .box1 .box2 li, .g_home, .g_advise1, .g_jia, .g_tel, .g_area, .g_rank, .g_good, .g_praise1, .share_btn a .share_l, .essence_art ul li, .g_home1, .g_advise2, .g_jia1, .g_tel1, .g_collect, .g_rec, .g_read, .g_comment, .g_sub, .kart_icon, .kart_icon1, .left_bar .total, .left_bar .total a, .arrow_up, .arrow_down, .g_arrow5, .left_bar1, .total, .g_good1, .g_praise2, .menu_cate3 li, .left_bar3 .total a, .hot_zixun_box .hot_icon{ background-image:url(../images/sprite_disease.png); background-repeat:no-repeat; _bancground-image:none; _filterprogid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/sprite_disease.png" ,sizingMethod="noscale");}

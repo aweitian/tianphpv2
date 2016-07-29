@@ -63,19 +63,21 @@
 	<!-- 返回字段:aid -->
 	<allKnowledge>
 		<![CDATA[
-			SELECT `data_article_dis`.`aid` FROM `data_article_dis`
-			WHERE `data_article_dis`.`aid` IN (
-				SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` < 7
-			) AND `data_article_dis`.`did` = :did
+				SELECT 	`data_article_dis`.`aid`,`data_article_tags`.`tid` FROM 
+					`data_article_dis`
+					LEFT JOIN `data_article_tags` ON `data_article_dis`.`aid` = `data_article_tags`.`aid`
+					WHERE `data_article_tags`.`tid` < 7
+					AND `data_article_dis`.`did` = :did
 			LIMIT :offset,:length
 		]]>
 	</allKnowledge>
 	<allKnowledgeCnt>
 		<![CDATA[
-			SELECT count(`data_article_dis`.`aid`) as `cnt` FROM `data_article_dis`
-			WHERE `data_article_dis`.`aid` IN (
-				SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` < 7
-			) AND `data_article_dis`.`did` = :did
+			SELECT count(`data_article_dis`.`aid`) as `cnt` FROM 
+			`data_article_dis`
+					LEFT JOIN `data_article_tags` ON `data_article_dis`.`aid` = `data_article_tags`.`aid`
+					WHERE `data_article_tags`.`tid` < 7
+					AND `data_article_dis`.`did` = :did
 		]]>
 	</allKnowledgeCnt>
 	
@@ -84,17 +86,19 @@
 	<!-- 参数:did,tid,length -->
 	<!-- 返回字段:aid -->
 	<knowledge_kind>
-		SELECT `data_article_dis`.`aid` FROM `data_article_dis`
-		WHERE `data_article_dis`.`aid` IN (
-			SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` = :tid
-		) AND `data_article_dis`.`did` = :did
+		SELECT 	`data_article_dis`.`aid`,`data_article_tags`.`tid` FROM 
+					`data_article_dis`
+					LEFT JOIN `data_article_tags` ON `data_article_dis`.`aid` = `data_article_tags`.`aid`
+					WHERE `data_article_tags`.`tid` = :tid
+					AND `data_article_dis`.`did` = :did
 		LIMIT :offset,:length
 	</knowledge_kind>
 	<knowledge_kindCnt>
-		SELECT count(`data_article_dis`.`aid`) as `cnt` FROM `data_article_dis`
-		WHERE `data_article_dis`.`aid` IN (
-			SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` = :tid
-		) AND `data_article_dis`.`did` = :did
+		SELECT count(`data_article_dis`.`aid`) as `cnt` FROM 
+		`data_article_dis`
+					LEFT JOIN `data_article_tags` ON `data_article_dis`.`aid` = `data_article_tags`.`aid`
+					WHERE `data_article_tags`.`tid` = :tid
+					AND `data_article_dis`.`did` = :did
 	</knowledge_kindCnt>
 	
 	<!-- 获取一篇文章信息，带内容 -->
@@ -142,7 +146,7 @@
 			LIMIT :offset,:length
 	</getEssenceAidByDid>
 	<getEssenceAidByDidCnt>
-		SELECT `data_article_dis`.`aid` FROM `data_article_dis`
+		SELECT count(`data_article_dis`.`aid`) as `cnt` FROM `data_article_dis`
 			WHERE `data_article_dis`.`aid` IN (
 				SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` = 8
 			) AND `data_article_dis`.`did` = :did

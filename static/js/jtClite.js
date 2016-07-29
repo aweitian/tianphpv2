@@ -230,14 +230,14 @@ $(function(){
 					 .siblings().hide();
 	})
 	
-		var tab_zs_nav_li = $('.jb_zstab li');//�л���ʽ
-	tab_zs_nav_li.mouseover(function(){
-		$(this).addClass('selected')
-				 .siblings().removeClass('selected');
-	var tab_zs_nav_li_index = tab_zs_nav_li.index(this);
-	$('.jb_zsall .jb_zsbox').eq(tab_zs_nav_li_index).show()
-					 .siblings().hide();
-	})
+//		var tab_zs_nav_li = $('.jb_zstab li');
+//	tab_zs_nav_li.mouseover(function(){
+//		$(this).addClass('selected')
+//				 .siblings().removeClass('selected');
+//	var tab_zs_nav_li_index = tab_zs_nav_li.index(this);
+//	$('.jb_zsall .jb_zsbox').eq(tab_zs_nav_li_index).show()
+//					 .siblings().hide();
+//	})
 	
  var tab_menu_li = $('.allfrombz dl');//������ǰѡ��
   tab_menu_li.mouseover(function(){

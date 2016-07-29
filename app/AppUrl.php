@@ -245,6 +245,13 @@ class AppUrl {
 	 * 
 	 * @param string $diskey
 	 */
+	public static function disKnowledgeSubByDiskey($diskey,$subid){
+		return AppUrl::build("/".$diskey."/knowledge?s=".$subid);
+	}
+	/**
+	 * 
+	 * @param string $diskey
+	 */
 	public static function disAskByDiseasekey($diskey){
 		return AppUrl::build("/".$diskey."/ask");
 	}

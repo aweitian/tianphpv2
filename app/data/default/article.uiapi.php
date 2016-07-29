@@ -255,7 +255,9 @@ class articleUIApi {
 		) );
 		$ret = array ();
 		foreach ( $data as $item ) {
-			$ret [] = $this->row ( $item ["aid"], $txtlength );
+			$t = $this->row ( $item ["aid"], $txtlength );
+			$t["tid"] = $item["tid"];
+			$ret[] = $t;
 		}
 		$this->cache [$cache_key] = $ret;
 		return $ret;
@@ -309,7 +311,9 @@ class articleUIApi {
 		) );
 		$ret = array ();
 		foreach ( $data as $item ) {
-			$ret [] = $this->row ( $item ["aid"], $txtlength );
+			$t = $this->row ( $item ["aid"], $txtlength );
+			$t["tid"] = $item["tid"];
+			$ret[] = $t;
 		}
 		$this->cache [$cache_key] = $ret;
 		return $ret;
