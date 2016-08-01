@@ -1,1 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<filter_sets>
+	<all>
+		SELECT
+		  `sid`,
+		  `name`,
+		  `mid`,
+		  `url`,
+		  `ord`,
+		  `pid`,
+		  `lft`,
+		  `rgt`
+		FROM `data_hosipital_filter_sets`
+		AND `mid` = :mid
+	</all>
+	
+	<getDepthData>
+	    SELECT 
+	    		node.sid,
+         		CONCAT( REPEAT('   ', COUNT(parent.name) - 1), node.name) AS `name`
+	        FROM data_hosipital_filter_sets AS node
+				INNER JOIN 
+	                data_hosipital_filter_sets AS parent
+	                ON node.mid = parent.mid
+	            WHERE 
+	            	node.lft BETWEEN parent.lft AND parent.rgt
+	            	AND node.mid = :mid
+	            GROUP BY node.name
+	            ORDER BY node.lft;
+	</getDepthData>
+	
+	<debug>
+	    SELECT 
+            CONCAT( REPEAT('   ', COUNT(parent.name) - 1), node.name) AS NAME
+        FROM data_hosipital_filter_sets AS node
+			INNER JOIN 
+                data_hosipital_filter_sets AS parent
+                ON node.mid = parent.mid
+            WHERE 
+            	node.lft BETWEEN parent.lft AND parent.rgt
+            	AND node.mid = 1
+            GROUP BY node.name
+            ORDER BY node.lft;
+	</debug>
+
+
+	<!-- 虚拟根结点，方便用于森林管理 -->
+	<virtualRoot>
+		<rgt>
+			SELECT MAX(`rgt`) as `rgt` 
+				FROM `data_hosipital_filter_sets`
+				WHERE `data_hosipital_filter_sets`.`mid` = :mid
+		</rgt>
+	</virtualRoot>
+
+	<!-- sid -->
+	<!-- 返回字段:depth -->
+	<depth>
+		SELECT (COUNT(parent.name) - 1) AS depth
+	    FROM `data_hosipital_filter_sets` AS node
+	    LEFT JOIN
+	        `data_hosipital_filter_sets` AS parent
+	        ON node.`mid` = parent.`mid`
+	    WHERE 
+		node.lft BETWEEN parent.lft AND parent.rgt
+		AND node.`sid` = :sid
+	    GROUP BY node.name
+	    ORDER BY node.lft;
+	</depth>
+
+
+	<row>
+		SELECT 
+		  `sid`,
+		  `name`,
+		  `mid`,
+		  `ord`,
+		  `url` 
+		 FROM `data_hosipital_filter_sets` 
+		 	WHERE `sid` = :sid
+	</row>
+	
+	<!-- 内部使用 -->
+	<row_full>
+		SELECT * FROM `data_hosipital_filter_sets` WHERE `sid` = :sid
+	</row_full>
+
+	<!-- 返回字段leaf，为1是叶子结点,0不是 -->
+	<isLeaf>
+		SELECT IF( `rgt` - `lft` = 1,1,0) AS `leaf` FROM `data_hosipital_filter_sets` WHERE `sid` = :sid
+	</isLeaf>
+
+	<!-- 根据SID，获取NAME路径 -->
+	<path>
+		SELECT 
+		    parent.`sid` AS `pid`,
+		    parent.`lft` AS `plft`,
+		    parent.`name` AS `pname`,
+		    parent.`rgt` AS `prgt`,
+		    parent.`url` AS `purl`,
+		    parent.`ord` AS `pord`,
+		
+		    node.`sid` AS `nid`,
+		    node.`lft` AS `nlft`,
+		    node.`name` AS `nname`,
+		    node.`url` AS `nurl`,
+		    node.`ord` AS `nord`,
+		    node.`rgt` AS `nrgt`
+		    FROM 
+		    `data_hosipital_filter_sets` AS `node`
+				INNER JOIN 
+                	`data_hosipital_filter_sets` AS `parent`
+                ON `node`.`mid` = `parent`.`mid`
+		    WHERE `node`.`lft` BETWEEN `parent`.`lft` AND `parent`.`rgt`
+		    AND `node`.`sid` = :pid
+		    AND `node`.`mid` = :mid
+	</path>
+
+	<add>
+
+			<getParentRgt>
+				SELECT `rgt` FROM `data_hosipital_filter_sets`
+	       				WHERE `sid` = :pid;
+			</getParentRgt>
+			<balance>
+				<rgt>
+					<![CDATA[
+					 UPDATE `data_hosipital_filter_sets` SET `rgt` = `rgt` + 2 
+					 WHERE `rgt` >= :prgt
+					 AND `mid` = :mid
+					 ORDER BY `rgt` DESC
+					 ]]>
+				</rgt>
+				<lft>
+					<![CDATA[
+					UPDATE `data_hosipital_filter_sets` SET `lft` = `lft` + 2 
+					WHERE `lft` >= :prgt
+					AND `mid` = :mid
+					ORDER BY `lft` DESC
+					]]>
+				</lft>
+			</balance>
+			<base>
+				INSERT INTO `data_hosipital_filter_sets`
+		            (
+		             `name`,
+		             `mid`,
+		             `url`,
+		             `ord`,
+		             `lft`,
+		             `rgt`,
+		             `pid`
+		             )
+				VALUES (
+				        :name,
+				        :mid,
+				        :url,
+				        :ord,
+			            :prgt,
+			            :prgt+1,
+			            :pid
+				     );			
+			</base>		
+		
+	</add>
+	
+	<!-- 删除自己和所有孩子结点 -->
+	<remove>
+		<getSpan>
+			SELECT `lft`, `rgt`, `rgt` - `lft` + 1 as `span`,`mid` FROM `data_hosipital_filter_sets`
+				WHERE `sid` = :pid;
+		</getSpan>
+		<balance>
+			<self>
+				DELETE FROM `data_hosipital_filter_sets` 
+					WHERE 
+						`lft` BETWEEN :plft AND :prgt
+						 AND `mid` = :mid;
+			</self>
+			<rgt>
+				UPDATE `data_hosipital_filter_sets` SET `rgt` = `rgt` - :span 
+					WHERE 
+						`rgt` > :prgt
+						 AND `mid` = :mid;
+			</rgt>
+			<lft>
+				UPDATE `data_hosipital_filter_sets` SET `lft` = `lft` - :span 
+					WHERE 
+						`lft` > :prgt
+						 AND `mid` = :mid;
+			</lft>
+		</balance>
+	</remove>
+	
+	<!-- 返回字段有:sid,name,url,order,layout -->
+	<children>
+		SELECT 
+		   `sid`,
+		  `name`,
+		  `mid`,
+		  `ord`,
+		  `url`
+		 FROM `data_hosipital_filter_sets` 
+		 WHERE 
+		 	`pid` = :pid  AND 
+		 	`mid` = :mid
+		ORDER BY `ord` ASC,`sid` ASC
+	</children>
+	
+	<update>
+		UPDATE `data_hosipital_filter_sets`
+			SET 
+			  `name` = 'name',
+			  `url` = 'url',
+			  `order` = 'order',
+			WHERE `sid` = :sid;
+	</update>
+</filter_sets>

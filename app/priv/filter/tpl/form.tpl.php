@@ -13,14 +13,17 @@ $model = $data["model"];
 $info = $data["info"];
 $act = $data["act"];
 if ($act == "edit") {
-	$ret = $model->row($_REQUEST["sid"]);
+	$sid = intval($_REQUEST["sid"]);
+	$ret = $model->row($sid);
 	if(!$ret->isTrue()){
 		$this->showOpResult($info,$ret->info,"");
 	}
 	$def = $ret->return;
 	$at = "编辑";
 	$ua = "edit";
+	
 } else {
+	$sid = 0;
 	$def = array (
 			"type" => "set",
 			"data" => "",
@@ -36,29 +39,11 @@ if (isset ( $_SERVER ['HTTP_REFERER'] )) {
 	$ret_url = "";
 }
 
-$str_fields = array ();
-$num_fields = array ();
+$str_fields = $model->getDataDomainLikestr ();
+$num_fields = $model->getDataDomainRng ($sid);
 
-$tbname = "data_hosipital";
 
-$tbinfo = new mysqlTableInfo ( $tbname );
-
-foreach ( $tbinfo->getColumnNames () as $col ) {
-
-	$colinfo = new mysqlColumnInfo ( $tbname, $col );
-// 	var_dump($colinfo->getType ());
-	if (mysqlColumnInfo::getPdoParamType ( $colinfo->getType () ) == PDO::PARAM_INT) {
-		if(!$colinfo->isPk() && $model->chkRange($col)){
-			$num_fields [$col] = $col."(".$colinfo->getComment().")";
-		}
-	} else if (mysqlColumnInfo::getPdoParamType ( $colinfo->getType () ) == PDO::PARAM_STR) {
-		if($model->chkLikestr()){
-			$str_fields [$col] = $col."(".$colinfo->getComment().")";
-		}
-	}
-
-}
-$fields = explode ( ",", $colinfo->getLen () );
+$fields = explode ( ",", $model->getTypeDomain () );
 $fields_name = filterTypeMeta::getData();
 // var_dump($def);exit;
 
@@ -105,7 +90,7 @@ $fields_name = filterTypeMeta::getData();
 					value="<?php print $_REQUEST["sid"]?>" name="sid">
                     <?php endif;?>
                     <!-- text input -->
-                   <?php if ($at == "add"):?>
+                   <?php if ($act == "add"):?>
 				<div class="form-group">
 					<label>选择条件类型</label> <select id="typectl" class="form-control" name="type">
 						<option value="set" <?php if("set" == $def["type"]):?> selected
@@ -130,7 +115,7 @@ $fields_name = filterTypeMeta::getData();
 				<div class="form-group">
 					<label>补充数据</label> 
 					
-				<?php if ($at == "add"):?>	
+				<?php if ($act == "add"):?>	
 					<div id="data_container">
 					<?php if($def["type"] == "set"):?>
 					<input value="<?php if($def["type"] == "set"){print $def["data"];}?>" name="data" class="form-control" placeholder="以|分隔不同层级，以,分隔同一层级">
@@ -155,9 +140,17 @@ $fields_name = filterTypeMeta::getData();
 
 					<?php if($def["type"] == "set"):?>
 					<input value="<?php print $def["data"];?>" name="data" class="form-control">
+					<?php elseif ($def["type"] == "range"):?>
+					<select class="form-control" name="data">
+					<?php foreach ($model->getDataDomainRng($sid) as $field => $name): ?>
+					<option<?php if($field == $def["data"]){print " selected";}?> value="<?php print $field?>"><?php print $name?></option>
+					<?php endforeach;?>			
+					</select>	
 					<?php else:?>
-					<input type="hidden" value="<?php print $def["data"];?>" name="data" class="form-control">
-					<br><?php print $def["data"];?>
+					<br>
+					<?php foreach ($model->getDataDomainLikestr() as $field => $name): ?>
+					<input<?php if(in_array($field,explode(",",$def["data"]))){print " checked";}?> type="checkbox" name="data[]" value="<?php print $field?>"><?php print $name?>
+					<?php endforeach;?>	
 					<?php endif;?>
 				<?php endif?>
 				</div>

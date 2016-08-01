@@ -76,6 +76,17 @@ class filterController extends privController{
 		$this->model->rm(intval($msg["?sid"]));
 		$this->response->redirect($ret_url);
 	}
+	public function toggleAction(pmcaiMsg $msg){
+		$ret_url = $_SERVER["HTTP_REFERER"];
+		if(!isset($msg["?sid"])){
+			$this->response->_404();
+		}
+		$this->model->toggleEnabled(intval($msg["?sid"]));
+		$this->response->redirect($ret_url);
+	}
+	
+	
+	
 	public function editAction(pmcaiMsg $msg){
 		if ($msg->isPost()){
 			if($msg["?returl"]){
@@ -84,9 +95,18 @@ class filterController extends privController{
 				$ret_url = "";
 			}
 			
+			if(!isset($msg["data"])){
+				$this->view->showOpResult($this->priv->getUserInfo(), "DATA数据为空", $ret_url);
+			}
 			if (!isset($msg["sid"],$msg["data"],$msg["order"])){
 				$this->response->_404();
 			}
+			
+			
+			if(isset($msg["data"]) && is_array($msg["data"])){
+				$msg["data"] = join(",", $msg["data"]);
+			}
+			
 			$ret = $this->model->update($msg["sid"],$msg["data"],$msg["order"]);
 			
 			if($ret->isTrue()){

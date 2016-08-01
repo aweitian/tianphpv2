@@ -8,7 +8,6 @@
 require_once dirname ( __FILE__ ) . "/filterMeta.validator.php";
 require_once FILE_SYSTEM_ENTRY . "/lib/db/mysql/mysqlColumnInfo.php";
 require_once FILE_SYSTEM_ENTRY . "/lib/db/mysql/mysqlTableInfo.php";
-
 class filterMetaApi {
 	private $sqlManager;
 	private $db;
@@ -38,32 +37,30 @@ class filterMetaApi {
 		}
 		
 		if ($type == "range") {
-			if (!$this->chkRange ( $data )) {
+			if (! $this->chkRange ( $data )) {
 				return new rirResult ( 4, "数据库中已存在此条件" );
 			}
-			//检查字段 是否存在于表中
+			// 检查字段 是否存在于表中
 			$tbname = "data_hosipital";
 			$tbinfo = new mysqlTableInfo ( $tbname );
 			$cols = $tbinfo->getColumnNames ();
-			if (!in_array($data, $cols)){
-				return new rirResult ( 6, $field."字段在表中不存在" );
+			if (! in_array ( $data, $cols )) {
+				return new rirResult ( 6, $field . "字段在表中不存在" );
 			}
-			
 		} else if ($type == "likestr") {
-			if (!$this->chkLikestr ()) {
+			if (! $this->chkLikestr ()) {
 				return new rirResult ( 5, "数据库中已存在此条件" );
 			}
-			//检查字段 是否存在于表中
+			// 检查字段 是否存在于表中
 			$tbname = "data_hosipital";
 			$tbinfo = new mysqlTableInfo ( $tbname );
 			$cols = $tbinfo->getColumnNames ();
-			$userFields = explode(",", $data);
-			foreach ($userFields as $field){
-				if(!in_array($field, $cols)){
-					return new rirResult ( 6, $field."字段在表中不存在" );
+			$userFields = explode ( ",", $data );
+			foreach ( $userFields as $field ) {
+				if (! in_array ( $field, $cols )) {
+					return new rirResult ( 6, $field . "字段在表中不存在" );
 				}
 			}
-			
 		}
 		
 		$sql = $this->sqlManager->getSql ( "/filter_meta/add" );
@@ -83,7 +80,7 @@ class filterMetaApi {
 	
 	/**
 	 * 检查字段是否可以添加
-	 * 
+	 *
 	 * @param string $field        	
 	 * @return bool
 	 */
@@ -98,7 +95,7 @@ class filterMetaApi {
 	
 	/**
 	 * 检查是否可以添加模糊搜索
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function chkLikestr() {
@@ -109,19 +106,19 @@ class filterMetaApi {
 	
 	/**
 	 * 返回1OK,0 FAILED
-	 * 
+	 *
 	 * @param int $pid        	
 	 * @return int;
 	 */
-	public function toggleEnabled() {
+	public function toggleEnabled($sid) {
 		$sql = $this->sqlManager->getSql ( "/filter_meta/toggle_enabled" );
-		$bnd = array ();
+		$bnd = array ("sid" => $sid);
 		return $this->db->exec ( $sql, $bnd );
 	}
 	
 	/**
 	 * 返回1OK,0 FAILED
-	 * 
+	 *
 	 * @param int $pid        	
 	 * @return int;
 	 */
@@ -133,40 +130,13 @@ class filterMetaApi {
 			return new rirResult ( 3, "顺序只能为数字" );
 		}
 		
-// 		$sql = $this->sqlManager->getSql("/filter_meta/row");
-// 		$row = $this->db->fetch($sql, array("sid" => $sid));
-// 		if(empty($row)){
-// 			return new rirResult ( 7, "数据不存在" );
-// 		}
-// 		$type = $row["type"];
-// 		if ($type == "range") {
-// 			if (!$this->chkRange ( $data )) {
-// 				return new rirResult ( 4, "数据库中已存在此条件" );
-// 			}
-// 			//检查字段 是否存在于表中
-// 			$tbname = "data_hosipital";
-// 			$tbinfo = new mysqlTableInfo ( $tbname );
-// 			$cols = $tbinfo->getColumnNames ();
-// 			if (!in_array($data, $cols)){
-// 				return new rirResult ( 6, $field."字段在表中不存在" );
-// 			}
-				
-// 		} else if ($type == "likestr") {
-// 			if (!$this->chkLikestr ()) {
-// 				return new rirResult ( 5, "数据库中已存在此条件" );
-// 			}
-// 			//检查字段 是否存在于表中
-// 			$tbname = "data_hosipital";
-// 			$tbinfo = new mysqlTableInfo ( $tbname );
-// 			$cols = $tbinfo->getColumnNames ();
-// 			$userFields = explode(",", $data);
-// 			foreach ($userFields as $field){
-// 				if(!in_array($field, $cols)){
-// 					return new rirResult ( 6, $field."字段在表中不存在" );
-// 				}
-// 			}
-				
-// 		}
+		$sql = $this->sqlManager->getSql("/filter_meta/row");
+		$row = $this->db->fetch($sql, array("sid" => $sid));
+		if(empty($row)){
+			return new rirResult ( 7, "数据不存在" );
+		}
+		$type = $row["type"];
+		
 		
 		$sql = $this->sqlManager->getSql ( "/filter_meta/update" );
 		$bnd = array (
@@ -175,16 +145,83 @@ class filterMetaApi {
 				"order" => $order 
 		);
 		$row = $this->db->exec ( $sql, $bnd );
-		if ($row > 0){
-			return new rirResult(0,"ok");
-		}else{
-			return new rirResult(1,$this->db->getErrorInfo());
+		if ($row > 0) {
+			return new rirResult ( 0, "ok" );
+		} else {
+			return new rirResult ( 1, $this->db->getErrorInfo () );
 		}
+	}
+	/**
+	 *
+	 * @param int $sid
+	 *        	(add 0 /edit > 0)
+	 * @return array
+	 */
+	public function getDataDomainRng($sid = 0) {
+		$tbname = "data_hosipital";
+		$num_fields = array ();
+		$tbinfo = new mysqlTableInfo ( $tbname );
+		if ($sid) {
+			$row = $this->row ( $sid );
+			if ($row->isTrue ()) {
+				$appCol = $row->return ["data"];
+			} else {
+				$appCol = "";
+			}
+		} else {
+			$appCol = "";
+		}
+		foreach ( $tbinfo->getColumnNames () as $col ) {
+			
+			$colinfo = new mysqlColumnInfo ( $tbname, $col );
+			if (mysqlColumnInfo::getPdoParamType ( $colinfo->getType () ) == PDO::PARAM_INT) {
+				if (! $colinfo->isPk () && $this->chkRange ( $col )) {
+					$num_fields [$col] = $col . "(" . $colinfo->getComment () . ")";
+				} else if ($sid > 0 && $appCol) {
+					$num_fields [$appCol] = $col . "(" . $colinfo->getComment () . ")";
+				}
+			}
+		}
+		return $num_fields;
+	}
+	/**
+	 * 编辑和添加DATA DOMAIN一样
+	 * @return array
+	 */
+	public function getDataDomainLikestr() {
+		$tbname = "data_hosipital";
+		$str_fields = array ();
+		$tbinfo = new mysqlTableInfo ( $tbname );
+		
+		foreach ( $tbinfo->getColumnNames () as $col ) {
+			$colinfo = new mysqlColumnInfo ( $tbname, $col );
+			if (mysqlColumnInfo::getPdoParamType ( $colinfo->getType () ) == PDO::PARAM_STR) {
+				$str_fields [$col] = $col . "(" . $colinfo->getComment () . ")";
+			}
+		}
+		return $str_fields;
 	}
 	
 	/**
-	 * 删除
+	 * 获取 TYPE 字段  DOMAIN
 	 * 
+	 * @param int $sid        	
+	 */
+	public function getTypeDomain() {
+		
+		// if (!$this->chkRange ( $data )) {
+		// return new rirResult ( 4, "数据库中已存在此条件" );
+		// }
+		// //检查字段 是否存在于表中
+		$tbname = "data_hosipital_filter_meta";
+		$col = new mysqlColumnInfo( $tbname, "type" );
+		return $col->getLen();
+	}
+
+	
+	/**
+	 * 删除
+	 *
 	 * @param int $sid        	
 	 * @return rirResult
 	 */
@@ -207,7 +244,7 @@ class filterMetaApi {
 	/**
 	 * 返回一行记录
 	 * 返回字段:sid,type,data,order
-	 * 
+	 *
 	 * @return rirResult;
 	 */
 	public function row($sid) {
@@ -225,7 +262,7 @@ class filterMetaApi {
 	
 	/**
 	 * 返回字段:sid,name,url,order,layout
-	 * 
+	 *
 	 * @return rirResult
 	 */
 	public function all() {

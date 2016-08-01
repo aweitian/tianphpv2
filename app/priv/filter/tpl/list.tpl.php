@@ -51,13 +51,13 @@ $fields_name = filterTypeMeta::getData();
                       <td><?php print $item["sid"]?></td>
                       <td><?php print $fields_name[$item["type"]]?></td>
                       <td><?php print $item["data"]?></td>
-                      <td><?php if( $item["enabled"] == "1" ):?>可用<?php else:?>不可用<?php endif;?></td>
+                      <td><?php if( $item["enabled"] == "1" ):?>可用<?php else:?>已禁用<?php endif;?></td>
                       <td><?php print $item["order"]?></td>
                       <td>
                         <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/filter/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
                         <a class="btn btn-danger" href="<?php print HTTP_ENTRY?>/priv/filter/rm?sid=<?php print $item["sid"]?>">删除</a>
                       	<a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/filter/toggle?sid=<?php print $item["sid"]?>"><?php if( $item["enabled"] == "1" ):?><i class="glyphicon glyphicon-remove"></i> 禁用<?php else:?><i class="glyphicon glyphicon-ok"></i> 启用<?php endif;?></a>
-                        
+                      	<a class="btn bg-olive" <?php if($item["type"] != "set"):?>disabled<?php else:?>href="<?php print HTTP_ENTRY?>/priv/filterset?mid=<?php print $item["sid"]?>"<?php endif?>>管理集合</a>
                       </td>
                     </tr>
                     

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hosipital_filterset>
+	<exists>
+		SELECT
+		  `hid`,
+		  `mid`,
+		  `fsid`
+		FROM `data_hosipital_rel`
+		WHERE `hid` = :hid AND `mid` = :mid
+	</exists>
+	<all>
+		SELECT
+		  `hid`,
+		  `fsid`
+		FROM `data_hosipital_rel`
+		WHERE `hid` = :hid
+	</all>
+	
+	<!-- fsid,mid -->
+	<add>
+		INSERT INTO `data_hosipital_rel` (`fsid`,`hid`,`mid`) 
+			SELECT 
+				`data_hosipital_filter_sets`.`sid`,
+				`data_hosipital`.`sid`,
+				`data_hosipital_filter_sets`.`mid`
+			FROM `data_hosipital_filter_sets`
+			INNER JOIN `data_hosipital`
+			WHERE `data_hosipital_filter_sets`.`sid` = :fsid
+			AND `data_hosipital`.`sid` = :hid
+	</add>
+	<rm>
+		DELETE
+		FROM `data_hosipital_rel`
+		WHERE `hid` = :hid
+		    AND `mid` = :mid;
+	</rm>
+	
+	<!-- newfsid,oldfsid,hid -->
+	<update>
+		UPDATE `data_hosipital_rel`
+			SET `fsid` = :newfsid
+			WHERE `mid` = (SELECT `mid` FROM `data_hosipital_filter_sets` WHERE `sid` = :oldfsid)
+			    AND `hid` = :hid;
+	</update>
+	
+	
+	<!-- 参数:hid -->
+	<!-- 返回这个医院对集合的全部选择 -->
+	<!-- 
+		data           name          name                      
+	==============================================================
+	城市,区域         		 普陀区           		上海九龙男子医院  
+	科室类别          		 男科            			上海九龙男子医院  
+	科室类别          		 脊柱外科          		上海九龙男子医院  
+	擅长疾病           		(NULL)        	上海九龙男子医院  
+	aa,bb          	(NULL)        	上海九龙男子医院  
+	 -->
+	<showDetail>
+	
+		SELECT 
+				`data_hosipital_filter_meta`.`sid` as `mid`,
+				`data_hosipital_filter_meta`.`data` as `s_name`,
+				`data_hosipital_filter_sets`.`name` as `u_name`,
+				`data_hosipital`.`name`	as `h_name`
+			FROM `data_hosipital_filter_meta`
+			LEFT JOIN `data_hosipital_rel` ON `data_hosipital_rel`.`mid` = `data_hosipital_filter_meta`.`sid`  AND `data_hosipital_rel`.`hid` = :hid
+			LEFT JOIN `data_hosipital` ON `data_hosipital`.`sid` = :hid
+			LEFT JOIN `data_hosipital_filter_sets` ON `data_hosipital_rel`.`fsid` = `data_hosipital_filter_sets`.sid
+			WHERE `data_hosipital_filter_meta`.`type` = 'set'
+			
+	</showDetail>
+	
+	
+	<!-- 输入参数:hid -->
+	<!-- 返回字段:attr,name -->
+	<data>
+		SELECT 
+	 
+				CONCAT(`data_hosipital_filter_meta`.`data`,'(',`data_hosipital_filter_sets`.`name`,')') AS attr,
+				`data_hosipital`.`name`
+			
+			FROM `data_hosipital_rel`
+			LEFT JOIN `data_hosipital_filter_sets` ON `data_hosipital_filter_sets`.`sid` = `data_hosipital_rel`.`fsid`
+			LEFT JOIN `data_hosipital` ON `data_hosipital`.`sid` = `data_hosipital_rel`.`hid`
+			LEFT JOIN `data_hosipital_filter_meta` ON `data_hosipital_filter_sets`.`mid` = `data_hosipital_filter_meta`.`sid`
+			WHERE `data_hosipital_rel`.`hid` = :hid
+	</data>
+	<!-- 查找和某个条件不关联的医院ID,NAME -->
+	<homeless>
+		<query>
+			SELECT `data_hosipital`.`sid`,`data_hosipital`.`name`
+				FROM `data_hosipital`
+				WHERE
+				`data_hosipital`.`sid`
+				NOT IN (SELECT `hid` FROM `data_hosipital_rel` WHERE `mid` = :mid)	
+				LIMIT :offset,:length	
+		</query>
+		<cnt>
+			SELECT count(`data_hosipital`.`sid`) as `cnt`
+				FROM `data_hosipital`
+				WHERE
+				`data_hosipital`.`sid`
+				NOT IN (SELECT `hid` FROM `data_hosipital_rel` WHERE `mid` = :mid)
+		</cnt>
+	</homeless>
+</hosipital_filterset>
+
+

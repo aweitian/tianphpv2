@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hosipital>
+	<add>
+		INSERT INTO `data_hosipital`
+            (
+             `name`,
+             `dis`,
+             `hot`,
+             `expert`)
+		VALUES (
+		        :name,
+		        :dis,
+		        :hot,
+		        :expert);
+	</add>
+	<rm>
+		DELETE FROM `data_hosipital` WHERE `sid`=:sid
+	</rm>
+	<update>
+		UPDATE `data_hosipital`
+			SET
+			  `name` = :name,
+			  `dis` = :dis,
+			  `hot` = :hot,
+			  `expert` = :expert
+			WHERE `sid` = :sid;
+	</update>
+	<row>
+		SELECT * FROM `data_hosipital` WHERE `sid`=:sid
+	</row>
+	<all>
+		SELECT 
+			*
+		 FROM `data_hosipital` 
+		 LIMIT :offset,:length
+	</all>
+	<cnt>
+		SELECT COUNT(`sid`) as `cnt` 
+		FROM `data_hosipital` 
+	
+	</cnt>
+</hosipital>
+
+
+

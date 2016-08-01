@@ -15,6 +15,10 @@ class filterModel extends privModel{
 		$api = new filterMetaApi();
 		return $api->devAll();
 	}
+	public function getTypeDomain(){
+		$api = new filterMetaApi();
+		return $api->getTypeDomain();
+	}
 	/**
 	 *
 	 * @param string $type        	
@@ -55,9 +59,9 @@ class filterModel extends privModel{
 	 * @param int $pid
 	 * @return int;
 	 */
-	public function toggleEnabled(){
+	public function toggleEnabled($sid){
 		$api = new filterMetaApi();
-		return $api->toggleEnabled();
+		return $api->toggleEnabled($sid);
 	}
 	
 	/**
@@ -70,7 +74,24 @@ class filterModel extends privModel{
 		return $api->update($sid, $data, $order);
 	}
 	
-	
+	/**
+	 *
+	 * @param int $sid
+	 *        	(add 0 /edit > 0)
+	 * @return array
+	 */
+	public function getDataDomainRng($sid = 0) {
+		$api = new filterMetaApi();
+		return $api->getDataDomainRng($sid);
+	}
+	/**
+	 * 编辑和添加DATA DOMAIN一样
+	 * @return array
+	 */
+	public function getDataDomainLikestr() {
+		$api = new filterMetaApi();
+		return $api->getDataDomainLikestr();
+	}
 	
 	/**
 	 * 删除

@@ -5,13 +5,13 @@
  * Desc:
  * 		
  */
-require_once dirname ( __FILE__ ) . "/tree.validator.php";
-class treeApi {
+require_once dirname ( __FILE__ ) . "/filterSet.validator.php";
+class filterSetApi {
 	private $sqlManager;
 	private $db;
 	public function __construct() {
 		$this->db = new mysqlPdoBase ();
-		$this->sqlManager = new sqlManager ( FILE_SYSTEM_ENTRY . "/app/sql/priv/tree.xml" );
+		$this->sqlManager = new sqlManager ( FILE_SYSTEM_ENTRY . "/app/sql/priv/filter_sets.xml" );
 	}
 	
 	/**
@@ -23,21 +23,24 @@ class treeApi {
 	 * @param string $layout        	
 	 * @return rirResult
 	 */
-	public function add($pid, $name, $url, $order = 0, $layout = "") {
+	public function add($pid, $mid, $name, $url, $order = 0) {
 		// validate
-		if (! treeValidator::isValidName( $name )) {
-			return new rirResult ( 1, "栏目名不能为空" );
+		if (! filterSetValidator::isValidName( $name )) {
+			return new rirResult ( 1, "集合元素名不能为空" );
 		}
-		if (! treeValidator::isValidUrl ( $url )) {
-			return new rirResult ( 2, "生成网址只能是 /,字母，数字，横线，下划线" );
+		if (! filterSetValidator::isValidUrl ( $url )) {
+			return new rirResult ( 2, "网址只能是 字母，数字，横线，下划线" );
 		}
-		if (! validator::isInt ( $order )) {
+		if (! filterSetValidator::isValidOrder( $order )) {
 			return new rirResult ( 3, "顺序只能为数字" );
+		}
+		if (! filterSetValidator::isValidMid( $mid )) {
+			return new rirResult ( 4, "MID只能为数字" );
 		}
 		
 		// 先检查PID结点是否存在
 		if ($pid != 0){
-			$sql = $this->sqlManager->getSql ( "/tree/row_full" );
+			$sql = $this->sqlManager->getSql ( "/filter_sets/row_full" );
 			$bnd = array (
 					"sid" => $pid 
 			);
@@ -48,8 +51,8 @@ class treeApi {
 		} else {
 			//虚拟的根结点
 			$row = array("pid" => null,"lft" => 0);
-			$sql = $this->sqlManager->getSql("/tree/virtualRoot/rgt");
-			$data = $this->db->fetch($sql, array());
+			$sql = $this->sqlManager->getSql("/filter_sets/virtualRoot/rgt");
+			$data = $this->db->fetch($sql, array("mid" => $mid));
 			if(is_null($data["rgt"])){
 				$row["rgt"] = 1;
 			} else {
@@ -61,23 +64,25 @@ class treeApi {
 		// 获取当前结点的LEFT值
 		$rgt = $row ["rgt"];
 		// 平衡整个树
-		$sql = $this->sqlManager->getSql ( "/tree/add/balance/rgt" );
+		$sql = $this->sqlManager->getSql ( "/filter_sets/add/balance/rgt" );
 		$bnd = array (
+				"mid" => $mid ,
 				"prgt" => $rgt 
 		);
 		$this->db->exec ( $sql, $bnd );
-		$sql = $this->sqlManager->getSql ( "/tree/add/balance/lft" );
+		$sql = $this->sqlManager->getSql ( "/filter_sets/add/balance/lft" );
 		$bnd = array (
+				"mid" => $mid ,
 				"prgt" => $rgt 
 		);
 		$this->db->exec ( $sql, $bnd );
 		// 插入新结点
-		$sql = $this->sqlManager->getSql ( "/tree/add/base" );
+		$sql = $this->sqlManager->getSql ( "/filter_sets/add/base" );
 		$bnd = array (
 				"name" => $name,
 				"url" => $url,
-				"order" => $order,
-				"layout" => $layout,
+				"ord" => $order,
+				"mid" => $mid,
 				"prgt" => $rgt ,
 				"pid" => $pid 
 		);
@@ -88,21 +93,50 @@ class treeApi {
 			}
 		}
 		return new rirResult ( 0, "ok", $sid );
-	
 	}
+	
+	/**
+	 * 
+	 * @param int $mid
+	 * @return array
+	 */
+	public function getDepthData($mid){
+		$sql = $this->sqlManager->getSql ( "/filter_sets/getDepthData" );
+		$bnd = array (
+				"mid" => $mid ,
+		);
+		return $this->db->fetchAll( $sql, $bnd );
+	}
+	
 	
 	/**
 	 * 返回NAME的数组
 	 * @param int $pid
 	 * @return array;
 	 */
-	public function path($pid){
-		$sql = $this->sqlManager->getSql ( "/tree/path" );
+	public function path($pid,$mid){
+		$sql = $this->sqlManager->getSql ( "/filter_sets/path" );
 		$bnd = array (
-				"pid" => $pid
+				"pid" => $pid,
+				"mid" => $mid
 		);
 		return $this->db->fetchAll($sql, $bnd);
 	}
+
+	
+// 	/**
+// 	 * 返回NAME的数组
+// 	 * @param int $pid
+// 	 * @return array;
+// 	 */
+// 	public function getSubDepth($pid,$mid){
+// 		$sql = $this->sqlManager->getSql ( "/filter_sets/path" );
+// 		$bnd = array (
+// 				"pid" => $pid,
+// 				"mid" => $mid
+// 		);
+// 		return $this->db->fetchAll($sql, $bnd);
+// 	}
 	
 	
 	
@@ -113,7 +147,7 @@ class treeApi {
 	 */
 	public function rm($pid) {
 		//先检查PID结点是否存在,并计算待删除结点的LEFT,RIGHT,SPAN
-		$sql = $this->sqlManager->getSql("/tree/remove/getSpan");
+		$sql = $this->sqlManager->getSql("/filter_sets/remove/getSpan");
 		$bnd = array (
 				"pid" => $pid
 		);
@@ -124,25 +158,27 @@ class treeApi {
 		$span = $row["span"];
 		$left = $row["lft"];
 		$right = $row["rgt"];
-		
+		$mid = $row["mid"];
 		
 // 		var_dump($span,$left,$right);exit;
 		
-		$sql = $this->sqlManager->getSql("/tree/remove/balance/self");
+		$sql = $this->sqlManager->getSql("/filter_sets/remove/balance/self");
 		$bnd = array(
 			"plft" => $left,	
 			"prgt" => $right,	
+			"mid" => $mid,	
 		);
 		$ret = $this->db->exec($sql, $bnd);
 		
 		//平衡树
-		$sql = $this->sqlManager->getSql("/tree/remove/balance/rgt");
+		$sql = $this->sqlManager->getSql("/filter_sets/remove/balance/rgt");
 		$bnd = array(
 				"span" => $span,
 				"prgt" => $right,
+				"mid" => $mid,
 		);
 		$this->db->exec($sql, $bnd);
-		$sql = $this->sqlManager->getSql("/tree/remove/balance/lft");
+		$sql = $this->sqlManager->getSql("/filter_sets/remove/balance/lft");
 		$this->db->exec($sql, $bnd);
 		if ($ret == 0) {
 			if ($this->db->hasError ()) {
@@ -159,9 +195,9 @@ class treeApi {
 	 * 返回字段:sid,name,url,order,layout
 	 * @return rirResult;
 	 */
-	public function getChildren($pid) {
-		$sql = $this->sqlManager->getSql ( "/tree/children" );
-		$ret = $this->db->fetchAll ( $sql, array ("pid" => $pid) );
+	public function getChildren($pid,$mid) {
+		$sql = $this->sqlManager->getSql ( "/filter_sets/children" );
+		$ret = $this->db->fetchAll ( $sql, array ("pid" => $pid,"mid" => $mid) );
 		if (empty ( $ret )) {
 			if ($this->db->hasError ()) {
 				return new rirResult ( 1, $this->db->getErrorInfo () );
@@ -179,7 +215,7 @@ class treeApi {
 	 * @return rirResult
 	 */
 	public function row($sid) {
-		$sql = $this->sqlManager->getSql ( "/tree/row" );
+		$sql = $this->sqlManager->getSql ( "/filter_sets/row" );
 		$ret = $this->db->fetch ( $sql, array (
 				"sid" => $sid 
 		) );
@@ -194,29 +230,51 @@ class treeApi {
 	/**
 	 * 
 	 * @param int $sid
+	 * @return rirResult return = depth
+	 */
+	public function getDepth($sid){
+// 		if($sid == 0)return -1;
+		$sql = $this->sqlManager->getSql ( "/filter_sets/depth" );
+		$ret = $this->db->fetch ( $sql, array (
+				"sid" => $sid
+		) );
+		if (empty ( $ret )) {
+			if ($this->db->hasError ()) {
+				return new rirResult ( 1, $this->db->getErrorInfo () );
+			}
+		}
+		return new rirResult ( 0, "ok", $ret["depth"] );
+		
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @param int $sid
 	 * @param string $name
 	 * @param string $url
 	 * @param int $order
 	 * @param string $layout
 	 * @return rirResult
 	 */
-	public function update($sid,  $name, $url, $order = 0, $layout = "") {
+	public function update($sid,  $name, $url, $order = 0) {
 		// validate
-		if (! treeValidator::isValidTags ( $text )) {
+		if (! filterSetValidator::isValidTags ( $text )) {
 			return new rirResult ( 1, "栏目名不能为空" );
 		}
-		if (! treeValidator::isValidUrl ( $url )) {
+		if (! filterSetValidator::isValidUrl ( $url )) {
 			return new rirResult ( 2, "生成网址只能是 /,字母，数字，横线，下划线" );
 		}
-		if (! validator::isInt ( $order )) {
+		if (! filterSetValidator::isValidOrder( $order )) {
 			return new rirResult ( 3, "顺序只能为数字" );
 		}
-		$sql = $this->sqlManager->getSql ( "/tree/update" );
+		$sql = $this->sqlManager->getSql ( "/filter_sets/update" );
 		$bnd = array (
 					"name" => $name,
 					"url" => $url,
 					"order" => $order,
-					"layout" => $layout,
+					"sid" => $sid,
 			);
 		$sid = $this->db->exec ( $sql, $bnd );
 		if ($sid == 0) {

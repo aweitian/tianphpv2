@@ -51,7 +51,6 @@
 // }
 // $test = "我爱中国国";
 // echo preg_match_all('/([\xC0-\xFF][\x80-\xBF]+){2}|([\xC0-\xFF][\x80-\xBF]+)/',$test,$match) ? join("<br>",$match[0]) : "";
-$ret = range(1,9);
-shuffle($ret);
-var_dump(array_slice($ret,0,$length)) ;
+
+var_dump(array_merge(array(1,2),array(2))) ;
 ?>
