@@ -60,6 +60,7 @@ function css_active_control($links){
             		"/tree"=>"栏目管理",
             		"/filter"=>"条件管理",
             		"/hosipital"=>"医院管理",
+            		"/hosipital_filter"=>"搜索测试",
             )?>
             <li class="treeview<?php print css_active_control($links)?>">
               <a href="#">

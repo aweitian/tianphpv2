@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hosipital_filter>
+	
+	<!-- mid是data_hosipital_filter_meta表中的ID -->
+	<!-- nid是条件中的ID值 -->
+	<!-- 返回一个集合，data_hosipital_rel表中FSID存在于这个集合中就是命中 -->
+	<cond_set>
+		SELECT node.sid
+			FROM 
+			`data_hosipital_filter_sets` AS parent
+			INNER JOIN `data_hosipital_filter_sets` AS node ON `node`.mid = parent.mid
+			WHERE 
+			node.lft BETWEEN parent.lft AND parent.rgt
+			AND parent.sid = :nid
+			AND parent.`mid` = :mid
+	</cond_set>
+
+
+
+	<!-- count_mid 总共有几个条件 -->
+	<getHid>
+		<base>
+			SELECT `data_hosipital_rel`.`hid` FROM 
+				`data_hosipital_rel`
+				WHERE 
+				
+				:where
+				
+				GROUP BY `hid`
+				HAVING COUNT(`data_hosipital_rel`.`hid`) = :count_mid
+		</base>
+		
+		
+		
+		
+		<!-- 
+		`data_hosipital_rel`.`fsid` IN (
+				:cond_set1
+			)
+		OR 
+		`data_hosipital_rel`.`fsid` IN (
+				:cond_set2
+			)
+		OR ...
+		
+		 -->
+		<where>
+			
+			`data_hosipital_rel`.`fsid` IN (
+					:cond_set
+				)
+		</where>
+	
+	</getHid>
+	
+	<!-- 输入的参数格式大概是这样 -->
+	<!-- 
+		array(
+			array("mid","nid"),
+			array("mid","nid"),
+			array("mid","nid"),
+			array("mid","nid"),
+			array("mid","nid"),
+			...
+		) 
+	-->
+	
+	<main>
+		SELECT `data_hosipital`.`name` FROM `data_hosipital`
+			WHERE `sid` IN (
+				:getHid
+			)
+	</main>
+</hosipital_filter>
