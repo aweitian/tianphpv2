@@ -1,0 +1,733 @@
+*{margin: 0;padding: 0;list-style: none;}
+html {font-size: 100%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin: 0;padding: 0;}
+body{font-family: 'microsoft yahei','Hiragino Sans GB',Helvetica;background:#f0f0f0;}
+a{text-decoration: none;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-block;}
+* html .clearfix{height:1%;}
+.clearfix{display:block;}
+.head_top{
+    height: 40px;
+    background: #ffffff;
+}
+.head_top .c_logo{
+    display: block;
+    float: left;
+    width: 98px;
+    height: 40px;
+    background:url("../images/index_clogo.png") no-repeat 15px 8px;
+    background-size: 98px 24px;
+    padding-left: 15px;
+}
+.head_top .c_ad{
+    display: block;
+    float: right;
+    width: 103px;
+    height: 40px;
+    background:url("../images/index_helplogo.png") no-repeat left 14px;
+    background-size: 103px 14px;
+    padding-right: 15px;
+}
+.find_doctor{
+    padding: 15px 15px 0 15px;
+    background:#ffffff;
+}
+.find_doctor .title_tips{
+    width: 56%;
+    height: 32px;
+    position: relative;
+    margin: 0 auto;
+}
+.find_doctor .title_tips .line{
+    position: absolute;
+    z-index: 1;
+    top: 15px;
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #c8c8c8;
+}
+.find_doctor .title_tips h2{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -27px;
+    z-index: 2;
+    width: 54px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 12px;
+    color: #505050;
+    background: #ffffff;
+}
+.find_doctor .search_outer{
+    position: relative;
+    height: 34px;
+    border:#b4b4b4 1px solid;
+    border-radius: 34px;
+    background:#ffffff url("../images/index_search_right.png") no-repeat right 10px;
+    background-size: 40px 14px;
+    overflow: hidden;
+    padding-right: 48px;
+    padding-left: 24px;
+}
+.find_doctor .search_outer .right_btn{
+    display: block;
+    width: 45px;
+    height: 34px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-top-right-radius: 34px;
+    border-bottom-right-radius: 34px;
+}
+.find_doctor .search_outer .shu_line{
+    position: absolute;
+    right: 40px;
+    top: 8px;
+    display: block;
+    width: 1px;
+    height: 19px;
+    background:#b4b4b4;
+}
+.find_doctor .search_outer input{
+    border:0 none;
+    outline: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+    height: 34px;
+    line-height: 34px;
+    font-size: 13px;
+    color: #969696;
+    width: 100%;
+    -webkit-appearance: none;
+}
+.find_doctor .search_outer .search_btn{
+    height: 65px;
+    background:#ffffff;
+}
+.find_doctor .search_btn .btnleft{
+    float: left;
+    width: 50%;
+    padding: 5px 0 15px 0;
+}
+.find_doctor .search_btn .btnright{
+    float: right;
+    width: 50%;
+    padding: 5px 0 15px 0;
+}
+.find_doctor .search_btn a{
+    display: block;
+    height: 35px;
+    text-indent: 28%;
+    line-height: 35px;
+    border-radius: 35px;
+    color: #ffffff;
+    font-size: 13px;
+    text-align: left;
+}
+.find_doctor .search_btn a.left_a{
+    background:#fffae6 url("../images/index_searchbtn01.png") no-repeat 13% 9px;
+    background-size: 16px 16px;
+    margin-right: 5px;
+    color: #000000;
+    border: #ffa000 1px solid;
+}
+.find_doctor .search_btn a.right_a{
+    background:#ecf6ff url("../images/index_searchbtn02.png") no-repeat 14% 10px;
+    background-size: 16px 16px;
+    margin-left: 5px;
+    color: #000000;
+    border: #46a0f0 1px solid;
+}
+.button_list{
+    margin-top: 6px;
+    background:#ffffff;
+    line-height: 18px;
+}
+.button_list .left_list{
+    float: left;
+    width: 50%;
+    overflow: hidden;
+}
+.button_list .right_list{
+    float: right;
+    width: 50%;
+    overflow: hidden;
+}
+.button_list a{
+    display: block;
+    position: relative;
+}
+.button_list .left_list .ask_online{
+    text-align: center;
+    height: 130px;
+    border-bottom:#dcdcdc 1px solid;
+    border-right:#dcdcdc 1px solid;
+}
+.button_list .left_list .ask_byphone{
+    text-align: center;
+    height: 65px;
+    border-right:#dcdcdc 1px solid;
+}
+.button_list .right_list .order_menzhen{
+    text-align: center;
+    height: 65px;
+    border-bottom:#dcdcdc 1px solid;
+}
+.button_list .right_list .order_pinzhi{
+    text-align: center;
+    height: 65px;
+    border-bottom:#dcdcdc 1px solid;
+    margin-top: -1px;
+}
+.button_list .right_list .order_kuaisu{
+    text-align: center;
+    height: 65px;
+}
+.button_list .left_list .zixun_ab{
+    position: absolute;
+    top: 50%;
+    margin-top: -65px;
+    left: 50%;
+    margin-left: -80px;
+    display: block;
+    text-align: center;
+    width: 160px;
+    height: 69px;
+    padding-top: 61px;
+    color: #000000;
+    font-size: 14px;
+    background:url("../images/index_btnlist01.png") no-repeat center 28px;
+    background-size: 31px 28px;
+}
+.button_list .gray{
+    color: #787878;
+    font-size: 12px;
+}
+.button_list .right_list .dianhua_ab{
+    position: absolute;
+    top: 50%;
+    margin-top: -33px;
+    left: 50%;
+    margin-left: -80px;
+    display: block;
+    text-align: center;
+    width: 124px;
+    height: 52px;
+    padding-top: 13px;
+    padding-left: 36px;
+    color: #000000;
+    font-size: 14px;
+    background:url("../images/index_btnlist02.png") no-repeat 19px 22px;
+    background-size: 19px 20px;
+}
+.button_list .right_list .menzhen_ab{
+    position: absolute;
+    top: 50%;
+    margin-top: -33px;
+    left: 50%;
+    margin-left: -80px;
+    display: block;
+    text-align: center;
+    width: 116px;
+    height: 52px;
+    padding-top: 13px;
+    padding-left: 44px;
+    color: #000000;
+    font-size: 14px;
+    background:url("../images/index_btnlist03.png") no-repeat 20px 21px;
+    background-size: 22px 22px;
+}
+.button_list .right_list .pinzhi_ab{
+    position: absolute;
+    top: 50%;
+    margin-top: -33px;
+    left: 50%;
+    margin-left: -80px;
+    display: block;
+    text-align: center;
+    width: 116px;
+    height: 52px;
+    padding-top: 13px;
+    padding-left: 44px;
+    color: #000000;
+    font-size: 14px;
+    background:url("../images/index_btnlist04.png") no-repeat 21px 16px;
+    background-size: 22px 27px;
+}
+.button_list .right_list .kuaisu_ab{
+    position: absolute;
+    top: 50%;
+    margin-top: -33px;
+    left: 50%;
+    margin-left: -80px;
+    display: block;
+    text-align: center;
+    width: 116px;
+    height: 52px;
+    padding-top: 13px;
+    padding-left: 44px;
+    color: #000000;
+    font-size: 14px;
+    background:url("../images/index_btnlist05.png") no-repeat 24px 20px;
+    background-size: 20px 22px;
+}
+.finddoctor_list{
+    margin-top: 6px;
+    background-color:#ffffff;
+}
+.finddoctor_list .list_nav{
+    height: 40px;
+    line-height: 40px;
+    border-bottom: #dcdcdc 1px solid;
+}
+.finddoctor_list .list_nav li{
+    width: 33.3%;
+    height: 40px;
+    float: left;
+    text-align: center;
+    font-size: 14px;
+    color: #646464;
+}
+.finddoctor_list .list_nav li a{
+    display: block;
+    height: 100%;
+    color: #646464;
+}
+.finddoctor_list .list_nav li.curli{
+    color: #46a0f0;
+    border-bottom: #46a0f0 2px solid;
+    margin-top: -1px;
+}
+.finddoctor_list{
+    background-color:#ffffff;
+}
+.finddoctor_list .nav_content{
+    height: 210px;
+    position: relative;
+}
+.finddoctor_list .nav_content .province_list{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 90px;
+    padding-left: 15px;
+    height: 195px;
+    padding-top: 15px;
+}
+.finddoctor_list .nav_content .province_list li{
+    height: 20px;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+.finddoctor_list .nav_content .province_list li .name{
+    display: block;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+    color: #646464;
+    background:#f0f0f0;
+    text-indent: 7px;
+    text-align: left;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    border-left: #ffffff 5px solid;
+}
+.finddoctor_list .nav_content .province_list li .name.longname{
+    width: 50px !important;
+}
+.finddoctor_list .nav_content .province_list li .cur_name{
+    background-color: #46a0f0 !important;
+    color: #ffffff !important;
+}
+.finddoctor_list .nav_content .province_list li .name .left_tiao{
+    position: absolute;
+    left: -5px;
+    top: 0;
+    display: block;
+    width: 2px;
+    height: 20px;
+    background-color: #ffffff;
+}
+.finddoctor_list .nav_content .province_list li .name .curtiao{
+    position: absolute;
+    left: -5px;
+    top: 0;
+    display: block;
+    width: 2px;
+    height: 20px;
+    background-color: #46a0f0;
+}
+.finddoctor_list .nav_content .hospital_list{
+    padding-left: 105px;
+    height: 195px;
+    padding-top: 15px;
+}
+.finddoctor_list .nav_content .hospital_list a{
+    color: #000000;
+}
+.finddoctor_list .nav_content .hospital_list li{
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-right: 5px;
+}
+.finddoctor_list .nav_content .hospital_list .left_hos{
+    float: left;
+    width: 50%;
+}
+.finddoctor_list .nav_content .hospital_list .right_hos{
+    float: right;
+    width: 50%;
+}
+.finddoctor_list .nav_content .hospital_list .more_hos{
+    color: #46a0f0;
+}
+.finddoctor_list .nav_content .doctor_list{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 65px;
+    padding-left: 15px;
+    height: 195px;
+    padding-top: 15px;
+}
+.finddoctor_list .nav_content .doctor_list li{
+    height: 20px;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+.finddoctor_list .nav_content .doctor_list li .name{
+    display: block;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+    color: #646464;
+    background:#f0f0f0;
+    text-indent: 7px;
+    text-align: left;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    border-left: #ffffff 5px solid;
+}
+.finddoctor_list .nav_content .doctor_list li .name.longname{
+    width: 50px !important;
+}
+.finddoctor_list .nav_content .doctor_list li .cur_name{
+    background-color: #46a0f0 !important;
+    color: #ffffff !important;
+}
+.finddoctor_list .nav_content .doctor_list li .name .left_tiao{
+    position: absolute;
+    left: -5px;
+    top: 0;
+    display: block;
+    width: 2px;
+    height: 20px;
+    background-color: #ffffff;
+}
+.finddoctor_list .nav_content .doctor_list li .name .curtiao{
+    position: absolute;
+    left: -5px;
+    top: 0;
+    display: block;
+    width: 2px;
+    height: 20px;
+    background-color: #46a0f0;
+}
+.finddoctor_list .nav_content .bing_dor_list{
+    padding-left: 80px;
+    height: 195px;
+    padding-top: 15px;
+}
+.finddoctor_list .nav_content .bing_dor_list a{
+    color: #000000;
+}
+.finddoctor_list .nav_content .bing_dor_list li{
+    position: relative;
+    font-size: 14px;
+    height: 50px;
+    line-height: 20px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-right: 5px;
+}
+.finddoctor_list .nav_content .bing_dor_list .left_hos{
+    float: left;
+    width: 50%;
+}
+.finddoctor_list .nav_content .bing_dor_list .right_hos{
+    float: right;
+    width: 50%;
+}
+.finddoctor_list .nav_content .bing_dor_list .more_hos{
+    color: #46a0f0;
+}
+.finddoctor_list .nav_content .bing_dor_list .left_head{
+    position: absolute;
+    left: 0;
+    top: 0;
+    float: left;
+    width: 48px;
+    height: 48px;
+    border: #dcdcdc 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.finddoctor_list .nav_content .bing_dor_list .left_head .head_outer{
+    width:48px;
+    height:48px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+}
+.finddoctor_list .nav_content .bing_dor_list .left_head .head_outer img{
+    max-width:48px;
+    max-height:48px;
+    vertical-align: middle;
+}
+.finddoctor_list .nav_content .bing_dor_list .left_head .head_outer a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+.finddoctor_list .nav_content .bing_dor_list .right_name{
+    padding-left: 57px;
+}
+.finddoctor_list .nav_content .bing_dor_list .right_name p{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.finddoctor_list .nav_content .bing_dor_list .right_name .name{
+    font-size: 14px;
+    color: #000000;
+    line-height: 14px;
+    padding-bottom: 5px;
+}
+.finddoctor_list .nav_content .bing_dor_list .right_name .title{
+    font-size: 12px;
+    color: #646464;
+    line-height: 12px;
+    padding-bottom: 5px;
+}
+.finddoctor_list .nav_content .bing_dor_list .right_name .btn a{
+    display: block;
+    width: 29px;
+    height: 14px;
+    background:url("../images/index_zixunbtn.png") no-repeat;
+    background-size: 29px 14px;
+}
+.science_bing{
+    background-color:#ffffff;
+    margin-top: 6px;
+    padding: 0 15px 10px 15px;
+}
+.science_bing .title_name{
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    color: #000000;
+    font-weight: normal;
+}
+.science_bing .title_name .right_more{
+    display: block;
+    float: right;
+    height: 40px;
+    line-height: 40px;
+    width: 45px;
+    text-align: right;
+    font-size: 13px;
+    color: #46a0f0;
+}
+.science_bing .jibing_block a{
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 9px;
+    background-color: #d2e6ff;
+    color: #006ec8;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.today_article{
+    background-color:#ffffff;
+    margin-top: 6px;
+    padding: 0 0 0 15px;
+    margin-bottom: 25px;
+}
+.today_article .title_name{
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    color: #000000;
+    padding-right: 15px;
+    font-weight: normal;
+}
+.today_article .title_name .right_more{
+    display: block;
+    float: right;
+    height: 40px;
+    line-height: 40px;
+    width: 45px;
+    text-align: right;
+    font-size: 13px;
+    color: #46a0f0;
+}
+.today_article .article_block a{
+    position: relative;
+    display: block;
+    padding-right: 90px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #000000;
+    border-bottom: #dcdcdc 1px solid;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.today_article .article_block a:last-child{
+    border-bottom: 0 none;
+}
+.today_article .article_block a .redu{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 65px;
+    height: 40px;
+    line-height: 40px;
+    color: #646464;
+    font-size: 12px;
+    text-align: right;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.today_article .article_block .tuijian{
+    position: absolute;
+    right: 70px;
+    top: 13px;
+    display: block;
+    width: 14px;
+    height: 14px;
+    background:url("../images/index_article_jian.png") no-repeat;
+    background-size: 14px 14px;
+}
+.new_footer{
+    height: 110px;
+    background-color:#3c4146;
+    padding-top: 15px;
+}
+.new_footer .middle_link{
+    width: 210px;
+    overflow: hidden;
+    height: 24px;
+    line-height: 24px;
+    background:#353a3e;
+    border-radius: 3px;
+    border:#2f3337 1px solid;
+    margin: 0 auto;
+}
+.new_footer .middle_link a{
+    display: inline-block;
+    text-align: center;
+    width: 66px;
+    line-height: 24px;
+    color: #ffffff;
+    font-size: 13px;
+}
+.new_footer .middle_link a.border_r{
+    border-right: #2f3337 1px solid;
+}
+.new_footer .what_version{
+    width: 170px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 10px;
+    color: #919196;
+    margin: 10px auto 0 auto;
+    text-align: center;
+}
+.new_footer .what_version a{
+    font-size: 12px;
+    color: #77777b;
+}
+.new_footer .what_version a.cur{
+    color: #adadb4;
+}
+.new_footer .company_title{
+    font-size: 12px;
+    color: #919196;
+    text-align: center;
+    margin-top: 10px;
+}
+.index_bottom_change03{
+    width: 100%;
+    height: 50px;
+    background:rgba(0,0,0,0.5) url("../images/turn3_index_new.png") no-repeat 15px 5px;
+    background-size: 40px;
+    position: fixed;
+    bottom: 0;
+    color: #ffffff;
+	z-index: 10;
+}
+.index_bottom_change03 img{
+    margin-left: 8px;
+    margin-top: 7px;
+    float: left;
+}
+.index_bottom_change03 .text{
+    line-height: 50px;
+    font-size: 13px;
+    float: left;
+    margin-left: 65px;
+    font-weight: normal;
+}
+.index_bottom_change03 input{
+    position: absolute;
+    right: 25px;
+    top: 14px;
+    width: 14%;
+    line-height: 24px;
+    height: 22px;
+    background-color: #f6721f;
+    color: #ffffff;
+    border: 0 none;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-appearance:none;
+    -moz-line-height: 24px;
+}
+.index_bottom_change03 .close{
+    width: 16px;
+    height: 16px;
+    background:url("../images/turn3_index_newclose.png") no-repeat center;
+    background-size: 10px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    cursor: pointer;
+}
+/*¾ÉÑùÊ½*/
+.focus{ width:100%;margin:0 auto;position:relative; overflow:hidden;}
+.focus .hd{ width:100%; height:11px;  position:absolute; z-index:1; bottom:5px; text-align:center;}
+.focus .hd ul{ display:inline-block;text-align:center;height:5px;-webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px; font-size:0; vertical-align:top;}
+.focus .hd ul li{ display:inline-block; width:5px; height:5px; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px; background:#8C8C8C; margin:0 5px;  vertical-align:top; overflow:hidden;}
+.focus .hd ul .on{ background:#fff;}
+.focus .bd{ position:relative; z-index:0; border: none!important;}
+.focus .bd li img{ display: block; width:100%; background:url(../images/loading.gif) center center no-repeat;}
+.focus .bd li a{ width:100%; -webkit-tap-highlight-color:rgba(0, 0, 0, 0);}

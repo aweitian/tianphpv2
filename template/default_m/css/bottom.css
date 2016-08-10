@@ -1,0 +1,15 @@
+
+.box_a{background: rgba(0, 0, 0, 0.75) none repeat scroll 0 0;bottom: 0;height:1rem;left: 0;line-height: 1rem;position: fixed;right: auto;text-align: center;width: 100%;z-index: 5000;}
+.box_a .box_center2{margin: 0;padding: 0;width: 100%;height:1rem;text-align: center}
+.box_a .box_center2 a{display: inline-block;height: .7rem;border-radius: .06rem;margin: 0 .15rem;color: #fff;font: .28rem/.7rem 'Microsoft YaHei';text-decoration: none;text-align: center;width:1.8rem;}
+.box_a a.btn_a1{background: #e76049}
+.box_a a.btn_a2{background: #4197ff}
+/*===疾病科普-相关咨询 end===*/
+
+.box_b{background:#eee; border-top:1px solid #ddd;bottom: 0;height:1rem;left: 0;line-height: 1rem;position: fixed;right: auto;text-align: center;width: 100%;z-index: 5000;}
+.box_b .box_center2{margin: 0;padding: 0;width: 100%;height:1rem;text-align: center}
+.box_b .box_center2 a{display: inline-block;height: .65rem;border-radius: .06rem;margin: 0 .15rem;color: #fff;font: .26rem/.65rem 'Microsoft YaHei';text-decoration: none;text-align: center;width:2.7rem;}
+.box_b a.btn_b1{background: url(../images/box_b_img1.png) no-repeat left .56rem top .17rem #38b7ea; text-indent:2em; background-size:.31rem .31rem;}
+.box_b a.btn_b2{background: url(../images/box_b_img2.png) no-repeat left .56rem top .17rem #38b7ea; text-indent:1em; background-size:.28rem .32rem;}
+/*===医生页-患者投票 end===*/
+

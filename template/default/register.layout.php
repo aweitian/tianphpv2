@@ -13,13 +13,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>注册</title>
-<link href="<?php print HTTP_ENTRY?>/static/css/style.css" rel="stylesheet" />
-<script src="<?php print HTTP_ENTRY?>/static/js/jquery.js"></script>
-<script src="<?php print HTTP_ENTRY?>/static/js/jtClite.js"></script>
+<link href="<?php print AppUrl::getMediaPath()?>/css/style.css" rel="stylesheet" />
+<script src="<?php print AppUrl::getMediaPath()?>/js/jquery.js"></script>
+<script src="<?php print AppUrl::getMediaPath()?>/js/jtClite.js"></script>
 </head>
 
 <body>
-<div class="wid1000 loginlogo clearfix"><a href="<?php print AppUrl::navHome()?>"><img class="fl" src="<?php print HTTP_ENTRY?>/static/images/loginlogo.jpg" width="284" height="47" /></a><span class="fl black fz24">注册帐号</span></div>
+<div class="wid1000 loginlogo clearfix"><a href="<?php print AppUrl::navHome()?>"><img class="fl" src="<?php print AppUrl::getMediaPath()?>/images/loginlogo.jpg" width="284" height="47" /></a><span class="fl black fz24">注册帐号</span></div>
 <div class="registerbox">
 <div class="wid1000"><div class="registerboxnr clearfix">
 
@@ -45,7 +45,7 @@
 <div class="blank30"></div>
 <div class="regxy1 gray"><input type="checkbox" checked/>我已看过并同意 <a class="blue">注册协议</a></div>
 <div class="blank30"></div>
-<button class="regsub1" type="submit"><img src="<?php print HTTP_ENTRY?>/static/images/regbtn.jpg" width="162" height="40" /></button>
+<button class="regsub1" type="submit"><img src="<?php print AppUrl::getMediaPath()?>/images/regbtn.jpg" width="162" height="40" /></button>
 </form></div>
 <div class="registercon regway">
 <form action="<?php print AppUrl::userRegister()."?t=m"?>" method="post">
@@ -61,7 +61,7 @@
 <div class="blank30"></div>
 <div class="regxy1 gray"><input type="checkbox" />我已看过并同意 <a class="blue">注册协议</a></div>
 <div class="blank30"></div>
-<button class="regsub1" type="submit"><img src="<?php print HTTP_ENTRY?>/static/images/regbtn.jpg" width="162" height="40" /></button>
+<button class="regsub1" type="submit"><img src="<?php print AppUrl::getMediaPath()?>/images/regbtn.jpg" width="162" height="40" /></button>
 </form>
 </div>
 </div>

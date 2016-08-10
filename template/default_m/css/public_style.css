@@ -1,0 +1,193 @@
+@charset "gb2312";
+/* CSS Document */
+
+
+/*===========================================
+ 	
+	时间：2016.07.01
+	
+	说明：公共样式
+
+ ==========================================*/
+
+
+
+
+
+body,ul,ol,li,span,p,b,strong,h1,h2,h3,h4,h5,h6,dl,dt,dd,form{
+	margin:0px;
+	padding:0px;
+	}
+.clearfix:after{
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	}
+body{
+	font-size:0.24rem;
+	color:#333;
+	font-family:'Microsoft YaHei';
+	background:#666;
+	width:6.4rem;
+	margin:0 auto;
+	}
+a{
+	text-decoration:none;
+	color:#333;
+	}
+img{
+	border:0px;
+	vertical-align:top;
+	}
+em,i{
+	font-style:normal;
+	}
+*+html img {
+	-ms-interpolation-mode:bicubic;
+	}
+ul,li,ol{
+	list-style:none;
+	}
+.left{
+	float:left;
+	}
+.right{
+	float:right;
+	}
+.clear{
+	clear:both;
+	overflow:hidden;
+	height:0 !important;
+	}
+input,button,select,textarea{
+	border:none;
+	font-family:'Microsoft YaHei';
+	border-radius:0px;
+	font-size:.3rem;
+	color:#999;
+	}
+.public_width{
+	width:6.4rem;
+	margin:0 auto;
+	background:#fff;
+	}
+.img_width{
+	width:100%;
+	}
+.public_title{
+	line-height:.5rem;
+	margin:.2rem 0;
+	text-align:center;
+	}
+.public_title strong{
+	display:inline-block;
+	font-size:.32rem;
+	color:#1979d1;
+	line-height:1em;
+	margin:.12rem 0;
+	font-weight:normal;
+	font-weight:400;
+	}
+.public_title a{
+	display:inline-block;
+	float:right;
+	color:#fff601;
+	font-size:.18rem;
+	text-decoration:underline;
+	}
+.public_border{
+	border:1px solid #cccccc;
+	background:#ededed;
+	}
+.ad{
+	margin-bottom:.2rem;
+	}
+.color_a, .color_a1{
+	display:inline-block;
+	width:1.2rem;
+	height:.42rem;
+	line-height:.4rem;
+	font-size:.2rem;
+	color:#FFF;
+	float:left;
+	text-align:center;
+	background:linear-gradient(to bottom, #1364b6, #1a89f9, #1364b6);
+	border-radius:.05rem;
+	}
+.color_a1{
+	background:linear-gradient(to bottom, #ffb400, #ffd400,#ffb400);
+	color:#1364b6;
+	}
+*{ outline:none;}
+.clr{ overflow:hidden; clear:both;}
+.warp98{ width:6.2rem; margin:.0 auto;}
+
+
+
+.fl{ float:left;}
+.fr{ float:right;}
+
+.center{ text-align:center;}
+.header{ margin-top:.5rem}
+.dw{position:relative;}
+.blank05{height:.05rem; display: block;clear: both;}
+.blank10{height:.10rem; display: block;clear: both;}
+.blank15{height:.15rem; display: block;clear: both;}
+.blank20{height:.2rem; display: block;clear: both;}
+.blank25{height:.25rem; display: block;clear: both;}
+.blank30{height:.3rem; display: block;clear: both;}
+.blank40{height:.4rem; display: block;clear: both;}
+.blank50{height:.5rem; display: block;clear: both;}
+.mzy30{ margin:0 .3rem;}
+
+
+.pr30{ padding-right:.3rem;}
+.color3{ color:#333 !important;;}
+.color6{ color:#666 !important;;}
+.color9{ color:#999 !important;;}
+.colorf{ color:#fff !important;}
+.colorc{ color:#ccc !important;}
+.hd{ height:.1rem; background:#f0f0f0; overflow:hidden; clear:both;}
+.hd_hx{ height:0; border-bottom:1px solid #535f6e; overflow:hidden; clear:both;}
+.hd_hsx{ height:0; border-bottom:1px solid #ddd; overflow:hidden; clear:both;}
+.mr0{ margin-right:0 !important;}
+.blue{ color:#3b83ff !important;}
+.fz22{ font-size:.22rem;}
+.fz24{font-size: .24rem;}
+.fz26{ font-size:.26rem;}
+.fz28{ font-size:.28rem;}
+.fz30{ font-size:.3rem;}
+
+.lh40{ line-height:.4rem;}
+
+
+.blue_bg{ background:#3b83ff !important;}
+.hui_bg{ background:#f0f0f0 !important;}
+.bor_rad{border-radius:.08rem;-webkit-border-radius:.08rem;-moz-border-radius:.08rem;}
+.borddd{ border:1px solid #ddd;}
+.borblue{ border:1px solid #3b83ff;}
+.yellow{ color:#ff8800;}
+.yellow_bg{ background:#fe8100;}
+.mbor0{ border-bottom:0 !important;}
+.green_topbg{ background:#92cf67 !important;}
+.green_bg{ background:#46b692 !important;}
+.tc{ text-align:center;}
+.plr20{ padding:0 20px;}
+.fw400{ font-weight:400;}
+.fw700{ font-weight:700;}
+.green{ color:#68ba8a;}
+.hui_bg{ background:#f0f0f0;}
+.red{ color:#f9644e;}
+.bule{ color:#377bee !important;}
+.yellow{ color:#fe8100 !important;}
+.bortbcon{ border-top:1px solid #ddd; border-bottom:1px solid #ddd; background:#f0f0f0; height:.1rem; overflow:hidden; clear:both;}
+.bg_fff{ background:#fff !important;}
+.tr{ text-align:right;}
+
+
+
+
+
+

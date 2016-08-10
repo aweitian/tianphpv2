@@ -7,7 +7,7 @@
  */
 class avatarMeta {
 	public static function getAllAvatar() {
-		$files = tian::getFileList ( FILE_SYSTEM_ENTRY . "/static/avatar", "gif,jpg,png" );
+		$files = tian::getFileList ( AppUrl::getMediaPath() . "/avatar", "gif,jpg,png" );
 		foreach ( $files as &$item ) {
 			$item = pathinfo ( $item, PATHINFO_BASENAME );
 		}

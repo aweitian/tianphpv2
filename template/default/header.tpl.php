@@ -1,7 +1,7 @@
 <div class="logo clearfix">
-    <div class="logol fl"><img src="<?php print HTTP_ENTRY?>/static/images/sylogol.jpg" width="681" height="58" /></div>
+    <div class="logol fl"><img src="<?php print AppUrl::getMediaPath()?>/images/sylogol.jpg" width="681" height="58" /></div>
     <div class="logor fr">
-      <div class="logor1"><img src="<?php print HTTP_ENTRY?>/static/images/sylogor.jpg" width="248" height="31" /></div>
+      <div class="logor1"><img src="<?php print AppUrl::getMediaPath()?>/images/sylogor.jpg" width="248" height="31" /></div>
       <div class="logor2 clearfix">
         <form>
           <input class="inputl fl fz12 gray" placeholder="站内搜索" />

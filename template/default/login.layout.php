@@ -12,11 +12,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>登录</title>
-<link href="<?php print HTTP_ENTRY?>/static/css/style.css" rel="stylesheet" />
+<link href="<?php print AppUrl::getMediaPath()?>/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
-<div class="wid1000 loginlogo clearfix"><a href="<?php print AppUrl::navHome()?>"><img class="fl" src="<?php print HTTP_ENTRY?>/static/images/loginlogo.jpg" width="284" height="47" /></a><span class="fl black fz24">登录</span></div>
+<div class="wid1000 loginlogo clearfix"><a href="<?php print AppUrl::navHome()?>"><img class="fl" src="<?php print AppUrl::getMediaPath()?>/images/loginlogo.jpg" width="284" height="47" /></a><span class="fl black fz24">登录</span></div>
 <div class="loginban">
   <div class="wid1000">
     <div class="logintable fz13">
@@ -37,14 +37,14 @@
           </div>
         <div class="blank20"></div>
         <div class="loginbtnbox clearfix">
-          <button class="fl loginbtn" type="submit" value=""><img src="<?php print HTTP_ENTRY?>/static/images/loginbtn.jpg" width="102" height="34" /></button>
+          <button class="fl loginbtn" type="submit" value=""><img src="<?php print AppUrl::getMediaPath()?>/images/loginbtn.jpg" width="102" height="34" /></button>
           <span class="fr loginnozc"><a href="<?php print AppUrl::userResetPwd()?>"><span class="fr">忘记密码？</span></a></span></div>
       </form>
       <div class="blank15"></div>
       <div class="otherlogin clearfix"><span class="fl">没有账号？<a href="<?php print AppUrl::userRegister()?>" class="blue">立即注册</a></span>
       	<span class="fl">
       	<!-- 
-      	<a href=""><img src="<?php print HTTP_ENTRY?>/static/images/loginqq.jpg" width="22" height="22" /></a><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/loginxl.jpg" width="22" height="22" /></a><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/loginwc.jpg" width="22" height="22" /></a>
+      	<a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/loginqq.jpg" width="22" height="22" /></a><a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/loginxl.jpg" width="22" height="22" /></a><a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/loginwc.jpg" width="22" height="22" /></a>
       	 -->
      	</span>
       </div>

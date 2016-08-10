@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>挂号预约</title>
-<link href="<?php print HTTP_ENTRY?>/static/css/style.css" rel="stylesheet" />
+<link href="<?php print AppUrl::getMediaPath()?>/css/style.css" rel="stylesheet" />
 </head>
 
 
@@ -12,7 +12,7 @@
 
 <div class="ghhead clearfix">
 
-  <div class="wid1000"><a href="<?php print HTTP_ENTRY?>/"><img class="fl" src="<?php print HTTP_ENTRY?>/static/images/logo2.png" width="267" height="46" /></a>
+  <div class="wid1000"><a href="<?php print HTTP_ENTRY?>/"><img class="fl" src="<?php print AppUrl::getMediaPath()?>/images/logo2.png" width="267" height="46" /></a>
 
 	<ul class="fr">
 
@@ -27,7 +27,7 @@
   </div>
 
 </div>
-   <script src="<?php print HTTP_ENTRY?>/static/js/guahao.js"></script>
+   <script src="<?php print AppUrl::getMediaPath()?>/js/guahao.js"></script>
 <div class="ghbanner">
 
   <div class="ghbannerbox">
@@ -96,7 +96,7 @@
 
 	  </form>
 
-	  <div class="ghlc tc"><img src="<?php print HTTP_ENTRY?>/static/images/ghlcpic.jpg" width="313" height="54" /></div>
+	  <div class="ghlc tc"><img src="<?php print AppUrl::getMediaPath()?>/images/ghlcpic.jpg" width="313" height="54" /></div>
 
 	</div>
 
@@ -108,11 +108,11 @@
 
   <div class="step">
 
-	<div class="sdbt tc"><img src="<?php print HTTP_ENTRY?>/static/images/sdys.jpg" width="432" height="56" /></div>
+	<div class="sdbt tc"><img src="<?php print AppUrl::getMediaPath()?>/images/sdys.jpg" width="432" height="56" /></div>
 
 	<dl>
 
-	  <dt><img src="<?php print HTTP_ENTRY?>/static/images/step1.jpg" /></dt>
+	  <dt><img src="<?php print AppUrl::getMediaPath()?>/images/step1.jpg" /></dt>
 
 	  <dd class="dd1"><span>省时</span></dd>
 
@@ -122,7 +122,7 @@
 
 	<dl>
 
-	  <dt><img src="<?php print HTTP_ENTRY?>/static/images/step2.jpg" /></dt>
+	  <dt><img src="<?php print AppUrl::getMediaPath()?>/images/step2.jpg" /></dt>
 
 	  <dd class="dd1"><span>省心</span></dd>
 
@@ -132,7 +132,7 @@
 
 	<dl>
 
-	  <dt><img src="<?php print HTTP_ENTRY?>/static/images/step3.jpg" /></dt>
+	  <dt><img src="<?php print AppUrl::getMediaPath()?>/images/step3.jpg" /></dt>
 
 	  <dd class="dd1"><span>省力</span></dd>
 
@@ -142,7 +142,7 @@
 
 	<dl class="last">
 
-	  <dt><img src="<?php print HTTP_ENTRY?>/static/images/step4.jpg" /></dt>
+	  <dt><img src="<?php print AppUrl::getMediaPath()?>/images/step4.jpg" /></dt>
 
 	  <dd class="dd1"><span>省钱</span></dd>
 

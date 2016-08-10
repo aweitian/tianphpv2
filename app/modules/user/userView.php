@@ -1,17 +1,17 @@
 <?php
 class userView extends AppView {
 	public function login($model, $info = "") {
-		include dirname ( __FILE__ ) . "/tpl/login.tpl.php";
+		include $this->getThemePath ( "user" ) . "/login.tpl.php";
 	}
 	public function register($model) {
-		include dirname ( __FILE__ ) . "/tpl/register.tpl.php";
+		include $this->getThemePath ( "user" ) . "/register.tpl.php";
 	}
 	public function resetpwd($model, $info = "") {
-		include dirname ( __FILE__ ) . "/tpl/resetpwd.tpl.php";
+		include $this->getThemePath ( "user" ) . "/resetpwd.tpl.php";
 	}
 	public function profile($model, $info = "") {
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
-				dirname ( __FILE__ ) . "/tpl/profile.tpl.php",
+				$this->getThemePath ( "user" ) . "/profile.tpl.php",
 				array (
 						"model" => $model,
 						"info" => $info 
@@ -20,7 +20,7 @@ class userView extends AppView {
 	}
 	public function modify($model, $info = "") {
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
-				dirname ( __FILE__ ) . "/tpl/modify.tpl.php",
+				$this->getThemePath ( "user" ) . "/modify.tpl.php",
 				array (
 						"model" => $model,
 						"info" => $info 
@@ -29,7 +29,7 @@ class userView extends AppView {
 	}
 	public function avatar($model, $info = "") {
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
-				dirname ( __FILE__ ) . "/tpl/avatar.tpl.php",
+				$this->getThemePath ( "user" ) . "/avatar.tpl.php",
 				array (
 						"model" => $model,
 						"info" => $info 
@@ -38,7 +38,7 @@ class userView extends AppView {
 	}
 	public function letter($model, $info = "") {
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
-				dirname ( __FILE__ ) . "/tpl/letter.tpl.php",
+				$this->getThemePath ( "user" ) . "/letter.tpl.php",
 				array (
 						"model" => $model,
 						"info" => $info 
@@ -47,21 +47,20 @@ class userView extends AppView {
 	}
 	public function writeletter($model, $info = "") {
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
-				dirname ( __FILE__ ) . "/tpl/write-letter.tpl.php",
+				$this->getThemePath ( "user" ) . "/write-letter.tpl.php",
 				array (
 						"model" => $model,
 						"info" => $info 
 				) 
 		) )->setLayout ()->reponse ();
 	}
-	
 	public function appraise($model, $info = "") {
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
-				dirname ( __FILE__ ) . "/tpl/appraise.tpl.php",
+				$this->getThemePath ( "user" ) . "/appraise.tpl.php",
 				array (
 						"model" => $model,
-						"info" => $info
-				)
+						"info" => $info 
+				) 
 		) )->setLayout ()->reponse ();
 	}
 }

@@ -25,4 +25,25 @@ class utility {
 		// 返回单元个数
 		return count ( $match [0] );
 	}
+	public static function isMobile() {
+		$userAgent = strtolower ( $_SERVER ['HTTP_USER_AGENT'] );
+		$keywords = array (
+				"android",
+				"iphone",
+				"ipod",
+				"ipad",
+				"windows phone",
+				"mqqbrowser",
+				"symbian",
+				"blackberry",
+				"ucweb",
+				"linux; u;" 
+		);
+		foreach ( $keywords as $kw ) {
+			if (strpos ( $userAgent, $kw ) !== false)
+				return true;
+		}
+		
+		return false;
+	}
 }

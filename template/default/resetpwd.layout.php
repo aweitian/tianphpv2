@@ -13,13 +13,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>找回密码</title>
-<link href="<?php print HTTP_ENTRY?>/static/css/style.css" rel="stylesheet" />
-<script src="<?php print HTTP_ENTRY?>/static/js/jquery.js"></script>
-<script src="<?php print HTTP_ENTRY?>/static/js/jtClite.js"></script>
+<link href="<?php print AppUrl::getMediaPath()?>/css/style.css" rel="stylesheet" />
+<script src="<?php print AppUrl::getMediaPath()?>/js/jquery.js"></script>
+<script src="<?php print AppUrl::getMediaPath()?>/js/jtClite.js"></script>
 </head>
 
 <body>
-<div class="wid1000 loginlogo clearfix"><a href="<?php print AppUrl::navHome()?>"><img class="fl" src="<?php print HTTP_ENTRY?>/static/images/loginlogo.jpg" width="284" height="47" /></a><span class="fl black fz24">找回密码</span></div>
+<div class="wid1000 loginlogo clearfix"><a href="<?php print AppUrl::navHome()?>"><img class="fl" src="<?php print AppUrl::getMediaPath()?>/images/loginlogo.jpg" width="284" height="47" /></a><span class="fl black fz24">找回密码</span></div>
 <div class="registerbox">
   <div class="wid1000">
     <div class="rtpboxnr clearfix">
@@ -42,7 +42,7 @@
               <input class="reginp1 gray border2" name="a" placeholder='密码安全答案' />
               
               <div class="blank30"></div>
-              <button class="regsub1" type="submit"><img src="<?php print HTTP_ENTRY?>/static/images/zh_btn.png" width="162" height="40" /></button>
+              <button class="regsub1" type="submit"><img src="<?php print AppUrl::getMediaPath()?>/images/zh_btn.png" width="162" height="40" /></button>
             </form>
           </div>
           <div class="rtpcon regway<?php if(isset($_REQUEST["s"]) && $_REQUEST["s"] == "1"):?> selected<?php else:?><?php endif?>">
@@ -54,7 +54,7 @@
               <div class="blank20"></div>
               <input class="reginp1 gray border2" name="pp" placeholder='确认新密码' />
               <div class="blank30"></div>
-              <button class="regsub1" type="submit"><img src="<?php print HTTP_ENTRY?>/static/images/zh_btn1.png" width="162" height="40" /></button>
+              <button class="regsub1" type="submit"><img src="<?php print AppUrl::getMediaPath()?>/images/zh_btn1.png" width="162" height="40" /></button>
             </form>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 <div class="b_bottom_box news_fixs">
     <div class="aus_info">
-        <a target="_blank" href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print ($doc_img)?>" width="80" height="80" /></a>
+        <a target="_blank" href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print ($doc_img)?>" width="80" height="80" /></a>
     </div>
     <div class="fix_right_box">
         <div class="docs_info_box zzx_dib_w">
