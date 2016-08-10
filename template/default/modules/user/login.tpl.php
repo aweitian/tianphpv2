@@ -5,5 +5,5 @@
 $m = $model;
 
 
-include FILE_SYSTEM_ENTRY.'/template/default/login.layout.php';
+include dirname(dirname(dirname(__FILE__))).'/login.layout.php';
 ?>

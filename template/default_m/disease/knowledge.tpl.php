@@ -28,162 +28,557 @@ $pagination = new pagination($model->knowledgeCnt($row["sid"],$model->subid), $p
 $req = new httpRequest();
 $url = new url($req->requestUri());
 ?>
-  
-  <div class="blank15"></div>
-  <div class="sybox clearfix">
-    <div>
-      
-      <div class="clr">
-      	
-        <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
-          
-          <div class="fz13">
-            
-            <div class="blank20"></div>
-                
-               <div class="clr">
-               
-               	<div class="wid680 fl">
-                    
-                    <div class="jb_zstab clearfix dgray fz13 color6">
-                            <ul class="clr">
-                              <li <?php if($model->subid =="0"):?> class="selected" <?php endif?>><a href="<?php print AppUrl::disKnowledgeSubByDiskey($row["key"],0) ?>">全部文章</a></li>
-                                <li <?php if($model->subid =="1"):?> class="selected" <?php endif?>><a href="<?php print AppUrl::disKnowledgeSubByDiskey($row["key"],1) ?>">病因</a></li>
-                         <li <?php if($model->subid =="2"):?> class="selected" <?php endif?>><a href="<?php print AppUrl::disKnowledgeSubByDiskey($row["key"],2) ?>">症状</a></li>
-                          <li <?php if($model->subid =="3"):?> class="selected" <?php endif?>><a href="<?php print AppUrl::disKnowledgeSubByDiskey($row["key"],3) ?>">检查</a></li>
-                           <li <?php if($model->subid =="4"):?> class="selected" <?php endif?>><a href="<?php print AppUrl::disKnowledgeSubByDiskey($row["key"],4) ?>">治疗</a></li>
-                          <li <?php if($model->subid =="5"):?> class="selected" <?php endif?>><a href="<?php print AppUrl::disKnowledgeSubByDiskey($row["key"],5) ?>">危害</a></li>
-                            <li <?php if($model->subid =="6"):?> class="selected" <?php endif?>><a href="<?php print AppUrl::disKnowledgeSubByDiskey($row["key"],6) ?>">保健</a></li>
-                            </ul>
-                        </div>
-                     
-                         
-                    <div class="blank20"></div>
-                    	
-      
-      				<div class="jb_zsall">
-      				
-                        <div class="jb_zsbox selected">
-                        <?php if( $model->subid =="0"): ?>
-                      <div class="padd20 border2">
-                            <div class="zjtdwztit fz18"><span></span><?php print $row["data"]?>精华文章</div>
-                            <div class="blank20"></div>
-                                <div class="jb_ssbox_sm2 clr">
-                                <ul class="fl">
-                                <?php foreach ($model->getEssenceAidByDid($row["sid"],6) as $jh):?>
-                                    <li><a href="<?php print AppUrl::articleByAid($jh["sid"]) ?>"><?php print $jh["title"] ?></a></li>
-                             <?php endforeach; ?>
-                                </ul>
-                            </div>
-                           </div> 
-                           	
-                            <div class="blank20"></div>
-        
-                        <?php endif; ?>
-                           
-                            
-                            <div class="padd20 border2">
-                            	
-                                <ul class="kart_list"> 
-                                   <?php foreach ($model->knowledge($row["sid"],$model->subid,0,($page-1)*$pageSize,$pageSize, 6) as $list): ?>
-                                  	<?php $tag=$model->getTag($list["tid"]) ?>
-                                  
-                                   
-                   <?php $dod= $model->getOwner($list["aid"])?> 
-                
-	              <?php  $doc=($model->getInfoByDod($dod))?> 
-                              <?php $nuber=$model->getCountByAid($list["aid"]) ?>     
-                      
-                                
-                                  <li class="kart_li">
-                                    <div class="bb_e5 pb5 clearfix"> 
-                                        <span class="f20 fl">
-                                        <a href="<?php print AppUrl::articleByAid($list["aid"]) ?>" class="fl kart_title"><h2><?php print $list["title"] ?></h2></a>
-                                        <span class="fl kart_label "><?php print ($tag) ?></span></span>
-                                      	<p class="fr color9">发布时间：<?php print $list["date"] ?></p>
-                                    </div>
-                                    <div class="blank15"></div>
-                                    <p class="fz13 color9"> 发布医生： <a  href="<?php print AppUrl::articleByAid($list["aid"]) ?>" class="blue"><?php print $doc["name"] ?> </a></p>
-                                    <div class="pt10 clearfix ">
-                                      <div class="fl w435 kart_con"> <?php print utility::utf8Substr( $list["desc"], 0, 80)?>...<a href="<?php print AppUrl::articleByAid($list["aid"]) ?>"  class="gray_a ml5">查看全文<span class="f8">>></span></a> </div>
-                                      <!--轮转图 start-->
-                                      <div class="fr kart_doc ml25">
-                                              <a href="<?php print AppUrl::articleByAid($list["aid"]) ?>" ><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" width="80" height="80"  class="fl"></a>
-                                            <div class="fl pt20">
-                                              <p><a href="<?php print AppUrl::articleByAid($list["aid"]) ?>"  class="g_home1">个人网站</a></p>
-                                              <p><a  href="<?php print AppUrl::getSwtUrl(); ?>" class="g_advise2" rel="nofollow">可咨询</a>
-                                              <p> 
-                                        </div>
-                                        <a href="javascript:;" class="prev2"></a> <a href="javascript:;" class="next2"></a> </div>
-                                      <!--轮转图 end--> 
-                                    </div>
-                                    <div class="blank20"></div>
-                                    <!--分享 start-->
-                                    <div class="kart_share mt20 clearfix fz12">
-                                      <p class="fl"> 
-                                    
-                                        <a class="g_comment" rel="nofollow">评论  <?php print($nuber) ?></a> 
-                                
-                             
-                                        <a href="<?php print AppUrl::docArticleHomeByDocid($doc["id"]); ?>" class="g_sub" style="margin-right:0px">查看<?php print $doc["name"] ?>的全部文章</a>
-                                        
-                                        <a href="<?php print AppUrl::getSwtUrl(); ?>" class="gray_a">全部咨询</a> 
-                                        </p>
-                                      <p class="fr">
-                                      <div class="bshare-custom fr">分享到
-                                            <img src="<?php print HTTP_ENTRY?>/static/images/jbfx_tb1.png" />
-                                            <img src="<?php print HTTP_ENTRY?>/static/images/jbfx_tb2.png" />
-                                            <img src="<?php print HTTP_ENTRY?>/static/images/jbfx_tb3.png" />
-                                            <img src="<?php print HTTP_ENTRY?>/static/images/jbfx_tb4.png" />
-                                            <img src="<?php print HTTP_ENTRY?>/static/images/jbfx_tb5.png" />
-                                     </div>
-                                    </div>
-                                    <!--分享 end--> 
-                                  </li>
-                                  <?php endforeach; ?>
-                                  <div class="blank30"></div>
-                                  <div class="pagenum tc gray fz13">
-                              
-                        <?php if ($pagination->hasPre()):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
-        	<?php endif;?>
-        	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
-        	<?php endfor;?>
-        	<?php if($pagination->hasNext()):?>
-            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
-       		<?php endif;?> </div>
-                                  <div class="blank15"></div>
-                                </ul>
+ 
+<div class="public_width">
+<?php $disease_header_title = $row["data"];?>
+<?php include dirname(dirname(__FILE__))."/inc/header.disease.php"?>
 
-                                
-                            </div>
-                           
-                           
-                           
-                        </div>
-                                         
-                    
-                      </div>
+<!--head end-->
+<div class="hui_bg">
+	<div class="blank30"></div>
+    <div class="mzy30">
+		<div class="jbzs_con_nav">
+            <ul>
+                <li><a href="" class="jbzs_one">疾病知识</a></li>
+                <li class=""><a href="">相关咨询</a></li>
+                <li class=""><a href="" class="last">推荐专家</a></li>
+            </ul>
+           
+            <div class="clear_l"></div>
+        </div>
+     </div>
+     <div class="blank20"></div>
+</div>
+<div class="public_width">
+<div class="hd_hsx"></div>
+    
+    <div class="jbzs_con">
+        
+        <div class="jb_sstab clearfix dgray fz13 color6">
+            <ul class="fl">
+              <li class="selected">全部文章</li>
+              <li>病因</li>
+              <li class="last">症状</li>
+            </ul>
+           <div class ="rel fr">
+          	<span class="left_down"><img src="<?php print AppUrl::getMediaPath()?>/images/down.png" id="img1" ></span> 
+         </div>
+         <div class="bg_col"></div>
+        </div>
+        
+        <div id="de_show" class="de_show" >
+          <p>选择标签</p>
+          <ul class="de_line clearfix">
+            <li> 
+                <a href="" class="de_cur">全部文章</a> 
+                <a href="" class ="cnzz_article_lable">疾病介绍</a> 
+                <a href="" class ="cnzz_article_lable">病因</a> 
+            </li>
+            <li> 
+                <a href="" class ="cnzz_article_lable">症状</a> 
+                <a href="" class ="cnzz_article_lable">传染</a> 
+                <a href="" class ="cnzz_article_lable">遗传</a> 
+            </li>
+            <li> 
+                <a href="" class ="cnzz_article_lable">预防</a> 
+                <a href="" class ="cnzz_article_lable">检查</a> 
+                <a href="" class ="cnzz_article_lable">用药</a> 
+            </li>
+            <li> 
+                <a href="" class ="cnzz_article_lable">康复</a> 
+                <a href="" class ="cnzz_article_lable">中医疗法</a> 
+                <a href="" class ="cnzz_article_lable">心理治疗</a> 
+            </li>
+            <li> 
+                <a href="" class ="cnzz_article_lable">治疗方法</a> 
+                <a href="" class ="cnzz_article_lable">就诊指南</a> 
+                <a href="" class ="cnzz_article_lable">日常护理</a> 
+            </li>
+            <li> 
+                <a href="" class ="cnzz_article_lable">饮食运动</a> 
+                <a href="" class ="cnzz_article_lable">孕产</a> 
+            </li>
+          </ul>
+        </div>
+      
+      	<div class="jb_ssall">
+        
+            <div class="jb_ssbox selected">
+                
+                <div class="clr jb_ssbox_sm1">
+                    <div>
+                        <span class="fz16 color3">1前列腺炎的疾病简介</span>
+                        <p class="fz13 color6">前列腺炎是多种复杂原因和诱因引起的前列腺的炎症、免疫、神经内分泌参与的错综的病...<a href="" class="bule fr">详情 ></a></p>
                     </div>
+                    <div class="blank20"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
                 
-    			<!--left end-->
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
                 
-               <?php include dirname(__FILE__)."/common/right.tpl.php";?>
-                <!--right end-->
-             </div>
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="hd_hsx"></div>
+                <div class="blank30 hui_bg"></div>
+
+            </div>
+            
+            <div class="jb_ssbox">
+                <div class="clr jb_ssbox_sm1">
+                    <div class="clr">
+                        <span class="fz16 color3">2前列腺炎的疾病简介</span>
+                        <p class="fz13 color6">前列腺炎是多种复杂原因和诱因引起的前列腺的炎症、免疫、神经内分泌参与的错综的病...<a href="" class="bule fr">详情 ></a></p>
+                    </div>
+                    <div class="blank20"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="hd_hsx"></div>
+                <div class="blank30 hui_bg"></div>
+                
+            </div>
+            
+            <div class="jb_ssbox">
+                <div class="clr jb_ssbox_sm1">
+                    <div class="clr">
+                        <span class="fz16 color3">3前列腺炎的疾病简介</span>
+                        <p class="fz13 color6">前列腺炎是多种复杂原因和诱因引起的前列腺的炎症、免疫、神经内分泌参与的错综的病...<a href="" class="bule fr">详情 ></a></p>
+                    </div>
+                    <div class="blank20"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="bortbcon"></div>
+                <div class="mzy30">
+                <div class="blank30"></div>
+                
+					<div class="clr jbzs_sm1">
+                    	<dl class="fl tc">
+                            <a href="">
+                            <dt><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img1.png" /></dt>
+                             <dd class="color6">陈希球</dd>
+                            </a>
+                        </dl>
+                        <div class="fr">
+                        	<h5 class="fz28 fw400"><a href="" class="color3">前列腺炎"最爱"八种人，有...</a></h5>
+                            <p class="color6 fz22">值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最...</p>
+                            <p class="tr"><span class="yellow">1112</span> 已读</p>
+                        </div>
+                    </div>
+    				
+                    <div class="blank30"></div>
+                </div>
+                <div class="hd_hsx"></div>
+                <div class="blank30 hui_bg"></div>
+               
+            </div>
             
           </div>
-          <!--zjtd_con2 end-->
         
-      </div>
-      
-      <!--fromjb end-->
-      
-      <div class="blank20"></div>
-      
+        
     </div>
-    <!--syboxl end-->
-  </div>
-  <!--sybox end-->
-  
+    
+    
+</div>
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+                
+	console=window.console || {dir:new Function(),log:new Function()};
+	var active=0,
+		as=document.getElementById('de_show').getElementsByTagName('a');
+		
+	for(var i=0;i<as.length/3;i++){
+		(function(){
+			var j=i;
+			as[i].onclick=function(){
+				t4.slide(j);
+				
+				return false;
+			}
+		})();
+	}
+	var t4=new TouchSlider('slider4',{speed:1000, autoplay:false, direction:0, interval:6000, fullsize:true,});
+	$(".bg_col").hide();
+	$(".de_show").hide();
+	$("document").ready(function() {
+			 $(".bd li").click(function(){
+					$(this).addClass("on_selected");
+					$(this).siblings("li").removeClass("on_selected");
+                    $(this).parent("ul").siblings("ul").children("li").removeClass("on_selected");
+                    $("#de_show ul").children("li:eq("+$(this).parent().index()+")").children("a:eq("+$(this).index()+")").addClass("de_cur");
+                    $("#de_show ul").children("li:eq("+$(this).parent().index()+")").children("a:eq("+$(this).index()+")").siblings("a").removeClass("de_cur");
+                    $("#de_show ul").children("li:eq("+$(this).parent().index()+")").siblings("li").children("a").removeClass("de_cur");
+			})
+			$(".left_down").click(function(){
+					if($(this).children("#img1").hasClass("cur1")){
+						$(this).children("#img1").removeClass("cur1");
+						$(".bg_col").hide();
+						$(".slideBox").show();
+						$(".de_show").hide();
+						$(this).children("#img1").attr("src","<?php print AppUrl::getMediaPath()?>/images/down.png");
+					}else{
+						$(this).children("#img1").addClass("cur1");
+						$(".bg_col").show();
+						$(".slideBox").hide();
+						$(".de_show").show();
+						$(this).children("#img1").attr("src","http://i1.hdfimg.com/touch/<?php print AppUrl::getMediaPath()?>/images/up.png");
+					}
+			  })
+            $('#de_show a').click(function(){
+					$(".bd ul:eq("+$(this).parent().index()+")").children("li:eq("+$(this).index()+")").click();
+					$(".bg_col").hide();
+					$(".de_show").hide();
+					$(".slideBox").show();
+					$(this).addClass("de_cur").siblings("a").removeClass("de_cur");
+					$(this).parent("li").siblings("li").children("a").removeClass("de_cur");
+					$(".left_down").children("#img1").removeClass("cur1");
+					$(".left_down").children("#img1").attr("src","<?php print AppUrl::getMediaPath()?>/images/down.png");
+				 })
+		   $(".bg_col").click(function(){
+			   		$(".bg_col").hide();
+					$(".de_show").hide();
+					$(".slideBox").show();
+					$(".left_down").children("#img1").removeClass("cur1");
+					$(".left_down").children("#img1").attr("src","<?php print AppUrl::getMediaPath()?>/images/down.png");
+		   })
+	});
+</script>
+ 

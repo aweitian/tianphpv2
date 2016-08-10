@@ -46,7 +46,12 @@ if (DEBUG_FLAG) {
 	error_reporting ( 0 );
 	ini_set ( "display_errors", "Off" );
 }
-
+if (utility::isMobile ()) {
+	define("THEME", "default_m");
+} else {
+	define("THEME", "default");
+}
+// var_dump(THEME);exit;
 require_once FILE_SYSTEM_ENTRY . '/app/AppConst.php';
 require_once FILE_SYSTEM_ENTRY . "/lib/db/mysql/mysqlPdoBase.php";
 require_once FILE_SYSTEM_ENTRY . "/modules/sqlManager/sqlManager.php";
@@ -68,11 +73,6 @@ if (false !== strpos ( FILE_SYSTEM_ENTRY, "openshift" )) {
 	require_once FILE_SYSTEM_ENTRY . '/app/runEnvir/default.php';
 }
 
-if (utility::isMobile ()) {
-	define("THEME", "default_m");
-} else {
-	define("THEME", "default");
-}
 
 tian::addExceptionDir ( FILE_SYSTEM_ENTRY . "/app/exceptions" );
 

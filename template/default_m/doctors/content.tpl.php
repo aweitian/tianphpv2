@@ -236,4 +236,4 @@ function chk(form){
   $doc_spec=$m->data["spec"];
   
   ?>
-      <?php include FILE_SYSTEM_ENTRY."/template/default/bottom_swt.tpl.php";?>
+      <?php include dirname(dirname(__FILE__))."/template/default/bottom_swt.tpl.php";?>

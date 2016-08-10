@@ -5,5 +5,5 @@
 
 
 
-include FILE_SYSTEM_ENTRY."/template/default/subscribe.layout.php";
+include dirname(dirname(dirname(__FILE__)))."/subscribe.layout.php";
 ?>

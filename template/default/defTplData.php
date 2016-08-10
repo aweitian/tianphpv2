@@ -84,7 +84,7 @@ class defTplData{
 		if($layout != ""){
 			$this->layout = $layout;
 		}else{
-			$this->layout = FILE_SYSTEM_ENTRY."/template/default/layout.php";
+			$this->layout = dirname(__FILE__)."/layout.php";
 		}
 		return $this;
 	}

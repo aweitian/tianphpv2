@@ -4,8 +4,12 @@
  * Author: Awei.tian
  * Description: 
  * 		Specail for pmcai view
+
  */
-require_once FILE_SYSTEM_ENTRY . '/template/default/defTplData.php';
+
+// var_dump(THEME);EXIT;
+
+require_once FILE_SYSTEM_ENTRY . '/template/'.THEME.'/defTplData.php';
 class AppView extends View {
 	/**
 	 *

@@ -46,6 +46,14 @@ class mainModel extends AppModel {
 		return askUIApi::getInstance()->getQuestionsByLv0Did($did,$length);
 	}
 	
+	/**
+	 * Author
+	 * sihangzhang
+	 */
+	public function getAllQuestions($off,$len){
+		return askUIApi::getInstance()->getAllQuestions($off,$len);
+	}
+	
 	public function getNameByDod($dod){
 		return doctorUIApi::getInstance()->getNameByDod($dod);
 	}
@@ -72,4 +80,11 @@ class mainModel extends AppModel {
 	public function getNewest($length){
 		return articleUIApi::getInstance()->getNewest($length);
 	}
+	public function getLv0Data(){
+		return symptomUIApi::getInstance()->alllv0();
+	}
+    public function alllv1BySyd($syd){
+		return $alllv1BySyd=symptomUIApi::getInstance()->alllv1BySyd($syd);
+	}
+	
 }

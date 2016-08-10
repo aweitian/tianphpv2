@@ -3,5 +3,5 @@
  * @var userModel;
  */
 
-include FILE_SYSTEM_ENTRY.'/template/default/register.layout.php';
+include dirname(dirname(dirname(__FILE__))).'/register.layout.php';
 ?>

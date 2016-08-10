@@ -3,5 +3,5 @@
  * @var userModel;
  */
 
-include FILE_SYSTEM_ENTRY.'/template/default/resetpwd.layout.php';
+include dirname(dirname(dirname(__FILE__))).'/resetpwd.layout.php';
 ?>
