@@ -1,6 +1,7 @@
 <?php
 //aid,kw,desc,thumb,title,content,date
 $data = $m->row($_REQUEST["id"]);
+
 if(empty($data)){
 	exit("removed.");
 }
@@ -21,13 +22,10 @@ defTplData::getInstance()->description = $data["desc"];
 // 	["contribution"]=> string(1) "0" 
 // 	["desc"]=> string(3) "doc" 
 // 	["spec"]=> string(4) "spce" }
-// var_dump($m->data);exit;
+
 ?>
 
-  <div class="blank15"></div>
-  <div class="con_tit fz13">当前位置：<a href="">首页</a> > <a href="">陈希球医生个人网站</a> > <a href="">文章列表</a> > 文章详情</div>
-  
-  <div class="blank15"></div>
+  <?php include dirname(__FILE__)."/common/location.tpl.php";?>
   <div class="sybox clearfix">
     <div>
       
@@ -58,18 +56,23 @@ defTplData::getInstance()->description = $data["desc"];
                        <h6 class="color3 fz16">专家简介</h6>
                        <div class="blank15"></div>
                        <div class="zjtdcon1box1_sm1 clr" style="margin:0;">
+
+                       
                   		<div class="fl">
-                     		<img src="<?php print HTTP_ENTRY?>/static/images/zjtd_zj1.jpg">
-                     		<a href="" class="zjtd_swt">陈希球</a>
+                     		<a href="<?php print AppUrl::docHomeByDocid($m->data["id"]) ?>">
+                     		<img width="200" height="220" src="<?php print HTTP_ENTRY?>/static/doctor/<?php print($m->data["avatar"]) ?>">
+                     		</a>
+                     		<a href="<?php print AppUrl::docHomeByDocid($m->data["id"]) ?>" class="zjtd_swt"><?php print($m->data["name"]) ?></a>
                      	</div>
                      
                      <div class="fr">
-                          <h4 class="fz24 tc">陈希球大夫的个人网站</h4>
+                          <h4 class="fz24 tc"><?php print($m->data["name"]) ?>大夫的个人网站</h4>
                           <div class="blank20"></div>
-                          <p><b class="fz18">陈希球  副主任医师 </b></p>
+                          <p><b class="fz18"><?php print($m->data["name"]) ?> <?php print($m->data["lv"]) ?> </b></p>
                           <div class="blank10"></div>
                           <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img2.png" class="fl" />格言：从医20多年来，患者的康复是对我最大的回报。</p>
-                          <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />擅长项目：高难度男性生殖整形手术：阴茎背神经修复手术，阴茎再造术，阴茎延长，阴茎增粗，阴茎矫正，先天性尿道下裂，阴茎冠状沟缺损等，精索静脉曲张，尿道等…<a href=""> [点击咨询]</a></p>
+                          <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />
+                          擅长项目：<?php print utility::utf8Substr($m->data["spec"] , 0, 30)?>…<a href="<?php print AppUrl::getSwtUrl() ?>"> [点击咨询]</a></p>
                      </div>
                      
                   </div>
@@ -81,9 +84,9 @@ defTplData::getInstance()->description = $data["desc"];
                     <div class="zjtdpage_box1">
                     	<h6 class="color3 fz16 page_tit1">在线问诊<span class="color9 fz13">平台不收取任何额外费用</span></h6>
                         <div class="padd20 border2 clr">
-                        	<a href=""><img src="<?php print HTTP_ENTRY?>/static/images/zjtdpage_img1.png" /></a>
-                            <a href=""><img src="<?php print HTTP_ENTRY?>/static/images/zjtdpage_img2.png" /></a>
-                            <a href=""><img src="<?php print HTTP_ENTRY?>/static/images/zjtdpage_img3.png" style="margin:0;" /></a>
+                        	<a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/images/zjtdpage_img1.png" /></a>
+                            <a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/images/zjtdpage_img2.png" /></a>
+                            <a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/images/zjtdpage_img3.png" style="margin:0;" /></a>
                         </div>
                     </div>
                   	<div class="blank20"></div>
@@ -92,24 +95,20 @@ defTplData::getInstance()->description = $data["desc"];
                         
                         <div class="zjtd_box3">
                     	
+                
+                   
+                 <?php $aid= $data["aid"]?>
+                 
+             
+                    	<?php foreach ($m->data($aid,0,3) as $list): ?>
+
                         <dl class="clr">
                         	<p class="blank20"></p>
-                        	<dt>你好。邹主任。婴儿痉挛点头。能做手术吗</dt>
-                            <dd class="fr"><span class="color9">游客(来自上海市长城宽带的网友) 2016-03-03</span></dd>
+                        	<dt><?php print AppFilter::filterOut($list["comment"]) ?></dt>
+                            <dd class="fr"><span class="color9"><?php print($list["datetime"]) ?></span></dd>
                             <p class="blank20"></p>
                         </dl>
-                         <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt>你好。邹主任。婴儿痉挛点头。能做手术吗</dt>
-                            <dd class="fr"><span class="color9">游客(来自上海市长城宽带的网友) 2016-03-03</span></dd>
-                            <p class="blank20"></p>
-                        </dl>
-                         <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt>你好。邹主任。婴儿痉挛点头。能做手术吗</dt>
-                            <dd class="fr"><span class="color9">游客(来自上海市长城宽带的网友) 2016-03-03</span></dd>
-                            <p class="blank20"></p>
-                        </dl>
+                         	<?php endforeach;  ?>
                         
                     </div>
                     
@@ -118,14 +117,53 @@ defTplData::getInstance()->description = $data["desc"];
                     <div class="zjtdpage_box2">
                     	<h6 class="color3 fz16 page_tit1">发表评论</h6>
                         <div class="blank10"></div>
-                        <textarea placeholder="请填写评论内容..." class="border2 color9 fz16"></textarea>
+                        <form name="form" onsubmit="return chk(this)" method="post" action="<?php print AppUrl::userAddComment() ?>">
+                        
+                        <textarea name="c" placeholder="请填写评论内容..." class="border2 color9 fz16"></textarea>
                         <div class="blank10"></div>
                     	<div class="f14 color6 zjtdpage_pl clr">
-                            <span class="fl">请输入计算结果：</span>
-                            <p class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/zjtdpage_img4.jpg" /><br /><a href="fl">看不清，换一个</a></p>
-                            <input type="text" class="fl zjtdpage_ip1 border2" />
-                            <input type="button"  class="fl zjtdpage_ip2" value="发表" />
+                            <span class="fl">请输入验证码：</span>
+                            <p class="fl">    <img id="Img" src="<?php print AppUrl::Captcha() ?>" onclick = "this.src='<?php print AppUrl::Captcha() ?>?'+Math.random()"  />  <br />
+			        <a  onclick="reImg();">看不清，换一张</a>  </p>
+			                            
+			                                <script type="text/javascript">  
+			        function reImg(){  
+			            var img = document.getElementById("Img"); 
+			         
+			            img.src = "<?php print AppUrl::Captcha() ?>?" + Math.random();  
+			          
+			        }  
+			    </script>  
+			    			
+                            <input type="hidden" name="a" value="<?php print $aid?>" />
+                            <input type="text" name="v" class="fl zjtdpage_ip1 border2" />
+                            <input type="submit"  class="fl zjtdpage_ip2" value="发表" />
                         </div>
+                        
+                        </form>
+                        
+                        
+                        <script>
+
+function chk(form){
+    $.post(form.action,
+    {
+      a:form.a.value,
+      c:form.c.value,
+      v:form.v.value
+    },
+    function(data,status){
+        if(data.result==0){
+        	reImg();
+            }
+        alert(data.info);
+   
+    },
+    'json');
+    return false;
+  }
+
+</script>
                     </div>
                     <div class="blank20"></div>
                     <div>
@@ -133,31 +171,29 @@ defTplData::getInstance()->description = $data["desc"];
                         <div class="blank10"></div>
                         
                         <div class="zjtdpage_box3 clr">
-                        	<ul class="fl">
-                            	<li><a href="">前列腺的作用以及前列</a></li>
-                                <li><a href="">男性为何会患上前列腺增生</a></li>
-                                <li><a href="">男性为何会患上前列腺增生</a></li>
-                            </ul>
-                            <ul class="fr">
-                            	<li><a href="">前列腺的作用以及前列</a></li>
-                                <li><a href="">男性为何会患上前列腺增生</a></li>
-                                <li><a href="">男性为何会患上前列腺增生</a></li>
-                            </ul>
+                        	<ul >
+
+          	 <?php foreach($m->allByDod($m->data["sid"],8,0) as $aitem):?> 
+              
+                 <?php $a= $m->rowNoContent($aitem)?> 
+                       	<li><a href="<?php print AppUrl::articleByAid($a["sid"])?>"> 	
+                       	<?php print utility::utf8Substr($a["title"], 0, 22) ; ?></a> 	
+                       	</li>
+                    <?php endforeach;?> 
+                            </ul>        
                         </div>
                     </div>
                     <div class="blank20"></div>
                 </div>
     			<!--left end-->
                 
-                <div class="fr wid300 fz13">
-                    
+                <div class="fr wid300 fz13">             
                 	<div class="zjtd_zxfw border4">
-                    	
                     	<textarea placeholder="在此简单描述病情，向陈希球医生提问" class="border4"></textarea>
                         <p class="blank10"></p>
-                        <p class="color6"><b>陈希球的咨询范围： </b>各类先天性心脏病，包括小儿和成人；房缺，室缺，四联症以及二尖... <a href="" class="blue">[更多]</a></p>
+                        <p class="color6"><b><?php print($m->data["name"]) ?>的咨询范围： </b>各类先天性心脏病，包括小儿和成人；房缺，室缺，四联症以及二尖... <a href="<?php print AppUrl::getSwtUrl()?>" class="blue">[更多]</a></p>
                         <p class="blank10"></p>
-                        <p><a href="" class="zjtd_rgzx tc">咨询陈希球医生</a></p>
+                        <p><a href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_rgzx tc">咨询<?php print($m->data["name"]) ?>医生</a></p>
                     </div>
                     
                   	<div class="blank20"></div>
@@ -166,22 +202,11 @@ defTplData::getInstance()->description = $data["desc"];
                         <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a></div>
                         <div class="hotbqbox fz13">
                           <ul class="clearfix">
-                            <li><a href="">前列腺炎</a></li>
-                            <li><a href="">前列腺增生</a></li>
-                            <li><a href="">包皮包茎</a></li>
-                            <li><a href="">前列腺痛</a></li>
-                            <li><a href="">前列腺肥大</a></li>
-                            <li><a href="">早泄</a></li>
-                            <li><a href="">前列腺囊肿</a></li>
-                            <li><a href="">前列腺癌</a></li>
-                            <li><a href="">前列腺炎</a></li>
-                            <li><a href="">前列腺增生</a></li>
-                            <li><a href="">包皮包茎</a></li>
-                            <li><a href="">前列腺痛</a></li>
-                            <li><a href="">前列腺肥大</a></li>
-                            <li><a href="">早泄</a></li>
-                            <li><a href="">前列腺囊肿</a></li>
-                            <li><a href="">前列腺癌</a></li>
+                                     
+                          <?php foreach($m->getRandomDid(8) as $dis):?>
+                  
+                            <li><a href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><?php print $dis["data"] ?></a></li>
+                       <?php endforeach;?> 
                           </ul>
                         </div>
                       </div>
@@ -203,4 +228,12 @@ defTplData::getInstance()->description = $data["desc"];
     <!--syboxl end-->
   </div>
   <!--sybox end-->
+  <?php 
+
+  $doc_img=$m->data["avatar"];
+  $doc_name=$m->data["name"];
+  $doc_desc=$m->data["desc"];
+  $doc_spec=$m->data["spec"];
   
+  ?>
+      <?php include FILE_SYSTEM_ENTRY."/template/default/bottom_swt.tpl.php";?>

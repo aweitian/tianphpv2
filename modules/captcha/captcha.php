@@ -25,16 +25,22 @@ class session_captcha{
 	 */
 	public function check($code){
 		if(!isset($code)){
+			$this->resetCode();
 			return false;
 		}
 		if(is_string($code)&&strlen($code)>0){
 			$ret=$this->session->get($this->config["session_name"])===$code;
+			$this->resetCode();
 			if(!$ret){
 				return false;
 			}
 			return true;
 		}
+		$this->resetCode();
 		return false;
+	}
+	public function resetCode(){
+		$this->session->remove($this->config["session_name"]);
 	}
 	//for test
 	public function _debug_get_code_238237128(){

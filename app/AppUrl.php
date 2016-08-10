@@ -1,6 +1,10 @@
 <?php
 class AppUrl {
 #全局URL
+	public static function Captcha(){
+		return AppUrl::build("/captcha");
+	}
+	
 	public static function navHome(){
 		return AppUrl::build("/");
 	}	
@@ -94,6 +98,9 @@ class AppUrl {
 	}
 	public static function userRmPresents(){
 		return AppUrl::build("/user/rmpresents");
+	}
+	public static function userAddComment(){
+		return AppUrl::build("/user/addcomment");
 	}
 	
 	

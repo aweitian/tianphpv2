@@ -11,7 +11,7 @@ $d = diseaseExtInfoes::getExtData();
 
 // exit;
 ?>
-  
+ 
   <div class="blank15"></div>
   <div class="sybox clearfix">
     <div>

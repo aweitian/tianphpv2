@@ -39,6 +39,12 @@ class articleModel extends privModel{
 		return $api->getInfo();
 	}
 	
+	public function hasArticleBysyd($syd){
+		$api = new articleSymptomApi();
+		return !empty($api->row($syd));
+	}
+	
+	
 	/* get INFOES  */
 	public function getInfo_disease(){
 		$api = new diseaseApi();
@@ -50,6 +56,7 @@ class articleModel extends privModel{
 	}
 	public function getInfo_symptom(){
 		$api = new symptomApi();
+// 		var_dump($api->getInfo());exit;
 		return $api->getInfo();
 	}
 	
@@ -101,7 +108,7 @@ class articleModel extends privModel{
 	}
 	public function q_relsym_aid($aid){
 		$api = new articleSymptomApi();
-		return $api->row($aid);
+		return $api->all($aid);
 	}
 	public function q_tags_aid($aid){
 		$api = new articleTagsApi();

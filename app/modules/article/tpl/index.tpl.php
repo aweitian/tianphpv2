@@ -76,7 +76,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                         	           <?php endif?>
                         	</dt>
                             <dd class="fl">
-                            	<b class="fz18 color3"><a href="<?php print AppUrl::articleByAid($a1["aid"])?>"><?php print utility::utf8Substr($a1["title"], 0, 30) ?></a></b>
+                            	<b class="fz18 color3"><a href="<?php print AppUrl::articleByAid($a1["aid"])?>"><?php print utility::utf8Substr($a1["title"], 0, 15) ?></a></b>
                                 <p class="color9"><?php print utility::utf8Substr($a1["desc"], 0, 80) ?>...<a href="<?php print AppUrl::articleByAid($a1["aid"])?>" class="bule">[查看全文]</a></p>
                             </dd>
                         </dl>                  
@@ -89,7 +89,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                             
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a2["aid"])?>"><?php print utility::utf8Substr($a2["title"], 0, 30) ?></a>...</p>
+                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a2["aid"])?>"><?php print utility::utf8Substr($a2["title"], 0, 15) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                             </div>
@@ -99,7 +99,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                     
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a3["aid"])?>"><?php print utility::utf8Substr($a3["title"], 0, 30) ?></a>...</p>
+                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a3["aid"])?>"><?php print utility::utf8Substr($a3["title"], 0, 15) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                             </div>
@@ -198,9 +198,13 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                      <?php $y=1;?>	
                     	<?php $asks = $m->getAllQuestions(0,4);foreach($asks["data"] as $ask):?>
                         <dl <?php if($y==1){?> class="selected"<?php } ?> >
-                          <dt class="fz18 blue"><a href=""><?php print $ask["title"]?></a></dt>
+                          <dt class="fz18 blue"><a href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>"><?php print $ask["title"]?></a></dt>
                           <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl"><?php $content = $m->getAnswerByAskid($ask["sid"]); print empty($content) ? "" :$content["content"]?>...</p>
+                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">
+                            <a href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>">
+                            <?php $content = $m->getAnswerByAskid($ask["sid"]); print empty($content) ? "" :$content["content"]?>...
+                            </a>
+                            </p>
                           </dd>
                         </dl>
                    <?php $y++;?>      
@@ -208,54 +212,55 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                         
                       </div>
                     
-                    <div class="zjtd_r3 clr"><a href="">立刻咨询</a></div>
+                    <div class="zjtd_r3 clr"><a href="<?php print AppUrl::getSwtUrl() ?>">立刻咨询</a></div>
                     <div class="blank20"></div>
                   </div>
                 	
                     <div class="blank20"></div>
-                  
-                   <div class="syrbox4 border2">
-                    <div class="syrboxtit fz18 graybg">预约挂号</div>
-                    <div class="syrbox4nr fz13">
-                      <form method="post" action="">
-                        <table>
-                          <tr>
-                            <td height="26" width="62">姓      名</td>
-                            <td><input class="input1 border2" type="text" /></td>
-                          </tr>
-                          <tr height="14">
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">联系电话</td>
-                            <td><input class="input1 border2" type="text" /></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">预约时间</td>
-                            <td><input class="input2 gray border2" onclick="WdatePicker()" placeholder="请选择预约时间" type="text" /></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">就诊状态</td>
-                            <td><input type="radio" name="zd"  checked="checked" />
-                              <label> 初诊</label>
-                              <input class="input3" type="radio" name="zd" />
-                              <label> 复诊</label></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                        </table>
-                        <div class="sybtn">
-                          <button class="sybtn1" type="submit" value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth8.jpg" width="120" height="40" /></button>
-                          <button value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth9.jpg" width="120" height="40" /></button>
-                        </div>
-                      </form>
+                  <script src="<?php print HTTP_ENTRY?>/static/js/guahao.js"></script>
+                    <div class="syrbox4 border2">
+        <div class="syrboxtit fz18 graybg">预约挂号</div>
+        <div class="syrbox4nr fz13">
+        
+  <form name="form1" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
+            <table>
+              <tr>
+                <td height="26"  width="62">姓      名</td>
+                <td><input name="名称" id="name" class="input1 border2" type="text" /></td>
+              </tr>
+              <tr height="14">
+                <td></td>
+              </tr>
+              <tr>
+                <td width="62">联系电话</td>
+                <td><input id="hometel" name="电话" class="input1 border2" type="text" /></td>
+              </tr>
+              <tr height="14" >
+                <td></td>
+              </tr>
+              <tr>
+                <td width="62">预约时间</td>
+                <td><input id="yudate" name="预约时间"  class="input2 gray border2"  onclick="WdatePicker()" placeholder="请选择预约时间" type="text" /></td>
+              </tr>
+              <tr height="14" >
+                <td></td>
+              </tr>
+              <tr>
+                <td width="62">就诊状态</td>
+                <td><input id="ismode" type="radio" name="就诊状态"  checked="checked" />
+                  <label> 初诊</label>
+                  <input id="ismode" class="input3" type="radio" name="就诊状态" />
+                  <label> 复诊</label></td>
+              </tr>
+              <tr height="14" >
+                <td></td>
+              </tr>
+            </table>
+            <div class="sybtn">
+              <button class="sybtn1" type="submit" value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth8.jpg" width="120" height="40" /></button>
+              <button value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth9.jpg" width="120" height="40" /></button>
+            </div>
+          </form>
                     </div>
                   </div>
                   
@@ -277,4 +282,5 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
     <!--syboxl end-->
   </div>
   <!--sybox end-->
+ 
   

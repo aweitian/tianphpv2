@@ -41,7 +41,7 @@ $url = new url($req->requestUri());
     </ul>
   </div>
   <div class="blank15"></div>
-  <div class="con_tit fz13">当前位置：<a href="">首页</a> > <a href="">医护团队</a> > <a href="">医师</a></div>
+  <div class="con_tit fz13">当前位置：<a href="/">首页</a> > <a href="<?php print AppUrl::navDoctors()?>">医护团队</a> </div>
   
   <div class="sybox clearfix">
     <div>
@@ -58,7 +58,7 @@ $url = new url($req->requestUri());
                	<div class="wid680 fl">
                     
                     <div class="padd20 border2">
-                    	<div class="zjtdwztit fz18"><span></span>诊后服务星<a href="" class="fr fz13 color9">+更多</a></div>
+                    	<div class="zjtdwztit fz18"><span></span>诊后服务星</div>
                         <div class="fromjbzj clearfix">
                           <ul class="ulbot clearfix">
                            	<?php foreach($model->getTopStar(3) as $doc):?>
@@ -160,13 +160,13 @@ $url = new url($req->requestUri());
                 	
                     <div class="jb_rg">
                         <textarea placeholder="在此咨询，专业医师在线提供就医指导" class="jb_rg1 fl color9"></textarea>
-                        <input type="button" class="jb_rg2 fl" />
+                      <a href="<?php print AppUrl::getSwtUrl() ?>"><input type="button" class="jb_rg2 fl" /></a>  
                     </div>
                     
                     <div class="blank20"></div>
                     
                     <div class="syrbox5 border2">
-                    <div class="syrboxtit fz18 graybg">相关问答<a href="" class="blue fz13 fr">+更多</a></div>
+                    <div class="syrboxtit fz18 graybg">相关问答<a href="<?php print AppUrl::navAsk()?>"" class="blue fz13 fr">+更多</a></div>
                     
                     <div class="zjtd_r2">
                     	<div class="blank10"></div>
@@ -174,9 +174,13 @@ $url = new url($req->requestUri());
                      <?php $y=1;?>	
                     	<?php $asks = $m->getAllQuestions(0,4);foreach($asks["data"] as $ask):?>
                         <dl <?php if($y==1){?> class="selected"<?php } ?> >
-                          <dt class="fz18 blue"><a href=""><?php print $ask["title"]?></a></dt>
+                          <dt class="fz18 blue"><a href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>"><?php print $ask["title"]?></a></dt>
                           <dd class="fz16 dgray clr">
-                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl"><?php $content = $m->getAnswerByAskid($ask["sid"]); print empty($content) ? "" :$content["content"]?>...</p>
+                            <img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img7.png" class="fl" /><p class="fl">
+                            <a href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>">
+                            <?php $content = $m->getAnswerByAskid($ask["sid"]); print empty($content) ? "" :$content["content"]?>...
+                            </a>
+                            </p>
                           </dd>
                         </dl>
                    <?php $y++;?>      
@@ -184,12 +188,10 @@ $url = new url($req->requestUri());
                         
                       </div>
                     
-                    <div class="zjtd_r3 clr"><a href="">立刻咨询</a></div>
+                    <div class="zjtd_r3 clr"><a href="<?php print AppUrl::getSwtUrl() ?>">立刻咨询</a></div>
                     <div class="blank20"></div>
                   </div>
-                	
                     <div class="blank20"></div>
-                	
                     <div class="docsug border2">
                         <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师观点</a><a class="fz13 blue fr" href="<?php print AppUrl::navArticle()?>">+更多</a></div>
                         <div class="docsugbox fz13">
@@ -198,7 +200,17 @@ $url = new url($req->requestUri());
     <?php /*var_dump($thumb)*/?>
     <dl class="clearfix">
     	<dt class="fl">
-    		<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print $thumb["thumb"]?>" width="80" height="60" /></a>
+    		
+    			
+							<?php if (!empty($thumb["thumb"])):?>
+                        	<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>">
+    		<img src="<?php print $thumb["thumb"]?>" width="80" height="60" />
+    		</a>
+                        	<?php else:  ?>
+                        	
+                        		<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print HTTP_ENTRY?>/static/images/zt_img1.jpg" width="80" heigth="60" /></a>
+                        	           <?php endif?>
+    		
     	</dt>
       <dd class="fl">
       <p><a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></p>
@@ -225,11 +237,23 @@ $url = new url($req->requestUri());
                   <div class="blank20"></div>
                   
                   <div class="syrbox2">
-                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth1.jpg" width="300" height="100" /></p>
+                    <p>
+                    <a href="<?php print AppUrl::getSwtUrl() ?>">
+                    <img src="<?php print HTTP_ENTRY?>/static/images/syrth1.jpg" width="300" height="100" />
+                    </a>
+                    </p>
                     <p class="blank10"></p>
-                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth2.jpg" width="300" height="100" /></p>
+                    <p>
+                        <a href="<?php print AppUrl::getSwtUrl() ?>">
+                    <img src="<?php print HTTP_ENTRY?>/static/images/syrth2.jpg" width="300" height="100" />
+                    </a>
+                    </p>
                     <p class="blank10"></p>
-                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth3.jpg" width="300" height="100" /></p>
+                    <p>
+                        <a href="<?php print AppUrl::getSwtUrl() ?>">
+                    <img src="<?php print HTTP_ENTRY?>/static/images/syrth3.jpg" width="300" height="100" />
+                    </a>
+                    </p>
                   </div>
                   
                   <div class="blank20"></div>

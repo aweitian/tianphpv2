@@ -207,9 +207,21 @@
  	 * @param int $aid
  	 * @return array int dod
  	 */
- 	public function row($aid){
+ 	public function all($aid){
  		return $this->db->fetchAll($this->sqlManager->getSql("/articleSymptom/all"), array(
  				"aid" => $aid,
  		));
  	}
+ 	/**
+ 	 *
+ 	 * @param int $syd
+ 	 * @return array int dod
+ 	 */
+ 	public function row($syd){
+ 		return $this->db->fetch($this->sqlManager->getSql("/articleSymptom/row"), array(
+ 				"syd" => $syd,
+ 		));
+ 	}
+ 	
+ 	
  }

@@ -590,7 +590,7 @@ class articleController extends privController{
 				$this->response->_404();
 			}
 			
-			$this->view->showForm($this->priv->getUserInfo(),$this->getArticleInfo($msg["?sid"]),$rowR->return);			
+			$this->view->showForm($this->priv->getUserInfo(),$this->getArticleInfo($msg["?sid"]),$this->model,$rowR->return);			
 		}
 	}
 	
@@ -700,7 +700,7 @@ class articleController extends privController{
 			}
 		}else{
 			$this->view->setPmcaiMsg($msg);
-			$this->view->showForm($this->priv->getUserInfo(),$this->getArticleInfo());			
+			$this->view->showForm($this->priv->getUserInfo(),$this->getArticleInfo(),$this->model);			
 		}
 	}
 }

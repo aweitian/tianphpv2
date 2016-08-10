@@ -10,6 +10,7 @@
  * "dis" "doc "sym" "tag"
  */
 $info = $data["info"];
+$model = $data["model"];
 // var_dump($info["def"]["tag"]);exit;
 if(isset($data["def"]) && !is_null($data["def"])) {
 	$actionMode = "edit";
@@ -181,6 +182,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       	 */
                       	$tree_sym = array();
                       	foreach ($info["symptom"] as $item){
+                      		if(!$item["pd"])continue;
                       		if(!array_key_exists($item["pid"], $tree_sym)){
                       			$tree_sym[$item["pid"]] = array(
                       				"text" => $item["pd"],
@@ -205,7 +207,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       	 <?php foreach ($tree_sym as $pid => $item):?>
                         <b><?php print $item["text"]?>:</b><br>
 	                       <?php foreach ($item["children"] as $mid => $child):?>
-	                        <label style="font-weight:normal;padding-right:12px;">
+	                        <label style="font-weight:normal;padding-right:12px;<?php if($model->hasArticleBysyd($mid)):?><?php else:?>color:red;<?php endif?>">
 	                        <input type="checkbox" name="syid[]" value="<?php print $mid?>"<?php if(array_key_exists($mid, $hash_sym_rel)):?>checked <?php endif;?>><?php print $child?>
 	                        </label>
 	                        <?php endforeach;?>

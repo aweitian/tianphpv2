@@ -180,6 +180,9 @@ class diseaseControllerNotFoundModel extends AppModel {
 		return tagsUIApi::getInstance()->getTag($tid);
 	}
 	
+	public function getCountByAid($aid) {
+		return commentUIApi::getInstance()->getCountByAid($aid);
+	}
 	
 	
 	

@@ -31,7 +31,7 @@ class commentUIApi {
 	 * @return int;
 	 */
 	public function getCountByAid($aid){
-		$cache_key = "getCountByAid-".$uid;
+		$cache_key = "getCountByAid-".$aid;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
@@ -44,6 +44,43 @@ class commentUIApi {
 		}
 		$this->cache[$cache_key] = $ret;
 		return $ret;
+	}
+	
+
+
+	/**
+	 *
+	 * @param int $uid
+	 * @param int $dod
+	 * @param string $content
+	 * @return rirResult
+	 */
+	public function add($uid, $aid, $content) {
+		$op_type = "user_submit";
+		$op_id = $uid;
+		$oplog = new oplog ();
+		$try_cnt = $oplog->getCnt ( $op_type, $op_id );
+		if (USER_SUBMIT_TRY_MAX - $try_cnt <= 0) {
+			return new rirResult ( 1, "今天向网站提交的数据过多" );
+		}
+		$opsid = $oplog->add ( $op_type, $op_id );
+		$oplog->update ( $opsid );
+	
+		if(utility::utf8Strlen($content) > 2048){
+			return new rirResult ( 2, "内容过长" );
+		}
+		$sql = $this->sqlManager->getSql("/ui_comment/add");
+		$bnd = array(
+				"uid" => $uid,
+				"aid" => $aid,
+				"comment" => $content,
+		);
+		// var_dump($sql,$bnd);exit;
+		$row = $this->db->insert ( $sql, $bnd );
+		if ($row > 0) {
+			return new rirResult ( 0, "提交成功，审核通过后会出现在页面上" );
+		}
+		return new rirResult ( 0, $this->db->getErrorInfo() );
 	}
 	
 	

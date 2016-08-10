@@ -98,7 +98,7 @@ $url = new url($req->requestUri());
     
     <div class="wid300 fr">
     
-    <p><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth4.jpg" width="300" height="90" /></a></p>
+    <p><a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/images/syrth4.jpg" width="300" height="90" /></a></p>
     <p class="blank20"></p>
     
     <div class="docsug border2">
@@ -110,7 +110,17 @@ $url = new url($req->requestUri());
     <?php /*var_dump($thumb)*/?>
     <dl class="clearfix">
     	<dt class="fl">
-    		<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print $thumb["thumb"]?>" width="80" height="60" /></a>
+    		
+    			<?php if (!empty($thumb["thumb"])):?>
+                        	<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>">
+    		<img src="<?php print $thumb["thumb"]?>" width="80" height="60" />
+    		</a>
+                        	<?php else:  ?>
+                        	
+                        		<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print HTTP_ENTRY?>/static/images/zt_img1.jpg" width="80" heigth="60" /></a>
+                        	           <?php endif?>
+    		
+    		
     	</dt>
       <dd class="fl">
       <p><a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></p>

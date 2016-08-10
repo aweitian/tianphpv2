@@ -17,7 +17,13 @@
    
     <dl class="clearfix">
     	<dt class="fl">
-    		<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print $thumb["thumb"]?>" width="80" height="60" /></a>
+    			<?php if (!empty($a1["thumb"])):?>
+                        	<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>">
+    		<img src="<?php print $thumb["thumb"]?>" width="80" height="60" />
+    		</a>
+                        	<?php else:  ?>
+                        	<img src="<?php print HTTP_ENTRY?>/static/images/zt_img1.jpg" width="80" heigth="80" />
+                        	           <?php endif?>
     	</dt>
       <dd class="fl">
       <p><a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></p>
@@ -60,48 +66,50 @@
                       
                   <div class="blank20"></div>
                   
-                  <div class="syrbox4 border2">
-                    <div class="syrboxtit fz18 graybg">预约挂号</div>
-                    <div class="syrbox4nr fz13">
-                      <form method="post" action="">
-                        <table>
-                          <tr>
-                            <td height="26" width="62">姓      名</td>
-                            <td><input class="input1 border2" type="text" /></td>
-                          </tr>
-                          <tr height="14">
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">联系电话</td>
-                            <td><input class="input1 border2" type="text" /></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">预约时间</td>
-                            <td><input class="input2 gray border2" onclick="WdatePicker()" placeholder="请选择预约时间" type="text" /></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">就诊状态</td>
-                            <td><input type="radio" name="zd"  checked="checked" />
-                              <label> 初诊</label>
-                              <input class="input3" type="radio" name="zd" />
-                              <label> 复诊</label></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                        </table>
-                        <div class="sybtn">
-                          <button class="sybtn1" type="submit" value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth8.jpg" width="120" height="40" /></button>
-                          <button value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth9.jpg" width="120" height="40" /></button>
-                        </div>
-                      </form>
+                  <script src="<?php print HTTP_ENTRY?>/static/js/guahao.js"></script>
+      <div class="syrbox4 border2">
+        <div class="syrboxtit fz18 graybg">预约挂号</div>
+        <div class="syrbox4nr fz13">
+        
+  <form name="form1" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
+            <table>
+              <tr>
+                <td height="26"  width="62">姓      名</td>
+                <td><input name="名称" id="name" class="input1 border2" type="text" /></td>
+              </tr>
+              <tr height="14">
+                <td></td>
+              </tr>
+              <tr>
+                <td width="62">联系电话</td>
+                <td><input id="hometel" name="电话" class="input1 border2" type="text" /></td>
+              </tr>
+              <tr height="14" >
+                <td></td>
+              </tr>
+              <tr>
+                <td width="62">预约时间</td>
+                <td><input id="yudate" class="input2 gray border2" name="预约时间" onclick="WdatePicker()" placeholder="请选择预约时间" type="text" /></td>
+              </tr>
+              <tr height="14" >
+                <td></td>
+              </tr>
+              <tr>
+                <td width="62">就诊状态</td>
+                <td><input id="ismode" type="radio" name="就诊状态"  checked="checked" />
+                  <label> 初诊</label>
+                  <input id="ismode" class="input3" type="radio" name="就诊状态" />
+                  <label> 复诊</label></td>
+              </tr>
+              <tr height="14" >
+                <td></td>
+              </tr>
+            </table>
+            <div class="sybtn">
+              <button class="sybtn1" type="submit" value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth8.jpg" width="120" height="40" /></button>
+              <button value=""><img src="<?php print HTTP_ENTRY?>/static/images/syrth9.jpg" width="120" height="40" /></button>
+            </div>
+          </form>
                     </div>
                   </div>
                   
@@ -122,10 +130,22 @@
                   <div class="blank20"></div>
                   
                   <div class="syrbox2">
-                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth1.jpg" width="300" height="100" /></p>
+                    <p>
+                    <a href="<?php print AppUrl::getSwtUrl() ?>">
+                    <img src="<?php print HTTP_ENTRY?>/static/images/syrth1.jpg" width="300" height="100" />
+    </a>
+                    </p>
                     <p class="blank10"></p>
-                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth2.jpg" width="300" height="100" /></p>
-                    <p class="blank10"></p>
-                    <p><img src="<?php print HTTP_ENTRY?>/static/images/syrth3.jpg" width="300" height="100" /></p>
+                    <p>
+                    <a href="<?php print AppUrl::getSwtUrl() ?>">
+                    <img src="<?php print HTTP_ENTRY?>/static/images/syrth2.jpg" width="300" height="100" /></p>
+                    <p class="blank10">
+                    </a>
+                    </p>
+                    <p>
+                    <a href="<?php print AppUrl::getSwtUrl() ?>">
+                    <img src="<?php print HTTP_ENTRY?>/static/images/syrth3.jpg" width="300" height="100" />
+                    </a>
+                    </p>
                   </div>
                 </div>

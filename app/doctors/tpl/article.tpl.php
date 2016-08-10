@@ -12,19 +12,15 @@ $req = new httpRequest();
 $url = new url($req->requestUri());
 
 ?>
-  <div class="blank15"></div>
-  <div class="con_tit fz13">当前位置：<a href="">首页</a> > <a href="">医护团队</a> > <a href="">医师</a></div>
-  
-  <div class="blank15"></div>
-  <div class="sybox clearfix">
-    <div>
+
+ <?php include dirname(__FILE__)."/common/location.tpl.php";?>
       
       <div class="zjtd">
       
       <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
        
         </ul>
-        
+  
           <div class="tabcon selected fz13">
           	   <div class="blank20"></div>
                <div class="clr">
@@ -67,13 +63,13 @@ $url = new url($req->requestUri());
                   </div>
                   
                 </div>
-    			<!--left end-->
+    			<!--left end-->	
                 
                 <div class="fr wid300 fz13">
                     
                 	<div class="zjtd_zxfw border4">
                     	
-                    	<textarea placeholder="在此简单描述病情，向陈希球医生提问" class="border4"></textarea>
+                    	<textarea placeholder="在此简单描述病情，向<?php print $m->data["name"]?>医生提问" class="border4"></textarea>
                         <p class="blank10"></p>
                         <p class="color6"><b><?php print $m->data["name"]?>的咨询范围： </b><?php print $m->data["spec"]?>... <a href="<?php print AppUrl::getSwtUrl()?>" class="blue">[更多]</a></p>
                         <p class="blank10"></p>
@@ -114,3 +110,5 @@ $url = new url($req->requestUri());
     </div>
     <!--syboxl end-->
   </div>
+  
+ 

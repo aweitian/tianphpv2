@@ -63,7 +63,7 @@ if(is_null($q)){
                       <td><?php print $item["sid"]?></td>
                       <td><?php print $item["title"]?></td>
                       <td><?php print $item["cnt"]?></td>
-                      <td><?php print $item["date"]?></td>
+                      <td><?php print AppFilter::filterOut($item["date"]) ?></td>
                       
                       <td>
                       	<!-- <i class="fa fa-edit"></i> -->

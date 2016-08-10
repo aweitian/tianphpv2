@@ -2,10 +2,7 @@
 
 
 ?>
- <div class="blank15"></div>
-  <div class="con_tit fz13">当前位置：<a href="">首页</a> > <a href="">医护团队</a> > <a href="">医师</a></div>
-  
-  <div class="blank15"></div>
+  <?php include dirname(__FILE__)."/common/location.tpl.php";?>
   <div class="sybox clearfix">
     <div>
       

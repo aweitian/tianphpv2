@@ -21,6 +21,14 @@ class userModel extends AppModel {
 		return userUIApi::getInstance ()->initLogin ( $this->session )->check ( $nep, $pwd, $code );
 	}
 	
+	
+	public function addComment($uid,$aid,$c){
+		return commentUIApi::getInstance ()->add($uid,$aid,$c);
+		
+	}
+	
+	
+	
 	/**
 	 * 修改头像
 	 * 

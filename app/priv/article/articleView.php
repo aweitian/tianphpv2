@@ -7,11 +7,12 @@
 require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 class articleView extends privView{
 	
-	public function showForm($userInfo,$info,$def=null){
+	public function showForm($userInfo,$info,$model,$def=null){
 		$this->priv_wrap($userInfo, $this->fetch(
 				"form",array(
 					"def" => $def,
-					"info" => $info
+					"info" => $info,
+					"model" => $model
 				)
 			))->show();
 	}

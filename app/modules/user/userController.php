@@ -36,7 +36,8 @@ class userController extends appCtrl {
 		if (! in_array ( $msg->getAction (), array (
 				"login",
 				"register",
-				"resetpwd" 
+				"resetpwd",
+				"addcomment"
 		) )) {
 			if (! AppUser::getInstance ()->auth->isLogined ()) {
 				$this->response->redirect ( AppUrl::userLogin () );
@@ -66,6 +67,45 @@ class userController extends appCtrl {
 			$this->response->redirect(AppUrl::userProfile());
 		}
 		$this->view->writeletter ( $this->model );
+	}
+	public function addcommentAction(pmcaiMsg $msg) {
+		if(!AppUser::getInstance ()->auth->isLogined()){
+			$ret = new rirResult(1,"需要登陆");
+			print $ret->toJSON();
+			exit;
+		}
+		
+		if(!isset($msg["a"],$msg["v"],$msg["c"])){
+			$ret = new rirResult(2,"非法数据提交");
+			print $ret->toJSON();
+			exit;
+		}
+		
+		$cap = new session_captcha(App::getSession());
+		if(!$cap->check($msg["v"])){
+			$ret = new rirResult(3,"验证码错误");
+			print $ret->toJSON();
+			exit;
+		}
+		if(trim($msg["c"]) == ""){
+			$ret = new rirResult(5,"评论内容为空");
+			print $ret->toJSON();
+			exit;
+		}
+		$info = AppUser::getInstance ()->auth->getInfo();
+		$uid = $info["sid"];
+		$ret= $this->model->addComment($uid, intval($msg["a"]), $msg["c"]);
+		
+		if($ret->isTrue()){
+			$ret = new rirResult(0,"提交成功,需要审核过才能出现在页面");
+			print $ret->toJSON();
+			exit;
+		} else {
+			$ret = new rirResult(4,"今天提交数据过多");
+			print $ret->toJSON();
+			exit;
+		}
+
 	}
 	public function rmletterAction(pmcaiMsg $msg) {
 		$info = AppUser::getInstance ()->auth->getInfo ();

@@ -182,6 +182,26 @@ class askUIApi {
 	}
 	
 	/**
+	 * 返回所有问题个数
+	 * @return int;
+	 */
+	public function getAllQuestionsCnt(){
+		$cache_key = "getAllQuestionsCnt";
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+	
+		$sql = $this->sqlManager->getSql("/ui_ask/cnt");
+		$cnt = $this->db->fetch($sql, array());
+		//	var_dump($sql);exit;
+		$ret = $cnt["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	
+	
+	/**
 	 * 返回COUNT,DATA数组
 	 * DATA的字段为:sid,title,date,dod
 	 * @param int $offset

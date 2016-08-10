@@ -27,7 +27,7 @@
   </div>
 
 </div>
-
+   <script src="<?php print HTTP_ENTRY?>/static/js/guahao.js"></script>
 <div class="ghbanner">
 
   <div class="ghbannerbox">
@@ -36,7 +36,7 @@
 
 	  <h2>上海九龙男子医院在线预约平台</h2>
 
-	  <form method="post" action="">
+	 <form name="form1" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
 
 		<table width="490">
 
@@ -44,7 +44,7 @@
 
 			<td>姓名：
 
-			  <input class="xhline1" /></td>
+			  <input name="名称" id="name" class="xhline1" /></td>
 
 			<td class="td2">性别：
 
@@ -58,7 +58,7 @@
 
 			<td class="td2">年龄：
 
-			  <input class="xhline1" /></td>
+			  <input name="年龄" id="age" class="xhline1" /></td>
 
 		  </tr>
 
@@ -70,11 +70,11 @@
 
 			<td>联系电话：
 
-			  <input class="xhline2" /></td>
+			  <input id="hometel" name="电话" class="xhline2" /></td>
 
 			<td>预约时间：
 
-			  <input class="xhline2"  type="text" name="date" onclick="WdatePicker()" /></td>
+			  <input  id="yudate" name="预约时间" class="xhline2"  type="text"  onclick="WdatePicker()" /></td>
 
 		  </tr>
 
@@ -82,7 +82,7 @@
 
 			<td colspan="3">病情描述：
 
-			  <textarea class="xhline3"></textarea></td>
+			  <textarea name="病情描述" id="desc" class="xhline3"></textarea></td>
 
 		  </tr>
 

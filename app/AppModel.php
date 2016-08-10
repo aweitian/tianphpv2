@@ -7,6 +7,7 @@
 require_once FILE_SYSTEM_ENTRY."/app/data/default/appraise.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/article.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/ask.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/comment.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/disease.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/doctor.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/letter.uiapi.php";

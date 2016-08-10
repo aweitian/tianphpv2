@@ -103,6 +103,16 @@ class doctorsModelControllerNotFound extends AppModel {
 		return askUIApi::getInstance()->getQuestionByAskid($askid);
 	}
 
+	public  function  data($aid,$offset,$length){
+	
+		return commentUIApi::getInstance()->data($aid,$offset,$length);
+	}
+	public  function  getAllQuestionsCnt(){
+	
+		return askUIApi::getInstance()->getAllQuestionsCnt();
+	}
+	
+	
 	
 	
 }

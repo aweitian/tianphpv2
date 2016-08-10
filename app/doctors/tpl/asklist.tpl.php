@@ -20,9 +20,9 @@ $pagination = new pagination($m->getQuestionsCountByDod($m->data["sid"]), $page,
 $req = new httpRequest();
 $url = new url($req->requestUri());
 
+
 ?>
-  
-  <div class="blank15"></div>
+ <?php include dirname(__FILE__)."/common/location.tpl.php";?>
   <div class="sybox clearfix">
     <div>
       
@@ -56,12 +56,12 @@ $url = new url($req->requestUri());
       <!--fromjb end-->
       
       <div class="blank20"></div>
-      	
-   
+      
+
      <!--服务区 start-->
     <div class="padd20  border2 clr">
       <div class="zjtdwztit fz18 clr"><span class="fl"></span><h5 class="fl fz18">服务区</h5>
-      <div class="fz13 color3 fl" style="margin-left:15px;">（全部患者：<font class="yellow">27167</font>）</div>
+      <div class="fz13 color3 fl" style="margin-left:15px;">（全部患者：<font class="yellow">   <?php print $m->getAllQuestionsCnt()?></font>）</div>
         <div class="fr">
             <input type="text" class="zjtdwztit_sel fl color9 fz13" />
             <input type="button" class="zjtdwztit_sel2 fr" value="搜索" />
