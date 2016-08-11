@@ -184,6 +184,14 @@ class diseaseControllerNotFoundModel extends AppModel {
 		return commentUIApi::getInstance()->getCountByAid($aid);
 	}
 	
+	/**
+	 * 获取医生回答的个数
+	 * @param int $askid
+	 * @return int
+	 */
+	public function getAnswersDocReplyCnt($askid){
+		return askUIApi::getInstance()->getAnswersDocReplyCnt($askid);
+	}
 	
 	
 }

@@ -41,4 +41,5 @@ class diseaseModel extends AppModel {
 	public function getArticleTag7ByDid($did){
 		return diseaseUIApi::getInstance()->getArticleTag7ByDid($did);
 	}
+	
 }

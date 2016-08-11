@@ -30,65 +30,16 @@ $d = diseaseExtInfoes::getExtData();
 <div class="blank30"></div>
 <div class="mzy30">
 	<h3 class="blue fz30">常见疾病</h3>
-    <div class="blank30"></div>
-    
+    <div class="blank30"></div>       
         <div class="kp_cjjb clr">
-            <a href="">前列腺炎</a>
-            <a href="">前列腺增生</a>
-            <a href="">前列腺肥大</a>
-            <a href="">前列腺痛</a>
-            <a href="">前列腺囊肿</a>
-            <a href="">前列腺癌</a>
-            <a href="">阳痿</a>
-            <a href="">早泄 </a>
-            <a href="">过度手淫</a>
-            <a href="">前列腺炎</a>
-            <a href="">前列腺增生</a>
-            <a href="">前列腺肥大</a>
-            <a href="">前列腺痛</a>
-            <a href="">前列腺囊肿</a>
-            <a href="">前列腺癌</a>
-            <a href="">阳痿</a>
-            <a href="">早泄 </a>
-            <a href="">过度手淫</a>
-            <a href="">前列腺炎</a>
-            <a href="">前列腺增生</a>
-            <a href="">前列腺肥大</a>
-            <a href="">前列腺痛</a>
-            <a href="">前列腺囊肿</a>
-            <a href="">前列腺癌</a>
-            <a href="">阳痿</a>
-            <a href="">早泄 </a>
-            <a href="">过度手淫</a>
-            <a href="">前列腺炎</a>
-            <a href="">前列腺增生</a>
-            <a href="">前列腺肥大</a>
-            <a href="">前列腺痛</a>
-            <a href="">前列腺囊肿</a>
-            <a href="">前列腺癌</a>
-            <a href="">阳痿</a>
-            <a href="">早泄 </a>
-            <a href="">过度手淫</a>
+            <?php foreach($m->getLv0Infoes() as $dis):?> 
+                 <?php foreach ($m->getLv1InfoesByDid($dis["sid"]) as $xbz):?>
+                 <a href="<?php print AppUrl::disHomeByDiseasekey($xbz['key'])?>"><?php print ($xbz['data']) ?></a>                    	
+                 <?php endforeach;?>
+            <?php endforeach;?>          
         </div>
-    
-    
-    
-    
-    
-    
+   
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -22,88 +22,76 @@ $url = new url($req->requestUri());
 
 
 ?>
- <?php include dirname(__FILE__)."/common/location.tpl.php";?>
-  <div class="sybox clearfix">
-    <div>
-      
-      <div class="zjtd">
-      
-      <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
-          
-          <div class="tabcon selected fz13">
-            
-            <div class="blank20"></div>
-                
-           <div class="border2 padd20 clr zjtd_hzfwtw">
-           		<img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $m->data["avatar"]?>" width="210" height="160" class="fl" style="border:1px solid #fff;" />
-                <div class="fr">
-                	<div class="zjtd_page_set clr">
-                    	<input type="text" class="zjtd_pageset_inp1 border2 fl color9 fz16" placeholder="在此简单描述病情，向<?php print $m->data["name"]?>大夫提问" />
-                        <input type="button" class="zjtd_pageset_inp2 fr" style="background:#76c000;" value="个人网站站内搜索" />
-                    </div>
-                    <div class="blank20"></div>
-                    <p class="color3 clr"><b><?php print $m->data["name"]?>的咨询范围：</b><?php print $m->data["spec"]?></p>
-                    <div class="blank20"></div>
-                </div>
-                
-           </div>
-            
-          </div>
-          <!--zjtd_con2 end-->
-        
-      </div>
-      
-      <!--fromjb end-->
-      
-      <div class="blank20"></div>
-      
+<div class="public_width">
 
-     <!--服务区 start-->
-    <div class="padd20  border2 clr">
-      <div class="zjtdwztit fz18 clr"><span class="fl"></span><h5 class="fl fz18">服务区</h5>
-      <div class="fz13 color3 fl" style="margin-left:15px;">（全部患者：<font class="yellow">   <?php print $m->getAllQuestionsCnt()?></font>）</div>
-        <div class="fr">
-            <input type="text" class="zjtdwztit_sel fl color9 fz13" />
-            <input type="button" class="zjtdwztit_sel2 fr" value="搜索" />
-        </div>
+<div class="head_tc blue_bg">
+        <a class="goback" href="" title="返回上页"><span>返回</span></a>
+        <div class="head_tit" >陈希球医生咨询列表</div>
+    <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_xl.png" /><i id="redpoint" class=""></i></span></a>
+  </div>
+<div class="black_bg"></div>
+<div class="head_tc_nav_new">
+  <form class="clearfix" action="" method="GET" accept-charset="GBK">
+      <div class="text">
+        <div class="in_out">
+          <input id="uniqueKeyword20151125" type="text" placeholder="医院名、疾病名或医生姓名" class="head_tc_nav_new_input" name="key"/>
+        </div>  
       </div>
-      <div class="blank20"></div>
-      <div class="zixun_list">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr class="zixun_list_title">
-            <td width="2%"></td>
-            <td width="10%">患者</td>
-            <td width="40%">标题</td>
-            <td width="20%">症状/疾病</td>
-            <td width="13%">对话数</td>
-            <td width="15%">时间</td>
-          </tr>
-          
-    <?php foreach ($m->getQuestionsByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $ask): ?>
+      <div class="sub">
+        <input type="button" id="nav_bar_search_btn" value="搜索"/>
+      </div>
+  </form>
+  <div class="search_dor clearfix">
+    <a href="" class="anyiyuan" id="cnzz_yiyuan203">找大夫咨询</a>
+    <a href="" class="anjibing" id="cnzz_jibing204">好评医院</a>
+  </div>
+  <div class="three_btn clearfix">
+    <a href="" id="cnzz_zixun205"><span></span></a>
+    <a href="" id="cnzz_dianhua206"><span></span></a>
+    <a href="" id="cnzz_jihao207" class="mr0"><span></span></a>
+  </div>
+  <div class="three_a clearfix">
+    <a href="" class="" id="cnzz_shouye208">首页</a>
+    <a href="" class=" " id="cnzz_zhishi209">疾病知识</a>
+ </div>
+ <div class="three_dl clearfix">
+    <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_dl.png" class="three_dl_sm1" /></a>
+    <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_zc.png" /></a>
+ </div>
+  <div id="percenter"> </div>
+  <div class="battom_waitao"><div class="bottom_bac"></div></div>
+  <div class="arrow"></div>
+</div>
+<input id="isShowRedPoint" type="hidden" value="">
+<script src="js/nav_bar.0e2272c9.js"></script>
+
+<!--head end-->
+
+<div class="hui_bg">
+<?php include dirname(__FILE__)."/common/nav.tpl.php";?>
+
+<?php foreach ($m->getQuestionsByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $ask): ?>
  
-        <?php $user=$m->getNameByUid($ask["uid"])  ?>
-        <?php $dis=$m->getNameByDid($ask["did"])?>
+<?php $user=$m->getNameByUid($ask["uid"])  ?>
+<?php $dis=$m->getNameByDid($ask["did"])?>
         
-		<?php $count=$m->getAnswersCnt($ask["sid"]) ?>
-		<?php $docount= $m->getAnswersDocReplyCnt($ask["sid"]) ?>
-    
-        
-    
-          <tr>
-            <td></td>
-            <td><p><?php print ($user) ?></p></td>
-            <td><p><a target="_blank" href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="td_link" ><?php print($ask["title"]) ?></a> </p></td>
-            <td ><a target="_blank" href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="rela_dis"  ><?php print($dis) ?></a></td>
-            <td> (<font class="green3 pl5 pr5 green"><?php print($docount) ?>/<?php print($count) ?></font>) </td>
-            <td class="color9"><?php print($ask["date"]) ?></td>
-          </tr>
-        <?php endforeach; ?>  
-    
-        </table>
-        
- 		 </div>
-  		<div class="blank20"></div>
-        <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
+<?php $count=$m->getAnswersCnt($ask["sid"]) ?>
+<?php $docount= $m->getAnswersDocReplyCnt($ask["sid"]) ?>
+<div class="hd_hsx"></div>
+<div class="blank10"></div>
+<div class="hd_hsx"></div>
+<div class="kp_about  bg_fff">
+	<dl class="mzy30">
+    	<div class="blank20"></div>
+    	<dt class="clr"><a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_wen.png" /><?php print utility::utf8Substr($ask["title"], 0, 18)?></a></dt>
+        <dd>疾病 ：<a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><?php print($dis) ?></a></dd>
+        <dd class="clr color9"><span class="fl">患者： <?php print ($user) ?></span><span class="fr">共<?php print($docount) ?>条对话   <?php print utility::utf8Substr($ask["date"], 0, 10)?></span></dd>
+    </dl>
+</div>
+ <?php endforeach; ?>  
+<div class="hd_hsx"></div>
+<div class="blank10"></div>
+<div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
         	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
@@ -112,13 +100,9 @@ $url = new url($req->requestUri());
         	<?php if($pagination->hasNext()):?>
             <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?> </div>
-        <div class="blank20"></div>
-	</div>
-    <!--服务区 end-->
-        <div class="blank20"></div>
-        
-    </div>
-    <!--syboxl end-->
-  </div>
-  <!--sybox end-->
+<div class="blank30"></div>
+
+</div>
+
+</div>
   

@@ -165,7 +165,7 @@ foreach ($m->getDisease() as $item){
               <?php $xy++; ?>
               <li class="clearfix">
                 <div class="left_head">
-                  <div class="head_outer"><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/<?php print $doc["avatar"]?>" /></a></div>
+                  <div class="head_outer"><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" /></a></div>
                 </div>
                 <div class="right_name">
                   <p class="name"><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><?php print $doc["name"]; ?></a></p>
@@ -196,7 +196,7 @@ foreach ($m->getDisease() as $item){
     <ul class="hotzx_box1"> 
         <?php $all=$m->getAllQuestions(0,5);?>
         <?php foreach ($all["data"] as $allitem):?>
-        <li><a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><?php print utility::utf8Substr($allitem["title"], 0, 15) ?><span>今天</span></a></li>
+        <li><a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><?php print utility::utf8Substr($allitem["title"], 0, 12) ?><span> <?php print utility::utf8Substr($allitem["date"], 0, 10)?></span></a></li>
         <?php endforeach;?>
     </ul>
   </div>

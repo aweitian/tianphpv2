@@ -33,201 +33,29 @@ $docinfos=$m->getInfoes(10);
       <li style="display: block;" id="cnzz_yyqy">
         <div class="province_list">
           <ul>
-            <li><span class="name cur_name">龟头异常</span></li>
-            <li><span class="name">包皮异常</span></li>
-            <li><span class="name">阴茎异常</span></li>
-            <li><span class="name" style="font-size:.2rem">尿道口异常</span></li>
-            <li><span class="name">阴囊异常</span></li>
-             <li><span class="name">睾丸异常</span></li>
-            <li><span class="name">精液异常</span></li>
-            <li><span class="name">射精异常</span></li>
-            <li><span class="name">勃起异常</span></li>
-            <li><span class="name">排尿异常</span></li>
+            <?php $x=1;?>
+            <?php foreach($m->getLv0Data() as $sym):?> 	
+            <li><span class="name <?php if($x==1){?>cur_name<?php }?>"><?php print utility::utf8Substr($sym["data"], 0, 4) ?></span></li>
+            <?php $x++;?>
+            <?php endforeach;?> 
           </ul>
         </div>
         
         <div class="hospital_list" style="display: block;">
-          <div class="list_num" style="display: block;">
+          <?php $z=1;?>
+          <?php foreach($m->getLv0Data() as $sym):?> 	
+          <div class="list_num" <?php if($z==1){?>style="display:block;"<?php } else{?>style="display:none;"<?php }?>>
           
             <ul class="left_hos clr">
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎瘙痒</a><span>|</span></li>
-              <li><a href="">阴茎包皮粘连</a><span>|</span></li>
-              <li><a href="">阴茎长小疙瘩</a><span>|</span></li>
-              <li><a href="">阴茎疼痛</a><span>|</span></li>
-              <li><a href="">阴茎发黑发紫阴</a><span>|</span></li>
-              <li><a href="">阴茎黑点黑斑</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
+              <?php foreach ($m->alllv1BySyd($sym["syd"]) as $xzz):?>
+              <li><a href="<?php print AppUrl::articleBySyd($xzz['syd'])?>"><?php print ($xzz['data']) ?></a><span>|</span></li>
+              <?php endforeach;?>
             </ul>
             
           </div>
-          <div class="list_num" style="display: none;">
-            
-            <ul class="left_hos clr">
-              <li><a href="">2阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎瘙痒</a><span>|</span></li>
-              <li><a href="">阴茎包皮粘连</a><span>|</span></li>
-              <li><a href="">阴茎长小疙瘩</a><span>|</span></li>
-              <li><a href="">阴茎疼痛</a><span>|</span></li>
-              <li><a href="">阴茎发黑发紫阴</a><span>|</span></li>
-              <li><a href="">阴茎黑点黑斑</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-            </ul>
-            
-          </div>
-          <div class="list_num" style="display: none;">
-            
-            <ul class="left_hos clr">
-              <li><a href="">3阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎瘙痒</a><span>|</span></li>
-              <li><a href="">阴茎包皮粘连</a><span>|</span></li>
-              <li><a href="">阴茎长小疙瘩</a><span>|</span></li>
-              <li><a href="">阴茎疼痛</a><span>|</span></li>
-              <li><a href="">阴茎发黑发紫阴</a><span>|</span></li>
-              <li><a href="">阴茎黑点黑斑</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-            </ul>
-            
-          </div>
-          <div class="list_num" style="display: none;">
-            
-            <ul class="left_hos clr">
-              <li><a href="">4阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎瘙痒</a><span>|</span></li>
-              <li><a href="">阴茎包皮粘连</a><span>|</span></li>
-              <li><a href="">阴茎长小疙瘩</a><span>|</span></li>
-              <li><a href="">阴茎疼痛</a><span>|</span></li>
-              <li><a href="">阴茎发黑发紫阴</a><span>|</span></li>
-              <li><a href="">阴茎黑点黑斑</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-            </ul>
-            
-          </div>
-          <div class="list_num" style="display: none;">
-            
-            <ul class="left_hos clr">
-              <li><a href="">5阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎瘙痒</a><span>|</span></li>
-              <li><a href="">阴茎包皮粘连</a><span>|</span></li>
-              <li><a href="">阴茎长小疙瘩</a><span>|</span></li>
-              <li><a href="">阴茎疼痛</a><span>|</span></li>
-              <li><a href="">阴茎发黑发紫阴</a><span>|</span></li>
-              <li><a href="">阴茎黑点黑斑</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-            </ul>
-            
-          </div>
-          <div class="list_num" style="display: none;">
-            
-            <ul class="left_hos clr">
-              <li><a href="">6阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎瘙痒</a><span>|</span></li>
-              <li><a href="">阴茎包皮粘连</a><span>|</span></li>
-              <li><a href="">阴茎长小疙瘩</a><span>|</span></li>
-              <li><a href="">阴茎疼痛</a><span>|</span></li>
-              <li><a href="">阴茎发黑发紫阴</a><span>|</span></li>
-              <li><a href="">阴茎黑点黑斑</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-            </ul>
-            
-          </div>
-          <div class="list_num" style="display: none;">
-            
-            <ul class="left_hos clr">
-              <li><a href="">7阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎瘙痒</a><span>|</span></li>
-              <li><a href="">阴茎包皮粘连</a><span>|</span></li>
-              <li><a href="">阴茎长小疙瘩</a><span>|</span></li>
-              <li><a href="">阴茎疼痛</a><span>|</span></li>
-              <li><a href="">阴茎发黑发紫阴</a><span>|</span></li>
-              <li><a href="">阴茎黑点黑斑</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-            </ul>
-            
-          </div>
-          <div class="list_num" style="display: none;">
-            
-            <ul class="left_hos clr">
-              <li><a href="">8阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎瘙痒</a><span>|</span></li>
-              <li><a href="">阴茎包皮粘连</a><span>|</span></li>
-              <li><a href="">阴茎长小疙瘩</a><span>|</span></li>
-              <li><a href="">阴茎疼痛</a><span>|</span></li>
-              <li><a href="">阴茎发黑发紫阴</a><span>|</span></li>
-              <li><a href="">阴茎黑点黑斑</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-            </ul>
-            
-          </div>
-          <div class="list_num" style="display: none;">
-            
-            <ul class="left_hos clr">
-              <li><a href="">9阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎瘙痒</a><span>|</span></li>
-              <li><a href="">阴茎包皮粘连</a><span>|</span></li>
-              <li><a href="">阴茎长小疙瘩</a><span>|</span></li>
-              <li><a href="">阴茎疼痛</a><span>|</span></li>
-              <li><a href="">阴茎发黑发紫阴</a><span>|</span></li>
-              <li><a href="">阴茎黑点黑斑</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-            </ul>
-            
-          </div>
-          <div class="list_num" style="display: none;">
-            
-            <ul class="left_hos clr">
-              <li><a href="">10阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-              <li><a href="">阴茎瘙痒</a><span>|</span></li>
-              <li><a href="">阴茎包皮粘连</a><span>|</span></li>
-              <li><a href="">阴茎长小疙瘩</a><span>|</span></li>
-              <li><a href="">阴茎疼痛</a><span>|</span></li>
-              <li><a href="">阴茎发黑发紫阴</a><span>|</span></li>
-              <li><a href="">阴茎黑点黑斑</a><span>|</span></li>
-              <li><a href="">阴茎红点红疹</a><span>|</span></li>
-              <li><a href="">阴茎红肿潮红</a><span>|</span></li>
-              <li><a href="">阴茎滴白流脓</a><span>|</span></li>
-            </ul>
-            
-          </div>
+          <?php $z++;?>
+          <?php endforeach;?>
+      
         </div>
         
       			</li>

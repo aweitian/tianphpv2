@@ -149,7 +149,7 @@ input,button,select,textarea{
 .color9{ color:#999 !important;;}
 .colorf{ color:#fff !important;}
 .colorc{ color:#ccc !important;}
-.hd{ height:.1rem; background:#f0f0f0; overflow:hidden; clear:both;}
+.hd{ height:.1rem; overflow:hidden; clear:both;}
 .hd_hx{ height:0; border-bottom:1px solid #535f6e; overflow:hidden; clear:both;}
 .hd_hsx{ height:0; border-bottom:1px solid #ddd; overflow:hidden; clear:both;}
 .mr0{ margin-right:0 !important;}

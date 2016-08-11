@@ -89,7 +89,7 @@ $a=Appctrl::$msg->getControl()
                             
                                         <li>
                                             <div class="advise_box_title">                              
-                                            <a href="" class="fz16 color3"><?php print $allitem["title"]?></a>
+                                            <a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" class="fz16 color3"><?php print $allitem["title"]?></a>
                                             </div>
                                             <p class="gray3 pt5 color9">最后提交
                                          

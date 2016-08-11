@@ -34,12 +34,13 @@
 	</add>
 	
 	
-	<removeTreeById>
-		DELETE pt,mt
-			FROM `data_attr_data` AS mt
-			LEFT JOIN `data_attr_data` AS pt ON mt.`pid` = pt.`sid`
-			WHERE (mt.`sid` = :sid OR mt.`pid` = :sid) AND mt.`grp` = 2
-	</removeTreeById>
+	<removeById>
+		DELETE FROM `data_attr_data` WHERE `sid` = :sid AND data_attr_data.`grp` = 2
+	</removeById>
+	<removeByPid>
+		DELETE FROM `data_attr_data` WHERE `pid` = :sid AND data_attr_data.`grp` = 2
+	</removeByPid>
+	
 
 	<updateById>
 		UPDATE `data_attr_data` SET 

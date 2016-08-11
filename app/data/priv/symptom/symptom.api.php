@@ -27,7 +27,11 @@ class symptomApi{
 
 
 	public function rm($sid){
-		$sql = $this->sqlManager->getSql("/symptom/removeTreeById");
+		$sql = $this->sqlManager->getSql("/symptom/removeById");
+		$this->db->exec($sql, array(
+				"sid" => $sid
+		));
+		$sql = $this->sqlManager->getSql("/symptom/removeByPid");
 		$this->db->exec($sql, array(
 				"sid" => $sid
 		));
