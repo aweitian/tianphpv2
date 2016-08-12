@@ -74,6 +74,17 @@
 	</where_clause_title>
 	
 	
+	<assignRand>
+		INSERT INTO `data_article_doc` (`aid`,`dod`)
+		SELECT `data_article`.`sid`,(SELECT sid FROM `data_doctor`
+				ORDER BY RAND() LIMIT 0,1) AS b
+			FROM `data_article`
+			WHERE
+			`data_article`.`sid`
+			NOT IN (SELECT `aid` FROM `data_article_doc`)
+	</assignRand>
+	
+	
 	<reldoc_homeless>
 		<count>
 			SELECT COUNT(`data_article`.`sid`) as `count`

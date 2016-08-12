@@ -79,41 +79,22 @@ $url = new url($req->requestUri());
         </div>
     </div>
     <div class="blank20"></div>
-<div class="bg_fff">
-	<div class="hd_hsx"></div>
-    <div class="mzy30">
-       <div class="blank30"></div>
-       <div class="zj_tp clr">
-            <a href="">全部<span class="blue"><?php print $m->getLetterCnt()?></span></a>
-            <a href="">前列腺增生<span class="blue">7</span></a>
-            <a href="">前列腺肥大<span class="blue">3</span></a>
-            <a href="">早泄<span class="blue">1</span></a>
-            <a href="">前列腺痛<span class="blue">5</span></a>
-            <a href="">前列腺囊肿<span class="blue">3</span></a>
-            
-        </div>
-        <div class="blank20"></div>
-    </div>
-</div>
 
-<?php foreach($m->getDataByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $dodpj):?> 
-<?php $a=appraiseLvMeta::getMeta() ?>
-<?php $b= $m->getNameByDid($dodpj["did"])?> 
-<?php $c=$m->rowuser($m->data["sid"])?>
-<?php $let=$m->getLetter($m->data["sid"])?>
+<?php foreach($m->getLetterByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $let):?> 
+<?php $dis=$m->getNameByDid($let["did"])?>  
+<?php $user=$m->getNameByUid($let["uid"])  ?>
 <div class="hd_hsx"></div>
 <div class="blank10"></div>
 <div class="hd_hsx"></div>
 <div class="kp_about  bg_fff">
 	<dl class="mzy30">
     	<div class="blank20"></div>
-    	<dt class="clr"><a href="" class="yellow">所患疾病：<?php print ($b)  ?></a></dt>
-        <dd class="color3">满意度：<?php print ($a[$dodpj["lv"]]) ?></dd>
+    	<dt class="clr"><a href="" class="yellow">所患疾病： <?php print($dis) ?></a></dt>
         <dd class="color3">感谢信：<?php print $m->utf8cut($let["content"],0,64)?>...</dd>
         <div class="blank15"></div>
         <div class="hd_hsx"></div>
         <div class="blank15"></div>
-        <dd class="clr color9"><span class="fl"> 患者：<?php print ($c["name"]) ?> </span><span class="fr"><?php print ($dodpj["date"]) ?></span></dd>
+        <dd class="clr color9"><span class="fl"> 患者： <?php print ($user) ?></span><span class="fr"><?php print utility::utf8Substr($let["date"], 0, 10)?></span></dd>
     </dl>
 </div>
 <?php endforeach;?>   
@@ -138,7 +119,7 @@ $url = new url($req->requestUri());
 <div class="box_b">
     <p class="box_center2">
         <a href="<?php print AppUrl::letterPut()?>" class="btn_b1">给医生写信</a>
-        <a href="" class="btn_b2">联系医生</a>
+        <a href="<?php print AppUrl::getSwtUrl()?>" class="btn_b2">联系医生</a>
     </p> 
 </div>
 </div>

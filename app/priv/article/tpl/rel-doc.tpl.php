@@ -153,14 +153,14 @@ function chooseDi(o,a){
                   	<script>
 					function chk(f)
 					{
-						if(f.di.value == "0")
+						if(f.di.value == "-1")
 						{
 							return confirm("确认要全部随机分配么?");
 						}
 						return true;
 					}
                   	</script>
-                  	<form onclick="return chk(this)" action="<?php print HTTP_ENTRY?>/priv/article/con_reldoc" method="post" class="form-horizontal">
+                  	<form onsubmit="return chk(this)" action="<?php print HTTP_ENTRY?>/priv/article/con_reldoc" method="post" class="form-horizontal">
                   	<div class="form-group">
                       <label for="inputEmail3" class="col-sm-4 control-label">对选中项:</label>
                       <div class="col-sm-6">

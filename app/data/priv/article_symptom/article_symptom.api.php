@@ -140,6 +140,9 @@
  		return $len + ($len_new-$i) + ($len_old-$i);
  	}
  	
+ 	
+ 	
+ 	
  	/**
  	 * 获取所有没有相关到疾病的文章
  	 * 返回值的RETURN中包含data和count

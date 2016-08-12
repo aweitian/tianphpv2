@@ -7,6 +7,20 @@
 		FROM `data_article_dis`
 		WHERE `aid` = :aid AND `did` = :did
 	</exists>
+	
+	<count>
+		<all>SELECT COUNT(`data_article_dis`.`did` ) AS `cnt` FROM `data_article_dis`</all>
+		<did>SELECT COUNT(`data_article_dis`.`aid` ) AS `cnt` FROM `data_article_dis`
+			WHERE `data_article_dis`.`did` = :did
+			OR 
+			`data_article_dis`.`did` IN (
+				SELECT `sid` FROM `data_attr_data` WHERE `pid` = :did
+			)
+		</did>
+	
+	</count>
+	
+	
 	<all>
 		SELECT
 		  `aid`,

@@ -13,6 +13,7 @@
     background:url("../images/index_clogo.png") no-repeat;
 	background-size:100%;
 	
+	
 }
 .head_top .c_ad{
     display: block;
@@ -445,10 +446,20 @@
 }
 .index_hotzx .title_name a{ font-weight:400; color:#f39800; font-size:.24rem;}
 .index_hotzx .title_name a img{ width:.26rem; height:.31rem; margin:.22rem .05rem 0 0; float:left;}
+.index_hotzx .title_name .ys_tb{ width:.29rem; height:.29rem; margin:.25rem .1rem 0 0;}
+.index_hotzx .title_name_lan .ys_tb{ width:.29rem; height:.29rem; margin:.25rem .1rem 0 0;}
+
+
 
 .index_hotzx .title_name{border-top:.04rem solid #f39800; background:#fef4e5;color: #f39800;}
 .index_hotzx .title_name_lan{border-top:.04rem solid #3b83ff; background:#ebf2ff;color: #3b83ff;}
 .index_hotzx .title_name_lan a{ font-weight:400; color:#999; font-size:.24rem;}
+.index_hotzx .title_name_lan a img{ width:.26rem; height:.31rem; margin:.22rem .05rem 0 0; float:left;}
+.index_hotzx .title_name_lan span{ color:#999; font-size:.24rem;}
+
+
+
+
 
 .index_hotzx .hotzx_box1 li,.index_hotzx .hotzx_box2 li{
     height: .68rem;
@@ -674,10 +685,10 @@
 .zjtd{padding-top:.2rem; background:#fff;}
 .zjtd_box1 dl{ margin-left:.3rem; color:#666;}
 .zjtd_box1 dl dt{ margin-bottom:.12rem;}
-.zjtd_box1 dl dt b{ margin-right:.15rem; float:left;}
+.zjtd_box1 dl dt b{ margin-right:.15rem;}
 .zjtd_box1 dl dd{ margin-bottom:.12rem;}
 .zjtd_box1 dl dd img{ width:.28rem; height:.28rem; margin-left:.15rem;}
-.zjtd_box1_img1{ width:1.2rem; height:1.2rem;}
+.zjtd_box1_img1{ width:1.2rem; height:1.2rem; border-radius: 50%;}
 .zjtd_box1_img2{ width:.9rem; height:.9rem; margin-top:.15rem;}
 .zjtd_box1_img3{width:.15rem !important; height:.14rem !important; margin:.1rem 0 0 .1rem !important;}
 .zjtd_box1_img4{ width:.17rem; height:.31rem; margin-top:.4rem;}
@@ -729,6 +740,7 @@
 	border-radius:0 .1rem .1rem 0
 }
 .jbzs_con_nav ul li a.jbzs_one {
+	border-radius:.1rem 0 0 .1rem;
 	color:#FFF;
 	background:#0F82FE;
 }
@@ -777,7 +789,6 @@
 .jbzs_sm1 div{ width:4.15rem;}
 .jbzs_sm1 div p{ line-height:.34rem;}
 
-.jbkp_zjzx a.doc_name{ width:auto!important; height:auto!important;}
 .jbkp_zjzx a{ display:block; width:.7rem; height:.3rem; float:right;margin-left:.05rem}
 
 .kp_about dl{ padding-bottom:.2rem;}
@@ -797,6 +808,65 @@
 .zj_tp a span{ margin-left:.05rem;}
 .zj_tp a:hover{ background:#3b83ff; color:#fff; border:1px solid #3b83ff;}
 .zj_tp a:hover span{ color:#fff !important;}
+
+
+.lwq_con dl{ margin:.2rem .3rem; height:.6rem; line-height:.6rem; color:#bbb;}
+.lwq_con dl dt{ width:2rem;}
+.lwq_con dl dt img{ width:.6rem; height:.6rem; margin-right:.18rem;}
+
+.lwq_con dl dd{ width:1.8rem; text-align:right;}
+.lwq_con dl dd p{ color:#cfa972;}
+.lwq_con dl dd img{ width:.3rem; height:.3rem; margin:.15rem .1rem 0 0;}
+
+.zslw_con dl{ width:1.2rem; text-align:center; margin-right:.33rem;}
+.zslw_con dl dt{ position:relative; width:1.2rem; height:1rem; color:#333; margin-bottom:.1rem;}
+.zslw_con dl dt img{ width:1.2rem; height:1rem;}
+.zslw_con .zslw_xz{ position:absolute; top:0; left:0; background:url(../images/ys_lw_hv.png) no-repeat top center; background-size:100%; width:1.2rem; height:1rem;}
+
+
+.ys_box1{ line-height:.3rem; font-size:.22rem;}
+.ys_box1 p{ width:1.9rem; float:left; text-align:center; color:#999;}
+.ys_box1 p span{ margin-left:.05rem;}
+.ys_box1 b{ float:left; font-weight:400; color:#ddd; font-size:.2rem;}
+
+.ys_box1_sm1 a{ display:inline-block; width:2.8rem; height:.65rem; line-height:.65rem; font-size:.28rem; text-align:center; border-radius:.06rem; color:#fff;}
+
+
+.ys_con_p1{font-size:.22rem;}
+.ys_con_p1 p{ height:.35rem; margin-top:.1rem; line-height:.35rem;}
+.ys_con_p1 p img{ margin-top:.05rem; margin-right:.03rem; width:.23rem; height:.23rem;}
+
+.ys_con_p2 span{ display:block; clear:both; height:.4rem; margin:-.2rem 0 0 .4rem; line-height:.4rem;}
+
+.ys_time{ background:url(../images/ysym_img5.png) no-repeat; width:4.58rem; height:1.99rem; background-size:100%; margin:0 auto; padding:.75rem 0 .65rem 1.22rem;}
+.ys_time p span{ display:block; width:.65rem; height:.66rem; text-align:center; float:left;}
+.ys_time p span img{ width:.2rem; height:.2rem; margin-top:.24rem;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

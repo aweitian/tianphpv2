@@ -44,6 +44,28 @@ class articleModel extends privModel{
 		return !empty($api->row($syd));
 	}
 	
+	/**
+	 * @return rirResult
+	 */
+	public function allCnt(){
+		$api = new articleDiseaseApi();
+		$ret =  $api->allCnt();
+		if($ret->isTrue()){
+			return $ret->return;
+		}
+		return 0;
+	}
+	/**
+	 * @return rirResult
+	 */
+	public function allCntByDid($did){
+		$api = new articleDiseaseApi();
+		$ret =  $api->allCntByDid($did);
+		if($ret->isTrue()){
+			return $ret->return;
+		}
+		return 0;
+	}
 	
 	/* get INFOES  */
 	public function getInfo_disease(){
@@ -96,6 +118,11 @@ class articleModel extends privModel{
 		}
 		$api = new articleDoctorApi();
 		return $api->connect($idArr, $dd);
+	}
+	
+	public function assignRand(){
+		$api = new articleDoctorApi();
+		return $api->assignRand();
 	}
 	
 	public function q_reldoc_aid($aid){

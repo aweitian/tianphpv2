@@ -123,6 +123,11 @@ class doctorsModelControllerNotFound extends AppModel {
 	public function getLetter($length){
 		return letterUIApi::getInstance()->data($length);
 	}
+	public function getLetterByDod($dod,$length,$offset=0){
+		return letterUIApi::getInstance()->getDataByDod($dod,$length,$offset);
+	}
+	
+	
 	public function getLetterCnt(){
 		return letterUIApi::getInstance()->cnt();
 	}

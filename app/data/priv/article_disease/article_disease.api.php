@@ -14,6 +14,36 @@
  	}
  	
  	/**
+ 	 * @return rirResult
+ 	 */
+ 	public function allCnt(){
+ 		$sql = $this->sqlManager->getSql("/sql/count/all");
+ 		$ret = $this->db->fetch($sql,array());
+ 		if(empty($ret)){
+ 			if($this->db->hasError()){
+ 				return new rirResult(1,$this->db->getErrorInfo());
+ 			}
+ 		}
+ 		return new rirResult(0,"ok",$ret["cnt"]);
+ 	}
+ 	/**
+ 	 * @return rirResult
+ 	 */
+ 	public function allCntByDid($did){
+ 		$sql = $this->sqlManager->getSql("/sql/count/did");
+ 		$ret = $this->db->fetch($sql,array("did" => $did));
+ 		if(empty($ret)){
+ 			if($this->db->hasError()){
+ 				return new rirResult(1,$this->db->getErrorInfo());
+ 			}
+ 		}
+ 		return new rirResult(0,"ok",$ret["cnt"]);
+ 	}
+ 	
+ 	
+ 	
+ 	
+ 	/**
  	 * 根据 病种ID,疾病ID,标题中包含的字来查询文章
  	 * 返回值的RETURN中包含data和count
  	 * @param int $dcid		病种ID

@@ -18,7 +18,7 @@ if(isset($_REQUEST["page"])){
 }
 
 
-$pagination = new pagination($m->getAppraise($m->data["sid"]), $page, $pageSize, 6);
+$pagination = new pagination($m->getDataByDodCnt($m->data["sid"]), $page, $pageSize, 6);
 
 
 $req = new httpRequest();
@@ -75,40 +75,27 @@ $url = new url($req->requestUri());
         <div class="fz28 color3 tc">诊治过的患者：<span class="yellow"><?php echo rand(3000,6000);?></span>例</div>
     <div class="blank30"></div>
  </div>
-<div class="bg_fff">
-	<div class="hd_hsx"></div>
-    <div class="mzy30">
-       <div class="blank30"></div>
-       <div class="zj_tp clr">
-            <a href="">全部<span class="blue">50</span></a>
-            <a href="">前列腺增生<span class="blue">7</span></a>
-            <a href="">前列腺肥大<span class="blue">3</span></a>
-            <a href="">早泄<span class="blue">1</span></a>
-            <a href="">前列腺痛<span class="blue">5</span></a>
-            <a href="">前列腺囊肿<span class="blue">3</span></a>
-            
-        </div>
-        <div class="blank20"></div>
-    </div>
-</div>
 
 
-<?php foreach($m->getAppraise($m->data["sid"],$pageSize,($page-1)*$pageSize) as $app):?> 
-<?php $c=$m->rowuser($m->data["sid"])?>
+
+<?php foreach($m->getDataByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $dodpj):?> 
+<?php $a=appraiseLvMeta::getMeta() ?>
+<?php $b= $m->getNameByDid($dodpj["did"])?> 
+<?php  $c=$m->rowuser($m->data["sid"])?>
 <div class="hd_hsx"></div>
 <div class="blank10"></div>
 <div class="hd_hsx"></div>
 <div class="kp_about  bg_fff">
 	<dl class="mzy30 fz26">
     	<div class="blank20"></div>
-        <dd class="clr color3 "><span class="fl"> 患者：<?php print ($c["name"]) ?> </span><span class="fr"><?php print ($app["date"]) ?></span></dd>
-    	<dt class="clr"><a href="" class="yellow">所患疾病：<a href="<?php print AppUrl::disHomeByDid($app["did"])?>"><?php print $m->getNameByDid($app["did"])?></a></a></dt>
+        <dd class="clr color3 "><span class="fl"> 患者：<?php print ($c["name"]) ?></span><span class="fr"><?php print ($dodpj["date"]) ?></span></dd>
+    	<dt class="clr">所患疾病：<a href="<?php print AppUrl::disHomeByDid($dodpj["did"])?>" class="yellow"><?php print ($b)  ?></a>&nbsp;&nbsp;&nbsp;&nbsp;满意度：<span class="yellow"><?php print ($a[$dodpj["lv"]]) ?></span></dt>
         <div class="blank15"></div>
         <div class="hd_hsx"></div>
         <div class="blank15"></div>
-        <dd class="color3 fz22"><?php print $app["txt"]?></dd>
+        <dd class="color3 fz22"><?php print AppFilter::filterOut(utility::utf8substr($dodpj["txt"],0,40)); ?></dd>
         <div class="blank15"></div>
-        <dd class="clr color9"><?php print ($app["date"]) ?></dd>
+        <dd class="clr color9"><?php print ($dodpj["date"]) ?></dd>
     </dl>
 </div>
 <?php endforeach;?>

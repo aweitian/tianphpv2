@@ -89,6 +89,5 @@ class doctorsModel extends AppModel {
 	public function getAllCnt(){
 		return doctorUIApi::getInstance()->getAllCnt();
 	}
-
 	
 }

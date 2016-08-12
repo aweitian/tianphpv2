@@ -44,7 +44,7 @@ if(is_null($q)){
 
 //病种数组
 $pdc = array();
-foreach ($dis_infoes as $item){
+foreach ($dis_infoes as &$item){
 	if(!array_key_exists($item["pid"], $pdc)){
 		$pdc[$item["pid"]] = $item["pd"];
 	}
@@ -52,9 +52,10 @@ foreach ($dis_infoes as $item){
 		$di_data[$item["mid"]] = $item["md"];
 	}
 	//$dc[$item["pid"]][$item["mid"]] = array($item["md"],$item["pd"]);
+	$item["cnt"] = $this->model->allCntByDid($item["mid"]);
 }
 
-// var_dump($di_data);exit;
+// var_dump($dis_infoes);exit;
 
 //classname function
 function cn($a,$b){
@@ -79,8 +80,8 @@ span.cate-active{
 </style>
 <script>
 var g_data = <?php print json_encode($dis_infoes);?>;
-function di_item(id,text){
-	return '<span style="margin-right: 15px;" class="di cate" onclick="chooseDi(this,'+id+')">'+text+'</span>';
+function di_item(id,text,cnt){
+	return '<span style="margin-right: 15px;" class="di cate" onclick="chooseDi(this,'+id+')">'+text+'('+cnt+')</span>';
 }
 function chooseDc(o,a){
 	$("#dc_val").val(a);
@@ -93,7 +94,7 @@ function chooseDc(o,a){
 			if(g_data[x]["pid"] == a){
 				//console.log(g_data[x]);
 				var y = g_data[x];
-				v.push(di_item(y["mid"],y["md"]));
+				v.push(di_item(y["mid"],y["md"],y["cnt"]));
 			}
 			
 		}
@@ -105,7 +106,7 @@ function chooseDc(o,a){
 	$(".cate-active.dc").removeClass("cate-active").addClass("cate");
 	$(o).addClass("cate-active");
 }
-function chooseDi(o,a){
+function chooseDi(o,a,b){
 	$("#di_val").val(a);
 	$(".cate-active.di").removeClass("cate-active").addClass("cate");
 	$(o).addClass("cate-active");
@@ -128,11 +129,11 @@ function chooseDi(o,a){
 	
 	                  <div class="col-sm-11">
 	                  	<p class="form-control-static">
-	                  	<span style="margin-right: 15px;" class="dc cate<?php if($dc == 0):?>-active<?php endif;?>" onclick="chooseDc(this,0)">全部</span>
+	                  	<span style="margin-right: 15px;" class="dc cate<?php if($dc == 0):?>-active<?php endif;?>" onclick="chooseDc(this,0,<?php print $this->model->allCnt()?>)">全部(<?php print $this->model->allCnt()?>)</span>
 	                   
 	                    <?php foreach ($pdc as $pk => $pv):?>
 	                    
-	                    <span style="margin-right: 15px;" class="dc cate<?php if($dc == $pk):?>-active<?php endif;?>" onclick="chooseDc(this,<?php print $pk?>)"><?php print $pv?></span>
+	                    <span style="margin-right: 15px;" class="dc cate<?php if($dc == $pk):?>-active<?php endif;?>" onclick="chooseDc(this,<?php print $pk?>,<?php print $this->model->allCntByDid($pk)?>)"><?php print $pv?>(<?php print $this->model->allCntByDid($pk)?>)</span>
 	                    
 	                    <?php endforeach;?>
 	                    </p>
@@ -143,11 +144,11 @@ function chooseDi(o,a){
 	
 	                  <div class="col-sm-11">
 	                  <p class="form-control-static" id="di_con">
-	                  	<span style="margin-right: 15px;" class="di cate<?php if($di == 0):?>-active<?php endif;?>" onclick="chooseDi(this,0)">全部</span>
+	                  	<span style="margin-right: 15px;" class="di cate<?php if($di == 0):?>-active<?php endif;?>" onclick="chooseDi(this,0,0)">全部</span>
 	                   
 	                   <?php foreach ($di_data as $dk => $dv):?>
 	                    
-	                    <span style="margin-right: 15px;" class="dc cate<?php if($di == $dk):?>-active<?php endif;?>" onclick="chooseDi(this,<?php print $dk?>)"><?php print $dv?></span>
+	                    <span style="margin-right: 15px;" class="dc cate<?php if($di == $dk):?>-active<?php endif;?>" onclick="chooseDi(this,<?php print $dk?>,<?php print $this->model->allCntByDid($dk)?>)"><?php print $dv?>(<?php print $this->model->allCntByDid($dk)?>)</span>
 	                    
 	                    <?php endforeach;?>
 	                   

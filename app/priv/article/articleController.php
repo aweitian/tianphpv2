@@ -25,6 +25,7 @@ class articleController extends privController{
 		$this->model = new articleModel();
 		$this->view = new articleView();
 		$this->initHttpResponse();
+		$this->view->model = $this->model;
 	}
 	public function welcomeAction(pmcaiMsg $msg){
 		
@@ -303,6 +304,10 @@ class articleController extends privController{
 				foreach ($dds as $ak => $aid){
 					$this->model->disconRelDoc($aid, $dda[$ak]);
 				}
+				$this->response->redirect($_SERVER["HTTP_REFERER"]);
+				return ;
+			} else if($msg["di"] == -1) {
+				$this->model->assignRand();
 				$this->response->redirect($_SERVER["HTTP_REFERER"]);
 				return ;
 			}

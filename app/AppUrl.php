@@ -186,6 +186,9 @@ class AppUrl {
 	public static function docPresentHomeByDocid($docid) {
 		return AppUrl::build ( "/" . $docid . "/present" );
 	}
+	public static function docLetterHomeByDocid($docid) {
+		return AppUrl::build ( "/" . $docid . "/letter");
+	}
 	/**
 	 * 根据医生ID生成医生首页的URL
 	 * 

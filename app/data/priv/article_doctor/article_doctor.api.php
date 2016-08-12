@@ -64,6 +64,22 @@
  				"count" => $cnt
  		));
  	} 	
+ 	
+ 	/**
+ 	 * 对未关联医生的文章随机分配医生
+ 	 */
+ 	public function assignRand(){
+ 		$sql = $this->sqlManager->getSql("/sql/assignRand");
+ 		$ret = $this->db->exec($sql, array());
+ 		if($ret == 0){
+ 			if($this->db->hasError()){
+ 				return new rirResult(1,$this->db->getErrorInfo());
+ 			}
+ 		}
+ 		return new rirResult(0,"ok",$ret);
+ 	}
+ 	
+ 	
  	/**
  	 * 获取所有没有相关到医生的文章
  	 * 返回值的RETURN中包含data和count
