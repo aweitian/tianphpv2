@@ -1,22 +1,34 @@
 <?php
-$pageSize = 10;
+/**
+ * @Author: awei.tian
+ * @Date: 2016年8月12日
+ * @Desc: 
+ * 依赖:
+ */
+
+$row = $m->data;
+// var_dump($row);exit;
+
+
+$pageSize = 6;
 if(isset($_REQUEST["page"])){
 	$page = intval($_REQUEST["page"]);
 } else{
 	$page = 1;
 }
-$pagination = new pagination($m->allByDodCnt($m->data["sid"]), $page, $pageSize, 6);
+
+
+$pagination = new pagination($m->getAppraise($m->data["sid"]), $page, $pageSize, 6);
 
 
 $req = new httpRequest();
 $url = new url($req->requestUri());
-
 ?>
 <div class="public_width">
 
 <div class="head_tc blue_bg">
         <a class="goback" href="" title="返回上页"><span>返回</span></a>
-        <div class="head_tit" ><?php print $m->data["name"]?>医生页文章列表</div>
+        <div class="head_tit" ><?php print $m->data["name"]?>医生的评价</div>
     <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_xl.png" /><i id="redpoint" class=""></i></span></a>
   </div>
 <div class="black_bg"></div>
@@ -58,27 +70,52 @@ $url = new url($req->requestUri());
 <!--head end-->
 
 <div class="hui_bg">
-<?php include dirname(__FILE__)."/common/nav.tpl.php";?>
+<div class="bg_fff">
+		<div class="blank30"></div>
+        <div class="fz28 color3 tc">诊治过的患者：<span class="yellow"><?php echo rand(3000,6000);?></span>例</div>
+    <div class="blank30"></div>
+ </div>
+<div class="bg_fff">
+	<div class="hd_hsx"></div>
+    <div class="mzy30">
+       <div class="blank30"></div>
+       <div class="zj_tp clr">
+            <a href="">全部<span class="blue">50</span></a>
+            <a href="">前列腺增生<span class="blue">7</span></a>
+            <a href="">前列腺肥大<span class="blue">3</span></a>
+            <a href="">早泄<span class="blue">1</span></a>
+            <a href="">前列腺痛<span class="blue">5</span></a>
+            <a href="">前列腺囊肿<span class="blue">3</span></a>
+            
+        </div>
+        <div class="blank20"></div>
+    </div>
+</div>
 
-<?php foreach($m->allByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $aitem):?>           
-<?php $a= $m->rowNoContent($aitem)?> 	
+
+<?php foreach($m->getAppraise($m->data["sid"],$pageSize,($page-1)*$pageSize) as $app):?> 
+<?php $c=$m->rowuser($m->data["sid"])?>
 <div class="hd_hsx"></div>
 <div class="blank10"></div>
 <div class="hd_hsx"></div>
 <div class="kp_about  bg_fff">
-	<dl class="mzy30">
+	<dl class="mzy30 fz26">
     	<div class="blank20"></div>
-    	<dt class="clr"><a href="<?php print AppUrl::articleByAid($a["sid"])?>" class="blue fz28"><?php print utility::utf8Substr($a["title"], 0, 15)?>...</a></dt>
-        <dd><?php print utility::utf8Substr( $a["desc"], 0, 65)?>...</dd>
-        <dd class="kp_dd1">发表于 <?php print ($a["date"])?><span><?php echo rand(12000,15000);?>人已读</span></dd>
+        <dd class="clr color3 "><span class="fl"> 患者：<?php print ($c["name"]) ?> </span><span class="fr"><?php print ($app["date"]) ?></span></dd>
+    	<dt class="clr"><a href="" class="yellow">所患疾病：<a href="<?php print AppUrl::disHomeByDid($app["did"])?>"><?php print $m->getNameByDid($app["did"])?></a></a></dt>
+        <div class="blank15"></div>
+        <div class="hd_hsx"></div>
+        <div class="blank15"></div>
+        <dd class="color3 fz22"><?php print $app["txt"]?></dd>
+        <div class="blank15"></div>
+        <dd class="clr color9"><?php print ($app["date"]) ?></dd>
     </dl>
 </div>
-<?php endforeach;?> 
-                  
+<?php endforeach;?>
 
 <div class="hd_hsx"></div>
-<div class="blank15"></div>
-                       <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
+<div class="blank10"></div>
+<div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
         	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
@@ -86,10 +123,11 @@ $url = new url($req->requestUri());
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
             <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
-       		<?php endif;?></div>
-<div class="blank30"></div>
+       		<?php endif;?> </div>
+
+
+<div class="blank15"></div>
 
 </div>
 
 </div>
- 

@@ -49,4 +49,20 @@ class doctorsViewControllerNotFound extends AppView {
 				) 
 		) )->setLayout ()->reponse ();
 	}
+	public function appraise($model) {
+			return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_NOW, array (
+					$this->getDocThemePath () . "/appraise.tpl.php",
+					array (
+							"m" => $model
+					)
+			) )->setLayout ()->reponse ();			
+	}
+	public function letter($model) {
+			return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_NOW, array (
+					$this->getDocThemePath () . "/letter.tpl.php",
+					array (
+							"m" => $model
+					)
+			) )->setLayout ()->reponse ();			
+	}
 }

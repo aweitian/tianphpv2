@@ -112,7 +112,18 @@ class doctorsModelControllerNotFound extends AppModel {
 		return askUIApi::getInstance()->getAllQuestionsCnt();
 	}
 	
+	public function getAppraise($length){
+		return appraiseUIApi::getInstance()->getData($length);
+	}
 	
-	
-	
+	public function getAppMeta($i){
+		$m = appraiseLvMeta::getMeta();
+		return $m[$i];
+	}
+	public function getLetter($length){
+		return letterUIApi::getInstance()->data($length);
+	}
+	public function getLetterCnt(){
+		return letterUIApi::getInstance()->cnt();
+	}
 }

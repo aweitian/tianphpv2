@@ -74,4 +74,25 @@ class doctorsControllerNotFound{
 			$this->view->article($this->model);
 		}
 	}
+	protected function appraise(pmcaiMsg $msg){
+		if (utility::isMobile ()) {
+			$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
+// 			$row = appraiseUIApi::getInstance ()->getDataByDod($dod, $length)    ->getInfoById ( $msg->getControl () );
+			$this->model->data = $row;
+			$this->view->appraise ( $this->model );
+		} else {
+			$res = new httpResponse();
+			$res->_404();
+		}
+	}
+	protected function letter(pmcaiMsg $msg){
+		if (utility::isMobile ()) {
+			$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
+			$this->model->data = $row;
+			$this->view->letter ( $this->model );
+		} else {
+			$res = new httpResponse();
+			$res->_404();
+		}
+	}
 }

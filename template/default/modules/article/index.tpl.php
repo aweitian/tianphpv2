@@ -149,7 +149,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                         <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
         	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
-        	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+        	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
         	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>

@@ -75,7 +75,7 @@ $pagination = new pagination($cnt, $curPageNum, $pageSize, $pageBtnLen);
                       <li><a href="<?php print $url->setQuery("page", $pagination->getPre())->getUrl();?>">&laquo;</a></li>
                       <?php endif;?>
                       
-                      <?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+                      <?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
                       <li><a href="<?php print $url->setQuery("page", $pagination->getStartPage() + $i)->getUrl()?>"><?php print $pagination->getStartPage() + $i?></a></li>
                       <?php endfor;?>
                       <?php if($pagination->hasNext()):?>

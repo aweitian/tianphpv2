@@ -26,7 +26,7 @@ $url = new url($req->requestUri());
 
 <div class="head_tc blue_bg">
         <a class="goback" href="" title="返回上页"><span>返回</span></a>
-        <div class="head_tit" >陈希球医生咨询列表</div>
+        <div class="head_tit" ><?php print $m->data["name"]?>医生咨询列表</div>
     <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_xl.png" /><i id="redpoint" class=""></i></span></a>
   </div>
 <div class="black_bg"></div>
@@ -84,7 +84,7 @@ $url = new url($req->requestUri());
 	<dl class="mzy30">
     	<div class="blank20"></div>
     	<dt class="clr"><a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_wen.png" /><?php print utility::utf8Substr($ask["title"], 0, 18)?></a></dt>
-        <dd>疾病 ：<a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><?php print($dis) ?></a></dd>
+        <dd>疾病 ：<a href="<?php print AppUrl::disHomeByDid($ask["did"])?>"><?php print($dis) ?></a></dd>
         <dd class="clr color9"><span class="fl">患者： <?php print ($user) ?></span><span class="fr">共<?php print($docount) ?>条对话   <?php print utility::utf8Substr($ask["date"], 0, 10)?></span></dd>
     </dl>
 </div>
@@ -94,7 +94,7 @@ $url = new url($req->requestUri());
 <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
         	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
-        	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+        	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
         	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>

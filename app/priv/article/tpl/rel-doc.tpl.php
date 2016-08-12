@@ -12,8 +12,8 @@
 $req = new httpRequest();
 $url  = new pmcaiUrl($req->requestUri());
 $cnt  = $data["count"];
-$pageSize = $data["pageSize"];
-$pageBtnLen = $data["pageBtnLen"];
+$pageSize = 10;
+$pageBtnLen = 10;
 $curPageNum = $data["curPageNum"];
 $doc_infoes = $data["doc_infoes"];
 
@@ -150,13 +150,23 @@ function chooseDi(o,a){
                   <div class="box-tools clearfix">
                   
                   	<div class="no-margin pull-left" style="width:30%">
-                  	
-                  	<form action="<?php print HTTP_ENTRY?>/priv/article/con_reldoc" method="post" class="form-horizontal">
+                  	<script>
+					function chk(f)
+					{
+						if(f.di.value == "0")
+						{
+							return confirm("确认要全部随机分配么?");
+						}
+						return true;
+					}
+                  	</script>
+                  	<form onclick="return chk(this)" action="<?php print HTTP_ENTRY?>/priv/article/con_reldoc" method="post" class="form-horizontal">
                   	<div class="form-group">
-                      <label for="inputEmail3" class="col-sm-4 control-label">对选中项分配到:</label>
+                      <label for="inputEmail3" class="col-sm-4 control-label">对选中项:</label>
                       <div class="col-sm-6">
-                           <select class="form-control" name="di" id="sel_dd" onchange="submitBtnDisable()">
-                        <option value="0">请选择</option>
+                           <select class="form-control" name="di" id="sel_dd" onchange="">
+                        <option value="-1">随机分配</option>
+                        <option value="0">删除</option>
               
                         <?php foreach ($doc_infoes as $child):?>
                         <option value="<?php print $child["dod"]?>"><?php print $child["name"]?></option>
@@ -166,7 +176,7 @@ function chooseDi(o,a){
                       </div>
                       <div class="col-sm-2">
                       <input id="article_ids" value="" name="ds" type="hidden">
-                      <input id="btn_submit_conrel" type="submit" value="分配" class="btn bg-olive btn-flat" disabled>
+                      <input id="btn_submit_conrel" type="submit" value="分配" class="btn bg-olive btn-flat">
                       </div>
                     </div>
                   	
@@ -181,7 +191,7 @@ function chooseDi(o,a){
                       <li><a href="<?php print $url->setQuery("page", $pagination->getPre())->getUrl();?>">&laquo;</a></li>
                       <?php endif;?>
                       
-                      <?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+                      <?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
                       <li><a href="<?php print $url->setQuery("page", $pagination->getStartPage() + $i)->getUrl()?>"><?php print $pagination->getStartPage() + $i?></a></li>
                       <?php endfor;?>
                       <?php if($pagination->hasNext()):?>
