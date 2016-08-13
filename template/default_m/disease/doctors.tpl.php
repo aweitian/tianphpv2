@@ -27,7 +27,7 @@ $url = new url($req->requestUri());
  <div class="public_width">
  
 <?php $disease_header_title = $row["data"];?>
-<?php include dirname(dirname(__FILE__))."/inc/header.disease.php"?>
+<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>
 
 <!--head end-->
 

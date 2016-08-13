@@ -33,7 +33,7 @@ $ctr = appCtrl::$msg->getAction();
  
 <div class="public_width">
 <?php $disease_header_title = $row["data"];?>
-<?php include dirname(dirname(__FILE__))."/inc/header.disease.php"?>
+<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>
 
 <!--head end-->
 <div class="hui_bg">
@@ -95,7 +95,7 @@ $ctr = appCtrl::$msg->getAction();
                 <?php foreach ($model->knowledge($row["sid"],$model->subid,0,($page-1)*$pageSize,$pageSize, 6) as $list): ?>
                 <?php $tag=$model->getTag($list["tid"]) ?>                           
                 <?php $dod= $model->getOwner($list["aid"])?>     
-	            <?php  $doc=($model->getInfoByDod($dod))?> 
+	            <?php $doc=($model->getInfoByDod($dod))?> 
                 <?php $nuber=$model->getCountByAid($list["aid"]) ?>     
                 <div class="bortbcon"></div>
                 <div class="mzy30">
@@ -103,10 +103,8 @@ $ctr = appCtrl::$msg->getAction();
                 
 					<div class="clr jbzs_sm1">
                     	<dl class="fl tc">
-                            <a href="">
-                            <dt><a  href="<?php print AppUrl::articleByAid($list["aid"]) ?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" /></a></dt>
-                             <dd class="color6"><a  href="<?php print AppUrl::articleByAid($list["aid"]) ?>"><?php print $doc["name"] ?> </a></dd>
-                            </a>
+                            <dt><a href="<?php print AppUrl::docHomeByDod($doc["dod"]) ?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" /></a></dt>
+                             <dd class="color6"><a href="<?php print AppUrl::docHomeByDod($doc["dod"]) ?>"><?php print $doc["name"] ?> </a></dd>
                         </dl>
                         <div class="fr">
                         	<h5 class="fz28 fw400"><a href="<?php print AppUrl::articleByAid($list["aid"]) ?>" class="color3"><?php print utility::utf8Substr( $list["title"], 0, 14)?></a></h5>

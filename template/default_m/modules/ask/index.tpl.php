@@ -38,51 +38,38 @@ $req = new httpRequest();
 $url = new url($req->requestUri());
 
 ?>
- <div class="blank20"></div>
-  <div id="focusindex">
-    <ul class="index_banner_box clearfix">
-      <li><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/sybanner1.jpg" width="998" height="238" /></a></li>
-      <li><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/sybanner1.jpg" width="998" height="238" /></a></li>
-      <li><a href=""><img src="<?php print HTTP_ENTRY?>/static/images/sybanner1.jpg" width="998" height="238" /></a></li>
-    </ul>
-  </div>
-  <div class="listpos fz13"><span class="gray">当前位置：</span><a href="">首页 > 网络咨询</a></div>
-  <div class="clearfix">
-    <div class="wid680 border2 fl">
-      <div class="norques">
-        <div class="questit fz18">常见问题</div>
-        <p class="blank20"></p>
-        <div class="quesnav fz13">
-          <ul class="clearfix">
-            <li<?php if($row["key"] =="all"):?> class="selected"<?php endif?>><a href="<?php print AppUrl::askByLv0key("")?>">全部</a></li>
-           <?php for($i=0,$D=$m->getLv0Ask(),$I=count($D);$i<$I;$i++):?>
-        <li<?php if($D[$i]["key"] == $row["key"]):?> class="selected"<?php endif?>><a href="<?php print AppUrl::askByLv0key($D[$i]["key"])?>"><?php print $D[$i]["data"]?></a></li>
-        <?php endfor;?>
-          </ul>
-        </div>
-      
-        <p class="blank15"></p>
-        <div class="quesall">
-        
-        
-          <div class="wlzxnr quescon selected fz13">
-          	<?php foreach ($all["data"] as $allitem):?>
-          	 <dl>
-              <dt class="fl"><a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><span class="fl"><?php print $allitem["title"]?></span></a><a href="<?php print AppUrl::docHomeByDod($allitem["dod"])?>"><span class="fr"><?php print $m->getNameByDod($allitem["dod"])?></span></a></dt>
-              <dd class="fr gray"><a>回复</a></dd>
-            </dl>
-          	
-          	<?php endforeach;?>
+<div class="public_width">
+	
+		<?php $disease_header_title = '常见问题'?>
+		<?php include dirname(dirname(dirname(__FILE__)))."/inc/header.tc.php"?>
+<!--head end-->
 
-  
-          </div>
-          
- 
+<div class="hui_bg">
 
-        </div>
-        <p class="blank25"></p>
-        <div class="pagenum tc gray fz13"> 
-        	<?php if ($pagination->hasPre()):?>
+     <div class="blank20"></div>
+     
+     
+<?php foreach ($all["data"] as $allitem):?>     
+<?php $user=$m->getNameByUid($allitem["uid"])  ?>
+<?php $dis=$m->getNameByDid($allitem["did"])?>
+
+<?php $docount= $m->getAnswersDocReplyCnt($allitem["sid"]) ?>
+<div class="hd_hsx"></div>
+<div class="kp_about  bg_fff">
+	<dl class="mzy30">
+    	<div class="blank20"></div>
+    	<dt class="clr"><a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_wen.png" /><?php print utility::utf8Substr($allitem["title"], 0, 16)?></a></dt>
+        <dd>疾病 ：<a href="<?php print AppUrl::disHomeByDid($allitem["did"])?>"><?php print($dis) ?></a></dd>
+        <dd class="clr"><span class="fl">患者：<?php print ($user) ?></span><span class="fr">共<?php print($docount) ?>条对话    <?php print utility::utf8Substr($allitem["date"], 0, 10)?></span></dd>
+    </dl>
+</div>
+<div class="hd_hsx"></div>
+<div class="blank10"></div>
+<?php endforeach;?>
+
+
+<div class="pagenum tc gray fz13"> 
+            <?php if ($pagination->hasPre()):?>
         	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
@@ -91,86 +78,17 @@ $url = new url($req->requestUri());
         	<?php if($pagination->hasNext()):?>
             <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?>
-       </div>
-      </div>
-    </div>
-    <!--left end-->
-    
-    <div class="wid300 fr">
-    
-    <p><a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/images/syrth4.jpg" width="300" height="90" /></a></p>
-    <p class="blank20"></p>
-    
-    <div class="docsug border2">
-    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师观点</a><a class="fz13 blue fr" href="<?php print AppUrl::navArticle()?>">+更多</a></div>
-    <div class="docsugbox fz13">
-    
-    <?php $thumb = $m->getRowThumbnail()?>
-    <?php if (!empty($thumb)):?>
-    <?php /*var_dump($thumb)*/?>
-    <dl class="clearfix">
-    	<dt class="fl">
-    		
-    			<?php if (!empty($thumb["thumb"])):?>
-                        	<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>">
-    		<img src="<?php print $thumb["thumb"]?>" width="80" height="60" />
-    		</a>
-                        	<?php else:  ?>
-                        	
-                        		<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print HTTP_ENTRY?>/static/images/zt_img1.jpg" width="80" heigth="60" /></a>
-                        	           <?php endif?>
-    		
-    		
-    	</dt>
-      <dd class="fl">
-      <p><a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></p>
-      
-      <p class="p2 clearfix">
-      <a class="fl gray"><?php print $thumb["date"]?></a>
-      </p>
-      </dd>
-      </dl>
-      <?php endif?>
-      
-      <p class="blank15"></p>
-      <ul class="othsug">
-      	
-          
-          	
-       <?php foreach($m->getNewest(5) as $aitem):?>   	
-      <li><p class="p1"><a class="black" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print utility::utf8Substr($aitem["title"], 0, 18) ?></a></p><p class="p2"><a class="gray" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print $m->getContent($aitem["aid"],18)?>...[全文]</a></p></li>
-     <?php endforeach;?>
-      </ul>      
-      </div>          
-    </div>
-    <p class="blank20"></p>
-    
-    <div class="doctj border2">
-    
-    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a><a class="fz13 blue fr" href="<?php print AppUrl::navDoctors() ?>">+更多</a></div>
-    <div class="doctjbox">
-    <?php foreach($m->getDoctors(3) as $doc):?>
-      <dl class="clearfix"><dt class="fl"><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
-      <dd class="fl">
-      <p class="blank5"></p>
-      <p class="fz18"><?php print $doc["name"]; ?><span class="gray fz13"><?php print $doc["lv"]; ?></span></p>
-      <p class="blank5"></p>
-      <p class="fz13 gray">擅长：<?php print $doc["spec"]; ?></p>
-      <p class="blank5"></p>
-      <p class="p3 tc"><a href="<?php print AppUrl::getSwtUrl()?>">咨询</a></p>
-      </dd></dl>
-      	<?php endforeach;?>
-      
-      
-        	
-      
-      
-      </div>
-    
-    
-    
-    </div>
-    
-    </div>
-    <!--right end--> 
-  </div>
+</div>
+<div class="blank30"></div>
+
+</div>
+
+<div class="box_a">
+    <p class="box_center2">
+        <a href="<?php print AppUrl::getSwtUrl() ?>" class="btn_a1" >预约通话</a>
+        <a href="<?php print AppUrl::getSwtUrl() ?>" class="btn_a2">免费咨询</a>
+    </p> 
+</div>
+
+
+</div>

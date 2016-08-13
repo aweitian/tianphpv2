@@ -58,8 +58,16 @@ class askModel extends AppModel {
 	public function getQuestionsCountByLv0Did($did){
 		return askUIApi::getInstance()->getQuestionsCountByLv0Did($did);
 	}
+	public function getNameByDid($did){
+		return diseaseUIApi::getInstance()->getNameByDid($did);
+	}
+	public function getNameByUid($uid){
+		return userUIApi::getInstance()->getNameByUid($uid);
+	}
+	public  function  getAnswersDocReplyCnt($askid){
 	
-
+		return askUIApi::getInstance()->getAnswersDocReplyCnt($askid);
+	}
 	/**
 	 * Author
 	 * sihangzhang

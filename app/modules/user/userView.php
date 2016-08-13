@@ -1,7 +1,17 @@
 <?php
 class userView extends AppView {
 	public function login($model, $info = "") {
-		include $this->getThemePath ( "user" ) . "/login.tpl.php";
+		if(utility::isMobile()){
+			return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
+					$this->getThemePath ( "user" ) . "/login.tpl.php",
+					array (
+							"model" => $model,
+							"info" => $info
+					)
+			) )->setLayout ()->reponse ();
+		} else {
+			include $this->getThemePath ( "user" ) . "/login.tpl.php";
+		}
 	}
 	public function register($model) {
 		include $this->getThemePath ( "user" ) . "/register.tpl.php";

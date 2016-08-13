@@ -39,7 +39,7 @@ $a=$m->allThumbnail($pageSize,($page-1)*$pageSize);
 
 <div class="head_tc blue_bg">
         <a class="goback" href="" title="返回上页"><span>返回</span></a>
-        <div class="head_tit" >陈希球医生页文章列表</div>
+        <div class="head_tit" >全部文章</div>
     <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_xl.png" /><i id="redpoint" class=""></i></span></a>
   </div>
 <div class="black_bg"></div>
@@ -81,79 +81,29 @@ $a=$m->allThumbnail($pageSize,($page-1)*$pageSize);
 <!--head end-->
 
 <div class="hui_bg">
+<?php foreach($a as $lb):?>
 <div class="blank10"></div>
 <div class="hd_hsx"></div>
 <div class="kp_about  bg_fff">
 	<dl class="mzy30">
     	<div class="blank20"></div>
-    	<dt class="clr"><a href="" class="blue fz28">前列腺炎"最爱"八种人，有冇你？</a></dt>
-        <dd>值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最大的副性腺，位于盆腔内膀胱出口的下方，它底朝</dd>
-        <dd class="kp_dd1">发表于 2016.03.08<span>12579人已读</span></dd>
+    	<dt class="clr"><a href="<?php print AppUrl::articleByAid($lb["aid"])?>" class="blue fz28"><?php print utility::utf8Substr($lb["title"], 0, 16) ?></a></dt>
+        <dd><?php print utility::utf8Substr($lb["desc"], 0, 60) ?>...</dd>
+        <dd class="kp_dd1">发表于 <?php print utility::utf8Substr($lb["date"], 0, 10) ?><span><?php print rand(1200,3000);?>人已读</span></dd>
     </dl>
 </div>
 <div class="hd_hsx"></div>
+<?php endforeach;?>
 <div class="blank10"></div>
-<div class="hd_hsx"></div>
-
-<div class="kp_about  bg_fff">
-	<dl class="mzy30">
-    	<div class="blank20"></div>
-    	<dt class="clr"><a href="" class="blue fz28">前列腺炎"最爱"八种人，有冇你？</a></dt>
-        <dd>值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最大的副性腺，位于盆腔内膀胱出口的下方，它底朝</dd>
-        <dd class="kp_dd1">发表于 2016.03.08<span>12579人已读</span></dd>
-    </dl>
-</div>
-<div class="hd_hsx"></div>
-<div class="blank10"></div>
-<div class="hd_hsx"></div>
-
-<div class="kp_about  bg_fff">
-	<dl class="mzy30">
-    	<div class="blank20"></div>
-    	<dt class="clr"><a href="" class="blue fz28">前列腺炎"最爱"八种人，有冇你？</a></dt>
-        <dd>值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最大的副性腺，位于盆腔内膀胱出口的下方，它底朝</dd>
-        <dd class="kp_dd1">发表于 2016.03.08<span>12579人已读</span></dd>
-    </dl>
-</div>
-<div class="hd_hsx"></div>
-<div class="blank10"></div>
-<div class="hd_hsx"></div>
-
-<div class="kp_about  bg_fff">
-	<dl class="mzy30">
-    	<div class="blank20"></div>
-    	<dt class="clr"><a href="" class="blue fz28">前列腺炎"最爱"八种人，有冇你？</a></dt>
-        <dd>值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最大的副性腺，位于盆腔内膀胱出口的下方，它底朝</dd>
-        <dd class="kp_dd1">发表于 2016.03.08<span>12579人已读</span></dd>
-    </dl>
-</div>
-<div class="hd_hsx"></div>
-<div class="blank10"></div>
-<div class="hd_hsx"></div>
-
-<div class="kp_about  bg_fff">
-	<dl class="mzy30">
-    	<div class="blank20"></div>
-    	<dt class="clr"><a href="" class="blue fz28">前列腺炎"最爱"八种人，有冇你？</a></dt>
-        <dd>值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最大的副性腺，位于盆腔内膀胱出口的下方，它底朝</dd>
-        <dd class="kp_dd1">发表于 2016.03.08<span>12579人已读</span></dd>
-    </dl>
-</div>
-<div class="hd_hsx"></div>
-<div class="blank10"></div>
-<div class="hd_hsx"></div>
-
-<div class="kp_about  bg_fff">
-	<dl class="mzy30">
-    	<div class="blank20"></div>
-    	<dt class="clr"><a href="" class="blue fz28">前列腺炎"最爱"八种人，有冇你？</a></dt>
-        <dd>值此三八妇女节之际，献给心爱的他——"他"好，"我"也好！前列腺是男子体内最大的副性腺，位于盆腔内膀胱出口的下方，它底朝</dd>
-        <dd class="kp_dd1">发表于 2016.03.08<span>12579人已读</span></dd>
-    </dl>
-</div>
-<div class="hd_hsx"></div>
-
-
+<div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
+        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($pagination->hasNext()):?>
+            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?> </div>
 <div class="blank30"></div>
 
 </div>

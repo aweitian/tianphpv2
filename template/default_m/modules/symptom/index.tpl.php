@@ -21,7 +21,7 @@ $docinfos=$m->getInfoes(10);
 ?>
 <div class="public_width">
 <?php $disease_header_title = "按症状";?>
-<?php include dirname(dirname(dirname(__FILE__)))."/inc/header.disease.php"?>
+<?php include dirname(dirname(dirname(__FILE__)))."/inc/header.tc.php"?>
 
   <!--head end-->
 

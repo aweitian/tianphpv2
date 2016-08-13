@@ -13,7 +13,7 @@ $d = diseaseExtInfoes::getExtData();
 ?>
 <div class="public_width">
 	<?php $disease_header_title = "疾病科普"?>
-	<?php include dirname(dirname(dirname(__FILE__)))."/inc/header.disease.php"?>
+	<?php include dirname(dirname(dirname(__FILE__)))."/inc/header.tc.php"?>
 	<!--head end-->
 
 	<?php include dirname(dirname(dirname(__FILE__)))."/inc/slider.php"?>
