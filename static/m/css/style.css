@@ -1,6 +1,4 @@
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
-}
+
 
 .head_top{
     height: .85rem;
@@ -111,7 +109,7 @@ input:-webkit-autofill {
     border: #46a0f0 1px solid;
 }
 
-/*=====ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ end=====*/
+/*=====ËÑË÷À¸ end=====*/
 
 .index_zxyy{
     background:#ffffff;
@@ -183,7 +181,7 @@ input:-webkit-autofill {
 	padding-left:.7rem;
 }
 
-/*=====ï¿½ï¿½Ñ¯ end=====*/
+/*=====×ÉÑ¯ end=====*/
 
 
 
@@ -479,7 +477,7 @@ input:-webkit-autofill {
 .index_kp{ padding:0 .3rem;}
 .index_kp a{ display:block; font-size:.22rem; float:left; border:1px solid #3b83ff; border-radius:.05rem; padding:0 .13rem; height:.48rem; line-height:.48rem; margin:0 .1rem .1rem 0;}
 
-/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ end*/
+/*ÈÈÃÅ×ÉÑ¯ end*/
 
 .new_footer{
     height: 1.88rem;
@@ -555,7 +553,7 @@ input:-webkit-autofill {
     cursor: pointer;
 }
 
-/*=============ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½================*/
+/*=============·µ»Ø¶¥²¿================*/
 
 .backToTop {
 	display:none;
@@ -574,7 +572,7 @@ input:-webkit-autofill {
 	filter:Alpha(opacity=50);
 	z-index:100000;
 }
-/*=============ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½================*/
+/*=============·µ»Ø¶¥²¿================*/
 
 /*============================inedx end==========================*/
 
@@ -690,7 +688,7 @@ input:-webkit-autofill {
 .zjtd_box1 dl dt b{ margin-right:.15rem;}
 .zjtd_box1 dl dd{ margin-bottom:.12rem;}
 .zjtd_box1 dl dd img{ width:.28rem; height:.28rem; margin-left:.15rem;}
-.zjtd_box1_img1{ width:1.2rem; height:1.2rem; border-radius: 50%;}
+.zjtd_box1_img1{ width:1.2rem; height:1.2rem;}
 .zjtd_box1_img2{ width:.9rem; height:.9rem; margin-top:.15rem;}
 .zjtd_box1_img3{width:.15rem !important; height:.14rem !important; margin:.1rem 0 0 .1rem !important;}
 .zjtd_box1_img4{ width:.17rem; height:.31rem; margin-top:.4rem;}
@@ -701,7 +699,7 @@ input:-webkit-autofill {
 .zjtd_box1_p2 p img{ margin-top:.18rem; margin-right:.03rem; width:.23rem; height:.23rem;}
 
 
-/*ï¿½ï¿½ï¿½ï¿½*/
+/*¿ÆÆÕ*/
 
 
 .jbzs_con_nav {
@@ -791,13 +789,18 @@ input:-webkit-autofill {
 .jbzs_sm1 div p{ line-height:.34rem;}
 
 .jbkp_zjzx a{ display:block; width:.7rem; height:.3rem; float:right;margin-left:.05rem}
-
+.jbkp_zjzx a.doc_name {
+    width: auto;
+    height: auto;
+    float: left;
+}
 .kp_about dl{ padding-bottom:.2rem;}
 .kp_about dl dt{ margin-bottom:.1rem;}
 .kp_about dl dt img{ width:.34rem; height:.34rem; margin-right:.05rem;}
 .kp_about dl dd{ line-height:.38rem; color:#666;}
 .kp_about dl dd.kp_dd1{color:#999; margin-top:.1rem;}
 .kp_about dl dd.kp_dd1 span{ margin-left:.25rem;}
+.kp_about dl dd img{ width:.29rem; height:.26rem; margin:.1rem .1rem 0 0;}
 
 .top_tit{ height:.63rem; line-height:.63rem;}
 
@@ -843,27 +846,34 @@ input:-webkit-autofill {
 .ys_time p span{ display:block; width:.65rem; height:.66rem; text-align:center; float:left;}
 .ys_time p span img{ width:.2rem; height:.2rem; margin-top:.24rem;}
 
+.yswd_wap{ position:relative;}
+.yswd_j1{ position:absolute; bottom:-.01rem; left:.7rem;}
 
+.yswd_box1{border-radius:.06rem; border:1px solid #ddd; padding:.2rem .23rem; background:#fff; font-size:.26rem;}
+.yswd_box1 span{ display:inline-block;}
+.yswd_box1 p{ width:3.95rem;}
 
+.yswd_box2{border-radius:.06rem 0 .06rem .06rem;-webkit-border-radius:.06rem 0 .06rem .06rem;-moz-border-radius:.06rem 0 .06rem .06rem; border:1px solid #ddd; margin-right:.5rem; padding:.2rem .23rem; background:#cce8f0; font-size:.26rem; position:relative; line-height:.5rem;}
+.yswd_box2 h5{ font-weight:400; font-size:.26rem;}
 
+.yswd_box2_t1{ position:absolute; width:.22rem; height:.21rem; right:-.22rem; top:0;}
+.yswd_box2 p img{ width:.24rem; height:.3rem; margin:.1rem .1rem 0 0;}
 
+.yswd_box3{}
+.yswd_box3 dl dt{ margin-right:.2rem;}
+.yswd_box3 dl dt img{ width:.8rem; height:.8rem;}
+.yswd_box3 dl dd{ width:4.6rem;}
+.yswd_box3 dl dd div{border-radius:0 .06rem .06rem .06rem;-webkit-border-radius:0 .06rem .06rem .06rem;-moz-border-radius:0 .06rem .06rem .06rem; border:1px solid #ddd; margin-left:.2rem; padding:.2rem .23rem; width:3.94rem; background:#fff; font-size:.26rem; position:relative; line-height:.4rem;}
 
+.yswd_box3_t1{ position:absolute; width:.11rem; height:.11rem; left:-.11rem; top:0;}
 
+.yswd_box4{ border-top:.03rem solid #3b83ff;}
+.yswd_box4 dl dt img{ width:.8rem; height:.8rem;}
+.yswd_box4 dl dd{ width:4.65rem; line-height:.4rem;}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.yswd_jb p{ height:.8rem; line-height:.8rem;}
+.yswd_jb p a{ color:#666; font-size:.26rem;}
+.yswd_jb p img{ margin-top:.25rem; width:.17rem; height:.3rem;}
 
 
 

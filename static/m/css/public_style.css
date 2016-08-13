@@ -1,12 +1,12 @@
-@charset "utf-8";
+@charset "gb2312";
 /* CSS Document */
 
 
 /*===========================================
  	
-	æ—¶é—´ï¼š2016.07.01
+	Ê±¼ä£º2016.07.01
 	
-	è¯´æ˜ï¼šå…¬å…±æ ·å¼
+	ËµÃ÷£º¹«¹²ÑùÊ½
 
  ==========================================*/
 
@@ -124,7 +124,9 @@ input,button,select,textarea{
 .clr{ overflow:hidden; clear:both;}
 .warp98{ width:6.2rem; margin:.0 auto;}
 
-
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
 
 .fl{ float:left;}
 .fr{ float:right;}
@@ -152,6 +154,7 @@ input,button,select,textarea{
 .hd{ height:.1rem; background:#f0f0f0; overflow:hidden; clear:both;}
 .hd_hx{ height:0; border-bottom:1px solid #535f6e; overflow:hidden; clear:both;}
 .hd_hsx{ height:0; border-bottom:1px solid #ddd; overflow:hidden; clear:both;}
+.hd_xhsx{ height:0; border-bottom:1px dashed #b0c6da; overflow:hidden; clear:both;}
 .mr0{ margin-right:0 !important;}
 .blue{ color:#3b83ff !important;}
 .fz22{ font-size:.22rem;}

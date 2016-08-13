@@ -115,7 +115,6 @@
 			  `date`
 			FROM `data_ask_append`
 			WHERE `askid` = :askid
-			ORDER BY `sid` DESC
 			LIMIT :offset, :length;
 	</rows_answer>
 	<rows_answerCnt>

@@ -21,14 +21,25 @@ class doctorsModelControllerNotFound extends AppModel {
 	public function allByDod($dod,$length,$offset=0){
 		return articleUIApi::getInstance()->allByDod($dod,$length,$offset);
 	}
+    public function getOwner($aid){
+			return articleUIApi::getInstance()->getFirstDod($aid);
+	}
 	
 	
 	public function getDataByDod($dod,$length,$offset=0){
 		return appraiseUIApi::getInstance()->getDataByDod($dod,$length,$offset);
 	}
-	
+	public function getEssenceAidByDid($did, $length, $offset = 0){
+		return articleUIApi::getInstance()->getEssenceAidByDid($did, $length, $offset);
+	}
+	public function getAll($did, $length, $offset = 0){
+		return articleUIApi::getInstance()->getAll($did, $length, $offset);
+	}
 	public function getNameByDid($did){
 		return diseaseUIApi::getInstance()->getNameByDid($did);
+	}
+	public function getSiblingDids($did){
+		return diseaseUIApi::getInstance()->getSiblingDids($did);
 	}
 	public function getDataByDodCnt($dod){
 		return appraiseUIApi::getInstance()->getDataByDodCnt($dod);
@@ -51,10 +62,15 @@ class doctorsModelControllerNotFound extends AppModel {
 	public function getDocRowByDod($dod){
 		return doctorUIApi::getInstance()->getInfoByDod($dod);
 	}
+	public function getNameByDod($dod){
+		return doctorUIApi::getInstance()->getNameByDod($dod);
+	}
 	public function allByDodCnt($dod){
 		return articleUIApi::getInstance()->allByDodCnt($dod);
 	}
-	
+    public function getQuestionsByDid($did,$length=4,$offset=0){
+		return askUIApi::getInstance()->getQuestionsByDid($did,$length,$offset);
+	}
 	public  function  getRandomDid($length){
 		
 		return diseaseUIApi::getInstance()->getRandomDid($length);

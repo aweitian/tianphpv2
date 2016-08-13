@@ -49,8 +49,7 @@ class doctorsControllerNotFound{
 		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
 		$this->model->data = $row;
 		if (isset($msg["?id"])){
-			
-			$this->view->askcontent($this->model,$msg["?id"]);
+			$this->view->askcontent($this->model,intval($msg["?id"]));
 		}else{
 			$this->view->ask($this->model);
 		}
