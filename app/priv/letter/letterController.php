@@ -23,6 +23,7 @@ class letterController extends privController{
 		$this->checkPriv();
 		$this->model = new letterModel();
 		$this->view = new letterView();
+		$this->view->model = $this->model;
 		$this->initHttpResponse();
 	}
 

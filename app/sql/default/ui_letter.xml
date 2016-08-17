@@ -34,8 +34,8 @@
 	<!-- 参数:offset,length -->
 	<!-- 返回字段:sid,uid,dod,did,content,date -->
 	<data>
-		SELECT * FROM `data_letter`
-			ORDER BY `sid` DESC
+		SELECT * FROM `data_letter` WHERE `verify` = 1
+			ORDER BY `sid` DESC 
 			LIMIT :offset,:length
 	</data>
 

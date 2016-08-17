@@ -93,6 +93,9 @@ class AppUrl {
 	public static function userAppraise() {
 		return AppUrl::build ( "/user/appraise" );
 	}
+	public static function userWriteAppraise() {
+		return AppUrl::build ( "/user/writeappraise" );
+	}
 	public static function userAddAppraise() {
 		return AppUrl::build ( "/user/addappraise" );
 	}

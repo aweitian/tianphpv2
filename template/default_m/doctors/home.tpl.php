@@ -285,8 +285,8 @@ $url = new url ( $req->requestUri () );
 	<div class="box_c">
 		<p class="box_center2">
 			<a href="<?php print AppUrl::getSwtUrl()?>" class="btn_b1">预约挂号</a> <a
-				href="#" class="btn_b2">写感谢信</a> <a
-				href="#" class="btn_b3">送暖心</a>
+				href="<?php print AppUrl::userWriteLetter()?>" class="btn_b2">写感谢信</a> <a
+				href="<?php print AppUrl::userWriteLetter()?>" class="btn_b3">送暖心</a>
 		</p>
 	</div>
 </div>

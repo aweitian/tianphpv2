@@ -68,6 +68,18 @@ class userController extends appCtrl {
 		}
 		$this->view->writeletter ( $this->model );
 	}
+	public function writeappraiseAction(pmcaiMsg $msg) {
+		if ($msg->isPost ()) {
+			$ret = $this->model->writeAppraise($msg["j"],$msg["d"],$msg["m"], $msg["c"]);
+			if ($ret -> isTrue()) {
+				if(isset($msg["?return"])){
+					$this->response->redirect($msg["?return"]);
+				}
+			}
+			$this->response->redirect(AppUrl::userProfile());
+		}
+		$this->view->writeappraise ( $this->model );
+	}
 	public function addcommentAction(pmcaiMsg $msg) {
 		if(!AppUser::getInstance ()->auth->isLogined()){
 			$ret = new rirResult(1,"需要登陆");

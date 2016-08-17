@@ -5,9 +5,35 @@
  * Description: 
  */
 $err = $data["err"];
-$data = $data["data"];
+// $data = $data["data"];
+
+$length = 10;//每页显示多少行
+if(isset($_REQUEST["page"])){
+	$page = intval($_REQUEST["page"]);
+}else{
+	$page = 1;
+}
+if($page < 1){
+	$page = 1;
+}
+
+$offset = ($page - 1) * $length;
+
+$dataRet = $this->model->getAll($offset, $length);
+if(!$dataRet->isTrue()){
+	$this->getResponse()->showError($dataRet->info);
+}
+$cnt  = $dataRet->info;
+$pageSize = 10;
+$pageBtnLen = 5;
+$curPageNum = $page;
+$data = $dataRet->return;
 
 // var_dump($data);exit;
+$req = new httpRequest();
+$url  = new pmcaiUrl($req->requestUri());
+$pagination = new pagination($cnt, $curPageNum, $pageSize, $pageBtnLen);
+
 
 ?>
 <link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/lightbox2/dist/css/lightbox.min.css">
@@ -34,7 +60,7 @@ $data = $data["data"];
                       <th>是否通过验证</th>
                       <th>感谢信内容</th>
                       <th>时间</th>
-                      <th width="30%">操作</th>
+                      <th>操作</th>
                     </tr>
                     <?php foreach ($data as $item):?>
                     <tr>
@@ -43,7 +69,7 @@ $data = $data["data"];
                       <td><?php print $item["docname"]?></td>
                       <td><?php print $item["data"]?></td>
                       <td><?php if( $item["verify"] == "1" ):?>已通过<?php else:?>侍审核<?php endif;?></td>
-                      <td><?php print $item["content"]?></td>
+                      <td><?php print utility::utf8Substr(AppFilter::filterOut($item["content"]) , 0, 25) ?>...</td>
                       <td><?php print $item["date"]?></td>
                       <td>
                         <a class="btn btn-default" href="<?php print HTTP_ENTRY?>/priv/letter/edit?sid=<?php print $item["sid"]?>"> 编辑</a>
@@ -60,7 +86,20 @@ $data = $data["data"];
                   </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
- 
+ 					<div class="box-tools">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                    <?php if($pagination->hasPre()):?>
+                      <li><a href="<?php print $url->setQuery("page", $pagination->getPre())->getUrl();?>">&laquo;</a></li>
+                      <?php endif;?>
+                      
+                      <?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
+                      <li><a href="<?php print $url->setQuery("page", $pagination->getStartPage() + $i)->getUrl()?>"><?php print $pagination->getStartPage() + $i?></a></li>
+                      <?php endfor;?>
+                      <?php if($pagination->hasNext()):?>
+                      <li><a href="<?php print $url->setQuery("page", $pagination->getNext())->getUrl()?>">&raquo;</a></li>
+                      <?php endif;?>
+                    </ul>
+                  </div>
                 </div>
               </div><!-- /.box -->
 

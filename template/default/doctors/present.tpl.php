@@ -1,6 +1,10 @@
 <?php
 
 
+
+// 	var_dump($m->data);exit;
+
+
 ?>
   <?php include dirname(__FILE__)."/common/location.tpl.php";?>
   <div class="sybox clearfix">
@@ -23,7 +27,7 @@
                 <li>
                   <p class="gift_num tc">02</p>
                   <p class="gift_top_con"> <span class="fl"><b class="fz16 color3"><?php print $m->data["name"]?></b> 大夫</span><br>
-                    <span class="fl pt10 fz13">已经帮助<strong class="yellow"><?php print rand(30000,4000);?></strong>位患者，已收到<strong class="yellow">6033</strong>件心意礼物。</span> </p>
+                    <span class="fl pt10 fz13">已经帮助<strong class="yellow"><?php print rand(30000,4000);?></strong>位患者，已收到<strong class="yellow"><?php print $m->getDataByDodCnt($m->data["id"]);?></strong>件心意礼物。</span> </p>
                   <p class="gift_top_btn"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="" class="tc fz13">我也要送</a></p>
                 </li>
               </ul>
@@ -40,226 +44,23 @@
                <!--医生收到的礼物（展示部分） start-->
 
                 <ul class="gift_wall_main clearfix">
+
+                  <?php foreach( $m->all() as $lw):?>
+                  
                   <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_lw1.png" /></a> </p>
-                    <p class="gift_name">爱心气球(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
+                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $lw["avatar"];?>" /></a> </p>
+                    <p class="gift_name"><?php print $lw["data"];?></p>
                     <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
                   </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_lw2.png"></a> </p>
-                    <p class="gift_name">小糕点(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_lw3.png"></a> </p>
-                    <p class="gift_name">一点心意(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_lw4.png"></a> </p>
-                    <p class="gift_name">医患同心(<span class="orange1">2</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_lw5.png"></a> </p>
-                    <p class="gift_name">心意满满(<span class="orange1">3</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n4.hdfimg.com/g6/M01/42/EC/sYYBAFcgrMiAQ0HRAAAt21EwOD4714_96_96_2.png?a70d"></a> </p>
-                    <p class="gift_name">诚心诚意(<span class="orange1">3</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g3/M01/80/AC/p4YBAFcQVK-ABQqiAAAvD1nVilI816_96_96_2.png?604c"></a> </p>
-                    <p class="gift_name">暖暖心意(<span class="orange1">8</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n1.hdfimg.com/g2/M01/42/7D/pYYBAFcQVCOAJIKcAAAuxGoQ-co668_96_96_2.png?401c"></a> </p>
-                    <p class="gift_name">心意多多(<span class="orange1">14</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g1/M01/1A/6D/oYYBAFcE0WeAPJPmAAAXslCzvQU078_96_96_2.png?f32e"></a> </p>
-                    <p class="gift_name">再世华佗(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n1.hdfimg.com/g4/M01/40/78/rIYBAFcEz9eAfcb9AAAYrCxZdJo067_96_96_2.png?3f7a"></a> </p>
-                    <p class="gift_name">妙手回春(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
+                  <?php endforeach;?>
                 </ul>
-                <!--医生收到的礼物（展示部分） end--> 
-                <script src="<?php print AppUrl::getMediaPath()?>/js/jquery-1.8.3.min.js" type="text/javascript"></script>
-                <!--医生收到的礼物（隐藏部分） start-->
-                <div class="gift_all"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="javascript:;" id="triggerBtn">展开隐藏礼物 ></a></div>
+               
+                
+                
                 <div class="blank20"></div>
-                <ul class="gift_wall_main clearfix" id="hasShowHidden" style="display:none">
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g6/M01/3E/C6/sYYBAFcEzbOAQX07AAAyS70fAgk918_96_96_2.png?40fd"></a> </p>
-                    <p class="gift_name">暖暖心意(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g1/M01/3F/FD/ooYBAFcEzT-AA3GCAAAc0VABi_4683_96_96_2.png?e489"></a> </p>
-                    <p class="gift_name">小小心意(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g5/M01/40/24/roYBAFcEyH6AAsj0AAAxzilfI_0056_96_96_2.png?44b7"></a> </p>
-                    <p class="gift_name">缤纷果篮(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n3.hdfimg.com/g6/M01/2B/EF/sYYBAFZOkmKAfkaUAAAk08XFJU8493_96_96_2.png?252e"></a> </p>
-                    <p class="gift_name">小小心意(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢及时回复我！</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g3/M01/05/E6/qIYBAFZFWuqANZ0TAAAk03Rpa6s608_96_96_2.png?f6e3"></a> </p>
-                    <p class="gift_name">小小心意(<span class="orange1">134</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢余大夫</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n4.hdfimg.com/g3/M01/05/A7/qIYBAFZB0jGAdwWdAAAk0wa60Jw838_96_96_2.png?c0b4"></a> </p>
-                    <p class="gift_name">小小心意(<span class="orange1">10</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">查看明细</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n1.hdfimg.com/g2/M01/29/05/pYYBAFX5J-2ATDoNAAAny9Mhfzs991_96_96_2.png?4568"></a> </p>
-                    <p class="gift_name">心意满满(<span class="orange1">3</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">查看明细</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g5/M01/29/0B/roYBAFYV3RKAPv6pAAAp74ehddE798_96_96_2.png?3928"></a> </p>
-                    <p class="gift_name">暖暖心意(<span class="orange1">14</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">查看明细</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g3/M01/67/2D/p4YBAFX5J0WADdUeAACR4fTXw3Q423_96_96_2.png?9426"></a> </p>
-                    <p class="gift_name">心意多多(<span class="orange1">4</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">查看明细</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n4.hdfimg.com/g2/M01/3D/87/poYBAFbvvtyADF2oAAAu_OjmBlQ150_96_96_2.png?39a7"></a> </p>
-                    <p class="gift_name">诚心诚意(<span class="orange1">54</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢余博士耐心，详细的解答！谢谢！</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n4.hdfimg.com/g3/M01/14/6C/qYYBAFYV3cGAWFHDAAAp76vpVW4260_96_96_2.png?c37e"></a> </p>
-                    <p class="gift_name">暖暖心意(<span class="orange1">240</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n4.hdfimg.com/g3/M01/00/FA/qIYBAFX5KPWAe0IeAAA0XN8ToLY626_96_96_2.png?e2c9"></a> </p>
-                    <p class="gift_name">医患同心(<span class="orange1">21</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>余博士，辛苦了！既然一点心意，您都拒绝。那复诊过来就...</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g4/M01/36/D0/q4YBAFazA7qASlN3AAAsNlCfaw4971_96_96_2.gif?6c74"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">春节快乐(<span class="orange1">2</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢余大夫</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n3.hdfimg.com/g6/M01/30/4F/sIYBAFaA7B2AMcZ0AABBV2FI33Q608_96_96_2.gif?40c3"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">新年快乐(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢余医生</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n3.hdfimg.com/g7/M01/40/02/tIYBAFZDMBuASpR4AAAvD_3zmmo420_96_96_2.png?a7e3"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">暖暖心意(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g7/M01/3F/C0/tIYBAFZApw-ACMXdAAAe16ASFug066_96_96_2.png?5a9b"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">小小心意(<span class="orange1">2</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢余大夫</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n2.hdfimg.com/g4/M01/28/8A/q4YBAFX5JvWAFH8rAAAcXzjeaPs232_96_96_2.png?c280"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">小小心意(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>该礼物暂无赠送语</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="/api/present/ajaxshowpresentdetail?presentid=3433098180&uname=yhy200167">查看明细</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n1.hdfimg.com/g7/M01/22/6B/tIYBAFXIkfKAQuUoAAA90hdEj9U149_96_96_2.png?60fa"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">诚心诚意(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢大夫</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n4.hdfimg.com/g4/M01/2A/19/rIYBAFYV3UiATnRMAAAp799ptWs885_96_96_2.png?c1d3"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">暖暖心意(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢大夫</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n3.hdfimg.com/g7/M01/39/09/tIYBAFX5KCyAdo3zAAAcX9wCK2M744_96_96_2.png?9612"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">小小心意(<span class="orange1">66</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢余博士</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n3.hdfimg.com/g7/M01/3A/16/tIYBAFYEusaAWfbXAAAb-ko8KUE580_96_96_2.png?7cb0"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">小小心意(<span class="orange1">3</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢余主任，非常感谢您的回复!</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n4.hdfimg.com/g7/M01/16/D5/tIYBAFW22eGAQSA0AAAWG6sjAZ8783_96_96_2.jpg?0c09"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">爱心果篮(<span class="orange1">2</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢余大夫</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n3.hdfimg.com/g7/M00/16/15/s4YBAFW1tmWAD8d6AAASgTT6eSE311_96_96_2.jpg?b4ba"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">心意卡片(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢余大夫</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n4.hdfimg.com/g7/M01/11/07/tIYBAFWuG9eAAoxGAABZmxtldCk231_96_96_2.jpg?0c8b"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">感恩花束(<span class="orange1">2</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢大夫</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="http://n4.hdfimg.com/g3/M00/5C/6B/p4YBAFT8_RCADSrYAABAIfE0TZU287_96_96_2.jpg?4c12"></a> <span class="gift_clear">卖光啦</span> </p>
-                    <p class="gift_name">感恩花篮(<span class="orange1">1</span>)</p>
-                    <p class="gift_high"><span class="black">真情寄语：</span>谢谢余大夫</p>
-                    <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">展示更多</a></p>
-                  </li>
-                </ul>
+               
                 <!--医生收到的礼物（隐藏部分） end-->
-               <script type="text/javascript" src="<?php print AppUrl::getMediaPath()?>/js/present.js"></script>
+              
                
           
           
@@ -269,25 +70,17 @@
         <!--未收到的礼物 end-->
         
         <div class="norques border2">
-               <div class="zjtdwztit fz18" style="border-bottom:0;"><span></span><?php print $m->data["name"]?></b><font class="color6">医生还没收到的礼物</font></div>
+               <div class="zjtdwztit fz18" style="border-bottom:0;"><span></span><?php print $m->data["name"]?></b><font class="color6">医生收到的礼物</font></div>
                <div class="blank20"></div>
                
                 <ul class="gift_wall_main clearfix">
+                 <?php foreach( $m->getDataByDod($m->data["sid"],10) as $lws):?>
                   <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_lw1.png" /></a> </p>
-                    <p class="gift_name">爱心气球</p>
+                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $lws["avatar"];?>" /></a> </p>
+                    <p class="gift_name"><?php print $lws["data"];?>(<?php print $lw["cp"];?>)</p>
                     <p class="gift_send pl3"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我要送第一个</a></p>
                   </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_lw2.png"></a> </p>
-                    <p class="gift_name">小糕点(<span class="orange1">1</span>)</p>
-                    <p class="gift_send pl3"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我要送第一个</a></p>
-                  </li>
-                  <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_lw3.png"></a> </p>
-                    <p class="gift_name">一点心意(<span class="orange1">1</span>)</p>
-                    <p class="gift_send pl3"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我要送第一个</a></p>
-                  </li>
+                  <?php endforeach;?>
                 </ul>
           
           

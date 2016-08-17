@@ -141,7 +141,7 @@ class doctorsModelControllerNotFound extends AppModel {
 		return letterUIApi::getInstance()->data($length);
 	}
 	public function getLetterByDod($dod,$length,$offset=0){
-		return letterUIApi::getInstance()->getDataByDod($dod,$length,$offset);
+		return letterUIApi::getInstance()->getLetterByDod($dod,$length,$offset);
 	}
 	
 	
@@ -156,5 +156,12 @@ class doctorsModelControllerNotFound extends AppModel {
 	 */
 	public function getFirstDid($aid) {
 		return articleUIApi::getInstance()->getFirstDid($aid);
+	}
+	
+	public function all() {
+		return presentUIApi::getInstance()->all();
+	}
+	public function getDataCnt(){
+		return presentUIApi::getInstance()->getDataCnt();
 	}
 }

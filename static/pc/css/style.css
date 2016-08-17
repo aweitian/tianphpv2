@@ -1753,7 +1753,7 @@ _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizing
 .zjtdpage_pl{ padding-left:285px;}
 .zjtdpage_pl span{ display:block; width:115px; line-height:36px;}
 .zjtdpage_pl p{ text-align:center;}
-.zjtdpage_pl p a{ text-decoration:underline; color:#2670d5; line-height:30px;}
+.zjtdpage_pl p a{ text-decoration:underline; color:#2670d5; line-height:30px;white-space: nowrap;}
 .zjtdpage_ip1{ width:46px; height:20px; margin:0 20px 0 10px; padding:5px;}
 .zjtdpage_ip2{ width:68px; height:30px; border:0; background:#76c000; color:#fff;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px; cursor:pointer;}
 

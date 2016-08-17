@@ -92,7 +92,6 @@ defTplData::getInstance()->description = $data["desc"];
 <?php include dirname(dirname(__FILE__))."/inc/dhwz.tpl.php";?>
 <div id="quanping" style=" background-color:#CCCCCC;display:none; width:100%; height:100%; position: fixed ! important;_position:absolute;_top:expression(offsetParent.scrollTop+0); top:0; left:0; opacity:0.6;filter:'alpha(opacity=60)';filter:alpha(opacity=60); z-index:12000;"></div>
 <iframe id="destiframe" src="" scrolling="no" width="515px" height="350px" frameborder="0" style="position: fixed ! important;_position:absolute;_top:expression(offsetParent.scrollTop+240); left:50%; top:50%; margin-top:-160px; margin-left:-257px;display:none; z-index:2147483647; background:none; _height:340px; border:2px solid silver;"></iframe>
-<script src="<?php print AppUrl::getMediaPath()?>/js/dxuse.js"></script>
                   	<div class="blank20"></div>
                   	<div>
                     	<h6 class="color3 fz16 page_tit1">评论</h6>

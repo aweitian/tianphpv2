@@ -182,7 +182,7 @@ foreach ($m->getDisease() as $item){
                 <font class="fr"><span class="gray">接诊医生：</span><span class="blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDod($app["dod"])?>"><?php print $m->getNameByDod($app["dod"])?></a></span></font></p></dd>
             </dl>
 			<?php endforeach;?>
-            <div class="fromjyfxlb fromjyfxbsm fz12"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="blue" href="<?php print AppUrl::appraisePut()?>">我要对医生评价</a></div>
+            <div class="fromjyfxlb fromjyfxbsm fz12"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="blue" href="<?php print AppUrl::userWriteAppraise()?>">我要对医生评价</a></div>
           </div>
         </div>
         <div class="fromjyfxr fr">
@@ -196,7 +196,7 @@ foreach ($m->getDisease() as $item){
               <dd><?php print $m->utf8cut($let["content"],0,54)?>...<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="black" href="<?php print AppUrl::docLetterByDodLed($let["dod"], $let["sid"])?>">看详情>></a></dd>
             </dl>
 			<?php endforeach;?>
-            <div class="fromjyfxrb fromjyfxbsm fz12"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="orange" href="<?php print AppUrl::letterPut()?>">写感谢信给医生</a></div>
+            <div class="fromjyfxrb fromjyfxbsm fz12"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="orange" href="<?php print AppUrl::userWriteLetter()?>">写感谢信给医生</a></div>
           </div>
         </div>
       </div>

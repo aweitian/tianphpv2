@@ -2,9 +2,9 @@
 <letter>
 	<add>
 		INSERT INTO `data_letter` (
-			`uid`,`dod`,`did`,`content`,`date`
+			`uid`,`dod`,`did`,`content`,`verify`,`date`
 		) VALUES (
-			:uid,:dod,:did,:content,:date
+			:uid,:dod,:did,:content,1,:date
 		)
 	</add>
 

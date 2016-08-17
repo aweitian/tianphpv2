@@ -5,7 +5,7 @@
  * Description: 
  */
 class letterView extends privView{
-	
+	public $model;
 	
 	public function showOpSucc($info,$op="操作",$ret_url){
 		if($ret_url != ""){

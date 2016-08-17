@@ -64,6 +64,15 @@ class userView extends AppView {
 				) 
 		) )->setLayout ()->reponse ();
 	}
+	public function writeappraise($model, $info = "") {
+		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
+				$this->getThemePath ( "user" ) . "/write-appraise.tpl.php",
+				array (
+						"model" => $model,
+						"info" => $info 
+				) 
+		) )->setLayout ()->reponse ();
+	}
 	public function appraise($model, $info = "") {
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
 				$this->getThemePath ( "user" ) . "/appraise.tpl.php",

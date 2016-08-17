@@ -14,4 +14,12 @@ class AppFilter {
 	public static function filterOut($html){
 		return htmlspecialchars($html,ENT_QUOTES);
 	}
+	/**
+	 * 用户数据输入时过滤
+	 * @param string $html
+	 * @return string
+	 */
+	public static function filterIn($html){
+		return $html;
+	}
 }

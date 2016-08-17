@@ -26,6 +26,9 @@ class userModel extends AppModel {
 		return commentUIApi::getInstance ()->add($uid,$aid,$c);
 		
 	}
+	public function getDisease() {
+		return diseaseUIApi::getInstance()->getInfo();
+	}
 	
 	
 	
@@ -109,6 +112,10 @@ class userModel extends AppModel {
 		$info = AppUser::getInstance()->auth->getInfo();
 		return letterUIApi::getInstance()->add($info["sid"] , $dod, $content);
 	}
+	public function writeAppraise($did,$dod,$lv,$content){
+		$info = AppUser::getInstance()->auth->getInfo();
+		return letterUIApi::getInstance()->add($info["sid"] , $did, $dod, $lv, $content);
+	}
 	
 	
 	/**
@@ -130,5 +137,10 @@ class userModel extends AppModel {
 	}
 	public function register_normal($name, $pwd, $sq, $sa, $eml, $code) {
 		return userUIApi::getInstance ()->register_normal ( $name, $pwd, $sq, $sa, $eml, $code );
+	}
+	
+	
+	public static function filterOut($html){
+		return htmlspecialchars($html,ENT_QUOTES);
 	}
 }
