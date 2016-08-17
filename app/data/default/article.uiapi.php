@@ -96,6 +96,32 @@ class articleUIApi {
 	}
 	
 	/**
+	 * 根据文章查找病种，返回一个病种的ID,文章不属于任何病种的时候返回0
+	 *
+	 * @param int $aid
+	 * @return number
+	 */
+	public function getFirstDid($aid) {
+		$cache_key = "getFirstDid-" . $aid;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_article/first_did_byaid" );
+		$ret = $this->db->fetch ( $sql, array (
+				"aid" => $aid
+		) );
+		if (! empty ( $ret )) {
+			$ret = $ret ["did"];
+		} else {
+			$ret = 0;
+		}
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	
+	
+	
+	/**
 	 * 获取症状的第一篇文章id,没有找到返回0
 	 *
 	 * @param int $syd        	

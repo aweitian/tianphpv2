@@ -26,46 +26,9 @@ $url = new url($req->requestUri());
 ?>
 <div class="public_width">
 
-<div class="head_tc blue_bg">
-        <a class="goback" href="" title="返回上页"><span>返回</span></a>
-        <div class="head_tit" ><?php print $m->data["name"]?>医生的评价</div>
-    <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_xl.png" /><i id="redpoint" class=""></i></span></a>
-  </div>
-<div class="black_bg"></div>
-<div class="head_tc_nav_new">
-  <form class="clearfix" action="" method="GET" accept-charset="GBK">
-      <div class="text">
-        <div class="in_out">
-          <input id="uniqueKeyword20151125" type="text" placeholder="医院名、疾病名或医生姓名" class="head_tc_nav_new_input" name="key"/>
-        </div>  
-      </div>
-      <div class="sub">
-        <input type="button" id="nav_bar_search_btn" value="搜索"/>
-      </div>
-  </form>
-  <div class="search_dor clearfix">
-    <a href="" class="anyiyuan" id="cnzz_yiyuan203">找大夫咨询</a>
-    <a href="" class="anjibing" id="cnzz_jibing204">好评医院</a>
-  </div>
-  <div class="three_btn clearfix">
-    <a href="" id="cnzz_zixun205"><span></span></a>
-    <a href="" id="cnzz_dianhua206"><span></span></a>
-    <a href="" id="cnzz_jihao207" class="mr0"><span></span></a>
-  </div>
-  <div class="three_a clearfix">
-    <a href="" class="" id="cnzz_shouye208">首页</a>
-    <a href="" class=" " id="cnzz_zhishi209">疾病知识</a>
- </div>
- <div class="three_dl clearfix">
-    <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_dl.png" class="three_dl_sm1" /></a>
-    <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_zc.png" /></a>
- </div>
-  <div id="percenter"> </div>
-  <div class="battom_waitao"><div class="bottom_bac"></div></div>
-  <div class="arrow"></div>
-</div>
-<input id="isShowRedPoint" type="hidden" value="">
-<script src="js/nav_bar.0e2272c9.js"></script>
+
+<?php $doctors_header_title = "医生的评价"?>
+<?php include dirname(dirname(__FILE__))."/inc/header.doc.php"?>
 
 <!--head end-->
 
@@ -81,14 +44,14 @@ $url = new url($req->requestUri());
 <?php foreach($m->getDataByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $dodpj):?> 
 <?php $a=appraiseLvMeta::getMeta() ?>
 <?php $b= $m->getNameByDid($dodpj["did"])?> 
-<?php  $c=$m->rowuser($m->data["sid"])?>
+<?php $c=$m->getNameByUid($dodpj["uid"])  ?>
 <div class="hd_hsx"></div>
 <div class="blank10"></div>
 <div class="hd_hsx"></div>
 <div class="kp_about  bg_fff">
 	<dl class="mzy30 fz26">
     	<div class="blank20"></div>
-        <dd class="clr color3 "><span class="fl"> 患者：<?php print ($c["name"]) ?></span><span class="fr"><?php print ($dodpj["date"]) ?></span></dd>
+        <dd class="clr color3 "><span class="fl"> 患者：<?php print ($c) ?></span><span class="fr"><?php print ($dodpj["date"]) ?></span></dd>
     	<dt class="clr">所患疾病：<a href="<?php print AppUrl::disHomeByDid($dodpj["did"])?>" class="yellow"><?php print ($b)  ?></a>&nbsp;&nbsp;&nbsp;&nbsp;满意度：<span class="yellow"><?php print ($a[$dodpj["lv"]]) ?></span></dt>
         <div class="blank15"></div>
         <div class="hd_hsx"></div>
@@ -113,8 +76,8 @@ $url = new url($req->requestUri());
        		<?php endif;?> </div>
 
 
-<div class="blank15"></div>
-
+<div class="blank10"></div>
+<?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 </div>
 
 </div>

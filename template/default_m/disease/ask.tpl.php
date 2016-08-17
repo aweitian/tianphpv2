@@ -82,7 +82,7 @@ $a=Appctrl::$msg->getControl()
        		<?php endif;?> </div>
 <div class="blank15"></div>
 
-
+<?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 </div>
 
 <div class="box_a">

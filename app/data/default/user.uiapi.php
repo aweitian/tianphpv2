@@ -388,7 +388,7 @@ class userUIApi implements IOp {
 		}
 		
 		if ($eml) {
-			if (! validator::isEmail ( $eml ) || strlen ( $eml )) {
+			if (! validator::isEmail ( $eml ) || ! strlen ( $eml )) {
 				return new rirResult ( 7, "EMAIL格式不正确或者长度大于64" );
 			}
 			$sql = $this->sqlManager->getSql ( "/ui_user/reg_normal" );

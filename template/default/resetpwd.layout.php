@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<div class="wid1000 loginlogo clearfix"><a href="<?php print AppUrl::navHome()?>"><img class="fl" src="<?php print AppUrl::getMediaPath()?>/images/loginlogo.jpg" width="284" height="47" /></a><span class="fl black fz24">找回密码</span></div>
+<div class="wid1000 loginlogo clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navHome()?>"><img class="fl" src="<?php print AppUrl::getMediaPath()?>/images/loginlogo.jpg" width="284" height="47" /></a><span class="fl black fz24">找回密码</span></div>
 <div class="registerbox">
   <div class="wid1000">
     <div class="rtpboxnr clearfix">
@@ -71,7 +71,7 @@ function chk(f)
 <div class="blank20"></div>
 <div class="blank10"></div>
 <div class="loginfooter dgray fz13 wid1000">
-  <div class="loginfooternav tc"><a href="">关于我们</a><a href="">友情链接</a><a href="">找大夫咨询</a><a href="">预约挂号</a><a href="">版权声明</a><a class="nobor" href="">联系我们</a></div>
+  <div class="loginfooternav tc"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">关于我们</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">友情链接</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">找大夫咨询</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">预约挂号</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">版权声明</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="nobor" href="">联系我们</a></div>
   <div class="blank15"></div>
   <div class="loginfooterloc tc">地址：上海市长宁区中山西路333号（近中山公园）  沪ICP备14017357号-1 沪卫（中医）网复审【2014】第10045号　网站统计</div>
 </div>

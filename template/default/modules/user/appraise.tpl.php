@@ -8,7 +8,7 @@
 $userinfo = AppUser::getInstance()->auth->getInfo();
 ?>
   <div class="blank15"></div>
-  <div class="con_tit fz13">当前位置：<a href="">首页</a> > 会员中心</div>
+  <div class="con_tit fz13">当前位置：<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">首页</a> > 会员中心</div>
   
   <div class="blank15"></div>
   
@@ -39,15 +39,15 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
                 <?php foreach($data as $q):?>
                 <tr>
                 	<td class="tbtd1 color3 line24"><?php print utility::utf8Substr(strip_tags($q["content"]),0,16) ?></td>
-                    <td class="color9"><a style="text-decoration: underline" href="<?php print AppUrl::docHomeByDod($q["dod"])?>"><?php print $model->getDocNameByDod($q["dod"])?></a></td>
+                    <td class="color9"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> style="text-decoration: underline" href="<?php print AppUrl::docHomeByDod($q["dod"])?>"><?php print $model->getDocNameByDod($q["dod"])?></a></td>
                     <td class="color9"><?php print $q["date"]?></td>
                     <td class="green"><?php if($q["verify"]):?>是<?php else:?>待审核<?php endif?></td>
-                    <td class="tbtd2"><?php if(!$q["verify"]):?><a onclick='return confirm("?")' href="<?php print AppUrl::userRemoveLetter()?>?sid=<?php print $q["sid"]?>">删除</a><?php endif?></td>
+                    <td class="tbtd2"><?php if(!$q["verify"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("?")' href="<?php print AppUrl::userRemoveLetter()?>?sid=<?php print $q["sid"]?>">删除</a><?php endif?></td>
                 </tr>
  				<?php endforeach;?>
             </table>
            <?php else:?> 
-           		您还没有写过感谢信，<a class="dgreen" href="<?php print AppUrl::userWriteLetter()?>">现在就写</a>
+           		您还没有写过感谢信，<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::userWriteLetter()?>">现在就写</a>
            <?php endif?>
         </div>
         

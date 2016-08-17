@@ -92,8 +92,8 @@ $url = new url($req->requestUri());
           <tr>
             <td></td>
             <td><p><?php print ($user) ?></p></td>
-            <td><p><a target="_blank" href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="td_link" ><?php print($ask["title"]) ?></a> </p></td>
-            <td ><a target="_blank" href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="rela_dis"  ><?php print($dis) ?></a></td>
+            <td><p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> target="_blank" href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="td_link" ><?php print($ask["title"]) ?></a> </p></td>
+            <td ><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> target="_blank" href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="rela_dis"  ><?php print($dis) ?></a></td>
             <td> (<font class="green3 pl5 pr5 green"><?php print($docount) ?>/<?php print($count) ?></font>) </td>
             <td class="color9"><?php print($ask["date"]) ?></td>
           </tr>
@@ -104,13 +104,13 @@ $url = new url($req->requestUri());
  		 </div>
   		<div class="blank20"></div>
         <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?> </div>
         <div class="blank20"></div>
 	</div>

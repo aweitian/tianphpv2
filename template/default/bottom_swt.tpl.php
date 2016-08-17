@@ -14,12 +14,12 @@
         </div>
         <div class="btn_box clearfix">
             <div class="new_bottom_btn docs_n_btns">
-                <a href="<?php print AppUrl::getSwtUrl() ?>" class="online" >网上咨询</a>
+                <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>" class="online" >网上咨询</a>
             </div>
     
               <div class="docs_btns">
                   <div class="b2_btn">
-                      <a href="<?php print AppUrl::getSwtUrl() ?>">预约挂号</a>
+                      <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navSubscribe() ?>">预约挂号</a>
                   </div>
               </div>
         </div>

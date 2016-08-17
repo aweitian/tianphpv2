@@ -22,11 +22,14 @@ class askController extends privController{
 		$this->checkPriv();
 		$this->model = new askModel();
 		$this->view = new askView();
+		$this->view->model = $this->model;
 		$this->initHttpResponse();
 	}
 	public function welcomeAction(pmcaiMsg $msg){
 		if(!isset($msg["?uid"])){
-			$this->response->_404();
+			//$this->response->_404();
+			$this->showAll($msg);
+			return;
 		}
 		$this->view->setPmcaiMsg($msg);
 		$this->view->showForm(
@@ -36,7 +39,35 @@ class askController extends privController{
 			$this->model->getAllDis()
 		);
 	}
+	public function showAll($msg) {
+		
+		$length = 10;
+		if(isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		$offset = ($page - 1) * $length;
+		
+		$this->view->setPmcaiMsg($msg);
+		
+		$data = $this->model->getAll($offset, $length);
 
+		$this->view->setPmcaiMsg($msg);
+		$this->view->showList(
+				$msg->getPmcaiUrl(),
+				$this->priv->getUserInfo(),
+				$data->info,
+				$data->return,
+				$page,
+				$length,
+				$msg["?q"]
+		);
+		
+	}
 	public function editAction(pmcaiMsg $msg){
 		if($msg->isPost()){
 			
@@ -362,6 +393,11 @@ class askController extends privController{
 	
 	
 	public function addAction(pmcaiMsg $msg){
+		if(!$msg->isPost()){
+			$this->view->setPmcaiMsg($msg);
+			return $this->view->showAllForm(
+					$this->priv->getUserInfo());
+		}
 		$this->chkPost($msg, array("uid","dod","title","did","desc","svr","date"));
 
 		if(!isset($msg["files"])){

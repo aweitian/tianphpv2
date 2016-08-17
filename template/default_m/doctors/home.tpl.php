@@ -277,30 +277,16 @@ $url = new url ( $req->requestUri () );
 <?php endforeach;?>  
 
 <div class="blank10"></div>
-		<div class="new_footer">
-			<div class="what_version">
-				<a href="<?php print AppUrl::getSwtUrl()?>" class="colorf">在线咨询</a>&nbsp;&nbsp;|&nbsp;&nbsp
-				<a href="#">知识库</a>&nbsp;&nbsp;|&nbsp;&nbsp; <a href=""
-					class="colorf">个人中心</a>
-			</div>
-			<div class="blank30"></div>
-			<div class="hd_hx"></div>
-			<div class="what_version">
-				<a href="" class="cur">触屏版</a>&nbsp;&nbsp;|&nbsp;&nbsp <a href="#"
-					class="cur">电脑版</a>
-			</div>
-			<p class="company_title">版权所有 上海九龙男子医院</p>
-		</div>
+<?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 	</div>
 
 
-
+<div style="height:1rem;"></div>
 	<div class="box_c">
 		<p class="box_center2">
 			<a href="<?php print AppUrl::getSwtUrl()?>" class="btn_b1">预约挂号</a> <a
-				href="<?php print AppUrl::letterPut()?>" class="btn_b2">写感谢信</a> <a
-				href="" class="btn_b3">送暖心</a>
+				href="#" class="btn_b2">写感谢信</a> <a
+				href="#" class="btn_b3">送暖心</a>
 		</p>
 	</div>
-
 </div>

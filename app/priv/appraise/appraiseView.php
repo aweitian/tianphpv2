@@ -5,7 +5,7 @@
  * Description: 
  */
 class appraiseView extends privView{
-	
+	public $model;
 	
 	public function showOpSucc($info,$op="操作",$ret_url){
 		if($ret_url != ""){
@@ -17,9 +17,8 @@ class appraiseView extends privView{
 		$this->priv_wrap($info, $this->info("提示", $op."成功".$ret))->show();
 	}
 	
-	public function showList($userinfo,$data,$err){
+	public function showList($userinfo,$err){
 		$content = $this->fetch("list",array(
-			"data" => $data,
 			"err" => $err,
 		));
 		$this->priv_wrap($userinfo, $content)->show();

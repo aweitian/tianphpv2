@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<put>
+
+	<add>
+		INSERT INTO `data_ask` (
+			`uid`,`dod`,`title`,`did`,`desc`,`svr`,`v`,`date`
+		) VALUES (
+			:uid,:dod,:title,:did,:desc,:svr,0,:date
+		)
+	
+	
+	</add>
+ 		
+</put>

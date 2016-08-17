@@ -79,7 +79,7 @@ $url = new url($req->requestUri());
             <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?>
 </div>
-<div class="blank30"></div>
+<?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom.tpl.php";?>
 
 </div>
 

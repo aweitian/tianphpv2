@@ -48,8 +48,11 @@ if (DEBUG_FLAG) {
 }
 if (utility::isMobile ()) {
 	define("THEME", "default_m");
+	#页面是否以新窗口打开
+	define("TARGET_BLANK_OPEN",false);
 } else {
 	define("THEME", "default");
+	define("TARGET_BLANK_OPEN",true);
 }
 // var_dump(THEME);exit;
 require_once FILE_SYSTEM_ENTRY . '/app/AppConst.php';

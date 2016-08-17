@@ -124,6 +124,7 @@ function css_active_control($links){
               </ul>
             </li>
              <?php $links = array(
+				"/ask"=>"全部问答列表",
 				"/ask/usr"=>"选择用户提问",
 				"/ask/usrec"=>"用户提问记录",
 				"/ask/doc"=>"医生的问题"

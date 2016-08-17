@@ -1,29 +1,29 @@
-/*presentNavigation Õ¹¿ªÊÕÆğÒş²ØÀñÎï start*/
+/*presentNavigation å±•å¼€æ”¶èµ·éšè—ç¤¼ç‰© start*/
 $(function()
 {
     var triggerBtn = $("#triggerBtn");
     var hasShowHidden = $("#hasShowHidden");
     triggerBtn.toggle(function(){
         hasShowHidden.slideDown();
-        $(this).text("ÊÕÆğÒş²ØÀñÎï<<");
+        $(this).text("æ”¶èµ·éšè—ç¤¼ç‰©<<");
         return false;
     },function(){
         hasShowHidden.slideUp();
-        $(this).text("Õ¹¿ªÒş²ØÀñÎï>>");
+        $(this).text("å±•å¼€éšè—ç¤¼ç‰©>>");
         return false;
     });
 
 });
-/*presentNavigation Õ¹¿ªÊÕÆğÒş²ØÀñÎï end*/
+/*presentNavigation å±•å¼€æ”¶èµ·éšè—ç¤¼ç‰© end*/
 
-//ÔùËÍÀñÎïÊ±¼ì²é·şÎñÌõ¿î
+//èµ é€ç¤¼ç‰©æ—¶æ£€æŸ¥æœåŠ¡æ¡æ¬¾
 function checkPresentTerm()
 {//{{{
     if(false == $("#agreeInfo").attr("checked"))
     {
         $("#term").fadeTo("slow", 0, function(){$(this).css({"background-color":"red", "font-color":"white"})});
         $("#term").fadeTo("slow", 1, function(){$(this).css({"background-color":"white", "font-color":"black"})});
-        alert('ÇëÑ¡Ôñ·şÎñÌõ¿î');
+        alert('è¯·é€‰æ‹©æœåŠ¡æ¡æ¬¾');
         $("#sendPresent").attr('rel', true);
         return false;
     }
@@ -31,24 +31,24 @@ function checkPresentTerm()
     return true;
 }//}}}
 
-//¼ì²éÔùËÍÓïµÄ±à¼­×ÖÊı
+//æ£€æŸ¥èµ é€è¯­çš„ç¼–è¾‘å­—æ•°
 $(function(){
     $("#presentWish").keyup(function(){
         var num = 100-$(this).val().length;
         if ($(this).val().length > 100) {
-            alert("ÔùËÍÓï¾äÌ«³¤ÁË");
+            alert("èµ é€è¯­å¥å¤ªé•¿äº†");
             return false;
         }
-        $(this).parent().parent().prev().html('´ËÀñÎï¿É×Ô¶¨ÒåÔùËÍÓï£¬Äú»¹¿ÉÒÔÊäÈë<span class="red">'+ num +'</span>¸ö×Ö');
+        $(this).parent().parent().prev().html('æ­¤ç¤¼ç‰©å¯è‡ªå®šä¹‰èµ é€è¯­ï¼Œæ‚¨è¿˜å¯ä»¥è¾“å…¥<span class="red">'+ num +'</span>ä¸ªå­—');
     });
 });
 
-//Ô¤ÀÀ±à¼­ÍêÔùËÍÓïµÄÀñÎï
+//é¢„è§ˆç¼–è¾‘å®Œèµ é€è¯­çš„ç¤¼ç‰©
 function doApplyPresent(finishUrl)
 {//{{{
     if ($("#presentWish").val().length < 1 || $("#presentWish").val().length > 100)
     {
-        alert("ÔùËÍÓï³¤¶ÈÔÚ1µ½100Ö®¼ä£¡");
+        alert("èµ é€è¯­é•¿åº¦åœ¨1åˆ°100ä¹‹é—´ï¼");
         $("#presentWish").focus();
         return false;
     }
@@ -73,19 +73,19 @@ function doApplyPresent(finishUrl)
     return false;
 }//}}}
 
-//Õ¹Ê¾ÀñÎïÃ÷Ï¸
+//å±•ç¤ºç¤¼ç‰©æ˜ç»†
 $('.tab_present li').click(function(){
     $(this).addClass("tab_active").siblings().removeClass();
     $(".tab_pre_desc > ul").eq($('.tab_present li').index(this)).show().siblings().hide();
 });
 
-//ÀñÎïÔùËÍ³É¹¦Ò³ÃæµÄÊÖ»úºÅÂëÉèÖÃ
+//ç¤¼ç‰©èµ é€æˆåŠŸé¡µé¢çš„æ‰‹æœºå·ç è®¾ç½®
 function changeMobileSubmit(presentId, spaceUserName)
 {/*{{{*/
     var reg_mobile = /^1[34578][0-9]{9}$/;
     if(false == reg_mobile.test($("#presentOrderMobile").val()))
     {
-        alert("ÇëÊäÈëÕıÈ·µÄÊÖ»úºÅ£¡");
+        alert("è¯·è¾“å…¥æ­£ç¡®çš„æ‰‹æœºå·ï¼");
         return false;
     }
     else
@@ -101,14 +101,14 @@ function changeMobileSubmit(presentId, spaceUserName)
                     },
                     error: function()
                     {
-                        alert("ÊÖ»úÉèÖÃÊ§°Ü");
+                        alert("æ‰‹æœºè®¾ç½®å¤±è´¥");
                     }
         });
-        changePage();//¸Ã·½·¨ÔÚÒ³ÃæÉÏ
+        changePage();//è¯¥æ–¹æ³•åœ¨é¡µé¢ä¸Š
     }
 }/*}}}*/
 
-//ÅĞ¶ÏÊÇ·ñÊÇĞÄÒâÀñÎïÒ³Ãæ
+//åˆ¤æ–­æ˜¯å¦æ˜¯å¿ƒæ„ç¤¼ç‰©é¡µé¢
 function isNavtation()
 {/*{{{*/
     var isTheUrl = window.document.location.toString().search(/presentnavigation/i);
@@ -125,19 +125,19 @@ function isNavtation()
 function closeKeyDown()
  {/*{{{*/
      parent.$.fancybox.close();
-     if(isNavtation())//ÊÇĞÄÒâÀñÎïÒ³Ôòµ±Ç°Ò³ÃæË¢ĞÂ
+     if(isNavtation())//æ˜¯å¿ƒæ„ç¤¼ç‰©é¡µåˆ™å½“å‰é¡µé¢åˆ·æ–°
      {
          document.getElementById('closeKey').target = "_self";
      }
      return true;
  }/*}}}*/
 
-//Á÷ÏêÇéºÍÎÄÕÂÒ³µÄÀñÎïbanner ÀñÎï»¬¶¯ÓÃ 
+//æµè¯¦æƒ…å’Œæ–‡ç« é¡µçš„ç¤¼ç‰©banner ç¤¼ç‰©æ»‘åŠ¨ç”¨ 
 $(function(){
         initFancyBox("a.showDoctorPatientRef");
         var J_box = $('#latestBoughtPresents'),timer;
         function scrollItem(){
-        var rollNum = 2;//¹ö¶¯ĞĞÊı
+        var rollNum = 2;//æ»šåŠ¨è¡Œæ•°
         var liH = J_box.find("li").first().outerHeight(true);
         var marginS = 'marginTop';
         var animater = {marginTop: -liH*rollNum + "px"};

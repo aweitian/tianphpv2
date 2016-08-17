@@ -23,7 +23,7 @@
             <div class="box-body">
             
 	            <div class="attachment-block clearfix">
-	            	<img class="attachment-img" src="<?php print HTTP_ENTRY?>/static/present/<?php print $item["avatar"]?>" alt="User Avatar">
+	            	<img class="attachment-img" src="<?php print AppUrl::getMediaPath()?>/present/<?php print $item["avatar"]?>" alt="User Avatar">
         
 	                <div class="attachment-pushed">
 	

@@ -199,5 +199,15 @@ class appraiseApi{
 		$data = $this->db->fetchAll($sql, $bin);
 		return new rirResult(0,$cnt,$data);
 	}
+	public function getAllCnt(){
+		$sql = $this->sqlManager->getSql("/appraise/all/cnt");
+		$bin = array();
+		$row = $this->db->fetch($sql, $bin);
+		if(empty($row)){
+			return new rirResult(1,$this->db->getErrorInfo());
+		}
+		$cnt = $row["count"];
+		return $cnt;
+	}
 	
 }

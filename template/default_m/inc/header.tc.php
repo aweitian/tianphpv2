@@ -26,17 +26,17 @@
       </div>
   </form>
   <div class="search_dor clearfix">
-    <a href="" class="anyiyuan" id="cnzz_yiyuan203">找大夫咨询</a>
-    <a href="" class="anjibing" id="cnzz_jibing204">好评医院</a>
+    <a href="<?php print AppUrl::navDoctors()?>" class="anyiyuan" id="cnzz_yiyuan203">找大夫咨询</a>
+    <a href="<?php print AppUrl::helpAbout()?>" class="anjibing" id="cnzz_jibing204">好评医院</a>
   </div>
   <div class="three_btn clearfix">
-    <a href="" id="cnzz_zixun205"><span></span></a>
-    <a href="" id="cnzz_dianhua206"><span></span></a>
-    <a href="" id="cnzz_jihao207" class="mr0"><span></span></a>
+    <a href="<?php print AppUrl::getSwtUrl()?>" id="cnzz_zixun205"><span></span></a>
+    <a href="tel:021-52733999" id="cnzz_dianhua206"><span></span></a>
+    <a href="<?php print AppUrl::getSwtUrl()?>" id="cnzz_jihao207" class="mr0"><span></span></a>
   </div>
   <div class="three_a clearfix">
-    <a href="" class="" id="cnzz_shouye208">首页</a>
-    <a href="" class=" " id="cnzz_zhishi209">疾病知识</a>
+    <a href="/" class="" id="cnzz_shouye208">首页</a>
+    <a href="<?php print AppUrl::navDisease()?>" class=" " id="cnzz_zhishi209">疾病知识</a>
  </div>
  <div class="three_dl clearfix">
     <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_dl.png" class="three_dl_sm1" /></a>

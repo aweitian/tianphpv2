@@ -52,7 +52,9 @@ class appraiseModel extends privModel{
 	public function getAll($offset,$length){
 		return $this->api->getAll($offset, $length);
 	}
-	
+	public function getAllCnt(){
+		return $this->api->getAllCnt();
+	}
 	/**
 	 *
 	 * @param int $sid

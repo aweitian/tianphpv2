@@ -12,13 +12,13 @@
 
 <div class="ghhead clearfix">
 
-  <div class="wid1000"><a href="<?php print HTTP_ENTRY?>/"><img class="fl" src="<?php print AppUrl::getMediaPath()?>/images/logo2.png" width="267" height="46" /></a>
+  <div class="wid1000"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print HTTP_ENTRY?>/"><img class="fl" src="<?php print AppUrl::getMediaPath()?>/images/logo2.png" width="267" height="46" /></a>
 
 	<ul class="fr">
 
-	  <li><a href="<?php print HTTP_ENTRY?>/">返回首页</a></li>
+	  <li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print HTTP_ENTRY?>/">返回首页</a></li>
 
-	  <li><a href="<?php print AppUrl::getSwtUrl()?>">在线咨询</a></li>
+	  <li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">在线咨询</a></li>
 
 	</ul>
 
@@ -160,7 +160,7 @@
 
 	<ul class="ghfootnav">
 
-	  <a href="">关于我们</a> <a href="">友情链接</a> <a href="">找大夫咨询</a> <a href="">预约挂号</a> <a href="">版权声明</a> <a class="last" href="">联系我们</a>
+	  <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">关于我们</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">友情链接</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">找大夫咨询</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navSubscribe()?>">预约挂号</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">版权声明</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="last" href="">联系我们</a>
 
 	  </li>
 

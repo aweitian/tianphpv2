@@ -42,8 +42,8 @@ $data = $data["data"];
                       <td><?php print $item["sid"]?></td>
                       <td><?php print $item["data"]?></td>
                       <td>
-                      	<a href="<?php print HTTP_ENTRY?>/static/present/<?php print $item["avatar"]?>" data-lightbox="present" data-title="<?php print $item["data"]?>">
-                      	<img width="40" height="40" src="<?php print HTTP_ENTRY?>/static/present/<?php print $item["avatar"]?>">
+                      	<a href="<?php print AppUrl::getMediaPath()?>/present/<?php print $item["avatar"]?>" data-lightbox="present" data-title="<?php print $item["data"]?>">
+                      	<img width="40" height="40" src="<?php print AppUrl::getMediaPath()?>/present/<?php print $item["avatar"]?>">
                       	</a>
                       
                       </td>

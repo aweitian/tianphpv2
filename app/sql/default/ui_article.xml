@@ -49,6 +49,16 @@
 			LIMIT 0, 1
 	</first_author_byaid>
 	
+	
+	<!-- 获取这篇文章的病种第一个ID -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:did -->
+	<first_did_byaid>
+		SELECT `data_article_dis`.`did` FROM `data_article_dis`
+			WHERE `data_article_dis`.`aid` = :aid
+			LIMIT 0,1
+	</first_did_byaid>
+	
 	<!-- 获取与症状ID相关的第一篇文章的ID -->
 	<!-- 参数:syd -->
 	<!-- 返回字段:aid -->

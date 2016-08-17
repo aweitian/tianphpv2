@@ -8,6 +8,7 @@ require_once FILE_SYSTEM_ENTRY."/app/data/priv/ask/ask.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/ask/askAppend.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor/doctor.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/disease/disease.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/user/user.api.php";
 class askModel extends privModel{
 	public function __construct(){
 		parent::__construct();
@@ -123,6 +124,11 @@ class askModel extends privModel{
 		return $api->getAllAskByDod($dod, $offset, $length);
 	}
 	
+	public function getAll($offset,$length){
+		$api = new askApi();
+		return $api->getAll($length,$offset);
+	}
+	
 	public function getAppendByAskid($askid){
 		$api = new askAppendApi();
 		return $api->getDataByAskid($askid);
@@ -142,6 +148,11 @@ class askModel extends privModel{
 	public function getAllPresent(){
 		$api = new askApi();
 		return $api->getAllPresent();
+	}
+	
+	public function getWaterArm(){
+		$api = new userApi();
+		return $api->getWaterArm();
 	}
 	
 }

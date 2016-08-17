@@ -51,6 +51,6 @@
 // }
 // $test = "我爱中国国";
 // echo preg_match_all('/([\xC0-\xFF][\x80-\xBF]+){2}|([\xC0-\xFF][\x80-\xBF]+)/',$test,$match) ? join("<br>",$match[0]) : "";
-phpinfo();
+echo strip_tags('<<a href="cc">aa</a>a></a>');
 
 ?>

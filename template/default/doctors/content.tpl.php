@@ -59,10 +59,10 @@ defTplData::getInstance()->description = $data["desc"];
 
                        
                   		<div class="fl">
-                     		<a href="<?php print AppUrl::docHomeByDocid($m->data["id"]) ?>">
+                     		<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($m->data["id"]) ?>" class="zjtd_thumb">
                      		<img width="200" height="220" src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print($m->data["avatar"]) ?>">
                      		</a>
-                     		<a href="<?php print AppUrl::docHomeByDocid($m->data["id"]) ?>" class="zjtd_swt"><?php print($m->data["name"]) ?></a>
+                     		<a href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_swt"><?php print($m->data["name"]) ?></a>
                      	</div>
                      
                      <div class="fr">
@@ -72,7 +72,7 @@ defTplData::getInstance()->description = $data["desc"];
                           <div class="blank10"></div>
                           <p class="clr"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img2.png" class="fl" />格言：从医20多年来，患者的康复是对我最大的回报。</p>
                           <p class="clr"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />
-                          擅长项目：<?php print utility::utf8Substr($m->data["spec"] , 0, 30)?>…<a href="<?php print AppUrl::getSwtUrl() ?>"> [点击咨询]</a></p>
+                          擅长项目：<?php print utility::utf8Substr($m->data["spec"] , 0, 30)?>…<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>"> [点击咨询]</a></p>
                      </div>
                      
                   </div>
@@ -84,11 +84,15 @@ defTplData::getInstance()->description = $data["desc"];
                     <div class="zjtdpage_box1">
                     	<h6 class="color3 fz16 page_tit1">在线问诊<span class="color9 fz13">平台不收取任何额外费用</span></h6>
                         <div class="padd20 border2 clr">
-                        	<a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtdpage_img1.png" /></a>
-                            <a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtdpage_img2.png" /></a>
-                            <a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtdpage_img3.png" style="margin:0;" /></a>
+                        	<a id="dx_a" onclick="a()"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtdpage_img1.png" /></a>
+                            <a class="dh_a"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtdpage_img2.png" /></a>
+                            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navSubscribe() ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtdpage_img3.png" style="margin:0;" /></a>
                         </div>
                     </div>
+<?php include dirname(dirname(__FILE__))."/inc/dhwz.tpl.php";?>
+<div id="quanping" style=" background-color:#CCCCCC;display:none; width:100%; height:100%; position: fixed ! important;_position:absolute;_top:expression(offsetParent.scrollTop+0); top:0; left:0; opacity:0.6;filter:'alpha(opacity=60)';filter:alpha(opacity=60); z-index:12000;"></div>
+<iframe id="destiframe" src="" scrolling="no" width="515px" height="350px" frameborder="0" style="position: fixed ! important;_position:absolute;_top:expression(offsetParent.scrollTop+240); left:50%; top:50%; margin-top:-160px; margin-left:-257px;display:none; z-index:2147483647; background:none; _height:340px; border:2px solid silver;"></iframe>
+<script src="<?php print AppUrl::getMediaPath()?>/js/dxuse.js"></script>
                   	<div class="blank20"></div>
                   	<div>
                     	<h6 class="color3 fz16 page_tit1">评论</h6>
@@ -124,7 +128,7 @@ defTplData::getInstance()->description = $data["desc"];
                     	<div class="f14 color6 zjtdpage_pl clr">
                             <span class="fl">请输入验证码：</span>
                             <p class="fl">    <img id="Img" src="<?php print AppUrl::Captcha() ?>" onclick = "this.src='<?php print AppUrl::Captcha() ?>?'+Math.random()"  />  <br />
-			        <a  onclick="reImg();">看不清，换一张</a>  </p>
+			        <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?>  onclick="reImg();">看不清，换一张</a>  </p>
 			                            
 			                                <script type="text/javascript">  
 			        function reImg(){  
@@ -176,9 +180,11 @@ function chk(form){
           	 <?php foreach($m->allByDod($m->data["sid"],8,0) as $aitem):?> 
               
                  <?php $a= $m->rowNoContent($aitem)?> 
-                       	<li><a href="<?php print AppUrl::articleByAid($a["sid"])?>"> 	
+                 <?php if(!empty($a)):?>
+                       	<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($a["sid"])?>"> 	
                        	<?php print utility::utf8Substr($a["title"], 0, 22) ; ?></a> 	
                        	</li>
+                       	<?php endif;?>
                     <?php endforeach;?> 
                             </ul>        
                         </div>
@@ -191,21 +197,21 @@ function chk(form){
                 	<div class="zjtd_zxfw border4">
                     	<textarea placeholder="在此简单描述病情，向陈希球医生提问" class="border4"></textarea>
                         <p class="blank10"></p>
-                        <p class="color6"><b><?php print($m->data["name"]) ?>的咨询范围： </b>各类先天性心脏病，包括小儿和成人；房缺，室缺，四联症以及二尖... <a href="<?php print AppUrl::getSwtUrl()?>" class="blue">[更多]</a></p>
+                        <p class="color6"><b><?php print($m->data["name"]) ?>的咨询范围： </b>各类先天性心脏病，包括小儿和成人；房缺，室缺，四联症以及二尖... <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="blue">[更多]</a></p>
                         <p class="blank10"></p>
-                        <p><a href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_rgzx tc">咨询<?php print($m->data["name"]) ?>医生</a></p>
+                        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_rgzx tc">咨询<?php print($m->data["name"]) ?>医生</a></p>
                     </div>
                     
                   	<div class="blank20"></div>
                     
       				<div class="hotbq border2">
-                        <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a></div>
+                        <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">医师推荐</a></div>
                         <div class="hotbqbox fz13">
                           <ul class="clearfix">
                                      
                           <?php foreach($m->getRandomDid(8) as $dis):?>
                   
-                            <li><a href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><?php print $dis["data"] ?></a></li>
+                            <li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><?php print $dis["data"] ?></a></li>
                        <?php endforeach;?> 
                           </ul>
                         </div>

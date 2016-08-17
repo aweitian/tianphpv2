@@ -154,7 +154,7 @@ input:-webkit-autofill {
 .hd{ height:.1rem; background:#f0f0f0; overflow:hidden; clear:both;}
 .hd_hx{ height:0; border-bottom:1px solid #535f6e; overflow:hidden; clear:both;}
 .hd_hsx{ height:0; border-bottom:1px solid #ddd; overflow:hidden; clear:both;}
-.hd_xhsx{ height:0; border-bottom:1px dashed #b0c6da; overflow:hidden; clear:both;}
+.hd_xhsx{ height:0; border-bottom:1px dashed #ddd; overflow:hidden; clear:both;}
 .mr0{ margin-right:0 !important;}
 .blue{ color:#3b83ff !important;}
 .fz22{ font-size:.22rem;}

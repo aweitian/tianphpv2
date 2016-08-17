@@ -61,8 +61,7 @@ $docinfos=$m->getInfoes(10);
       			</li>
             </ul>
           </div>
-  <!---->
-  <div class="blank30"></div>
+<?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom.tpl.php";?>
 </div>
 
   

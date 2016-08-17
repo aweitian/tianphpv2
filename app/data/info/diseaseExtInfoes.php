@@ -15,7 +15,7 @@ class diseaseExtInfoes{
 				"en" => "SEXUAL DYSFUNCTION"	,
 				"ico" => "jbcx_img2.png"	
 			),
-			"生殖整形" => array(
+			"男科手术" => array(
 				"en" => "MALE DIVISION OPERATION",
 				"ico" => "jbcx_img3.png"		
 			),

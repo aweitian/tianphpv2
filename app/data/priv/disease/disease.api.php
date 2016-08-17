@@ -42,9 +42,13 @@ class diseaseApi{
 	 * @param unknown $sid
 	 */
 	public function rm($sid){
-		$sql = $this->sqlManager->getSql("/disease/removeTreeById");
-		return $this->db->exec($sql, array(
+		$sql = $this->sqlManager->getSql("/disease/removeById");
+		$this->db->exec($sql, array(
 			"sid" => $sid
+		));
+		$sql = $this->sqlManager->getSql("/disease/removeByPid");
+		$this->db->exec($sql, array(
+				"sid" => $sid
 		));
 	}
 	
@@ -79,6 +83,19 @@ class diseaseApi{
 	}
 	
 	public function edit($sid,$key,$data){
+		$urkChk = AppUrl::checkControlExists($key);
+		switch ($urkChk){
+			case 0:
+				break;
+			case 1:
+				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(默认路由<a target='_blank' href='".AppUrl::build("/".$key)."'>点击查看</a>)占用");
+			case 2:
+				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(医生模块<a target='_blank' href='".AppUrl::docHomeByDocid($key)."'>点击查看</a>)占用");
+			case 3:
+				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(疾病模块<a target='_blank' href='".AppUrl::disHomeByDiseasekey($key)."'>点击查看</a>)占用");
+			default:
+				return new rirResult(3,"URL检测未知错误");
+		}
 		$sql = $this->sqlManager->getSql("/disease/updateData");
 		$data = array(
 				"key" => $key,
@@ -97,6 +114,21 @@ class diseaseApi{
 	}
 
 	public function add($key,$data,$pid,$metaid){
+		
+		$urkChk = AppUrl::checkControlExists($key);
+		switch ($urkChk){
+			case 0:
+				break;
+			case 1:
+				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(默认路由<a target='_blank' href='".AppUrl::build("/".$key)."'>点击查看</a>)占用");
+			case 2:
+				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(医生模块<a target='_blank' href='".AppUrl::docHomeByDocid($key)."'>点击查看</a>)占用");
+			case 3:
+				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(疾病模块<a target='_blank' href='".AppUrl::disHomeByDiseasekey($key)."'>点击查看</a>)占用");
+			default:
+				return new rirResult(3,"URL检测未知错误");
+		}
+		
 		$sql = $this->sqlManager->getSql("/disease/new_add");
 		$data = array(
 				"key" => $key,

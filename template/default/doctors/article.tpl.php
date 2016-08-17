@@ -40,7 +40,7 @@ $url = new url($req->requestUri());
                  <?php $a= $m->rowNoContent($aitem)?> 	
                         <dl class="clr">
                         	<p class="blank20"></p>
-                        	<dt><img src="<?php print AppUrl::getMediaPath()?>/images/bzdot.jpg" class="fl" /><a href="<?php print AppUrl::articleByAid($a["sid"])?>"><?php print ($a["title"])?></a> </dt>
+                        	<dt><img src="<?php print AppUrl::getMediaPath()?>/images/bzdot.jpg" class="fl" /><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($a["sid"])?>"><?php print ($a["title"])?></a> </dt>
                             <dd class="fr"> 发表于<?php print ($a["date"])?></dd>
                             <p class="blank20"></p>
                         </dl>
@@ -49,13 +49,13 @@ $url = new url($req->requestUri());
                   
                         <div class="blank40"></div>
                        <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?></div>
                          <div class="blank20"></div>
                     </div>
@@ -71,15 +71,15 @@ $url = new url($req->requestUri());
                     	
                     	<textarea placeholder="在此简单描述病情，向<?php print $m->data["name"]?>医生提问" class="border4"></textarea>
                         <p class="blank10"></p>
-                        <p class="color6"><b><?php print $m->data["name"]?>的咨询范围： </b><?php print $m->data["spec"]?>... <a href="<?php print AppUrl::getSwtUrl()?>" class="blue">[更多]</a></p>
+                        <p class="color6"><b><?php print $m->data["name"]?>的咨询范围： </b><?php print $m->data["spec"]?>... <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="blue">[更多]</a></p>
                         <p class="blank10"></p>
-                        <p><a href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_rgzx tc">咨询<?php print $m->data["name"]?>医生</a></p>
+                        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_rgzx tc">咨询<?php print $m->data["name"]?>医生</a></p>
                     </div>
                     
                   	<div class="blank20"></div>
                     
       				<div class="hotbq border2">
-                        <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a></div>
+                        <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">医师推荐</a></div>
                         <div class="hotbqbox fz13">
                           <ul class="clearfix">
        
@@ -88,7 +88,7 @@ $url = new url($req->requestUri());
                                     
                           <?php foreach($m->getRandomDid(8) as $dis):?>
                   
-                            <li><a href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><?php print $dis["data"] ?></a></li>
+                            <li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><?php print $dis["data"] ?></a></li>
                        <?php endforeach;?> 
                           </ul>
                         </div>

@@ -25,7 +25,8 @@ if(isset($_SERVER['HTTP_REFERER'])){
 }else{
 	$ret_url = "";
 }
-
+require_once FILE_SYSTEM_ENTRY.'/lib/utils/pinyin.php';
+$py = new pinyin();
 ?>
 		<section class="content">
 			<div class="box box-primary">
@@ -41,7 +42,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       <input required id="vv" type="text" name="data" value="<?php print $def["data"]?>" class="form-control" placeholder="<?php print $meta?>名称">
                     </div>
                     <div class="form-group">
-                      <label for="vx">url</label>
+                      <label for="vx">url(使用推荐值:<span style="cursor:pointer;color:blue;" onclick="document.getElementById('vx').value = this.innerHTML"><?php print $py->get( $def["data"],true)?></span>)</label>
                       <input required id="vx" type="text" name="key" value="<?php print $def["key"]?>" class="form-control" placeholder="网址路径，只能是字母，数字和下划线">
                     </div>
                   </div><!-- /.box-body -->

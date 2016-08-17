@@ -49,6 +49,13 @@
 	</update>
 	
 	<remove>
-		DELETE FROM `data_article` WHERE `sid` = :sid
+		DELETE `data_article`,`data_article_comment`,`data_article_dis`,`data_article_doc`,`data_article_sym`,`data_article_tags`
+			FROM `data_article`
+			LEFT JOIN `data_article_comment` ON `data_article`.`sid` = `data_article_comment`.`aid`
+			LEFT JOIN `data_article_dis` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			LEFT JOIN `data_article_doc` ON `data_article`.`sid` = `data_article_doc`.`aid`
+			LEFT JOIN `data_article_sym` ON `data_article`.`sid` = `data_article_sym`.`aid`
+			LEFT JOIN `data_article_tags` ON `data_article`.`sid` = `data_article_tags`.`aid`
+			WHERE `data_article`.`sid` = :sid
 	</remove>
 </sql>

@@ -29,7 +29,15 @@ if(isset($_SERVER['HTTP_REFERER'])){
 // var_dump($def);exit;
 
 ?>
-
+<script type="text/javascript">
+<!--
+function ru(o)
+{
+	o.parentNode.nextSibling.value = o.parentNode.nextSibling.options[Math.floor(o.parentNode.nextSibling.options.length * Math.random())].value;
+	
+}
+//-->
+</script>
 <section class="content">
  <!-- general form elements disabled -->
               <div class="box box-warning">
@@ -44,8 +52,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     <?php endif;?>
                     <!-- text input -->
                     <div class="form-group">
-           				<label>选择用户</label>
-         				<select class="form-control" name="uid">
+           				<label>选择用户(<span style="color: blue" onclick='ru(this)'>点击随机产生</span>)</label><select class="form-control" name="uid">
                         <?php foreach ($data["usr"]->return as $child):?>
                         <option value="<?php print $child["sid"]?>"<?php if($child["sid"] == $def["uid"]):?>selected <?php endif;?>><?php print $child["name"]?></option>
                         <?php endforeach;?>

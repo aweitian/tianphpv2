@@ -19,54 +19,16 @@ $url = new url($req->requestUri());
 ?>
 <div class="public_width">
 
-<div class="head_tc blue_bg">
-        <a class="goback" href="" title="返回上页"><span>返回</span></a>
-        <div class="head_tit" ><?php print $m->data["name"]?></div>
-    <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_xl.png" /><i id="redpoint" class=""></i></span></a>
-  </div>
-<div class="black_bg"></div>
-<div class="head_tc_nav_new">
-  <form class="clearfix" action="" method="GET" accept-charset="GBK">
-      <div class="text">
-        <div class="in_out">
-          <input id="uniqueKeyword20151125" type="text" placeholder="医院名、疾病名或医生姓名" class="head_tc_nav_new_input" name="key"/>
-        </div>  
-      </div>
-      <div class="sub">
-        <input type="button" id="nav_bar_search_btn" value="搜索"/>
-      </div>
-  </form>
-  <div class="search_dor clearfix">
-    <a href="" class="anyiyuan" id="cnzz_yiyuan203">找大夫咨询</a>
-    <a href="" class="anjibing" id="cnzz_jibing204">好评医院</a>
-  </div>
-  <div class="three_btn clearfix">
-    <a href="" id="cnzz_zixun205"><span></span></a>
-    <a href="" id="cnzz_dianhua206"><span></span></a>
-    <a href="" id="cnzz_jihao207" class="mr0"><span></span></a>
-  </div>
-  <div class="three_a clearfix">
-    <a href="" class="" id="cnzz_shouye208">首页</a>
-    <a href="" class=" " id="cnzz_zhishi209">疾病知识</a>
- </div>
- <div class="three_dl clearfix">
-    <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_dl.png" class="three_dl_sm1" /></a>
-    <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_zc.png" /></a>
- </div>
-  <div id="percenter"> </div>
-  <div class="battom_waitao"><div class="bottom_bac"></div></div>
-  <div class="arrow"></div>
-</div>
-<input id="isShowRedPoint" type="hidden" value="">
-<script src="js/nav_bar.0e2272c9.js"></script>
 
+<?php $doctors_header_title = ""?>
+<?php include dirname(dirname(__FILE__))."/inc/header.doc.php"?>
 <!--head end-->
 
 <div class="hui_bg">
 <div class="bg_fff">
 	<div class="zjtd  yswd_wap">
 	<div class="mzy30 zjtd_box1 clr">
-    	<a href=""><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>" class="fl" style="width:.98rem; height:.98rem;" /></a>
+    	<a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>" class="fl zjtd_xg2" style="width:.98rem; height:.98rem;" /></a>
         <dl class="fl">
         	<dt class="fz24 jbkp_zjzx clr"><b class="blue fz28"><?php print $m->data["name"]?></b></dt>
             <dd><?php print $m->data["lv"]?></dd>
@@ -75,7 +37,7 @@ $url = new url($req->requestUri());
         	<dd class="color3">疗效：<span class="red">100%满意</span></dd>
             <dd class="color3">态度：<span class="red">100%满意</span></dd>
         </dl>
-        <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr zjtd_box1_img4" /></a>
+        <a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr zjtd_box1_img4" /></a>
         <img src="<?php print AppUrl::getMediaPath()?>/images/yswd_img4.png" class="yswd_j1" />
     </div>
     <div class="blank20"></div>
@@ -110,8 +72,9 @@ $url = new url($req->requestUri());
     </div>
     <div class="blank10"></div>
 </div>
-<?php foreach ($m->getAnswers($askid,$pageSize,($page-1)*$pageSize)as $wd):?>
+
 <div class="mzy30">
+<?php foreach ($m->getAnswers($askid,$pageSize,($page-1)*$pageSize)as $wd):?>
 <?php if($wd["role"] == "user"): ?>
 	<div class="blank10"></div>
     <p class="color9 tc"><?php print $wd["date"] ?></p>
@@ -119,7 +82,19 @@ $url = new url($req->requestUri());
     <div class="blank10"></div>
     <div class="yswd_box2">
         <div class="blank10"></div>
-        <p><span class="blue"><?php print $wd["content"] ?></span></p>
+        <p><span class="blue">
+        <?php if($wd["conmeta"] == "text"):?>
+                            <?php print $wd["content"] ?>
+                            <?php else:?>
+		          	
+		                 	<?php $tmp = explode(",", $wd["content"]);?>
+		                	<i class="fa fa-gift" style="font-size:28px;"></i> <?php print $tmp[1]?><br>
+		          	
+		                	<img style="width:64px;height:64px;" src="<?php print AppUrl::getMediaPath()?>/present/<?php print $tmp[0]?>">
+        
+		          	
+		                	<?php endif;?>
+        </span></p>
         <img src="<?php print AppUrl::getMediaPath()?>/images/ys_wd2.png" class="yswd_box2_t1" />
     </div>
     <div class="blank10"></div>
@@ -137,9 +112,10 @@ $url = new url($req->requestUri());
         </dl>
     </div>
     <div class="blank30"></div>
-</div>
 <?php endif;?>
 <?php endforeach; ?>
+</div>
+
 <div class="bg_fff yswd_box4">
     <div class="mzy30 ">
         <div class="blank20"></div>
@@ -228,27 +204,14 @@ $url = new url($req->requestUri());
 
 
 <div class="blank10"></div>
-<div class="new_footer">
-    <div class="what_version"> 
-        <a href="<?php print AppUrl::getSwtUrl()?>" class="colorf">在线咨询</a>&nbsp;&nbsp;|&nbsp;&nbsp
-        <a href="#">知识库</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="" class="colorf">个人中心</a>
-    </div>
-    <div class="blank30"></div>
-    <div class="hd_hx"></div>
-    <div class="what_version"> 
-        <a href="" class="cur">触屏版</a>&nbsp;&nbsp;|&nbsp;&nbsp
-        <a href="#" class="cur">电脑版</a>
-    </div>
-    <p class="company_title">版权所有 上海九龙男子医院</p>
-  </div>
+<?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 </div>
 
 
 
 <div class="box_d">
     <div class="clr">
-        <img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>" class="fl" />
+        <a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>" class="fl" /></a>
         <div class="fl">
         	<h5 class="fw400 color3"><?php print $m->data["name"]?><span class="color6 fz24"><?php print $m->data["lv"]?></span></h5>
             <p class="clr"><a href="<?php print AppUrl::getSwtUrl()?>" class="btn_b1">在线咨询</a><a href="tel:021-52733999" class="btn_b2">电话咨询</a></p>

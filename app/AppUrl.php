@@ -1,8 +1,32 @@
 <?php
 class AppUrl {
+	// 用于检测ControllerNotFound命名冲突
+	public static function checkControlExists($ctl) {
+		// 检查默认模块，它的优先级比ControllerNotFound高
+		$defCtls = tian::getDirList ( FILE_SYSTEM_ENTRY . "/app/modules" );
+		foreach ( $defCtls as $path ) {
+			if (strtolower ( $ctl ) == pathinfo ( $path, PATHINFO_BASENAME )) {
+				return 1;
+			}
+		}
+		
+		// 先检查医生 ,由hookControllerNotFound决定
+		if (doctorUIApi::getInstance ()->exists ( $ctl )) {
+			return 2;
+		}
+		if (diseaseUIApi::getInstance ()->exists ( $ctl )) {
+			return 3;
+		}
+		
+		return 0;
+	}
+	
 	// 全局URL
 	public static function getMediaPath() {
 		return AppUrl::build ( "/static/" . (utility::isMobile () ? "m" : "pc") );
+	}
+	public static function getMediaFilePath() {
+		return FILE_SYSTEM_ENTRY . "/static/" . (utility::isMobile () ? "m" : "pc");
 	}
 	public static function Captcha() {
 		return AppUrl::build ( "/captcha" );
@@ -96,7 +120,12 @@ class AppUrl {
 	public static function userAddComment() {
 		return AppUrl::build ( "/user/addcomment" );
 	}
-	
+	public static function helpRouting() {
+		return AppUrl::build ( "/help/routing" );
+	}
+	public static function helpAbout() {
+		return AppUrl::build ( "/help/about" );
+	}
 	// 医生评价
 	/**
 	 *
@@ -152,7 +181,7 @@ class AppUrl {
 	
 	/**
 	 * 根据医生ID(NAME那个)生成医生首页的URL
-	 * 
+	 *
 	 * @param string $diskey        	
 	 * @return string
 	 */
@@ -161,7 +190,7 @@ class AppUrl {
 	}
 	/**
 	 * 根据医生ID(NAME那个)生成医生问答的URL
-	 * 
+	 *
 	 * @param string $diskey        	
 	 * @return string
 	 */
@@ -170,7 +199,7 @@ class AppUrl {
 	}
 	/**
 	 * 根据医生ID(NAME那个)生成医生文章的URL
-	 * 
+	 *
 	 * @param string $diskey        	
 	 * @return string
 	 */
@@ -179,7 +208,7 @@ class AppUrl {
 	}
 	/**
 	 * 根据医生ID(NAME那个)生成医生收到礼物的URL
-	 * 
+	 *
 	 * @param string $diskey        	
 	 * @return string
 	 */
@@ -187,11 +216,11 @@ class AppUrl {
 		return AppUrl::build ( "/" . $docid . "/present" );
 	}
 	public static function docLetterHomeByDocid($docid) {
-		return AppUrl::build ( "/" . $docid . "/letter");
+		return AppUrl::build ( "/" . $docid . "/letter" );
 	}
 	/**
 	 * 根据医生ID生成医生首页的URL
-	 * 
+	 *
 	 * @param int $dod        	
 	 * @return string
 	 */
@@ -205,7 +234,7 @@ class AppUrl {
 	
 	/**
 	 * 生成医生感谢信URl
-	 * 
+	 *
 	 * @param string $docid        	
 	 * @param int $led        	
 	 * @return string
@@ -215,7 +244,7 @@ class AppUrl {
 	}
 	/**
 	 * 生成医生感谢信URl
-	 * 
+	 *
 	 * @param int $led        	
 	 * @return string
 	 */
@@ -230,7 +259,7 @@ class AppUrl {
 	// 疾病URL生成
 	/**
 	 * 根据病种KEY生成URL
-	 * 
+	 *
 	 * @param string $diskey        	
 	 * @return string
 	 */
@@ -239,7 +268,7 @@ class AppUrl {
 	}
 	/**
 	 * 根据病种ID生成URL
-	 * 
+	 *
 	 * @param int $did        	
 	 * @return string
 	 */
@@ -290,7 +319,7 @@ class AppUrl {
 	// 文章URL生成
 	/**
 	 * 获取症状的URL
-	 * 
+	 *
 	 * @param int $syd        	
 	 * @return string
 	 */
@@ -318,7 +347,7 @@ class AppUrl {
 	
 	/**
 	 * 根据医生ID和文章ID生成URL
-	 * 
+	 *
 	 * @param int $dod        	
 	 * @param int $aid        	
 	 * @return string
@@ -333,7 +362,7 @@ class AppUrl {
 	
 	/**
 	 * 优先使用这个函数获取
-	 * 
+	 *
 	 * @param string $doc_id        	
 	 * @param int $aid        	
 	 * @return string
@@ -343,10 +372,35 @@ class AppUrl {
 	}
 	
 	// 基本URL生成
+	/**
+	 * 获取医生图片的URL
+	 */
+	public static function getDoctorAvatarUrl($docid) {
+		return HTTP_ENTRY . "/static/" . (utility::isMobile () ? "m" : "pc") . "/doctor/" . $docid;
+	}
+	/**
+	 * 获取医生图片的文件路径
+	 */
+	public static function getDoctorAvatarPath() {
+		return FILE_SYSTEM_ENTRY . "/static/" . (utility::isMobile () ? "m" : "pc") . "/doctor";
+	}
+	
+	/**
+	 * 获取用户图片的URL
+	 */
+	public static function getUserAvatarUrl($docid) {
+		return HTTP_ENTRY . "/static/" . (utility::isMobile () ? "m" : "pc") . "/avatar/" . $docid;
+	}
+	/**
+	 * 获取用户图片的文件路径
+	 */
+	public static function getUserAvatarPath() {
+		return FILE_SYSTEM_ENTRY . "/static/" . (utility::isMobile () ? "m" : "pc") . "/avatar";
+	}
 	
 	/**
 	 * 基本URL生成
-	 * 
+	 *
 	 * @param string $path        	
 	 * @return string
 	 */
@@ -355,7 +409,7 @@ class AppUrl {
 	}
 	/**
 	 * 获取商务通URL
-	 * 
+	 *
 	 * @return string
 	 */
 	public static function getSwtUrl() {
@@ -363,7 +417,7 @@ class AppUrl {
 	}
 	/**
 	 * 404路径
-	 * 
+	 *
 	 * @return string
 	 */
 	public static function _404() {

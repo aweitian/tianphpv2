@@ -13,7 +13,7 @@ $ctr = appCtrl::$msg->getAction();
             <dd><?php print $m->data["lv"]?></dd>
             <dd>患者推荐热度(综合) : <span><?php print $m->data["hot"]?></span><img src="<?php print AppUrl::getMediaPath()?>/images/ys_tj.png" class="zjtd_box1_img3" /></dd>
         </dl>
-        <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr zjtd_box1_img4" /></a>
+        <a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr zjtd_box1_img4" /></a>
     </div>
     <div class="blank20"></div>
     

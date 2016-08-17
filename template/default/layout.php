@@ -20,20 +20,20 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 	<div class="wid1000  header">
 		<div class="fl">
 		<?php if(!AppUser::getInstance()->auth->isLogined()):?>
-			<span>中午好！</span><b>游客</b> , <a href="<?php print AppUrl::userLogin().$loginReturnUrl?>" class="yellow">请登陆</a>
+			<span>中午好！</span><b>游客</b> , <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::userLogin().$loginReturnUrl?>" class="yellow">请登陆</a>
 		<?php else:?>
 		<?php $userinfo = AppUser::getInstance()->auth->getInfo()?>
 			<span>中午好！</span> , 
-			<a href="<?php print AppUrl::userHome()?>" class="yellow">
+			<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::userHome()?>" class="yellow">
 			<b><?php print AppFilter::filterOut($userinfo["name"]) ?></b>
 			</a>
 			&nbsp;
-			<a href="<?php print AppUrl::userLogout()?>">退出</a>	
+			<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::userLogout()?>">退出</a>	
 		<?php endif?>
 		</div>
 		<p class="fr">
-			<a href="">设为首页</a>  |  
-			<a href="">收藏本站</a>
+			<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">设为首页</a>  |  
+			<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">收藏本站</a>
 		</p>
 	</div>
 </div>

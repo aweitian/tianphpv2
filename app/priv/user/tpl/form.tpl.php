@@ -62,14 +62,14 @@ $avatar = avatarMeta::getAllAvatar();
                     </div>
                     <?php endif?>
                     <div class="form-group">
-                      <label>手机(可选)</label>
-                      <input value="<?php print $def["phone"]?>" name="phone" type="tel" class="form-control" placeholder="13678780000">
+                      <label>手机</label>
+                      <input required value="<?php print $def["phone"]?>" name="phone" type="tel" class="form-control" placeholder="13678780000">
                     </div>
                     <div class="form-group">
                       <label>头像</label>
                       <div class="input-group">
                       	<span class="input-group-addon" style="width:50px;">
-                      	<img id="avatar_src" width="50" height="50" src="<?php print HTTP_ENTRY?>/static/avatar/<?php print $def["avatar"]?>">
+                      	<img id="avatar_src" width="50" height="50" src="<?php print AppUrl::getUserAvatarUrl($def["avatar"])?>">
                       	</span>
                       <select class="form-control btn-lg" style="height:70px;" name="avatar" class="btn btn-success">
                       <?php foreach ($avatar as $item):?>
@@ -109,13 +109,10 @@ $(function(){
 	});
 
 	$("select[name=avatar]").on("change",function(){
-		$("#avatar_src").attr("src","<?php print HTTP_ENTRY?>/static/avatar/"+this.value);
+		$("#avatar_src").attr("src","<?php print AppUrl::getUserAvatarUrl("")?>"+this.value);
 // 		$("#example").popover({trigger: 'focus', delay: { show: 500, hide: 100}});
 		//$("#example").popover({title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});
 	});;
-
-// 	//$("select[name=avatar]").popover({title: 'Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});
-	
 
 	 
 });

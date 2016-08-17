@@ -89,5 +89,9 @@ class doctorsModel extends AppModel {
 	public function getAllCnt(){
 		return doctorUIApi::getInstance()->getAllCnt();
 	}
+
+	public  function  getQuestionsCountByDod($dod){
 	
+		return askUIApi::getInstance()->getQuestionsCountByDod($dod);
+	}
 }

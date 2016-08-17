@@ -337,10 +337,16 @@ padding: 0px 0 20px 0px; width:320px;
 }
 .fromjbbox .fromjbboxnr dl dt {
 	width: 75px;
-	height: 55px;
+	height: 75px;
 	background: url(../images/fromjbbg.jpg) no-repeat;
-	padding-top: 20px;
 	line-height: 18px;
+	text-align: center;
+}
+.fromjbbox .fromjbboxnr dl dt span{
+    padding-top: 20px;
+    width: 50px;
+    margin: 0 auto;
+    display: block;
 }
 .fromjbbox .fromjbboxnr dl dd {
 	width: 216px;
@@ -640,7 +646,7 @@ padding: 0px 0 20px 0px; width:320px;
 .syrbox4nr table tr td .input3 {
 	margin-left: 25px;
 }
-.sybtn button {
+.sybtn button,.sybtn a.sqjh {
 	background: none;
 	cursor: pointer;
 	border: none;
@@ -818,6 +824,7 @@ padding: 0px 0 20px 0px; width:320px;
 	cursor: pointer;
 	background: url(../images/borbg2.jpg) no-repeat bottom;
 	height: 28px;
+	line-height:28px;
 	padding-bottom: 5px;
 }
 .registerboxnrltit ul li.li1 {
@@ -993,6 +1000,7 @@ padding: 0px 0 20px 0px; width:320px;
 }
 .doctjbox dl dd {
 	margin-left: 10px;
+	width:170px;
 }
 .doctjbox dl dd p.p3 {
 	width: 48px;
@@ -1055,7 +1063,7 @@ padding: 0px 0 20px 0px; width:320px;
 }
 .wtbox .scpic .scpicl span {
 	display: inline-block;
-	margin: 10px 10px 0 20px;
+	margin: 0 10px 0 20px;
 }
 .wtbox .scpic .scpicl span img {
 	vertical-align: middle;
@@ -1297,6 +1305,9 @@ padding: 0px 0 20px 0px; width:320px;
 	height: 80px;
 	padding: 10px;
 	margin: 20px 0;
+}
+.fromzzrzj dl dt a img{
+	border-radius:50%;
 }
 .fromzzrzj dl dd.ddl {
 	width: 300px;
@@ -1617,6 +1628,7 @@ _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizing
 .zjtdcon1_box1{ border:1px solid #e8e8e8;}
 .zjtdcon1box1_sm1{ width:640px; margin:20px;}
 .zjtdcon1box1_sm1 div.fl{ position:relative; width:200px; height:220px;}
+.zjtd_thumb{ display:block;}
 .zjtd_swt{ display:block; position:absolute; bottom:10px; right:10px; width:100px; height:40px; line-height:40px; font-size:18px; color:#fe8100;  background:url(../images/zjtd_zjswt.png) no-repeat; padding-left:10px;}
 
 
@@ -2092,7 +2104,6 @@ a.td_link, a.td_link_read {
     padding-top: 20px;
     float: left;
     border-bottom: 1px dotted #d8d8d8;
-    overflow: hidden;
     padding-bottom: 15px
 }
 .doc_rela_link {
@@ -2133,7 +2144,7 @@ a.td_link, a.td_link_read {
     width: 520px;
 }
 .hp_doc_box2 .fl{ line-height:23px;}
-
+.hp_doc_box2 .hp_doc_xq{ width:410px;}
 .pr20{ padding-right:20px;}
 .personweb-btn {
     margin-left: 3px
@@ -2684,6 +2695,9 @@ rtpboxnrl {
     float: left;
     padding: 10px 0 0 10px
 }
+.aus_info img{
+	border-radius:50%;
+}
 .aus_info p {
     font-size: 14px
 }
@@ -2777,5 +2791,76 @@ rtpboxnrl {
     color: #fff;
     position: relative
 }
- 
+
+.pop_by, .dh_by {
+    display: none;
+    width: 100%;
+    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999999;
+    _position: absolute;
+    _left: expression(eval(document.documentElement.scrollLeft+0));
+    _top: expression(eval(document.documentElement.scrollTop+0));
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+}
+.sjdxwz {
+    display: none;
+    width: 494px;
+    height: 259px;
+    background: #fff;
+    border: 3px solid #69b4ee;
+    margin: -129px 0 0 -247px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 99999999;
+    _position: absolute;
+    _left: expression(eval(document.documentElement.scrollLeft+50%));
+    _top: expression(eval(document.documentElement.scrollTop+50%));
+}
+#ska_a {
+	color:#bfbfbf;
+	height:28px;
+	width:315px;
+	line-height:28px;
+	text-indent:1em;
+	border:1px solid #dcdcdc
+}
+.dh_top{
+	height:87px;
+	background:#69b4ee url(../images/dh1.jpg) 19px 19px no-repeat;
+}
+
+.tsjy_but {
+	color:#fff;
+	font-size:18px;
+	border:none;
+	cursor:pointer;
+	width:126px;
+	height:39px;
+	margin-left:15px;
+	line-height:39px;
+	background:#69b4ee;
+	font-family:"微软雅黑"
+}
+.tsjy_buts {
+	background:#bbbbbb
+}
+.tsjy_but_in {
+	width:101px;
+	height:31px;
+	font-size:16px;
+	line-height:31px;
+}
+.tsjy_but_in:hover, .tsjy_but:hover {
+	background:#8ac5f3
+}
+.tsjy_buts:hover {
+	background:#999999
+}
   

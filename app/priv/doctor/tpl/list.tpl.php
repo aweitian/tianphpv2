@@ -67,8 +67,8 @@ for ($i = 0; $i < 6; $i++) {
                       <td><?php print $item["id"]?></td>
                       <td><?php print $item["name"]?></td>
                       <td>
-                      	<a href="<?php print HTTP_ENTRY?>/static/doctor/<?php print $item["avatar"]?>" data-lightbox="doctor" data-title="<?php print $item["name"]?>">
-                      	<img width="40" height="40" src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $item["avatar"]?>">
+                      	<a href="<?php print AppUrl::getDoctorAvatarUrl($item["avatar"])?>" data-lightbox="doctor" data-title="<?php print $item["name"]?>">
+                      	<img width="40" height="40" src="<?php print AppUrl::getDoctorAvatarUrl($item["avatar"])?>">
                       	</a>
                       </td>
                       <td><?php print $item["date"]?></td>

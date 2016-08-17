@@ -5,7 +5,7 @@
  * Description: 
  */
 
-$def_avatar_src = "1_133653_1_lit.jpg";
+$def_avatar_src = "lml.jpg";
 
 if(isset($data["def"]) && !is_null($data["def"])){
 	$def = $data["def"];
@@ -27,7 +27,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
 }else{
 	$ret_url = "";
 }
-$avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/doctor","gif,jpg,png");
+$avatar = tian::getFileList(AppUrl::getDoctorAvatarPath(),"gif,jpg,png");
 // var_dump($avatar);exit;
 
 ?>
@@ -62,7 +62,7 @@ $avatar = tian::getFileList(FILE_SYSTEM_ENTRY."/static/doctor","gif,jpg,png");
                       <label>头像</label>
                       <div class="input-group">
                       	<span class="input-group-addon" style="width:50px;">
-                      	<img id="avatar_src" title="<?php print $def["avatar"]?>" width="50" height="50" src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $def["avatar"]?>">
+                      	<img id="avatar_src" title="<?php print $def["avatar"]?>" width="50" height="50" src="<?php print AppUrl::getDoctorAvatarUrl($def["avatar"])?>">
                       	</span>
                       <select class="form-control btn-lg" style="height:70px;" name="avatar" class="btn btn-success">
                       <?php foreach ($avatar as $item):?>
@@ -103,7 +103,7 @@ $(function(){
 
 	$("select[name=avatar]").on("change",function(){
 		$("#avatar_src")
-		.attr("src","<?php print HTTP_ENTRY?>/static/doctor/"+this.value)
+		.attr("src","<?php print AppUrl::getDoctorAvatarUrl("")?>"+this.value)
 		.attr("title",this.value);
 // 		$("#example").popover({trigger: 'focus', delay: { show: 500, hide: 100}});
 		//$("#example").popover({title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});

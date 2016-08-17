@@ -38,6 +38,13 @@ if(isset($_SERVER['HTTP_REFERER'])){
                   <h3 class="box-title"><?php print $at?>对医生的评价</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
+                <script>
+				function ru()
+				{
+					document.getElementById('ake_23832873321').value = document.getElementById("ake_23832873321").options[Math.floor(document.getElementById("ake_23832873321").options.length * Math.random())].value;
+				}
+
+                </script>
                   <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/appraise/<?php print $ua;?><?php print $ret_url?>">
                     <?php if(isset($_REQUEST["sid"])):?>
                     
@@ -45,8 +52,8 @@ if(isset($_SERVER['HTTP_REFERER'])){
                     <?php endif;?>
                     <!-- text input -->
                     <div class="form-group">
-           				<label>选择用户</label>
-         				<select class="form-control" name="uid">
+           				<label>选择用户(<span style="color: blue" onclick='ru()'>点击随机产生</span>)</label>
+         				<select id='ake_23832873321' class="form-control" name="uid">
                         <?php foreach ($data["usr"]->return as $child):?>
                         <option value="<?php print $child["sid"]?>"<?php if($child["sid"] == $def["uid"]):?>selected <?php endif;?>><?php print $child["name"]?></option>
                         <?php endforeach;?>

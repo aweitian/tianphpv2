@@ -119,7 +119,7 @@ $ctr = appCtrl::$msg->getAction();
               
                 <div class="hd_hsx"></div>
                 <div class="blank30 hui_bg"></div>
-                <div class="blank30"></div>
+
                                   <div class="pagenum tc gray fz13">
                               
                         <?php if ($pagination->hasPre()):?>
@@ -131,7 +131,8 @@ $ctr = appCtrl::$msg->getAction();
         	<?php if($pagination->hasNext()):?>
             <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?> </div>
-                                  <div class="blank15"></div>
+                                 
+                                  <?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 
             </div>
             

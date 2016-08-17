@@ -30,10 +30,11 @@ foreach ($m->getDisease() as $item){
 
 // exit;
 ?>
-  <div class="listpos fz13"><span class="gray">当前位置：</span><a href="">首页 > 我要提问</a></div>
+  <div class="listpos fz13"><span class="gray">当前位置：</span><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">首页 > 我要提问</a></div>
   <div class="clearfix">
     <div class="wid680 fl border2">
       <div class="quetwbox">
+        <form action="<?php print AppUrl::navPut()?>" method="post">
         <div class="blank25"></div>
         <div class="twtit clearfix">
           <div class="twtitl fl fz16"><span class="tc white">1</span>您哪里不舒服 </div>
@@ -41,7 +42,7 @@ foreach ($m->getDisease() as $item){
         </div>
         <div class="blank10"></div>
         <div class="wtbox">
-          <input placeholder="请用简单描述您的问题..." class="wtmsinp border2 fz13 gray" />
+          <input placeholder="请用简单描述您的问题..." class="wtmsinp border2 fz13 gray" type="text" name="title" />
         </div>
         <div class="blank25"></div>
         <div class="twtit clearfix">
@@ -49,8 +50,9 @@ foreach ($m->getDisease() as $item){
           <div class="twtitr2 fl border2">
             <select class="fz16 gray">
               <option>请选择</option>
-              <option>疾病1</option>
-              <option>疾病2</option>
+              <?php foreach($tree_dis as $dis):?>
+              <option value="<?php print $dis["text"];?>"><?php print $dis["text"];?></option>
+              <?php endforeach;?>
             </select>
           </div>
         </div>
@@ -61,11 +63,14 @@ foreach ($m->getDisease() as $item){
         </div>
         <div class="blank10"></div>
         <div class="wtbox border2">
-          <textarea class="hei110 fz13 gray" placeholder="描述越详细，医生回复质量越高"></textarea>
+          <textarea class="hei110 fz13 gray" placeholder="描述越详细，医生回复质量越高" name="desc"></textarea>
+          <!-- 
           <div class="scpic graybg  fz13 gray clearfix">
             <div class="scpicl fl"><span><img src="<?php print AppUrl::getMediaPath()?>/images/camr.jpg" width="18" height="15" /></span>上传疾病图片</div>
             <div class="scpicr fr">上传病例图或患病部位照片（单张< 2M，最多 3 张）</div>
           </div>
+          -->
+          
         </div>
         <div class="blank25"></div>
         <div class="twtit clearfix">
@@ -74,13 +79,14 @@ foreach ($m->getDisease() as $item){
         </div>
         <div class="blank10"></div>
         <div class="wtbox border2">
-          <textarea class="hei40 fz13 gray" placeholder="描述越详细，医生回复质量越高"></textarea>
+          <textarea class="hei40 fz13 gray" placeholder="描述越详细，医生回复质量越高" name="svr"></textarea>
         </div>
         <div class="blank30"></div>
         <div class="blank5"></div>
         <div class="tjtodoc">
           <button class=" nobor tc white fz18" value="提交给医生" type="submit">提交给医生</button>
         </div>
+        </form>
       </div>
     </div>
     <!--left end-->

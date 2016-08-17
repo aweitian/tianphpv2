@@ -7,7 +7,7 @@
 require_once FILE_SYSTEM_ENTRY.'/app/utility/pagination.php';
 class askView extends privView{
 	
-	
+	public $model;
 	
 	
 	public function showForm($userInfo,$uid,$docInfo,$disInfo,$def=null){
@@ -20,6 +20,18 @@ class askView extends privView{
 					"uid" => $uid,
 					"doc_infoes" => $docInfo,
 					"dis_infoes" => $disInfo
+				)
+			)
+		)->show();
+	}
+	
+	public function showAllForm($userInfo){
+// 		var_dump($docInfo);exit;
+		$this->priv_wrap($userInfo, 
+			$this->fetch(
+				"allform",
+				array(
+
 				)
 			)
 		)->show();
@@ -39,6 +51,21 @@ class askView extends privView{
 			)
 		)->show();
 	}
+	
+	public function showList(pmcaiUrl $url,$userinfo,$cnt,$data,$page,$length,$q){
+	
+		$data["data"] = $data;
+		$data["pageSize"] = $length;
+		$data["pageBtnLen"] = 5;
+		$data["curPageNum"] = $page;
+		$data["url"] = $url;
+		$data["cnt"] = $cnt;
+		$data["q"] = $q;
+		$content = $this->fetch("list",$data);
+		$this->priv_wrap($userinfo, $content)->show();
+	
+	}
+	
 	
 	public function showUidList(pmcaiUrl $url,$userinfo,$cnt,$data,$page,$length,$q){
 

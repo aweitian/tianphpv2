@@ -41,15 +41,9 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
 // exit;
 ?>
   <div class="blank20"></div>
-  <div id="focusindex">
-    <ul class="index_banner_box clearfix">
-      <li><a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/sybanner1.jpg" width="998" height="238" /></a></li>
-      <li><a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/sybanner1.jpg" width="998" height="238" /></a></li>
-      <li><a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/sybanner1.jpg" width="998" height="238" /></a></li>
-    </ul>
-  </div>
+  <?php include dirname(dirname(dirname(__FILE__)))."/inc/banner.php"?>
   <div class="blank15"></div>
-  <div class="con_tit fz13">当前位置：<a href="">首页</a> > <a href="">专题列表</a></div>
+  <div class="con_tit fz13">当前位置：<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">首页</a> > <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">专题列表</a></div>
   
   <div class="blank15"></div>
   <div class="sybox clearfix">
@@ -76,8 +70,8 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                         	           <?php endif?>
                         	</dt>
                             <dd class="fl">
-                            	<b class="fz18 color3"><a href="<?php print AppUrl::articleByAid($a1["aid"])?>"><?php print utility::utf8Substr($a1["title"], 0, 15) ?></a></b>
-                                <p class="color9"><?php print utility::utf8Substr($a1["desc"], 0, 80) ?>...<a href="<?php print AppUrl::articleByAid($a1["aid"])?>" class="bule">[查看全文]</a></p>
+                            	<b class="fz18 color3"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($a1["aid"])?>"><?php print utility::utf8Substr($a1["title"], 0, 15) ?></a></b>
+                                <p class="color9"><?php print utility::utf8Substr($a1["desc"], 0, 80) ?>...<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($a1["aid"])?>" class="bule">[查看全文]</a></p>
                             </dd>
                         </dl>                  
                         <?php endif?>
@@ -89,7 +83,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                             
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a2["aid"])?>"><?php print utility::utf8Substr($a2["title"], 0, 15) ?></a>...</p>
+                                    	<p class="fr"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($a2["aid"])?>"><?php print utility::utf8Substr($a2["title"], 0, 15) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                             </div>
@@ -99,7 +93,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                     
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a3["aid"])?>"><?php print utility::utf8Substr($a3["title"], 0, 15) ?></a>...</p>
+                                    	<p class="fr"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($a3["aid"])?>"><?php print utility::utf8Substr($a3["title"], 0, 15) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                             </div>
@@ -109,7 +103,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                             	<div class="blank15"></div>
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a4["aid"])?>"><?php print utility::utf8Substr($a4["title"], 0, 30) ?></a>...</p>
+                                    	<p class="fr"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($a4["aid"])?>"><?php print utility::utf8Substr($a4["title"], 0, 30) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                                 
@@ -120,7 +114,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                             	<div class="blank15"></div>
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a href="<?php print AppUrl::articleByAid($a5["aid"])?>"><?php print utility::utf8Substr($a5["title"], 0, 30) ?></a>...</p>
+                                    	<p class="fr"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($a5["aid"])?>"><?php print utility::utf8Substr($a5["title"], 0, 30) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                             </div>
@@ -136,7 +130,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                             
                                	<?php foreach($a as $lb):?>
                             	<li>
-                                	<a href="<?php print AppUrl::articleByAid($lb["aid"])?>"><?php print utility::utf8Substr($lb["title"], 0, 30) ?></a>
+                                	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($lb["aid"])?>"><?php print utility::utf8Substr($lb["title"], 0, 30) ?></a>
                                     <p><?php print utility::utf8Substr($lb["desc"], 0, 80) ?>...</p>
                                 </li>
                                    	<?php endforeach;?>
@@ -147,13 +141,13 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                         
                         <div class="blank35"></div>
                         <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?> </div>
                 	</div>
                 </div>
@@ -165,18 +159,18 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                 	
                     <div class="doctj border2">
     
-    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a><a class="fz13 blue fr" href="<?php print AppUrl::navDoctors() ?>">+更多</a></div>
+    <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">医师推荐</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fz13 blue fr" href="<?php print AppUrl::navDoctors() ?>">+更多</a></div>
     <div class="doctjbox">
     
         <?php foreach($m->getDoctors(3) as $doc):?>
-      <dl class="clearfix"><dt class="fl"><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
+      <dl class="clearfix"><dt class="fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
       <dd class="fl">
       <p class="blank5"></p>
       <p class="fz18"><?php print $doc["name"]; ?><span class="gray fz13"><?php print $doc["lv"]; ?></span></p>
       <p class="blank5"></p>
-      <p class="fz13 gray">擅长：<?php print $doc["spec"]; ?></p>
+      <p class="fz13 gray">擅长：<?php print utility::utf8Substr($doc["spec"],0,20); ?>...</p>
       <p class="blank5"></p>
-      <p class="p3 tc"><a href="<?php print AppUrl::getSwtUrl()?>">咨询</a></p>
+      <p class="p3 tc"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">咨询</a></p>
       </dd></dl>
       	<?php endforeach;?>
 
@@ -190,7 +184,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                   <div class="blank20"></div>
 
                     <div class="syrbox5 border2">
-                    <div class="syrboxtit fz18 graybg">相关问答<a href="<?php print AppUrl::navAsk() ?>" class="blue fz13 fr">+更多</a></div>
+                    <div class="syrboxtit fz18 graybg">相关问答<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navAsk() ?>" class="blue fz13 fr">+更多</a></div>
                     
                     <div class="zjtd_r2">
                     	<div class="blank10"></div>
@@ -198,10 +192,10 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                      <?php $y=1;?>	
                     	<?php $asks = $m->getAllQuestions(0,4);foreach($asks["data"] as $ask):?>
                         <dl <?php if($y==1){?> class="selected"<?php } ?> >
-                          <dt class="fz18 blue"><a href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>"><?php print $ask["title"]?></a></dt>
+                          <dt class="fz18 blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>"><?php print utility::utf8Substr($ask["title"],0,16);?></a></dt>
                           <dd class="fz16 dgray clr">
                             <img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img7.png" class="fl" /><p class="fl">
-                            <a href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>">
+                            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>">
                             <?php $content = $m->getAnswerByAskid($ask["sid"]); print empty($content) ? "" :$content["content"]?>...
                             </a>
                             </p>
@@ -212,7 +206,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                         
                       </div>
                     
-                    <div class="zjtd_r3 clr"><a href="<?php print AppUrl::getSwtUrl() ?>">立刻咨询</a></div>
+                    <div class="zjtd_r3 clr"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>">立刻咨询</a></div>
                     <div class="blank20"></div>
                   </div>
                 	
@@ -258,7 +252,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
             </table>
             <div class="sybtn">
               <button class="sybtn1" type="submit" value=""><img src="<?php print AppUrl::getMediaPath()?>/images/syrth8.jpg" width="120" height="40" /></button>
-              <button value=""><img src="<?php print AppUrl::getMediaPath()?>/images/syrth9.jpg" width="120" height="40" /></button>
+              <a class="sqjh" href="<?php print AppUrl::navSubscribe()?>" <?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?>><img src="<?php print AppUrl::getMediaPath()?>/images/syrth9.jpg" width="120" height="40" /></a>
             </div>
           </form>
                     </div>

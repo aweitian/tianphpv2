@@ -63,9 +63,9 @@ for ($i = 0; $i < 6; $i++) {
                       <th>推荐热度</th>
                        <th>爱心</th>
                       <th>贡献值 </th>
-                      <th>简介</th>
+                      <th>专家语录</th>
                       <th>擅长</th>
-                      <th width="30%">操作</th>
+                      <th>操作</th>
                     </tr>
                     <?php foreach ($data as $item):?>
                     <tr>
@@ -76,8 +76,8 @@ for ($i = 0; $i < 6; $i++) {
                        <td><?php print $item["hot"]?></td>
                       <td><?php print $item["love"]?></td>
                       <td><?php print $item["contribution"]?></td>
-                        <td><?php print $item["desc"]?></td>
-                      <td><?php print $item["spec"]?></td>
+                        <td><?php print utility::utf8Substr($item["desc"], 0, 15)?>...</td>
+                      <td><?php print utility::utf8Substr($item["spec"], 0, 15) ?>...</td>
                      
              
                       

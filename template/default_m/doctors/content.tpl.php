@@ -1,6 +1,8 @@
 <?php
 //aid,kw,desc,thumb,title,content,date
-$data = $m->row($_REQUEST["id"]);
+$aid = intval($_REQUEST["id"]);
+
+$data = $m->row($aid);
 
 if(empty($data)){
 	exit("removed.");
@@ -24,211 +26,110 @@ defTplData::getInstance()->description = $data["desc"];
 // 	["spec"]=> string(4) "spce" }
 
 ?>
+<div class="public_width">
 
-  <?php include dirname(__FILE__)."/common/location.tpl.php";?>
-  <div class="sybox clearfix">
-    <div>
-      
-      <div class="zjtd">
-      
-       <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
-        
-          <div class="tabcon selected fz13">
-          	   <div class="blank20"></div>
-               <div class="clr">
-               
-               <div class="wid680  fl ">
-               
-               		<div class="padd20 border2">
-                       <div class="zjtd_pagetit tc">
-                            <h2 class="color3 fz24"><?php print $data["title"]?></h2>
-                            <p><span class="color9"><?php print $data["date"]?></span> <span class="color6"> 发表者：</span><span class="color3"><?php print $m->data["name"]?></span>   </p>
-                       </div>
-                       <div class="blank20"></div>
-                       <div class="zjtd_pagenr">
-                       
-                       
-                       <p><?php print ($data["content"])?></p>
-                       
-                       
-                       </div>
-                       <div class="blank20"></div>
-                       <h6 class="color3 fz16">专家简介</h6>
-                       <div class="blank15"></div>
-                       <div class="zjtdcon1box1_sm1 clr" style="margin:0;">
+<?php $doctors_header_title = ""?>
+<?php include dirname(dirname(__FILE__))."/inc/header.doc.php"?>
+<!--head end-->
 
-                       
-                  		<div class="fl">
-                     		<a href="<?php print AppUrl::docHomeByDocid($m->data["id"]) ?>">
-                     		<img width="200" height="220" src="<?php print HTTP_ENTRY?>/static/doctor/<?php print($m->data["avatar"]) ?>">
-                     		</a>
-                     		<a href="<?php print AppUrl::docHomeByDocid($m->data["id"]) ?>" class="zjtd_swt"><?php print($m->data["name"]) ?></a>
-                     	</div>
-                     
-                     <div class="fr">
-                          <h4 class="fz24 tc"><?php print($m->data["name"]) ?>大夫的个人网站</h4>
-                          <div class="blank20"></div>
-                          <p><b class="fz18"><?php print($m->data["name"]) ?> <?php print($m->data["lv"]) ?> </b></p>
-                          <div class="blank10"></div>
-                          <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img2.png" class="fl" />格言：从医20多年来，患者的康复是对我最大的回报。</p>
-                          <p class="clr"><img src="<?php print HTTP_ENTRY?>/static/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />
-                          擅长项目：<?php print utility::utf8Substr($m->data["spec"] , 0, 30)?>…<a href="<?php print AppUrl::getSwtUrl() ?>"> [点击咨询]</a></p>
-                     </div>
-                     
-                  </div>
-                  		 <div class="blank30"></div>
-                        <div class="tc"><span class="bg_yl">点击上图，进入医生个人主页</span></div>
-                       
-                  </div>
-                  	<div class="blank20"></div>
-                    <div class="zjtdpage_box1">
-                    	<h6 class="color3 fz16 page_tit1">在线问诊<span class="color9 fz13">平台不收取任何额外费用</span></h6>
-                        <div class="padd20 border2 clr">
-                        	<a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/images/zjtdpage_img1.png" /></a>
-                            <a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/images/zjtdpage_img2.png" /></a>
-                            <a href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print HTTP_ENTRY?>/static/images/zjtdpage_img3.png" style="margin:0;" /></a>
-                        </div>
-                    </div>
-                  	<div class="blank20"></div>
-                  	<div>
-                    	<h6 class="color3 fz16 page_tit1">评论</h6>
-                        
-                        <div class="zjtd_box3">
-                    	
-                
-                   
-                 <?php $aid= $data["aid"]?>
-                 
-             
-                    	<?php foreach ($m->data($aid,0,3) as $list): ?>
-
-                        <dl class="clr">
-                        	<p class="blank20"></p>
-                        	<dt><?php print AppFilter::filterOut($list["comment"]) ?></dt>
-                            <dd class="fr"><span class="color9"><?php print($list["datetime"]) ?></span></dd>
-                            <p class="blank20"></p>
-                        </dl>
-                         	<?php endforeach;  ?>
-                        
-                    </div>
-                    
-                    </div>
-                    <div class="blank30"></div>
-                    <div class="zjtdpage_box2">
-                    	<h6 class="color3 fz16 page_tit1">发表评论</h6>
-                        <div class="blank10"></div>
-                        <form name="form" onsubmit="return chk(this)" method="post" action="<?php print AppUrl::userAddComment() ?>">
-                        
-                        <textarea name="c" placeholder="请填写评论内容..." class="border2 color9 fz16"></textarea>
-                        <div class="blank10"></div>
-                    	<div class="f14 color6 zjtdpage_pl clr">
-                            <span class="fl">请输入验证码：</span>
-                            <p class="fl">    <img id="Img" src="<?php print AppUrl::Captcha() ?>" onclick = "this.src='<?php print AppUrl::Captcha() ?>?'+Math.random()"  />  <br />
-			        <a  onclick="reImg();">看不清，换一张</a>  </p>
-			                            
-			                                <script type="text/javascript">  
-			        function reImg(){  
-			            var img = document.getElementById("Img"); 
-			         
-			            img.src = "<?php print AppUrl::Captcha() ?>?" + Math.random();  
-			          
-			        }  
-			    </script>  
-			    			
-                            <input type="hidden" name="a" value="<?php print $aid?>" />
-                            <input type="text" name="v" class="fl zjtdpage_ip1 border2" />
-                            <input type="submit"  class="fl zjtdpage_ip2" value="发表" />
-                        </div>
-                        
-                        </form>
-                        
-                        
-                        <script>
-
-function chk(form){
-    $.post(form.action,
-    {
-      a:form.a.value,
-      c:form.c.value,
-      v:form.v.value
-    },
-    function(data,status){
-        if(data.result==0){
-        	reImg();
-            }
-        alert(data.info);
-   
-    },
-    'json');
-    return false;
-  }
-
-</script>
-                    </div>
-                    <div class="blank20"></div>
-                    <div>
-                    	<h6 class="color3 fz16 page_tit1">相关文章</h6>
-                        <div class="blank10"></div>
-                        
-                        <div class="zjtdpage_box3 clr">
-                        	<ul >
-
-          	 <?php foreach($m->allByDod($m->data["sid"],8,0) as $aitem):?> 
-              
-                 <?php $a= $m->rowNoContent($aitem)?> 
-                       	<li><a href="<?php print AppUrl::articleByAid($a["sid"])?>"> 	
-                       	<?php print utility::utf8Substr($a["title"], 0, 22) ; ?></a> 	
-                       	</li>
-                    <?php endforeach;?> 
-                            </ul>        
-                        </div>
-                    </div>
-                    <div class="blank20"></div>
-                </div>
-    			<!--left end-->
-                
-                <div class="fr wid300 fz13">             
-                	<div class="zjtd_zxfw border4">
-                    	<textarea placeholder="在此简单描述病情，向陈希球医生提问" class="border4"></textarea>
-                        <p class="blank10"></p>
-                        <p class="color6"><b><?php print($m->data["name"]) ?>的咨询范围： </b>各类先天性心脏病，包括小儿和成人；房缺，室缺，四联症以及二尖... <a href="<?php print AppUrl::getSwtUrl()?>" class="blue">[更多]</a></p>
-                        <p class="blank10"></p>
-                        <p><a href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_rgzx tc">咨询<?php print($m->data["name"]) ?>医生</a></p>
-                    </div>
-                    
-                  	<div class="blank20"></div>
-                    
-      				<div class="hotbq border2">
-                        <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a></div>
-                        <div class="hotbqbox fz13">
-                          <ul class="clearfix">
-                                     
-                          <?php foreach($m->getRandomDid(8) as $dis):?>
-                  
-                            <li><a href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><?php print $dis["data"] ?></a></li>
-                       <?php endforeach;?> 
-                          </ul>
-                        </div>
-                      </div>
-      
-                </div>
-                
-                <!--right end-->
-             </div>
-             
-          </div>
-        
-      </div>
-      
-      <!--fromjb end-->
-      
-      <div class="blank20"></div>
-      
+<div class="hui_bg">
+<div class="bg_fff">
+	<div class="zjtd  yswd_wap">
+	<div class="mzy30 zjtd_box1 clr">
+    	<a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>" class="fl zjtd_xg2" style="width:.98rem; height:.98rem;" /></a>
+        <dl class="fl">
+        	<dt class="fz24 jbkp_zjzx clr"><b class="blue fz28"><?php print $m->data["name"]?></b></dt>
+            <dd><?php print $m->data["lv"]?></dd>
+        </dl>
+        <a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr zjtd_box1_img4" /></a>
     </div>
-    <!--syboxl end-->
-  </div>
-  <!--sybox end-->
-  <?php 
+    <div class="blank20"></div>
+    
+</div>
+</div>
+<div class="hd_hsx"></div>
+
+<div class="mzy30">
+	<div class="blank25"></div>
+	<h5 class="fz28 color3"><?php print $data["title"]?></h5>
+    <div class="blank30"></div>
+    <div class="hd_xhsx"></div>
+    <div class="blank30"></div>
+    <div class="color9"><span class="fl">发表于 <?php print $data["date"]?></span><span class="fr">已阅读<?php print rand(10000,13000);?>次</span></div>
+    <div class="blank30"></div>
+    <div class="jbkp_page">
+        <?php print ($data["content"])?>
+        <div class="jbkp_page_zx">
+        	<a href="" class="fl kp_bn1">赞赏(<?php print rand(300,600);?>)</a>
+        </div>
+        <div class="blank30"></div>
+    </div>
+   
+    
+</div>
+
+<?php $did=$m->getFirstDid($data["aid"]) ?>
+<?php if ( $did !== 0 ) { ?>
+<?php $dis=$m->getNameByDid($did) ?>
+<div class="blank10"></div>
+<div class="index_hotzx">
+    <h2 class="title_name_lan"><?php print ($dis) ?><b class="fz28 color3">的相关文章</b><a href="" class="fr blue"><img src="<?php print AppUrl::getMediaPath()?>/images/index_hyh.png" />换一换</a></h2>
+</div>
+
+
+
+  <div class="bg_fff">
+	<div class="yswd_jb bg_fff">
+   <div class="mzy30">
+       <?php foreach ($m->getAll($did,5) as $wz):?>
+    	
+    	
+        <p class="clr"><a href="<?php print AppUrl::articleByAid($wz["aid"]) ?>" class="color3"><?php print $m->utf8cut($wz["title"],0,16)?></a></p>
+        <div class="hd_hsx"></div>
+        <?php endforeach; ?>
+    </div>
+    </div>
+    </div>
+
+
+<div class="blank10"></div>
+<div class="index_hotzx">
+    <h2 class="title_name_lan"><?php print ($dis) ?><b class="fz28 color3">的相关疾病</b></h2>
+</div>
+<div class="bg_fff">
+	<div class="yswd_jb bg_fff">
+        <div class="mzy30">
+           <?php foreach($m->getRandomDid(5) as $dis):?>                  	
+            <p class="clr"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>" class="fl"><?php print $dis["data"] ?></a><a href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr" /></a></p>
+            <div class="hd_hsx"></div>    
+            <?php endforeach;?>
+
+            
+         </div>
+    </div>
+    <div class="hd_hsx"></div>
+</div>
+<?php } ?>
+
+
+<div class="blank10"></div>
+
+<?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
+</div>
+<div style="height:1rem;"></div>
+<div class="box_e">
+    <p class="box_center2">
+        <a href="<?php print AppUrl::getSwtUrl()?>" class="btn_e1" >预约挂号</a>
+        <a href="tel:021-52733999" class="btn_e2">电话咨询</a>
+        <a href="<?php print AppUrl::getSwtUrl()?>" class="btn_e3">在线咨询</a>
+    </p> 
+</div>
+
+</div>
+
+
+  
+<?php 
 
   $doc_img=$m->data["avatar"];
   $doc_name=$m->data["name"];
@@ -236,4 +137,6 @@ function chk(form){
   $doc_spec=$m->data["spec"];
   
   ?>
-      <?php include dirname(dirname(__FILE__))."/template/default/bottom_swt.tpl.php";?>
+  <?php if(!utility::isMobile()):?>
+ <?php include dirname(dirname(__FILE__))."/template/default/bottom_swt.tpl.php";?>
+ <?php endif?>

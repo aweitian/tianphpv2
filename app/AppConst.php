@@ -28,3 +28,7 @@ define("USER_MOD_PROFILE_TRY_MAX",30);
 
 #在一天之内一个用户最大提交内容个数，超过不给提交不成功
 define("USER_SUBMIT_TRY_MAX",100);
+
+
+
+

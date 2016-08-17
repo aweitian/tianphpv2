@@ -182,8 +182,6 @@ class userController extends appCtrl {
 		if ($msg->isPost ()) {
 			$ret = $this->model->chk ( $msg ["nep"], $msg ["pwd"], isset ( $msg ["code"] ) ? $msg ["code"] : "" );
 			if ($ret->isTrue ()) {
-				// var
-				
 				$this->performReturn ();
 			} else {
 				$this->view->login ( $this->model, $ret->info );

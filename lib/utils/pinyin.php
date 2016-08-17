@@ -23,7 +23,7 @@ class pinyin{
 	 * "xx_tian_d_a_d_wei_x"
 	 * 
 	 */
-	public function pinyin($string, $utf8 = true) {
+	public function get($string, $first = false, $utf8 = true) {
 		$string = ($utf8 === true) ? iconv('utf-8', 'gbk', $string) : $string;
 		if ($this->pinyinArr == NULL) {
 			$this->pinyinArr = $this->pinyin_code();
@@ -47,7 +47,7 @@ class pinyin{
 						break;
 					}
 				}
-				$pinyin .= $this->pinyinArr[$j][0];
+				$pinyin .= $first ? substr($this->pinyinArr[$j][0], 0, 1) : $this->pinyinArr[$j][0];
 			}
 		}
 		return ($utf8==true) ? iconv('gbk', 'utf-8', $pinyin) : $pinyin;

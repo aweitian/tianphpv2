@@ -23,29 +23,15 @@ class appraiseController extends privController{
 		$this->checkPriv();
 		$this->model = new appraiseModel();
 		$this->view = new appraiseView();
+		$this->view->model = $this->model;
 		$this->initHttpResponse();
 	}
 
 	
 	public function welcomeAction(pmcaiMsg $msg){
-		$length = 10;//每页显示多少行
-		if(isset($msg["?page"])){
-			$page = intval($msg["?page"]);
-		}else{
-			$page = 1;
-		}
-		if($page < 1){
-			$page = 1;
-		}
 		
-		$offset = ($page - 1) * $length;
-		
-		$dataRet = $this->model->getAll($offset, $length);
-		if(!$dataRet->isTrue()){
-			$this->response->showError($dataRet->info);
-		}
 		$this->view->setPmcaiMsg($msg);
-		$this->view->showList($this->priv->getUserInfo(), $dataRet->return,$msg["?err"]);
+		$this->view->showList($this->priv->getUserInfo(),$msg["?err"]);
 	}
 
 	public function rmAction(pmcaiMsg $msg){

@@ -33,4 +33,8 @@ class privView extends AppView{
 		ob_end_clean();
 		return View::wrap($body,"template/priv/layout.php");
 	}
+	public function getResponse(){
+		$rep = new httpResponse();
+		return $rep;
+	}
 }

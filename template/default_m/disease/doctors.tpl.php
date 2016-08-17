@@ -57,7 +57,7 @@ $url = new url($req->requestUri());
         <p class="fr">态度：<img src="<?php print AppUrl::getMediaPath()?>/images/star_man.png" /><img src="<?php print AppUrl::getMediaPath()?>/images/star_man.png" /><img src="<?php print AppUrl::getMediaPath()?>/images/star_man.png" /><img src="<?php print AppUrl::getMediaPath()?>/images/star_man.png" /><span class="red">100%满意</span></p>
         </div>
         <div class="hd_hsx"></div>
-        <p class="zjtd_box1_p1">擅长项目：<?php print $doc["spec"]; ?>...</p>
+        <p class="zjtd_box1_p1">擅长项目：<?php print utility::utf8substr($doc["spec"],0,20); ?> ...</p>
     </div>
 </div>
 <div class="hd_hsx"></div>
@@ -66,7 +66,6 @@ $url = new url($req->requestUri());
 <?php endforeach;?>
 
 
-<div class="blank30"></div>
                         <div class="pagenum tc gray fz13">  <?php if ($pagination->hasPre()):?>
         	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
@@ -76,9 +75,9 @@ $url = new url($req->requestUri());
         	<?php if($pagination->hasNext()):?>
             <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?>  </div>
-<div class="blank15"></div>
 
 
+<?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 
 
 

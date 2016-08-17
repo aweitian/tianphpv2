@@ -82,7 +82,19 @@ if(is_null($q)){
  
  
                   <div class="box-tools">
+                  	
                     <ul class="pagination pagination-sm no-margin pull-right">
+                    	<li>
+                    	<a>
+                    	<select onchange="window.location=this.value">
+	                  	<?php for($i=0;$i<$pagination->getMaxPage();$i++):?>
+	                  	
+	                  	<option<?php if($curPageNum==$i+1):?> selected<?php endif;?> value="<?php print $url->setQuery("page", $i+1)->getUrl();?>"><?php print $i+1;?></option>
+	                  	
+	                  	<?php endfor;?>
+	                  	</select>
+	                  	</a>
+                    	</li>
                     <?php if($pagination->hasPre()):?>
                       <li><a href="<?php print $url->setQuery("page", $pagination->getPre())->getUrl();?>">&laquo;</a></li>
                       <?php endif;?>

@@ -69,7 +69,7 @@ if($hasData)
 		          <span class="direct-chat-name pull-left"><?php print $item["email"]?></span>
 		          <span class="direct-chat-timestamp pull-right"><?php print $item["ap_date"]?></span>
 		        </div><!-- /.direct-chat-info -->
-		        <img class="direct-chat-img" src="<?php print HTTP_ENTRY?>/static/avatar/<?php print $item["usr_avatar"]?>" alt="message user image"><!-- /.direct-chat-img -->
+		        <img class="direct-chat-img" src="<?php print AppUrl::getMediaPath()?>/avatar/<?php print $item["usr_avatar"]?>" alt="message user image"><!-- /.direct-chat-img -->
 		        <div class="direct-chat-text">
 		        	<?php if($item["conmeta"] == "text"):?>
 		        
@@ -80,7 +80,7 @@ if($hasData)
 		          	<?php $tmp = explode(",", $item["content"]);?>
 		          	<i class="fa fa-gift" style="font-size:28px;"></i> <?php print $tmp[1]?><br><br>
 		          	
-		          	<img style="width:64px;height:64px;" src="<?php print HTTP_ENTRY?>/static/present/<?php print $tmp[0]?>">
+		          	<img style="width:64px;height:64px;" src="<?php print AppUrl::getMediaPath()?>/present/<?php print $tmp[0]?>">
         
 		          	
 		          	<?php endif;?>
@@ -93,7 +93,7 @@ if($hasData)
 		          <span class="direct-chat-name pull-right"><?php print $item["doc_name"]?></span>
 		          <span class="direct-chat-timestamp pull-left"><?php print $item["ap_date"]?></span>
 		        </div><!-- /.direct-chat-info -->
-		        <img class="direct-chat-img" src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $item["doc_avatar"]?>" alt="message user image"><!-- /.direct-chat-img -->
+		        <img class="direct-chat-img" src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $item["doc_avatar"]?>" alt="message user image"><!-- /.direct-chat-img -->
 		        <div class="direct-chat-text">
 		          <?php print $item["content"]?>
 		        </div><!-- /.direct-chat-text -->

@@ -31,15 +31,42 @@ $url = new url($req->requestUri());
             <div class="blank20"></div>
                 
                <div class="clr">
-                     <?php $askq= $m->getQuestionByAskid($askid) ?>            
+               <?php $askq= $m->getQuestionByAskid($askid) ?>  
+               <?php $user= $m->rowuser($askq["uid"]); ?>  
+    	       <?php $doc=$m->getDocRowByDod($askq["dod"]) ?> 
+    	       <?php $dis=$m->getNameByDid($askq["did"]) ?>     
                <div class="wid680 fl">
                   <div class="zjtdhzfw_tit"><?php print($askq["title"]) ?></div>
                   
                   <div class="blank20"></div>
-
+          <div class="zjtd_hzfw clr">
+                  	
+                    	<div class="zjtd_hzfw_fl tc fl">
+                        	<img src="<?php print AppUrl::getMediaPath()?>/avatar/<?php print $user["avatar"] ?>" width="61" height="62" />
+                            <p><?php print $user["name"] ?>***</p>
+                            <p><?php print $user["date"] ?></p>
+                        </div>
+                        
+                        <div class="zjtd_hzfw_fr border2 hzfw_hz fr">
+                        	
+                            <div class="color3 fz14">
+                           <p><span class="blue">疾病：</span><?php print ($dis) ?></p>
+                           <p><span class="blue">描述：</span><?php print $askq["desc"] ?></p>
+                           <p><span class="blue">想获得的帮助：</span><?php print $askq["svr"] ?></p>
+                            </div>
+                            <div class="hzfw_wdl">
+                            	<img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img14.png" class="fl" />病例资料仅医生及患者本人登录后可见
+                            </div>
+                            <div class="blank15"></div>
+                            <p class="fr color9 fz13">发表于：  <?php print $askq["date"] ?></p>
+                            <img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img17.png" class="hzfw_jian" />
+                        </div>
+                    
+                  </div>
+                  
+                  <div class="blank20"></div>
           <?php foreach ($m->getAnswers($askid,$pageSize,($page-1)*$pageSize)as $wd):?>
-        <?php $user= $m->rowuser($askq["uid"]); ?>  
-    	<?php $doc=$m->getDocRowByDod($askq["dod"]) ?>
+        
    
      		<?php if($wd["role"] == "user"): ?>
      		 <div class="zjtd_hzfw clr">
@@ -53,13 +80,18 @@ $url = new url($req->requestUri());
                         <div class="zjtd_hzfw_fr border2 hzfw_hz fr">
                         	
                             <div class="color3 fz14">
+                            <?php if($wd["conmeta"] == "text"):?>
                             <?php print $wd["content"] ?>
-                          
+                            <?php else:?>
+		          	
+		                 	<?php $tmp = explode(",", $wd["content"]);?>
+		                	<i class="fa fa-gift" style="font-size:28px;"></i> <?php print $tmp[1]?><br/>
+		          	
+		                	<img style="width:64px;height:64px;" src="<?php print AppUrl::getMediaPath()?>/present/<?php print $tmp[0]?>">
+        
+		          	
+		                	<?php endif;?>
                             </div>
-                            <div class="hzfw_wdl">
-                            	<img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img14.png" class="fl" />病例资料仅医生及患者本人登录后可见
-                            </div>
-                            <div class="blank15"></div>
                             <p class="fr color9 fz13">发表于：  <?php print $wd["date"] ?></p>
                             <img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img17.png" class="hzfw_jian" />
                         </div>
@@ -103,13 +135,13 @@ $url = new url($req->requestUri());
                   
                   
                   <div class="pagenum tc gray fz13"><?php if ($pagination->hasPre()):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?></div>
 
                 </div>
@@ -135,14 +167,14 @@ $url = new url($req->requestUri());
                             </table>
                         </div>
                         <p class="tc color9" style="margin:10px 0; line-height:20px;">注：所有门诊时间仅供参考，最终以医院当日公布为准。</p>
-                        <p class="color6"><b class="color3">预约提示：</b>以下病情患者，可在官方网站预约我的预约加号：阴茎延长，精索静脉曲张、阴茎弯曲，<a href="" class="blue">免费申请→</a></p>
+                        <p class="color6"><b class="color3">预约提示：</b>以下病情患者，可在官方网站预约我的预约加号：阴茎延长，精索静脉曲张、阴茎弯曲，<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="" class="blue">免费申请→</a></p>
                     </div>
                   </div>
                   
                   <div class="blank20"></div>
                   
       			  <div class="syrbox5 border2">
-                    <div class="syrboxtit fz18 graybg"><?php print $m->data["name"]?>医生的最新咨询<a href="<?php print AppUrl::docAskHomeByDocid($m->data["id"])?>" class="blue fz13 fr">+更多</a></div>
+                    <div class="syrboxtit fz18 graybg"><?php print $m->data["name"]?>医生的最新咨询<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docAskHomeByDocid($m->data["id"])?>" class="blue fz13 fr">+更多</a></div>
                     
                     <div class="zjtd_r2">
                     	<div class="blank10"></div>
@@ -155,11 +187,11 @@ $url = new url($req->requestUri());
 
                
                         <dl <?php if($x==1){?> class="selected"<?php }?>>
-                          <dt class="fz18 blue"><a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><?php print utility::utf8Substr($ask["title"],0,15) ?></a></dt>
+                          <dt class="fz18 blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><?php print utility::utf8Substr($ask["title"],0,15) ?></a></dt>
                           <dd class="fz16 dgray clr">
                             <img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img7.png" class="fl" /><p class="fl"><?php if (!empty($ans["content"]))  :?>
                              
-                              <a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>">	<?php print utility::utf8Substr($ans["content"], 0, 40) ?></a>
+                              <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>">	<?php print utility::utf8Substr($ans["content"], 0, 40) ?></a>
                              <?php endif; ?>...</p>
                           </dd>
                         </dl>
@@ -170,14 +202,14 @@ $url = new url($req->requestUri());
                        
                       </div>
                     
-                    <div class="zjtd_r3 clr"><a href="<?php print AppUrl::getSwtUrl(); ?>">立刻咨询</a></div>
+                    <div class="zjtd_r3 clr"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl(); ?>">立刻咨询</a></div>
                     <div class="blank20"></div>
                   </div>
                   
                   <div class="blank20"></div>
                   
                   <div class="docsug border2">
-    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师观点</a><a class="fz13 blue fr" href="">+更多</a></div>
+    <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">医师观点</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fz13 blue fr" href="">+更多</a></div>
     <div class="docsugbox fz13">
     
     <?php $thumb = $m->getRowThumbnail();?>
@@ -186,13 +218,13 @@ $url = new url($req->requestUri());
    
     <dl class="clearfix">
     	<dt class="fl">
-    		<a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print $thumb["thumb"]?>" width="80" height="60" /></a>
+    		<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print $thumb["thumb"]?>" width="80" height="60" /></a>
     	</dt>
       <dd class="fl">
-      <p><a href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></p>
+      <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></p>
       
       <p class="p2 clearfix">
-      <a class="fl gray"><?php print $thumb["date"]?></a>
+      <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl gray"><?php print $thumb["date"]?></a>
       </p>
       </dd>
       </dl>
@@ -204,7 +236,7 @@ $url = new url($req->requestUri());
           
           	
        <?php foreach($m->getNewest(5) as $aitem):?>   	
-      <li><p class="p1"><a class="black" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print utility::utf8Substr($aitem["title"], 0, 18) ?></a></p><p class="p2"><a class="gray" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print $m->getContent($aitem["aid"],18)?>...[全文]</a></p></li>
+      <li><p class="p1"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="black" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print utility::utf8Substr($aitem["title"], 0, 18) ?></a></p><p class="p2"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="gray" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print $m->getContent($aitem["aid"],16)?>...[全文]</a></p></li>
      <?php endforeach;?>
       </ul>      
                 
