@@ -1,5 +1,8 @@
 <?php
 
+$this->title = "心意礼物-".$m->data["name"]."-找大夫咨询-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 
 
 // 	var_dump($m->data);exit;
@@ -48,7 +51,7 @@
                   <?php foreach( $m->all() as $lw):?>
                   
                   <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $lw["avatar"];?>" /></a> </p>
+                    <p class="gift_box"><img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $lw["avatar"];?>" /></p>
                     <p class="gift_name"><?php print $lw["data"];?></p>
                     <p class="gift_send"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
                   </li>
@@ -74,11 +77,14 @@
                <div class="blank20"></div>
                
                 <ul class="gift_wall_main clearfix">
-                 <?php foreach( $m->getPresentDataByDod($m->data["sid"],10) as $lws):?>
+                 <?php foreach( $m->getDataByDod($m->data["sid"],10,0) as $lw):?>           
+                 <?php $pre=$m->rowpid($lw["pid"]);?>    
+                 <?php $cnt=$m->getDataByDodCnt($lw["dod"]);?>
+                 
                   <li>
-                    <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $lws["avatar"];?>" /></a> </p>
-                    <p class="gift_name"><?php print $lws["data"];?>(<?php print $lw["cp"];?>)</p>
-                    <p class="gift_send pl3"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我要送第一个</a></p>
+                    <p class="gift_box"> <img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $pre["avatar"];?>" /></p>
+                    <p class="gift_name"><?php print $pre["data"];?>(<?php print ($cnt);?>)</p>
+                    <p class="gift_send pl3"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我要送一个</a></p>
                   </li>
                   <?php endforeach;?>
                 </ul>

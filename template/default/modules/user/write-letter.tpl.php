@@ -16,7 +16,9 @@ if ($_SERVER ["HTTP_REFERER"]) {
 } else {
 	$redirectUrl = "";
 }
-
+$this->title = "写感谢信-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 ?>
 <div class="listpos fz13">
 	<span class="gray">当前位置：</span><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">首页 > 给医生写感谢信</a>

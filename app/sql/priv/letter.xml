@@ -63,6 +63,7 @@
 			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_letter`.`did`
 			LEFT JOIN `data_doctor` ON `data_doctor`.`sid` = `data_letter`.`dod`
 			WHERE 1
+			ORDER BY `sid` DESC
 			LIMIT :offset,:length 
 		</query>
 	</all>

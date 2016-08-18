@@ -1,5 +1,7 @@
 <?php
 
+
+
 defTplData::getInstance()->title = $m->data["name"] . " - 医师首页";
 /**
   ["sid"]=> 	11
@@ -40,7 +42,7 @@ $url = new url($req->requestUri());
       <div class="zjtd">
       
     <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
-        
+       
           <div class="tabcon selected fz13">
               <div class="blank20"></div>
               <div class="zjtdcon1_box1 clr">
@@ -106,7 +108,7 @@ $url = new url($req->requestUri());
                             
                             <div class="zjtd_box2_sm2 clr">
                             	<div class="fl">
-                                	<p>直接和陈希球医生本人通话，私密安全！便捷！（本次通话免费，最长时间15分钟）</p>
+                                	<p>直接和<?php print $m->data["name"]?>医生本人通话，私密安全！便捷！（本次通话免费，最长时间15分钟）</p>
                                     <p class="color9"> [ <span class="yellow"><?php print rand(400,600);?></span>人已使用电话咨询服务，<span class="yellow"><?php print rand(400,600);?></span>人已成功预约 ]</p>
                                 </div>
                                 <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fr tc dh_a">一键通话</a>
@@ -114,8 +116,8 @@ $url = new url($req->requestUri());
                             
                             <div class="zjtd_box2_sm2 clr">
                             	<div class="fl">
-                                	<p>包皮手术、精索静脉曲张、成人疝气、阴茎延长、阴茎增粗等生殖整形手术，阴茎增粗等生殖整形手术。</p>
-                                    <p class="color9"> [ 已有<span class="yellow">382</span>位患者加号预约成功 ]</p>
+                                	<p><?php print $m->data["spec"]?></p>
+                                    <p class="color9"> [ 已有<span class="yellow"><?php print rand(400,600);?></span>位患者加号预约成功 ]</p>
                                 </div>
                                 <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navSubscribe()?>" class="fr tc">申请加号</a>
                             </div>
@@ -162,13 +164,14 @@ $url = new url($req->requestUri());
 
                     
                     
-                    
-                      <?php foreach($m->getDataByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $dodpj):?> 
+                
+                      <?php foreach($m->getDataByDod($m->data["sid"],$pageSize,($page-1)*$pageSize) as $dodpj):?>   
+    
                       <?php $a=appraiseLvMeta::getMeta() ?>
-                      <?php $b= $m->getNameByDid($dodpj["did"])?> 
-					<?php  $c=$m->rowuser($m->data["sid"])?>
 
-
+                     <?php $b= $m->getNameByDid($dodpj["did"])?>
+                     
+					<?php  $c=$m->rowuser($m->data["sid"])?> 	        
                     <div class="zjtd_box4 clr">
                       <img src="<?php print AppUrl::getMediaPath()?>/avatar/<?php print ($c["avatar"]) ?>"  width="60" height="60" class="fl" />
                       <div class="zjtd_box4_sm1 fr">
@@ -178,12 +181,13 @@ $url = new url($req->requestUri());
                                   <p class="fl" style=" width:250px;">满意度： <span class="yellow"> <?php print ($a[$dodpj["lv"]]) ?></span></p>
                               </dt>
                               <dd class=" fz15">
-                              <?php print AppFilter::filterOut(utility::utf8substr($dodpj["txt"],0,40)); ?>
+                              <?php print AppFilter::filterOut(utility::utf8substr($dodpj["txt"],0,200)); ?>
                               </dd>
                               <dd class="color9"><?php print ($dodpj["date"]) ?>  来源： <?php print ($b)  ?></dd>
                           </dl>
                       </div>
                   </div>
+                    
                      <?php endforeach;?>   
 
                     <div class="blank20"></div>  

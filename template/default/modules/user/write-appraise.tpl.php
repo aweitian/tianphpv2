@@ -28,6 +28,9 @@ foreach ($model->getDisease() as $item){
 	}
 	$tree_dis[$item["pid"]]["children"][$item["mid"]] = array($item["md"],$item["url"]);
 }
+$this->title = "写评价-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 ?>
 <div class="listpos fz13">
 	<span class="gray">当前位置：</span><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">首页 > 给医生写感谢信</a>

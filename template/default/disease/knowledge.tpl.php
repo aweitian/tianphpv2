@@ -10,7 +10,9 @@ $row = $model->data;
 $ext = diseaseExtInfoes::getExtData();
 
 
-
+$this->title = "疾病知识-按疾病找-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 
 
 $pageSize = 8;
@@ -142,8 +144,7 @@ $url = new url($req->requestUri());
                                     
                                     <!--分享 end--> 
                                   </li>
-                       
-                  
+            
                         	           <?php endif?>      
                         	           
                                 

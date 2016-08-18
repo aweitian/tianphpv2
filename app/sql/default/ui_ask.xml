@@ -23,6 +23,33 @@
 		 WHERE `sid`=:sid
 	</row>
 
+	<getAskByUid>
+		SELECT 
+			`data_ask`.`sid`,
+			`data_ask`.`uid`,
+			`data_ask`.`did`,
+			`data_ask`.`title`,
+			`data_ask`.`desc`,
+			`data_ask`.`svr`,
+			`data_ask`.`date`,
+			`data_ask`.`dod`
+			FROM `data_ask`
+			WHERE `data_ask`.`uid` = :uid
+			ORDER BY `data_ask`.`sid` DESC
+		LIMIT :offset,:length
+	</getAskByUid>
+	<getAskByDidCnt>
+		SELECT 
+			count(`data_ask`.`sid`) as `cnt`
+			FROM `data_ask`
+			WHERE `data_ask`.`uid` = :uid
+	</getAskByDidCnt>
+
+
+
+
+
+
 	<!-- 根据病种Id获取问答和回答(医生回答最多只获取一条) -->
 	<getAskByDid>
 		SELECT 
@@ -132,8 +159,7 @@
 			`role` = 'doctor'
 	</rows_answerDocReplyCnt>
 	
-	
-	
+		
 	
 	<getAskAnswerByDid>
 		<!-- 

@@ -2,6 +2,9 @@
 //aid,kw,desc,thumb,title,content,date
 $data = $m->row($_REQUEST["id"]);
 
+$this->description = "";
+$this->keyword = "";
+
 if(empty($data)){
 	exit("removed.");
 }

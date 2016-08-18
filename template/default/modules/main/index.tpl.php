@@ -62,30 +62,16 @@ foreach ($m->getDisease() as $item){
           <div class="fromzxzjbox1 clearfix">
             <div class="fromzxzjbox1l fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syask.gif" width="449" height="60" /></a></div>
             <div class="fromzxzjbox1r fr" id="topzj">
+              	<?php foreach($m->getDoctors(3) as $doc):?>
               <dl>
-                <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syaskzj.jpg" width="60" height="60" /></dt>
+                <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="60" height="60" /></dt>
                 <dd class="fl fz12">
-                  <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="blue">陈希球1</a> 副主任医师 </p>
-                  <p>男科手术</p>
+                  <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="blue"><?php print $doc["name"]; ?></a> <?php print $doc["lv"]; ?> </p>
+                  <p><?php print utility::utf8Substr($doc["spec"],0,6); ?></p>
                   <p class="gray">今天</p>
                 </dd>
               </dl>
-              <dl>
-                <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syaskzj.jpg" width="60" height="60" /></dt>
-                <dd class="fl fz12">
-                  <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="blue">陈希球2</a> 副主任医师 </p>
-                  <p>男科手术</p>
-                  <p class="gray">今天</p>
-                </dd>
-              </dl>
-              <dl>
-                <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syaskzj.jpg" width="60" height="60" /></dt>
-                <dd class="fl fz12">
-                  <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="blue">陈希球3</a> 副主任医师 </p>
-                  <p>男科手术</p>
-                  <p class="gray">今天</p>
-                </dd>
-              </dl>
+            	<?php endforeach;?>
             </div>
           </div>
           <div class="blank20"></div>
@@ -111,7 +97,10 @@ foreach ($m->getDisease() as $item){
 			   if(!empty($askdata)):
 			  ?>
               <dd class="dd2 fl">
-                <p><a href="<?php print AppUrl::askByAsdDocid($doc["dod"], $askdata["sid"])?>"><?php  print $askdata["title"]?></a></p>
+                <p><a href="<?php print AppUrl::askByAsdDocid($doc["dod"], $askdata["sid"])?>">
+                
+                <?php   print utility::utf8Substr($askdata["title"],0,10) ?>...
+                </a></p>
                 <p class="gray">最近通话<?php  print utility::utf8Substr($askdata["date"],0,10)?></p>
                 <p class="blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docAskHomeByDocid($doc["id"])?>">查看最新用户分享 >></a></p>
               </dd>           
@@ -261,11 +250,11 @@ foreach ($m->getDisease() as $item){
       </div>
       <div class="blank20"></div>
       <div class="syrbox2">
-        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth1.jpg" width="300" height="100" /></a></p>
+        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByDocidAid("hyt","338") ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth1.jpg" width="300" height="100" /></a></p>
         <p class="blank10"></p>
-        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth2.jpg" width="300" height="100" /></a></p>
+        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByDocidAid("hyt","339") ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth2.jpg" width="300" height="100" /></a></p>
         <p class="blank10"></p>
-        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth3.jpg" width="300" height="100" /></a></p>
+        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByDocidAid("hyt","340") ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth3.jpg" width="300" height="100" /></a></p>
       </div>
       <div class="blank20"></div>
       <div class="syrbox3 border2">
@@ -339,32 +328,27 @@ foreach ($m->getDisease() as $item){
         <div class="syrboxtit fz18 graybg">大家都在送什么?</div>
         <div class="syrbox5nr">
           <div class="syrbox5nr_1" id="toplw">
+            <?php foreach ($m->getData(6) as $lw):?>
+            <?php $pre=$m->rowpid($lw["pid"]);?>      
+            <?php $user=$m->getNameByUid($lw["uid"]);?>
+            <?php $doc=($m->getInfoByDod($lw["dod"]))?> 
             <dl class="clearfix" >
-              <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth10.jpg" width="61" height="57" /></dt>
+              <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $pre["avatar"]?>" width="61" height="57" /></dt>
               <dd class="fl">
-                <p class="ddp1"><strong>陈希球</strong>医生收到了<strong>h***</strong>精心挑选的礼物<strong>医患同心</strong>医生爱心值+100</p>
-                <p class="ddp2 fr blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
+                <p class="ddp1"><strong><a href="<?php print AppUrl::docHomeByDod($lw["dod"])?>"><?php print $doc["name"]; ?></a></strong>医生收到了<strong><?php print ($user); ?></strong>精心挑选的礼物<strong><?php print $pre["data"]?></strong>医生爱心值+<?php print $pre["cost"]?></p>
+                <p class="ddp2 fr blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docPresentHomeByDocid($doc["id"]); ?>">我也要送</a></p>
               </dd>
             </dl>
-            <dl class="clearfix" >
-              <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth10.jpg" width="61" height="57" /></dt>
-              <dd class="fl">
-                <p class="ddp1"><strong>陈希球</strong>医生收到了<strong>h***</strong>精心挑选的礼物<strong>医患同心</strong>医生爱心值+100</p>
-                <p class="ddp2 fr blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-              </dd>
-            </dl>
-            <dl class="clearfix" >
-              <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth10.jpg" width="61" height="57" /></dt>
-              <dd class="fl">
-                <p class="ddp1"><strong>陈希球</strong>医生收到了<strong>h***</strong>精心挑选的礼物<strong>医患同心</strong>医生爱心值+100</p>
-                <p class="ddp2 fr blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">我也要送</a></p>
-              </dd>
-            </dl>
+            <?php endforeach;?>
           </div>
+          <!-- 
           <div class="blank10"></div>
           <div class="fz13">共有<em class="orange">7,572</em>位患者送出<em class="orange">95,756</em>件礼物，下一个是你么? 我也要送</div>
+          
           <div class="blank10"></div>
           <div class="syrbox5nr_3 clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="" class="fl blue">什么是“心意礼物”？</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fr" href=""><img src="<?php print AppUrl::getMediaPath()?>/images/syrth11.jpg" width="80" height="26" /></a></div>
+         -->
+        
         </div>
       </div>
     </div>

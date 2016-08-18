@@ -953,8 +953,11 @@ padding: 0px 0 20px 0px; width:320px;
 	margin-right:10px;
 	float:left;
 	height:15px;
+	vertical-align: top;
 	}
-
+.zjtdwztit a{
+	vertical-align: top;
+}
 .pagenum a {
 	margin-right: 5px;
 	height: 24px;
@@ -2102,17 +2105,18 @@ a.td_link, a.td_link_read {
 
 .hp_doc_box1 {
     padding-top: 20px;
-    float: left;
+    vertical-align: top;
     border-bottom: 1px dotted #d8d8d8;
     padding-bottom: 15px
 }
 .doc_rela_link {
-    float: left;
+    float: right;
     line-height: 180%;
-    padding-left: 15px;
 	height: 60px;
 	padding-top:20px;
+	padding-left:15px;
     border-left: 2px dotted #ddd;
+    vertical-align: top;
 }
 .doc_rela_link a {
     margin-bottom: 5px;
@@ -2141,10 +2145,10 @@ a.td_link, a.td_link_read {
     float: left;
     padding: 0 10px;
     position: relative;
-    width: 520px;
+    width: 510px;
 }
 .hp_doc_box2 .fl{ line-height:23px;}
-.hp_doc_box2 .hp_doc_xq{ width:410px;}
+.hp_doc_box2 .hp_doc_xq{ width:400px; }
 .pr20{ padding-right:20px;}
 .personweb-btn {
     margin-left: 3px

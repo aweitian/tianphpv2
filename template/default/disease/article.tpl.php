@@ -6,6 +6,10 @@
  */
 $row = $model->data;
 // var_dump($row);
+
+$this->title = "专家观点-按疾病找-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 $ext = diseaseExtInfoes::getExtData();
 
 

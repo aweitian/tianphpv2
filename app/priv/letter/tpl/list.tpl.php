@@ -34,7 +34,7 @@ $req = new httpRequest();
 $url  = new pmcaiUrl($req->requestUri());
 $pagination = new pagination($cnt, $curPageNum, $pageSize, $pageBtnLen);
 
-
+// var_dump($data);exit;
 ?>
 <link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/lightbox2/dist/css/lightbox.min.css">
 <link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/jqnotifybar/css/jquery.notifyBar.css">

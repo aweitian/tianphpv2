@@ -86,5 +86,14 @@ class mainModel extends AppModel {
     public function alllv1BySyd($syd){
 		return $alllv1BySyd=symptomUIApi::getInstance()->alllv1BySyd($syd);
 	}
+	public function getData($length,$offset=0){
+		return presentUIApi::getInstance()->getData($length,$offset);
+	}
+	public function rowpid($pid) {
+		return presentUIApi::getInstance ()->row($pid);
+	}
 	
+	public function getInfoByDod($dod){
+		return doctorUIApi::getInstance()->getInfoByDod($dod);
+	}
 }

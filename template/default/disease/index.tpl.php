@@ -12,6 +12,10 @@ $row = $model->data;
 // var_dump($row);
 $ext = diseaseExtInfoes::getExtData();
 // var_dump($ext);exit;
+
+$this->title = "疾病首页-按疾病找-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 ?>
   <div class="blank15"></div>
   <div class="sybox clearfix">
@@ -65,7 +69,7 @@ $ext = diseaseExtInfoes::getExtData();
                     <div class="blank20"></div>
                     
                     <div class="padd20 border2">
-                    	<div class="zjtdwztit fz18"><span></span>相关问答<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="" class="fr fz13 color9">+更多</a></div>
+                    	<div class="zjtdwztit fz18 clr"><span></span>相关问答<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="" class="fr fz13 color9">+更多</a></div>
                         <div class="blank20"></div>
                         <div class="clr jb_box2">
                      
@@ -120,7 +124,7 @@ $ext = diseaseExtInfoes::getExtData();
                     
                     <div class="blank20"></div>
                     <div class="padd20 border2">
-                    	<div class="zjtdwztit fz18" style="border-bottom:0;"><span></span><?php print $row["data"]?>全面详解</div>
+                    	<div class="zjtdwztit fz18 clr" style="border-bottom:0;"><span></span><?php print $row["data"]?>全面详解</div>
                         <?php 
                           $all=array("病因","症状","检查","治疗","危害","保键")
                         ?>
@@ -191,7 +195,7 @@ $ext = diseaseExtInfoes::getExtData();
                     <div class="blank20"></div>
                     
                     <div class="padd20 border2 clr">
-                    	<div class="zjtdwztit fz18"><span></span>好评医生<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navDoctors() ?>" class="fr fz13 color9">+更多推荐</a></div>
+                    	<div class="zjtdwztit fz18 clr"><span></span>好评医生<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navDoctors() ?>" class="fr fz13 color9">+更多推荐</a></div>
                         
                         <ul class="hp_doc1 clearfix">
                         
@@ -211,7 +215,7 @@ $ext = diseaseExtInfoes::getExtData();
                                         <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> target="_blank" href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="personweb-sickness-btn">个人网站</a>
                                 </div>
                                 <div class="fl hp_doc_xq">
-                                    <p><?php print $doc["name"]; ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php print $doc["lv"]; ?></p>
+                                    <p><?php print $doc["name"]; ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php print $doc["lv"] ?></p>
                                     <p>
                                         <span class="patient_recommend">患者推荐热度：
                                         <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><i class="blue" style="margin-left:-5px;"><?php print $doc["hot"]; ?></i></a></span>

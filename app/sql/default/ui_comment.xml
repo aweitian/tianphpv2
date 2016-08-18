@@ -23,13 +23,4 @@
 		LIMIT :offset,:length
 	</data>
 	
-	<add>
-		INSERT INTO `data_article_comment` (
-			`aid`,`uid`,`comment`
-		) VALUES (
-			:aid,:uid,:comment
-		)
-	</add>
-	
-	
 </ui_comment>

@@ -1,5 +1,8 @@
 <?php
 
+$this->title = "患者咨询-".$m->data["name"]."-找大夫咨询-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 
 $pageSize = 8;
 if(isset($_REQUEST["page"])){

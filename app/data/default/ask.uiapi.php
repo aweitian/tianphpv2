@@ -75,6 +75,55 @@ class askUIApi {
 		return $ret;
 	}
 	
+	
+	
+	/**
+	 * 根据病种Id获取问题个数
+	 * @param int $did
+	 * @return int
+	 */
+	public function getQuestionsByUidCnt($uid){
+		$cache_key = "getQuestionsByUidCnt-".$uid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		$sql = $this->sqlManager->getSql("/ui_ask/getAskByUidCnt");
+		$ret = $this->db->fetch($sql, array(
+				"dod" => $dod,
+		));
+		$ret = $ret["cnt"];
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * 按病种ID倒序排列
+	 * 根据病种Id获取问题
+	 * sid title date dod
+	 * @param int $did 病种ID
+	 * @param int $length (最多返回多少条,默认值4条)
+	 * @return array fetchAll
+	 */
+	public function getQuestionsByUid($uid,$length=4,$offset=0){
+		$cache_key = "getQuestionsByUid-".$uid."-".$length."-".$offset;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		$sql = $this->sqlManager->getSql("/ui_ask/getAskByUid");
+		$ret = $this->db->fetchAll($sql, array(
+			"uid" => $uid,
+			"offset" => $offset,
+			"length" => $length
+		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	
+	
+	
+	
 	/**
 	 * 根据ASKID获取医生回答的第一条
 	 * content

@@ -15,6 +15,7 @@ require_once FILE_SYSTEM_ENTRY."/app/data/default/present.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/symptom.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/tags.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/user.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/put.uiapi.php";
 
 class AppModel extends Model{
 	/**

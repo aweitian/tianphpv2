@@ -1,9 +1,7 @@
 <?php
 /**
- * @Author: awei.tian
- * @Date: 2016年7月21日
- * @Desc: 
- * 依赖:
+ * @Author: zhangsihang
+ * @Date: 2016年8月18日
  */
 $userinfo = AppUser::getInstance()->auth->getInfo();
 ?>
@@ -26,7 +24,8 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
             </dd>
         </dl>
         <div class="memer_box3">
-        	<?php $data = $model->getDataByUid(5,0)?>
+        	<?php $data = $model->getAppraiseDataByUid(5,0)?>
+        
         	<?php if(count($data)):?>
             <table cellpadding="0" cellspacing="0" border="0">
             	<tr class="tbtr1">
@@ -36,14 +35,20 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
                     <th width="54px">通过</th>
                     <th width="80px">操 作</th>
                 </tr>
+                <?php $ma = appraiseLvMeta::getMeta()?>
                 <?php foreach($data as $q):?>
-                <?php $con=$model->filterOut($q["content"]);?>
+                <?php $con=AppFilter::filterOut($q["txt"]);?>
                 <tr>
                 	<td class="tbtd1 color3 line24"><?php print ($con) ?></td>
                     <td class="color9"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> style="text-decoration: underline" href="<?php print AppUrl::docHomeByDod($q["dod"])?>"><?php print $model->getDocNameByDod($q["dod"])?></a></td>                 
                     <td class="color9"><?php print $q["date"]?></td>
-                    <td class="green"><?php if($q["verify"]):?>是<?php else:?>待审核<?php endif?></td>
-                    <td class="tbtd2"><?php if(!$q["verify"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("?")' href="<?php print AppUrl::userRemoveLetter()?>?sid=<?php print $q["sid"]?>">删除</a><?php endif?></td>
+                    <td class="green"><?php print $ma[$q["lv"]]?></td>
+                    
+                    <td class="tbtd2 green"><?php if(!$q["v"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("?")' href="<?php print AppUrl::userRemoveLetter()?>?sid=<?php print $q["sid"]?>">删除</a>
+                    <?php else:  ?>
+                    已验证
+                    <?php endif?></td>
+                    
                 </tr>
  				<?php endforeach;?>
             </table>

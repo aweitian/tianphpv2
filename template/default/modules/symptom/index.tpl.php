@@ -16,6 +16,10 @@ if (!$m instanceof symptomModel)exit;
 
 // exit;
 
+$this->title = "按症状找-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
+
 $docinfos=$m->getInfoes(10);
 
 ?>

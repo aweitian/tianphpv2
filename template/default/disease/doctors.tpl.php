@@ -4,7 +4,9 @@
  * @Date: 2016年7月12日
  * @Desc: 
  */
-
+$this->title = "好评医生-按疾病找-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 $row = $model->data;
 // var_dump($row);
 $ext = diseaseExtInfoes::getExtData();
@@ -80,7 +82,7 @@ $url = new url($req->requestUri());
                         <ul class="hp_doc1 clearfix">
                         
                         
-                          	<?php foreach($model->getDoctors($pageSize,($page-1)*$pageSize) as $doc):?>\
+                          	<?php foreach($model->getDoctors($pageSize,($page-1)*$pageSize) as $doc):?>
                           	<?php $count=$model->getQuestionsCountByDod($doc["dod"]);?>
                             <li class="hp_doc_box1">
                             <div class="clr">

@@ -82,4 +82,28 @@ class userView extends AppView {
 				) 
 		) )->setLayout ()->reponse ();
 	}
+	
+	
+	
+	
+	public function questions($model, $info = "") {
+		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
+				$this->getThemePath ( "user" ) . "/questions.tpl.php",
+				array (
+						"model" => $model,
+						"info" => $info
+				)
+		) )->setLayout ()->reponse ();
+	}
+	
+
+	public function presents($model, $info = "") {
+		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
+				$this->getThemePath ( "user" ) . "/presents.tpl.php",
+				array (
+						"model" => $model,
+						"info" => $info
+				)
+		) )->setLayout ()->reponse ();
+	}
 }

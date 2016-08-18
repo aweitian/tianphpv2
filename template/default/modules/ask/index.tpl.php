@@ -7,6 +7,10 @@ $m = $model;
 $row = $m->data;
 
 
+$this->title = "网络咨询-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
+
 $pageSize = 20;
 if(isset($_REQUEST["page"])){
 	$page = intval($_REQUEST["page"]);

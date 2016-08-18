@@ -102,8 +102,8 @@ class defTplData{
 		}
 	}
 	private function init(){
-		$this->title = "shjl";
-		$this->keyword = "man nk";
-		$this->description = "hook";
+		$this->title = "上海九龙男子医院";
+		$this->keyword = "上海九龙男子医院";
+		$this->description = "上海九龙男子医院";
 	}
 }

@@ -23,7 +23,9 @@ $pagination = new pagination($m->getAllCnt(), $page, $pageSize, 6);
 $req = new httpRequest();
 $url = new url($req->requestUri());
 
-
+$this->title = "找大夫咨询-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 // foreach($m->getDisease() as $item)
 // {
 	

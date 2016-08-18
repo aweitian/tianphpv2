@@ -4,7 +4,9 @@
  * @Date: 2016年7月12日
  * @Desc: 
  */
-
+$this->title = "患者咨询-按疾病找-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 $row = $model->data;
 $pageSize = 8;
 if(isset($_REQUEST["page"])){

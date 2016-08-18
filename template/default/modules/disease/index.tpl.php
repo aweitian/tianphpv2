@@ -9,6 +9,10 @@ $m = $model;
 
 $d = diseaseExtInfoes::getExtData();
 
+
+$this->title = "按疾病找-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 // exit;
 ?>
  

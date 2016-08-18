@@ -43,9 +43,9 @@
        <?php foreach($model->getNewest(5) as $aitem):?>  
        <?php $dod= $model->getOwner($aitem["aid"])?> 
 	              <?php  $doc=($model->getInfoByDod($dod))?> 
-     <?php var_dump($doc) ?>
+   <?php if (!empty($doc["name"])):?>
       <li><p class="p1"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="black" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print utility::utf8Substr($aitem["title"], 0, 18) ?></a></p><p class="p2"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="gray" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print $model->getContent($aitem["aid"],16)?>...[全文]</a></p></li>
-   
+    <?php endif?>  
      <?php endforeach;?>
       </ul>      
                           </div>          

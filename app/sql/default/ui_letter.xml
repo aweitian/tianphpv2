@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui_letter>
-	<add>
-		INSERT INTO `data_letter`
-		(
-             `uid`,
-             `dod`,
-             `content`
-	    ) VALUES (
-	        :uid,
-	        :dod,
-	        :content
-		)
-	</add>
+	
 
 
 	<!-- 获取感谢信的总数 -->
@@ -19,16 +8,10 @@
 	<!-- 返回字段:cnt -->
 	<cnt>
 		SELECT COUNT(`sid`) AS `cnt` FROM `data_letter`
+		WHERE `data_letter`.`verify` = 1
 	</cnt>
 
-	<rm>
-		DELETE
-			FROM `data_letter`
-			WHERE 
-			`sid` = :led
-			AND `uid` = :uid
-			AND `verify` = 0
-	</rm>
+
 
 	<!-- 获取所有的感谢信,排序按ID倒序 -->
 	<!-- 参数:offset,length -->
@@ -44,7 +27,7 @@
 	<!-- 返回字段:sid,uid,dod,did,content,date -->
 	<rows_dod>
 		SELECT * FROM `data_letter`
-		WHERE `dod` = :dod
+		WHERE `dod` = :dod AND `data_letter`.`verify` = 1
 		LIMIT :offset,:length
 	</rows_dod>
 	

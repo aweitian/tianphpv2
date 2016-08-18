@@ -53,7 +53,7 @@ class presentUIApi {
 	 * @return array
 	 */
 	public function row($pid) {
-		$cache_key = "row";
+		$cache_key = "row-".$pid;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
@@ -71,6 +71,7 @@ class presentUIApi {
 
 	/**
 	 * 获取所有的赠送礼物数据
+	 * 返回字段:sid     uid     dod     pid  date
 	 * @param int $length
 	 * @return array fetchAll
 	 */
@@ -158,18 +159,40 @@ class presentUIApi {
 	 * @param int $length
 	 * @return array fetchAll
 	 */
-	public function getDataByUid($uid,$length){
+	public function getDataByUid($uid,$length,$offset=0){
 		$cache_key = "getDataByUid-".$uid."-".$length;
 		if (array_key_exists($cache_key, $this->cache)){
 			return $this->cache[$cache_key];
 		}
 		
 		$ret = $this->db->fetchAll(
-				$this->sqlManager->getSql("/ui_present/rows_uid"), 
+				$this->sqlManager->getSql("/ui_present/data_uid"), 
 				array(
 					"uid" => $uid,
+					"offset" => $offset,
 					"length" => $length
 				));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * 获取最新某个用户所有赠送的礼物数据
+	 * @param int $uid
+	 * @param int $length
+	 * @return array fetchAll
+	 */
+	public function getDataByUidCnt($uid){
+		$cache_key = "getDataByUidCnt-".$uid;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		
+		$ret = $this->db->fetch(
+				$this->sqlManager->getSql("/ui_present/data_uid_cnt"), 
+				array(
+					"uid" => $uid,
+				));
+		$ret = $ret["cnt"];
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
@@ -182,5 +205,6 @@ class presentUIApi {
 			$this->meta_cache[$item["sid"]] = $item;
 		}
 	}
+	
 	
 }

@@ -56,6 +56,26 @@ class userController extends appCtrl {
 		$this->profileAction ( $msg );
 		// $this->view->profile($this->model);
 	}
+	public function questionsAction(pmcaiMsg $msg) {
+	
+		
+// 		if ($msg->isPost ()) {
+// 			$ret = $this->model->writeLetter($msg["d"], $msg["c"]);
+// 			if ($ret -> isTrue()) {
+// 				if(isset($msg["?return"])){
+// 					$this->response->redirect($msg["?return"]);
+// 				}
+// 			}
+// 			$this->response->redirect(AppUrl::userProfile());
+// 		}
+		$this->view->questions ( $this->model );
+		
+
+	}
+	public function presentsAction(pmcaiMsg $msg) {
+	$this->view->presents ( $this->model );
+
+	}
 	public function writeletterAction(pmcaiMsg $msg) {
 		if ($msg->isPost ()) {
 			$ret = $this->model->writeLetter($msg["d"], $msg["c"]);

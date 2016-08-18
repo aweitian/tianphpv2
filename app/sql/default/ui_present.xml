@@ -47,8 +47,13 @@
 	
 	
 	<row>
-		SELECT * FROM `data_doctor_present` WHERE `sid` = :sid
+		SELECT * FROM `data_present` WHERE `sid` = :sid
 	</row>
+	
+	
+	<row_bak>
+		SELECT * FROM `data_doctor_present` WHERE `sid` = :sid
+	</row_bak>
 	
 	
 	
@@ -59,16 +64,21 @@
 	<rows_dod>
 		SELECT * FROM `data_doctor_present`
 		WHERE `dod` = :dod
-		LIMIT 0,:length
+		LIMIT :offset,:length
 	</rows_dod>
 	
 	<!-- 获取所有对医生的礼物,排序按ID倒序 -->
 	<!-- 参数:uid,length -->
 	<!-- 返回字段:sid,uid,dod,pid,date -->
-	<rows_uid>
+	<data_uid>
 		SELECT * FROM `data_doctor_present`
 		WHERE `uid` = :uid
-		LIMIT 0,:length
-	</rows_uid>
+		LIMIT :offset,:length
+	</data_uid>
+	<data_uid_cnt>
+		SELECT count(`sid`) as `cnt` FROM `data_doctor_present`
+		WHERE `uid` = :uid
+	</data_uid_cnt>
 
+	
 </ui_present>

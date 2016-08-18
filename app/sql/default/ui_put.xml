@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<put>
 
-	<add>
+
+
+<!-- 所有用户向数据库提交的数据都经过此文件中的SQL提交 -->
+
+<ui_put>
+
+	<ask>
 		INSERT INTO `data_ask` (
 			`uid`,`dod`,`title`,`did`,`desc`,`svr`,`v`,`date`
 		) VALUES (
@@ -9,6 +14,129 @@
 		)
 	
 	
-	</add>
+	</ask>
+ 	
+ 	<reg_normal>
+		INSERT INTO `data_user`
+	            (
+	             `email`,
+	             `name`,
+	             `pwd`,
+	             `rpq`,
+	             `rpa`
+		) VALUES (
+		        :email,
+		        :name,
+		        :pwd,
+		        :rpq,
+		        :rpa
+		);
+	</reg_normal>
+	<reg_normal_noeml>
+		INSERT INTO `data_user`
+		(
+	             `name`,
+	             `pwd`,
+	             `rpq`,
+	             `rpa`
+		) VALUES (
+		        :name,
+		        :pwd,
+		        :rpq,
+		        :rpa
+		);
+	</reg_normal_noeml>
+	
+ 	<reset_pwd>
+		<name>
+			UPDATE `data_user`
+				SET
+				  `pwd` = :pwd
+				WHERE `name` = :name AND `rpq` = :rpq AND `rpa` = :rpa;
+		</name>
+		<email>
+			UPDATE `data_user`
+				SET
+				  `pwd` = :pwd
+				WHERE `email` = :email AND `rpq` = :rpq AND `rpa` = :rpa;
+		</email>
+		<phone>
+			UPDATE `data_user`
+				SET
+				  `pwd` = :pwd
+				WHERE `phone` = :phone AND `rpq` = :rpq AND `rpa` = :rpa;
+		</phone>
+		
+	</reset_pwd>
+	
+	
+	
+	
+	<profile>
+		<base>
+			UPDATE `data_user`
+				SET
+				  `name` = :name,
+				  @nep
+				  `rpq` = :rpq,
+				  `rpa` = :rpa
+				WHERE `sid` = :uid;
+		</base>
+	
+		<avatar>
+			UPDATE `data_user`
+				SET
+				  `avatar` = :avatar
+				WHERE `sid` = :uid
+		</avatar>
+		
+		<pwd>
+			UPDATE `data_user`
+				SET 
+				  `pwd` = :newpwd
+				WHERE `sid` = :uid AND `pwd` = :oldpwd;
+		</pwd>
+	</profile>
+
+
+	<comment>
+		INSERT INTO `data_article_comment` (
+			`aid`,`uid`,`comment`
+		) VALUES (
+			:aid,:uid,:comment
+		)
+	</comment>
+	
+	
+	<appraise>
+		INSERT INTO `data_appraise` (
+			`v`,`uid`,`did`,`dod`,`txt`,`lv`,`date`
+		) VALUES (
+			0,:uid,:did,:dod,:txt,:lv,:date
+		)
+	</appraise>
+	
+	<letter>
+		INSERT INTO `data_letter`
+		(
+			`verify`,
+             `uid`,
+             `dod`,
+             `content`
+	    ) VALUES (
+	    	0,
+	        :uid,
+	        :dod,
+	        :content
+		)
+	</letter>
+ 	<letter_rm>
+		DELETE
+			FROM `data_letter`
+			WHERE 
+			`sid` = :led
+			AND `uid` = :uid
+			AND `verify` = 0
+	</letter_rm>
  		
-</put>
+</ui_put>

@@ -12,7 +12,7 @@ class doctorDutyMeta {
 		);		
 	}
 	public static function getDayStaus(){
-		return array("不值班","特殊门诊","专家门诊","夜门诊");
+		return array("不值班","值班","专家门诊","夜门诊");
 	}
 	public static function getDayNight(){
 		return array("上午","下午","夜班");

@@ -18,7 +18,9 @@ foreach ($m->getDisease() as $item){
 	$tree_dis[$item["pid"]]["children"][$item["mid"]] = array($item["md"],$item["url"]);
 }
  
-
+$this->title = "在线咨询-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 
 
 

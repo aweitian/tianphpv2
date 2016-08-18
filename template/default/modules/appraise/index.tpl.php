@@ -21,7 +21,9 @@ foreach ($m->getDisease() as $item){
 }
 
 
-
+$this->title = "评价-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 ?>
 
 <div class="blank20"></div>

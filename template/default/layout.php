@@ -41,6 +41,6 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 <?php include dirname(__FILE__)."/header.tpl.php"?>
 <?php $model->outputContent()?>
 <?php include dirname(__FILE__)."/footer.tpl.php"?>
-</div>
+
 </body>
 </html>

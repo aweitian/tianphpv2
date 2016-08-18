@@ -5,6 +5,10 @@
  * @Desc: 
  */
 
+$this->title = "患者服务区-".$m->data["name"]."-找大夫咨询-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
+
 $pageSize = 6;
 if(isset($_REQUEST["page"])){
 	$page = intval($_REQUEST["page"]);

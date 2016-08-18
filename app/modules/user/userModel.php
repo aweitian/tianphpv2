@@ -23,7 +23,7 @@ class userModel extends AppModel {
 	
 	
 	public function addComment($uid,$aid,$c){
-		return commentUIApi::getInstance ()->add($uid,$aid,$c);
+		return putUIApi::getInstance ()->addComment($uid,$aid,$c);
 		
 	}
 	public function getDisease() {
@@ -51,10 +51,10 @@ class userModel extends AppModel {
 	 * @return rirResult
 	 */
 	public function modpwd($uid, $op, $np) {
-		return userUIApi::getInstance ()->modpwd ( $uid, $op, $np );
+		return putUIApi::getInstance ()->modpwd ( $uid, $op, $np );
 	}
 	public function resetPwd($nep, $sq, $sa, $pwd) {
-		return userUIApi::getInstance ()->resetPwd ( $nep, $sq, $sa, $pwd );
+		return putUIApi::getInstance ()->resetPwd ( $nep, $sq, $sa, $pwd );
 	}
 	/**
 	 * 
@@ -67,7 +67,7 @@ class userModel extends AppModel {
 	 * @return rirResult
 	 */
 	public function modProfile($uid, $name, $eml, $phone, $sq, $sa) {
-		return userUIApi::getInstance ()->modProfile ( $uid, $name, $eml, $phone, $sq, $sa );
+		return putUIApi::getInstance ()->modProfile ( $uid, $name, $eml, $phone, $sq, $sa );
 	}
 	
 	public function getDocNameByDod($dod){
@@ -96,8 +96,13 @@ class userModel extends AppModel {
 		return letterUIApi::getInstance ()->getDataByUid ($info["sid"] , $length, $offset );
 	}
 	
+	public function getAppraiseDataByUid( $length, $offset = 0) {
+		$info = AppUser::getInstance()->auth->getInfo();
+		return appraiseUIApi::getInstance ()->getDataByUid ($info["sid"] , $length, $offset );
+	}
+	
 	public function rmLetter($uid,$led){
-		return letterUIApi::getInstance()->rm($uid, $led);
+		return putUIApi::getInstance()->rmLetter($uid, $led);
 	}
 	public function getAllDoc(){
 		return doctorUIApi::getInstance()->getAll();
@@ -110,11 +115,11 @@ class userModel extends AppModel {
 	 */
 	public function writeLetter($dod,$content){
 		$info = AppUser::getInstance()->auth->getInfo();
-		return letterUIApi::getInstance()->add($info["sid"] , $dod, $content);
+		return putUIApi::getInstance()->addLetter($info["sid"] , $dod, $content);
 	}
 	public function writeAppraise($did,$dod,$lv,$content){
 		$info = AppUser::getInstance()->auth->getInfo();
-		return letterUIApi::getInstance()->add($info["sid"] , $did, $dod, $lv, $content);
+		return putUIApi::getInstance()->addAppraise($info["sid"] , $did, $dod, $lv, $content);
 	}
 	
 	
@@ -136,11 +141,6 @@ class userModel extends AppModel {
 		return userUIApi::getInstance ()->initLogin ( $this->session )->getVcFlag ();
 	}
 	public function register_normal($name, $pwd, $sq, $sa, $eml, $code) {
-		return userUIApi::getInstance ()->register_normal ( $name, $pwd, $sq, $sa, $eml, $code );
-	}
-	
-	
-	public static function filterOut($html){
-		return htmlspecialchars($html,ENT_QUOTES);
+		return putUIApi::getInstance ()->register_normal ( $name, $pwd, $sq, $sa, $eml, $code );
 	}
 }
