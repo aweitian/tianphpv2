@@ -36,7 +36,7 @@
   </div>
   <div class="three_a clearfix">
     <a href="/" class="" id="cnzz_shouye208">首页</a>
-    <a href="<?php print AppUrl::navDisease()?>" class=" " id="cnzz_zhishi209">疾病知识</a>
+    <a href="<?php print AppUrl::navArticle()?>" class=" " id="cnzz_zhishi209">疾病知识</a>
  </div>
  <div class="three_dl clearfix">
     <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_dl.png" class="three_dl_sm1" /></a>

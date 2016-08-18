@@ -74,7 +74,7 @@
                <div class="blank20"></div>
                
                 <ul class="gift_wall_main clearfix">
-                 <?php foreach( $m->getDataByDod($m->data["sid"],10) as $lws):?>
+                 <?php foreach( $m->getPresentDataByDod($m->data["sid"],10) as $lws):?>
                   <li>
                     <p class="gift_box"> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $lws["avatar"];?>" /></a> </p>
                     <p class="gift_name"><?php print $lws["data"];?>(<?php print $lw["cp"];?>)</p>

@@ -283,7 +283,7 @@ em {
 	height: 67px;
 	position: absolute;
 	top: 83px;
-	background: url(../images/banlr.png) no-repeat left bottom;
+	background: url(../images/banlr.png) no-repeat left top;
 	cursor: pointer;
 	z-index: 9;
 	opacity: 0;
@@ -2717,14 +2717,15 @@ rtpboxnrl {
 }
 
 .docs_info_box {
-    height: 52px;
+    height: 50px;
+    line-height:32px;
     width: 580px;
     overflow: hidden
 }
 .docs_info {
     display: table-cell;
     vertical-align: middle;
-    height: 52px;
+    height: 50px;
     width: 528px;
 }
 .docs_info strong {
@@ -2759,37 +2760,35 @@ rtpboxnrl {
 }
 .news_fixs .docs_n_btns {
     margin-top: 0;
-    float: left
+    float: left;
+	width:116px;
 }
-.new_bottom_btn .online,.new_bottom_btn .yyjh {
-    float: right;
+.new_bottom_btn .online{
+    float: left;
     height: 40px;
     line-height: 40px;
-    padding-left: 45px;
-    padding-right: 15px;
-    margin-right: 10px;
+    padding-left: 38px;
     font-size: 16px;
     color: #fff;
     display: block;
-    border-radius: 5px
-}
-.new_bottom_btn .online {
-    background: url(../images/new_a.png) 15px no-repeat #3e9cff;
-}
-.new_bottom_btn .yyjh {
-    background: url(../images/new_y.png) 20px no-repeat #4dcd70;
+    border-radius: 5px;
+	width:78px;
+	background: url(../images/new_a.png) 13px no-repeat #3e9cff;
 }
 
 .b_bottom_box .b2_btn a {
     display: block;
     height: 40px;
     line-height: 40px;
-    background: url(../images/new_d.png) 20px no-repeat #ff806a;
-    padding-left: 45px;
+    background: url(../images/new_d.png) 20px no-repeat #4dcd70;
+    padding-left: 38px;
     border-radius: 5px;
     font-size: 16px;
     color: #fff;
-    position: relative
+    position: relative;
+	background-position-x: 13px;
+	width:78px;
+	margin-left:10px;
 }
 
 .pop_by, .dh_by {

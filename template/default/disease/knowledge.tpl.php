@@ -34,7 +34,7 @@ $url = new url($req->requestUri());
     <div>
       
       <div class="clr">
-      	
+      
         <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
           
           <div class="fz13">
@@ -86,16 +86,14 @@ $url = new url($req->requestUri());
                             	
                                 <ul class="kart_list"> 
                                    <?php foreach ($model->knowledge($row["sid"],$model->subid,0,($page-1)*$pageSize,$pageSize, 6) as $list): ?>
-                                  	<?php $tag=$model->getTag($list["tid"]) ?>
-                                  
-                                   
+                                  	<?php $tag=$model->getTag($list["tid"]) ?>       
                    <?php $dod= $model->getOwner($list["aid"])?> 
-                
 	              <?php  $doc=($model->getInfoByDod($dod))?> 
+	           
                               <?php $nuber=$model->getCountByAid($list["aid"]) ?>     
                       
-                                
-                                  <li class="kart_li">
+                                       <?php if (!empty($doc["name"])):?>
+         <li class="kart_li">
                                     <div class="bb_e5 pb5 clearfix"> 
                                         <span class="f20 fl">
                                         <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($list["aid"]) ?>" class="fl kart_title"><h2><?php print $list["title"] ?></h2></a>
@@ -119,6 +117,7 @@ $url = new url($req->requestUri());
                                     </div>
                                     <div class="blank20"></div>
                                     <!--分享 start-->
+            
                                     <div class="kart_share mt20 clearfix fz12">
                                       <p class="fl"> 
                                     
@@ -138,8 +137,16 @@ $url = new url($req->requestUri());
                                             <img src="<?php print AppUrl::getMediaPath()?>/images/jbfx_tb5.png" />
                                      </div>
                                     </div>
+                                    
+                                    
+                                    
                                     <!--分享 end--> 
                                   </li>
+                       
+                  
+                        	           <?php endif?>      
+                        	           
+                                
                                   <?php endforeach; ?>
                                   <div class="blank30"></div>
                                   <div class="pagenum tc gray fz13">

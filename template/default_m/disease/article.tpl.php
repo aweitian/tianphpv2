@@ -23,7 +23,7 @@ $pagination = new pagination($model->getAllCnt($row["sid"]), $page, $pageSize, 6
 $req = new httpRequest();
 $url = new url($req->requestUri());
 ?>
-  
+ 
   <div class="blank15"></div>
   <div class="sybox clearfix">
     <div>

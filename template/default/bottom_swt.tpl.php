@@ -8,8 +8,7 @@
         <div class="docs_info_box zzx_dib_w">
             <a target="_blank"  href="" class="docs_info">
                 <strong><?php print($doc_name) ?></strong>
-                <span><?php print($doc_desc) ?></span>
-                <span><?php print($doc_spec) ?>...</span>
+                <span><?php print utility::utf8Substr($doc_spec,0,30); ?>...</span>
             </a>
         </div>
         <div class="btn_box clearfix">

@@ -18,7 +18,9 @@ class presentUIApi {
 	}
 
 	
-	
+	/**
+	 * @return presentUIApi
+	 */
 	public static function getInstance(){
 		if(is_null(presentUIApi::$inst)){
 			presentUIApi::$inst = new presentUIApi();

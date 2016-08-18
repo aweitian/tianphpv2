@@ -29,7 +29,8 @@ $ext = diseaseExtInfoes::getExtData();
                	<div class="wid680 fl">
                 
                 	<div class="padd20 border2 clr">
-                    	<img src="<?php print AppUrl::getMediaPath()?>/images/jb_img1.jpg" class="fl" />
+                    	<img src="<?php print AppUrl::getMediaPath()?>/disease<?php print AppUrl::disHomeByDid($row["sid"])?>.jpg" class="fl" />
+                        
                         <div class="jb_box1 fr">
                         	<div class="blank10"></div>
                         	<span class="fz18 bule"><?php print $row["data"]?>知识介绍</span>

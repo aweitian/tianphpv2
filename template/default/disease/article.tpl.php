@@ -48,7 +48,7 @@ $url = new url($req->requestUri());
 	              <?php $dod= $model->getOwner($item["aid"])?> 
 	              <?php  $doc=($model->getInfoByDod($dod))?> 
 	        <?php $nuber=$model->getCountByAid($item["aid"]) ?>     
-	                   
+	                         <?php if (!empty($doc["name"])):?>
                                   <li class="kart_li">
                                     <div class="bb_e5 pb5 clearfix"> 
                                         <span class="f20 fl">
@@ -95,7 +95,7 @@ $url = new url($req->requestUri());
                                     </div>
                                     <!--分享 end--> 
                                   </li>
-                                  
+                                <?php endif?>          
                           <?php endforeach;?>  
                                  
 <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>

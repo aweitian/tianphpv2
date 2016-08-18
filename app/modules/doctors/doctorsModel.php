@@ -94,4 +94,7 @@ class doctorsModel extends AppModel {
 	
 		return askUIApi::getInstance()->getQuestionsCountByDod($dod);
 	}
+	public function getLetterByDod($dod,$length,$offset=0){
+		return letterUIApi::getInstance()->getLetterByDod($dod,$length,$offset);
+	}
 }
