@@ -27,7 +27,7 @@ foreach ($m->getDisease() as $item){
   <div class="head_top clr"> 
   <div class="blank20"></div>
   <a href="/" class="c_logo"></a> 
-    <a href="/" class="fr"> <img src="<?php print AppUrl::getMediaPath()?>/images/user_not_login.png"  style="width:.45rem; height:.44rem;"> </a> </div>
+    <a href="<?php print AppUrl::userProfile();?>" class="fr"> <img src="<?php print AppUrl::getMediaPath()?>/images/user_not_login.png"  style="width:.45rem; height:.44rem;"> </a> </div>
   <!--head end-->
   <div id="focus" class="focus" style="background-color:#fff;margin:0px auto;"> 
     

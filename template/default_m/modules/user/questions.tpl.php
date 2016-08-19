@@ -35,7 +35,7 @@ $url = new url($req->requestUri());
 	<div class="blank30"></div>
 	<?php $data = $model->getQuestionsDataByUid($pageSize,($page-1)*$pageSize)?>
 	<?php if(count($data)):?>
-	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::userAddQuestions()?>" style="color:#ff8800;">我要提问</a>
+	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::navPut()?>" style="color:#ff8800;">我要提问</a>
 	<?php foreach($data as $q):?>
     <?php $con=AppFilter::filterOut($q["title"]);?>
     <?php $doc=$model->getNameByDod($q["dod"])?>
@@ -60,7 +60,7 @@ $url = new url($req->requestUri());
        		<?php endif;?> </div>
     
     <?php else:?> 
-           		您还没有提过问题，<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::userAddQuestions()?>" style="color:#ff8800;">现在就提问</a>
+           		您还没有提过问题，<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::navPut()?>" style="color:#ff8800;">现在就提问</a>
            <?php endif?>
     
     

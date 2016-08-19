@@ -19,7 +19,7 @@ if ($_SERVER ["HTTP_REFERER"]) {
 
 ?>
 <div class="public_width">
-<?php $user_header_title = "感谢信";?>
+<?php $user_header_title = "写感谢信";?>
 <?php include dirname(__FILE__)."/common/header.tpl.php"?>
 
 <!--head end-->

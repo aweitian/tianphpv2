@@ -7,6 +7,19 @@
  */
 $m = $model;
 $userinfo = AppUser::getInstance()->auth->getInfo();
+
+$pageSize = 5;
+if(isset($_REQUEST["page"])){
+	$page = intval($_REQUEST["page"]);
+} else{
+	$page = 1;
+}
+
+$pagination = new pagination($model->getPresentDataByUidCnt($userinfo["sid"]), $page, $pageSize, 10);
+
+$req = new httpRequest();
+$url = new url($req->requestUri());
+
 ?>
 <div class="public_width">
 
@@ -22,17 +35,33 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
 
 <div class="mzy30">
 	<div class="blank30"></div>
-	
+	<?php $data = $model->getPresentDataByUid($pageSize,($page-1)*$pageSize)?>
+    <?php if(count($data)):?>
+    <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::userAddPresents()?>" style="color:#ff8800;">我要送礼物</a>
+    <?php foreach($data as $q):?>
+                <?php $doc=$model->getNameByDod($q["dod"])?>                 
+                <?php $pid=$model->row($q["pid"]) ?>        
     <div class="pj_con borddd clr">
-    	<h5 class="fz24 color9 plr20 fw400"><span class="fl">To:<a href="#">陈希球</a>医生</span><span class="fr">2016.06.05</span></h5>
+    	<h5 class="fz24 color9 plr20 fw400"><span class="fl">To:<a href="<?php print AppUrl::docHomeByDod($q["dod"]);?>"><?php print ($doc) ?></a>医生</span><span class="fr">2016.06.05</span></h5>
         <div class="blank20"></div>
-        <p class="plr20 fz28">昨天检查前列腺炎好了，可还是早泄,请问医生，我该怎么治疗。</p>
+        <p class="plr20 fz28"><?php print $pid["data"] ?></p>
         <div class="blank20"></div>
-        <h6 class="plr20 clr fz24 fw400"><span class="fl color9">通过：<b class="fw400 green">是</b></span><a href="" class="fr">删除</a><a href="" class="fr">编辑</a></h6>
+        <h6 class="plr20 clr fz24 fw400"><span class="fl color9">通过：<b class="fw400 green"><?php if(($q["v"])==1){ echo "是";}else {echo "否";} ?></b><?php if(!$q["v"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("友情提醒：是否要删除！")' href="<?php print AppUrl::userRmPresents()?>?sid=<?php print $q["sid"]?>" class="fr">删除</a><?php endif?><a href="" class="fr">编辑</a></h6>
     </div>
     <div class="blank10"></div>
-   
-    
+    <?php endforeach;?>
+    <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($pagination->hasNext()):?>
+            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?> </div>
+       		<?php else:?> 
+           		您还没有送过礼物，<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::userAddPresents()?>" style="color:#ff8800;">现在就送礼物</a>
+           <?php endif?>
     
 </div>
 <div class="blank30"></div>

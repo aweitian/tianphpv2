@@ -38,10 +38,18 @@
     <a href="/" class="" id="cnzz_shouye208">首页</a>
     <a href="<?php print AppUrl::navArticle()?>" class=" " id="cnzz_zhishi209">疾病知识</a>
  </div>
+  <?php if(!AppUser::getInstance()->auth->isLogined()):?>
  <div class="three_dl clearfix">
-    <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_dl.png" class="three_dl_sm1" /></a>
-    <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_zc.png" /></a>
+    <a href="<?php print AppUrl::userLogout()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_dl.png" class="three_dl_sm1" /></a>
+    <a href="<?php print AppUrl::userRegister()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/top_nav_zc.png" /></a>
  </div>
+ <?php else:?>
+ <?php $userinfo = AppUser::getInstance()->auth->getInfo()?>
+ <div class="three_dl clearfix">
+    <a style="color:#fe8100;"><?php print AppFilter::filterOut($userinfo["name"]) ?></a> 
+    <a href="<?php print AppUrl::userLogout()?>" style="color:#fff;">退出</a>
+ </div>
+ <?php endif;?>
   <div id="percenter"> </div>
   <div class="battom_waitao"><div class="bottom_bac"></div></div>
   <div class="arrow"></div>

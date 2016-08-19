@@ -27,20 +27,41 @@ $this->keyword = "";
 	<div class="wid680 fl">
 		<div class="padd20 border2 clr">
 
-			<form action="<?php print AppUrl::userWriteLetter().$redirectUrl?>" method="post">
+			<form name="gh" onSubmit="return chk(this)" action="<?php print AppUrl::userWriteLetter().$redirectUrl?>" method="post">
 
 				<div class="twtit">
 					<div class="twtitl fl fz16 pt7">医 生：</div>
 					<div class="twtitr2 fl border2">
 						<select class="fz16 gray" name="d">
 
-							<option>选择医生</option>
+							<option value="0">选择医生</option>
 						<?php foreach($model->getAllDoc() as $doc):?>
 						<option value="<?php print $doc["sid"]?>"><?php print $doc["name"]?></option>
 						<?php endforeach;?>
 					</select>
 					</div>
+				</div>
+			
+						<div class="twtit fl" style="margin-left: 50px;">
+					<div class="twtitl fl fz16 pt7">疾病：</div>
+					<div class="twtitr2 fl border2">
+						<select class="fz16 gray" name="j">
 
+							<option value="0">选择疾病</option>
+					
+					  <?php foreach($model->getLv0KeyInfoes() as $xbz):?>   	
+              
+                  
+                    
+                       	<option value="<?php print $xbz["sid"] ?>"><?php print $xbz["data"] ?></option>     
+            <?php endforeach;?>
+					
+					
+					
+					
+					
+					</select>
+					</div>
 				</div>
 				<div class="blank20"></div>
 				<div class="twtit">
@@ -59,6 +80,41 @@ $this->keyword = "";
 				</div>
 				<div class="blank20"></div>
 			</form>
+<script type="text/javascript">
+			
+function chk(f){
+if (f.d.value=="0")
+{ 
+	alert("请选择医生");
+	f.d.focus();
+	return false;
+}
+if (f.j.value=="0")
+{ 
+	alert("请选择疾病");
+	f.j.focus();
+	return false;
+}
+
+if (f.c.value=="")
+{ 
+	alert("请填写内容");
+	f.c.focus();
+	return false;
+}
+
+
+
+
+
+return true;
+
+
+
+}
+
+</script>
+			
 		</div>
 	</div>
 	<!--left end-->

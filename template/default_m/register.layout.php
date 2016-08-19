@@ -8,88 +8,51 @@
 
 
 ?>
-<!DOCTYPE>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>注册</title>
-<link href="<?php print HTTP_ENTRY?>/static/css/style.css" rel="stylesheet" />
-<script src="<?php print HTTP_ENTRY?>/static/js/jquery.js"></script>
-<script src="<?php print HTTP_ENTRY?>/static/js/jtClite.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>手机快速登录/注册</title>
+<script language="javascript" src="<?php print AppUrl::getMediaPath()?>/js/base.js"></script>
+<script src="<?php print AppUrl::getMediaPath()?>/js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script language="javascript" src="<?php print AppUrl::getMediaPath()?>/js/js.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php print AppUrl::getMediaPath()?>/css/public_style.css">
+<link rel="stylesheet" type="text/css" href="<?php print AppUrl::getMediaPath()?>/css/style.css">
+<link rel="stylesheet" type="text/css" href="<?php print AppUrl::getMediaPath()?>/css/nav_bar.css">
 </head>
-
 <body>
-<div class="wid1000 loginlogo clearfix"><a href="<?php print AppUrl::navHome()?>"><img class="fl" src="<?php print HTTP_ENTRY?>/static/images/loginlogo.jpg" width="284" height="47" /></a><span class="fl black fz24">注册帐号</span></div>
-<div class="registerbox">
-<div class="wid1000"><div class="registerboxnr clearfix">
+<div class="public_width">
 
-<div class="registerboxnrl fl">
-<div class="registerboxnrltit"><ul class="clearfix fz24 gray"><li class="fl selected li1">普通注册</li><span class="fl"></span><li class="li2 fl">手机注册</li></ul></div>
-<div class="blank20"></div>
-<div class="registerform fz13">
-<div class="registercon regway selected">
-<form action="<?php print AppUrl::userRegister()."?t=n"?>" method="post">
-<input class="reginp1 gray border2" required placeholder='用户名' name="name" />
-<div class="blank20"></div>
-<input class="reginp1 gray  border2" required placeholder='密码' name="pwd"/>
-<div class="blank20"></div>
-<input class="reginp1 gray  border2" required placeholder='确认密码' name="pwd_repeat"/>
-<div class="blank20"></div>
-<input class="reginp1 gray  border2" required placeholder='密码安全问题,如：我的第一个女朋友的名字' name="sq"/>
-<div class="blank20"></div>
-<input class="reginp1 gray  border2" required placeholder='密码安全答案,如：JLM' name="sa"/>
-<div class="blank20"></div>
-<input class="reginp1 gray  border2" placeholder='输入常用邮箱' name="eml"/> (可选)
-<div class="blank20"></div>
-<div class="regyzm clearfix gray"><input name="code" class="regyzminp fl border2 gray" placeholder='验证码'/><span class="yzmpic fl"><img src="<?php print HTTP_ENTRY?>/captcha" width="86" height="32" id="captcha"/></span><span style="cursor:pointer" onclick="$('#captcha').attr('src','<?php print HTTP_ENTRY?>/captcha?t='+(new Date()).getTime())" class="yzmchange fl">换一张</span></div>
+<div class="head_tc blue_bg">
+    <a class="goback" href="" title="返回上页" onclick="history.go(-1)"><b></b></a>
+    <div class="head_tit" >手机快速注册/登录</div>
+</div>
+<div class="mzy30">
+<!--head end-->
 <div class="blank30"></div>
-<div class="regxy1 gray"><input type="checkbox" checked/>我已看过并同意 <a class="blue">注册协议</a></div>
-<div class="blank30"></div>
-<button class="regsub1" type="submit"><img src="<?php print HTTP_ENTRY?>/static/images/regbtn.jpg" width="162" height="40" /></button>
-</form></div>
-<div class="registercon regway">
-<form action="<?php print AppUrl::userRegister()."?t=m"?>" method="post">
-<input class="reginp1 gray border2" value='请输入手机号码' onClick='this.value = ""' onblur='if(value == ""){value="请输入手机号码"}'   type="email" />
-<div class="blank20"></div>
-<div class="regyzm clearfix gray"><input class="regyzminp fl border2 gray" value='验证码' onClick='this.value = ""' onblur='if(value == ""){value="验证码"}' /><div class="getyzm fl tc">点击获取验证码</div></div>
-<div class="blank20"></div>
-<input class="reginp1 gray  border2" value='密码' onClick='this.value = ""' onblur='if(value == ""){value="密码"}' />
-<div class="blank20"></div>
-<input class="reginp1 gray  border2" value='确认密码' onClick='this.value = ""' onblur='if(value == ""){value="确认密码"}' />
 
+<div class="login_warp bor_rad borddd">
+	<input type="text" placeholder="11位中国大陆手机号码" />
+    <div class="hd_hsx"></div>
+    <p class="clr">
+    	<input type="text" class="login_yzm fl" placeholder="填写短信验证码" />
+        <input type="submit" class="login_fsyzm fr bor_rad borblue blue fz24" value="发送验证码" />
+    </p>
+    
+</div>
+<div class="blank30"></div>
+<button class="login_dl bor_rad">登录</button>
 
 <div class="blank30"></div>
-<div class="regxy1 gray"><input type="checkbox" />我已看过并同意 <a class="blue">注册协议</a></div>
+<div class="login_sm1 clr fz26">
+	<a href="<?php print AppUrl::userResetPwd()?>" class="fl blue">忘记密码？</a>
+    <a href="<?php print AppUrl::userLogin()?>" class="fr blue">帐号密码登录</a>
+</div>
+</div>
 <div class="blank30"></div>
-<button class="regsub1" type="submit"><img src="<?php print HTTP_ENTRY?>/static/images/regbtn.jpg" width="162" height="40" /></button>
-</form>
 </div>
-</div>
-
-
-
-
-
-
-</div>
-
-<div class="registerboxnrr fr">
-<p class="pwz">已有账号,请 <a href="<?php print AppUrl::userLogin()?>" class="blue">登录</a></p>
-
-</div></div></div>
-
-
-
-
-
-
-
-<div class="blank20"></div>
-<div class="blank10"></div>
-<div class="loginfooter dgray fz13 wid1000">
-  <div class="loginfooternav tc"><a href="">关于我们</a><a href="">友情链接</a><a href="">找大夫咨询</a><a href="">预约挂号</a><a href="">版权声明</a><a class="nobor" href="">联系我们</a></div>
-  <div class="blank15"></div>
-  <div class="loginfooterloc tc">地址：上海市长宁区中山西路333号（近中山公园）  沪ICP备14017357号-1 沪卫（中医）网复审【2014】第10045号　网站统计</div>
-</div>
+<div class="backToTop" style="display: block;"></div>
+<script src="<?php print AppUrl::getMediaPath()?>/js/touch_new_index.js" type="text/javascript"></script> 
 </body>
 </html>

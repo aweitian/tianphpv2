@@ -10,7 +10,7 @@
 		INSERT INTO `data_ask` (
 			`uid`,`dod`,`title`,`did`,`desc`,`svr`,`v`,`date`
 		) VALUES (
-			:uid,:dod,:title,:did,:desc,:svr,0,:date
+			:uid,:dod,:title,:did,:desc,:svr,0,CURDATE()
 		)
 	</ask>
  	<ask_rm>
@@ -49,11 +49,16 @@
 	
  	<register_phone>
  		INSERT INTO `data_user` (
-			`name`,`pwd`,`phone`,`avatar`,`rpq`,`rpa`,`wa`,`date`
+			`name`,`pwd`,`phone`,`date`
 		) VALUES (
-			:phone,:pwd,:phone,:avatar,:rpq,:rpa,:wa,:date
+			:name,:pwd,:phone,CURDATE()
 		)
  	</register_phone>
+ 	<register_phone_rand_avatar>
+ 		UPDATE `data_user` SET `data_user`.`avatar` =  CONCAT("memer_tx",1+CAST(RAND() * 8 AS UNSIGNED),".jpg")
+			WHERE sid = :uid
+ 	</register_phone_rand_avatar>
+ 	
  	
  	
  	
@@ -176,12 +181,14 @@
 			`verify`,
              `uid`,
              `dod`,
+             `did`,
              `content`,
              `date`
 	    ) VALUES (
 	    	0,
 	        :uid,
 	        :dod,
+	        :did,
 	        :content,
 	        CURDATE()
 		)
@@ -194,5 +201,17 @@
 			AND `uid` = :uid
 			AND `verify` = 0
 	</letter_rm>
+ 	
+ 	
+ 	
+ 	<read>
+ 		<dod>SELECT `data_doctor`.`sid` FROM `data_doctor` WHERE `data_doctor`.`sid` = :sid  </dod>
+ 		<did>SELECT `data_attr_data`.`sid` FROM `data_attr_data` WHERE `data_attr_data`.`sid` = :sid AND `data_attr_data`.`grp` = 1 </did>
+ 		<aid>SELECT `data_article`.`sid` FROM `data_article` WHERE `data_article`.`sid` = :sid  </aid>
+ 	</read>
+ 	
+ 	
+ 	
+ 	
  		
 </ui_put>

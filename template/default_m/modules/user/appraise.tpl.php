@@ -65,7 +65,7 @@ $url = new url($req->requestUri());
             <div class="blank10"></div>
             <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen fr" href="<?php print AppUrl::userWriteAppraise()?>">写评价</a>
            <?php else:?> 
-           		您还没有写过评价，<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::userWriteAppraise()?>">现在就写</a>
+           		您还没有写过评价，<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::userWriteAppraise()?>" style="color:#ff8800;">现在就写</a>
            <?php endif?>
     
 </div>

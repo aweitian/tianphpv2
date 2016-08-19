@@ -161,7 +161,9 @@ class userModel extends AppModel {
 	public function getLv0KeyInfoes(){
 		return diseaseUIApi::getInstance()->getLv0KeyInfoes();
 	}
-	
+	public function getNameByDid($did){
+		return diseaseUIApi::getInstance()->getNameByDid($did);
+	}
 	
 	
 	
@@ -173,9 +175,9 @@ class userModel extends AppModel {
 	 * @param string $content
 	 * @return rirResult
 	 */
-	public function writeLetter($dod,$content){
+	public function writeLetter($dod,$did,$content){
 		$info = AppUser::getInstance()->auth->getInfo();
-		return putUIApi::getInstance()->addLetter($info["sid"] , $dod, $content);
+		return putUIApi::getInstance()->addLetter($info["sid"] , $dod, $did, $content);
 	}
 	public function writeAppraise($did,$dod,$lv,$content){
 		$info = AppUser::getInstance()->auth->getInfo();

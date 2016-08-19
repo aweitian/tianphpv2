@@ -39,17 +39,17 @@ $this->keyword = "";
 	<div class="wid680 fl">
 		<div class="padd20 border2 clr">
 
-			<form action="<?php print AppUrl::userWriteAppraise().$redirectUrl?>" method="post">
+			<form name="gh" onSubmit="return chk(this)" action="<?php print AppUrl::userWriteAppraise().$redirectUrl?>" method="post">
 
 				<div class="twtit fl">
 					<div class="twtitl fl fz16 pt7">疾病：</div>
 					<div class="twtitr2 fl border2">
 						<select class="fz16 gray" name="j">
 
-							<option>选择疾病</option>
-						<?php foreach($tree_dis as $dis):?>   
-						<option value=""><?php print $dis["text"];?></option>
-						<?php endforeach;?>
+							<option value="0">选择疾病</option>
+						  <?php foreach($model->getLv0KeyInfoes() as $xbz):?>   	
+                       	<option value="<?php print $xbz["sid"] ?>"><?php print $xbz["data"] ?></option>     
+            <?php endforeach;?>
 					</select>
 					</div>
 
@@ -59,7 +59,7 @@ $this->keyword = "";
 					<div class="twtitr2 fl border2">
 						<select class="fz16 gray" name="d">
 
-							<option>选择医生</option>
+							<option value="0">选择医生</option>
 						<?php foreach($model->getAllDoc() as $doc):?>
 						<option value="<?php print $doc["sid"]?>"><?php print $doc["name"]?></option>
 						<?php endforeach;?>
@@ -71,9 +71,9 @@ $this->keyword = "";
 				<div class="twtit">
 					<div class="twtitl fl fz16 pt7">满意度：</div>
 					    <div class="twtitl fl fz16 pt7">
-						<input name="m" type="radio" value="一般" />  一般&nbsp;&nbsp;&nbsp;&nbsp;
-						<input name="m" type="radio" value="满意" />  满意&nbsp;&nbsp;&nbsp;&nbsp;
-						<input name="m" type="radio" value="很满意" />  很满意
+						<input name="m" type="radio" value="0" />  一般&nbsp;&nbsp;&nbsp;&nbsp;
+						<input name="m" type="radio" value="1" />  满意&nbsp;&nbsp;&nbsp;&nbsp;
+						<input name="m" type="radio" value="2" />  很满意
 					    </div>
 
 				</div>
@@ -96,6 +96,48 @@ $this->keyword = "";
 			</form>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+			
+function chk(f){
+if (f.j.value=="0")
+{ 
+	alert("请选择疾病");
+	f.j.focus();
+	return false;
+}
+if (f.d.value=="0")
+{ 
+	alert("请选择医生");
+	f.j.focus();
+	return false;
+}
+
+if (f.m.value == "")
+{ 
+alert("请选择满意度");
+f.j.focus();
+return false;
+}
+
+if (f.c.value=="")
+{ 
+	alert("请填写内容");
+	f.c.focus();
+	return false;
+}
+
+
+
+
+
+return true;
+
+
+
+}
+
+</script>
 	<!--left end-->
 	<div class="wid300 fr">
 		<div class="hotbq border2">

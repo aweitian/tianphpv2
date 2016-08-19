@@ -5,7 +5,7 @@
  */
 $userinfo = AppUser::getInstance()->auth->getInfo();
 
-$pageSize = 1;
+$pageSize = 5;
 if(isset($_REQUEST["page"])){
 	$page = intval($_REQUEST["page"]);
 } else{

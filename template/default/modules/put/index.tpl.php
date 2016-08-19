@@ -36,7 +36,7 @@ $this->keyword = "";
   <div class="clearfix">
     <div class="wid680 fl border2">
       <div class="quetwbox">
-        <form action="<?php print AppUrl::navPut()?>" method="post">
+        <form name="gh" onSubmit="return chk(this)" action="<?php print AppUrl::navPut()?>" method="post">
         <div class="blank25"></div>
         <div class="twtit clearfix">
           <div class="twtitl fl fz16"><span class="tc white">1</span>您哪里不舒服 </div>
@@ -50,11 +50,11 @@ $this->keyword = "";
         <div class="twtit clearfix">
           <div class="twtitl fl fz16"><span class="tc white">2</span>选择疾病分类</div>
           <div class="twtitr2 fl border2">
-            <select class="fz16 gray">
-              <option>请选择</option>
-              <?php foreach($tree_dis as $dis):?>
-              <option value="<?php print $dis["text"];?>"><?php print $dis["text"];?></option>
-              <?php endforeach;?>
+            <select name="j" class="fz16 gray">
+              <option value="0">请选择</option>
+             	  <?php foreach($model->getLv0KeyInfoes() as $xbz):?>   	
+                       	<option value="<?php print $xbz["sid"] ?>"><?php print $xbz["data"] ?></option>     
+            <?php endforeach;?>
             </select>
           </div>
         </div>
@@ -86,11 +86,61 @@ $this->keyword = "";
         <div class="blank30"></div>
         <div class="blank5"></div>
         <div class="tjtodoc">
-          <button class=" nobor tc white fz18" value="提交给医生" type="submit">提交给医生</button>
+        <?php if(AppUser::getInstance()->auth->isLogined()):?>
+        
+          <button class=" nobor tc white fz18" type="submit">提交给医生</button>
+        <?php else:?>
+        
+        <button class="white fz18" disabled type="submit">请登陆后再提交</button>
+        <?php endif?>
         </div>
         </form>
       </div>
     </div>
+    
+    
+    <script type="text/javascript">
+			
+function chk(f){
+if (f.title.value=="")
+{ 
+	alert("请描述你的问题");
+	f.title.focus();
+	return false;
+}
+if (f.j.value=="0")
+{ 
+	alert("请选择疾病");
+	f.j.focus();
+	
+	return false;
+}
+
+if (f.desc.value == "")
+{ 
+alert("请描述病情");
+f.desc.focus();
+return false;
+}
+
+if (f.svr.value=="")
+{ 
+	alert("请填写内容");
+	f.svr.focus();
+	return false;
+}
+
+
+
+
+
+return true;
+
+
+
+}
+
+</script>
     <!--left end-->
     <div class="wid300 fr">
       <div class="zxfpage border3">

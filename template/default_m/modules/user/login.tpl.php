@@ -33,6 +33,7 @@ $m = $model;
 </div>
 <div class="blank30"></div>
 </form>
+<!-- 
 <div class="blank30"></div>
 <div class="login_sanf fz30 color6"><p>或第三方快速登录</p></div>
 <div class="blank40"></div>
@@ -40,6 +41,7 @@ $m = $model;
 	<a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/login_qq.png" class="fl" /></a>
     <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/login_weibo.png" class="fr" /></a>
 </div>
+ -->
 
 </div>
 <div class="blank30"></div>

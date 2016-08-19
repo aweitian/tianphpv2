@@ -25,7 +25,16 @@ class putController extends appCtrl{
 	public function _action_not_found(pmcaiMsg $msg){
 		echo "hi";
 	}
-	public function welcomeAction(){
+	public function welcomeAction(pmcaiMsg $msg){
+		if($msg->isPost()){
+			if(!AppUser::getInstance ()->auth->isLogined()){
+				$ret = new rirResult(1,"需要登陆");
+				print $ret->toJSON();
+				exit;
+			}
+			$info = AppUser::getInstance()->auth->getInfo();
+			$this->model->addQuestion($info["sid"], $msg["j"], $msg["title"], $did, $desc, $svr);
+		}
 		$this->view->put($this->model);
 	}
 }

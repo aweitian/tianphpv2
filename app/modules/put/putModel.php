@@ -35,4 +35,10 @@ class putModel extends AppModel {
 			return array();
 		}
 	}
+	public function getLv0KeyInfoes(){
+		return diseaseUIApi::getInstance()->getLv0KeyInfoes();
+	}
+	public function addQuestion($uid,$dod,$title,$did,$desc,$svr){
+		return putUIApi::getInstance()->addQuestion($uid,$dod,$title,$did,$desc,$svr);
+	}
 }

@@ -78,13 +78,14 @@ class userController extends appCtrl {
 	}
 	public function writeletterAction(pmcaiMsg $msg) {
 		if ($msg->isPost ()) {
-			$ret = $this->model->writeLetter($msg["d"], $msg["c"]);
+			$ret = $this->model->writeLetter($msg["d"], $msg["j"],$msg["c"]);
 			if ($ret -> isTrue()) {
 				if(isset($msg["?return"])){
 					$this->response->redirect($msg["?return"]);
 				}
 			}
 			$this->response->redirect(AppUrl::userProfile());
+			//$this->response->redirect($msg["?return"]);
 		}
 		$this->view->writeletter ( $this->model );
 	}
