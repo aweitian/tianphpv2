@@ -144,6 +144,21 @@ class userController extends appCtrl {
 		$this->model->rmLetter ( $info ["sid"], $msg ["?sid"] );
 		$this->response->redirect ( AppUrl::userLetter () );
 	}
+	public function rmpresentsAction(pmcaiMsg $msg) {
+		$info = AppUser::getInstance ()->auth->getInfo ();
+		$this->model->rmPresent ( $info ["sid"], $msg ["?sid"] );
+		$this->response->redirect ( AppUrl::userPresents () );
+	}
+	public function rmappraiseAction(pmcaiMsg $msg) {
+		$info = AppUser::getInstance ()->auth->getInfo ();
+		$this->model->rmAppraise ( $info ["sid"], $msg ["?sid"] );
+		$this->response->redirect ( AppUrl::userAppraise () );
+	}
+	public function rmquestionAction(pmcaiMsg $msg) {
+		$info = AppUser::getInstance ()->auth->getInfo ();
+		$this->model->rmQuestion ( $info ["sid"], $msg ["?sid"] );
+		$this->response->redirect ( AppUrl::userQuestions () );
+	}
 	public function profileAction(pmcaiMsg $msg) {
 		if ($msg->isPost ()) {
 			$i = AppUser::getInstance ()->auth->getInfo ();

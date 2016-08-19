@@ -39,4 +39,8 @@
 		WHERE `uid` = :uid
 		LIMIT :offset,:length
 	</rows_uid>
+	<rows_uid_cnt>
+		SELECT count(sid) as `cnt` FROM `data_letter`
+		WHERE `uid` = :uid
+	</rows_uid_cnt>
 </ui_letter>

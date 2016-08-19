@@ -69,22 +69,14 @@ $this->keyword = "";
 			</div>
 			<div class="hotbqbox fz13">
 				<ul class="clearfix">
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺炎</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺增生</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">包皮包茎</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺痛</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺肥大</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">早泄</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺囊肿</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺癌</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺炎</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺增生</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">包皮包茎</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺痛</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺肥大</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">早泄</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺囊肿</a></li>
-					<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">前列腺癌</a></li>
+				  <?php foreach($model->getLv0KeyInfoes() as $xbz):?>   	
+             
+                  
+                           <li><a><?php print $xbz["data"] ?></a></li>
+                            
+            <?php endforeach;?>
+				
+				
 				</ul>
 			</div>
 		</div>

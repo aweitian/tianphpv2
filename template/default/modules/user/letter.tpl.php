@@ -6,6 +6,19 @@
  * 依赖:
  */
 $userinfo = AppUser::getInstance()->auth->getInfo();
+
+$pageSize = 5;
+if(isset($_REQUEST["page"])){
+	$page = intval($_REQUEST["page"]);
+} else{
+	$page = 1;
+}
+
+$pagination = new pagination($model->getDataCntByUid($userinfo["sid"]), $page, $pageSize, 10);
+
+$req = new httpRequest();
+$url = new url($req->requestUri());
+
 ?>
   <div class="blank15"></div>
   <div class="con_tit fz13">当前位置：<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">首页</a> > 会员中心</div>
@@ -26,7 +39,7 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
             </dd>
         </dl>
         <div class="memer_box3">
-        	<?php $data = $model->getDataByUid(5,0)?>
+        	<?php $data = $model->getDataByUid($pageSize,($page-1)*$pageSize)?>
         	<?php if(count($data)):?>
             <table cellpadding="0" cellspacing="0" border="0">
             	<tr class="tbtr1">
@@ -48,6 +61,17 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
                 </tr>
  				<?php endforeach;?>
             </table>
+             <p class="blank10"></p>
+            <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($pagination->hasNext()):?>
+            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?> </div>
+       		
             <div class="blank10"></div>
             <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen fr" href="<?php print AppUrl::userWriteLetter()?>">写感谢信</a>
            <?php else:?> 

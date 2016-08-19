@@ -4,6 +4,18 @@
  * @Date: 2016年8月18日
  */
 $userinfo = AppUser::getInstance()->auth->getInfo();
+
+$pageSize = 1;
+if(isset($_REQUEST["page"])){
+	$page = intval($_REQUEST["page"]);
+} else{
+	$page = 1;
+}
+
+$pagination = new pagination($model->getDataByUidCnt($userinfo["sid"]), $page, $pageSize, 10);
+
+$req = new httpRequest();
+$url = new url($req->requestUri());
 ?>
   <div class="blank15"></div>
   <div class="con_tit fz13">当前位置：<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="/">首页</a> > 会员中心</div>
@@ -24,7 +36,7 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
             </dd>
         </dl>
         <div class="memer_box3">
-        	<?php $data = $model->getAppraiseDataByUid(5,0)?>
+        	<?php $data = $model->getAppraiseDataByUid($pageSize,($page-1)*$pageSize)?>
         
         	<?php if(count($data)):?>
             <table cellpadding="0" cellspacing="0" border="0">
@@ -37,6 +49,7 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
                 </tr>
                 <?php $ma = appraiseLvMeta::getMeta()?>
                 <?php foreach($data as $q):?>
+               
                 <?php $con=AppFilter::filterOut($q["txt"]);?>
                 <tr>
                 	<td class="tbtd1 color3 line24"><?php print ($con) ?></td>
@@ -44,7 +57,7 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
                     <td class="color9"><?php print $q["date"]?></td>
                     <td class="green"><?php print $ma[$q["lv"]]?></td>
                     
-                    <td class="tbtd2 green"><?php if(!$q["v"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("?")' href="<?php print AppUrl::userRemoveLetter()?>?sid=<?php print $q["sid"]?>">删除</a>
+                    <td class="tbtd2 green"><?php if(!$q["v"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("友情提示：是否要删除?")' href="<?php print AppUrl::userRemoveAppraise()?>?sid=<?php print $q["sid"]?>">删除</a>
                     <?php else:  ?>
                     已验证
                     <?php endif?></td>
@@ -52,6 +65,16 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
                 </tr>
  				<?php endforeach;?>
             </table>
+           <p class="blank10"></p>
+            <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($pagination->hasNext()):?>
+            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?> </div>
             <div class="blank10"></div>
             <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen fr" href="<?php print AppUrl::userWriteAppraise()?>">写评价</a>
            <?php else:?> 

@@ -104,6 +104,55 @@ class putUIApi {
 	
 	/**
 	 *
+	 * @param int $pid
+	 * @param int $uid
+	 *        	删除感谢信
+	 * @return int 1/0
+	 */
+	public function rmPresent($uid, $pid) {
+		$sql = $this->sqlManager->getSql ( "/ui_put/present_rm" );
+		$bnd = array (
+				"uid" => $uid,
+				"pid" => $pid
+		);
+		return $this->db->exec ( $sql, $bnd );
+	}
+	
+	public function givePresent($uid,$dod,$pid){
+		$op_type = "user_modify";
+		$oplog = new oplog ();
+		$try_cnt = $oplog->getCnt ( $op_type, $uid );
+		if (USER_MOD_PROFILE_TRY_MAX - $try_cnt <= 0) {
+			return new rirResult ( 1, "今天编辑次数过多" );
+		}
+		$opsid = $oplog->add ( $op_type, $uid );
+		$oplog->update ( $opsid );
+		
+		if(!validator::isUint($dod)){
+			return new rirResult(1,"无效的医生ID");
+		}
+		if(!validator::isUint($uid)){
+			return new rirResult(1,"无效的用户ID");
+		}
+		if(!validator::isUint($pid)){
+			return new rirResult(1,"无效的礼物ID");
+		}
+		
+		
+		$sql = $this->sqlManager->getSql ( "/ui_put/present" );
+		$row = $this->db->exec ( $sql, array (
+				"uid" => $uid,
+				"dod" => $dod,
+				"pid" => $pid
+		) );
+		if ($row == 1) {
+			return new rirResult ( 0, "ok" );
+		}
+		return new rirResult ( 2, "数据库错误" );
+	}
+	
+	/**
+	 *
 	 * @param int $uid        	
 	 * @param string $op
 	 *        	旧密码
@@ -493,10 +542,42 @@ class putUIApi {
 	 * @return int 1/0
 	 */
 	public function rmLetter($uid, $led) {
-		$sql = $this->sqlManager->getSql ( "/ui_put/rm" );
+		$sql = $this->sqlManager->getSql ( "/ui_put/letter_rm" );
 		$bnd = array (
 				"uid" => $uid,
 				"led" => $led 
+		);
+		return $this->db->exec ( $sql, $bnd );
+	}
+	
+	
+	/**
+	 *
+	 * @param int $appid        	
+	 * @param int $uid
+	 *        	删除APPRAISE
+	 * @return int 1/0
+	 */
+	public function rmAppraise($uid, $appid) {
+		$sql = $this->sqlManager->getSql ( "/ui_put/appraise_rm" );
+		$bnd = array (
+				"uid" => $uid,
+				"appid" => $appid 
+		);
+		return $this->db->exec ( $sql, $bnd );
+	}
+	/**
+	 *
+	 * @param int $askid        	
+	 * @param int $uid
+	 *        	删除ASK
+	 * @return int 1/0
+	 */
+	public function rmQuestion($uid, $askid) {
+		$sql = $this->sqlManager->getSql ( "/ui_put/ask_rm" );
+		$bnd = array (
+				"uid" => $uid,
+				"askid" => $askid 
 		);
 		return $this->db->exec ( $sql, $bnd );
 	}

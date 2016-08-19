@@ -90,6 +90,9 @@ class AppUrl {
 	public static function userRemoveLetter() {
 		return AppUrl::build ( "/user/rmletter" );
 	}
+	public static function userRemoveAppraise() {
+		return AppUrl::build ( "/user/rmappraise" );
+	}
 	public static function userAppraise() {
 		return AppUrl::build ( "/user/appraise" );
 	}
@@ -98,6 +101,9 @@ class AppUrl {
 	}
 	public static function userAddAppraise() {
 		return AppUrl::build ( "/user/addappraise" );
+	}
+	public static function userRmQuestion() {
+		return AppUrl::build ( "/user/rmquestion" );
 	}
 	public static function userRmAppraise() {
 		return AppUrl::build ( "/user/rmappraise" );

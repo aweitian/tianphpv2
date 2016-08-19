@@ -6,71 +6,29 @@
  * 依赖:
  */
 $userinfo = AppUser::getInstance ()->auth->getInfo ();
+$act = appCtrl::$msg->getAction();
 // var_dump($userinfo);exit;
 ?>
-<div class="blank15"></div>
+<div class="public_width">
 
-
-<div class="clr">
-
-
-	<?php include dirname(__FILE__)."/common/left.tpl.php";?>
-
-	<div class="fr border2 wid738 memer_box2">
-
-		<dl class="clr">
-			<dt class="fl">
-				<img src="<?php print HTTP_ENTRY?>/static/images/hyfr_img4.png" />
-			</dt>
-			<dd class="fl">
-				<p class="fz24">帐号设置</p>
-				<p class="blank10"></p>
-				<p class="fz13">修改个人信息</p>
-			</dd>
-		</dl>
-		<div class="memer_box4">
-
-			<?php include dirname(__FILE__)."/common/setting_links.php"?>
-
-			<?php print $info?>
-			<div class="memer_box5 clr color6 fz13">
-				<form method="post" action="<?php print AppUrl::userProfile()?>">
-					<p>
-						<label>昵称：</label> 
-						<input value="<?php print $userinfo["name"]?>" name="name" type="text" /> 
-						<span>4~14字符英文、汉字、数字等组成</span>
-					</p>
-					<p class="blank25"></p>
-					<p>
-						<label>Email:</label> 
-						<input value="<?php print $userinfo["email"]?>" name="email" type="email" /> 
-					</p>
-					<p class="blank25"></p>
-					<p>
-						<label>手机:</label> 
-						<input value="<?php print $userinfo["phone"]?>" name="phone" type="text" />
-					</p>
-					<p class="blank25"></p>
-					<p>
-						<label>安全问题:</label> 
-						<input value="<?php print $userinfo["rpq"]?>" name="rpq" type="text" />
-					</p>
-					<p class="blank25"></p>
-					<p>
-						<label>安全答案：</label>
-						<input value="<?php print $userinfo["rpa"]?>" name="rpa" type="text" />
-					</p>
-					<p class="blank25"></p>
-					<p>
-						<button class="tc gd1s" type="submit">保存</button>
-					</p>
-				</form>
-			</div>
-
-		</div>
-
-	</div>
-
+<div class="head_tc blue_bg">
+    <a class="goback fl" href="" title="返回上页" onclick="history.go(-1)"><b></b></a>
+    <div class="head_tit" >个人中心</div>
+    <a href="<?php print AppUrl::userLogout()?>" class="fr login_top bor_rad green_topbg">退出</a>
+</div>
+<div class="mzy30">
+<!--head end-->
+<div class="blank30"></div>
+<div class="fz30">欢迎你,<span class="yellow"><?php print $userinfo["name"]?></span>!</div>
+<div class="blank30"></div>
+<div class="memer_center bor_rad borddd clr">
+	<a href="<?php print AppUrl::userQuestions()?>">我的提问<span></span></a>
+    <a href="<?php print AppUrl::userLetter()?>">我写的感谢信<span></span></a>
+    <a href="<?php print AppUrl::userAppraise()?>">我发表的评价<span></span></a>
+    <a href="<?php print AppUrl::userPresents()?>">心意礼物<span></span></a>
+    <a href="<?php print AppUrl::userModifypwd()?>" class="mbor0">修改密码<span></span></a>
 </div>
 
-<div class="blank40"></div>
+</div>
+<div class="blank30"></div>
+</div>

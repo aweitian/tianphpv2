@@ -25,25 +25,18 @@
 
 	<getAskByUid>
 		SELECT 
-			`data_ask`.`sid`,
-			`data_ask`.`uid`,
-			`data_ask`.`did`,
-			`data_ask`.`title`,
-			`data_ask`.`desc`,
-			`data_ask`.`svr`,
-			`data_ask`.`date`,
-			`data_ask`.`dod`
+			*
 			FROM `data_ask`
 			WHERE `data_ask`.`uid` = :uid
 			ORDER BY `data_ask`.`sid` DESC
 		LIMIT :offset,:length
 	</getAskByUid>
-	<getAskByDidCnt>
+	<getAskByUidCnt>
 		SELECT 
 			count(`data_ask`.`sid`) as `cnt`
 			FROM `data_ask`
 			WHERE `data_ask`.`uid` = :uid
-	</getAskByDidCnt>
+	</getAskByUidCnt>
 
 
 

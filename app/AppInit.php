@@ -52,7 +52,7 @@ if (utility::isMobile ()) {
 	define("TARGET_BLANK_OPEN",false);
 } else {
 	define("THEME", "default");
-	define("TARGET_BLANK_OPEN",true);
+	define("TARGET_BLANK_OPEN",false);
 }
 // var_dump(THEME);exit;
 require_once FILE_SYSTEM_ENTRY . '/app/AppConst.php';
@@ -68,6 +68,7 @@ require_once FILE_SYSTEM_ENTRY . '/app/AppView.php';
 require_once FILE_SYSTEM_ENTRY . '/app/AppUrl.php';
 require_once FILE_SYSTEM_ENTRY . '/app/AppUser.php';
 require_once FILE_SYSTEM_ENTRY . '/app/AppFilter.php';
+require_once FILE_SYSTEM_ENTRY . '/app/AppSms.php';
 require_once FILE_SYSTEM_ENTRY . '/app/hookControllerNotFound.php';
 
 if (false !== strpos ( FILE_SYSTEM_ENTRY, "openshift" )) {

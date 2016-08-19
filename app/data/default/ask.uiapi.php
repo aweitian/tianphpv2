@@ -78,8 +78,8 @@ class askUIApi {
 	
 	
 	/**
-	 * 根据病种Id获取问题个数
-	 * @param int $did
+	 * 根据用户Id获取问题个数
+	 * @param int $uid
 	 * @return int
 	 */
 	public function getQuestionsByUidCnt($uid){
@@ -90,7 +90,7 @@ class askUIApi {
 		
 		$sql = $this->sqlManager->getSql("/ui_ask/getAskByUidCnt");
 		$ret = $this->db->fetch($sql, array(
-				"dod" => $dod,
+				"uid" => $uid,
 		));
 		$ret = $ret["cnt"];
 		$this->cache[$cache_key] = $ret;

@@ -94,7 +94,7 @@ $this->keyword = "";
                         <ul class="hp_doc1 clearfix">
                         
                         
-                            	<?php foreach($m->getDoctors(6,($page-1)*$pageSize) as $doc):?>
+                            	<?php foreach($m->getDoctors($pageSize,($page-1)*$pageSize) as $doc):?>
                             	<?php $count=$m->getQuestionsCountByDod($doc["dod"]);?>
                             <li class="hp_doc_box1">
                             <div class="clr">

@@ -77,7 +77,7 @@ $this->keyword = "";
                <div class="blank20"></div>
                
                 <ul class="gift_wall_main clearfix">
-                 <?php foreach( $m->getDataByDod($m->data["sid"],10,0) as $lw):?>           
+                 <?php foreach( $m->getPresentDataByDod($m->data["sid"],10,0) as $lw):?>         
                  <?php $pre=$m->rowpid($lw["pid"]);?>    
                  <?php $cnt=$m->getDataByDodCnt($lw["dod"]);?>
                  

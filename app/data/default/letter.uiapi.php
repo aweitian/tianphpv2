@@ -108,4 +108,24 @@ class letterUIApi {
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}
+	/**
+	 * sid,uid,dod,did,content,date
+	 * 
+	 * @param int $length        	
+	 * @param int $offset        	
+	 * @return array(fetchAll);
+	 */
+	public function getDataCntByUid($uid) {
+		$cache_key = "getDataCntByUid-" . $uid;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_letter/rows_uid_cnt" );
+		$ret = $this->db->fetch ( $sql, array (
+				"uid" => $uid,
+		) );
+		$ret = $ret["cnt"];
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
 }

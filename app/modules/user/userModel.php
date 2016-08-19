@@ -95,18 +95,78 @@ class userModel extends AppModel {
 		$info = AppUser::getInstance()->auth->getInfo();
 		return letterUIApi::getInstance ()->getDataByUid ($info["sid"] , $length, $offset );
 	}
+	public function getDataCntByUid($uid) {
+		$info = AppUser::getInstance()->auth->getInfo();
+		return letterUIApi::getInstance ()->getDataCntByUid ($info["sid"]);
+	}
+	
 	
 	public function getAppraiseDataByUid( $length, $offset = 0) {
 		$info = AppUser::getInstance()->auth->getInfo();
 		return appraiseUIApi::getInstance ()->getDataByUid ($info["sid"] , $length, $offset );
 	}
+	public function getDataByUidCnt($uid) {
+		$info = AppUser::getInstance()->auth->getInfo();
+		return appraiseUIApi::getInstance ()->getDataByUidCnt ($info["sid"]);
+	}
 	
+	
+	public function getQuestionsDataByUid( $length, $offset = 0) {
+		$info = AppUser::getInstance()->auth->getInfo();
+		return askUIApi::getInstance ()->getQuestionsByUid ($info["sid"] , $length, $offset );
+	}
+
+	public function getQuestionsByUidCnt($uid){
+		$info = AppUser::getInstance()->auth->getInfo();
+		return askUIApi::getInstance()->getQuestionsByUidCnt($info["sid"]);
+	}
+	
+	
+	public function getPresentDataByUid( $length, $offset = 0) {
+		$info = AppUser::getInstance()->auth->getInfo();
+		return presentUIApi::getInstance ()->getDataByUid ($info["sid"] , $length, $offset );
+	}
+	
+	
+	public function getPresentDataByUidCnt($uid) {
+		$info = AppUser::getInstance()->auth->getInfo();
+		return presentUIApi::getInstance ()->getDataByUidCnt ($info["sid"]);
+	}
+	public function row($pid) {
+		$info = AppUser::getInstance()->auth->getInfo();
+		return presentUIApi::getInstance ()->row ($pid);
+	}
+	
+	
+	
+	
+	public function rmPresent($uid,$pid){
+		return putUIApi::getInstance()->rmPresent($uid, $pid);
+	}
 	public function rmLetter($uid,$led){
 		return putUIApi::getInstance()->rmLetter($uid, $led);
+	}
+	public function rmAppraise($uid,$appid){
+		return putUIApi::getInstance()->rmAppraise($uid, $appid);
+	}
+	public function rmQuestion($uid,$qid){
+		return putUIApi::getInstance()->rmQuestion($uid, $qid);
 	}
 	public function getAllDoc(){
 		return doctorUIApi::getInstance()->getAll();
 	}
+	public function getNameByDod($dod){
+		return doctorUIApi::getInstance()->getNameByDod($dod);
+	}
+	public function getLv0KeyInfoes(){
+		return diseaseUIApi::getInstance()->getLv0KeyInfoes();
+	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * 
 	 * @param int $dod

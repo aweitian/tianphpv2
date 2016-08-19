@@ -12,9 +12,52 @@
 		) VALUES (
 			:uid,:dod,:title,:did,:desc,:svr,0,:date
 		)
-	
-	
 	</ask>
+ 	<ask_rm>
+		DELETE `data_ask`,`data_ask_append`
+		 FROM `data_ask`
+		 LEFT JOIN `data_ask_append` ON `data_ask`.`sid` = `data_ask_append`.`askid`
+		 WHERE  
+			`data_ask`.`sid` = :askid
+			AND `data_ask`.`uid` = :uid
+			AND `data_ask`.`v` = 0
+	</ask_rm>
+	
+	<present>
+		 INSERT INTO `data_doctor_present`
+		(
+				`v`,
+	             `uid`,
+	             `dod`,
+	             `pid`,
+	             `date`)
+		VALUES (
+				0,
+		        :uid,
+		        :dod,
+		        :pid,
+		        CURDATE());   
+	</present>
+	<present_rm>
+		DELETE FROM `data_doctor_present`
+		WHERE  
+			`data_doctor_present`.`sid` = :pid
+			AND `data_doctor_present`.`uid` = :uid
+			AND `data_doctor_present`.`v` = 0
+	</present_rm>
+	
+	
+ 	<register_phone>
+ 		INSERT INTO `data_user` (
+			`name`,`pwd`,`phone`,`avatar`,`rpq`,`rpa`,`wa`,`date`
+		) VALUES (
+			:phone,:pwd,:phone,:avatar,:rpq,:rpa,:wa,:date
+		)
+ 	</register_phone>
+ 	
+ 	
+ 	
+ 	
  	
  	<reg_normal>
 		INSERT INTO `data_user`
@@ -116,18 +159,31 @@
 		)
 	</appraise>
 	
+	<appraise_rm>
+		DELETE
+			FROM `data_appraise`
+			WHERE 
+				`sid` = :appid
+				AND `uid` = :uid
+				AND `v` = 0
+	</appraise_rm>
+	
+	
+	
 	<letter>
 		INSERT INTO `data_letter`
 		(
 			`verify`,
              `uid`,
              `dod`,
-             `content`
+             `content`,
+             `date`
 	    ) VALUES (
 	    	0,
 	        :uid,
 	        :dod,
-	        :content
+	        :content,
+	        CURDATE()
 		)
 	</letter>
  	<letter_rm>
