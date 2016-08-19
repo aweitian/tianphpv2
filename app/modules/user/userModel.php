@@ -26,6 +26,10 @@ class userModel extends AppModel {
 		return putUIApi::getInstance ()->addComment($uid,$aid,$c);
 		
 	}
+	public function givePresent($uid,$dod,$pid){
+		return putUIApi::getInstance ()->givePresent($uid,$dod,$pid);
+		
+	}
 	public function getDisease() {
 		return diseaseUIApi::getInstance()->getInfo();
 	}

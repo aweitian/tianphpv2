@@ -32,8 +32,11 @@ class putController extends appCtrl{
 				print $ret->toJSON();
 				exit;
 			}
+			$this->initHttpResponse();
 			$info = AppUser::getInstance()->auth->getInfo();
-			$this->model->addQuestion($info["sid"], $msg["j"], $msg["title"], $did, $desc, $svr);
+			$this->model->addQuestion($info["sid"], $msg["d"], $msg["title"], $msg["j"], $msg["desc"], $msg["svr"]);
+			$this->response->redirect ( AppUrl::userQuestions () );
+			
 		}
 		$this->view->put($this->model);
 	}

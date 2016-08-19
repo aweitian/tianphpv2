@@ -37,7 +37,8 @@ class userController extends appCtrl {
 				"login",
 				"register",
 				"resetpwd",
-				"addcomment"
+				"addcomment",
+				"addpresents",
 		) )) {
 			if (! AppUser::getInstance ()->auth->isLogined ()) {
 				$this->response->redirect ( AppUrl::userLogin () );
@@ -128,6 +129,34 @@ class userController extends appCtrl {
 		$info = AppUser::getInstance ()->auth->getInfo();
 		$uid = $info["sid"];
 		$ret= $this->model->addComment($uid, intval($msg["a"]), $msg["c"]);
+		
+		if($ret->isTrue()){
+			$ret = new rirResult(0,"提交成功,需要审核过才能出现在页面");
+			print $ret->toJSON();
+			exit;
+		} else {
+			$ret = new rirResult(4,"今天提交数据过多");
+			print $ret->toJSON();
+			exit;
+		}
+
+	}
+	public function addpresentsAction(pmcaiMsg $msg) {
+		if(!AppUser::getInstance ()->auth->isLogined()){
+			$ret = new rirResult(1,"需要登陆");
+			print $ret->toJSON();
+			exit;
+		}
+		//$uid,$dod,$pid
+		if(!isset($msg["d"],$msg["p"])){
+			$ret = new rirResult(2,"非法数据提交");
+			print $ret->toJSON();
+			exit;
+		}
+
+		$info = AppUser::getInstance ()->auth->getInfo();
+		$uid = $info["sid"];
+		$ret= $this->model->givePresent($uid, intval($msg["d"]), $msg["p"]);
 		
 		if($ret->isTrue()){
 			$ret = new rirResult(0,"提交成功,需要审核过才能出现在页面");

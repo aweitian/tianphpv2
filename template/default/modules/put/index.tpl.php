@@ -46,9 +46,23 @@ $this->keyword = "";
         <div class="wtbox">
           <input placeholder="请用简单描述您的问题..." class="wtmsinp border2 fz13 gray" type="text" name="title" />
         </div>
+          <div class="blank25"></div>
+        <div class="twtit clearfix">
+          <div class="twtitl fl fz16"><span class="tc white">2</span>选择医生</div>
+          <div class="twtitr2 fl border2">
+          <select class="fz16 gray" name="d">
+
+							<option value="0">选择医生</option>
+						<?php foreach($model->getAllDoc() as $doc):?>
+						<option value="<?php print $doc["sid"]?>"><?php print $doc["name"]?></option>
+						<?php endforeach;?>
+					</select>
+          </div>
+        </div>
+  
         <div class="blank25"></div>
         <div class="twtit clearfix">
-          <div class="twtitl fl fz16"><span class="tc white">2</span>选择疾病分类</div>
+          <div class="twtitl fl fz16"><span class="tc white">3</span>选择疾病分类</div>
           <div class="twtitr2 fl border2">
             <select name="j" class="fz16 gray">
               <option value="0">请选择</option>
@@ -59,8 +73,9 @@ $this->keyword = "";
           </div>
         </div>
         <div class="blank25"></div>
+        
         <div class="twtit clearfix">
-          <div class="twtitl fl fz16"><span class="tc white">3</span>请详细描述您的病情</div>
+          <div class="twtitl fl fz16"><span class="tc white">4</span>请详细描述您的病情</div>
           <div class="twtitr fr gray fz13">描述不少于20个字</div>
         </div>
         <div class="blank10"></div>
@@ -76,7 +91,7 @@ $this->keyword = "";
         </div>
         <div class="blank25"></div>
         <div class="twtit clearfix">
-          <div class="twtitl fl fz16"><span class="tc white">4</span>想要得到哪些帮助？ </div>
+          <div class="twtitl fl fz16"><span class="tc white">5</span>想要得到哪些帮助？ </div>
           <div class="twtitr fr gray fz13">描述不能为空</div>
         </div>
         <div class="blank10"></div>
@@ -108,6 +123,12 @@ if (f.title.value=="")
 	f.title.focus();
 	return false;
 }
+if (f.d.value=="0")
+{ 
+	alert("请选择医生");
+	f.j.focus();
+	return false;
+}
 if (f.j.value=="0")
 { 
 	alert("请选择疾病");
@@ -125,7 +146,7 @@ return false;
 
 if (f.svr.value=="")
 { 
-	alert("请填写内容");
+	alert("想要得到哪些帮助？");
 	f.svr.focus();
 	return false;
 }

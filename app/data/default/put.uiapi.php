@@ -653,7 +653,14 @@ class putUIApi {
 		if(!validator::isUint($did) or $did < 1) {
 			return new rirResult(5,"无效的病种ID");
 		}
-// 		var_dump($uid, $dod, $did,$content);exit;
+		
+		
+		
+// 		var_dump($uid,$dod,$title,$did,$desc,$svr);exit;
+		
+		
+		
+		
 		if(!$this->existDid($did)){
 			return new rirResult(4,"无效的病种ID");
 		}
@@ -662,7 +669,7 @@ class putUIApi {
 			return new rirResult(4,"无效的医生ID");
 		}
 		
-		$sql = $this->sqlManager->getSql ( "/ui_put/letter" );
+		$sql = $this->sqlManager->getSql ( "/ui_put/ask" );
 		$bnd = array (
 				//:uid,:dod,:title,:did,:desc,:svr
 				"uid" => $uid,
@@ -672,7 +679,6 @@ class putUIApi {
 				"desc" => $desc, 
 				"svr" => $svr, 
 		);
-		// var_dump($sql,$bnd);exit;
 		$row = $this->db->insert ( $sql, $bnd );
 		if ($row > 0) {
 			return new rirResult ( 0, "提交成功，审核通过后会出现在页面上" );
