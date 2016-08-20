@@ -54,6 +54,23 @@ class userUIApi implements IOp {
 		}
 		return userUIApi::$inst;
 	}
+	/**
+	 * -1 已发验证码
+	 * 0没有注册过
+	 * 1注册过
+	 * @param phone $phone
+	 * @return number
+	 */
+	public function isRegisted($phone) {
+		$sql = $this->sqlManager->getSql ( "/ui_user/row_phone" );
+		$ret = $this->db->fetch ( $sql, array (
+				"phone" => $phone 
+		) );
+		if (empty ( $ret )) {
+			return 0;
+		}
+		return $ret ["v"] == "0" ? - 1 : 1;
+	}
 	
 	/**
 	 * 获取全部用户个数
@@ -121,44 +138,6 @@ class userUIApi implements IOp {
 		return $ret;
 	}
 	// 前端操作
-	
-	/**
-	 *
-	 * @param int $uid        	
-	 * @param string $newavatar
-	 *        	(只要BASENAME部分)
-	 * @return rirResult
-	 */
-	public function avatar($uid, $newavatar) {
-		$op_type = "user_modify";
-		$oplog = new oplog ();
-		$try_cnt = $oplog->getCnt ( $op_type, $uid );
-		if (USER_MOD_PROFILE_TRY_MAX - $try_cnt <= 0) {
-			return new rirResult ( 1, "今天编辑次数过多" );
-		}
-		$opsid = $oplog->add ( $op_type, $uid );
-		$oplog->update ( $opsid );
-		$avatarMeta = avatarMeta::getAllAvatar ();
-		
-		if (! in_array ( $newavatar, $avatarMeta )) {
-			return new rirResult ( 2, "头像不存在" );
-		}
-		
-		$sql = $this->sqlManager->getSql ( "/ui_user/profile/avatar" );
-		$row = $this->db->exec ( $sql, array (
-				"uid" => $uid,
-				"avatar" => $newavatar 
-		) );
-		if ($row == 1) {
-			$sql = $this->sqlManager->getSql ( "/ui_user/row_uid" );
-			$ret = $this->db->fetch ( $sql, array (
-					"uid" => $uid 
-			) );
-			return new rirResult ( 0, "ok", $ret );
-		}
-		return new rirResult ( 3, "头像没有变化" );
-	}
-	
 	private function initWaterArm() {
 		$data = $this->db->fetchAll ( $this->sqlManager->getSql ( "/ui_user/waterarm" ), array () );
 		foreach ( $data as $item ) {

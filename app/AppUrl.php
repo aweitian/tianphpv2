@@ -69,6 +69,10 @@ class AppUrl {
 	public static function userResetPwd() {
 		return AppUrl::build ( "/user/resetpwd" );
 	}
+	public static function userWritecode() {
+		return AppUrl::build ( "/user/writecode" );
+	}
+	
 	public static function userRegister() {
 		return AppUrl::build ( "/user/register" );
 	}
@@ -129,12 +133,20 @@ class AppUrl {
 	public static function userAddComment() {
 		return AppUrl::build ( "/user/addcomment" );
 	}
+	public static function userRegPhoneSendSms() {
+		return AppUrl::build ( "/user/sendsms4reg" );
+	}
+	
+	
+	
 	public static function helpRouting() {
 		return AppUrl::build ( "/help/routing" );
 	}
 	public static function helpAbout() {
 		return AppUrl::build ( "/help/about" );
 	}
+	
+	
 	// 医生评价
 	/**
 	 *

@@ -61,6 +61,7 @@ defTplData::getInstance()->description = $data["desc"];
         <?php print ($data["content"])?>
         <div class="jbkp_page_zx">
         	<a href="" class="fl kp_bn1">赞赏(<?php print rand(300,600);?>)</a>
+        	<a href="<?php print AppUrl::userAddAppraise();?>" class="fr kp_bn1">去评论</a>
         </div>
         <div class="blank30"></div>
     </div>
@@ -119,7 +120,7 @@ defTplData::getInstance()->description = $data["desc"];
 <div style="height:1rem;"></div>
 <div class="box_e">
     <p class="box_center2">
-        <a href="<?php print AppUrl::getSwtUrl()?>" class="btn_e1" >预约挂号</a>
+        <a href="<?php print AppUrl::navSubscribe()?>" class="btn_e1" >预约挂号</a>
         <a href="tel:021-52733999" class="btn_e2">电话咨询</a>
         <a href="<?php print AppUrl::getSwtUrl()?>" class="btn_e3">在线咨询</a>
     </p> 

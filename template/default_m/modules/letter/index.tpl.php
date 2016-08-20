@@ -44,7 +44,7 @@ $m = $model;
       <!--fromjb end-->
       <div class="blank20"></div>
       <div class="fromzxzj border1">
-        <div class="fromtit fz18 black">咨询专家<span class="fz12 gray">Expert cvonsultants</span></div>
+        <div class="fromtit fz18 black">咨询医生<span class="fz12 gray">Expert cvonsultants</span></div>
         <div class="fromzxzjbox">
           <div class="fromzxzjbox1 clearfix">
             <div class="fromzxzjbox1l fl"><a href="<?php print AppUrl::getSwtUrl()?>"><img src="<?php print HTTP_ENTRY?>/static/images/syask.gif" width="449" height="60" /></a></div>

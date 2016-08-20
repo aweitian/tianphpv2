@@ -99,7 +99,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       <input value="<?php print $def["contribution"]?>" name="contribution" required type="number" class="form-control" placeholder="请输入医生等级">
                     </div>
                      <div class="form-group">
-                      <label>专家语录</label>
+                      <label>医生语录</label>
                        <textarea name="desc"  class="form-control" placeholder="医生简介"><?php print $def["desc"]?></textarea>
                     </div>
                      <div class="form-group">

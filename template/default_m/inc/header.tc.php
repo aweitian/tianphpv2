@@ -46,7 +46,7 @@
  <?php else:?>
  <?php $userinfo = AppUser::getInstance()->auth->getInfo()?>
  <div class="three_dl clearfix">
-    <a style="color:#fe8100;"><?php print AppFilter::filterOut($userinfo["name"]) ?></a> 
+    <a style="color:#fe8100;" href="<?php print AppUrl::userProfile()?>"><?php print AppFilter::filterOut($userinfo["name"]) ?></a> 
     <a href="<?php print AppUrl::userLogout()?>" style="color:#fff;">退出</a>
  </div>
  <?php endif;?>

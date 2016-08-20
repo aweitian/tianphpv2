@@ -167,7 +167,7 @@ $url = new url ( $req->requestUri () );
 			<dl class="mzy30">
 				<div class="blank20"></div>
 				<dt class="clr">
-					<a href="" class="yellow">所患疾病： <?php print($dis) ?></a>
+					<a href="<?php print AppUrl::disHomeByDid($let["did"]);?>" class="yellow">所患疾病： <?php print($dis) ?></a>
 				</dt>
 				<dd class="color3">感谢信：<?php print $m->utf8cut($let["content"],0,64)?>...</dd>
 				<div class="blank15"></div>
@@ -252,7 +252,7 @@ $url = new url ( $req->requestUri () );
 		<div class="blank10"></div>
 		<div class="index_hotzx">
 			<h2 class="title_name_lan">
-				专家文章<span class="fw400 fz28">(<?php print $m->allByDodCnt($m->data["sid"])?>)</span><a
+				医生文章<span class="fw400 fz28">(<?php print $m->allByDodCnt($m->data["sid"])?>)</span><a
 					href="<?php print AppUrl::docArticleHomeByDocid($m->data["id"])?>"
 					class="fr">+更多</a>
 			</h2>
@@ -286,7 +286,7 @@ $url = new url ( $req->requestUri () );
 		<p class="box_center2">
 			<a href="<?php print AppUrl::getSwtUrl()?>" class="btn_b1">预约挂号</a> <a
 				href="<?php print AppUrl::userWriteLetter()?>" class="btn_b2">写感谢信</a> <a
-				href="<?php print AppUrl::getSwtUrl()?>" class="btn_b3">送暖心</a>
+				href="<?php print AppUrl::docPresentHomeByDocid($m->data["id"])?>" class="btn_b3">送暖心</a>
 		</p>
 	</div>
 </div>

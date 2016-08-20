@@ -5,10 +5,9 @@
  * @Desc: 
  * 依赖:
  */
-$userinfo = AppUser::getInstance()->auth->getInfo();
 if ($_SERVER ["HTTP_REFERER"]) {
 	$url = new url ( $_SERVER ["HTTP_REFERER"] );
-	if ($url->path != HTTP_ENTRY . "/user/writeletter") {
+	if ($url->path != HTTP_ENTRY . "/user/writeappraise") {
 		$redirectUrl = "?return=". urlencode($_SERVER ["HTTP_REFERER"]) ;
 	} else {
 		$redirectUrl = "";
@@ -17,9 +16,21 @@ if ($_SERVER ["HTTP_REFERER"]) {
 	$redirectUrl = "";
 }
 
+
+
+$tree_dis = array();
+foreach ($model->getDisease() as $item){
+	if(!array_key_exists($item["pid"], $tree_dis)){
+		$tree_dis[$item["pid"]] = array(
+				"text" => $item["pd"],
+				"children" => array()
+		);
+	}
+	$tree_dis[$item["pid"]]["children"][$item["mid"]] = array($item["md"],$item["url"]);
+}
 ?>
 <div class="public_width">
-<?php $user_header_title = "写感谢信";?>
+<?php $user_header_title = "写评价";?>
 <?php include dirname(__FILE__)."/common/header.tpl.php"?>
 
 <!--head end-->
@@ -27,7 +38,7 @@ if ($_SERVER ["HTTP_REFERER"]) {
 <div class="mzy30">
 	<div class="blank30"></div>
     
-    <form name="gh" onSubmit="return chk(this)" action="<?php print AppUrl::userWriteLetter().$redirectUrl?>" method="post">
+    <form name="gh" onSubmit="return chk(this)" action="<?php print AppUrl::userWriteAppraise().$redirectUrl?>" method="post">
 	    <div class="yuy_warp yuy_ys bor_rad borddd clr">
 						<select class="fz16 gray" name="d">
 						<option value="0">选择医生</option>
@@ -45,6 +56,15 @@ if ($_SERVER ["HTTP_REFERER"]) {
                         <?php endforeach;?>			    
 					</select>
 	     </div>
+	     <div class="blank30"></div>
+        <div class="satisfied clr">
+						<div class="twtitl fl fz16 pt7">满意度：</div>
+					    <div class="twtitl fl fz16 pt7">
+						<input name="m" type="radio" value="0" />  一般&nbsp;&nbsp;&nbsp;&nbsp;
+						<input name="m" type="radio" value="1" />  满意&nbsp;&nbsp;&nbsp;&nbsp;
+						<input name="m" type="radio" value="2" />  很满意
+					    </div>
+	     </div>
 	<div class="blank30"></div>
     <div class="yuy_warp bor_rad borddd clr">
         <textarea placeholder="我来说两句..." name="c"></textarea>
@@ -54,41 +74,6 @@ if ($_SERVER ["HTTP_REFERER"]) {
     <div class="blank30"></div>
     </form>
 </div>
-
-<script type="text/javascript">
-			
-function chk(f){
-if (f.d.value=="0")
-{ 
-	alert("请选择医生");
-	f.d.focus();
-	return false;
-}
-if (f.j.value=="0")
-{ 
-	alert("请选择疾病");
-	f.j.focus();
-	return false;
-}
-
-if (f.c.value=="")
-{ 
-	alert("请填写内容");
-	f.c.focus();
-	return false;
-}
-
-
-
-
-
-return true;
-
-
-
-}
-
-</script>
 
   
 <div class="blank30"></div>

@@ -41,4 +41,7 @@ class putModel extends AppModel {
 	public function addQuestion($uid,$dod,$title,$did,$desc,$svr){
 		return putUIApi::getInstance()->addQuestion($uid,$dod,$title,$did,$desc,$svr);
 	}
+	public function getAllDoc(){
+		return doctorUIApi::getInstance()->getAll();
+	}
 }

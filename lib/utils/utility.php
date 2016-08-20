@@ -46,4 +46,26 @@ class utility {
 		
 		return false;
 	}
+	public static function getRandChar($length = 4) {
+		$str = "";
+		$strPol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+		$max = strlen ( $strPol ) - 1;
+	
+		for($i = 0; $i < $length; $i ++) {
+			$str .= $strPol [rand ( 0, $max )];
+		}
+	
+		return $str;
+	}
+	public static function getRandNum($length = 4) {
+		$str = "";
+		$strPol = "0123456789";
+		$max = strlen ( $strPol ) - 1;
+	
+		for($i = 0; $i < $length; $i ++) {
+			$str .= $strPol [rand ( 0, $max )];
+		}
+	
+		return $str;
+	}
 }

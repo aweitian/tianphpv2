@@ -56,7 +56,7 @@ defTplData::getInstance()->description = $data["desc"];
                        
                        </div>
                        <div class="blank20"></div>
-                       <h6 class="color3 fz16">专家简介</h6>
+                       <h6 class="color3 fz16">医生简介</h6>
                        <div class="blank15"></div>
                        <div class="zjtdcon1box1_sm1 clr" style="margin:0;">
 

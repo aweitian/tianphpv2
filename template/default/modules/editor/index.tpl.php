@@ -13,11 +13,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>KindEditor instance</title>
 <?php include dirname(dirname(dirname(__FILE__)))."/public.tpl.php"?>
-<link rel="stylesheet" href="<?php print HTTP_ENTRY?>/verdor/kindeditor/themes/default/default.css" />
-<link rel="stylesheet" href="<?php print HTTP_ENTRY?>/verdor/kindeditor/plugins/code/prettify.css" />
-<script charset="utf-8" src="<?php print HTTP_ENTRY?>/verdor/kindeditor/kindeditor-all-min.js"></script>
-<script charset="utf-8" src="<?php print HTTP_ENTRY?>/verdor/kindeditor/lang/zh-CN.js"></script>
-<script charset="utf-8" src="<?php print HTTP_ENTRY?>/verdor/kindeditor/plugins/code/prettify.js"></script>
+<link rel="stylesheet" href="<?php print HTTP_ENTRY?>/vendor/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="<?php print HTTP_ENTRY?>/vendor/kindeditor/plugins/code/prettify.css" />
+<script charset="utf-8" src="<?php print HTTP_ENTRY?>/vendor/kindeditor/kindeditor-all-min.js"></script>
+<script charset="utf-8" src="<?php print HTTP_ENTRY?>/vendor/kindeditor/lang/zh-CN.js"></script>
+<script charset="utf-8" src="<?php print HTTP_ENTRY?>/vendor/kindeditor/plugins/code/prettify.js"></script>
 
 </head>
 

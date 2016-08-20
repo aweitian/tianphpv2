@@ -18,13 +18,72 @@
 </head>
 
 <body>
+	<script>
+	function getvc()
+	{
+		
+		$.post(
+			'<?php print AppUrl::userRegPhoneSendSms()?>',
+					{
+						't':$("#phone_no").val(),
+						'v':$("#img_vc").val()
+						
+						
+					},
+					function(data,status)
+					{
+						alert(data.info);
+						if(data.result==0){
+							sendMessage();
+							reImg();
+							}else{
+								reImg();
+								}
+						
+					},
+					'json'
+
+				);
+	}
+
+
+
+
+	var InterValObj; //timer变量，控制时间
+	var count = 5; //间隔函数，1秒执行
+	var curCount;//当前剩余秒数
+
+	function sendMessage() {
+		
+	  　curCount = count;
+	　　//设置button效果，开始计时
+	     $("#btnSendCode").attr("disabled", "true");
+	     $("#btnSendCode").val("请在" + curCount + "秒内输入验证码");
+	     InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+	　
+	}
+
+	//timer处理函数
+	function SetRemainTime() {
+	            if (curCount == 0) {                
+	                window.clearInterval(InterValObj);//停止计时器
+	                $("#btnSendCode").removeAttr("disabled");//启用按钮
+	                $("#btnSendCode").val("重新获取验证码");
+	            }
+	            else {
+	                curCount--;
+	                $("#btnSendCode").val(+ curCount + "秒内输入验证码");
+	            }
+	        }
+
+	</script>
 	<div class="wid1000 loginlogo clearfix">
 		<a <?php if(TARGET_BLANK_OPEN):?> target="_blank" <?php endif?>
 			href="<?php print AppUrl::navHome()?>"><img class="fl"
 			src="<?php print AppUrl::getMediaPath()?>/images/loginlogo.jpg"
 			width="284" height="47" /></a><span class="fl black fz24">注册帐号</span>
 	</div>
-	<div class="registerbox">
+
 		<div class="wid1000">
 			<div class="registerboxnr clearfix">
 
@@ -32,13 +91,33 @@
 					<div class="blank20"></div>
 					<div class="registerform fz13">
 						<div class="registercon regway selected">
+								<?php print $info?>
 							<form action="<?php print AppUrl::userRegister()."?t=m"?>"
 								method="post">
-								<input class="reginp1 gray border2" placeholder='请输入手机号码' type="email" />
+								<input id='phone_no' name="phone" class="reginp1 gray border2" placeholder='请输入手机号码' type="text" />
 								<div class="blank20"></div>
+								
 								<div class="regyzm clearfix gray">
-									<input class="regyzminp fl border2 gray" placeholder='验证码'/>
-									<div class="getyzm fl tc">点击获取验证码</div>
+								<input id='img_vc' name="vc" class="regyzminp fl border2 gray" placeholder='请输入验证码'/>
+								
+								<img id="Img" src="<?php print AppUrl::Captcha()?>" onclick = "this.src='<?php print AppUrl::Captcha()?>?'+Math.random()"  /> 
+							
+								</div>
+								
+								<div class="blank20"></div>
+						     <script type="text/javascript">  
+			        function reImg(){  
+			            var img = document.getElementById("Img"); 
+			         
+			            img.src = "/captcha?" + Math.random();  
+			          
+			        }  
+			    </script>  		
+								<div class="regyzm clearfix gray">
+									<input name="code" class="regyzminp fl border2 gray" placeholder='短信验证码'/>
+									
+								
+									<input class="getyzm fl tc" id="btnSendCode" type="button" value="点击获取验证码" onclick='getvc()' />
 								</div>
 								<div class="blank20"></div>
 								<input name="pwd" class="reginp1 gray border2" placeholder='密码'/>

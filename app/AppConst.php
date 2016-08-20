@@ -15,8 +15,11 @@ define("USER_LOGIN_USE_VC",true);
 #在一天之内一个IP不用验证码登陆错误次数(如果上面设定为FALSE，这个值无效)
 define("USER_LOGIN_TRY_TIMES",1);
 #在一天之内一个IP最大登陆错误次数，超过404
-define("USER_LOGIN_TRY_MAX",5);
+define("USER_LOGIN_TRY_MAX",25);
 
+
+#在一天之内一个IP最大获取验证码次数，超过获取不了
+define("SMS_REGIST_GET_VC",3);
 
 #在一天之内一个IP最大注册次数，超过404
 define("USER_REGIST_TRY_MAX",3);

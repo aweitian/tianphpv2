@@ -7,7 +7,7 @@ class helpModel extends AppModel {
 	
 	
     public function test($syd){
-		return $alllv1BySyd=symptomUIApi::getInstance()->alllv1BySyd($syd);
+		return symptomUIApi::getInstance()->alllv1BySyd($syd);
 	}
 	
 	public function getLetterCnt(){
@@ -19,4 +19,5 @@ class helpModel extends AppModel {
 	public function getDoctors($length=4){
 		return doctorUIApi::getInstance()->getInfoes($length);
 	}
+	
 }

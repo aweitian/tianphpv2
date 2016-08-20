@@ -9,7 +9,7 @@
     display: block;
     float: left;
     width: 4.94rem;
-    height: .41rem;
+    height: .51rem;
     background:url("../images/index_clogo.png") no-repeat;
 	background-size:100%;
 	
@@ -660,6 +660,7 @@
 }
 
 /*====================*/
+.modfiy{ height:.7rem; line-height:.7rem;}
 .login_warp{ padding:0 .3rem;}
 .login_warp input{ width:100%; height:.88rem;}
 .login_dl{ width:100%; height:.8rem; line-height:.8rem; text-align:center; color:#fff;     background: #92cf67 !important;}
@@ -907,8 +908,9 @@
 .yswd_jb p img{ margin-top:.25rem; width:.17rem; height:.3rem;}
 
 
-.jbkp_page{ line-height:.4rem; color:#333;}
-.jbkp_page p{ text-indent:2em; margin-bottom:.3rem;}
+.jbkp_page{ line-height:.4rem; color:#333; font-size:.24rem;}
+.jbkp_page p{ text-indent:2em; margin-bottom:.3rem; font-size:.24rem;}
+.jbkp_page p a{ font-size:.24rem;}
 .jbkp_page img{ margin-bottom:.3rem;}
 
 .jbkp_page_zx a{ display:block; width:2.78rem; height:.63rem; text-align:center; line-height:.63rem; border-radius:.1rem;}
@@ -962,9 +964,8 @@
 
 
 
-
-
-
+.hui{ background:#999!important;}
+.satisfied{ height: .66rem; line-height:.66rem; font-size:.28rem;}
 
 
 

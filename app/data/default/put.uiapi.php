@@ -123,7 +123,7 @@ class putUIApi {
 		$oplog = new oplog ();
 		$try_cnt = $oplog->getCnt ( $op_type, $uid );
 		if (USER_MOD_PROFILE_TRY_MAX - $try_cnt <= 0) {
-			return new rirResult ( 1, "今天编辑次数过多" );
+			return new rirResult ( 1, "今天操作数据库次数过多" );
 		}
 		$opsid = $oplog->add ( $op_type, $uid );
 		$oplog->update ( $opsid );
@@ -184,15 +184,15 @@ class putUIApi {
 	
 	/**
 	 *
-	 * @param string $name        	
-	 * @param string $pwd        	
+	 * @param string $phone        	
+	 * @param string $code  手机验证码        	
 	 * @param string $sq        	
 	 * @param string $sa        	
 	 * @param string $eml        	
 	 * @param string $code        	
 	 * @return rirResult
 	 */
-	public function register_phone($phone, $pwd, $code) {
+	public function register_phone($phone, $code) {
 		// 23000
 		// string(5) "23000" string(37) "Duplicate entry 'awei' for key 'name'"
 		$op_type = "user_register";
@@ -203,16 +203,10 @@ class putUIApi {
 		}
 		$opsid = $oplog->add ( $op_type, identityToken::getInstance ()->getIp () );
 		
-		$captcha = new session_captcha ( new session () );
-		if (! $captcha->check ( $code )) {
-			return new rirResult ( 2, "验证码校验失败" );
-		}
-		
-
 		$sql = $this->sqlManager->getSql ( "/ui_put/register_phone" );
 		$bnd = array (
 				"name" => $phone,
-				"pwd" => Security::encrypt ( $pwd ),
+				"pwd" => Security::encrypt ( $code ),
 				"phone" => $phone,
 		);
 		// var_dump($sql,$bnd);exit;
@@ -233,6 +227,54 @@ class putUIApi {
 		}
 		$oplog->update ( $opsid );
 		return new rirResult ( 0, "注册成功", $ret );
+	}
+	
+	
+	/**
+	 *
+	 * @param string $phone        	
+	 * @param string $code 手机验证码        	
+	 * @param string $pwd 密码        	
+	 * @param string $sa        	
+	 * @param string $eml        	
+	 * @param string $code        	
+	 * @return rirResult
+	 */
+	public function register_phone_active($phone, $code, $pwd) {
+		// 23000
+
+		$sql = $this->sqlManager->getSql ( "/ui_put/register_phone_active" );
+		$bnd = array (
+				"oldpwd" => Security::encrypt ( $code ),
+				"pwd" => Security::encrypt ( $pwd ),
+				"phone" => $phone,
+		);
+		$ret = $this->db->exec ( $sql, $bnd );
+		if ($ret == 0) {
+			return new rirResult ( 8, "验证码错误" );
+		}
+		return new rirResult ( 0, "注册成功", $ret );
+	}
+	
+	
+	/**
+	 *
+	 * @param string $phone
+	 * @param string $code 手机验证码
+	 * @return rirResult
+	 */
+	public function register_phone_retry($phone, $code) {
+		$sql = $this->sqlManager->getSql ( "/ui_put/register_phone_retry" );
+		$bnd = array (
+				"pwd" => Security::encrypt ( $code ),
+				"phone" => $phone,
+		);
+		// var_dump($sql,$bnd);exit;
+		$ret = $this->db->exec ( $sql, $bnd );
+		if ($ret == 0) {
+			return new rirResult ( 8, "错误" );
+		}
+		return new rirResult ( 0, "成功", $ret );
 	}
 	/**
 	 *
@@ -318,6 +360,44 @@ class putUIApi {
 		$oplog->update ( $opsid );
 		return new rirResult ( 0, "注册成功", $ret );
 	}
+	
+	/**
+	 *
+	 * @param int $uid
+	 * @param string $newavatar
+	 *        	(只要BASENAME部分)
+	 * @return rirResult
+	 */
+	public function avatar($uid, $newavatar) {
+		$op_type = "user_modify";
+		$oplog = new oplog ();
+		$try_cnt = $oplog->getCnt ( $op_type, $uid );
+		if (USER_MOD_PROFILE_TRY_MAX - $try_cnt <= 0) {
+			return new rirResult ( 1, "今天编辑次数过多" );
+		}
+		$opsid = $oplog->add ( $op_type, $uid );
+		$oplog->update ( $opsid );
+		$avatarMeta = avatarMeta::getAllAvatar ();
+	
+		if (! in_array ( $newavatar, $avatarMeta )) {
+			return new rirResult ( 2, "头像不存在" );
+		}
+	
+		$sql = $this->sqlManager->getSql ( "/ui_put/profile/avatar" );
+		$row = $this->db->exec ( $sql, array (
+				"uid" => $uid,
+				"avatar" => $newavatar
+		) );
+		if ($row == 1) {
+			$sql = sqlManager::getInstance(FILE_SYSTEM_ENTRY . "/app/sql/default/ui_user.xml") ->getSql ( "/ui_user/row_uid" );
+			$ret = $this->db->fetch ( $sql, array (
+					"uid" => $uid
+			) );
+			return new rirResult ( 0, "ok", $ret );
+		}
+		return new rirResult ( 3, "头像没有变化" );
+	}
+	
 	
 	/**
 	 *
@@ -653,7 +733,14 @@ class putUIApi {
 		if(!validator::isUint($did) or $did < 1) {
 			return new rirResult(5,"无效的病种ID");
 		}
-// 		var_dump($uid, $dod, $did,$content);exit;
+		
+		
+		
+// 		var_dump($uid,$dod,$title,$did,$desc,$svr);exit;
+		
+		
+		
+		
 		if(!$this->existDid($did)){
 			return new rirResult(4,"无效的病种ID");
 		}
@@ -662,7 +749,7 @@ class putUIApi {
 			return new rirResult(4,"无效的医生ID");
 		}
 		
-		$sql = $this->sqlManager->getSql ( "/ui_put/letter" );
+		$sql = $this->sqlManager->getSql ( "/ui_put/ask" );
 		$bnd = array (
 				//:uid,:dod,:title,:did,:desc,:svr
 				"uid" => $uid,
@@ -672,7 +759,6 @@ class putUIApi {
 				"desc" => $desc, 
 				"svr" => $svr, 
 		);
-		// var_dump($sql,$bnd);exit;
 		$row = $this->db->insert ( $sql, $bnd );
 		if ($row > 0) {
 			return new rirResult ( 0, "提交成功，审核通过后会出现在页面上" );

@@ -48,6 +48,9 @@ class doctorsModelControllerNotFound extends AppModel {
 	public function getDataByDodCnt($dod) {
 		return appraiseUIApi::getInstance ()->getDataByDodCnt ( $dod );
 	}
+	public function getPresentDataByDodCnt($dod){
+		return presentUIApi::getInstance ()->getDataByDodCnt ( $dod );
+	}
 	public function rowuser($uid) {
 		return userUIApi::getInstance ()->row ( $uid );
 	}

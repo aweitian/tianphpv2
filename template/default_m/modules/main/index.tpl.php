@@ -37,9 +37,9 @@ foreach ($m->getDisease() as $item){
     </div>
     <div class="bd">
       <ul>
-        <li> <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/ban1.jpg" /></a> </li>
-        <li> <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/ban1.jpg" /></a> </li>
-        <li> <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/ban1.jpg" /></a> </li>
+        <li> <a href="<?php print AppUrl::getSwtUrl();?>"><img src="<?php print AppUrl::getMediaPath()?>/images/ban1.jpg" /></a> </li>
+        <li> <a href="<?php print AppUrl::getSwtUrl();?>"><img src="<?php print AppUrl::getMediaPath()?>/images/banner2.jpg" /></a> </li>
+        <li> <a href="<?php print AppUrl::getSwtUrl();?>"><img src="<?php print AppUrl::getMediaPath()?>/images/banner3.jpg" /></a> </li>
       </ul>
     </div>
     <script src="<?php print AppUrl::getMediaPath()?>/js/TouchSlide_1_1.7f969dac.js" type="text/javascript"></script> 
@@ -86,7 +86,7 @@ foreach ($m->getDisease() as $item){
               <span class="menzhen_ab"> 预约转诊<br/><span class="gray">省时、省心、省力、省钱</span> </span>
          </a> 
          <a href="tel:021-52733999" class="order_pinzhi"> 
-              <span class="dianhua_ab"> 电话咨询<br/><span class="gray">足不出户联系专家</span></span> 
+              <span class="dianhua_ab"> 电话咨询<br/><span class="gray">足不出户联系医生</span></span> 
           </a> 
     </div>
   </div>

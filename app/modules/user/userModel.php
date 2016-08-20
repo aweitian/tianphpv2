@@ -26,6 +26,10 @@ class userModel extends AppModel {
 		return putUIApi::getInstance ()->addComment($uid,$aid,$c);
 		
 	}
+	public function givePresent($uid,$dod,$pid){
+		return putUIApi::getInstance ()->givePresent($uid,$dod,$pid);
+		
+	}
 	public function getDisease() {
 		return diseaseUIApi::getInstance()->getInfo();
 	}
@@ -205,4 +209,26 @@ class userModel extends AppModel {
 	public function register_normal($name, $pwd, $sq, $sa, $eml, $code) {
 		return putUIApi::getInstance ()->register_normal ( $name, $pwd, $sq, $sa, $eml, $code );
 	}
+	/**
+	 * -1 已发验证码
+	 * 0没有注册过
+	 * 1注册过
+	 * @param phone $phone
+	 * @return number
+	 */
+	public function isRegisted($phone){
+		return userUIApi::getInstance()->isRegisted($phone);
+	}
+	
+	public function reg_phone($phone,$code){
+		return putUIApi::getInstance()->register_phone($phone,$code);
+	}
+	public function reg_phone_retry($phone,$code){
+		return putUIApi::getInstance()->register_phone_retry($phone, $code);
+	}
+	
+	public function activeUser($phone, $code, $pwd){
+		return putUIApi::getInstance()->register_phone_active($phone, $code, $pwd);
+	}
+	
 }

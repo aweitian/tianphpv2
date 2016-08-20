@@ -6,57 +6,34 @@
  * 依赖:
  */
 
+
 $userinfo = AppUser::getInstance()->auth->getInfo();
 ?>
-  <div class="blank15"></div>
-  
-  
-  <div class="clr">
-  	<?php include dirname(__FILE__)."/common/left.tpl.php";?>
-    
-    <div class="fr border2 wid738 memer_box2">
+<div class="public_width">
+<?php $user_header_title = "修改密码";?>
+<?php include dirname(__FILE__)."/common/header.tpl.php"?>
 
-        <dl class="clr">
-            <dt class="fl"><img src="<?php print HTTP_ENTRY?>/static/images/hyfr_img4.png" /></dt>
-            <dd class="fl">
-                <p class="fz24">帐号设置</p>
-                <p class="blank10"></p>
-                <p class="fz13">修改个人信息</p>
-            </dd>
-        </dl>
-        <div class="memer_box4">
-        
-            <?php include dirname(__FILE__)."/common/setting_links.php"?>
+<!--head end-->
+<div class="mzy30">
+	<div class="blank30"></div>
+    
             <div><?php print $info?></div>
             <form method="post" action="<?php print AppUrl::userModifypwd()?>" onsubmit="return chk(this)">
             <div class="memer_box6 clr color6 fz13">
-            	
-                <p>
-                	<label><b class="red">*</b>原密码：</label>
-                    <input type="password" required name="op"/>
-                </p>
+            	<div class="login_warp bor_rad borddd clr">
+                <input type="password" required name="op" class="modfiy clr" placeholder="原密码"/>
+                <div class="hd_hsx"></div>
+                <input type="password" required name="np" class="modfiy clr" placeholder="新密码"/>
+                <div class="hd_hsx"></div>
+                <input type="password" required name="npp" class="modfiy clr" placeholder="确认密码"/>
+                </div>
+                
                 <p class="blank25"></p>
-                <p>
-                	<label><b class="red">*</b>新密码：</label>
-                    <input type="password" required name="np"/>
-                </p>
-                <p class="blank25"></p>
-                <p>
-                	<label><b class="red">*</b>确认密码：</label>
-                    <input type="password" required name="npp"/>
-                </p>
-                <p class="blank25"></p>
-                <p><label></label><button class="tc gd1s" type="submit">修改</button></p>
+                <p><label></label><button class="login_dl bor_rad yellow_bg" type="submit">修改</button></p>
             </div>
-            </form>
-        </div>
-        
-    </div>
-    
-  </div>
-  
-  <div class="blank40"></div>
-  <!--sybox end-->
+   </form>
+   <div class="blank30"></div>
+</div>
   <script>
 	function chk(f)
 	{

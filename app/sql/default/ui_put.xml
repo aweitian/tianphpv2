@@ -49,20 +49,25 @@
 	
  	<register_phone>
  		INSERT INTO `data_user` (
-			`name`,`pwd`,`phone`,`date`
+			`v`,`name`,`pwd`,`phone`,`date`
 		) VALUES (
-			:name,:pwd,:phone,CURDATE()
+			0,:name,:pwd,:phone,CURDATE()
 		)
  	</register_phone>
- 	<register_phone_rand_avatar>
- 		UPDATE `data_user` SET `data_user`.`avatar` =  CONCAT("memer_tx",1+CAST(RAND() * 8 AS UNSIGNED),".jpg")
-			WHERE sid = :uid
- 	</register_phone_rand_avatar>
- 	
- 	
- 	
- 	
- 	
+ 	<register_phone_retry>
+ 		UPDATE `data_user`
+			SET  
+			  `pwd` = :pwd
+			WHERE `phone` = :phone AND `data_user`.`v` = 0;
+ 	</register_phone_retry>
+ 	<register_phone_active>
+ 		UPDATE `data_user`
+			SET  
+			  `v` = '1',
+			  `pwd` = :pwd,
+			  `avatar` =  CONCAT("memer_tx",1+CAST(RAND() * 8 AS UNSIGNED),".jpg")
+			WHERE `phone` = :phone AND `data_user`.`v` = 0 AND `pwd` = :oldpwd;
+ 	</register_phone_active>
  	
  	<reg_normal>
 		INSERT INTO `data_user`

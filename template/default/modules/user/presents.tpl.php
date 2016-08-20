@@ -58,7 +58,7 @@ $url = new url($req->requestUri());
                 <tr>
                 	<td class="color9"><?php print utility::utf8Substr($q["date"], 0, 10)  ?></td>
                     <td class="color6"><?php print ($doc) ?></td>
-                    <td><img src="<?php print AppUrl::getMediaPath()?>/images/<?php print $pid["avatar"] ?>" /></td>
+                    <td><img src="<?php print AppUrl::getMediaPath()?>/images/<?php print $pid["avatar"] ?>"/></td>
                     <td class="fhs"><?php print $pid["data"] ?></td>
                     <td class="fhs"><?php if(($q["v"])==1){ echo "是";}else {echo "否";}
                     ?></td>

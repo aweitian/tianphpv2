@@ -35,7 +35,10 @@ class appraiseController extends privController{
 	}
 
 	public function rmAction(pmcaiMsg $msg){
-		$ret_url = $_SERVER["HTTP_REFERER"];
+		if (isset ( $_SERVER ["HTTP_REFERER"] ))
+			$ret_url = $_SERVER ["HTTP_REFERER"];
+		else
+			$ret_url = AppUrl::userAppraise ();
 		if(!isset($msg["?sid"])){
 			$this->response->_404();
 		}

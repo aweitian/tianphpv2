@@ -16,7 +16,7 @@ $ctr = appCtrl::$msg->getAction();
             <ul>
                 <li><a href="<?php print AppUrl::disKnowledgeByDiseasekey($row["key"])?>" class="first <?php if($ctr=="knowledge"):?>jbzs_one<?php endif?>">疾病知识</a></li>
                 <li class=""><a href="<?php print AppUrl::disAskByDiseasekey($row["key"])?>" class="<?php if($ctr=="ask"):?>jbzs_one<?php endif?>">相关咨询</a></li>
-                <li class=""><a href="<?php print AppUrl::disDoctorsByDiseasekey($row["key"])?>" class="last <?php if($ctr=="doctors"):?>jbzs_one<?php endif?>">推荐专家</a></li>
+                <li class=""><a href="<?php print AppUrl::disDoctorsByDiseasekey($row["key"])?>" class="last <?php if($ctr=="doctors"):?>jbzs_one<?php endif?>">推荐医生</a></li>
             </ul>
            
             <div class="clear_l"></div>

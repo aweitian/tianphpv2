@@ -37,7 +37,9 @@ class userController extends appCtrl {
 				"login",
 				"register",
 				"resetpwd",
-				"addcomment"
+				"addcomment",
+				"addpresents",
+				"sendsms4reg" 
 		) )) {
 			if (! AppUser::getInstance ()->auth->isLogined ()) {
 				$this->response->redirect ( AppUrl::userLogin () );
@@ -57,88 +59,110 @@ class userController extends appCtrl {
 		// $this->view->profile($this->model);
 	}
 	public function questionsAction(pmcaiMsg $msg) {
-	
 		
-// 		if ($msg->isPost ()) {
-// 			$ret = $this->model->writeLetter($msg["d"], $msg["c"]);
-// 			if ($ret -> isTrue()) {
-// 				if(isset($msg["?return"])){
-// 					$this->response->redirect($msg["?return"]);
-// 				}
-// 			}
-// 			$this->response->redirect(AppUrl::userProfile());
-// 		}
+		// if ($msg->isPost ()) {
+		// $ret = $this->model->writeLetter($msg["d"], $msg["c"]);
+		// if ($ret -> isTrue()) {
+		// if(isset($msg["?return"])){
+		// $this->response->redirect($msg["?return"]);
+		// }
+		// }
+		// $this->response->redirect(AppUrl::userProfile());
+		// }
 		$this->view->questions ( $this->model );
-		
-
 	}
 	public function presentsAction(pmcaiMsg $msg) {
-	$this->view->presents ( $this->model );
-
+		$this->view->presents ( $this->model );
 	}
 	public function writeletterAction(pmcaiMsg $msg) {
 		if ($msg->isPost ()) {
-			$ret = $this->model->writeLetter($msg["d"], $msg["j"],$msg["c"]);
-			if ($ret -> isTrue()) {
-				if(isset($msg["?return"])){
-					$this->response->redirect($msg["?return"]);
+			$ret = $this->model->writeLetter ( $msg ["d"], $msg ["j"], $msg ["c"] );
+			if ($ret->isTrue ()) {
+				if (isset ( $msg ["?return"] )) {
+					$this->response->redirect ( $msg ["?return"] );
 				}
 			}
-			$this->response->redirect(AppUrl::userProfile());
-			//$this->response->redirect($msg["?return"]);
+			$this->response->redirect ( AppUrl::userProfile () );
+			// $this->response->redirect($msg["?return"]);
 		}
 		$this->view->writeletter ( $this->model );
 	}
 	public function writeappraiseAction(pmcaiMsg $msg) {
 		if ($msg->isPost ()) {
-			$ret = $this->model->writeAppraise($msg["j"],$msg["d"],$msg["m"], $msg["c"]);
-			if ($ret -> isTrue()) {
-				if(isset($msg["?return"])){
-					$this->response->redirect($msg["?return"]);
+			$ret = $this->model->writeAppraise ( $msg ["j"], $msg ["d"], $msg ["m"], $msg ["c"] );
+			if ($ret->isTrue ()) {
+				if (isset ( $msg ["?return"] )) {
+					$this->response->redirect ( $msg ["?return"] );
 				}
 			}
-			$this->response->redirect(AppUrl::userProfile());
+			$this->response->redirect ( AppUrl::userProfile () );
 		}
 		$this->view->writeappraise ( $this->model );
 	}
 	public function addcommentAction(pmcaiMsg $msg) {
-		if(!AppUser::getInstance ()->auth->isLogined()){
-			$ret = new rirResult(1,"需要登陆");
-			print $ret->toJSON();
-			exit;
+		if (! AppUser::getInstance ()->auth->isLogined ()) {
+			$ret = new rirResult ( 1, "需要登陆" );
+			print $ret->toJSON ();
+			exit ();
 		}
 		
-		if(!isset($msg["a"],$msg["v"],$msg["c"])){
-			$ret = new rirResult(2,"非法数据提交");
-			print $ret->toJSON();
-			exit;
+		if (! isset ( $msg ["a"], $msg ["v"], $msg ["c"] )) {
+			$ret = new rirResult ( 2, "非法数据提交" );
+			print $ret->toJSON ();
+			exit ();
 		}
 		
-		$cap = new session_captcha(App::getSession());
-		if(!$cap->check($msg["v"])){
-			$ret = new rirResult(3,"验证码错误");
-			print $ret->toJSON();
-			exit;
+		$cap = new session_captcha ( App::getSession () );
+		if (! $cap->check ( $msg ["v"] )) {
+			$ret = new rirResult ( 3, "验证码错误" );
+			print $ret->toJSON ();
+			exit ();
 		}
-		if(trim($msg["c"]) == ""){
-			$ret = new rirResult(5,"评论内容为空");
-			print $ret->toJSON();
-			exit;
+		if (trim ( $msg ["c"] ) == "") {
+			$ret = new rirResult ( 5, "评论内容为空" );
+			print $ret->toJSON ();
+			exit ();
 		}
-		$info = AppUser::getInstance ()->auth->getInfo();
-		$uid = $info["sid"];
-		$ret= $this->model->addComment($uid, intval($msg["a"]), $msg["c"]);
+		$info = AppUser::getInstance ()->auth->getInfo ();
+		$uid = $info ["sid"];
+		$ret = $this->model->addComment ( $uid, intval ( $msg ["a"] ), $msg ["c"] );
 		
-		if($ret->isTrue()){
-			$ret = new rirResult(0,"提交成功,需要审核过才能出现在页面");
-			print $ret->toJSON();
-			exit;
+		if ($ret->isTrue ()) {
+			$ret = new rirResult ( 0, "提交成功,需要审核过才能出现在页面" );
+			print $ret->toJSON ();
+			exit ();
 		} else {
-			$ret = new rirResult(4,"今天提交数据过多");
-			print $ret->toJSON();
-			exit;
+			$ret = new rirResult ( 4, "今天提交数据过多" );
+			print $ret->toJSON ();
+			exit ();
 		}
-
+	}
+	public function addpresentsAction(pmcaiMsg $msg) {
+		if (! AppUser::getInstance ()->auth->isLogined ()) {
+			$ret = new rirResult ( 1, "需要登陆" );
+			print $ret->toJSON ();
+			exit ();
+		}
+		// $uid,$dod,$pid
+		if (! isset ( $msg ["d"], $msg ["p"] )) {
+			$ret = new rirResult ( 2, "非法数据提交" );
+			print $ret->toJSON ();
+			exit ();
+		}
+		
+		$info = AppUser::getInstance ()->auth->getInfo ();
+		$uid = $info ["sid"];
+		$ret = $this->model->givePresent ( $uid, intval ( $msg ["d"] ), $msg ["p"] );
+		
+		if ($ret->isTrue ()) {
+			$ret = new rirResult ( 0, "提交成功,需要审核过才能出现在页面" );
+			print $ret->toJSON ();
+			exit ();
+		} else {
+			$ret = new rirResult ( 4, "今天提交数据过多" );
+			print $ret->toJSON ();
+			exit ();
+		}
 	}
 	public function rmletterAction(pmcaiMsg $msg) {
 		$info = AppUser::getInstance ()->auth->getInfo ();
@@ -250,6 +274,12 @@ class userController extends appCtrl {
 					exit ( "<font color='red'>" . $ret->info . "</font>" );
 				}
 			} else if ($msg ["?t"] == "m") {
+				$ret = $this->model->activeUser ( $msg ["phone"], $msg ["code"], $msg ["pwd"] );
+				if ($ret->isTrue ()) {
+					return $this->view->register ( $this->model, $ret->info );
+				} else {
+					return $this->view->register ( $this->model, "<font color='red'>" . $ret->info . "</font>" );
+				}
 			}
 		} else {
 			$this->view->register ( $this->model );
@@ -267,5 +297,41 @@ class userController extends appCtrl {
 		} else {
 			$this->view->resetpwd ( $this->model );
 		}
+	}
+	public function sendsms4regAction(pmcaiMsg $msg) {
+		if ($msg->isPost () && isset ( $msg ["t"], $msg ["v"] )) {
+			if (! userValidator::isValidPhone ( $msg ["t"] )) {
+				$ret = new rirResult ( 1, "无效的手机号码" );
+				exit ( $ret->toJSON () );
+			}
+			$chk = $this->model->isRegisted ( $msg ["t"] );
+			if ($chk == "1") {
+				$ret = new rirResult ( 2, "手机已注册" );
+				exit ( $ret->toJSON () );
+			}
+			// 发送验证码
+			$code = utility::getRandNum ( 6 );
+			$sr = AppSms::sendVc ( $msg ["t"], $code, $msg ["v"] );
+			if (! $sr->isTrue ()) {
+				$ret = new rirResult ( 3, '发送短信失败' );
+				exit ( $ret->toJSON () );
+			} else {
+				// 判断chk为0还是1，0插入一条数据，-1更新验证码
+				if ($chk == "0") {
+					$ur = $this->model->reg_phone ( $msg ["t"], $code );
+				} else {
+					$ur = $this->model->reg_phone_retry ( $msg ["t"], $code );
+				}
+				if (! $ur->isTrue ()) {
+					$ret = new rirResult ( 4, $ur->info );
+					exit ( $ret->toJSON () );
+				}
+				
+				$ret = new rirResult ( 0, '验证码已发送' );
+				exit ( $ret->toJSON () );
+			}
+		}
+		$ret = new rirResult ( 1, "请输入手机号和验证码" );
+		exit ( $ret->toJSON () );
 	}
 }

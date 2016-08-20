@@ -44,7 +44,7 @@ $url = new url($req->requestUri());
         <div class="blank20"></div>
         <p class="plr20 fz28"><?php print utility::utf8Substr($con, 0, 50)?>...</p>
         <div class="blank20"></div>
-        <h6 class="plr20 clr fz24 fw400"><span class="fl color9">通过：<b class="fw400 green"><?php if(($q["v"])==1){ echo "是";}else {echo "否";}?></b></span><?php if(!$q["v"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("友情提醒：是否要删除！")' href="<?php print AppUrl::userRmQuestion()?>?sid=<?php print $q["sid"]?>" class="fr">删除</a><?php endif?><a href="" class="fr">编辑</a></h6>
+        <h6 class="plr20 clr fz24 fw400"><span class="fl color9">通过：<b class="fw400 green"><?php if(($q["v"])==1){ echo "是";}else {echo "否";}?></b></span><?php if(!$q["v"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("友情提醒：是否要删除！")' href="<?php print AppUrl::userRmQuestion()?>?sid=<?php print $q["sid"]?>" class="fr">删除</a><?php endif?></h6>
     </div>
     <div class="blank10"></div>
     <?php endforeach;?>

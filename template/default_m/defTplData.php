@@ -90,6 +90,7 @@ class defTplData{
 	}
 	public function reponse(){
 		include $this->layout;
+		exit;
 	}
 	public function outputContent(){
 		foreach ($this->html as $tpl){

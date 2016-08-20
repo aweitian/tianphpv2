@@ -100,15 +100,15 @@ $url = new url($req->requestUri());
                         
                         	<div class="zjtd_box2_sm2 clr">
                             	<div class="fl">
-                                	<p>包皮手术、精索静脉曲张、成人疝气、阴茎延长、阴茎增粗、阴茎弯曲、尿道下裂、隐睾、睾丸囊肿、附睾囊肿、鞘膜积液 …<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="" class="bule">[查看]</a></p>
-                                    <p class="color9"> [ 患者提问：<span class="yellow">8137</span>问，陈希球本人已回复：<span class="yellow">8130</span>问 ]</p>
+                                	<p>您有任何关于男科疾病方面的问题，都可在线点击咨询，我会立刻为您解答！您的聊天信息，我们严格保密！</p>
+                                    <p class="color9"> [ 患者提问：<span class="yellow">8137</span>问，<?php print $m->data["name"]?>本人已回复：<span class="yellow">8130</span>问 ]</p>
                                 </div>
                                 <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="fr tc">在线咨询</a>
                             </div>
                             
                             <div class="zjtd_box2_sm2 clr">
                             	<div class="fl">
-                                	<p>直接和<?php print $m->data["name"]?>医生本人通话，私密安全！便捷！（本次通话免费，最长时间15分钟）</p>
+                                	<p>直接和<?php print $m->data["name"]?>医生本人通话，私密安全！便捷！（我们会及时给您回电）</p>
                                     <p class="color9"> [ <span class="yellow"><?php print rand(400,600);?></span>人已使用电话咨询服务，<span class="yellow"><?php print rand(400,600);?></span>人已成功预约 ]</p>
                                 </div>
                                 <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fr tc dh_a">一键通话</a>

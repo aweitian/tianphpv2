@@ -21,9 +21,19 @@ $m = $model;
 <div class="login_warp bor_rad borddd">
 	<input type="text" name="nep" placeholder="您的手机号码/用户名/邮箱" />
     <div class="hd_hsx"></div>
-    <input type="password" name="pwd" placeholder="您的密码" />
+    <input type="password" name="pwd" placeholder="您的密码" />   
+    <div class="hd_hsx"></div>
+    <div class="blank25"><?php print $info?></div> 
+    <?php if($model->getVcFlag()):?>    
+    <div class="clr">
+    <input id='img_vc' name="code" class="regyzminp fl border2 gray" placeholder='请输入验证码' style="width:80%;float:left;"/>
+	<img alt="" src="<?php print AppUrl::Captcha()?>"  onclick = "this.src='<?php print AppUrl::Captcha() ?>?'+Math.random()"  style="float:left; width:20%;margin-top:.2rem;">
+    </div>
+    <?php endif;?>    
 </div>
-<div class="blank30"></div>
+
+<div class="blank20"></div>
+
 <button class="login_dl bor_rad" type="submit" value="">登录</button>
 
 <div class="blank30"></div>

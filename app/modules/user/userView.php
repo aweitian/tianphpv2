@@ -13,7 +13,7 @@ class userView extends AppView {
 			include $this->getThemePath ( "user" ) . "/login.tpl.php";
 		}
 	}
-	public function register($model) {
+	public function register($model,$info = "") {
 		include $this->getThemePath ( "user" ) . "/register.tpl.php";
 	}
 	public function resetpwd($model, $info = "") {

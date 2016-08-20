@@ -1,4 +1,5 @@
 <?php
+exit;
 /*
  *  Copyright (c) 2014 The CCP project authors. All Rights Reserved.
  *
@@ -13,29 +14,27 @@
  */
 
 include_once("./CCPRestSmsSDK.php");
+// 主帐号,对应开官网发者主账号下的 ACCOUNT SID
+$accountSid = '8a216da8567745c001568cc638520dd2';
 
-//主帐号,对应开官网发者主账号下的 ACCOUNT SID
-$accountSid= '';
+// 主帐号令牌,对应官网开发者主账号下的 AUTH TOKEN
+$accountToken = '4b3b424004e8424c9f560cd462549ab2';
 
-//主帐号令牌,对应官网开发者主账号下的 AUTH TOKEN
-$accountToken= '';
+// 应用Id，在官网应用列表中点击应用，对应应用详情中的APP ID
+// 在开发调试的时候，可以使用官网自动为您分配的测试Demo的APP ID
 
-//应用Id，在官网应用列表中点击应用，对应应用详情中的APP ID
-//在开发调试的时候，可以使用官网自动为您分配的测试Demo的APP ID
-$appId='';
+$appId = '8a216da8567745c001568cc638b40dd9';
 
-//请求地址
-//沙盒环境（用于应用开发调试）：sandboxapp.cloopen.com
-//生产环境（用户应用上线使用）：app.cloopen.com
-$serverIP='sandboxapp.cloopen.com';
+// 请求地址
+// 沙盒环境（用于应用开发调试）：sandboxapp.cloopen.com
+// 生产环境（用户应用上线使用）：app.cloopen.com
+$serverIP = 'app.cloopen.com';
 
+// 请求端口，生产环境和沙盒环境一致
+$serverPort = '8883';
 
-//请求端口，生产环境和沙盒环境一致
-$serverPort='8883';
-
-//REST版本号，在官网文档REST介绍中获得。
-$softVersion='2013-12-26';
-
+// REST版本号，在官网文档REST介绍中获得。
+$softVersion = '2013-12-26';
 
 /**
   * 发送模板短信
@@ -78,5 +77,5 @@ function sendTemplateSMS($to,$datas,$tempId)
 		//*result = sendTemplateSMS("13800000000" ,array('6532','5'),"1");																		  *
 		//*则13800000000手机号收到的短信内容是：【云通讯】您使用的是云通讯短信模板，您的验证码是6532，请于5分钟内正确输入     *
 		//*********************************************************************************************************************
-sendTemplateSMS("",array('',''),"");//手机号码，替换内容数组，模板ID
+sendTemplateSMS("13641898273",array('17739'),"110318");//手机号码，替换内容数组，模板ID
 ?>

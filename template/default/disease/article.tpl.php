@@ -7,7 +7,7 @@
 $row = $model->data;
 // var_dump($row);
 
-$this->title = "专家观点-按疾病找-上海九龙男子医院";
+$this->title = "医生观点-按疾病找-上海九龙男子医院";
 $this->description = "";
 $this->keyword = "";
 $ext = diseaseExtInfoes::getExtData();
@@ -57,7 +57,7 @@ $url = new url($req->requestUri());
                                     <div class="bb_e5 pb5 clearfix"> 
                                         <span class="f20 fl">
                                         <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($item["aid"]) ?>" class="fl kart_title"><h2><?php print utility::utf8substr($item["title"],0,12); ?></h2></a>
-                                        <span class="fl kart_label1">专家观点</span></span>
+                                        <span class="fl kart_label1">医生观点</span></span>
                                       	<p class="fr color9">发布时间：<?php print $item["date"] ?></p>
                                     </div>
                                     <div class="blank15"></div>

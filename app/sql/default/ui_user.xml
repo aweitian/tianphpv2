@@ -17,7 +17,14 @@
 		  `date`
 		FROM `data_user`
 		WHERE `sid` = :uid
+		AND `v` = 1
 	</row_uid>
+	<row_phone>
+		SELECT
+		  `v`
+		FROM `data_user`
+		WHERE `phone` = :phone
+	</row_phone>
 
 	<waterarm>
 		SELECT
