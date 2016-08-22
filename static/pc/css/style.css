@@ -84,7 +84,7 @@ em {
 }
 
 .fhs{ color:#ed7f5a;}
-
+.mr0{ margin-right:0px!important;}
 
 
 .clearfix:after {
@@ -2280,7 +2280,7 @@ a.td_link, a.td_link_read {
 
 
 
-.kart_list .kart_title{ color:#333;}
+.kart_list .kart_title{ color:#333;line-height:24px;}
 .kart_list .kart_title h2{ font-weight:400;}
 
 .kart_list .kart_title:hover{ color:#377bee; text-decoration:none;}
@@ -2714,10 +2714,9 @@ rtpboxnrl {
     bottom: 0;
     z-index: 10000;
 	height: 98px;
-    background: #d2e3f3;
-	border-radius:98px;
-	-webkit-border-radius:98px;
-	-moz-border-radius:98px;
+    background: #499BEF;
+	
+
 }
 
 .docs_info_box {
@@ -2734,13 +2733,13 @@ rtpboxnrl {
 }
 .docs_info strong {
     font-size: 22px;
-    color: #333;
+    color: #fff;
 	float:left;
 }
 .docs_info span {
     vertical-align: middle;
     font-size: 14px;
-    color: #448aca;
+    color: #fff;
     margin-left: 10px
 }
 .docs_btns {
@@ -2757,7 +2756,7 @@ rtpboxnrl {
 .b_bottom_box .docs_btns .b2_btn a {
     padding-left: 38px;
     background-position-x: 13px;
-    background-color: #4dcd70;
+    background-color: #7FD900;
 }
 .b_bottom_box .docs_btns .b2_btn a span {
     top: -12px
@@ -2777,14 +2776,14 @@ rtpboxnrl {
     display: block;
     border-radius: 5px;
 	width:78px;
-	background: url(../images/new_a.png) 13px no-repeat #3e9cff;
+	background: url(../images/new_a.png) 13px no-repeat #ED3D40;
 }
 
 .b_bottom_box .b2_btn a {
     display: block;
     height: 40px;
     line-height: 40px;
-    background: url(../images/new_d.png) 20px no-repeat #4dcd70;
+    background: url(../images/new_d.png) 15px no-repeat #4dcd70;
     padding-left: 38px;
     border-radius: 5px;
     font-size: 16px;

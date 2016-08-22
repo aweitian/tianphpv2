@@ -19,6 +19,7 @@ $pagination = new pagination($m->getAnswersCnt($askid), $page, $pageSize, 6);
 $req = new httpRequest();
 $url = new url($req->requestUri());
 ?>
+
    <?php include dirname(__FILE__)."/common/location.tpl.php";?>
   <div class="sybox clearfix">
     <div>

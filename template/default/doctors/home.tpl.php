@@ -216,11 +216,11 @@ $url = new url($req->requestUri());
                 <div class="fr wid300 fz13">
                   
                   <div class="syrbox2">
-                    <p><img src="<?php print AppUrl::getMediaPath()?>/images/syrth1.jpg" width="300" height="100" /></p>
-                    <p class="blank10"></p>
-                    <p><img src="<?php print AppUrl::getMediaPath()?>/images/syrth2.jpg" width="300" height="100" /></p>
-                    <p class="blank10"></p>
-                    <p><img src="<?php print AppUrl::getMediaPath()?>/images/syrth3.jpg" width="300" height="100" /></p>
+                    <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByDocidAid("hyt","338") ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth1.jpg" width="300" height="100" /></a></p>
+        <p class="blank10"></p>
+        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByDocidAid("hyt","339") ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth2.jpg" width="300" height="100" /></a></p>
+        <p class="blank10"></p>
+        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByDocidAid("hyt","340") ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth3.jpg" width="300" height="100" /></a></p>
                   </div>
                   <div class="blank20"></div>
                   <div class="syrbox3 border2">
@@ -247,48 +247,49 @@ $url = new url($req->requestUri());
                   </div>
                   
                   <div class="blank20"></div>
-                  <div class="syrbox4 border2">
-                    <div class="syrboxtit fz18 graybg">预约挂号</div>
-                    <div class="syrbox4nr fz13">
-                      <form method="post" action="">
-                        <table>
-                          <tr>
-                            <td height="26" width="62">姓      名</td>
-                            <td><input class="input1 border2" type="text" /></td>
-                          </tr>
-                          <tr height="14">
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">联系电话</td>
-                            <td><input class="input1 border2" type="text" /></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">预约时间</td>
-                            <td><input class="input2 gray border2" onclick="WdatePicker()" placeholder="请选择预约时间" type="text" /></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td width="62">就诊状态</td>
-                            <td><input type="radio" name="zd"  checked="checked" />
-                              <label> 初诊</label>
-                              <input class="input3" type="radio" name="zd" />
-                              <label> 复诊</label></td>
-                          </tr>
-                          <tr height="14" >
-                            <td></td>
-                          </tr>
-                        </table>
-                        <div class="sybtn">
-                          <button class="sybtn1" type="submit" value=""><img src="<?php print AppUrl::getMediaPath()?>/images/syrth8.jpg" width="120" height="40" /></button>
-                          <a href="<?php print AppUrl::navSubscribe()?>" class="sqjh"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth9.jpg" width="120" height="40" /></a>
-                        </div>
-                      </form>
+                 <script src="<?php print AppUrl::getMediaPath()?>/js/guahao.js"></script>
+                    <div class="syrbox4 border2">
+        <div class="syrboxtit fz18 graybg">预约挂号</div>
+        <div class="syrbox4nr fz13">
+                      <form name="form1" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
+            <table>
+              <tr>
+                <td height="26"  width="62">姓      名</td>
+                <td><input name="名称" id="name" class="input1 border2" type="text" /></td>
+              </tr>
+              <tr height="14">
+                <td></td>
+              </tr>
+              <tr>
+                <td width="62">联系电话</td>
+                <td><input id="hometel" name="电话" class="input1 border2" type="text" /></td>
+              </tr>
+              <tr height="14" >
+                <td></td>
+              </tr>
+              <tr>
+                <td width="62">预约时间</td>
+                <td><input id="yudate" name="预约时间"  class="input2 gray border2"  onclick="WdatePicker()" placeholder="请选择预约时间" type="text" /></td>
+              </tr>
+              <tr height="14" >
+                <td></td>
+              </tr>
+              <tr>
+                <td width="62">就诊状态</td>
+                <td><input id="ismode" type="radio" name="就诊状态"  checked="checked" />
+                  <label> 初诊</label>
+                  <input id="ismode" class="input3" type="radio" name="就诊状态" />
+                  <label> 复诊</label></td>
+              </tr>
+              <tr height="14" >
+                <td></td>
+              </tr>
+            </table>
+            <div class="sybtn">
+              <button class="sybtn1" type="submit" value=""><img src="<?php print AppUrl::getMediaPath()?>/images/syrth8.jpg" width="120" height="40" /></button>
+              <a class="sqjh" href="<?php print AppUrl::navSubscribe()?>" <?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?>><img src="<?php print AppUrl::getMediaPath()?>/images/syrth9.jpg" width="120" height="40" /></a>
+            </div>
+          </form>
                     </div>
                   </div>
                   <div class="blank20"></div>
@@ -335,63 +336,7 @@ $url = new url($req->requestUri());
                 <!--right end-->
              </div>   
              
-             <!--zjtdcon1_box2 end
-             
-             <div class="clr">
-             	<div class="norques border2">
-                    <div class="zjtdwztit fz18"><span></span><?php print $m->data["name"]?>&middot; 最新回复<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="" class="fr fz13 blue">查看全部问答<img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img9.png" style="margin:2px 0 0 5px;" /></a></div>
-                    <p class="blank20"></p>
-                    
-                    <div class="clr">
-                    
-                    
-                     <?php $nx=1;?>            	
-                    <?php foreach($m->getQuestionsByDod($m->data["sid"],2) as $newask):?> 
-          <?php $newans = $m->getAnswerByAskid($m->data["sid"])?>
-
-
-                    	<div class="zjtd_box5  fr">
-                        	<div class="zjtd_box5_sm1">
-                                <img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img10.png" />  <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><?php print utility::utf8Substr($newask["title"],0,18) ?></a>
-                                <span class="color9 fz14"><?php print $newask["date"] ?></span>
-                            </div>
-                            <div class="blank10"></div>
-                        	<div class="zjtd_box5_sm2">
-                            	<img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img11.png" class="fl" />
-                                <div class="fr">
-                                	<p class="color9 fz14">陈开亮，副主任医师  6秒前回复   </p>
-                                    <p class="color6"><?php print utility::utf8Substr($newans["content"], 0, 40) ?>…<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="blue">详细→</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        	<div class="zjtd_box5  fl">
-                        	<div class="zjtd_box5_sm1">
-                                <img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img10.png" />  <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><?php print utility::utf8Substr($newask["title"],0,18) ?></a>
-                                <span class="color9 fz14"><?php print $newask["date"] ?></span>
-                            </div>
-                            <div class="blank10"></div>
-                        	<div class="zjtd_box5_sm2">
-                            	<img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img11.png" class="fl" />
-                                <div class="fr">
-                                	<p class="color9 fz14">陈开亮，副主任医师  6秒前回复   </p>
-                                    <p class="color6"><?php print utility::utf8Substr($newans["content"], 0, 40) ?>…<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="blue">详细→</a></p>
-                                </div>
-                            </div>
-                        </div>
-                       <?php $nx++;?>
-                         <?php endforeach; ?>  
-                       
-                       
-                       
-                    	
-                    </div>
-                    
-                </div>
-             </div>
-             
-          </div>
-          -->
-          <!--zjtd_con1 end-->
+          
       </div>
       
       <!--fromjb end-->
