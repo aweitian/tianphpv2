@@ -5,11 +5,12 @@
  * @Desc: 
  */
 $row = $model->data;
-// var_dump($row);
+//var_dump($row);
 
-$this->title = "医生观点-按疾病找-上海九龙男子医院";
-$this->description = "";
-$this->keyword = "";
+$this->title = "【".$row["data"]."专题】".$row["data"]."专家访谈_上海九龙男子医院";
+$this->keyword = "".$row["data"]."专题，".$row["data"]."专家观点";
+$this->description = "上海九龙男子医院为您提供".$row["data"]."详细介绍，".$row["data"]."症状，".$row["data"]."治疗，".$row["data"]."吃什么等。更多".$row["data"]."知识，25位".$row["data"]."专家观点。";
+
 $ext = diseaseExtInfoes::getExtData();
 
 

@@ -12,6 +12,10 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?php print $model->title?></title>
+<meta name="keywords" content="<?php print $model->keyword?>" />
+<meta name="description" content="<?php print $model->description?>" />
+
+
 <?php include dirname(__FILE__)."/public.tpl.php"?>
 </head>
 

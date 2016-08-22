@@ -4,9 +4,10 @@
  * @Date: 2016年7月12日
  * @Desc: 
  */
-$this->title = "患者咨询-按疾病找-上海九龙男子医院";
-$this->description = "";
-$this->keyword = "";
+$this->title = "".$row["data"]."专家咨询_".$row["data"]."最新问题_上海九龙男子医院";
+$this->keyword = "".$row["data"]."咨询，".$row["data"]."在线咨询，".$row["data"]."网上咨询，".$row["data"]."专家咨询，".$row["data"]."电话咨询";
+$this->description = "上海九龙男子医院为您提供".$row["data"]."咨询，".$row["data"]."网上咨询，".$row["data"]."专家咨询，".$row["data"]."电话咨询。为您解答".$row["data"]."相关问题";
+
 $row = $model->data;
 $pageSize = 8;
 if(isset($_REQUEST["page"])){

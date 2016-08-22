@@ -2,7 +2,13 @@
 /**
  * @var mainModel;
  */
+$this->title = "上海男科医院_上海泌尿外科医院_上海男性专科医院_上海九龙男子医院官网";
+$this->keyword = "上海九龙男子医院,上海男科医院,上海泌尿外科医院，上海男性专科医院";
+$this->description = "上海九龙男子医院专家列表，25位医生详细介绍和门诊时间、7153篇患者发表的看病经验、按疾病推荐专家、25位专家在线咨询，免费预约上海九龙男子医院专家门诊。";
+
+
 $m = $model;
+
 
 // echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
 // var_dump($m->getDisease());
@@ -249,13 +255,7 @@ foreach ($m->getDisease() as $item){
         </dl>
       </div>
       <div class="blank20"></div>
-      <div class="syrbox2">
-        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByDocidAid("hyt","338") ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth1.jpg" width="300" height="100" /></a></p>
-        <p class="blank10"></p>
-        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByDocidAid("hyt","339") ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth2.jpg" width="300" height="100" /></a></p>
-        <p class="blank10"></p>
-        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByDocidAid("hyt","340") ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth3.jpg" width="300" height="100" /></a></p>
-      </div>
+    <?php include dirname(dirname(dirname(__FILE__)))."/inc/piclink.tpl.php"?>
       <div class="blank20"></div>
       <div class="syrbox3 border2">
         <div class="syrboxtit fz18 graybg">热门文章</div>
@@ -277,52 +277,8 @@ foreach ($m->getDisease() as $item){
       <div><a class="dh_a"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth6.jpg" /></a></div>
       <?php include dirname(dirname(dirname(__FILE__)))."/inc/dhwz.tpl.php";?>
       <div class="blank20"></div>
-<script src="<?php print AppUrl::getMediaPath()?>/js/guahao.js"></script>
-      <div class="syrbox4 border2">
-        <div class="syrboxtit fz18 graybg">预约挂号</div>
-        <div class="syrbox4nr fz13">
-        
-  <form name="form1" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
-            <table>
-              <tr>
-                <td height="26"  width="62">姓      名</td>
-                <td><input name="名称" id="name" class="input1 border2" type="text" /></td>
-              </tr>
-              <tr height="14">
-                <td></td>
-              </tr>
-              <tr>
-                <td width="62">联系电话</td>
-                <td><input id="hometel" name="电话" class="input1 border2" type="text" /></td>
-              </tr>
-              <tr height="14" >
-                <td></td>
-              </tr>
-              <tr>
-                <td width="62">预约时间</td>
-                <td><input id="yudate" class="input2 gray border2" name="预约时间" onclick="WdatePicker()" placeholder="请选择预约时间" type="text" /></td>
-              </tr>
-              <tr height="14" >
-                <td></td>
-              </tr>
-              <tr>
-                <td width="62">就诊状态</td>
-                <td><input id="ismode" type="radio" name="就诊状态"  checked="checked" />
-                  <label> 初诊</label>
-                  <input id="ismode" class="input3" type="radio" name="就诊状态" />
-                  <label> 复诊</label></td>
-              </tr>
-              <tr height="14" >
-                <td></td>
-              </tr>
-            </table>
-            <div class="sybtn">
-              <button class="sybtn1" type="submit" value=""><img src="<?php print AppUrl::getMediaPath()?>/images/syrth8.jpg" width="120" height="40" /></button>
-              <button value=""><img src="<?php print AppUrl::getMediaPath()?>/images/syrth9.jpg" width="120" height="40" /></button>
-            </div>
-          </form>
-        </div>
-      </div>
+      <?php include dirname(dirname(dirname(__FILE__)))."/inc/guahao.tpl.php"?>
+
       <div class="blank20"></div>
       <div class="syrbox5 border2">
         <div class="syrboxtit fz18 graybg">大家都在送什么?</div>

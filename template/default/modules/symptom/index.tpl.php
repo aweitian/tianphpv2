@@ -16,7 +16,7 @@ if (!$m instanceof symptomModel)exit;
 
 // exit;
 
-$this->title = "按症状找-上海九龙男子医院";
+$this->title = "男科疾病症状大全_上海九龙男子医院";
 $this->description = "";
 $this->keyword = "";
 

@@ -8,7 +8,7 @@ $this->keyword = "";
 if(empty($data)){
 	exit("removed.");
 }
-defTplData::getInstance()->title = $data["title"];
+defTplData::getInstance()->title = $data["title"]."_上海九龙男子医院";
 defTplData::getInstance()->keyword = $data["kw"];
 defTplData::getInstance()->description = $data["desc"];
 // 	["sid"]=> string(1) "7" 

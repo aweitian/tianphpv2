@@ -23,8 +23,8 @@ $pagination = new pagination($m->getAllCnt(), $page, $pageSize, 6);
 $req = new httpRequest();
 $url = new url($req->requestUri());
 
-$this->title = "找大夫咨询-上海九龙男子医院";
-$this->description = "";
+$this->title = "推荐专家_上海九龙男子医院";
+$this->description = "汇总了患者在上海九龙男子医院的就医经验7153篇，热评疾病100多个，热评疾病的推荐大夫25位，指导患者就医，帮助您找到好大夫。";
 $this->keyword = "";
 // foreach($m->getDisease() as $item)
 // {
@@ -233,25 +233,7 @@ $this->keyword = "";
                     
                   <div class="blank20"></div>
                   
-                  <div class="syrbox2">
-                    <p>
-                    <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>">
-                    <img src="<?php print AppUrl::getMediaPath()?>/images/syrth1.jpg" width="300" height="100" />
-                    </a>
-                    </p>
-                    <p class="blank10"></p>
-                    <p>
-                        <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>">
-                    <img src="<?php print AppUrl::getMediaPath()?>/images/syrth2.jpg" width="300" height="100" />
-                    </a>
-                    </p>
-                    <p class="blank10"></p>
-                    <p>
-                        <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>">
-                    <img src="<?php print AppUrl::getMediaPath()?>/images/syrth3.jpg" width="300" height="100" />
-                    </a>
-                    </p>
-                  </div>
+               <?php include dirname(dirname(dirname(__FILE__)))."/inc/piclink.tpl.php"?>
                   
                   <div class="blank20"></div>
                   

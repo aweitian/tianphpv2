@@ -13,9 +13,10 @@ $row = $model->data;
 $ext = diseaseExtInfoes::getExtData();
 // var_dump($ext);exit;
 
-$this->title = "疾病首页-按疾病找-上海九龙男子医院";
-$this->description = "";
-$this->keyword = "";
+$this->title = "".$row["data"]."哪家医院看得好_治疗".$row["data"]."哪个医生好_".$row["data"]."推荐医院医生_上海九龙男子医院";
+$this->keyword = "".$row["data"]."哪家医院看得好,治疗".$row["data"]."哪个医生好,".$row["data"]."推荐医院,".$row["data"]."推荐医生";
+$this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]."哪个医生好,132629患友推荐了上海九龙男子医院治疗".$row["data"]."好的专家,并且可以直接向专家在线咨询,预约电话咨询,预约专家的门诊挂号,在线上直接获得优质的治疗".$row["data"]."的医疗服务";
+
 ?>
   <div class="blank15"></div>
   <div class="sybox clearfix">
@@ -121,7 +122,9 @@ $this->keyword = "";
                         </div>
                         
                 	</div>
-                    
+        		<!-- 添加如果病种下没有 疾病知识 就不显示 "病因","症状","检查","治疗","危害","保键"-->    
+       			 <?php if ($model->knowledgeCnt($row["sid"],0) > 0):?>
+                
                     <div class="blank20"></div>
                     <div class="padd20 border2">
                     	<div class="zjtdwztit fz18 clr" style="border-bottom:0;"><span></span><?php print $row["data"]?>全面详解</div>
@@ -187,7 +190,8 @@ $this->keyword = "";
                       </div>
                         
                 	</div>
-                    
+                   	<!-- // 添加如果病种下没有 疾病知识 就不显示 "病因","症状","检查","治疗","危害","保键"-->    
+        			<?php endif;?>  
                      
                      
                      

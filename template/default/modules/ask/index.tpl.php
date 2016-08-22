@@ -7,9 +7,10 @@ $m = $model;
 $row = $m->data;
 
 
-$this->title = "网络咨询-上海九龙男子医院";
-$this->description = "";
+$this->title = "网上咨询男科在线专家_咨询男科医院在线医生_上海九龙男子医院";
 $this->keyword = "";
+$this->description = "上海九龙男子医院有25位医生根据你的病情给些相应的治疗建议，网上咨询男科在线医生，咨询男科医院在线专家，疾病查询，网上咨询疾病，咨询男科医生专家就去上海九龙男子医院。";
+
 
 $pageSize = 20;
 if(isset($_REQUEST["page"])){

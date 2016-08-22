@@ -10,9 +10,10 @@ $row = $model->data;
 $ext = diseaseExtInfoes::getExtData();
 
 
-$this->title = "疾病知识-按疾病找-上海九龙男子医院";
-$this->description = "";
-$this->keyword = "";
+$this->title = "什么是".$row["data"].",".$row["data"]."症状,".$row["data"]."的治疗和康复_上海九龙男子医院";
+$this->keyword = "什么是".$row["data"].",".$row["data"]."症状,".$row["data"]."治疗康复和手术费用";
+$this->description = "什么是".$row["data"].",".$row["data"]."症状是什么,".$row["data"]."疾病如何治疗,吃什么有利于".$row["data"]."康复,全面的疾病知识和患教文章，患者常见疑问，这里有25位医生发表有关".$row["data"]."的文章，让你正确了解".$row["data"]."的发病原因和治疗方式，".$row["data"]."专家在线咨询";
+
 
 
 $pageSize = 8;

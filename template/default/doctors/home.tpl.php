@@ -20,7 +20,13 @@ defTplData::getInstance()->title = $m->data["name"] . " - 医师首页";
   ["spec"]=>  	string(1) "3"
 }
  */
+
 // var_dump($m->data);exit;
+$this->title = "".$m->data["name"]."大夫个人网站_上海九龙男子医院";
+$this->keyword = "".$m->data["name"]."大夫,".$m->data["name"]."医生";
+$this->description = "免费咨询".$m->data["name"]."医生,查看".$m->data["name"]."医生门诊,".$m->data["desc"]."";
+
+
 
 $pageSize = 8;
 if(isset($_REQUEST["page"])){

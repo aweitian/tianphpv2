@@ -4,12 +4,15 @@
  * @Date: 2016年7月12日
  * @Desc: 
  */
-$this->title = "好评医生-按疾病找-上海九龙男子医院";
-$this->description = "";
-$this->keyword = "";
+
 $row = $model->data;
 // var_dump($row);
 $ext = diseaseExtInfoes::getExtData();
+
+
+$this->title = "【".$row["data"]."专家推荐】治疗".$row["data"]."最好的专家_1156位_".$row["data"]."专家排行榜_上海九龙男子医院";
+$this->keyword = "".$row["data"]."专家，治疗".$row["data"]."最好的专家，".$row["data"]."专家排行榜";
+$this->description = "上海九龙男子医院推荐25位治疗".$row["data"]."最好的专家。上海九龙男子医院".$row["data"]."专家排行榜由".$row["data"]."患者投票得出。去医院看".$row["data"]."前，可通过电话咨询，提前与".$row["data"]."专家沟通。通过预约挂号，可获得".$row["data"]."专家面诊资格。";
 
 
 $pageSize = 6;
@@ -26,7 +29,7 @@ $pagination = new pagination($model->getAllCnt($row["sid"]), $page, $pageSize, 6
 $req = new httpRequest();
 $url = new url($req->requestUri());
 ?>
-  
+
   <div class="blank15"></div>
   <div class="sybox clearfix">
     <div>
