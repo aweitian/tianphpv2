@@ -4,6 +4,11 @@
  */
 $m = $model;
 
+$this->title = "上海男科医院_上海泌尿外科医院_上海男性专科医院_上海九龙男子医院官网";
+$this->keyword = "上海九龙男子医院,上海男科医院,上海泌尿外科医院，上海男性专科医院";
+$this->description = "上海九龙男子医院专家列表，25位医生详细介绍和门诊时间、7153篇患者发表的看病经验、按疾病推荐专家、25位专家在线咨询，免费预约上海九龙男子医院专家门诊。";
+
+
 // echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
 // var_dump($m->getDisease());
 // var_dump($m->getDiseaseLv0());exit;
@@ -77,12 +82,12 @@ foreach ($m->getDisease() as $item){
   <!-- end-->
   <div class="index_zxyy clearfix">
     <div class="left_list"> 
-    <a href="<?php print AppUrl::getSwtUrl()?>" class="ask_online"> 
+    <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="ask_online"> 
     <span class="left_sm1">在线咨询<br/><font class="gray">一键咨询、免费答疑</font> </span> 
     </a> 
     </div>
       <div class="right_list"> 
-          <a href="<?php print AppUrl::getSwtUrl()?>" class="order_menzhen"> 
+          <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="order_menzhen"> 
               <span class="menzhen_ab"> 预约转诊<br/><span class="gray">省时、省心、省力、省钱</span> </span>
          </a> 
          <a href="tel:021-52733999" class="order_pinzhi"> 
@@ -171,7 +176,7 @@ foreach ($m->getDisease() as $item){
                   <p class="name"><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><?php print $doc["name"]; ?></a></p>
                   <p class="title"><?php print $doc["lv"]; ?></p>
                 </div>
-                <div class="btn"><a href="<?php print AppUrl::getSwtUrl()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/index_img3.png" /></a></div>
+                <div class="btn"><a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/index_img3.png" /></a></div>
               </li>
             <?php if ($xy % 3 == 0) { ?>              
             </ul>

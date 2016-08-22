@@ -65,7 +65,7 @@ defTplData::getInstance()->description = $data["desc"];
                      		<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($m->data["id"]) ?>" class="zjtd_thumb">
                      		<img width="200" height="220" src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print($m->data["avatar"]) ?>">
                      		</a>
-                     		<a href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_swt"><?php print($m->data["name"]) ?></a>
+                     		<a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="zjtd_swt"><?php print($m->data["name"]) ?></a>
                      	</div>
                      
                      <div class="fr">
@@ -199,9 +199,9 @@ function chk(form){
                 	<div class="zjtd_zxfw border4">
                     	<textarea placeholder="在此简单描述病情，向陈希球医生提问" class="border4"></textarea>
                         <p class="blank10"></p>
-                        <p class="color6"><b><?php print($m->data["name"]) ?>的咨询范围： </b>各类先天性心脏病，包括小儿和成人；房缺，室缺，四联症以及二尖... <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="blue">[更多]</a></p>
+                        <p class="color6"><b><?php print($m->data["name"]) ?>的咨询范围： </b>各类先天性心脏病，包括小儿和成人；房缺，室缺，四联症以及二尖... <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="blue">[更多]</a></p>
                         <p class="blank10"></p>
-                        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_rgzx tc">咨询<?php print($m->data["name"]) ?>医生</a></p>
+                        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="zjtd_rgzx tc">咨询<?php print($m->data["name"]) ?>医生</a></p>
                     </div>
                     
                   	<div class="blank20"></div>

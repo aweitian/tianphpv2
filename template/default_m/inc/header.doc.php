@@ -1,7 +1,7 @@
 <?php
 ?>
 <div class="head_tc blue_bg">
-        <a class="goback" href="" title="返回上页" onclick="history.go(-1)"><span>返回</span></a>
+        <a class="goback"  title="返回上页" onclick="history.go(-1)"><span>返回</span></a>
         <div class="head_tit" ><?php print $m->data["name"]?><?php print $doctors_header_title;?></div>
     <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_xl.png" /><i id="redpoint" class=""></i></span></a>
 </div>
@@ -22,9 +22,9 @@
     <a href="<?php print AppUrl::helpAbout()?>" class="anjibing" id="cnzz_jibing204">好评医院</a>
   </div>
   <div class="three_btn clearfix">
-    <a href="<?php print AppUrl::getSwtUrl()?>" id="cnzz_zixun205"><span></span></a>
+    <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" id="cnzz_zixun205"><span></span></a>
     <a href="tel:021-52733999" id="cnzz_dianhua206"><span></span></a>
-    <a href="<?php print AppUrl::getSwtUrl()?>" id="cnzz_jihao207" class="mr0"><span></span></a>
+    <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" id="cnzz_jihao207" class="mr0"><span></span></a>
   </div>
   <div class="three_a clearfix">
     <a href="/" class="" id="cnzz_shouye208">首页</a>

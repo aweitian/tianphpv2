@@ -71,7 +71,7 @@ $url = new url($req->requestUri());
                                               <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" ><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="80" height="80"  class="fl"></a>
                                             <div class="fl pt20">
                                               <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"  class="g_home1">个人网站</a></p>
-                                              <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?>  href="<?php print AppUrl::getSwtUrl()?>" class="g_advise2" rel="nofollow">可咨询</a>
+                                              <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?>  href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="g_advise2" rel="nofollow">可咨询</a>
                                               <p> 
                                         </div>
                                         <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="javascript:;" class="prev2"></a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="javascript:;" class="next2"></a> </div>
@@ -87,7 +87,7 @@ $url = new url($req->requestUri());
                                         </a> 
                                     
                                         <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docArticleHomeByDocid($doc["id"])?>" class="g_sub" style="margin-right:0px">查看<?php print  $doc["name"]?>的全部文章</a>、 
-                                        <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="gray_a">全部咨询</a> 
+                                        <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="gray_a">全部咨询</a> 
                                         </p>
                                       <p class="fr">
                                       <div class="bshare-custom fr">分享到

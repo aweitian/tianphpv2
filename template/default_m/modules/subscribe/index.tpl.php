@@ -4,7 +4,7 @@
  */
 
 $m = $model;
-
+$this->title = "网上挂号_上海九龙男子医院";
 $tree_dis = array();
 foreach ($m->getDisease() as $item){
 	if(!array_key_exists($item["pid"], $tree_dis)){
@@ -18,6 +18,7 @@ foreach ($m->getDisease() as $item){
 
 
 ?>
+
 <div class="public_width">
 
 <?php $disease_header_title = "预约挂号"?>

@@ -8,6 +8,9 @@ $row = $model->data;
 // var_dump($row);
 $ext = diseaseExtInfoes::getExtData();
 
+$this->title = "【".$row["data"]."专题】".$row["data"]."专家访谈_上海九龙男子医院";
+$this->keyword = "".$row["data"]."专题，".$row["data"]."专家观点";
+$this->description = "上海九龙男子医院为您提供".$row["data"]."详细介绍，".$row["data"]."症状，".$row["data"]."治疗，".$row["data"]."吃什么等。更多".$row["data"]."知识，25位".$row["data"]."专家观点。";
 
 $pageSize = 8;
 if(isset($_REQUEST["page"])){
@@ -66,7 +69,7 @@ $url = new url($req->requestUri());
                                               <a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" ><img src="<?php print HTTP_ENTRY?>/static/doctor/<?php print $doc["avatar"]?>" width="80" height="80"  class="fl"></a>
                                             <div class="fl pt20">
                                               <p><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"  class="g_home1">个人网站</a></p>
-                                              <p><a  href="<?php print AppUrl::getSwtUrl()?>" class="g_advise2" rel="nofollow">可咨询</a>
+                                              <p><a  href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="g_advise2" rel="nofollow">可咨询</a>
                                               <p> 
                                         </div>
                                         <a href="javascript:;" class="prev2"></a> <a href="javascript:;" class="next2"></a> </div>
@@ -82,7 +85,7 @@ $url = new url($req->requestUri());
                                         </a> 
                                     
                                         <a href="<?php print AppUrl::docArticleHomeByDocid($doc["id"])?>" class="g_sub" style="margin-right:0px">查看<?php print  $doc["name"]?>的全部文章</a>、 
-                                        <a href="<?php print AppUrl::getSwtUrl()?>" class="gray_a">全部咨询</a> 
+                                        <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="gray_a">全部咨询</a> 
                                         </p>
                                       <p class="fr">
                                       <div class="bshare-custom fr">分享到

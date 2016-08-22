@@ -18,7 +18,7 @@
 
 	  <li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print HTTP_ENTRY?>/">返回首页</a></li>
 
-	  <li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">在线咨询</a></li>
+	  <li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">在线咨询</a></li>
 
 	</ul>
 
@@ -160,7 +160,7 @@
 
 	<ul class="ghfootnav">
 
-	  <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">关于我们</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">友情链接</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">找大夫咨询</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navSubscribe()?>">预约挂号</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">版权声明</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="last" href="">联系我们</a>
+	  <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">关于我们</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">友情链接</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">找大夫咨询</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navSubscribe()?>">预约挂号</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">版权声明</a> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="last" href="">联系我们</a>
 
 	  </li>
 

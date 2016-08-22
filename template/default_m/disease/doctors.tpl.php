@@ -6,6 +6,11 @@
  */
 
 $row = $model->data;
+
+$this->title = "【".$row["data"]."专家推荐】治疗".$row["data"]."最好的专家_1156位_".$row["data"]."专家排行榜_上海九龙男子医院";
+$this->keyword = "".$row["data"]."专家，治疗".$row["data"]."最好的专家，".$row["data"]."专家排行榜";
+$this->description = "上海九龙男子医院推荐25位治疗".$row["data"]."最好的专家。上海九龙男子医院".$row["data"]."专家排行榜由".$row["data"]."患者投票得出。去医院看".$row["data"]."前，可通过电话咨询，提前与".$row["data"]."专家沟通。通过预约挂号，可获得".$row["data"]."专家面诊资格。";
+
 // var_dump($row);
 $ext = diseaseExtInfoes::getExtData();
 
@@ -43,7 +48,7 @@ $url = new url($req->requestUri());
 	<div class="mzy30 zjtd_box1">
     	<a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" class="fl zjtd_box1_img1" /></a>
         <dl class="fl">
-        	<dt class="fz24 jbkp_zjzx clr"><b class="color3 fz28"><a herf="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="doc_name"><?php print $doc["name"]; ?></a></b><a href="<?php print AppUrl::getSwtUrl()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_yy.png" class="img_width" /></a><a href="<?php print AppUrl::getSwtUrl()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_zx.png" class="img_width" /></a></dt>
+        	<dt class="fz24 jbkp_zjzx clr"><b class="color3 fz28"><a herf="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="doc_name"><?php print $doc["name"]; ?></a></b><a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_yy.png" class="img_width" /></a><a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_zx.png" class="img_width" /></a></dt>
             <dd><?php print $doc["lv"]; ?></dd>
             <dd>患者推荐热度：<span class="red"><?php print $doc["hot"]; ?></span><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img3.png" /></dd>
         </dl>

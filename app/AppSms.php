@@ -9,7 +9,7 @@ require_once FILE_SYSTEM_ENTRY . "/vendor/sms/CCPRestSmsSDK.php";
 require_once FILE_SYSTEM_ENTRY . "/modules/oplog/IOp.php";
 require_once FILE_SYSTEM_ENTRY . "/modules/oplog/oplog.php";
 
-define ( 'SMS_DEBUG', true );
+define ( 'SMS_DEBUG', false );
 class AppSms {
 	private static function sendVcDbg($to, $vc, $code) {
 		$db = new mysqlPdoBase ();

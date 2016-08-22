@@ -9,6 +9,9 @@ $m = $model;
 // var_dump($m->getDiseaseLv0());exit;
 
 
+$this->title = "疾病专题-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 
 $pageSize = 12;
 if(isset($_REQUEST["page"])){

@@ -22,9 +22,9 @@
     <a href="<?php print AppUrl::helpAbout()?>" class="anjibing" id="cnzz_jibing204">好评医院</a>
   </div>
   <div class="three_btn clearfix">
-    <a href="<?php print AppUrl::getSwtUrl()?>" id="cnzz_zixun205"><span></span></a>
+    <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" id="cnzz_zixun205"><span></span></a>
     <a href="tel:021-52733999" id="cnzz_dianhua206"><span></span></a>
-    <a href="<?php print AppUrl::getSwtUrl()?>" id="cnzz_jihao207" class="mr0"><span></span></a>
+    <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" id="cnzz_jihao207" class="mr0"><span></span></a>
   </div>
   <div class="three_a clearfix">
     <a href="/" class="" id="cnzz_shouye208">首页</a>

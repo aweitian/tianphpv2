@@ -172,7 +172,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
       <p class="blank5"></p>
       <p class="fz13 gray">擅长：<?php print utility::utf8Substr($doc["spec"],0,20); ?>...</p>
       <p class="blank5"></p>
-      <p class="p3 tc"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">咨询</a></p>
+      <p class="p3 tc"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">咨询</a></p>
       </dd></dl>
       	<?php endforeach;?>
 

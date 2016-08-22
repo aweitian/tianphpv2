@@ -1,6 +1,10 @@
 <?php
 
 $row = $m->data;
+
+$this->title = "心意礼物-".$m->data["name"]."-找大夫咨询-上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
 ?>
 <script>
 

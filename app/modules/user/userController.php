@@ -223,8 +223,10 @@ class userController extends appCtrl {
 			} else {
 				$this->view->profile ( $this->model, $ret->info );
 			}
+		} else {
+			$this->view->profile ( $this->model );
 		}
-		$this->view->profile ( $this->model );
+		
 	}
 	public function avatarAction(pmcaiMsg $msg) {
 		if ($msg->isPost ()) {
@@ -236,8 +238,10 @@ class userController extends appCtrl {
 			} else {
 				$this->view->avatar ( $this->model, $ret->info );
 			}
+		}else {
+			$this->view->avatar ( $this->model );
 		}
-		$this->view->avatar ( $this->model );
+		
 	}
 	public function letterAction(pmcaiMsg $msg) {
 		if ($msg->isPost ()) {
@@ -249,8 +253,10 @@ class userController extends appCtrl {
 			} else {
 				$this->view->letter ( $this->model, $ret->info );
 			}
+		} else {
+			$this->view->letter ( $this->model );
 		}
-		$this->view->letter ( $this->model );
+		
 	}
 	public function appraiseAction(pmcaiMsg $msg) {
 		$this->view->appraise ( $this->model );
@@ -264,8 +270,10 @@ class userController extends appCtrl {
 			} else {
 				$this->view->modify ( $this->model, $ret->info );
 			}
+		} else {
+			$this->view->modify ( $this->model );
 		}
-		$this->view->modify ( $this->model );
+		
 	}
 	public function logoutAction(pmcaiMsg $msg) {
 		AppUser::getInstance ()->auth->logout ();

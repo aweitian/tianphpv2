@@ -6,6 +6,12 @@
  */
 
 $row = $model->data;
+
+$row = $model->data;
+$this->title = "".$row["data"]."专家咨询_".$row["data"]."最新问题_上海九龙男子医院";
+$this->keyword = "".$row["data"]."咨询，".$row["data"]."在线咨询，".$row["data"]."网上咨询，".$row["data"]."专家咨询，".$row["data"]."电话咨询";
+$this->description = "上海九龙男子医院为您提供".$row["data"]."咨询，".$row["data"]."网上咨询，".$row["data"]."专家咨询，".$row["data"]."电话咨询。为您解答".$row["data"]."相关问题";
+
 $pageSize = 8;
 if(isset($_REQUEST["page"])){
 	$page = intval($_REQUEST["page"]);
@@ -88,7 +94,7 @@ $a=Appctrl::$msg->getControl()
 <div class="box_a">
     <p class="box_center2">
         <a href="tel:021-52733999" class="btn_a1" >预约通话</a>
-        <a href="<?php print AppUrl::getSwtUrl()?>" class="btn_a2">免费咨询</a>
+        <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="btn_a2">免费咨询</a>
     </p> 
 </div>
 

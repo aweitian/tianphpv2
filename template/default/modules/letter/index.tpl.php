@@ -47,7 +47,7 @@ $m = $model;
         <div class="fromtit fz18 black">咨询医生<span class="fz12 gray">Expert cvonsultants</span></div>
         <div class="fromzxzjbox">
           <div class="fromzxzjbox1 clearfix">
-            <div class="fromzxzjbox1l fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syask.gif" width="449" height="60" /></a></div>
+            <div class="fromzxzjbox1l fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/syask.gif" width="449" height="60" /></a></div>
             <div class="fromzxzjbox1r fr" id="topzj">
               <dl>
                 <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syaskzj.jpg" width="60" height="60" /></dt>
@@ -103,7 +103,7 @@ $m = $model;
                 <p class="gray">最近通话<?php  print $askdata["date"]?></p>
                 <p class="blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">查看最新用户分享 >></a></p>
               </dd>
-              <dd class="dd3 fr orange tc fz16"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">即刻预约</a></dd>
+              <dd class="dd3 fr orange tc fz16"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">即刻预约</a></dd>
 			  <?php endif;?>
             </dl>
           	<?php endforeach;?>

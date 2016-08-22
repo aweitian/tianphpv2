@@ -7,7 +7,7 @@ $data = $m->row($aid);
 if(empty($data)){
 	exit("removed.");
 }
-defTplData::getInstance()->title = $data["title"];
+defTplData::getInstance()->title = $data["title"]."_上海九龙男子医院";
 defTplData::getInstance()->keyword = $data["kw"];
 defTplData::getInstance()->description = $data["desc"];
 // 	["sid"]=> string(1) "7" 
@@ -122,7 +122,7 @@ defTplData::getInstance()->description = $data["desc"];
     <p class="box_center2">
         <a href="<?php print AppUrl::navSubscribe()?>" class="btn_e1" >预约挂号</a>
         <a href="tel:021-52733999" class="btn_e2">电话咨询</a>
-        <a href="<?php print AppUrl::getSwtUrl()?>" class="btn_e3">在线咨询</a>
+        <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="btn_e3">在线咨询</a>
     </p> 
 </div>
 

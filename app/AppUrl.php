@@ -104,7 +104,7 @@ class AppUrl {
 		return AppUrl::build ( "/user/writeappraise" );
 	}
 	public static function userAddAppraise() {
-		return AppUrl::build ( "/user/addappraise" );
+		return AppUrl::userWriteAppraise ();
 	}
 	public static function userRmQuestion() {
 		return AppUrl::build ( "/user/rmquestion" );
@@ -434,7 +434,7 @@ class AppUrl {
 	 * @return string
 	 */
 	public static function getSwtUrl() {
-		return "/swt";
+		return "javascript:void(0)";
 	}
 	/**
 	 * 404路径

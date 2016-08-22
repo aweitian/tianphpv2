@@ -66,7 +66,7 @@ foreach ($m->getDisease() as $item){
         <div class="fromtit fz18 black">咨询医生<span class="fz12 gray">Expert cvonsultants</span></div>
         <div class="fromzxzjbox">
           <div class="fromzxzjbox1 clearfix">
-            <div class="fromzxzjbox1l fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syask.gif" width="449" height="60" /></a></div>
+            <div class="fromzxzjbox1l fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/syask.gif" width="449" height="60" /></a></div>
             <div class="fromzxzjbox1r fr" id="topzj">
               	<?php foreach($m->getDoctors(3) as $doc):?>
               <dl>
@@ -111,7 +111,7 @@ foreach ($m->getDisease() as $item){
                 <p class="blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docAskHomeByDocid($doc["id"])?>">查看最新用户分享 >></a></p>
               </dd>           
 			  <?php endif;?>
-			  <dd class="dd3 fr orange tc fz16"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">即刻预约</a></dd>
+			  <dd class="dd3 fr orange tc fz16"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">即刻预约</a></dd>
             </dl>
           	<?php endforeach;?>
      
@@ -200,13 +200,13 @@ foreach ($m->getDisease() as $item){
     <div class="fr wid300 fz13">
       <div class="syrbox1 clearfix">
         <dl class="dll dl1">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd>门诊流程</dd>
           </a>
         </dl>
         <dl class="dl2">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd>住院须知</dd>
           </a>
@@ -224,31 +224,31 @@ foreach ($m->getDisease() as $item){
           </a>
         </dl>
         <dl class="dl5">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd>隐私声明</dd>
           </a>
         </dl>
         <dl class="dl6">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd>先进设备</dd>
           </a>
         </dl>
         <dl class="dll dl7">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd>投诉与建议</dd>
           </a>
         </dl>
         <dl class="dl8">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd>价格与收费</dd>
           </a>
         </dl>
         <dl class="dl9">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd class="">就诊环境</dd>
           </a>
@@ -271,7 +271,7 @@ foreach ($m->getDisease() as $item){
         </div>
       </div>
       <div class="blank20"></div>
-      <div><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth4.jpg" width="300" height="90" /></a></div>
+      <div><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth4.jpg" width="300" height="90" /></a></div>
       <div class="blank20"></div>
       <div><img src="<?php print AppUrl::getMediaPath()?>/images/syrth5.jpg" /></div>
       <div><a class="dh_a"><img src="<?php print AppUrl::getMediaPath()?>/images/syrth6.jpg" /></a></div>

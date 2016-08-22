@@ -18,6 +18,13 @@ if (!$m instanceof symptomModel)exit;
 
 $docinfos=$m->getInfoes(10);
 
+$this->title = "男科疾病症状大全_上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
+
+$docinfos=$m->getInfoes(10);
+
+
 ?>
 <div class="public_width">
 <?php $disease_header_title = "按症状";?>

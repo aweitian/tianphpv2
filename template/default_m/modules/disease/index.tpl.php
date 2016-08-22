@@ -7,6 +7,10 @@
  //var_dump(diseaseExtInfoes::getExtData());exit;
 $m = $model;
 
+$this->title = "男科疾病就医指南_上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
+
 $d = diseaseExtInfoes::getExtData();
 
 // exit;

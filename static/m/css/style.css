@@ -861,7 +861,7 @@
 
 
 .ys_box1{ line-height:.3rem; font-size:.22rem;}
-.ys_box1 p{ width:1.9rem; float:left; text-align:center; color:#999;}
+.ys_box1 p{ width:1.8rem; float:left; text-align:center; color:#999;}
 .ys_box1 p span{ margin-left:.05rem;}
 .ys_box1 b{ float:left; font-weight:400; color:#ddd; font-size:.2rem;}
 
@@ -911,11 +911,11 @@
 .jbkp_page{ line-height:.4rem; color:#333; font-size:.24rem;}
 .jbkp_page p{ text-indent:2em; margin-bottom:.3rem; font-size:.24rem;}
 .jbkp_page p a{ font-size:.24rem;}
-.jbkp_page img{ margin-bottom:.3rem;}
-
+.jbkp_page img{ margin-bottom:.3rem; }
+.jbkp_page p img{width:"320";height:120px;}
 .jbkp_page_zx a{ display:block; width:2.78rem; height:.63rem; text-align:center; line-height:.63rem; border-radius:.1rem;}
 .jbkp_page_zx a.kp_bn1{ color:#fe8100; border:1px solid #fe8100;}
-.jbkp_page_zx a.kp_bn2{ color:#53d37e; border:1px solid #53d37e;}
+.zjtd_pagenr a.kp_bn2{ color:#53d37e; border:1px solid #53d37e;}
 
 .yyjs{ border:1px solid #ddd; padding:.3rem .2rem; border-bottom:0;}
 .yyjs dl dt img{ width:2.4rem; height:1rem;}

@@ -233,8 +233,8 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                             </div>
                             
                             <div class="doc_rela_link">
-                                <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="online_btn"><span>点击咨询</span></a><p>
-                                <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="jiahao_btn"><span>预约挂号</span></a><p>
+                                <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="online_btn"><span>点击咨询</span></a><p>
+                                <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="jiahao_btn"><span>预约挂号</span></a><p>
                             </div>
                             </div>
                             </li>

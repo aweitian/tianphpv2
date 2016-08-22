@@ -18,7 +18,7 @@
 
 	  <li><a href="<?php print HTTP_ENTRY?>/">返回首页</a></li>
 
-	  <li><a href="<?php print AppUrl::getSwtUrl()?>">在线咨询</a></li>
+	  <li><a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">在线咨询</a></li>
 
 	</ul>
 

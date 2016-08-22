@@ -7,6 +7,11 @@ $m = $model;
 // var_dump($m->getDisease());
 // var_dump($m->getDiseaseLv0());exit;
 
+$this->title = "咨询医院在线医生_咨询专家_上海九龙男子医院";
+$this->description = "";
+$this->keyword = "";
+
+
 $tree_dis = array();
 foreach ($m->getDisease() as $item){
 	if(!array_key_exists($item["pid"], $tree_dis)){

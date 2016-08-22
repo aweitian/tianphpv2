@@ -75,9 +75,9 @@ $url = new url($req->requestUri());
                     	
                     	<textarea placeholder="在此简单描述病情，向<?php print $m->data["name"]?>医生提问" class="border4"></textarea>
                         <p class="blank10"></p>
-                        <p class="color6"><b><?php print $m->data["name"]?>的咨询范围： </b><?php print $m->data["spec"]?>... <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="blue">[更多]</a></p>
+                        <p class="color6"><b><?php print $m->data["name"]?>的咨询范围： </b><?php print $m->data["spec"]?>... <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="blue">[更多]</a></p>
                         <p class="blank10"></p>
-                        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="zjtd_rgzx tc">咨询<?php print $m->data["name"]?>医生</a></p>
+                        <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="zjtd_rgzx tc">咨询<?php print $m->data["name"]?>医生</a></p>
                     </div>
                     
                   	<div class="blank20"></div>

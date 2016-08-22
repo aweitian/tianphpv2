@@ -81,7 +81,7 @@ $url = new url($req->requestUri());
 <div class="box_b">
     <p class="box_center2">
         <a href="<?php print AppUrl::userWriteLetter()?>" class="btn_b1">给医生写信</a>
-        <a href="<?php print AppUrl::getSwtUrl()?>" class="btn_b2">联系医生</a>
+        <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="btn_b2">联系医生</a>
     </p> 
 </div>
 </div>

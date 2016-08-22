@@ -18,6 +18,9 @@ defTplData::getInstance ()->title = $m->data ["name"] . " - 医师首页";
  * }
  */
 // var_dump($m->data);exit;
+$this->title = "".$m->data["name"]."大夫个人网站_上海九龙男子医院";
+$this->keyword = "".$m->data["name"]."大夫,".$m->data["name"]."医生";
+$this->description = "免费咨询".$m->data["name"]."医生,查看".$m->data["name"]."医生门诊,".$m->data["desc"]."";
 
 $pageSize = 8;
 if (isset ( $_REQUEST ["page"] )) {
@@ -30,6 +33,7 @@ $req = new httpRequest ();
 $url = new url ( $req->requestUri () );
 
 ?>
+
 <div class="public_width">
 	<?php $disease_header_title = $m->data["name"]?>
 	<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>
@@ -78,7 +82,7 @@ $url = new url ( $req->requestUri () );
 					</div>
 					<div class="blank30"></div>
 					<div class="ys_box1_sm1 clr">
-						<a href="<?php print AppUrl::getSwtUrl()?>" class="blue_bg fl">免费在线咨询</a>
+						<a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="blue_bg fl">免费在线咨询</a>
 						<a href="tel:021-52733999" class="new_green_bg fr">电话咨询</a>
 					</div>
 					<div class="blank30"></div>
@@ -284,7 +288,7 @@ $url = new url ( $req->requestUri () );
 <div style="height:1rem;"></div>
 	<div class="box_c">
 		<p class="box_center2">
-			<a href="<?php print AppUrl::getSwtUrl()?>" class="btn_b1">预约挂号</a> <a
+			<a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="btn_b1">预约挂号</a> <a
 				href="<?php print AppUrl::userWriteLetter()?>" class="btn_b2">写感谢信</a> <a
 				href="<?php print AppUrl::docPresentHomeByDocid($m->data["id"])?>" class="btn_b3">送暖心</a>
 		</p>

@@ -63,14 +63,14 @@ $url = new url($req->requestUri());
                           <p><b class="fz18"><?php print $m->data["name"]?>  <?php print $m->data["lv"]?> </b></p>
                           <div class="blank10"></div>
                           <p class="clr"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img2.png" class="fl" />所属医院：上海九龙男子医院</p>
-                          <p class="clr"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />擅长项目：<?php print $m->data["spec"]?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>"> [点击咨询]</a></p>
+                          <p class="clr"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />擅长项目：<?php print $m->data["spec"]?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;"> [点击咨询]</a></p>
                      </div>
                   </div>
                   
                   <div class="fr zjtdcon1box1_sm2">
                   		<div class="zjtdcon1box1_sm3">
                         	<dl style="margin-left:60px;">
-                            	<dt><a href="<?php print AppUrl::getSwtUrl()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_tit1.png" /></a></dt>
+                            	<dt><a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_tit1.png" /></a></dt>
                                 <dd>挂号</dd>
                             </dl>
                             <dl class="zjtdbox1_d1">
@@ -109,7 +109,7 @@ $url = new url($req->requestUri());
                                 	<p>您有任何关于男科疾病方面的问题，都可在线点击咨询，我会立刻为您解答！您的聊天信息，我们严格保密！</p>
                                     <p class="color9"> [ 患者提问：<span class="yellow">8137</span>问，<?php print $m->data["name"]?>本人已回复：<span class="yellow">8130</span>问 ]</p>
                                 </div>
-                                <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" class="fr tc">在线咨询</a>
+                                <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="fr tc">在线咨询</a>
                             </div>
                             
                             <div class="zjtd_box2_sm2 clr">
@@ -334,7 +334,7 @@ $url = new url($req->requestUri());
                       
                       </div>
                     
-                    <div class="zjtd_r3 clr"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>">立刻咨询</a></div>
+                    <div class="zjtd_r3 clr"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">立刻咨询</a></div>
                     <div class="blank20"></div>
                   </div>
                 </div>

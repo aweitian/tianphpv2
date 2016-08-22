@@ -520,9 +520,9 @@ class putUIApi {
 		
 		$ret = $this->db->exec ( $sql, $bnd );
 		if ($ret == 0) {
+			$info = $this->db->getErrorInfo ();
 			if ($this->db->getErrorCode () == "23000") {
 				// 索引唯一约束
-				$info = $this->db->getErrorInfo ();
 				if (preg_match ( "/for key '(name|email|phone)'$/", $info, $matches )) {
 					if ($matches [1] == "name") {
 						return new rirResult ( 8, "用户名已存在" );

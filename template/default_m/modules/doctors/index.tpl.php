@@ -9,6 +9,10 @@ $m = $model;
 // var_dump($m->getDiseaseLv0());exit;
 
 
+$this->title = "推荐专家_上海九龙男子医院";
+$this->description = "汇总了患者在上海九龙男子医院的就医经验7153篇，热评疾病100多个，热评疾病的推荐大夫25位，指导患者就医，帮助您找到好大夫。";
+$this->keyword = "";
+
 $pageSize = 6;
 if(isset($_REQUEST["page"])){
 	$page = intval($_REQUEST["page"]);

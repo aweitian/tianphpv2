@@ -10,7 +10,7 @@
   <div class="hd"></div>
   <div class="new_footer">
     <div class="what_version"> 
-        <a href="<?php print AppUrl::getSwtUrl()?>" class="colorf">在线咨询</a>&nbsp;&nbsp;|&nbsp;&nbsp
+        <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="colorf">在线咨询</a>&nbsp;&nbsp;|&nbsp;&nbsp
         <a href="<?php print AppUrl::navArticle()?>">知识库</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="<?php print AppUrl::helpRouting()?>" class="colorf">来院路线</a>
     </div>
