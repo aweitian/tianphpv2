@@ -63,6 +63,8 @@
  		$bnd = array("syd" => $syd);
  		$ret = $this->db->fetchAll($sql, $bnd);
  	
+ 		
+ 		
  		//从HASH中去除已存在的记录
  		$tAr = array();
  		foreach ($ret as $item){
@@ -73,6 +75,9 @@
  			}
  		}
  	
+ 		
+
+ 		
  		//更新:选两者长度最短的，然后更新
  		$old     = array_keys($tAr);
  		$new     = array_keys($hash);
@@ -84,6 +89,9 @@
  			$len = $len_new;
  		}
  	
+ 		
+ 		
+ 		
  		$sql = $this->sqlManager->getSql("/symptom_disease/update");
  		for($i=0;$i<$len;$i++){
  			$bnd = array();
@@ -104,10 +112,15 @@
  		//echo "添加",$len_new-$i;
  		//删除
  		$sql = $this->sqlManager->getSql("/symptom_disease/rm");
+ 		
+ 		
+ 		
  		for($j=$i;$j<$len_old;$j++){
  			$bnd = array();
  			$bnd["syd"] = $syd;
  			$bnd[$kid] =  $old[$j];
+ 			
+//  			var_dump($sql, $bnd);exit;
  			$this->db->exec($sql, $bnd);
  		}
  		//echo "删除",$len_old-$i;

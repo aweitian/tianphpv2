@@ -1,7 +1,7 @@
 <?php 
 ?>
 <div class="head_tc">
-        <a class="goback" href="" title="返回上页" onclick="history.go(-1)"><span>返回</span></a>
+        <a class="goback" title="返回上页" onclick="history.go(-1)"><span>返回</span></a>
         <div class="head_tit" ><?php print $user_header_title;?></div>
     <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_xl.png" /><i id="redpoint" class=""></i></span></a>
   </div>

@@ -1,27 +1,19 @@
 
 
-<div class="b_bottom_box news_fixs">
-    <div class="aus_info">
-        <a target="_blank" href="<?php print AppUrl::getSwtUrl() ?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print ($doc_img)?>" width="80" height="80" /></a>
-    </div>
-    <div class="fix_right_box">
-        <div class="docs_info_box zzx_dib_w">
-            <a target="_blank"  href="" class="docs_info">
-                <strong><?php print($doc_name) ?></strong>
-                <span><?php print utility::utf8Substr($doc_spec,0,30); ?>...</span>
-            </a>
-        </div>
-        <div class="btn_box clearfix">
-            <div class="new_bottom_btn docs_n_btns">
-                <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>" class="online" >网上咨询</a>
-            </div>
-    
-              <div class="docs_btns">
-                  <div class="b2_btn">
-                      <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navSubscribe() ?>">预约挂号</a>
-                  </div>
-              </div>
-        </div>
-    </div>
+
+
+
+
+<div class="bottom">
+  <div class="btnr">
+    <dl>
+      <dt>
+        <a href=""><img src="<?php print AppUrl::getMediaPath()?>/doctor/120X100/<?php print ($doc_id)?>.png" width="117" height="99" class="btzj" /></a>
+        <h4><b><a href=""><?php print($doc_name) ?></a></b><?php print ($doc_lv) ?></h4>
+        <p>擅长：<?php print utility::utf8Substr($doc_spec,0,25); ?>...</p>
+      </dt>
+      <dd><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl() ?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/btbtn1.png" width="120" height="40" /></a><a href="<?php print AppUrl::navSubscribe()?>"><img src="<?php print AppUrl::getMediaPath()?>/images/btbtn2.png" width="120" height="40" /></a></dd>
+    </dl>
+  </div>
 </div>
   

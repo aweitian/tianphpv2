@@ -10,7 +10,7 @@ $m = $model;
 <div class="public_width">
 
 <div class="head_tc blue_bg">
-    <a class="goback" href="" title="返回上页" onclick="history.go(-1)"><b></b></a>
+    <a class="goback" title="返回上页" onclick="history.go(-1)"><b></b></a>
     <div class="head_tit" >已有账号登录</div>
     <a href="<?php print AppUrl::userRegister()?>" class="fr login_top bor_rad">注册</a>
 </div>
@@ -39,7 +39,7 @@ $m = $model;
 <div class="blank30"></div>
 <div class="login_sm1 clr fz26">
 	<span class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/dl_dui.png" />下次自动登录</span>
-    <a href="<?php print AppUrl::userResetPwd()?>" class="fr blue">忘记密码？</a>
+    <!--  <a href="<?php print AppUrl::userResetPwd()?>" class="fr blue">忘记密码？</a>-->
 </div>
 <div class="blank30"></div>
 </form>

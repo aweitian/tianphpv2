@@ -84,7 +84,7 @@ class mainModel extends AppModel {
 		return symptomUIApi::getInstance()->alllv0();
 	}
     public function alllv1BySyd($syd){
-		return $alllv1BySyd=symptomUIApi::getInstance()->alllv1BySyd($syd);
+		return symptomUIApi::getInstance()->alllv1BySyd($syd);
 	}
 	public function getData($length,$offset=0){
 		return presentUIApi::getInstance()->getData($length,$offset);
@@ -95,5 +95,24 @@ class mainModel extends AppModel {
 	
 	public function getInfoByDod($dod){
 		return doctorUIApi::getInstance()->getInfoByDod($dod);
+	}
+	
+	
+	
+	
+	
+	
+	
+	public function getAllComment($length,$offset=0){
+		return commentUIApi::getInstance()->all($offset,$length);
+	}
+	public function getArticleRowByAid($aid){
+		return articleUIApi::getInstance()->rowNoContent($aid);
+	}
+	public function getFirstDocByAid($aid){
+		return articleUIApi::getInstance()->getFirstDod($aid);
+	}
+	public function getUserRowByUid($uid){
+		return userUIApi::getInstance()->row($uid);
 	}
 }

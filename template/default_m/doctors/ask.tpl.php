@@ -52,6 +52,7 @@ $url = new url($req->requestUri());
 <?php $user= $m->rowuser($askq["uid"]); ?>  
 <?php $doc=$m->getDocRowByDod($askq["dod"]) ?>
 <?php $dis=$m->getNameByDid($askq["did"]) ?>
+<?php $row=$m->getRowByDid($askq["did"]);?>
 <div class="yswd_box1 mzy30 clr">
 	<span class="color9 fl">提问标题：</span>
     <p class="fl"><?php print($askq["title"]) ?></p>
@@ -143,7 +144,7 @@ $url = new url($req->requestUri());
 <div class="hd_hsx"></div>
 <div class="blank10"></div>
 <div class="index_hotzx">
-    <h2 class="title_name_lan"><?php print ($dis) ?><b class="fz28 color3">的相关咨询</b><a href="" class="fr blue"><img src="<?php print AppUrl::getMediaPath()?>/images/index_hyh.png" />换一换</a></h2>
+    <h2 class="title_name_lan"><?php print ($dis) ?><b class="fz28 color3">的相关咨询</b><a href="<?php print AppUrl::disAskByDiseasekey($row["key"])?>" class="fr blue">+更多</a></h2>
 </div>
 <div class="bg_fff">
 	<div class="kp_about  bg_fff">
@@ -167,7 +168,7 @@ $url = new url($req->requestUri());
 <div class="hd_hsx"></div>
 <div class="blank10"></div>
 <div class="index_hotzx">
-    <h2 class="title_name_lan"><?php print ($dis) ?><b class="fz28 color3">的相关文章</b><a href="" class="fr blue"><img src="<?php print AppUrl::getMediaPath()?>/images/index_hyh.png" />换一换</a></h2>
+    <h2 class="title_name_lan"><?php print ($dis) ?><b class="fz28 color3">的相关文章</b><a href="<?php print AppUrl::disKnowledgeByDiseasekey($row["key"])?>" class="fr blue">+更多</a></h2>
 </div>
 <div class="bg_fff">
 	<div class="kp_about  bg_fff">

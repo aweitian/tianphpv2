@@ -21,6 +21,7 @@ $url = new url($req->requestUri());
 ?>
 
    <?php include dirname(__FILE__)."/common/location.tpl.php";?>
+ 
   <div class="sybox clearfix">
     <div>
       
@@ -213,16 +214,25 @@ $url = new url($req->requestUri());
                   <div class="blank20"></div>
                   
                   <div class="docsug border2">
-    <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">医师观点</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fz13 blue fr" href="">+更多</a></div>
+    <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">医师观点</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fz13 blue fr" href="<?php print AppUrl::navArticle()?>">+更多</a></div>
     <div class="docsugbox fz13">
     
     <?php $thumb = $m->getRowThumbnail();?>
    
     <?php if (!empty($thumb)):?>
-   
-    <dl class="clearfix">
+       <dl class="clearfix">
     	<dt class="fl">
-    		<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print $thumb["thumb"]?>" width="80" height="60" /></a>
+    		
+    			
+							<?php if (!empty($thumb["thumb"])):?>
+                        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>">
+    		<img src="<?php print $thumb["thumb"]?>" width="80" height="60" />
+    		</a>
+                        	<?php else:  ?>
+                        	
+                        		<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/zt_img1.jpg" width="80" heigth="60" /></a>
+                        	           <?php endif?>
+    		
     	</dt>
       <dd class="fl">
       <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></p>
@@ -233,6 +243,7 @@ $url = new url($req->requestUri());
       </dd>
       </dl>
       <?php endif?>
+      
       
       <p class="blank15"></p>
       <ul class="othsug">

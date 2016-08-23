@@ -165,7 +165,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
     <div class="doctjbox">
     
         <?php foreach($m->getDoctors(3) as $doc):?>
-      <dl class="clearfix"><dt class="fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
+      <dl class="clearfix"><dt class="fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
       <dd class="fl">
       <p class="blank5"></p>
       <p class="fz18"><?php print $doc["name"]; ?><span class="gray fz13"><?php print $doc["lv"]; ?></span></p>

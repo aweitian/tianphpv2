@@ -35,7 +35,6 @@
 			  count(`data_article`.`sid`) as `count`
 			FROM `data_article`
 			WHERE `data_article`.`title` LIKE CONCAT('%',:q,'%')
-			GROUP BY `data_article`.`sid`
 		</count>
 		<query>
 			SELECT

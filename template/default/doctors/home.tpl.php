@@ -55,7 +55,7 @@ $url = new url($req->requestUri());
                   
                   <div class="zjtdcon1box1_sm1 fl">
                   	
-                   	 <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>" class="fl" width="165" height="175" /></a>
+                   	 <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $m->data["avatar"]?>" class="fl" width="170" height="170" /></a>
                  
                      <div class="fr">
                           <h4 class="fz24 tc"><?php print $m->data["name"]?>大夫的个人网站</h4>
@@ -86,7 +86,7 @@ $url = new url($req->requestUri());
                   
                   <div class="zjtdcon1box1_sm4 tc">
                   	<p><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_tit4.png" /><b>9.9</b></p>
-                    <p class="clr">预约量 <span><?php print rand(300,500);?></span>    问诊量 <span>暂无</span></p>
+                    <p class="clr">总预约量 <span><?php print rand(5000,6000);?></span>    问诊量 <span><?php print rand(6000,7000);?></span></p>
                   </div>
                  </div> 
              </div>
@@ -107,7 +107,7 @@ $url = new url($req->requestUri());
                         	<div class="zjtd_box2_sm2 clr">
                             	<div class="fl">
                                 	<p>您有任何关于男科疾病方面的问题，都可在线点击咨询，我会立刻为您解答！您的聊天信息，我们严格保密！</p>
-                                    <p class="color9"> [ 患者提问：<span class="yellow">8137</span>问，<?php print $m->data["name"]?>本人已回复：<span class="yellow">8130</span>问 ]</p>
+                                    <p class="color9"> [ 患者提问：<span class="yellow"><?php print rand(9000,10000);?></span>问，<?php print $m->data["name"]?>本人已回复：<span class="yellow"><?php print rand(8000,9000);?></span>问 ]</p>
                                 </div>
                                 <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="fr tc">在线咨询</a>
                             </div>
@@ -115,7 +115,7 @@ $url = new url($req->requestUri());
                             <div class="zjtd_box2_sm2 clr">
                             	<div class="fl">
                                 	<p>直接和<?php print $m->data["name"]?>医生本人通话，私密安全！便捷！（我们会及时给您回电）</p>
-                                    <p class="color9"> [ <span class="yellow"><?php print rand(400,600);?></span>人已使用电话咨询服务，<span class="yellow"><?php print rand(400,600);?></span>人已成功预约 ]</p>
+                                    <p class="color9"> [ <span class="yellow"><?php print rand(500,600);?></span>人已使用电话咨询服务，<span class="yellow"><?php print rand(400,500);?></span>人已成功预约 ]</p>
                                 </div>
                                 <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fr tc dh_a">一键通话</a>
                             </div>

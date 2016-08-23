@@ -88,6 +88,24 @@ class letterUIApi {
 		return $ret;
 	}
 	/**
+	 * 
+	 * @param int $dod        	
+	 * @return int
+	 */
+	public function getDataCntByDod($dod) {
+		$cache_key = "getDataCntByDod-" . $dod;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_letter/rows_dod_cnt" );
+		$ret = $this->db->fetch ( $sql, array (
+				"dod" => $dod,
+		) );
+		$ret = $ret["cnt"];
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	/**
 	 * sid,uid,dod,did,content,date
 	 * 
 	 * @param int $length        	

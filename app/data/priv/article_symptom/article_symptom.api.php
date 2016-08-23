@@ -221,6 +221,9 @@
  	 * @return array int dod
  	 */
  	public function row($syd){
+ 		if($syd == 483){
+ 			exit("test");
+ 		}
  		return $this->db->fetch($this->sqlManager->getSql("/articleSymptom/row"), array(
  				"syd" => $syd,
  		));

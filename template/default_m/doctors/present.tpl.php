@@ -77,7 +77,7 @@ function gp(d,p)
           
         <dl class="clr">
           <dt class="fl"> <img src="<?php print AppUrl::getMediaPath()?>/avatar/<?php print $user["avatar"];?>" class="fl" />
-            <p class="fl"><?php print $user["name"];?></p>
+            <p class="fl"><?php print utility::utf8Substr($user["name"], 0, 3);?>***</p>
           </dt>
           <dd class="fl"> <img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $pre["avatar"];?>" class="fl" />
             <p class="fl"><?php print $pre["data"];?></p>

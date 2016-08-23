@@ -70,7 +70,7 @@ foreach ($m->getDisease() as $item){
             <div class="fromzxzjbox1r fr" id="topzj">
               	<?php foreach($m->getDoctors(3) as $doc):?>
               <dl>
-                <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="60" height="60" /></dt>
+                <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="60" height="60" /></dt>
                 <dd class="fl fz12">
                   <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="blue"><?php print $doc["name"]; ?></a> <?php print $doc["lv"]; ?> </p>
                   <p><?php print utility::utf8Substr($doc["spec"],0,6); ?></p>
@@ -92,7 +92,7 @@ foreach ($m->getDisease() as $item){
 		   	<?php foreach($m->getDoctors(5) as $doc):?>
           
             <dl class="clearfix graybg">
-              <dt class="fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="68" height="68" /></a></dt>
+              <dt class="fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="68" height="68" /></a></dt>
               <dd class="dd1 fl fz13">
                 <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="blue" href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><?php print $doc["name"]; ?></a> <?php print $doc["lv"]; ?></p>
                 <p>上海九龙男子医院</p>
@@ -157,27 +157,40 @@ foreach ($m->getDisease() as $item){
       </div>
       
       <!--fromwlzx end-->
+      <!--fromwlzx end-->
       <div class="blank20"></div>
-      <div class="fromtit fz18 black border1 clearfix">经验分享<span class="fz12 gray">Experience sharing</span><span class="fr fz13 gray">把感谢信送给九龙，把经验留给患友！</span></div>
+      <div class="fromtit fz18 black border1 clearfix">感谢信<span class="fz12 gray">Thank you note</span><span class="fr fz13 gray">把感谢信送给九龙，把经验留给患友！</span></div>
       <div class="blank20"></div>
       <div class="fromjyfx clearfix">
         <div class="fromjyfxl fl">
           <div class="fromjyfxlt fz16">
-            <p>患者评价</p>
+            <p>文章评价</p>
           </div>
           <div class="fromjyfxlc">
           
-          	<?php foreach($m->getAppraise(3) as $app):?>
+          	<?php foreach($m->getAllComment(3) as $app):?>
+          	<?php $articleRow = $m->getArticleRowByAid($app["aid"])?>
+          	<?php $dod = $m->getFirstDocByAid($app["aid"])?>
+          	<?php $doctorInfo = $m->getInfoByDod($dod)?>
+          	<?php $userInfo = $m->getUserRowByUid($app["uid"])?>
+          	<?php 
           	
-          	
+          	//array(4) { ["aid"]=> string(3) "103" 
+          	//["comment"]=> string(15) "添jj测试5号" 
+          	//["datetime"]=> string(19) "2016-08-03 08:29:10" 
+          	//["uid"]=> string(1) "6" } 
+//           	var_dump($userInfo);
+          	//array(10) { ["sid"]=> string(1) "6" ["email"]=> string(16) "372037462@qq.com" ["name"]=> string(18) "戴眼镜的男人" ["pwd"]=> string(61) "fbb121fb354819ede754e3ed292d19ece44e113cc3f3157c6b7e5c2e825c3" ["phone"]=> string(11) "13259678420" ["avatar"]=> string(13) "memer_tx9.jpg" ["rpq"]=> string(11) "my card id?" ["rpa"]=> string(12) "302404501200" ["wa"]=> string(1) "y" ["date"]=> string(10) "2016-08-16" } 
+          	//array(15) { ["sid"]=> string(1) "1" ["id"]=> string(3) "lml" ["name"]=> string(9) "李美龙" ["lv"]=> string(12) "主治医师" ["avatar"]=> string(7) "lml.jpg" ["date"]=> string(10) "2016-05-16" ["dod"]=> string(1) "1" ["dlv"]=> string(1) "8" ["star"]=> string(1) "3" ["hot"]=> string(1) "5" ["love"]=> string(2) "21" ["contribution"]=> string(2) "32" ["desc"]=> string(63) "让病人的健康质量更好更高，是我的从医目标。" ["spec"]=> string(87) "治疗前列腺炎，性功能障碍（阳痿、早泄），男性不育等疑难杂症" ["duty"]=> string(21) "100001110000110000000" } 
+          	?>
             <dl class="fz13">
-              <dt><span class="gray">疾病：</span> <span class="blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::disHomeByDid($app["did"])?>"><?php print $m->getNameByDid($app["did"])?></a></span></dt>
-                <dd><?php print utility::utf8Substr($app["txt"],0,30);?>...
-                <p class="clr"><font class="fl"><span class="gray">满意度： </span><span class="yellow"><?php print $m->getAppMeta($app["lv"])?></span></font>
-                <font class="fr"><span class="gray">接诊医生：</span><span class="blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDod($app["dod"])?>"><?php print $m->getNameByDod($app["dod"])?></a></span></font></p></dd>
+              <dt><span class="gray"></span> <span class="black"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($app["aid"])?>"><?php print utility::utf8Substr($articleRow["title"],0,20) ?></a></span></dt>
+                <dd><?php print utility::utf8Substr($app["comment"],0,30);?>...
+                <p class="clr"><font class="fl"><span class="gray">发布医生： </span><span class="blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doctorInfo["id"])?>"><?php print $doctorInfo["name"]?></a></span></font>
+                <font class="fr"><span class="gray">评论：</span><span class="gray"><?php print $userInfo["name"]?></span></font></p></dd>
             </dl>
 			<?php endforeach;?>
-            <div class="fromjyfxlb fromjyfxbsm fz12"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="blue" href="<?php print AppUrl::userWriteAppraise()?>">我要对医生评价</a></div>
+            <div class="fromjyfxlb fromjyfxbsm fz12"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="blue" href="<?php print AppUrl::userWriteAppraise()?>">写文章评论</a></div>
           </div>
         </div>
         <div class="fromjyfxr fr">
@@ -196,25 +209,26 @@ foreach ($m->getDisease() as $item){
         </div>
       </div>
     </div>
+    
     <!--syboxl end-->
     <div class="fr wid300 fz13">
       <div class="syrbox1 clearfix">
         <dl class="dll dl1">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::process() ?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd>门诊流程</dd>
           </a>
         </dl>
         <dl class="dl2">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::notice() ?>">
           <dt></dt>
           <dd>住院须知</dd>
           </a>
         </dl>
         <dl class="dl3">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navSubscribe()?>">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navDoctors() ?>" >
           <dt></dt>
-          <dd>预约服务</dd>
+          <dd>医护团队</dd>
           </a>
         </dl>
         <dl class="dll dl4">
@@ -224,7 +238,7 @@ foreach ($m->getDisease() as $item){
           </a>
         </dl>
         <dl class="dl5">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::statement() ?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd>隐私声明</dd>
           </a>
@@ -232,23 +246,23 @@ foreach ($m->getDisease() as $item){
         <dl class="dl6">
           <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
           <dt></dt>
-          <dd>先进设备</dd>
+          <dd>立即咨询</dd>
           </a>
         </dl>
         <dl class="dll dl7">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navAsk()?>" onClick="openZoosUrl();return false;">
           <dt></dt>
-          <dd>投诉与建议</dd>
+          <dd>疾病问答</dd>
           </a>
         </dl>
         <dl class="dl8">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::toll() ?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd>价格与收费</dd>
           </a>
         </dl>
         <dl class="dl9">
-          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">
+          <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::environment() ?>" onClick="openZoosUrl();return false;">
           <dt></dt>
           <dd class="">就诊环境</dd>
           </a>
@@ -291,7 +305,11 @@ foreach ($m->getDisease() as $item){
             <dl class="clearfix" >
               <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $pre["avatar"]?>" width="61" height="57" /></dt>
               <dd class="fl">
-                <p class="ddp1"><strong><a href="<?php print AppUrl::docHomeByDod($lw["dod"])?>"><?php print $doc["name"]; ?></a></strong>医生收到了<strong><?php print ($user); ?></strong>精心挑选的礼物<strong><?php print $pre["data"]?></strong>医生爱心值+<?php print $pre["cost"]?></p>
+                <p class="ddp1"><strong><a href="<?php print AppUrl::docHomeByDod($lw["dod"])?>"><?php print $doc["name"];?></a></strong>医生收到了<strong>
+                
+                <?php print preg_replace("/^(\d{3})-?\d{4}(\d{4})$/","$1****$2",$user); ?>
+                
+                </strong>精心挑选的礼物<strong><?php print $pre["data"]?></strong>医生爱心值+<?php print $pre["cost"]?></p>
                 <p class="ddp2 fr blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docPresentHomeByDocid($doc["id"]); ?>">我也要送</a></p>
               </dd>
             </dl>
@@ -325,3 +343,5 @@ foreach ($m->getDisease() as $item){
       <div class="tabconjg">上海九龙男子医院</div>
     </div>
   </div>
+  
+  <div style="clear:both"></div>

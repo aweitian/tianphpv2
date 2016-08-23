@@ -33,4 +33,24 @@ class helpController extends appCtrl{
 	public function sendsmsproxyAction(){
 		$this->view->sendsmsproxy($this->model);
 	}
+	//流程
+	public function processAction(){
+		$this->view->process($this->model);
+	}
+	//须知
+	public function noticeAction(){
+		$this->view->notice($this->model);
+	}
+	//声明
+	public function statementAction(){
+		$this->view->statement($this->model);
+	}
+	//收费
+	public function tollAction(){
+		$this->view->toll($this->model);
+	}
+	//收费
+	public function environmentAction(){
+		$this->view->environment($this->model);
+	}
 }

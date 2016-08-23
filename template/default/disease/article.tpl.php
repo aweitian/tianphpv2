@@ -68,7 +68,7 @@ $url = new url($req->requestUri());
                                       <!--轮转图 start-->
                                       <div class="fr kart_doc ml25">
                                       
-                                              <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" ><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="80" height="80"  class="fl"></a>
+                                              <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" ><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="80" height="80"  class="fl"></a>
                                             <div class="fl pt20">
                                               <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"  class="g_home1">个人网站</a></p>
                                               <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?>  href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="g_advise2" rel="nofollow">可咨询</a>

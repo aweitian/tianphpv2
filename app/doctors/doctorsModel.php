@@ -30,9 +30,6 @@ class doctorsModelControllerNotFound extends AppModel {
 	public function getDataByDod($dod, $length, $offset = 0) {
 		return appraiseUIApi::getInstance ()->getDataByDod ( $dod, $length, $offset );
 	}
-	public function getQuestionsCountByDod($dod) {
-		return askUIApi::getInstance ()->getQuestionsCountByDod ( $dod );
-	}
 	public function getEssenceAidByDid($did, $length, $offset = 0) {
 		return articleUIApi::getInstance ()->getEssenceAidByDid ( $did, $length, $offset );
 	}
@@ -50,6 +47,9 @@ class doctorsModelControllerNotFound extends AppModel {
 	}
 	public function getPresentDataByDodCnt($dod){
 		return presentUIApi::getInstance ()->getDataByDodCnt ( $dod );
+	}
+	public function getQuestionsCountByDod($dod){
+		return askUIApi::getInstance ()->getQuestionsCountByDod ( $dod );
 	}
 	public function rowuser($uid) {
 		return userUIApi::getInstance ()->row ( $uid );
@@ -126,6 +126,9 @@ class doctorsModelControllerNotFound extends AppModel {
 	public function getLetterCnt() {
 		return letterUIApi::getInstance ()->cnt ();
 	}
+	public function getDataCntByDod($dod) {
+		return letterUIApi::getInstance ()->getDataCntByDod($dod);
+	}
 	/**
 	 * 根据文章查找病种，返回一个病种的ID,文章不属于任何病种的时候返回0
 	 *
@@ -145,6 +148,8 @@ class doctorsModelControllerNotFound extends AppModel {
 	public function rowpid($pid) {
 		return presentUIApi::getInstance ()->row($pid);
 	}
-
+	public function getRowByDid($did) {
+		return diseaseUIApi::getInstance ()->getRowByDid($did);
+	}
 	
 }

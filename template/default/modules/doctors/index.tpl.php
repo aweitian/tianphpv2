@@ -60,7 +60,7 @@ $this->keyword = "";
                            	<?php foreach($model->getTopStar(3) as $doc):?>
                             <li>
                               <dl class="clearfix">
-                                <dt class="fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
+                                <dt class="fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
                                 <dd class="fl">
                                   <p class="blank10"></p>
                                   <p class="black fz18"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><?php print $doc["name"]; ?></a></p>
@@ -102,7 +102,7 @@ $this->keyword = "";
                                 <div class="fl pr20">
                                 <p class="tc">
                                     <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" target="_blank">
-                                    <img alt="" src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="80" height="65">
+                                    <img alt="" src="<?php print AppUrl::getMediaPath()?>/doctor/80X65/<?php print $doc["avatar"]?>" width="80" height="65">
                                     </a>
                                 </p>
                                         <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> target="_blank" href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="personweb-sickness-btn">个人网站</a>

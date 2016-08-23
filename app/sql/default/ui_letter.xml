@@ -30,7 +30,12 @@
 		WHERE `dod` = :dod AND `data_letter`.`verify` = 1
 		LIMIT :offset,:length
 	</rows_dod>
+	<rows_dod_cnt>
+		SELECT count(sid) as `cnt` FROM `data_letter`
+		WHERE `dod` = :dod AND `data_letter`.`verify` = 1
+	</rows_dod_cnt>
 	
+		
 	<!-- 获取所有对医生的感谢信,排序按ID倒序 -->
 	<!-- 参数:uid,offset,length -->
 	<!-- 返回字段:sid,uid,dod,did,content,date -->

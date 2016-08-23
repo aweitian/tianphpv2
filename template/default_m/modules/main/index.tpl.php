@@ -34,33 +34,7 @@ foreach ($m->getDisease() as $item){
   <a href="/" class="c_logo"></a> 
     <a href="<?php print AppUrl::userProfile();?>" class="fr"> <img src="<?php print AppUrl::getMediaPath()?>/images/user_not_login.png"  style="width:.45rem; height:.44rem;"> </a> </div>
   <!--head end-->
-  <div id="focus" class="focus" style="background-color:#fff;margin:0px auto;"> 
-    
-    <div class="hd">
-      <ul>
-      </ul>
-    </div>
-    <div class="bd">
-      <ul>
-        <li> <a href="<?php print AppUrl::getSwtUrl();?>"><img src="<?php print AppUrl::getMediaPath()?>/images/ban1.jpg" /></a> </li>
-        <li> <a href="<?php print AppUrl::getSwtUrl();?>"><img src="<?php print AppUrl::getMediaPath()?>/images/banner2.jpg" /></a> </li>
-        <li> <a href="<?php print AppUrl::getSwtUrl();?>"><img src="<?php print AppUrl::getMediaPath()?>/images/banner3.jpg" /></a> </li>
-      </ul>
-    </div>
-    <script src="<?php print AppUrl::getMediaPath()?>/js/TouchSlide_1_1.7f969dac.js" type="text/javascript"></script> 
-    <script type="text/javascript">
-
-                TouchSlide({
-                    slideCell:"#focus",
-                    titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
-                    mainCell:".bd ul",
-                    effect:"leftLoop",
-                    autoPlay:true,//自动播放
-                    autoPage:true, //自动分页
-                });
-</script> 
-    
-  </div>
+<?php include dirname(dirname(dirname(__FILE__)))."/inc/slider.php"?>
   <!--banner end-->
   <!--搜索 end-->
   <div class="blank30"></div>
@@ -88,7 +62,7 @@ foreach ($m->getDisease() as $item){
     </div>
       <div class="right_list"> 
           <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="order_menzhen"> 
-              <span class="menzhen_ab"> 预约转诊<br/><span class="gray">省时、省心、省力、省钱</span> </span>
+              <span class="menzhen_ab"> 预约就诊<br/><span class="gray">省时、省心、省力、省钱</span> </span>
          </a> 
          <a href="tel:021-52733999" class="order_pinzhi"> 
               <span class="dianhua_ab"> 电话咨询<br/><span class="gray">足不出户联系医生</span></span> 

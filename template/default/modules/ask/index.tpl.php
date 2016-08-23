@@ -45,7 +45,7 @@ $url = new url($req->requestUri());
 ?>
  <div class="blank20"></div>
   <?php include dirname(dirname(dirname(__FILE__)))."/inc/banner.php"?>
-  <div class="listpos fz13"><span class="gray">当前位置：</span><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">首页 > 网络咨询</a></div>
+  <div class="listpos fz13"><span class="gray">当前位置：</span><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="/">首页</a>  > <a href="">网络咨询</a></div>
   <div class="clearfix">
     <div class="wid680 border2 fl">
       <div class="norques">
@@ -149,7 +149,7 @@ $url = new url($req->requestUri());
     <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">医师推荐</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fz13 blue fr" href="<?php print AppUrl::navDoctors() ?>">+更多</a></div>
     <div class="doctjbox">
     <?php foreach($m->getDoctors(3) as $doc):?>
-      <dl class="clearfix"><dt class="fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
+      <dl class="clearfix"><dt class="fl"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="80" height="80" /></a></dt>
       <dd class="fl">
       <p class="blank5"></p>
       <p class="fz18"><?php print $doc["name"]; ?><span class="gray fz13"><?php print $doc["lv"]; ?></span></p>

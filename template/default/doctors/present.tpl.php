@@ -56,7 +56,7 @@ function gp(d,p)
                 <li>
                   <p class="gift_num tc">02</p>
                   <p class="gift_top_con"> <span class="fl"><b class="fz16 color3"><?php print $m->data["name"]?></b> 大夫</span><br>
-                    <span class="fl pt10 fz13">已经帮助<strong class="yellow"><?php print rand(30000,4000);?></strong>位患者，已收到<strong class="yellow"><?php print $m->getDataByDodCnt($m->data["id"]);?></strong>件心意礼物。</span> </p>
+                    <span class="fl pt10 fz13">已经帮助<strong class="yellow"><?php print rand(30000,4000);?></strong>位患者，已收到<strong class="yellow"><?php print $m->getPresentDataByDodCnt($m->data["sid"]);?></strong>件心意礼物。</span> </p>
                   <p class="gift_top_btn"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="#" class="tc fz13">我也要送</a></p>
                 </li>
               </ul>

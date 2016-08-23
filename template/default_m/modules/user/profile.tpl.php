@@ -12,7 +12,7 @@ $act = appCtrl::$msg->getAction();
 <div class="public_width">
 
 <div class="head_tc blue_bg">
-    <a class="goback fl" href="" title="返回上页" onclick="history.go(-1)"><b></b></a>
+    <a class="goback fl" title="返回上页" onclick="history.go(-1)"><b></b></a>
     <div class="head_tit" >个人中心</div>
     <a href="<?php print AppUrl::userLogout()?>" class="fr login_top bor_rad green_topbg">退出</a>
 </div>

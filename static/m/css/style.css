@@ -70,14 +70,15 @@
     font-size: .24rem;
     color: #969696;
     -webkit-appearance: none;
-	width:4.65rem; 
+	width:79%; 
 	height:.65rem; 
+	line-height:.65rem; 
 	background:url(../images/index_sel1.png) no-repeat; background-size:100%;
-	padding-left:.15rem;
+	padding-left:2%;
 }
 .index_sel .sel_sm1 .right_btn{
     display: block;
-    width: .9rem;
+    width: 15%;
     height: .65rem;
 	border:0;
 	background:url(../images/index_sel2.png) no-repeat; background-size:100%;
@@ -664,8 +665,9 @@
 .login_warp{ padding:0 .3rem;}
 .login_warp input{ width:100%; height:.88rem;}
 .login_dl{ width:100%; height:.8rem; line-height:.8rem; text-align:center; color:#fff;     background: #92cf67 !important;}
-.login_warp p .login_yzm{ width:3.7rem;}
-.login_warp p .login_fsyzm{ width:1.4rem; height:.4rem; margin-top:.25rem; background:#fff;}
+.login_warp p .login_yzm{ width:50%!important; vertical-align: top;}
+.login_warp p .login_fsyzm{ width:30%; height:.4rem; margin-top:.25rem; background:#fff; vertical-align: top;}
+#btnSendCode{ width:35%!important;}
 .login_warp label{ width:1.3rem; height:.9rem; line-height:.9rem; color:#777; font-size:.3rem;}
 .login_warp input.zh_pswd1{ width:3.8rem;}
 .login_warp input.zh_pswd2{ width:2.7rem;}
@@ -861,7 +863,7 @@
 
 
 .ys_box1{ line-height:.3rem; font-size:.22rem;}
-.ys_box1 p{ width:1.8rem; float:left; text-align:center; color:#999;}
+.ys_box1 p{ width:32%; float:left; text-align:center; color:#999;}
 .ys_box1 p span{ margin-left:.05rem;}
 .ys_box1 b{ float:left; font-weight:400; color:#ddd; font-size:.2rem;}
 
@@ -912,10 +914,10 @@
 .jbkp_page p{ text-indent:2em; margin-bottom:.3rem; font-size:.24rem;}
 .jbkp_page p a{ font-size:.24rem;}
 .jbkp_page img{ margin-bottom:.3rem; }
-.jbkp_page p img{width:"320";height:120px;}
+
 .jbkp_page_zx a{ display:block; width:2.78rem; height:.63rem; text-align:center; line-height:.63rem; border-radius:.1rem;}
 .jbkp_page_zx a.kp_bn1{ color:#fe8100; border:1px solid #fe8100;}
-.zjtd_pagenr a.kp_bn2{ color:#53d37e; border:1px solid #53d37e;}
+.jbkp_page_zx a.kp_bn2{ color:#53d37e; border:1px solid #53d37e;}
 
 .yyjs{ border:1px solid #ddd; padding:.3rem .2rem; border-bottom:0;}
 .yyjs dl dt img{ width:2.4rem; height:1rem;}
@@ -968,8 +970,32 @@
 .satisfied{ height: .66rem; line-height:.66rem; font-size:.28rem;}
 
 
+.zjtd_pagenr p  img{width:"320px;" height:"320px;"}
 
 
-
+.heart {
+    background: url(../images/web_heart_animation.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    height: .63rem;
+    width: .63rem;
+    cursor: pointer;
+    position: absolute;
+    left: 1rem;
+    background-size: 2900%;
+}
+	.heartAnimation {
+    display: inline-block;
+    -webkit-animation-name: heartBlast;
+    animation-name: heartBlast;
+    -webkit-animation-duration: .8s;
+    animation-duration: .8s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: steps(28);
+    animation-timing-function: steps(28);
+    background-position: right;
+    }
+    .likeCount{font-family: 'Georgia', Times, Times New Roman, serif; font-size: .3rem;color: #999; margin-left:.3rem;}
 
 

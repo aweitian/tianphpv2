@@ -134,6 +134,7 @@ class diseaseUIApi {
 		) );
 		$ret = array ();
 		foreach ( $data as $item ) {
+// 			var_dump($item);
 			$ret [] = $item ["syd"];
 		}
 		$this->cache [$cache_key] = $ret;

@@ -17,7 +17,7 @@ if(isset($_REQUEST["page"])){
 }
 
 
-$pagination = new pagination($m->getLetterCnt($m->data["sid"]), $page, $pageSize, 6);
+$pagination = new pagination($m->getDataCntByDod($m->data["sid"]), $page, $pageSize, 6);
 
 
 $req = new httpRequest();

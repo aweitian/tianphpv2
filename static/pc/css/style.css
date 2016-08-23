@@ -86,7 +86,7 @@ em {
 .fhs{ color:#ed7f5a;}
 .mr0{ margin-right:0px!important;}
 
-
+.listpos{color:#999}
 .clearfix:after {
 	content: ".";
 	display: block;
@@ -127,6 +127,7 @@ em {
 .blue, .blue a, a.blue {
 	color: #377bee;
 }
+
 .red, .red a, a.red {
 	color: #f00;
 }
@@ -488,8 +489,9 @@ padding: 0px 0 20px 0px; width:320px;
 	padding: 20px 0 10px;
 }
 .fromjyfxlc dl dt {
-	padding-left: 15px;
+	padding-left: 18px;
 	background: url(../images/syjbtb1.jpg) no-repeat 0 0;
+	font-size:14px;
 }
 .fromjyfxlc dl dd {
 	line-height: 23px;
@@ -2691,34 +2693,6 @@ rtpboxnrl {
 
 
 
-/*swt*/
-  
-.aus_info {
-    width: 85px;
-    height: 85px;
-    float: left;
-    padding: 10px 0 0 10px
-}
-.aus_info img{
-	border-radius:50%;
-}
-.aus_info p {
-    font-size: 14px
-}
-.b_bottom_box {
-    width: 678px;
-    border: 1px solid #c3d7fa;
-    position: fixed;
-    left: 50%;
-    margin-left: -500px;
-    bottom: 0;
-    z-index: 10000;
-	height: 98px;
-    background: #499BEF;
-	
-
-}
-
 .docs_info_box {
     height: 50px;
     line-height:32px;
@@ -2868,4 +2842,80 @@ rtpboxnrl {
 .hui{
 	background:#999!important;
 }
+  
+  
+  
+
+.zyxz{padding:0 15px 15px;font-size:14px;color:#333;line-height:26px;}
+.jgsf { padding: 20px 15px;}
+.jgsf table,.jgsf td{border-collapse:collapse;border:1px solid #ccc;}
+.jgsf td{height:30px;line-height:30px;font-size:14px;padding-left:10px;}
+.yyhj{padding:15px 14px 10px;}
+.yyhj p.con{line-height:25px;text-indent:2em;padding-bottom:15px;}
+.yyhj p.js{font-size:14px;line-height:28px;padding:15px 0;border-bottom:1px dashed #9d9d9d;color:#515151;}
+.yyhj p.js span{color:#f00;}
+.yyhj p.js img{margin-left:25px;display:inline;}
+.yyhj_big{padding:10px;border:1px solid #b5d5e5;}
+.yyhj_small{margin:15px 0 5px;height:48px;position:relative;}
+.yyhj_small span{width:16px;height:18px;position:absolute;background:url(../images/yyhjbtn.gif) no-repeat;top:16px;}
+.yyhj_small span.next{right:0;background-position:right top;}
+.yyhj_small span.prev{left:0;}
+.yyhj_scoll{width:630px;margin:0 auto;height:48px;overflow:hidden;}
+.yyhj_scoll li{margin:0 5px;display:inline;float:left;}
+  *{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+.bannerbox{width:628px; height:400px;overflow:hidden;}
+  
+  .allinone_thumbnailsBanner{position:relative;}
+.allinone_thumbnailsBanner img{position:absolute;top:0px;left:0px;max-width:none;max-height:none;}
+.Banner_list{margin:0;padding:0;list-style:none;display:none;}
+.allinone_thumbnailsBanner .stripe{position:absolute;display:block;height:100%;z-index:1;overflow:hidden;}
+.allinone_thumbnailsBanner .block{position:absolute;display:block;z-index:1;overflow:hidden;}
+.mycanvas{position:absolute;top:8px;right:10px;z-index:10;}
+/**SIMPLE SKIN***/
+.allinone_thumbnailsBanner.simple .bannerControls{position:absolute;left:0;top:0;z-index:2;width:100%;}
+.allinone_thumbnailsBanner.simple .leftNav{position:absolute;left:0px;top:50%;width:31px;height:71px;background:url(../images/leftNavOFF.png) 0 0 no-repeat;cursor:pointer;}
+.allinone_thumbnailsBanner.simple .leftNav:hover{background:url(../images/leftNavON.png) 0 0 no-repeat;}
+.allinone_thumbnailsBanner.simple .rightNav{position:absolute;right:0px;top:50%;width:31px;height:71px;background:url(../images/rightNavOFF.png) 0 0 no-repeat;cursor:pointer;}
+.allinone_thumbnailsBanner.simple .rightNav:hover{background:url(../images/rightNavON.png) 0 0 no-repeat;}
+.allinone_thumbnailsBanner.simple .thumbsHolderWrapper{position:absolute;border-top:1px solid #23b6ed;height:80px;width:100%;overflow:hidden;z-index:10;}
+.allinone_thumbnailsBanner.simple .thumbsHolderVisibleWrapper{position:absolute;width:100%;height:63px;overflow:hidden;}
+.allinone_thumbnailsBanner.simple .thumbsHolder{position:absolute;}
+.allinone_thumbnailsBanner.simple .thumbsHolder_ThumbOFF{float:left;display:inline;width:95px;height:48px;cursor:pointer;}
+.allinone_thumbnailsBanner.simple .thumbsHolder_ThumbOFF img{position:relative;}
+.allinone_thumbnailsBanner.simple .thumbsHolder_ThumbON{background:url(../images/thumbActiveArrow.png) center 0px no-repeat;}
+.allinone_thumbnailsBanner.simple .carouselLeftNav{position:absolute;width:16px;height:18px;background:url(../images/yyhjbtn.gif) 0 0 no-repeat;cursor:pointer;top:26px;left:0;}
+.allinone_thumbnailsBanner.simple .carouselLeftNav:hover{background:url(../images/yyhjbtn.gif) 0 0 no-repeat;}
+.allinone_thumbnailsBanner.simple .carouselLeftNavDisabled{background:url(../images/yyhjbtn.gif) 0 0 no-repeat;cursor:default;}
+.allinone_thumbnailsBanner.simple .carouselLeftNavDisabled:hover{background:url(../images/yyhjbtn.gif) 0 0 no-repeat;}
+.allinone_thumbnailsBanner.simple .carouselRightNav{position:absolute;width:16px;height:18px;background:url(../images/yyhjbtn1.gif) right top no-repeat;cursor:pointer;top:26px;right:0;}
+.allinone_thumbnailsBanner.simple .carouselRightNav:hover{background:url(../images/yyhjbtn1.gif) right top no-repeat;}
+.allinone_thumbnailsBanner.simple .carouselRightNavDisabled{background:url(../images/yyhjbtn1.gif) right top no-repeat;cursor:default;}
+.allinone_thumbnailsBanner.simple .carouselRightNavDisabled:hover{background:url(../images/yyhjbtn1.gif) right top no-repeat;}
+
+
+
+
+
+
+
+
+
+
+
+/*swt*/
+  
+.bottom{width:100%;position:fixed;bottom:0;left:0;height:90px;}
+.btnr{width:1000px;height:90px;margin:0 auto; position:relative;}
+.btnr dl{width:680px;background:#6495ed;height:90px;}
+.btnr dt{float:left;width:360px;color:#fff;}
+.btnr dt h4{padding:15px 0 0 148px;}
+.btnr dt h4 b{font-size:20px;padding-right:10px;}
+.btnr dt h4 b a{color:#fff;}
+.btnr dt h4 b a:hover{color:#ff0;}
+.btnr dt p{line-height:18px;padding:5px 20px 0 148px;}
+.bottom dd{float:right;width:320px;height:90px;background:#74a0ef;}
+.bottom dd img{padding:25px 0 0 26px;}
+.btzj{ position: absolute;left:20px;top:-9px;}
   

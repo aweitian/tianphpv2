@@ -68,5 +68,48 @@ class commentUIApi {
 		$this->cache[$cache_key] = $ret;
 		return $ret;
 	}
+	
+	
+	
+	/**
+	 * 获取文章的评论数
+	 * @return int;
+	 */
+	public function getCount(){
+		$cache_key = "getCount";
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_comment/count_all");
+		$data = $this->db->fetch($sql, array("aid"=>$aid));
+		if(empty($data)){
+			$ret = 0;
+		}else{
+			$ret = $data["cnt"];
+		}
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
+	
+	/**
+	 * 返回字段:aid,comment,datetime,uid
+	 * @param int $offset
+	 * @param int $length
+	 * @return array;
+	 */
+	public function all($offset,$length){
+		$cache_key = "data-".$offset."-".$length;
+		if (array_key_exists($cache_key, $this->cache)){
+			return $this->cache[$cache_key];
+		}
+	
+		$sql = $this->sqlManager->getSql("/ui_comment/data_all");
+		$ret = $this->db->fetchAll($sql, array(
+				"offset"=>$offset,
+				"length"=>$length
+		));
+		$this->cache[$cache_key] = $ret;
+		return $ret;
+	}
 
 }

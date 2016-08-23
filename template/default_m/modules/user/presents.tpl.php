@@ -24,7 +24,7 @@ $url = new url($req->requestUri());
 <div class="public_width">
 
 <div class="head_tc blue_bg">
-        <a class="goback" href="" title="返回上页" onclick="history.go(-1)"><span>返回</span></a>
+        <a class="goback" title="返回上页" onclick="history.go(-1)"><span>返回</span></a>
         <div class="head_tit" ><?php print $userinfo["name"]?>送的礼物</div>
     <a href="<?php print AppUrl::userLogout()?>" class="fr login_top bor_rad green_topbg">退出</a>
   </div>

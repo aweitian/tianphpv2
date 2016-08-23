@@ -100,8 +100,11 @@ class symptomController extends privController{
 			$edit_rir = $this->model->edit($sid, $msg["data"]);
 			
 			if($edit_rir->isTrue()){
+				
 				if(is_array($msg["diid"])){
 					$this->model->addSymptomDisease($sid, $msg["diid"]);
+				}else if(is_null($msg["diid"])){
+					$this->model->addSymptomDisease($sid, array());
 				}
 				if(isset($msg["?returl"])){
 					$ret_url = $msg["?returl"];

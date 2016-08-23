@@ -99,7 +99,7 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                                 	<?php $ans = $model->getAnswerByAskid($ask["sid"])?>
                                 
                                 	
-                                	<img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="66" height="66" class="fl" />
+                                	<img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="66" height="66" class="fl" />
                                     <div class="fr">
                                     <!-- sid,id,name,lv,avatar,date,dod,dlv,star,hot,love,contribution,desc,spec -->
                                     	<span class="jb_ys<?php print $m ?>col"><?php print $doc["name"]?>，<?php print $doc["lv"]?></span>
@@ -213,7 +213,7 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                                 <div class="fl pr20">
                                 <p class="tc">
                                     <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="" target="_blank">
-                                   <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="80" height="65" /></a>
+                                   <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/80X65/<?php print $doc["avatar"]?>" width="80" height="65" /></a>
                                     </a>
                                 </p>
                                         <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> target="_blank" href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="personweb-sickness-btn">个人网站</a>

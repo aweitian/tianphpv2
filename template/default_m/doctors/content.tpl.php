@@ -55,18 +55,55 @@ defTplData::getInstance()->description = $data["desc"];
     <div class="blank30"></div>
     <div class="hd_xhsx"></div>
     <div class="blank30"></div>
-    <div class="color9"><span class="fl">发表于 <?php print $data["date"]?></span><span class="fr">已阅读<?php print rand(10000,13000);?>次</span></div>
+    <div class="color9"><span class="fl">发表于 <?php print $data["date"]?></span><span class="fr">已阅读<?php print rand(1000,2000);?>次</span></div>
     <div class="blank30"></div>
     <div class="jbkp_page">
         <?php print ($data["content"])?>
         <div class="jbkp_page_zx">
-        	<a href="" class="fl kp_bn1">赞赏(<?php print rand(300,600);?>)</a>
+
+			
+
+        	<!--  <a class="fl kp_bn1 zan">赞赏(<span><?php print rand(300,600);?></span>)</a>-->
+        	<a class="fl kp_bn1">
+        	<div class="heart" id="like2" rel="like" style="background-position: 0% 50%;"></div> <div class="likeCount" id="likeCount2"><?php print rand(300,600);?></div>
+        	</a>
         	<a href="<?php print AppUrl::userAddAppraise();?>" class="fr kp_bn1">去评论</a>
         </div>
         <div class="blank30"></div>
     </div>
-   
+    <script>
+	$(document).ready(function()
+	{
     
+	$('body').on("click",'.heart',function()
+    {
+    	
+    	var A=$(this).attr("id");
+    	var B=A.split("like");
+        var messageID=B[1];
+        var C=parseInt($("#likeCount"+messageID).html());
+    	$(this).css("background-position","")
+        var D=$(this).attr("rel");
+       
+        if(D === 'like') 
+        {      
+        $("#likeCount"+messageID).html(C+1);
+        $(this).addClass("heartAnimation").attr("rel","unlike");
+        
+        }
+        else
+        {
+        $("#likeCount"+messageID).html(C-1);
+        $(this).removeClass("heartAnimation").attr("rel","like");
+        $(this).css("background-position","left");
+        }
+
+
+    });
+
+
+	});
+	</script>
 </div>
 
 <?php $did=$m->getFirstDid($data["aid"]) ?>
@@ -74,7 +111,7 @@ defTplData::getInstance()->description = $data["desc"];
 <?php $dis=$m->getNameByDid($did) ?>
 <div class="blank10"></div>
 <div class="index_hotzx">
-    <h2 class="title_name_lan"><?php print ($dis) ?><b class="fz28 color3">的相关文章</b><a href="" class="fr blue"><img src="<?php print AppUrl::getMediaPath()?>/images/index_hyh.png" />换一换</a></h2>
+    <h2 class="title_name_lan"><?php print ($dis) ?><b class="fz28 color3">的相关文章</b><a href="<?php print AppUrl::disHomeByDid($did)?>" class="fr blue">+更多</a></h2>
 </div>
 
 

@@ -203,8 +203,8 @@ $url = new url ( $req->requestUri () );
 		<div class="bg_fff fz26">
 			<div class="blank30"></div>
 			<p class="color6 tc">
-				诊治过的患者: <span class="yellow"><?php echo rand(300,600);?></span>例
-				随访中的患者: <span class="yellow"><?php echo rand(290,590);?></span>例
+				诊治过的患者: <span class="yellow"><?php echo rand(600,650);?></span>例
+				随访中的患者: <span class="yellow"><?php echo rand(550,600);?></span>例
 			</p>
 			<div class="blank30"></div>
 			<div class="hd_hsx"></div>
@@ -221,7 +221,7 @@ $url = new url ( $req->requestUri () );
 		<div class="blank10"></div>
 		<div class="index_hotzx">
 			<h2 class="title_name_lan">
-				在线咨询<span class="fw400 fz28">(<?php print $m->getDataByDodCnt($m->data["sid"])?>)</span><a
+				在线咨询<span class="fw400 fz28">(<?php print $m->getQuestionsCountByDod($m->data["sid"])?>)</span><a
 					href="<?php print AppUrl::docAskHomeByDocid($m->data["id"])?>"
 					class="fr">+更多</a>
 			</h2>
@@ -288,7 +288,7 @@ $url = new url ( $req->requestUri () );
 <div style="height:1rem;"></div>
 	<div class="box_c">
 		<p class="box_center2">
-			<a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="btn_b1">预约挂号</a> <a
+			<a href="<?php print AppUrl::navSubscribe()?>" class="btn_b1">预约挂号</a> <a
 				href="<?php print AppUrl::userWriteLetter()?>" class="btn_b2">写感谢信</a> <a
 				href="<?php print AppUrl::docPresentHomeByDocid($m->data["id"])?>" class="btn_b3">送暖心</a>
 		</p>

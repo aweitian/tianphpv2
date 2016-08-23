@@ -27,6 +27,8 @@ $url = new url($req->requestUri());
 
 ?>
  <?php include dirname(__FILE__)."/common/location.tpl.php";?>
+ 
+ 
   <div class="sybox clearfix">
     <div>
       
@@ -39,7 +41,7 @@ $url = new url($req->requestUri());
             <div class="blank20"></div>
                 
            <div class="border2 padd20 clr zjtd_hzfwtw">
-           		<img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>" width="210" height="160" class="fl" style="border:1px solid #fff;" />
+           		<img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $m->data["avatar"]?>" width="170" height="170" class="fl" style="border:1px solid #fff;" />
                 <div class="fr">
                 	<div class="zjtd_page_set clr">
                     	<input type="text" class="zjtd_pageset_inp1 border2 fl color9 fz16" placeholder="在此简单描述病情，向<?php print $m->data["name"]?>大夫提问" />

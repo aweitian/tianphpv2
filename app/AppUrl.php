@@ -56,6 +56,28 @@ class AppUrl {
 		return AppUrl::build ( "/put" );
 	}
 	
+	
+	public static function process() {
+		return AppUrl::build ( "/help/process" );
+	}
+	public static function notice() {
+		return AppUrl::build ( "/help/notice" );
+	}
+	public static function statement() {
+		return AppUrl::build ( "/help/statement" );
+	}
+	public static function toll() {
+		return AppUrl::build ( "/help/toll" );
+	}
+
+	
+	public static function environment() {
+		return AppUrl::build ( "/help/environment" );
+	}
+	
+	
+	
+	
 	// 用户管理
 	public static function userHome() {
 		return AppUrl::userProfile ();

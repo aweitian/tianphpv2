@@ -60,7 +60,8 @@
                         <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">症状自查</a></div>
                         <div class="jb_jbzc fz13">
                           <ul class="clearfix">
-                             <?php foreach($model->getSydsBydid($row["sid"]) as $zz):?>                        
+                             <?php foreach($model->getSydsBydid($row["sid"]) as $zz):?> 
+                                                  
                             <li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleBySyd($zz) ?>"><?php print $model->getNameBySyd($zz) ?></a></li>
                             <?php endforeach;?>
                           </ul>
