@@ -5,6 +5,18 @@
 $m = $model;
 
 // var_dump($model->getVcFlag());exit;
+if(isset($_SERVER['HTTP_REFERER']))
+{
+	$url = $_SERVER['HTTP_REFERER'];
+}else{
+	$url = AppUrl::navHome();
+}
+
+
+
+$url ="?return=".urlencode($url);
+
+
 
 ?>
 <div class="public_width">
@@ -17,7 +29,7 @@ $m = $model;
 <div class="mzy30">
 <!--head end-->
 <div class="blank30"></div>
-<form action="<?php print AppUrl::userLogin()?>" method="post">
+<form action="<?php print AppUrl::userLogin()?><?php print $url?>" method="post">
 <div class="login_warp bor_rad borddd">
 	<input type="text" name="nep" placeholder="您的手机号码/用户名/邮箱" />
     <div class="hd_hsx"></div>

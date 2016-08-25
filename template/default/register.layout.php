@@ -5,6 +5,12 @@
  * @Desc: 
  * 依赖:
  */
+$url = "http://".$_SERVER['HTTP_HOST'].AppUrl::userLogin();
+if($url){
+	$url ="?redirect=".urlencode($url);
+}else{
+	$url = "";
+}
 ?>
 <!DOCTYPE>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -92,7 +98,7 @@
 					<div class="registerform fz13">
 						<div class="registercon regway selected">
 								<?php print $info?>
-							<form action="<?php print AppUrl::userRegister()."?t=m"?>"
+							<form action="<?php print AppUrl::userRegister()?><?php print $url;?>&t=m"
 								method="post">
 								<input id='phone_no' name="phone" class="reginp1 gray border2" placeholder='请输入手机号码' type="text" />
 								<div class="blank20"></div>

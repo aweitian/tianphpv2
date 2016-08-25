@@ -44,7 +44,7 @@ class userModel extends AppModel {
 	 * @return rirResult
 	 */
 	public function avatar($uid, $a) {
-		return userUIApi::getInstance ()->avatar ( $uid, $a );
+		return putUIApi::getInstance ()->avatar ( $uid, $a );
 	}
 	/**
 	 * 修改密码

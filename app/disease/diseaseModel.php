@@ -198,5 +198,14 @@ class diseaseControllerNotFoundModel extends AppModel {
 		return askUIApi::getInstance()->getAnswersDocReplyCnt($askid);
 	}
 	
+	public function getDataCntByDod($dod){
+		return letterUIApi::getInstance()->getDataCntByDod($dod);
+	}
+	public function getDataByDodCnt($dod){
+		return presentApi::getInstance()->getDataByDodCnt($dod);
+	}
 	
+	public function getAllCntdid($did) {
+		return articleUIApi::getInstance()->getAllCnt($did);
+	}
 }

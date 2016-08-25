@@ -84,6 +84,13 @@ if($hasData)
         
 		          	
 		          	<?php endif;?>
+		          	
+		          	<hr>
+		          
+		          <a style=';' onclick='return confirm("?")' href='<?php print HTTP_ENTRY?>/priv/ask/appendrm?sid=<?php print $item["aspapid"]?>'>删除</a>
+		          |
+		          <a style=';' href='<?php print HTTP_ENTRY?>/priv/ask/append?r=u&askid=<?php print $item["sid"]?>&sid=<?php print $item["aspapid"]?>'>编辑</a>
+		        
 		        </div><!-- /.direct-chat-text -->
 		      </div><!-- /.direct-chat-msg -->
   	
@@ -93,9 +100,15 @@ if($hasData)
 		          <span class="direct-chat-name pull-right"><?php print $item["doc_name"]?></span>
 		          <span class="direct-chat-timestamp pull-left"><?php print $item["ap_date"]?></span>
 		        </div><!-- /.direct-chat-info -->
-		        <img class="direct-chat-img" src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $item["doc_avatar"]?>" alt="message user image"><!-- /.direct-chat-img -->
+		        <img class="direct-chat-img" src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $item["doc_avatar"]?>" alt="message user image"><!-- /.direct-chat-img -->
 		        <div class="direct-chat-text">
 		          <?php print $item["content"]?>
+		          
+		          <hr>
+		          
+		          <a style='color:white;' onclick='return confirm("?")' href='<?php print HTTP_ENTRY?>/priv/ask/appendrm?sid=<?php print $item["aspapid"]?>'>删除</a>
+		          |
+		          <a style='color:white;' href='<?php print HTTP_ENTRY?>/priv/ask/append?r=d&askid=<?php print $item["sid"]?>&sid=<?php print $item["aspapid"]?>'>编辑</a>
 		        </div><!-- /.direct-chat-text -->
 		      </div><!-- /.direct-chat-msg -->
 		   

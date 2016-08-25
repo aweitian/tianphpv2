@@ -113,6 +113,11 @@ require_once dirname(__FILE__)."/askFilter.php";
  		return new rirResult(0,"ok",$ret);
  	}
  	
+ 	public function row($sid){
+ 		$sql = $this->sqlManager->getSql("/ask/append/row");
+ 		return $this->db->fetch($sql, array("sid" => $sid));
+ 		
+ 	}
  	
  	public function getDataByAskid($askid){
  		$sql = $this->sqlManager->getSql("/ask/append/view");

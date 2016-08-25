@@ -5,7 +5,12 @@
  * @Desc: 
  * 依赖:
  */
-
+$url = "http://".$_SERVER['HTTP_HOST'].AppUrl::userLogin();
+if($url){
+	$url ="?redirect=".urlencode($url);
+}else{
+	$url = "";
+}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -91,10 +96,11 @@
 <!--head end-->
 <div class="blank30"></div>
 <?php print $info?>
-<form action="<?php print AppUrl::userRegister().'?t=m'?>" method="post">
+<form action="<?php print AppUrl::userRegister()?><?php print $url?>&t=m" method="post">
 <div class="login_warp bor_rad borddd">
-
+    <p class="clr">
 	<input id='phone_no' name="phone" placeholder='11位中国大陆手机号码' type="text" />
+	</p>
     <div class="hd_hsx"></div>
     <p class="clr">
 	<input id='img_vc' name="vc" class="login_yzm fl" placeholder='请输入验证码' />
@@ -114,9 +120,13 @@
         <input id="btnSendCode" type="button" onclick='getvc()' class="login_fsyzm fr bor_rad borblue blue fz24" value="发送验证码" />
     </p>
     <div class="hd_hsx"></div>
+    <p class="clr">
 	<input name="pwd" type="text"  placeholder='密码' value="" />
+	</p>
     <div class="hd_hsx"></div>
+    <p class="clr">
 	<input name="pwd" type="text"  placeholder="确认密码"  />
+	</p>
 	<div class="hd_hsx"></div>
 	<div class="blank30"></div>
 </div>

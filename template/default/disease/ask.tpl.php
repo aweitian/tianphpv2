@@ -45,7 +45,7 @@ $a=Appctrl::$msg->getControl()
 
 
 ?>
-   
+  
   <div class="blank15"></div>
   <div class="sybox clearfix">
     <div>
@@ -107,7 +107,7 @@ $a=Appctrl::$msg->getControl()
                                                 <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" class="fr bule">详细 &gt;&gt;</a></div>
                                             </div>
                                             <div class="pt5 clearfix">
-                                            <div class="fl pr15 pt5"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" target="blank"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" width="31" height="31"></a></div>
+                                            <div class="fl pr15 pt5"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" target="blank"><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="31" height="31"></a></div>
                                                 <div class="advise_box_con fl">回复医生：<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" class="bule"><?php print $doc["name"]?></a></div>
                                                 <div class="advise_box_con fl">  <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>">
                                                 

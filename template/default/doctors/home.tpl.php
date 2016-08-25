@@ -55,14 +55,22 @@ $url = new url($req->requestUri());
                   
                   <div class="zjtdcon1box1_sm1 fl">
                   	
-                   	 <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $m->data["avatar"]?>" class="fl" width="170" height="170" /></a>
-                 
+                   	 <div class="fl">
+                       <p>	
+                  <img src="<?php print AppUrl::getMediaPath()?>/doctor/200x220/<?php print $m->data["avatar"]?>" class="fl" width="200" height="220" /></p>
+                       <p class="gddt"><img src="<?php print AppUrl::getMediaPath()?>/images/icon3.gif" width="62" height="39"/></p>
+                     </div>
+                 <?php $doclettercnt=$m->getDataCntByDod($m->data["sid"]) ?>
+            
+               <?php $docpresent=$m->getDataByDodCnt($m->data["sid"]) ?>
+              
                      <div class="fr">
                           <h4 class="fz24 tc"><?php print $m->data["name"]?>大夫的个人网站</h4>
                           <div class="blank20"></div>
-                          <p><b class="fz18"><?php print $m->data["name"]?>  <?php print $m->data["lv"]?> </b></p>
+                   
                           <div class="blank10"></div>
-                          <p class="clr"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img2.png" class="fl" />所属医院：上海九龙男子医院</p>
+                          <p class="clr"><em><img src="<?php print AppUrl::getMediaPath()?>/images/icon1.gif" />感谢信<span class="red">   <?php print($doclettercnt) ?></span>封</em><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img2.png" class="fl" />所属医院：上海九龙男子医院</p>
+                          <p class="clr"><em><img src="<?php print AppUrl::getMediaPath()?>/images/icon2.gif" />礼物<span class="red"> <?php print($docpresent) ?></span>个</em><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img2.png" class="fl" />职　　称：<?php print $m->data["lv"]?></p>
                           <p class="clr"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img3.png" class="fl" style="margin-bottom:30px;" />擅长项目：<?php print $m->data["spec"]?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;"> [点击咨询]</a></p>
                      </div>
                   </div>

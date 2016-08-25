@@ -27,7 +27,7 @@ $url = new url($req->requestUri());
 
 ?>
  <?php include dirname(__FILE__)."/common/location.tpl.php";?>
- 
+
  
   <div class="sybox clearfix">
     <div>
@@ -127,4 +127,15 @@ $url = new url($req->requestUri());
     <!--syboxl end-->
   </div>
   <!--sybox end-->
+  
+    <?php 
+
+  $doc_id=$m->data["id"];
+  $doc_name=$m->data["name"];
+  $doc_lv=$m->data["lv"];
+  $doc_desc=$m->data["desc"];
+  $doc_spec=$m->data["spec"];
+  
+  ?>
+<?php include dirname(dirname(__FILE__))."/bottom_swt.tpl.php";?>
   

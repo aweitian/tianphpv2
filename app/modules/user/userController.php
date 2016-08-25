@@ -305,14 +305,19 @@ class userController extends appCtrl {
 			} else if ($msg ["?t"] == "n") {
 				$ret = $this->model->register_normal ( $msg ["name"], $msg ["pwd"], $msg ["sq"], $msg ["sa"], $msg ["eml"], $msg ["code"] );
 				if ($ret->isTrue ()) {
-					exit ( $ret->info );
+					//$this->response->redirect(AppUrl::userLogin());
+					$this->view->register ( $this->model,"<font color='green'>注册成功.<a href='".AppUrl::userLogin()."'>点击登陆</a></font>" );
 				} else {
-					exit ( "<font color='red'>" . $ret->info . "</font>" );
+					$this->view->register ( $this->model,"<font color='red'>" . $ret->info . "</font>" );
+// 					exit ( "<font color='red'>" . $ret->info . "</font>" );
 				}
 			} else if ($msg ["?t"] == "m") {
 				$ret = $this->model->activeUser ( $msg ["phone"], $msg ["code"], $msg ["pwd"] );
 				if ($ret->isTrue ()) {
-					return $this->view->register ( $this->model, $ret->info );
+					$this->view->register ( $this->model,"<font color='green'>注册成功.<a href='".AppUrl::userLogin()."'>点击登陆</a></font>" );
+					
+					//$this->response->redirect(AppUrl::userLogin());
+					//return $this->view->register ( $this->model, $ret->info );
 				} else {
 					return $this->view->register ( $this->model, "<font color='red'>" . $ret->info . "</font>" );
 				}

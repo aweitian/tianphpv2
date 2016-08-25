@@ -184,7 +184,7 @@ foreach ($m->getDisease() as $item){
           	//array(15) { ["sid"]=> string(1) "1" ["id"]=> string(3) "lml" ["name"]=> string(9) "李美龙" ["lv"]=> string(12) "主治医师" ["avatar"]=> string(7) "lml.jpg" ["date"]=> string(10) "2016-05-16" ["dod"]=> string(1) "1" ["dlv"]=> string(1) "8" ["star"]=> string(1) "3" ["hot"]=> string(1) "5" ["love"]=> string(2) "21" ["contribution"]=> string(2) "32" ["desc"]=> string(63) "让病人的健康质量更好更高，是我的从医目标。" ["spec"]=> string(87) "治疗前列腺炎，性功能障碍（阳痿、早泄），男性不育等疑难杂症" ["duty"]=> string(21) "100001110000110000000" } 
           	?>
             <dl class="fz13">
-              <dt><span class="gray"></span> <span class="black"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($app["aid"])?>"><?php print utility::utf8Substr($articleRow["title"],0,20) ?></a></span></dt>
+              <dt><span class="gray"></span> <span class="black"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($app["aid"])?>"><?php print utility::utf8Substr($articleRow["title"],0,18) ?></a></span></dt>
                 <dd><?php print utility::utf8Substr($app["comment"],0,30);?>...
                 <p class="clr"><font class="fl"><span class="gray">发布医生： </span><span class="blue"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doctorInfo["id"])?>"><?php print $doctorInfo["name"]?></a></span></font>
                 <font class="fr"><span class="gray">评论：</span><span class="gray"><?php print $userInfo["name"]?></span></font></p></dd>

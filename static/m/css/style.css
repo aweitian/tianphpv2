@@ -913,7 +913,7 @@
 .jbkp_page{ line-height:.4rem; color:#333; font-size:.24rem;}
 .jbkp_page p{ text-indent:2em; margin-bottom:.3rem; font-size:.24rem;}
 .jbkp_page p a{ font-size:.24rem;}
-.jbkp_page img{ margin-bottom:.3rem; }
+.jbkp_page img{ margin-bottom:.3rem;width:100%}
 
 .jbkp_page_zx a{ display:block; width:2.78rem; height:.63rem; text-align:center; line-height:.63rem; border-radius:.1rem;}
 .jbkp_page_zx a.kp_bn1{ color:#fe8100; border:1px solid #fe8100;}

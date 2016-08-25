@@ -1,6 +1,7 @@
 <?php
 /**
  * 前台TPL文件调用问答模块接口类
+ * 感谢信
  * @author awei.tian
  * @date   2016-6-27
  */
@@ -88,7 +89,7 @@ class letterUIApi {
 		return $ret;
 	}
 	/**
-	 * 
+	 * 根据医生获取感谢信数量
 	 * @param int $dod        	
 	 * @return int
 	 */

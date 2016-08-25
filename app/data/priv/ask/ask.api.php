@@ -257,6 +257,19 @@ class askApi{
 	}
 	
 	
+	public function removeAppend($sid){
+		$ret = $this->db->exec($this->sqlManager->getSql("/ask/append/rm"), array(
+				"sid" => $sid,
+		));
+		if($ret == 0){
+			if($this->db->hasError()){
+				return new rirResult(1,$this->db->getErrorInfo());
+			}
+		}
+		return new rirResult(0,"ok",$ret);
+	}
+	
+	
 	
 	/**
 	 * 成功，INFO字段为COUNT,RETURN为数据

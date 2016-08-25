@@ -21,7 +21,7 @@ $url = new url($req->requestUri());
 ?>
 
    <?php include dirname(__FILE__)."/common/location.tpl.php";?>
- 
+
   <div class="sybox clearfix">
     <div>
       
@@ -111,7 +111,7 @@ $url = new url($req->requestUri());
                   	
                   	
                     	<div class="zjtd_hzfw_fl tc fl">
-                        	<img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"] ?>" width="61" height="62"  />
+                        	<img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"] ?>" width="61" height="62"  />
                             <p><span class="blue">  <?php print $doc["name"] ?></span> 医生</p>
                             <p><?php print $doc["date"] ?></p>
                         </div>

@@ -15,4 +15,3 @@ $ext = diseaseExtInfoes::getExtData();
 include dirname(__FILE__)."/knowledge.tpl.php";
 ?>
 
-  

@@ -5,6 +5,7 @@
 		SELECT 
 			count(`data_ask`.`sid`) as cnt
 			FROM `data_ask`
+			WHERE `v` = 1
 	</cnt>
 	<all>
 		SELECT 
@@ -15,6 +16,7 @@
 			`data_ask`.`date`,
 			`data_ask`.`dod`
 			FROM `data_ask`
+			WHERE `v` = 1
 			ORDER BY `data_ask`.`sid` DESC
 		LIMIT :offset,:length
 	</all>
@@ -56,6 +58,7 @@
 			`data_ask`.`dod`
 			FROM `data_ask`
 			WHERE `data_ask`.`did` = :did
+			AND `v` = 1
 			ORDER BY `data_ask`.`sid` DESC
 		LIMIT :offset,:length
 	</getAskByDid>
@@ -63,7 +66,7 @@
 		SELECT 
 			count(`data_ask`.`sid`) as `cnt`
 			FROM `data_ask`
-			WHERE `data_ask`.`did` = :did
+			WHERE `data_ask`.`did` = :did AND `v` = 1
 	</getAskByDidCnt>
 	<getAskByDod>
 		SELECT 
@@ -73,7 +76,7 @@
 			`data_ask`.`date`,
 			`data_ask`.`did`
 			FROM `data_ask`
-			WHERE `data_ask`.`dod` = :dod
+			WHERE `data_ask`.`dod` = :dod AND `v` = 1
 			ORDER BY `data_ask`.`sid` DESC
 		LIMIT :offset,:length
 	</getAskByDod>
@@ -81,7 +84,7 @@
 		SELECT 
 			count(`data_ask`.`sid`) as `cnt`
 			FROM `data_ask`
-			WHERE `data_ask`.`dod` = :dod
+			WHERE `data_ask`.`dod` = :dod AND `v` = 1
 	</getAskByDodCnt>
 	<getAnswerByAskid>
 		SELECT 
@@ -106,6 +109,7 @@
 					`data_attr_data`.`pid` = :did
 					AND `grp` = 1
 			)
+			 AND `v` = 1
 			ORDER BY `sid` DESC	
 			LIMIT :offset,:length
 	</getAllByLv0Did>
@@ -119,6 +123,7 @@
 					`data_attr_data`.`pid` = :did
 					AND `grp` = 1
 			)
+			 AND `v` = 1
 	</getAllByLv0DidCnt>
 	
 	<!-- 根据ASKID获取问题回答 -->

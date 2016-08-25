@@ -8,6 +8,7 @@ if(isset($data["def"]) && !is_null($data["def"])){
 	$def = $data["def"];
 	$at = "编辑";
 	$ua = "edit";
+	$def["files"] = array();
 }else{
 	$def = array(
 		"askid" => $data["askid"],
@@ -20,6 +21,9 @@ if(isset($data["def"]) && !is_null($data["def"])){
 	$at = "添加";
 	$ua = "add";
 }
+
+
+// var_dump($def);
 
 $file_item_html = "<div class='input-group'><i class='glyphicon glyphicon-trash input-group-addon'></i><input name='files[]' class='form-control' placeholder='图片路径' value=''></div>";
 
@@ -49,6 +53,9 @@ if(isset($_SERVER['HTTP_REFERER'])){
                  -->
                   <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/ask/append<?php print $ua; print $ret_url?>">
                    <!-- hidden -->
+                   <?php if($ua == "edit"):?>
+                   <input type="hidden" name="sid" value="<?php print $_REQUEST["sid"]?>">
+                   <?php endif?>
                    <input type="hidden" name="askid" value="<?php print $def["askid"]?>">
                    <input type="hidden" name="role" value="<?php print $def["role"]?>">
                    <input type="hidden" name="conmeta" value="<?php print $def["conmeta"]?>">

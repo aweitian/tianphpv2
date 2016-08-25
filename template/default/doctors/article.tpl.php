@@ -24,7 +24,7 @@ $url = new url($req->requestUri());
       <?php include dirname(__FILE__)."/common/nav.tpl.php";?>
        
         </ul>
-  
+
           <div class="tabcon selected fz13">
           	   <div class="blank20"></div>
                <div class="clr">

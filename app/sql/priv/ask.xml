@@ -107,6 +107,7 @@
 				`data_ask`.`svr`,
 				`data_ask`.`files`,
 				`data_ask`.`date`,
+				`data_ask_append`.`sid` as `aspapid`,
 				`data_ask_append`.`conmeta`,
 				`data_ask_append`.`content`,
 				`data_ask_append`.`date` AS `ap_date`,
@@ -123,7 +124,13 @@
 			
 		</view>
 		
-		
+		<row>
+			SELECT 
+				*
+				
+			FROM `data_ask_append`
+			WHERE `sid` = :sid
+		</row>
 	</append>
 	
 	

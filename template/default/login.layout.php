@@ -6,7 +6,19 @@
  * 依赖:
  */
 // var_dump($model->getVcFlag());exit;
+if(isset($_SERVER['HTTP_REFERER']))
+{
+	$url = $_SERVER['HTTP_REFERER'];
+}else{
+	$url = AppUrl::navHome();
+}
+
+
+
+$url ="?return=".urlencode($url);
+
 ?>
+
 <!DOCTYPE>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -22,7 +34,7 @@
     <div class="logintable fz13">
       <p class="fz18">请先登录</p>
       <div class="blank25"></div>
-      <form action="<?php print AppUrl::userLogin()?>" method="post">
+      <form action="<?php print AppUrl::userLogin()?><?php print $url?>" method="post">
         <input  class="logininp gray border2" name="nep" placeholder='用户名/邮箱/手机号'/>
         <div class="blank25"></div>
         <input type="password" class="logininp gray  border2" name="pwd" placeholder="密码" />

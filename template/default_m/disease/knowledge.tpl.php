@@ -26,7 +26,7 @@ if(isset($_REQUEST["page"])){
 
 
 $pagination = new pagination($model->knowledgeCnt($row["sid"],$model->subid), $page, $pageSize, 6);
-
+$paginations = new pagination($model->getAllCntdid($row["sid"]), $page, $pageSize, 6);
 
 
 $req = new httpRequest();
@@ -34,7 +34,7 @@ $url = new url($req->requestUri());
 
 $ctr = appCtrl::$msg->getAction();
 ?>
- 
+
 <div class="public_width">
 <?php $disease_header_title = $row["data"];?>
 <?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>
@@ -53,15 +53,21 @@ $ctr = appCtrl::$msg->getAction();
         <div class="jb_sstab clearfix dgray fz13 color6">
             <ul class="fl">
               <li <?php if($model->subid =="0"):?> class="selected" <?php endif?>><a href="<?php print AppUrl::disKnowledgeSubByDiskey($row["key"],0) ?>">全部文章</a></li>
+              <?php if ($model->knowledgeCnt($row["sid"],0) > 0):?>
               <li <?php if($model->subid =="1"):?> class="selected"<?php endif?>><a href="<?php print AppUrl::disKnowledgeSubByDiskey($row["key"],1) ?>">病因</a></li>
               <li class="last <?php if($model->subid =="2"):?>selected<?php endif?>"><a href="<?php print AppUrl::disKnowledgeSubByDiskey($row["key"],2) ?>">症状</a></li>
+              <?php endif?>
             </ul>
            <div class ="rel fr">
-          	<span class="left_down"><img src="<?php print AppUrl::getMediaPath()?>/images/down.png" id="img1" ></span> 
+
+            <?php if ($model->knowledgeCnt($row["sid"],0) > 0):?>            
+          	<span class="left_down"><img src="<?php print AppUrl::getMediaPath()?>/images/down.png" id="img1" ></span>         	
+            <?php endif?>
+          
          </div>
          <div class="bg_col"></div>
         </div>
-        
+        <?php if ($model->knowledgeCnt($row["sid"],0) > 0):?>
         <div id="de_show" class="de_show" >
           <p>选择标签</p>
           <ul class="de_line clearfix">
@@ -80,7 +86,7 @@ $ctr = appCtrl::$msg->getAction();
             </li>
           </ul>
         </div>
-      
+      <?php endif?>
       	<div class="jb_ssall">
         
             <div class="jb_ssbox selected">
@@ -88,15 +94,26 @@ $ctr = appCtrl::$msg->getAction();
                 <div class="clr jb_ssbox_sm1">
                     <?php if( $model->subid =="0"): ?>
                     <div>
-                        <?php foreach ($model->getEssenceAidByDid($row["sid"],1) as $jh):?>
-                        <span class="fz16 color3"><a href="<?php print AppUrl::articleByAid($jh["sid"]) ?>"><?php print utility::utf8Substr($jh["title"], 0, 20) ?></a></span>
-                        <p class="fz13 color6"><?php print utility::utf8Substr( $jh["desc"], 0, 40)?>...<a href="<?php print AppUrl::articleByAid($jh["sid"]) ?>" class="bule fr">详情 ></a></p>
+         
+                          <?php foreach($model->getArticleTag7ByDid($row["sid"],1,0) as $aitem):?> 
+                        <span class="fz16 color3"><a href="<?php print AppUrl::articleByAid($aitem["aid"]) ?>"><?php print $row["data"]?>知识介绍</a></span>
+                        <p class="fz13 color6"><?php print utility::utf8Substr( $aitem["desc"], 0, 40)?>...<a href="<?php print AppUrl::articleByAid($aitem["aid"]) ?>" class="bule fr">详情 ></a></p>
                         <?php endforeach; ?>
+                        
+                        
+                        
+                        
                     </div>                    
                     <?php endif; ?>
                     <div class="blank20"></div>
                 </div>
+                
+                
+                
+                <?php if ($model->knowledgeCnt($row["sid"],0) > 0):?>
+                
                 <?php foreach ($model->knowledge($row["sid"],$model->subid,0,($page-1)*$pageSize,$pageSize, 6) as $list): ?>
+             
                 <?php $tag=$model->getTag($list["tid"]) ?>                           
                 <?php $dod= $model->getOwner($list["aid"])?>     
 	            <?php $doc=($model->getInfoByDod($dod))?> 
@@ -120,23 +137,58 @@ $ctr = appCtrl::$msg->getAction();
                     <div class="blank30"></div>
                 </div>
                <?php endforeach; ?> 
-              
+               <?php else:?>
+               <?php foreach($model->getAll($row["sid"],$pageSize,($page - 1) * $pageSize) as $wz):?> 
+               <?php $dod= $model->getOwner($wz["aid"])?>     
+	           <?php $doc=($model->getInfoByDod($dod))?> 
+               <div class="bortbcon"></div>
+            <div class="mzy30">
+            <div class="blank30"></div>
+            <div class="clr jbzs_sm1">
+              <dl class="fl tc">
+                <dt><a href="<?php print AppUrl::docHomeByDod($doc["dod"]) ?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $doc["avatar"]?>" /></a></dt>
+                <dd class="color6"><a href="<?php print AppUrl::docHomeByDod($doc["dod"]) ?>"><?php print $doc["name"] ?> </a></dd>
+              </dl>
+              <div class="fr">
+                <h5 class="fz28 fw400"><a href="<?php print AppUrl::articleByAid($wz["aid"]) ?>" class="color3"><?php print utility::utf8substr($wz["title"],0,14); ?></a></h5>
+                <p class="color6 fz22"><?php print utility::utf8substr($wz["desc"],0,50); ?>...</p>
+                <p class="tr"><span class="yellow"><?php echo rand(1000,1300);?></span> 已读</p>
+              </div>
+            </div>
+            <div class="blank30"></div>
+          </div>
+          <?php endforeach;?>  
+               <?php endif;?>
                 <div class="hd_hsx"></div>
                 <div class="blank30 hui_bg"></div>
-
-                                  <div class="pagenum tc gray fz13">
-                              
-                        <?php if ($pagination->hasPre()):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+           <?php if ($model->knowledgeCnt($row["sid"],0) > 0):?>
+            <div class="pagenum tc gray fz13">                  
+                   <?php if ($pagination->hasPre()):?>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
-       		<?php endif;?> </div>
+            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?> 
+       		</div>
+       		<?php else:?>
+            <div class="pagenum tc gray fz13">                  
+                   <?php if ($paginations->hasPre()):?>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<?php endif;?>
+        	<?php for($i=0;$i<$paginations->getPageBtnLen();$i++):?>
+        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<?php endfor;?>
+        	<?php if($paginations->hasNext()):?>
+            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?> 
+       		</div>
+
+       		<?php endif;?>
                                  
-                                  <?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
+             <?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 
             </div>
             

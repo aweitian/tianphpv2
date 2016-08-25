@@ -148,6 +148,38 @@ class askController extends privController{
 			$this->response->showError($ret->info);
 		}
 	}
+	public function appendrmAction(pmcaiMsg $msg){
+		//["askid" ["role"] ["content"] ["date"]=> string(19) "2016-05-25 12:25:47" }
+		$ret_url = $_SERVER["HTTP_REFERER"];
+		if(!isset($msg["?sid"])){
+			$this->response->_404();
+		}
+		$this->model->removeAppend(intval($msg["?sid"]));
+		$this->response->redirect($ret_url);
+	}
+	public function appendeditAction(pmcaiMsg $msg){
+		//["askid" ["role"] ["content"] ["date"]=> string(19) "2016-05-25 12:25:47" }
+		$this->chkPost($msg, array("sid","askid","role","conmeta","content","date"));
+		
+		if(!isset($msg["files"])){
+			$files = array();
+		}else{
+			$files = $msg["files"];
+		}
+		
+		$ret = $this->model->appendUpdate($msg["sid"],$msg["askid"], $msg["role"], $msg["conmeta"],
+				$msg["content"], $files, $msg["date"]);
+		if($ret->isTrue()){
+			if(isset($msg["?returl"])){
+				$ret_url = $msg["?returl"];
+			}else{
+				$ret_url = "";
+			}
+			$this->view->showOpSucc($this->priv->getUserInfo(),"编辑",$ret_url);
+		}else{
+			$this->response->showError($ret->info);
+		}
+	}
 	
 	public function viewappendAction(pmcaiMsg $msg){
 		if(!isset($msg["?sid"])){
@@ -209,21 +241,25 @@ class askController extends privController{
 		$this->view->setPmcaiMsg($msg);
 		
 		
+		//这个SID是APPEND的SID
+		if(isset($msg["?sid"])) {
+			$def = $this->model->getAppendRow($msg["?sid"]);
+		}else{
+			$def = null;
+		}
+		
+		
 		$this->view->showAppendForm(
 				$this->priv->getUserInfo(), 
 				$msg["?askid"], 
 				$msg["?r"] == "u" ? "user" : "doctor", 
-				$present
+				$present,
+				$def
 		);
 		
 		
 	}
-	
-	
-	
-	
-	
-	
+
 	
 	
 	/**

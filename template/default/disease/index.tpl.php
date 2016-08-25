@@ -18,6 +18,7 @@ $this->keyword = "".$row["data"]."哪家医院看得好,治疗".$row["data"]."�
 $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]."哪个医生好,132629患友推荐了上海九龙男子医院治疗".$row["data"]."好的专家,并且可以直接向专家在线咨询,预约电话咨询,预约专家的门诊挂号,在线上直接获得优质的治疗".$row["data"]."的医疗服务";
 
 ?>
+
   <div class="blank15"></div>
   <div class="sybox clearfix">
     <div>
@@ -101,13 +102,12 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                                 	
                                 	<img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="66" height="66" class="fl" />
                                     <div class="fr">
-                                    <!-- sid,id,name,lv,avatar,date,dod,dlv,star,hot,love,contribution,desc,spec -->
                                     	<span class="jb_ys<?php print $m ?>col"><?php print $doc["name"]?>，<?php print $doc["lv"]?></span>
                                         <p>
                                         
                                              <?php if (!empty($ans["content"]))  :?>
                              
-                              	<?php print utility::utf8Substr($ans["content"], 0, 40) ?>
+                              	<?php print utility::utf8Substr($ans["content"], 0, 30) ?>
                              <?php endif; ?>
                                         
                                         </p>
@@ -159,7 +159,7 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                             	<img width="105" height="106" src="<?php print AppUrl::getMediaPath()?>/images/default.png" class="fl" />
                             	<?php endif?>
                                 <div class="fr">
-                                	<span class="fz16 color3"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="/"><?php print $thumb["title"]?></a></span>
+                                	<span class="fz16 color3"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></span>
                                     <p class="fz13 color6"><?php print $thumb["content"]?>...<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>" class="bule">[详细]</a></p>
                                 </div>
            
@@ -212,9 +212,9 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                             <div class="hp_doc_box2">
                                 <div class="fl pr20">
                                 <p class="tc">
-                                    <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="" target="_blank">
+                                   
                                    <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/80X65/<?php print $doc["avatar"]?>" width="80" height="65" /></a>
-                                    </a>
+                                   
                                 </p>
                                         <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> target="_blank" href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="personweb-sickness-btn">个人网站</a>
                                 </div>
@@ -222,8 +222,8 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                                     <p><?php print $doc["name"]; ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php print $doc["lv"] ?></p>
                                     <p>
                                         <span class="patient_recommend">患者推荐热度：
-                                        <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href=""><i class="blue" style="margin-left:-5px;"><?php print $doc["hot"]; ?></i></a></span>
-                                        <span><img src="<?php print AppUrl::getMediaPath()?>/images/jian.png" style="vertical-align:-3px;"></span>
+                                       <i class="blue" style="margin-left:-5px;"><?php print $doc["hot"]; ?></i></span>
+                                        <span><img src="<?php print AppUrl::getMediaPath()?>/images/jian.png" style="vertical-align:-3px;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;近两周回复<b class="yellow"><?php print ($count)?></b>问 
                                         </span>
                                     </p>

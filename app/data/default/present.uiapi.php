@@ -1,6 +1,7 @@
 <?php
 /**
  * 前台TPL文件调用礼物模块接口类
+ * 礼物
  * @author awei.tian
  * @date   2016-6-25
  */

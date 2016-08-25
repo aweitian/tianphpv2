@@ -98,6 +98,10 @@ class askModel extends privModel{
 		$api = new askApi();
 		return $api->remove($sid);
 	}
+	public function removeAppend($sid){
+		$api = new askApi();
+		return $api->removeAppend($sid);
+	}
 	
 	
 	
@@ -132,6 +136,11 @@ class askModel extends privModel{
 	public function getAppendByAskid($askid){
 		$api = new askAppendApi();
 		return $api->getDataByAskid($askid);
+	}
+	
+	public function getAppendRow($sid){
+		$api = new askAppendApi();
+		return $api->row($sid);
 	}
 	
 	public function getAllDoc(){
