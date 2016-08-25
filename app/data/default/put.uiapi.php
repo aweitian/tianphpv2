@@ -862,20 +862,23 @@ class putUIApi {
 		$bnd = array (
 				"sid" => $did,
 		);
-		return !empty($this->db->fetch( $sql, $bnd ));
+		$ret = $this->db->fetch( $sql, $bnd );
+		return !empty($ret);
 	}
 	public function existDod($dod){
 		$sql = $this->sqlManager->getSql ( "/ui_put/read/dod" );
 		$bnd = array (
 				"sid" => $dod,
 		);
-		return !empty($this->db->fetch( $sql, $bnd ));
+		$ret = $this->db->fetch( $sql, $bnd );
+		return !empty($ret);
 	}
 	public function existAid($aid){
 		$sql = $this->sqlManager->getSql ( "/ui_put/read/aid" );
 		$bnd = array (
 				"sid" => $aid,
 		);
-		return !empty($this->db->fetch( $sql, $bnd ));
+		$ret = $this->db->fetch( $sql, $bnd );
+		return !empty($ret);
 	}
 }
