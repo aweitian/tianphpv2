@@ -35,9 +35,8 @@ $url = new url ( $req->requestUri () );
 ?>
 
 <div class="public_width">
-	<?php $disease_header_title = $m->data["name"]?>
-	<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>
-	
+<?php $disease_header_title = $m->data["name"];?>
+<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>	
 
 	<!--head end-->
 
@@ -142,7 +141,6 @@ $url = new url ( $req->requestUri () );
 						src="<?php print AppUrl::getMediaPath()?>/images/ysym_img3.png"
 						class="fl ys_tb" /><b>患者感谢信</b>
 				</div>
-
 				<div class="ys_con_p1 fr">
 					<p class="color6">
 						疗效：<img
@@ -171,9 +169,9 @@ $url = new url ( $req->requestUri () );
 			<dl class="mzy30">
 				<div class="blank20"></div>
 				<dt class="clr">
-					<a href="<?php print AppUrl::disHomeByDid($let["did"]);?>" class="yellow">所患疾病： <?php print($dis) ?></a>
+					<a class="yellow">所患疾病： <?php print($dis) ?></a>
 				</dt>
-				<dd class="color3">感谢信：<?php print $m->utf8cut($let["content"],0,64)?>...</dd>
+				<dd class="color3">感谢信：<?php print AppFilter::filterOut($let["content"]);?></dd>
 				<div class="blank15"></div>
 				<div class="hd_hsx"></div>
 				<div class="blank15"></div>
@@ -238,10 +236,10 @@ $url = new url ( $req->requestUri () );
 					<dt class="clr">
 						<a
 							href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><img
-							src="<?php print AppUrl::getMediaPath()?>/images/kp_wen.png" /><?php print utility::utf8Substr($ask["title"], 0, 18)?></a>
+							src="<?php print AppUrl::getMediaPath()?>/images/kp_wen.png" /><?php print AppFilter::filterOut(utility::utf8Substr($ask["title"], 0, 18));?></a>
 					</dt>
 					<dd>
-						疾病 ：<a href="<?php print AppUrl::disHomeByDid($ask["did"])?>"><?php print($dis) ?></a>
+						疾病 ：<a><?php print($dis) ?></a>
 					</dd>
 					<dd class="clr color9">
 						<span class="fl">患者： <?php print ($user) ?></span><span class="fr">共<?php print($docount) ?>条对话    <?php print utility::utf8Substr($ask["date"], 0, 10)?></span>

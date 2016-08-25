@@ -68,9 +68,9 @@ $a=Appctrl::$msg->getControl()
                    
       
                    
-                  <li>   <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?>>热门问答</a></li>
+                  <li>   <a<?php print App::useTarget()?>>热门问答</a></li>
              <?php foreach($model->getSiblingDids($row["sid"]) as $xbz):?>             	
-                            <li <?php if($a == $xbz["key"]):?> class="selected"<?php endif?>> <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::disAskByDiseasekey($xbz["key"])?>"><?php print $xbz["data"] ?></a></li>
+                            <li <?php if($a == $xbz["key"]):?> class="selected"<?php endif?>> <a<?php print App::useTarget()?> href="<?php print AppUrl::disAskByDiseasekey($xbz["key"])?>"><?php print $xbz["data"] ?></a></li>
             <?php endforeach;?>
 
                           </ul>
@@ -94,22 +94,22 @@ $a=Appctrl::$msg->getControl()
                             
                                         <li>
                                             <div class="advise_box_title">                              
-                                            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" class="fz16 color3"><?php print $allitem["title"]?></a>
+                                            <a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" class="fz16 color3"><?php print $allitem["title"]?></a>
                                             </div>
                                             <p class="gray3 pt5 color9">最后提交
                                          
-                                            <?php print utility::utf8Substr($allitem["date"], 0, 10)?>  疾病分类：<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="bule"><?php print $row["data"]?></a></p>
+                                            <?php print utility::utf8Substr($allitem["date"], 0, 10)?>  疾病分类：<a<?php print App::useTarget()?> class="bule"><?php print $row["data"]?></a></p>
                                             <div class="pt10 bbd_c clearfix">
                                                 <div class="fl pr15 pt5"><img src="<?php print AppUrl::getMediaPath()?>/avatar/<?php print $user["avatar"]?>" width="31" height="31"></div>
                                                 
-                                                <div class="advise_box_con fl"> <?php print utility::utf8Substr($allitem["desc"], 0, 30)?>
+                                                <div class="advise_box_con fl"> <?php print AppFilter::filterOut(utility::utf8Substr($allitem["desc"], 0, 30))?>
                                                
-                                                <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" class="fr bule">详细 &gt;&gt;</a></div>
+                                                <a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" class="fr bule">详细 &gt;&gt;</a></div>
                                             </div>
                                             <div class="pt5 clearfix">
-                                            <div class="fl pr15 pt5"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" target="blank"><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="31" height="31"></a></div>
-                                                <div class="advise_box_con fl">回复医生：<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" class="bule"><?php print $doc["name"]?></a></div>
-                                                <div class="advise_box_con fl">  <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>">
+                                            <div class="fl pr15 pt5"><a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" target="blank"><img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"]?>" width="31" height="31"></a></div>
+                                                <div class="advise_box_con fl">回复医生：<a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>" class="bule"><?php print $doc["name"]?></a></div>
+                                                <div class="advise_box_con fl">  <a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>">
                                                 
                                                  <?php if (!empty($ans["content"]))  :?>
                              
@@ -132,13 +132,13 @@ $a=Appctrl::$msg->getControl()
                         </div>
                         <p class="blank25"></p>
                         <div class="pagenum tc gray fz13"><?php if ($pagination->hasPre()):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+            <a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?> </div>
                       </div>
                     </div>

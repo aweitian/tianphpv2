@@ -93,7 +93,7 @@ class diseaseUIApi {
 	 * @return boolean
 	 */
 	public function exists($key) {
-		return array_key_exists ( $key, $this->keyCache );
+		return array_key_exists ( $key, $this->keyCache ) && $this->keyCache[$key]["metaid"] == 2;
 	}
 	/**
 	 *

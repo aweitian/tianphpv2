@@ -46,7 +46,7 @@ $pagination = new pagination($cnt, $curPageNum, $pageSize, $pageBtnLen);
                     <tr>
                       <td><?php print $item["sid"]?></td>
                       <td><?php print $item["name"]?></td>
-                      <td><?php print AppFilter::filterOut($item["comment"]) ?></td>
+                      <td><?php print $item["comment"]?></td>
                       <td><span class="<?php if( $item["verify"] == "1" ):?>text-green<?php else:?>text-muted<?php endif;?>"><?php print $item["verify"] == "1" ? "已" : "未"?>验证</span></td>
                       <td><?php print $item["datetime"]?></td>
                       

@@ -22,8 +22,8 @@ $url = new url($req->requestUri());
 <div class="public_width">
 
 
-<?php $doctors_header_title = ""?>
-<?php include dirname(dirname(__FILE__))."/inc/header.doc.php"?>
+<?php $disease_header_title = $m->data["name"];?>
+<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>
 <!--head end-->
 
 <div class="hui_bg">
@@ -55,7 +55,7 @@ $url = new url($req->requestUri());
 <?php $row=$m->getRowByDid($askq["did"]);?>
 <div class="yswd_box1 mzy30 clr">
 	<span class="color9 fl">提问标题：</span>
-    <p class="fl"><?php print($askq["title"]) ?></p>
+    <p class="fl"><?php print AppFilter::filterOut($askq["title"]); ?></p>
 </div>
 <div class="mzy30">
     <div class="blank10"></div>
@@ -68,8 +68,8 @@ $url = new url($req->requestUri());
         <div class="hd_xhsx"></div>
         <div class="blank20"></div>
         <p><span class="blue">疾病：</span><?php print ($dis) ?></p>
-        <p><span class="blue">描述：</span><?php print $askq["desc"] ?></p>
-        <p><span class="blue">想获得的帮助：</span><?php print $askq["svr"] ?></p>
+        <p><span class="blue">描述：</span><?php print AppFilter::filterOut($askq["desc"]); ?></p>
+        <p><span class="blue">想获得的帮助：</span><?php print AppFilter::filterOut($askq["svr"]); ?></p>
         <p class="color9"><img src="<?php print AppUrl::getMediaPath()?>/images/yswd_img2.png" />病历资料仅医生及患者本人登录后可见 </p>
         <img src="<?php print AppUrl::getMediaPath()?>/images/ys_wd2.png" class="yswd_box2_t1" />
     </div>
@@ -87,7 +87,7 @@ $url = new url($req->requestUri());
         <div class="blank10"></div>
         <p><span class="blue">
         <?php if($wd["conmeta"] == "text"):?>
-                            <?php print $wd["content"] ?>
+                            <?php print AppFilter::filterOut($wd["content"]); ?>
                             <?php else:?>
 		          	
 		                 	<?php $tmp = explode(",", $wd["content"]);?>

@@ -23,6 +23,7 @@ class doctorsControllerNotFound{
 	private $allowAct;
 	public function __construct(pmcaiMsg $msg){
 		appCtrl::$msg = $msg;
+		AppModule::$moduleName = "doctor";
 		$this->allowAct = array(
 				"welcome" => 1,
 				"article" => 1,
@@ -39,6 +40,7 @@ class doctorsControllerNotFound{
 		}else{
 			$this->_404();
 		}
+		
 	}
 	
 	public function _404(){
@@ -74,7 +76,7 @@ class doctorsControllerNotFound{
 		}
 	}
 	protected function appraise(pmcaiMsg $msg){
-		if (utility::isMobile ()) {
+		if (APP_MOBILE_MODE) {
 			$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
 // 			$row = appraiseUIApi::getInstance ()->getDataByDod($dod, $length)    ->getInfoById ( $msg->getControl () );
 			$this->model->data = $row;
@@ -85,13 +87,8 @@ class doctorsControllerNotFound{
 		}
 	}
 	protected function letter(pmcaiMsg $msg){
-		if (utility::isMobile ()) {
-			$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
-			$this->model->data = $row;
-			$this->view->letter ( $this->model );
-		} else {
-			$res = new httpResponse();
-			$res->_404();
-		}
+		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
+		$this->model->data = $row;
+		$this->view->letter ( $this->model );
 	}
 }

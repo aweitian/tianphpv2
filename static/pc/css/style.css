@@ -24,6 +24,7 @@ table {
 	border-spacing: 0;
 	font-family: "Microsoft YaHei";
 }
+.current{background-color:#69b4ed; color:#fff;}
 /* ���� */
 a {
 	text-decoration: none;moz-transition: all 0.1s linear; -webkit-transition: all 0.1s linear; -o-transition: all 0.1s linear; transition: all 0.1s linear;
@@ -968,7 +969,7 @@ padding: 0px 0 20px 0px; width:320px;
 	padding: 0 10px;
 	cursor: pointer;
 	display: inline-block;
-	color:#8b8b8b;
+	
 }
 .pagenum a:hover {
 	color: #fff;

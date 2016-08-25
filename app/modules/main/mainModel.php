@@ -96,8 +96,7 @@ class mainModel extends AppModel {
 	public function getInfoByDod($dod){
 		return doctorUIApi::getInstance()->getInfoByDod($dod);
 	}
-	
-	
+
 	
 	
 	

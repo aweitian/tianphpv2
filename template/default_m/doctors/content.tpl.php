@@ -4,6 +4,8 @@ $aid = intval($_REQUEST["id"]);
 
 $data = $m->row($aid);
 
+$isArticle = true;
+
 if(empty($data)){
 	exit("removed.");
 }
@@ -28,20 +30,34 @@ defTplData::getInstance()->description = $data["desc"];
 ?>
 <div class="public_width">
 
-<?php $doctors_header_title = ""?>
+
+<div class="head_tc blue_bg">
+        <a class="goback"  title="返回上页" onclick="history.go(-1)"><span>返回</span></a>
+        <div class="head_tit" ><?php print utility::utf8Substr($data["title"], 0, 8);?>...</div>
+    <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_dh.png" style="width:.6rem!important;height:auto!important;"/><i id="redpoint" class=""></i></span></a>
+</div>
 <?php include dirname(dirname(__FILE__))."/inc/header.doc.php"?>
 <!--head end-->
 
 <div class="hui_bg">
 <div class="bg_fff">
-	<div class="zjtd  yswd_wap">
-	<div class="mzy30 zjtd_box1 clr">
-    	<a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>" class="fl zjtd_xg2" style="width:.98rem; height:.98rem;" /></a>
+<div class="zjtd  yswd_wap">
+	<div class="mzy30 page_tit clr">
+    	<p class="fl tc">
+        	<a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>" class="zjtd_xg4" /></a>
+        	<img src="<?php print AppUrl::getMediaPath()?>/images/page_img3.png" style="width:.62rem; height:.39rem;" />
+        </p>
+    	
         <dl class="fl">
-        	<dt class="fz24 jbkp_zjzx clr"><b class="blue fz28"><?php print $m->data["name"]?></b></dt>
-            <dd><?php print $m->data["lv"]?></dd>
+        	<dt class="fz24 jbkp_zjzx clr"><b class="color3 fz28"><?php print $m->data["name"]?></b><span class="page_gx"><img  src="<?php print AppUrl::getMediaPath()?>/images/page_img1.png" />感谢信<font class="red"><?php print $m->getLetterCnt()?></font>封</span></dt>
+            <dd><?php print $m->data["lv"]?><span class="page_gx"><img  src="<?php print AppUrl::getMediaPath()?>/images/page_img2.png" />礼物<font class="red"><?php print $m->getPresentDataByDodCnt($m->data["sid"]);?></font>个</span></dd>
+            <dd>擅长：<?php print utility::utf8Substr($m->data["spec"], 0, 15)?>...</dd>
+            <div class="blank10"></div>
+            <dd>
+            	<a href="<?php print AppUrl::getSwtUrl()?>" onclick="openZoosUrl();return false;" class="fl page_zx1">在线咨询</a>
+                <a href="tel:021-52733999" class="fl page_zx2">电话咨询</a>
+            </dd>
         </dl>
-        <a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr zjtd_box1_img4" /></a>
     </div>
     <div class="blank20"></div>
     
@@ -59,7 +75,7 @@ defTplData::getInstance()->description = $data["desc"];
     <div class="blank30"></div>
     <div class="jbkp_page">
         <?php print ($data["content"])?>
-        <div class="jbkp_page_zx">
+        <div class="jbkp_page_zx clr">
 
 			
 
@@ -67,7 +83,7 @@ defTplData::getInstance()->description = $data["desc"];
         	<a class="fl kp_bn1">
         	<div class="heart" id="like2" rel="like" style="background-position: 0% 50%;"></div> <div class="likeCount" id="likeCount2"><?php print rand(300,600);?></div>
         	</a>
-        	<a href="<?php print AppUrl::userAddAppraise();?>" class="fr kp_bn1">去评论</a>
+        	<a href="<?php print AppUrl::userAddAppraise();?>" class="fr kp_bn2">去评论</a>
         </div>
         <div class="blank30"></div>
     </div>
@@ -138,7 +154,7 @@ defTplData::getInstance()->description = $data["desc"];
 	<div class="yswd_jb bg_fff">
         <div class="mzy30">
            <?php foreach($m->getRandomDid(5) as $dis):?>                  	
-            <p class="clr"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>" class="fl"><?php print $dis["data"] ?></a><a href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr" /></a></p>
+            <p class="clr"><a<?php print App::useTarget()?> href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>" class="fl"><?php print $dis["data"] ?></a><a href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr" /></a></p>
             <div class="hd_hsx"></div>    
             <?php endforeach;?>
 
@@ -156,10 +172,10 @@ defTplData::getInstance()->description = $data["desc"];
 </div>
 <div style="height:1rem;"></div>
 <div class="box_e">
-    <p class="box_center2">
-        <a href="<?php print AppUrl::navSubscribe()?>" class="btn_e1" >预约挂号</a>
+    <p class="box_center2">               
+        <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="btn_e3">在线咨询<img src="<?php print AppUrl::getMediaPath()?>/images/hot.png" /></a>
         <a href="tel:021-52733999" class="btn_e2">电话咨询</a>
-        <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="btn_e3">在线咨询</a>
+        <a href="<?php print AppUrl::navSubscribe()?>" class="btn_e1" >预约挂号</a>
     </p> 
 </div>
 
@@ -175,6 +191,7 @@ defTplData::getInstance()->description = $data["desc"];
   $doc_spec=$m->data["spec"];
   
   ?>
-  <?php if(!utility::isMobile()):?>
+ <?php if(!APP_MOBILE_MODE):?>
  <?php include dirname(dirname(__FILE__))."/template/default/bottom_swt.tpl.php";?>
  <?php endif?>
+

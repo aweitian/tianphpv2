@@ -25,9 +25,9 @@ $url = new url($req->requestUri());
 ?>
 <div class="public_width">
 
-<?php $doctors_header_title = "医生的感谢信"?>
-<?php include dirname(dirname(__FILE__))."/inc/header.doc.php"?>
 
+<?php $disease_header_title = $m->data["name"]."医生的感谢信";?>
+<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>	
 <!--head end-->
 
 <div class="hui_bg">
@@ -51,8 +51,8 @@ $url = new url($req->requestUri());
 <div class="kp_about  bg_fff">
 	<dl class="mzy30">
     	<div class="blank20"></div>
-    	<dt class="clr"><a href="" class="yellow">所患疾病： <?php print($dis) ?></a></dt>
-        <dd class="color3">感谢信：<?php print $m->utf8cut($let["content"],0,64)?>...</dd>
+    	<dt class="clr"><a class="yellow">所患疾病： <?php print($dis) ?></a></dt>
+        <dd class="color3">感谢信：<?php print AppFilter::filterOut($let["content"]);?></dd>
         <div class="blank15"></div>
         <div class="hd_hsx"></div>
         <div class="blank15"></div>
@@ -78,6 +78,7 @@ $url = new url($req->requestUri());
 <div class="blank15"></div>
 <?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 </div>
+<div style="height: 1rem;"></div>
 <div class="box_b">
     <p class="box_center2">
         <a href="<?php print AppUrl::userWriteLetter()?>" class="btn_b1">给医生写信</a>

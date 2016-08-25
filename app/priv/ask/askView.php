@@ -107,7 +107,7 @@ class askView extends privView{
 	
 	public function showOpSucc($info,$op,$ret_url){
 		if($ret_url != ""){
-			$ret = ",<a href='".$ret_url ."'>返回</a>";
+			$ret = ",<a href='".$ret_url ."'>返回</a> 或者 <a href='".HTTP_ENTRY."/priv/ask'>返回到列表页</a>";
 		}else{
 			$ret = "";
 		}

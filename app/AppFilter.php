@@ -20,6 +20,6 @@ class AppFilter {
 	 * @return string
 	 */
 	public static function filterIn($html){
-		return $html;
+		return trim(strip_tags($html));
 	}
 }

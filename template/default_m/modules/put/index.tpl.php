@@ -25,9 +25,9 @@ foreach ($m->getDisease() as $item){
 ?>
 <div class="public_width">
 
-<?php $user_header_title = "在线咨询";?>
-<?php include dirname(dirname(__FILE__))."/user/common/header.tpl.php"?>
 
+<?php $disease_header_title = "在线咨询";?>
+<?php include dirname(dirname(dirname(__FILE__)))."/inc/header.tc.php"?>
 
 <div class="mzy30">
 	<form name="gh" onSubmit="return chk(this)" action="<?php print AppUrl::navPut()?>" method="post">

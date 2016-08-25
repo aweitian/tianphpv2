@@ -21,7 +21,7 @@ $this->description = "";
 $this->keyword = "";
 ?>
 <div class="listpos fz13">
-	<span class="gray">当前位置：</span><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="">首页 > 给医生写感谢信</a>
+	<span class="gray">当前位置：</span><a<?php print App::useTarget()?> href="">首页 > 给医生写感谢信</a>
 </div>
 <div class="clearfix">
 	<div class="wid680 fl">
@@ -121,7 +121,7 @@ return true;
 	<div class="wid300 fr">
 		<div class="hotbq border2">
 			<div class="syrboxtit fz18 graybg clearfix">
-				<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">热门标签</a>
+				<a<?php print App::useTarget()?> class="fl">热门标签</a>
 			</div>
 			<div class="hotbqbox fz13">
 				<ul class="clearfix">

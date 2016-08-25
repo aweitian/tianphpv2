@@ -46,7 +46,7 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
              <?php foreach($model->getArticleTag7ByDid($row["sid"],1,0) as $aitem):?> 
                
 
-                            <p class="fz13 color3"> <?php print utility::utf8substr($aitem["desc"],0,80); ?>...<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($aitem["aid"]) ?>" class="bule">疾病介绍→</a></p>
+                            <p class="fz13 color3"> <?php print utility::utf8substr($aitem["desc"],0,80); ?>...<a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($aitem["aid"]) ?>" class="bule">疾病介绍→</a></p>
                         
                               <?php endforeach;?>    
                             <div class="blank10"></div>
@@ -57,7 +57,7 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
 <?php if ($xy % 2 == 1) { ?>
             <p>
 <?php } ?>
-               <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($wz["aid"]) ?>"><?php print utility::utf8substr($wz["title"],0,12); ?></a>
+               <a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($wz["aid"]) ?>"><?php print utility::utf8substr($wz["title"],0,12); ?></a>
 <?php if ($xy % 2 == 0) { ?>
             </p>
 <?php } ?>
@@ -71,7 +71,7 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                     <div class="blank20"></div>
                     
                     <div class="padd20 border2">
-                    	<div class="zjtdwztit fz18 clr"><span></span>相关问答<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="" class="fr fz13 color9">+更多</a></div>
+                    	<div class="zjtdwztit fz18 clr"><span></span>相关问答<a<?php print App::useTarget()?> href="" class="fr fz13 color9">+更多</a></div>
                         <div class="blank20"></div>
                         <div class="clr jb_box2">
                      
@@ -90,7 +90,7 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                                 	
                                 	</div>
                                     <div class="fr">
-                                    	<p><?php print $ask["title"]?> ...<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>" class="bule"> 详细→</a></p>
+                                    	<p><?php print $ask["title"]?> ...<a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>" class="bule"> 详细→</a></p>
                                         <p class="fr color9"></p>
                                     </div>
                                 </div>
@@ -159,8 +159,8 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                             	<img width="105" height="106" src="<?php print AppUrl::getMediaPath()?>/images/default.png" class="fl" />
                             	<?php endif?>
                                 <div class="fr">
-                                	<span class="fz16 color3"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></span>
-                                    <p class="fz13 color6"><?php print $thumb["content"]?>...<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>" class="bule">[详细]</a></p>
+                                	<span class="fz16 color3"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></span>
+                                    <p class="fz13 color6"><?php print $thumb["content"]?>...<a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>" class="bule">[详细]</a></p>
                                 </div>
            
                                 
@@ -173,7 +173,7 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                         		<?php foreach ($data as $art):?>
 
      
-                            	<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($art["aid"]) ?>"><?php print utility::utf8substr($art["title"],0,20);?></a></li>
+                            	<li><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($art["aid"]) ?>"><?php print utility::utf8substr($art["title"],0,20);?></a></li>
  	
  	
  	
@@ -199,7 +199,7 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                     <div class="blank20"></div>
                     
                     <div class="padd20 border2 clr">
-                    	<div class="zjtdwztit fz18 clr"><span></span>好评医生<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::navDoctors() ?>" class="fr fz13 color9">+更多推荐</a></div>
+                    	<div class="zjtdwztit fz18 clr"><span></span>好评医生<a<?php print App::useTarget()?> href="<?php print AppUrl::navDoctors() ?>" class="fr fz13 color9">+更多推荐</a></div>
                         
                         <ul class="hp_doc1 clearfix">
                         
@@ -213,10 +213,10 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                                 <div class="fl pr20">
                                 <p class="tc">
                                    
-                                   <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/80X65/<?php print $doc["avatar"]?>" width="80" height="65" /></a>
+                                   <a<?php print App::useTarget()?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/80X65/<?php print $doc["avatar"]?>" width="80" height="65" /></a>
                                    
                                 </p>
-                                        <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> target="_blank" href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="personweb-sickness-btn">个人网站</a>
+                                        <a<?php print App::useTarget()?> target="_blank" href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="personweb-sickness-btn">个人网站</a>
                                 </div>
                                 <div class="fl hp_doc_xq">
                                     <p><?php print $doc["name"]; ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php print $doc["lv"] ?></p>
@@ -228,13 +228,13 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                                         </span>
                                     </p>
                                     <p><img src="<?php print AppUrl::getMediaPath()?>/images/jb_img6.png" class="fl" style="margin:5px 5px 0 0;" />擅长：<?php print utility::utf8Substr($doc["spec"],0,25); ?>...</p>
-                                    <p><img src="<?php print AppUrl::getMediaPath()?>/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="colora">查看<?php print $doc["name"]; ?>的全部文章、全部咨询</a></p>
+                                    <p><img src="<?php print AppUrl::getMediaPath()?>/images/jb_img7.png" class="fl" style="margin:5px 5px 0 0;" /><a<?php print App::useTarget()?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="colora">查看<?php print $doc["name"]; ?>的全部文章、全部咨询</a></p>
                                 </div>
                             </div>
                             
                             <div class="doc_rela_link">
-                                <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="online_btn"><span>点击咨询</span></a><p>
-                                <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="jiahao_btn"><span>预约挂号</span></a><p>
+                                <p><a<?php print App::useTarget()?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="online_btn"><span>点击咨询</span></a><p>
+                                <p><a<?php print App::useTarget()?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="jiahao_btn"><span>预约挂号</span></a><p>
                             </div>
                             </div>
                             </li>

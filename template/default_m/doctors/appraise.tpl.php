@@ -27,9 +27,9 @@ $url = new url($req->requestUri());
 <div class="public_width">
 
 
-<?php $doctors_header_title = "医生的评价"?>
-<?php include dirname(dirname(__FILE__))."/inc/header.doc.php"?>
 
+<?php $disease_header_title = $m->data["name"]."医生的评价";?>
+<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>
 <!--head end-->
 
 <div class="hui_bg">

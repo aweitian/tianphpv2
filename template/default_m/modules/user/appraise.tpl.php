@@ -37,7 +37,7 @@ $url = new url($req->requestUri());
 	<?php $data = $model->getAppraiseDataByUid($pageSize,($page-1)*$pageSize)?>
         
     <?php if(count($data)):?>
-    <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::userWriteAppraise()?>" style="color:#ff8800;">我要评价</a>
+    <a<?php print App::useTarget()?> class="dgreen" href="<?php print AppUrl::userWriteAppraise()?>" style="color:#ff8800;">我要评价</a>
     <?php $ma = appraiseLvMeta::getMeta()?>
     <?php foreach($data as $q):?>    
     <?php $con=AppFilter::filterOut($q["txt"]);?>
@@ -46,7 +46,7 @@ $url = new url($req->requestUri());
         <div class="blank20"></div>
         <p class="plr20 fz28"><?php print utility::utf8Substr($con, 0, 50) ?>...</p>
         <div class="blank20"></div>
-        <h6 class="plr20 clr fz24 fw400"><span class="fl color9"><b class="fw400 green"><?php print $ma[$q["lv"]]?></b></span><?php if(!$q["v"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("友情提示：是否要删除?")' href="<?php print AppUrl::userRemoveAppraise()?>?sid=<?php print $q["sid"]?>" class="fr">删除</a>
+        <h6 class="plr20 clr fz24 fw400"><span class="fl color9"><b class="fw400 green"><?php print $ma[$q["lv"]]?></b></span><?php if(!$q["v"]):?><a<?php print App::useTarget()?> onclick='return confirm("友情提示：是否要删除?")' href="<?php print AppUrl::userRemoveAppraise()?>?sid=<?php print $q["sid"]?>" class="fr">删除</a>
                     <?php else:  ?>
                     已验证
                     <?php endif?></h6>
@@ -54,18 +54,18 @@ $url = new url($req->requestUri());
     <div class="blank10"></div>
    <?php endforeach;?>
     <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+            <a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?> </div>
             <div class="blank10"></div>
-            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen fr" href="<?php print AppUrl::userWriteAppraise()?>">写评价</a>
+            <a<?php print App::useTarget()?> class="dgreen fr" href="<?php print AppUrl::userWriteAppraise()?>">写评价</a>
            <?php else:?> 
-           		您还没有写过评价，<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::userWriteAppraise()?>" style="color:#ff8800;">现在就写</a>
+           		您还没有写过评价，<a<?php print App::useTarget()?> class="dgreen" href="<?php print AppUrl::userWriteAppraise()?>" style="color:#ff8800;">现在就写</a>
            <?php endif?>
     
 </div>

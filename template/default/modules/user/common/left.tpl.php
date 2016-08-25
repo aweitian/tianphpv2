@@ -21,10 +21,10 @@ $act = appCtrl::$msg->getAction();
 		</dd>
 	</dl>
 	<ul>
-		<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::userProfile()?>" class="memer_li<?php if($act == "welcome" || $act == "profile"):?>dq<?php endif?>1">帐号设置</a></li>
-		<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::userLetter()?>" class="memer_li<?php if($act == "letter"):?>dq<?php endif?>2">我写的感谢信</a></li>
-		<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::userAppraise()?>" class="memer_li<?php if($act == "appraise"):?>dq<?php endif?>3">我发表的评价</a></li>
-		<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::userQuestions()?>" class="memer_li<?php if($act == "questions"):?>dq<?php endif?>4">我的提问</a></li>
-		<li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::userPresents()?>" class="memer_li<?php if($act == "presents"):?>dq<?php endif?>5">心意礼物</a></li>
+		<li><a<?php print App::useTarget()?> href="<?php print AppUrl::userProfile()?>" class="memer_li<?php if($act == "welcome" || $act == "profile"):?>dq<?php endif?>1">帐号设置</a></li>
+		<li><a<?php print App::useTarget()?> href="<?php print AppUrl::userLetter()?>" class="memer_li<?php if($act == "letter"):?>dq<?php endif?>2">我写的感谢信</a></li>
+		<li><a<?php print App::useTarget()?> href="<?php print AppUrl::userAppraise()?>" class="memer_li<?php if($act == "appraise"):?>dq<?php endif?>3">我发表的评价</a></li>
+		<li><a<?php print App::useTarget()?> href="<?php print AppUrl::userQuestions()?>" class="memer_li<?php if($act == "questions"):?>dq<?php endif?>4">我的提问</a></li>
+		<li><a<?php print App::useTarget()?> href="<?php print AppUrl::userPresents()?>" class="memer_li<?php if($act == "presents"):?>dq<?php endif?>5">心意礼物</a></li>
 	</ul>
 </div>

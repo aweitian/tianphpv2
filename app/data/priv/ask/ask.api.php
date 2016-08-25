@@ -48,6 +48,20 @@ class askApi{
 		}
 		return new rirResult(0,$cnt,$ret);
 	}
+	public function verify($sid) {
+		$sql = $this->sqlManager->getSql ( "/ask/verify" );
+		$bind = array (
+				"sid" => $sid 
+		);
+		$row = $this->db->exec ( $sql, $bind );
+		if ($row == 0) {
+			if ($this->db->hasError ()) {
+				return new rirResult ( 9, $this->db->getErrorInfo () );
+			}
+		}
+		return new rirResult ( 0, "ok", $row );
+	}
+	
 	
 	public function getAll($length,$offset=0){
 		$sql = $this->sqlManager->getSql("/ask/all/cnt");

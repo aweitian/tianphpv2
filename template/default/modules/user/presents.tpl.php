@@ -19,7 +19,7 @@ $url = new url($req->requestUri());
 
 ?>
   <div class="blank15"></div>
-  <div class="con_tit fz13">当前位置：<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="/">首页</a> > 会员中心</div>
+  <div class="con_tit fz13">当前位置：<a<?php print App::useTarget()?> href="/">首页</a> > 会员中心</div>
   
   <div class="blank15"></div>
   
@@ -63,7 +63,7 @@ $url = new url($req->requestUri());
                     <td class="fhs"><?php if(($q["v"])==1){ echo "是";}else {echo "否";}
                     ?></td>
                     
-                      <td class="tbtd2"><?php if(!$q["v"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("友情提醒：是否要删除！")' href="<?php print AppUrl::userRmPresents()?>?sid=<?php print $q["sid"]?>">删除</a><?php endif?></td>      
+                      <td class="tbtd2"><?php if(!$q["v"]):?><a<?php print App::useTarget()?> onclick='return confirm("友情提醒：是否要删除！")' href="<?php print AppUrl::userRmPresents()?>?sid=<?php print $q["sid"]?>">删除</a><?php endif?></td>      
                 </tr>
                	<?php endforeach;?>
                   <?php endif?> 
@@ -72,13 +72,13 @@ $url = new url($req->requestUri());
             </table>
               <p class="blank10"></p>
             <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+            <a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?> </div>
             <div class="blank10"></div>
         </div>

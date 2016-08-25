@@ -18,8 +18,9 @@ $url = new url($req->requestUri());
 ?>
 <div class="public_width">
 
-<?php $doctors_header_title = "医生页文章列表"?>
-<?php include dirname(dirname(__FILE__))."/inc/header.doc.php"?>
+
+<?php $disease_header_title = $m->data["name"]."医生页文章列表";?>
+<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>
 <!--head end-->
 
 <div class="hui_bg">
@@ -33,8 +34,8 @@ $url = new url($req->requestUri());
 <div class="kp_about  bg_fff">
 	<dl class="mzy30">
     	<div class="blank20"></div>
-    	<dt class="clr"><a href="<?php print AppUrl::articleByAid($a["sid"])?>" class="blue fz28"><?php print utility::utf8Substr($a["title"], 0, 15)?>...</a></dt>
-        <dd><?php print utility::utf8Substr( $a["desc"], 0, 65)?>...</dd>
+    	<dt class="clr"><a href="<?php print AppUrl::articleByAid($a["sid"])?>" class="blue fz28"><?php print AppFilter::filterOut(utility::utf8Substr($a["title"], 0, 15));?>...</a></dt>
+        <dd><?php print AppFilter::filterOut(utility::utf8Substr( $a["desc"], 0, 65));?>...</dd>
         <dd class="kp_dd1">发表于 <?php print ($a["date"])?><span><?php echo rand(12000,15000);?>人已读</span></dd>
     </dl>
 </div>

@@ -7,6 +7,8 @@
   </div>
 <div class="black_bg"></div>
 <div class="head_tc_nav_new">
+<!-- 
+
   <form class="clearfix" action="" method="post">
       <div class="text">
         <div class="in_out">
@@ -17,6 +19,9 @@
         <input type="button" id="nav_bar_search_btn" value="搜索"/>
       </div>
   </form>
+ -->
+ 
+  <div class="blank20"></div>
   <div class="search_dor clearfix">
     <a href="<?php print AppUrl::navDoctors()?>" class="anyiyuan" id="cnzz_yiyuan203">找大夫咨询</a>
     <a href="<?php print AppUrl::helpAbout()?>" class="anjibing" id="cnzz_jibing204">好评医院</a>

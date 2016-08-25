@@ -69,7 +69,7 @@ $a=Appctrl::$msg->getControl()
 <div class="kp_about  bg_fff">
 	<dl class="mzy30">
     	<div class="blank20"></div>
-    	<dt class="clr"><a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_wen.png" /><?php print $allitem["title"]?></a></dt>
+    	<dt class="clr"><a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_wen.png" /><?php print AppFilter::filterOut($allitem["title"]);?></a></dt>
         <dd>疾病 ：<a href="<?php print AppUrl::disHomeByDid($allitem["did"])?>"><?php print $row["data"]?></a></dd>
         <dd class="clr"><span class="fl">患者：<?php print $user["name"]?></span><span class="fr">共<?php print($docount) ?>条对话    <?php print utility::utf8Substr($allitem["date"], 0, 10)?></span></dd>
     </dl>

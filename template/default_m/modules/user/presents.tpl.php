@@ -45,18 +45,18 @@ $url = new url($req->requestUri());
         <div class="blank20"></div>
         <p class="plr20 fz28"><?php print $pid["data"] ?><img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $pid["avatar"] ?>"  width="26rem;" height="26rem;"  /></p>
         <div class="blank20"></div>
-        <h6 class="plr20 clr fz24 fw400"><span class="fl color9">通过：<b class="fw400 green"><?php if(($q["v"])==1){ echo "是";}else {echo "否";} ?></b></span><?php if(!$q["v"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("友情提醒：是否要删除！")' href="<?php print AppUrl::userRmPresents()?>?sid=<?php print $q["sid"]?>" class="fr">删除</a><?php endif?></h6>
+        <h6 class="plr20 clr fz24 fw400"><span class="fl color9">通过：<b class="fw400 green"><?php if(($q["v"])==1){ echo "是";}else {echo "否";} ?></b></span><?php if(!$q["v"]):?><a<?php print App::useTarget()?> onclick='return confirm("友情提醒：是否要删除！")' href="<?php print AppUrl::userRmPresents()?>?sid=<?php print $q["sid"]?>" class="fr">删除</a><?php endif?></h6>
     </div>
     <div class="blank10"></div>
     <?php endforeach;?>
     <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+            <a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?> </div>       	
            <?php endif?>
     

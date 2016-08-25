@@ -39,17 +39,38 @@ class askController extends privController{
 			$this->model->getAllDis()
 		);
 	}
-	public function showAll($msg) {
+	public function verAction(pmcaiMsg $msg){
+		$ret_url = $_SERVER["HTTP_REFERER"];
+		if(!isset($msg["?sid"])){
+			$this->response->_404();
+		}
 		
+		if(httpRequest::isJsonAccept()){
+			$ret = $this->model->verify(intval($msg["?sid"]));
+			print $ret->toJSON();
+			exit;
+		}else{
+			$this->model->verify(intval($msg["?sid"]));
+			$this->response->redirect($ret_url);
+		}
+		
+		
+	}
+	public function showAll($msg) {
 		$length = 10;
 		if(isset($msg["?page"])){
 			$page = intval($msg["?page"]);
 		}else{
-			$page = 1;
+			if(isset($_COOKIE["ask_page"])){
+				$page = intval($_COOKIE["ask_page"]);
+			}else{
+				$page = 1;
+			}
 		}
 		if($page < 1){
 			$page = 1;
 		}
+		setcookie("ask_page",$page);
 		$offset = ($page - 1) * $length;
 		
 		$this->view->setPmcaiMsg($msg);

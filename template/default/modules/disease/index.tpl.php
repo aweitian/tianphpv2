@@ -40,7 +40,7 @@ $this->keyword = "";
    
                     
                      <?php foreach ($m->getLv1InfoesByDid($dis["sid"]) as $xbz):?>
-                    	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::disHomeByDiseasekey($xbz['key'])?>">
+                    	<a<?php print App::useTarget()?> href="<?php print AppUrl::disHomeByDiseasekey($xbz['key'])?>">
                     	<?php print ($xbz['data']) ?></a>|
                     	
                        	<?php endforeach;?>

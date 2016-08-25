@@ -195,7 +195,7 @@ class doctorController extends privController{
 	
 	public function editAction(pmcaiMsg $msg){
 		if($msg->isPost()){
-				
+// 				var_dump($msg["sid"],$msg["id"],$msg["name"],$msg["avatar"],$msg["date"]);exit;
 			if(!isset($msg["sid"],$msg["id"],$msg["name"],$msg["avatar"],$msg["date"])){
 				$this->response->_404();
 			}

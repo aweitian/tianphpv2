@@ -23,10 +23,10 @@ class AppUrl {
 	
 	// 全局URL
 	public static function getMediaPath() {
-		return AppUrl::build ( "/static/" . (utility::isMobile () ? "m" : "pc") );
+		return AppUrl::build ( "/static/" . (APP_MOBILE_MODE ? "m" : "pc") );
 	}
 	public static function getMediaFilePath() {
-		return FILE_SYSTEM_ENTRY . "/static/" . (utility::isMobile () ? "m" : "pc");
+		return FILE_SYSTEM_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc");
 	}
 	public static function Captcha() {
 		return AppUrl::build ( "/captcha" );
@@ -55,6 +55,9 @@ class AppUrl {
 	public static function navPut() {
 		return AppUrl::build ( "/put" );
 	}
+
+	
+	
 	
 	
 	public static function process() {
@@ -168,6 +171,7 @@ class AppUrl {
 		return AppUrl::build ( "/help/about" );
 	}
 	
+
 	
 	// 医生评价
 	/**
@@ -260,6 +264,13 @@ class AppUrl {
 	}
 	public static function docLetterHomeByDocid($docid) {
 		return AppUrl::build ( "/" . $docid . "/letter" );
+	}
+	public static function docLetterHomeByDod($dod) {
+		$row = doctorUIApi::getInstance ()->getInfoByDod ( $dod );
+		if (empty ( $row )) {
+			return AppUrl::_404 ();
+		}
+		return AppUrl::build ( "/" . $row ["id"] . "/letter" );
 	}
 	/**
 	 * 根据医生ID生成医生首页的URL
@@ -418,27 +429,27 @@ class AppUrl {
 	/**
 	 * 获取医生图片的URL
 	 */
-	public static function getDoctorAvatarUrl($docid) {
-		return HTTP_ENTRY . "/static/" . (utility::isMobile () ? "m" : "pc") . "/doctor/" . $docid;
+	public static function getDoctorAvatarUrl($avatar,$size="80X65") {
+		return HTTP_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/doctor/". $size . "/" . $avatar;
 	}
 	/**
 	 * 获取医生图片的文件路径
 	 */
-	public static function getDoctorAvatarPath() {
-		return FILE_SYSTEM_ENTRY . "/static/" . (utility::isMobile () ? "m" : "pc") . "/doctor";
+	public static function getDoctorAvatarPath($size="80X65") {
+		return FILE_SYSTEM_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/doctor" . "/" . $size;
 	}
 	
 	/**
 	 * 获取用户图片的URL
 	 */
 	public static function getUserAvatarUrl($docid) {
-		return HTTP_ENTRY . "/static/" . (utility::isMobile () ? "m" : "pc") . "/avatar/" . $docid;
+		return HTTP_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/avatar/" . $docid;
 	}
 	/**
 	 * 获取用户图片的文件路径
 	 */
 	public static function getUserAvatarPath() {
-		return FILE_SYSTEM_ENTRY . "/static/" . (utility::isMobile () ? "m" : "pc") . "/avatar";
+		return FILE_SYSTEM_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/avatar";
 	}
 	
 	/**

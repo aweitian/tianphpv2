@@ -27,8 +27,8 @@ $url = new url($req->requestUri());
 ?>
 <div class="public_width">
 
-<?php $doctors_header_title = "医生咨询列表"?>
-<?php include dirname(dirname(__FILE__))."/inc/header.doc.php"?>
+<?php $disease_header_title = $m->data["name"]."医生咨询列表";?>
+<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>
 
 <!--head end-->
 
@@ -48,7 +48,7 @@ $url = new url($req->requestUri());
 <div class="kp_about  bg_fff">
 	<dl class="mzy30">
     	<div class="blank20"></div>
-    	<dt class="clr"><a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_wen.png" /><?php print utility::utf8Substr($ask["title"], 0, 18)?></a></dt>
+    	<dt class="clr"><a href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/kp_wen.png" /><?php print AppFilter::filterOut(utility::utf8Substr($ask["title"], 0, 18));?></a></dt>
         <dd>疾病 ：<a href="<?php print AppUrl::disHomeByDid($ask["did"])?>"><?php print($dis) ?></a></dd>
         <dd class="clr color9"><span class="fl">患者： <?php print ($user) ?></span><span class="fr">共<?php print($docount) ?>条对话   <?php print utility::utf8Substr($ask["date"], 0, 10)?></span></dd>
     </dl>

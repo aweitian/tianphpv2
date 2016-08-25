@@ -78,8 +78,8 @@ $url = new url($req->requestUri());
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr class="zixun_list_title">
             <td width="2%"></td>
-            <td width="10%">患者</td>
-            <td width="40%">标题</td>
+            <td width="20%">患者</td>
+            <td width="20%">标题</td>
             <td width="20%">症状/疾病</td>
             <td width="13%">对话数</td>
             <td width="15%">时间</td>
@@ -98,26 +98,27 @@ $url = new url($req->requestUri());
           <tr>
             <td></td>
             <td><p><?php print ($user) ?></p></td>
-            <td><p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> target="_blank" href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="td_link" ><?php print($ask["title"]) ?></a> </p></td>
-            <td ><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> target="_blank" href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="rela_dis"  ><?php print($dis) ?></a></td>
+            <td><p><a<?php print App::useTarget()?>  href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="td_link" ><?php  print(AppFilter::filterOut($ask["title"])) ?></a> </p></td>
+            <td ><a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>" class="rela_dis"  ><?php print($dis) ?></a></td>
             <td> (<font class="green3 pl5 pr5 green"><?php print($docount) ?>/<?php print($count) ?></font>) </td>
-            <td class="color9"><?php print($ask["date"]) ?></td>
+            <td class="color9"><?php print(utility::utf8Substr($ask["date"], 0, 10)) ?></td>
           </tr>
         <?php endforeach; ?>  
     
         </table>
         
  		 </div>
+ 		
   		<div class="blank20"></div>
-        <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        <div class="pagenum tc  fz13"> <?php if ($pagination->hasPre()):?>
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php print App::useTarget()?><?php if($pagination->getCurPageNum() - 1 == $i):?> class="current"<?php endif;?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
-       		<?php endif;?> </div>
+            <a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+       		<?php endif;?></div>
         <div class="blank20"></div>
 	</div>
     <!--服务区 end-->

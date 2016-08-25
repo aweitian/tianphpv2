@@ -8,7 +8,7 @@
                    <div class="blank20"></div>
                 	
                     <div class="docsug border2">
-                      <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">医师观点</a><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fz13 blue fr" href="<?php print AppUrl::navArticle()?>">+更多</a></div>
+                      <div class="syrboxtit fz18 graybg clearfix"><a<?php print App::useTarget()?> class="fl">医师观点</a><a<?php print App::useTarget()?> class="fz13 blue fr" href="<?php print AppUrl::navArticle()?>">+更多</a></div>
     <div class="docsugbox fz13">
     
     <?php $thumb = $model->getRowThumbnail();?>
@@ -18,7 +18,7 @@
     <dl class="clearfix">
     	<dt class="fl">
     			<?php if (!empty($a1["thumb"])):?>
-                        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>">
+                        	<a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>">
     		<img src="<?php print $thumb["thumb"]?>" width="80" height="60" />
     		</a>
                         	<?php else:  ?>
@@ -26,10 +26,10 @@
                         	           <?php endif?>
     	</dt>
       <dd class="fl">
-      <p><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></p>
+      <p><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($thumb["aid"])?>"><?php print $thumb["title"]?></a></p>
       
       <p class="p2 clearfix">
-      <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl gray"><?php print $thumb["date"]?></a>
+      <a<?php print App::useTarget()?> class="fl gray"><?php print $thumb["date"]?></a>
       </p>
       </dd>
       </dl>
@@ -44,7 +44,7 @@
        <?php $dod= $model->getOwner($aitem["aid"])?> 
 	              <?php  $doc=($model->getInfoByDod($dod))?> 
    <?php if (!empty($doc["name"])):?>
-      <li><p class="p1"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="black" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print utility::utf8Substr($aitem["title"], 0, 18) ?></a></p><p class="p2"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="gray" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print $model->getContent($aitem["aid"],16)?>...[全文]</a></p></li>
+      <li><p class="p1"><a<?php print App::useTarget()?> class="black" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print utility::utf8Substr($aitem["title"], 0, 18) ?></a></p><p class="p2"><a<?php print App::useTarget()?> class="gray" href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print $model->getContent($aitem["aid"],16)?>...[全文]</a></p></li>
     <?php endif?>  
      <?php endforeach;?>
       </ul>      
@@ -57,12 +57,12 @@
                   
                 
                   <div class="hotbq border2">
-                        <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">症状自查</a></div>
+                        <div class="syrboxtit fz18 graybg clearfix"><a<?php print App::useTarget()?> class="fl">症状自查</a></div>
                         <div class="jb_jbzc fz13">
                           <ul class="clearfix">
                              <?php foreach($model->getSydsBydid($row["sid"]) as $zz):?> 
                                                   
-                            <li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::articleBySyd($zz) ?>"><?php print $model->getNameBySyd($zz) ?></a></li>
+                            <li><a<?php print App::useTarget()?> href="<?php print AppUrl::articleBySyd($zz) ?>"><?php print $model->getNameBySyd($zz) ?></a></li>
                             <?php endforeach;?>
                           </ul>
                         </div>
@@ -75,12 +75,12 @@
                   <div class="blank20"></div>
                   
                   <div class="hotbq border2">
-                        <div class="syrboxtit fz18 graybg clearfix"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="fl">热门标签</a></div>
+                        <div class="syrboxtit fz18 graybg clearfix"><a<?php print App::useTarget()?> class="fl">热门标签</a></div>
                         <div class="hotbqbox fz13">
                           <ul class="clearfix">
                     <?php foreach($model->getSiblingDids($row["sid"]) as $xbz):?>   	
                   
-                            <li><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php print AppUrl::disHomeByDiseasekey($xbz["key"])?>"><?php print $xbz["data"] ?></a></li>
+                            <li><a<?php print App::useTarget()?> href="<?php print AppUrl::disHomeByDiseasekey($xbz["key"])?>"><?php print $xbz["data"] ?></a></li>
             <?php endforeach;?>
                           </ul>
                         </div>

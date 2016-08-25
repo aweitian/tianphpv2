@@ -203,6 +203,12 @@ class putUIApi {
 		}
 		$opsid = $oplog->add ( $op_type, identityToken::getInstance ()->getIp () );
 		
+		
+		if (userValidator::isValidPhone($phone)) {
+			return new rirResult ( 0xb, "请输入正确的手机号码" );
+		}
+		
+		
 		$sql = $this->sqlManager->getSql ( "/ui_put/register_phone" );
 		$bnd = array (
 				"name" => $phone,
@@ -560,6 +566,8 @@ class putUIApi {
 		$opsid = $oplog->add ( $op_type, $op_id );
 		$oplog->update ( $opsid );
 		
+		$content = AppFilter::filterIn($content);
+		
 		if (utility::utf8Strlen ( $content ) > 2048) {
 			return new rirResult ( 2, "内容过长" );
 		}
@@ -610,6 +618,9 @@ class putUIApi {
 		if (! validator::isUint ( $lv )) {
 			return new rirResult ( 5, "invalid appraise" );
 		}
+		
+		$txt = AppFilter::filterIn($txt);
+		
 		if (! appraiseValidator::isValidContent ( $txt )) {
 			return new rirResult ( 6, "invalid content" );
 		}
@@ -656,6 +667,9 @@ class putUIApi {
 		}
 		$opsid = $oplog->add ( $op_type, $op_id );
 		$oplog->update ( $opsid );
+		
+		$content = AppFilter::filterIn($content);
+		
 		
 		if (utility::utf8Strlen ( $content ) > 2048) {
 			return new rirResult ( 2, "内容过长" );
@@ -712,6 +726,28 @@ class putUIApi {
 		}
 		$opsid = $oplog->add ( $op_type, $op_id );
 		$oplog->update ( $opsid );
+		
+		
+		if (!validator::isUint($uid)) {
+			return new rirResult ( 2, "没有登陆" );
+		}
+		if (!validator::isUint($dod)) {
+			return new rirResult ( 2, "没有这个医生" );
+		}
+		if (!validator::isUint($did)) {
+			return new rirResult ( 2, "病种不正确" );
+		}
+		
+		
+		$title = AppFilter::filterIn($title);
+		$desc = AppFilter::filterIn($desc);
+		$svr = AppFilter::filterIn($svr);
+		
+		
+		
+		
+		
+		
 		
 		if (utility::utf8Strlen ( $title ) > 128) {
 			return new rirResult ( 2, "标题过长" );

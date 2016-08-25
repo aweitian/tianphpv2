@@ -1,7 +1,7 @@
 <?php
 class userView extends AppView {
 	public function login($model, $info = "") {
-		if(utility::isMobile()){
+		if(APP_MOBILE_MODE){
 			return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_DELAY, array (
 					$this->getThemePath ( "user" ) . "/login.tpl.php",
 					array (

@@ -18,7 +18,7 @@ $req = new httpRequest();
 $url = new url($req->requestUri());
 ?>
   <div class="blank15"></div>
-  <div class="con_tit fz13">当前位置：<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="/">首页</a> > 会员中心</div>
+  <div class="con_tit fz13">当前位置：<a<?php print App::useTarget()?> href="/">首页</a> > 会员中心</div>
   
   <div class="blank15"></div>
   
@@ -53,11 +53,11 @@ $url = new url($req->requestUri());
                 <?php $con=AppFilter::filterOut($q["txt"]);?>
                 <tr>
                 	<td class="tbtd1 color3 line24"><?php print ($con) ?></td>
-                    <td class="color9"><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> style="text-decoration: underline" href="<?php print AppUrl::docHomeByDod($q["dod"])?>"><?php print $model->getDocNameByDod($q["dod"])?></a></td>                 
+                    <td class="color9"><a<?php print App::useTarget()?> style="text-decoration: underline" href="<?php print AppUrl::docHomeByDod($q["dod"])?>"><?php print $model->getDocNameByDod($q["dod"])?></a></td>                 
                     <td class="color9"><?php print $q["date"]?></td>
                     <td class="green"><?php print $ma[$q["lv"]]?></td>
                     
-                    <td class="tbtd2 green"><?php if(!$q["v"]):?><a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> onclick='return confirm("友情提示：是否要删除?")' href="<?php print AppUrl::userRemoveAppraise()?>?sid=<?php print $q["sid"]?>">删除</a>
+                    <td class="tbtd2 green"><?php if(!$q["v"]):?><a<?php print App::useTarget()?> onclick='return confirm("友情提示：是否要删除?")' href="<?php print AppUrl::userRemoveAppraise()?>?sid=<?php print $q["sid"]?>">删除</a>
                     <?php else:  ?>
                     已验证
                     <?php endif?></td>
@@ -67,18 +67,18 @@ $url = new url($req->requestUri());
             </table>
            <p class="blank10"></p>
             <div class="pagenum tc gray fz13"> <?php if ($pagination->hasPre()):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getPre()) ?>">&lt;</a> 
         	<?php endif;?>
         	<?php for($i=0;$i<$pagination->getPageBtnLen();$i++):?>
-        	<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
+        	<a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getStartPage() + $i)?>"><?php print $pagination->getStartPage() + $i?></a>
         	<?php endfor;?>
         	<?php if($pagination->hasNext()):?>
-            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
+            <a<?php print App::useTarget()?> href="<?php echo $url->setQuery("page", $pagination->getNext())?>">&gt;</a>
        		<?php endif;?> </div>
             <div class="blank10"></div>
-            <a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen fr" href="<?php print AppUrl::userWriteAppraise()?>">写评价</a>
+            <a<?php print App::useTarget()?> class="dgreen fr" href="<?php print AppUrl::userWriteAppraise()?>">写评价</a>
            <?php else:?> 
-           		您还没有写过评价，<a<?php if(TARGET_BLANK_OPEN):?> target="_blank"<?php endif?> class="dgreen" href="<?php print AppUrl::userWriteAppraise()?>">现在就写</a>
+           		您还没有写过评价，<a<?php print App::useTarget()?> class="dgreen" href="<?php print AppUrl::userWriteAppraise()?>">现在就写</a>
            <?php endif?>
         </div>
         

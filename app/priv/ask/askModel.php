@@ -132,6 +132,10 @@ class askModel extends privModel{
 		$api = new askApi();
 		return $api->getAll($length,$offset);
 	}
+	public function verify($sid){
+		$api = new askApi();
+		return $api->verify($sid);
+	}
 	
 	public function getAppendByAskid($askid){
 		$api = new askAppendApi();

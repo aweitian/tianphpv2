@@ -1,13 +1,10 @@
 <?php
 ?>
-<div class="head_tc blue_bg">
-        <a class="goback"  title="返回上页" onclick="history.go(-1)"><span>返回</span></a>
-        <div class="head_tit" ><?php print $m->data["name"]?><?php print $doctors_header_title;?></div>
-    <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_xl.png" /><i id="redpoint" class=""></i></span></a>
-</div>
+
 <div class="black_bg"></div>
 <div class="head_tc_nav_new">
-  <form class="clearfix" action="" method="GET" accept-charset="GBK">
+<!-- 
+<form class="clearfix" action="" method="GET" accept-charset="GBK">
       <div class="text">
         <div class="in_out">
           <input id="uniqueKeyword20151125" type="text" placeholder="医院名、疾病名或医生姓名" class="head_tc_nav_new_input" name="key"/>
@@ -17,6 +14,11 @@
         <input type="button" id="nav_bar_search_btn" value="搜索"/>
       </div>
   </form>
+
+ -->
+
+
+  <div class="blank20"></div>
   <div class="search_dor clearfix">
     <a href="<?php print AppUrl::navDoctors()?>" class="anyiyuan" id="cnzz_yiyuan203">找大夫咨询</a>
     <a href="<?php print AppUrl::helpAbout()?>" class="anjibing" id="cnzz_jibing204">好评医院</a>

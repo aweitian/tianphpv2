@@ -31,9 +31,8 @@ function gp(d,p)
 </script>
 
 <div class="public_width">
-<?php $doctors_header_title = "的礼物"?>
-<?php include dirname(dirname(__FILE__))."/inc/header.doc.php"?>
-  
+<?php $disease_header_title = $m->data["name"]."的礼物";?>
+<?php include dirname(dirname(__FILE__))."/inc/header.tc.php"?>	
   <!--head end-->
   
   <div class="hui_bg">

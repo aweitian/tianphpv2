@@ -20,6 +20,7 @@ class diseaseControllerNotFound{
 	private $allowAct;
 	public function __construct(pmcaiMsg $msg){
 		appCtrl::$msg = $msg;
+		AppModule::$moduleName = "disease";
 		$this->model = new diseaseControllerNotFoundModel();
 		$this->view = new diseaseControllerNotFoundView();
 		if (method_exists($this,$msg->getAction())){
@@ -29,10 +30,13 @@ class diseaseControllerNotFound{
 		}
 	}
 	private function welcome(pmcaiMsg $msg){
+		$pagestartime=microtime();
+// 		sleep(3.005);
 		$row = diseaseUIApi::getInstance()->getRowByDiskey($msg->getControl());
 // 		var_dump($row);exit;
 		$this->model->data = $row;
 		$this->view->disease($this->model);
+		
 	}
 	private function knowledge(pmcaiMsg $msg){
 		$row = diseaseUIApi::getInstance()->getRowByDiskey($msg->getControl());

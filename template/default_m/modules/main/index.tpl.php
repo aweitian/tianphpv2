@@ -40,7 +40,7 @@ foreach ($m->getDisease() as $item){
   <div class="blank30"></div>
   <div class="index_sel mzy30">
   	
-  	<?php include dirname(dirname(dirname(__FILE__)))."/search.form.php"?>
+  	<!--<?php include dirname(dirname(dirname(__FILE__)))."/search.form.php"?>-->
     
     <div class="blank20"></div>
     <div class="title_tips"> <span class="line"></span>
@@ -175,7 +175,7 @@ foreach ($m->getDisease() as $item){
     <ul class="hotzx_box1"> 
         <?php $all=$m->getAllQuestions(0,5);?>
         <?php foreach ($all["data"] as $allitem):?>
-        <li><a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><?php print utility::utf8Substr($allitem["title"], 0, 12) ?><span> <?php print utility::utf8Substr($allitem["date"], 0, 10)?></span></a></li>
+        <li><a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><?php print AppFilter::filterOut(utility::utf8Substr($allitem["title"], 0, 12)); ?><span> <?php print utility::utf8Substr($allitem["date"], 0, 10)?></span></a></li>
         <?php endforeach;?>
     </ul>
   </div>

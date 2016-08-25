@@ -12,7 +12,6 @@ $userinfo = AppUser::getInstance()->auth->getInfo();
 <div class="public_width">
 <?php $user_header_title = "修改密码";?>
 <?php include dirname(__FILE__)."/common/header.tpl.php"?>
-
 <!--head end-->
 <div class="mzy30">
 	<div class="blank30"></div>

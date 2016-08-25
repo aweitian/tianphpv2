@@ -24,13 +24,14 @@ $d = diseaseExtInfoes::getExtData();
 
 <!--banner end-->
 <div class="blank30"></div>
+ <!--
 <div class="index_sel2 mzy30">
     <h4 class="fz28">请输入您想了解的疾病</h4>
     <div class="blank25"></div>
     
-    <?php include dirname(dirname(dirname(__FILE__)))."/search.form.php"?>
+   <?php include dirname(dirname(dirname(__FILE__)))."/search.form.php"?>
 
-</div>
+</div>-->
 <div class="blank30"></div>
 <div class="mzy30">
 	<h3 class="blue fz30">常见疾病</h3>

@@ -25,7 +25,11 @@
 		</cnt>
 	</all>
 
-
+	<verify>
+		UPDATE `data_ask` SET 
+			`v` = NOT(`v`)
+		 WHERE `sid`=:sid
+	</verify>
 
 
 	<all_doctor>
