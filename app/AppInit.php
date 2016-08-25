@@ -12,6 +12,7 @@ if (DEBUG_FLAG) {
 	set_error_handler ( array("App","myErrorHandler") );
 	define("APP_MOBILE_MODE",utility::isMobile ());
 	define("TARGET_BLANK_OPEN",false);
+	require_once FILE_SYSTEM_ENTRY . '/app/runEnvir/default.php';
 } else {
 	error_reporting ( 0 );
 	ini_set ( "display_errors", "Off" );
@@ -22,19 +23,13 @@ if (DEBUG_FLAG) {
 	}else{
 		exit('0x1596321');
 	}
+	require_once FILE_SYSTEM_ENTRY . '/app/runEnvir/online.php';
 }
 if (APP_MOBILE_MODE) {
 	define("THEME", "default_m");
 } else {
 	define("THEME", "default");
 }
-
-
-
-
-
-
-
 
 // var_dump(THEME);exit;
 require_once FILE_SYSTEM_ENTRY . '/app/AppConst.php';
@@ -53,13 +48,6 @@ require_once FILE_SYSTEM_ENTRY . '/app/AppUser.php';
 require_once FILE_SYSTEM_ENTRY . '/app/AppFilter.php';
 require_once FILE_SYSTEM_ENTRY . '/app/AppSms.php';
 require_once FILE_SYSTEM_ENTRY . '/app/hookControllerNotFound.php';
-
-if (false !== strpos ( FILE_SYSTEM_ENTRY, "openshift" )) {
-	require_once FILE_SYSTEM_ENTRY . '/app/runEnvir/openshift.php';
-} else {
-	require_once FILE_SYSTEM_ENTRY . '/app/runEnvir/default.php';
-}
-
 
 tian::addExceptionDir ( FILE_SYSTEM_ENTRY . "/app/exceptions" );
 
