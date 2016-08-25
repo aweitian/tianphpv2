@@ -107,9 +107,9 @@ class App {
 	 */
 	public static function useTarget() {
 		if(TARGET_BLANK_OPEN){
-			return 'target="_blank"';
+			return ' target="_blank"';
 		}
-		return '';
+		return ' target="_blank"';
 	}
 	public static function myErrorHandler($errno, $errstr, $errfile, $errline) {
 		if (! (error_reporting () & $errno)) {
