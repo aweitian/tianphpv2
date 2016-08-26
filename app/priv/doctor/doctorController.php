@@ -251,6 +251,21 @@ class doctorController extends privController{
 	}
 	
 	
+	public function diseaseAction(pmcaiMsg $msg){
+		
+		$length = 10;//每页显示多少行
+		if(isset($msg["?page"])){
+			$page = intval($msg["?page"]);
+		}else{
+			$page = 1;
+		}
+		if($page < 1){
+			$page = 1;
+		}
+		$offset = ($page - 1) * $length;
+		$this->view->setPmcaiMsg($msg);
+		$this->view->showExtList($this->priv->getUserInfo(),$this->model->ext_getAll($offset, $length),$page,$length,$msg["?q"]);
+	}
 	public function extAction(pmcaiMsg $msg){
 		
 		$length = 10;//每页显示多少行

@@ -79,6 +79,7 @@ function css_active_control($links){
             		"/doctor"=>"医生列表",
             		"/doctor/lv"=>"职位管理",
             		"/doctor/ext"=>"医生信息",
+            		"/doctor/disease"=>"医生与疾病",
             		"/doctor/relarticle"=>"关联文章",
             		"/doctor/rellv"=>"设置职位",
             		"/doctor/revrellv"=>"修改职位",

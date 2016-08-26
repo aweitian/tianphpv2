@@ -42,4 +42,8 @@ class diseaseModel extends AppModel {
 		return diseaseUIApi::getInstance()->getArticleTag7ByDid($did);
 	}
 	
+	public function getTopStar($length){
+		return doctorUIApi::getInstance()->getTopStar($length);
+	}
+	
 }

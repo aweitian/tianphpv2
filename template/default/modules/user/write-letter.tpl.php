@@ -6,7 +6,7 @@
  * 依赖:
  */
 
-if ($_SERVER ["HTTP_REFERER"]) {
+if (isset($_SERVER ["HTTP_REFERER"])) {
 	$url = new url ( $_SERVER ["HTTP_REFERER"] );
 	if ($url->path != HTTP_ENTRY . "/user/writeletter") {
 		$redirectUrl = "?return=". urlencode($_SERVER ["HTTP_REFERER"]) ;

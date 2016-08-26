@@ -154,7 +154,7 @@ $url = new url($req->requestUri());
 	<?php $docount= $m->getAnswersDocReplyCnt($ask["sid"]) ?>
 	<dl class="mzy30">
     	<div class="blank20"></div>
-        <dd class="clr color9"><a href=""><span class="fl"><?php print $m->utf8cut($ask["title"],0,16)?></span><span class="fr yellow"><img src="<?php print AppUrl::getMediaPath()?>/images/yswd_img3.png" /><?php print($docount) ?></span></a></dd>
+        <dd class="clr color9"><a href="<?php print AppUrl::askByAsdDocidAsd($docid, $ask["sid"]);?>"><span class="fl"><?php print $m->utf8cut($ask["title"],0,16)?></span><span class="fr yellow"><img src="<?php print AppUrl::getMediaPath()?>/images/yswd_img3.png" /><?php print($docount) ?></span></a></dd>
         <dd class="color3"><span class="color9">描述：</span><?php print $m->utf8cut($ask["desc"],0,64)?>...</dd>
         <div class="blank15"></div>
     </dl>

@@ -4,7 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>网上挂号_上海九龙男子医院</title>
 <link href="<?php print AppUrl::getMediaPath()?>/css/style.css" rel="stylesheet" />
+<script src="<?php print AppUrl::getMediaPath()?>/js/jquery.js"></script>
 
+<script src="<?php print AppUrl::getMediaPath()?>/js/calendar/WdatePicker.js"></script>
 </head>
 
 
@@ -18,7 +20,7 @@
       <div class="ghbt">预约挂号平台</div>
       <div class="online_form">
       <script src="<?php print AppUrl::getMediaPath()?>/js/guahao.js"></script>
-       <form name="form1" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
+       <form name="form1" onSubmit="return guahao()" action="http://swt.gssmart.com/guahao/sockt.php" method="post"  >
        
           <p class="fl">
             <label for="name">姓&#12288;&#12288;名：</label>
@@ -40,22 +42,32 @@
             
           </p>
           <p class="fl">
-            <label for="keshi">预约科室：</label>
-            <select class="validation" title="请选择预约科室" name="sectionid" id="keshi">
-              <option value="">--请选择科室--</option>
-               <option value="">--请选择科室--</option>
+            <label for="keshi">预约医院：</label>
+            <select class="validation"  name="sectionid" id="keshi">
+              <option value="">上海九龙男子医院</option>
+              
             </select>
           </p>
           <p class="fr">
             <label for="expert">预约医师：</label>
-            <select class="validation" title="请选择预约专家"  name="d" id="zj">
-              <option selected="selected" value="">--请选择医师--</option>
+            <select class="validation"    name="d" id="zj">
+              <option  value="0">请选择医师</option>
+               <?php foreach($model->getAllDoc() as $doc):?>
+						<option value="<?php print $doc["sid"]?>"><?php print $doc["name"]?></option>
+						<?php endforeach;?>
             </select>
           </p>
           <p class="fl">
             <label for="diseases">选择病种：</label>
-            <select class="validation" title="请选择预约病种" id="diseases" name="orderDisease">
-              <option value="">--请选择病种--</option>
+            <select class="validation" title="请选择预约病种" id="diseases" name="j">
+              <option value="0">请选择病种</option>
+                <?php foreach($model->getLv0KeyInfoes() as $xbz):?>   	
+              
+                  
+                    
+                       	<option value="<?php print $xbz["sid"] ?>"><?php print $xbz["data"] ?></option>     
+            <?php endforeach;?>
+					
             </select>
           </p>
           <p class="fr">
@@ -75,11 +87,20 @@
           </div>
         </form>
       </div>
+    
       <div class="ghbt">其它方式挂号</div>
       <div class="ghfs">
         <img src="<?php print AppUrl::getMediaPath()?>/images/ghp1.png" width="28" height="27" class="ghfl" />
         <h5>官方预约电话：<span>021-52733999</span></h5>
-        <p><input type="text" class="ghbd"  placeholder="请输入您的电话号码" /><input name="" type="button" class="ghan" /></p>
+        <form name="myform" action="http://swt.gssmart.com/send/index.php" method="POST">
+	  <input type="hidden" name="content" value="上海九龙男子医院提醒：男科疾病要提早治疗，具体诊疗请在医生指导下进行！咨询电话：02152729299-退订回T【上海九龙男子医院】">
+	
+	
+	
+        
+        
+        <p><input name="tel" type="text" class="ghbd"  placeholder="请输入您的电话号码" /><input name="" value="" type="submit" class="ghan" /></p>
+        </form>
       </div>
       <div class="ghfs ml20">
         <img src="<?php print AppUrl::getMediaPath()?>/images/ghp2.png" width="28" height="27" class="ghfl" />
@@ -96,13 +117,12 @@
       <h4 class="fz24 blue">温馨提示：</h4>
       <p>1、请准确填写您的联系方式，以便我们与您联系。<br />
         <br />
-        2、由于每天医师门诊人数较多，为了给您提供更优质的服务，建议您提前两天预约。<br />
+        2、由于每天医师门诊人数较多，为了给您提供更优质的服务，建议您提前预约。<br />
         <br />
-        3、如有打印机可打印预约单，也可记下预约编号。<br />
+       
+        3、到诊时，在导医台核对您的预约编号、姓名及联系方式，然后直接找医师就诊。<br />
         <br />
-        4、到诊时，在导医台核对您的预约编号、姓名及联系方式，然后直接找医师就诊，不必排队。<br />
-        <br />
-        5、如因某些原因使您无法按时到诊，请及时取消或通知我院变更预约信息。</p>
+        4、如因某些原因使您无法按时到诊，请及时取消或通知我院变更预约信息。</p>
     </div>
   </div>
 </div>

@@ -35,4 +35,10 @@ class subscribeModel extends AppModel {
 			return array();
 		}
 	}
+	public function getAllDoc(){
+		return doctorUIApi::getInstance()->getAll();
+	}
+	public function getLv0KeyInfoes(){
+		return diseaseUIApi::getInstance()->getLv0KeyInfoes();
+	}
 }
