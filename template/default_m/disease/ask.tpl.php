@@ -90,13 +90,5 @@ $a=Appctrl::$msg->getControl()
 
 <?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 </div>
-
-<div class="box_a">
-    <p class="box_center2">
-        <a href="tel:021-52733999" class="btn_a1" >预约通话</a>
-        <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="btn_a2">免费咨询</a>
-    </p> 
-</div>
-
-
+<?php include dirname(dirname(__FILE__))."/inc/bottom_fd_sub.tpl.php";?>
 </div>

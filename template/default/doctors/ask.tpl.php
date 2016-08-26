@@ -172,7 +172,7 @@ $url = new url($req->requestUri());
                             </table>
                         </div>
                         <p class="tc color9" style="margin:10px 0; line-height:20px;">注：所有门诊时间仅供参考，最终以医院当日公布为准。</p>
-                        <p class="color6"><b class="color3">预约提示：</b>以下病情患者，可在官方网站预约我的预约加号：阴茎延长，精索静脉曲张、阴茎弯曲，<a<?php print App::useTarget()?> href="" class="blue">免费申请→</a></p>
+                        <p class="color6"><b class="color3">预约提示：</b>以下病情患者，可在官方网站预约我的预约加号：阴茎延长，精索静脉曲张、阴茎弯曲，<a<?php print App::useTarget()?> href="<?php print AppUrl::navSubscribe()?>"  class="blue">免费申请→</a></p>
                     </div>
                   </div>
                   
@@ -196,7 +196,7 @@ $url = new url($req->requestUri());
                           <dd class="fz16 dgray clr">
                             <img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img7.png" class="fl" /><p class="fl"><?php if (!empty($ans["content"]))  :?>
                              
-                             <a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>">
+                             <a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>">
                             <?php 
                              print empty($ans) ? "" : utility::utf8Substr($ans["content"], 0, 25)?>...
                             </a>

@@ -81,7 +81,7 @@ $url = new url ( $req->requestUri () );
 					</div>
 					<div class="blank30"></div>
 					<div class="ys_box1_sm1 clr">
-						<a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="blue_bg fl">免费在线咨询</a>
+						<a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="blue_bg fl">在线咨询</a>
 						<a href="tel:021-52733999" class="new_green_bg fr">电话咨询</a>
 					</div>
 					<div class="blank30"></div>
@@ -286,9 +286,9 @@ $url = new url ( $req->requestUri () );
 <div style="height:1rem;"></div>
 	<div class="box_c">
 		<p class="box_center2">
-			<a href="<?php print AppUrl::navSubscribe()?>" class="btn_b1">预约挂号</a> <a
-				href="<?php print AppUrl::userWriteLetter()?>" class="btn_b2">写感谢信</a> <a
-				href="<?php print AppUrl::docPresentHomeByDocid($m->data["id"])?>" class="btn_b3">送暖心</a>
+			<a href="<?php print AppUrl::navSubscribe()?>" class="btn_c1">预约挂号</a> <a
+				href="<?php print AppUrl::userWriteLetter()?>" class="btn_c2">写感谢信</a> <a
+				href="<?php print AppUrl::docPresentHomeByDocid($m->data["id"])?>" class="btn_c3">送暖心</a>
 		</p>
 	</div>
 </div>

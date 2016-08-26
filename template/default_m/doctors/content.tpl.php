@@ -1,6 +1,6 @@
 <?php
 //aid,kw,desc,thumb,title,content,date
-$aid = intval($_REQUEST["id"]);
+$aid = intval($m->articleId);
 
 $data = $m->row($aid);
 
@@ -49,7 +49,7 @@ defTplData::getInstance()->description = $data["desc"];
         </p>
     	
         <dl class="fl">
-        	<dt class="fz24 jbkp_zjzx clr"><b class="color3 fz28"><?php print $m->data["name"]?></b><span class="page_gx"><img  src="<?php print AppUrl::getMediaPath()?>/images/page_img1.png" />感谢信<font class="red"><?php print $m->getLetterCnt()?></font>封</span></dt>
+        	<dt class="fz24 jbkp_zjzx clr"><b class="color3 fz28"><?php print $m->data["name"]?></b><span class="page_gx"><img  src="<?php print AppUrl::getMediaPath()?>/images/page_img1.png" />感谢信<font class="red"><?php print $m->getDataCntByDod($m->data["sid"])?></font>封</span></dt>
             <dd><?php print $m->data["lv"]?><span class="page_gx"><img  src="<?php print AppUrl::getMediaPath()?>/images/page_img2.png" />礼物<font class="red"><?php print $m->getPresentDataByDodCnt($m->data["sid"]);?></font>个</span></dd>
             <dd>擅长：<?php print utility::utf8Substr($m->data["spec"], 0, 15)?>...</dd>
             <div class="blank10"></div>
@@ -170,14 +170,7 @@ defTplData::getInstance()->description = $data["desc"];
 
 <?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 </div>
-<div style="height:1rem;"></div>
-<div class="box_e">
-    <p class="box_center2">               
-        <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="btn_e3">在线咨询<img src="<?php print AppUrl::getMediaPath()?>/images/hot.png" /></a>
-        <a href="tel:021-52733999" class="btn_e2">电话咨询</a>
-        <a href="<?php print AppUrl::navSubscribe()?>" class="btn_e1" >预约挂号</a>
-    </p> 
-</div>
+<?php include dirname(dirname(__FILE__))."/inc/bottom_fd_ys.tpl.php";?>
 
 </div>
 

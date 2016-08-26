@@ -204,7 +204,7 @@ class putUIApi {
 		$opsid = $oplog->add ( $op_type, identityToken::getInstance ()->getIp () );
 		
 		
-		if (userValidator::isValidPhone($phone)) {
+		if (!userValidator::isValidPhone($phone)) {
 			return new rirResult ( 0xb, "请输入正确的手机号码" );
 		}
 		

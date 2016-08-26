@@ -71,5 +71,5 @@ $a=$m->allThumbnail($pageSize,($page-1)*$pageSize);
        		<?php endif;?> </div>
 <?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom.tpl.php";?>
 </div>
-
+<?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom_fd_sub.tpl.php";?>
 </div>

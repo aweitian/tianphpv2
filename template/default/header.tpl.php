@@ -16,6 +16,7 @@
       <li><a<?php print App::useTarget()?> href="<?php print AppUrl::navDisease()?>">按疾病找</a></li>
       <li><a<?php print App::useTarget()?> href="<?php print AppUrl::navSymptom()?>">按症状找</a></li>
       <li><a<?php print App::useTarget()?> href="<?php print AppUrl::navDoctors()?>">找大夫咨询</a></li>
+      <li><a<?php print App::useTarget()?> href="<?php print AppUrl::navHospital()?>">推荐医院</a></li>
       <li><a<?php print App::useTarget()?> href="<?php print AppUrl::navAsk()?>">网络咨询</a></li>
       <li><a<?php print App::useTarget()?> href="<?php print AppUrl::navArticle()?>">疾病专题</a></li>
       <li><a<?php print App::useTarget()?> href="<?php print AppUrl::navSubscribe()?>">预约挂号</a></li>

@@ -78,8 +78,7 @@ $url = new url($req->requestUri());
 <?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom.tpl.php";?>
 </div>
 
-
+<?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom_fd_sub.tpl.php";?>
   
 
 </div>
-  

@@ -16,9 +16,9 @@ if (DEBUG_FLAG) {
 } else {
 	error_reporting ( 0 );
 	ini_set ( "display_errors", "Off" );
-	if($_SERVER["HTTP_HOST"] = "hospital.cs999.cn") {
+	if($_SERVER["HTTP_HOST"] == "hospital.cs999.cn") {
 		define("APP_MOBILE_MODE",false);
-	}else if($_SERVER["HTTP_HOST"] = "3g.hospital.cs999.cn"){
+	}else if($_SERVER["HTTP_HOST"] == "3g.hospital.cs999.cn"){
 		define("APP_MOBILE_MODE",true);
 	}else{
 		exit('0x1596321');
@@ -30,6 +30,13 @@ if (APP_MOBILE_MODE) {
 } else {
 	define("THEME", "default");
 }
+
+if ($_SERVER["HTTP_HOST"] == "hospital.cs999.cn" && utility::isMobile()) {
+	header("location:http://3g.hospital.cs999.cn");
+	exit;
+}
+
+
 
 // var_dump(THEME);exit;
 require_once FILE_SYSTEM_ENTRY . '/app/AppConst.php';

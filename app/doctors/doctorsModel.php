@@ -2,6 +2,7 @@
 require_once FILE_SYSTEM_ENTRY . "/app/data/default/doctor.uiapi.php";
 class doctorsModelControllerNotFound extends AppModel {
 	public $data;
+	public $articleId = 0;
 	public function __construct() {
 	}
 	

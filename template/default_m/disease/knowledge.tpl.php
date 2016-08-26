@@ -201,6 +201,7 @@ $ctr = appCtrl::$msg->getAction();
     
     
 </div>
+<?php include dirname(dirname(__FILE__))."/inc/bottom_fd_sub.tpl.php";?>
 </div>
 
 

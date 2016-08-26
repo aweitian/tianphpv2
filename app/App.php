@@ -109,7 +109,7 @@ class App {
 		if(TARGET_BLANK_OPEN){
 			return ' target="_blank"';
 		}
-		return ' target="_blank"';
+		return '';
 	}
 	public static function myErrorHandler($errno, $errstr, $errfile, $errline) {
 		if (! (error_reporting () & $errno)) {

@@ -8,7 +8,7 @@
 
 ?>
 
-	<div class="head_tc">
+	<div class="head_tc blue_bg">
         <a class="goback" title="返回上页" onclick="history.go(-1)"><span>返回</span></a>
         <div class="head_tit" ><?php print $disease_header_title;?></div>
     <a href="javascript:;" class="oc_list_new"><span class="red_out"><img src="<?php print AppUrl::getMediaPath()?>/images/nav_xl.png" /><i id="redpoint" class=""></i></span></a>
@@ -32,7 +32,7 @@
   
   <div class="search_dor clearfix">
     <a href="<?php print AppUrl::navDoctors()?>" class="anyiyuan" id="cnzz_yiyuan203">找大夫咨询</a>
-    <a href="<?php print AppUrl::helpAbout()?>" class="anjibing" id="cnzz_jibing204">好评医院</a>
+    <a href="<?php print AppUrl::navHospital()?>" class="anjibing" id="cnzz_jibing204">好评医院</a>
   </div>
   <div class="three_btn clearfix">
     <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" id="cnzz_zixun205"><span></span></a>

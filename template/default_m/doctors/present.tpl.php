@@ -88,7 +88,9 @@ function gp(d,p)
       </div>
     </div>
     <div class="blank30"></div>
+    <?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
   </div>
+
+<?php include dirname(dirname(__FILE__))."/inc/bottom_fd_sub.tpl.php";?>
 </div>
 
-<?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>

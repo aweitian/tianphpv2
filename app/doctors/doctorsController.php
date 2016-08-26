@@ -50,10 +50,13 @@ class doctorsControllerNotFound{
 	protected function ask(pmcaiMsg $msg){
 		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
 		$this->model->data = $row;
-		if (isset($msg["?id"])){
-			$this->view->askcontent($this->model,intval($msg["?id"]));
-		}else{
+		$info = $msg->getPmcaiUrl()->getInfo();
+		if ($info == "") {
 			$this->view->ask($this->model);
+		} else if (preg_match("/^(\d+)\.html$/",$info,$match)) {
+			$this->view->askcontent($this->model,intval($match[1]));
+		}else{
+			$this->_404();
 		}
 	}
 	protected function welcome(pmcaiMsg $msg){
@@ -69,10 +72,17 @@ class doctorsControllerNotFound{
 	protected function article(pmcaiMsg $msg){
 		$row = doctorUIApi::getInstance()->getInfoById($msg->getControl());
 		$this->model->data = $row;
-		if(isset($msg["?id"])){
+		
+		$this->model->data = $row;
+		$info = $msg->getPmcaiUrl()->getInfo();
+		if ($info == "") {
+			$this->view->article($this->model);
+		} else if (preg_match("/^(\d+)\.html$/",$info,$match)) {
+			//$this->view->askcontent($this->model,intval($match[1]));
+			$this->model->articleId = $match[1];
 			$this->view->content($this->model);
 		}else{
-			$this->view->article($this->model);
+			$this->_404();
 		}
 	}
 	protected function appraise(pmcaiMsg $msg){

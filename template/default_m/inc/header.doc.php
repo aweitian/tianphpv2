@@ -21,7 +21,7 @@
   <div class="blank20"></div>
   <div class="search_dor clearfix">
     <a href="<?php print AppUrl::navDoctors()?>" class="anyiyuan" id="cnzz_yiyuan203">找大夫咨询</a>
-    <a href="<?php print AppUrl::helpAbout()?>" class="anjibing" id="cnzz_jibing204">好评医院</a>
+    <a href="<?php print AppUrl::navHospital()?>" class="anjibing" id="cnzz_jibing204">好评医院</a>
   </div>
   <div class="three_btn clearfix">
     <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" id="cnzz_zixun205"><span></span></a>

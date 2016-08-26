@@ -236,7 +236,7 @@ em {
 	text-align: center;
 	height: 14px;
 	line-height: 14px;
-	width: 124px;
+	width: 110px;
 	border-right: 1px solid #81aef5;
 }
 .dhnav ul li a {
@@ -2641,31 +2641,38 @@ rtpboxnrl {
 .zt_box3 ul li a:hover{ color:#377bee;}
 
 /*--------------------------zxgh���߹Һ�------------------------------------*/
-.ghhead {padding:19px 0;background:#377bee;}
-.ghhead li{float:left;font-size:16px;width:108px;height:32px;line-height:32px;border-radius:32px;border:1px solid #9bbdf7;text-align:center;margin:6px 0 0 10px;}
-.ghhead li a{color:#fff;}
-.ghbanner {background: url(../images/ghbanner.jpg) no-repeat center top;height:758px;}
-.ghbannerbox {position: relative;height: 758px;width: 1140px;margin: 0 auto;}
-.ghbannerbox .ghbox {display: block;position: absolute;right: 0;bottom: 66px;padding: 25px 30px;box-shadow: 2px 2px 2px #cdccbf;background: #fff;}
-.ghbox h2 {text-align: center;font-size: 22px;margin-bottom: 20px;color: #666d71;font-weight: normal;}
-.ghbox table td {padding-left:15px;color:#666d71;border:1px solid #d6d7d8;}
-.ghbox table td input, .ghbox table td select {color: #3a4951;}
-.ghbox table td.td2 {width:135px;}
-.ghbox table td select {width:50px;border:1px solid #d6d7d8;}
-.ghbox table input.xhline1 {border: none;border-bottom: 1px solid #d6d7d8;width:79px;outline:none;}
-.ghbox table input.xhline2 {border: none;border-bottom: 1px solid #d6d7d8;width:143px;outline:none;}
-.ghbox table textarea.xhline3 {height:74px;border:none;border-bottom:1px solid #d6d7d8;width:385px;outline:none;}
-.ghbox table.table2 td {border:1px solid #d6d7d8;border-top:none;}
-.ghbox button {text-align:center;background:#01a1df;height:35px;line-height:35px;padding:0 75px;color:#fff;border:none;font-size:18px;border-radius: 3px;margin-left:115px;cursor:pointer;}
-.ghbox .ghlc {margin-top:20px;}
-.step .sdbt {margin:57px 0 50px;}
-.step dl {float:left;margin-right:30px;}
-.step dl dt img{ width:227px; height:157px;}
-.step dl.last {margin-right:0;}
-.step dl dd {text-align:center;color:#666d71;}
-.step dl dd.dd1 {margin-top:25px;font-size:18px;}
-.step dl dd.dd1 span{ border-bottom:1px solid #377bee; padding-bottom:5px;}
-.step dl dd.dd2 {font-size:14px;margin-top:18px;}
+.ghhead {padding:17px 0;background:#377bee;}
+.ghLeft{float:left;width:658px;border-right:1px #e8e8e8 solid;padding:20px 0 0 20px;}
+.ghRight{float:right;width:234px;padding:30px 47px 0 0;}
+.location{line-height:48px;color:#999;}
+.ghRight h4{font-weight:normal;margin-bottom:15px;}
+.ghRight p{line-height:30px;color:#666;}
+.ghbt{font-size:18px;color:#f80;background:url(../images/ghbt.gif) no-repeat left center;padding-left:10px;margin-bottom:30px;}
+.online_form{width:610px;padding:0 20px 50px 0;color:#5e5e5e; border-bottom:1px dashed #ccc; margin-bottom:35px;}
+.online_form p{ width: 244px; height: 30px; line-height: 30px; margin:0 0 14px 13px; position: relative;}
+.online_form p label{ width: 70px; float: left;}
+.online_form p input,.online_form p select{ width: 170px; height:30px;background: #f4f4f4; border: none; text-indent: 10px; color: #666; float: left; line-height: 30px;}
+.online_form p input:focus,.online_form p select:focus,.form_describe textarea:focus{ box-shadow: 0 0 3px #23599b; transition: all 0.3s;}
+.online_form p input.online_sex{ width: auto; margin-left: 10px; vertical-align: middle; float: none; background: none;}
+.online_form p i{ display: block; width:16px; height: 15px; position: absolute; right: 8px; top: 7px; background: url(../images/date_icon.jpg) no-repeat center;}
+.form_describe{ width: 100%;}
+.form_describe label{ width: 70px; float: left; margin-left: 13px;}
+.form_describe textarea{ width: 522px; border: none; height: 100px; resize: none; background: #f4f4f4; float: left; text-indent: 10px; font-size: 14px; color: #666; font-family: "微软雅黑";}
+.ghbtn{ height: 30px; margin:25px 0 0 78px;}
+.ghbtn input{ width: 70px; height: 100%; display: inline-block; margin: 0 5px; border: none; color: #fefefe;}
+.ghbtn .btn_sub{ background:#f80;}
+.ghbtn .btn_res{ background:#666;}
+.ghfs{float:left;margin:0 0 40px 0;width:300px;height:100px;border:1px #dcdcdc dashed;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;position:relative;}
+.ghfs h5{line-height:38px;height:38px;text-align:center;font-size:16px;padding-top:10px;font-weight:normal;}
+.ghfs h5 span{color:#cc0000;}
+.ghfs p{padding-left:18px;}
+.ghfl{ position:absolute;top;-2px;right:0;z-index:9;}
+.ghfs .ghbd{float:left;width:155px;height:32px;line-height:32px;background:#f4f4f4;color:#ababab;padding-left:10px;}
+.ghfs .ghan{float:left;background:url(../images/ksgh.png);width:100px;height:32px;cursor:pointer;}
+.ghfs dl{padding:15px 0 0 15px;}
+.ghfs dd{float:left;width:100px;margin-left:15px;}
+.ghfs dd h5{padding-top:0;line-height:36px;height:36px;}
+.ml20{margin-left:20px;}
 .ghfoot {border-top:1px solid #e2e2e2;margin-top:60px;font-size:14px;color:#666;padding-bottom:50px;}
 .ghfoot .ghfootnav {width:565px;margin:0 auto;text-align:center;}
 .ghfoot .ghfootnav a {float:left;display:block;color:#666;padding:0 17px;border-right:1px solid #ddd;}

@@ -55,6 +55,9 @@ class AppUrl {
 	public static function navPut() {
 		return AppUrl::build ( "/put" );
 	}
+	public static function navHospital() {
+		return AppUrl::build ( "/hospital" );
+	}
 
 	
 	
@@ -199,7 +202,7 @@ class AppUrl {
 	 * @return string
 	 */
 	public static function askByAsdDocidAsd($docid, $asd) {
-		return AppUrl::build ( "/" . $docid . "/ask?id=" . $asd );
+		return AppUrl::build ( "/" . $docid . "/ask/" . $asd . ".html" );
 	}
 	/**
 	 *
@@ -213,7 +216,7 @@ class AppUrl {
 		if (empty ( $row )) {
 			return AppUrl::_404 ();
 		}
-		return AppUrl::build ( "/" . $row ["id"] . "/ask?id=" . $asd );
+		return AppUrl::askByAsdDocidAsd ( $row ["id"], $asd );
 	}
 	/**
 	 *
@@ -346,7 +349,7 @@ class AppUrl {
 	 * @param string $diskey        	
 	 */
 	public static function disKnowledgeSubByDiskey($diskey, $subid) {
-		return AppUrl::build ( "/" . $diskey . "/knowledge?s=" . $subid );
+		return AppUrl::build ( "/" . $diskey . "/knowledge/" . $subid );
 	}
 	/**
 	 *
@@ -422,7 +425,7 @@ class AppUrl {
 	 * @return string
 	 */
 	public static function articleByDocidAid($doc_id, $aid) {
-		return AppUrl::build ( "/" . $doc_id . "/article?id=" . $aid );
+		return AppUrl::build ( "/" . $doc_id . "/article/" . $aid . ".html" );
 	}
 	
 	// 基本URL生成

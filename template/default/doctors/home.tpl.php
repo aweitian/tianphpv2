@@ -62,7 +62,7 @@ $url = new url($req->requestUri());
                      </div>
                  <?php $doclettercnt=$m->getDataCntByDod($m->data["sid"]) ?>
             
-               <?php $docpresent=$m->getDataByDodCnt($m->data["sid"]) ?>
+               <?php $docpresent=$m->getPresentDataByDodCnt($m->data["sid"]) ?>
               
                      <div class="fr">
                           <h4 class="fz24 tc"><?php print $m->data["name"]?>大夫的个人网站</h4>
@@ -327,7 +327,7 @@ $url = new url($req->requestUri());
                           <dd class="fz16 dgray clr">
                             <img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img7.png" class="fl" /><p class="fl"><?php if (!empty($ans["content"]))  :?>
                              
-                             <a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($ask["dod"], $ask["sid"])?>">
+                             <a<?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocidAsd($m->data["id"], $ask["sid"])?>">
                             <?php 
                              print empty($ans) ? "" : utility::utf8Substr($ans["content"], 0, 25)?>...
                             </a>

@@ -84,4 +84,7 @@ foreach ($m->getDisease() as $item){
 
   
 <div class="blank30"></div>
+<?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom.tpl.php";?>
+<?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom_fd_sub.tpl.php";?>
 </div>
+  

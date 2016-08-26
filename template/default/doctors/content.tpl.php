@@ -1,6 +1,6 @@
 <?php
 //aid,kw,desc,thumb,title,content,date
-$data = $m->row($_REQUEST["id"]);
+$data = $m->row($m->articleId);
 
 $this->description = "";
 $this->keyword = "";
@@ -18,7 +18,7 @@ defTplData::getInstance()->description = $data["desc"];
 // 	["avatar"]=> string(7) "cxq.jpg" 
 // 	["date"]=> string(10) "2016-05-16" 
 // 	["dod"]=> string(1) "7" 
-// 	["dlv"]=> string(1) "3" 
+// 	["dlv"]=> string(1) "3" f
 // 	["start"]=> string(1) "0" 
 // 	["hot"]=> string(1) "0" 
 // 	["love"]=> string(1) "0" 

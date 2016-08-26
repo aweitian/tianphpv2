@@ -87,12 +87,6 @@ $url = new url($req->requestUri());
 
 </div>
 
-<div class="box_a">
-    <p class="box_center2">
-        <a href="<?php print AppUrl::getSwtUrl() ?>" class="btn_a1" >预约通话</a>
-        <a href="<?php print AppUrl::getSwtUrl() ?>" class="btn_a2">免费咨询</a>
-    </p> 
-</div>
 
-
+<?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom_fd_sub.tpl.php";?>
 </div>

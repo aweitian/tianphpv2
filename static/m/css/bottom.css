@@ -27,7 +27,7 @@
 
 .box_d div.fl{ margin:.05rem 0 0 .1rem;}
 .box_d div.fl a{display: inline-block;height: .5rem; color: #fff;font: .24rem/.5rem 'Microsoft YaHei';text-decoration: none;text-align: center;width:1.51rem;-webkit-border-radius:.1rem; -moz-border-radius:.1rem; border-radius:.1rem;}
-.box_d div.fl h5{ height:.35rem; line-height:.35rem; text-align:left; font-size:.28rem; margin-bottom:.15rem;}
+.box_d div.fl h5{ height:.35rem; line-height:.35rem; text-align:left; font-size:.28rem;}
 .box_d div.fl h5 span{ margin-left:.1rem;}
 
 .box_d div.fl a.btn_b1{background:#3b83ff; margin-right:.2rem;}
