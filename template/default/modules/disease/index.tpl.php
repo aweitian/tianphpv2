@@ -31,12 +31,12 @@ $alldoc = $m->getAllQuestions(0,2);
       <p class="blank10"></p>
       <?php $cnt=$m->getAllQuestionsCnt() ?>
 
-      <div class="sdwtnum blue fz13"><?php print($cnt) ?></div>
+      <div class="sdwtnum blue fz13">0000<?php print($cnt) ?></div>
       <div class="fz13 nowask">现在提问，十分钟内免费解答</div>
       <div class="blank10"></div>
       <p class="tc"><a href="<?php print AppUrl::getSwtUrl()?>" onclick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/nowask.jpg" width="260" height="40" /></a></p>
     </div>
-    <div class="quesnumr fr"><a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/frojbban.jpg" width="680" height="266" /></a></div>
+    <div class="quesnumr fr"><a href="<?php print AppUrl::getSwtUrl()?>" onclick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/frojbban.jpg" width="680" height="266" /></a></div>
   </div>
   
   <!--quesnumbox end-->

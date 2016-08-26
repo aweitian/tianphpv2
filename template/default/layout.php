@@ -28,22 +28,14 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 			<?php 
 			$date =  getdate(time());
 			$hr = $date["hours"];
-			if (($hr >= 0) && ($hr <= 4))
+			if (($hr >= 0) && ($hr <= 6))
 				print "已经夜深了，请注意休息哦！";
-			elseif (($hr >= 4) && ($hr < 7))
-				print "早上好，这么早就起来了？ ";
 			elseif (($hr >= 7) && ($hr < 12))
-				print "上午好，祝您保持心情愉快！";
-			elseif (($hr >= 12) && ($hr <= 13))
-				print "现在是午饭时间，你做什么好吃的了吗？";
-			elseif (($hr >= 13) && ($hr <= 17))
-				print "该午休了，希望您能够劳逸结合！ ";
-			elseif (($hr >= 17) && ($hr <= 18))
-				print "今晚时分，天空好美！";
-			elseif (($hr >= 18) && ($hr <= 19))
+				print "上午好";
+			elseif (($hr >= 12) && ($hr <= 18))
+				print "下午好 ";
+			else
 				print "晚上好！";
-			elseif (($hr >= 19) && ($hr <= 23))
-				print "一天又快过去了，你今天收获很多吧？";
 			?>
 			
 			
