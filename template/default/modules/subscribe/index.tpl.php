@@ -37,16 +37,18 @@
           <p class="fr">
             <label for="tel">联系电话：</label>
             <input type="text" class="validation" title="请输入联系电话" name="电话"  id="hometel">
+            
           </p>
           <p class="fl">
             <label for="keshi">预约科室：</label>
             <select class="validation" title="请选择预约科室" name="sectionid" id="keshi">
               <option value="">--请选择科室--</option>
+               <option value="">--请选择科室--</option>
             </select>
           </p>
           <p class="fr">
             <label for="expert">预约医师：</label>
-            <select class="validation" title="请选择预约专家" name="orderExpert" id="zj">
+            <select class="validation" title="请选择预约专家"  name="d" id="zj">
               <option selected="selected" value="">--请选择医师--</option>
             </select>
           </p>
@@ -58,7 +60,8 @@
           </p>
           <p class="fr">
             <label for="time">预约时间：</label>
-            <input type="text" class="validation" title="请输入预约时间" onclick="WdatePicker();" id="yudate" name="预约时间">
+            <input type="text" class="validation gray" title="请输入预约时间" onclick="WdatePicker();" id="yudate" name="预约时间">
+          
             <i class="date_icon"></i> </p>
           <div class="clr"></div>
           <div class="form_describe">
@@ -84,7 +87,7 @@
           <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/ghkf.jpg" width="135" height="68" /></dt>
           <dd>
             <h5>在线客服挂号</h5>
-            <a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/djgh.png" /></a>
+            <a href="<?php print AppUrl::getSwtUrl()?>" onclick="openZoosUrl();return false;" ><img src="<?php print AppUrl::getMediaPath()?>/images/djgh.png" /></a>
           </dd>
         </dl>
       </div>

@@ -26,12 +26,12 @@ class privView extends AppView{
 		return $body;
 	}
 	public function priv_wrap($userInfo,$content){
-		$tpl = "template/priv/body.php";
+		$tpl = FILE_SYSTEM_ENTRY."/template/priv/body.php";
 		ob_start();
 		include $tpl;
 		$body = ob_get_contents();
 		ob_end_clean();
-		return View::wrap($body,"template/priv/layout.php");
+		return View::wrap($body,FILE_SYSTEM_ENTRY."/template/priv/layout.php");
 	}
 	public function getResponse(){
 		$rep = new httpResponse();

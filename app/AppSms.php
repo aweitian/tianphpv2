@@ -5,7 +5,7 @@
  * @Desc: 
  * 依赖:
  */
-require_once FILE_SYSTEM_ENTRY . "/vendor/sms/CCPRestSmsSDK.php";
+require_once FILE_SYSTEM_ENTRY . "/web/vendor/sms/CCPRestSmsSDK.php";
 require_once FILE_SYSTEM_ENTRY . "/modules/oplog/IOp.php";
 require_once FILE_SYSTEM_ENTRY . "/modules/oplog/oplog.php";
 

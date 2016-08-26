@@ -13,7 +13,7 @@ class loginView extends privView{
 				"auth" => $auth,
 				"msg" => $msg,
 				"url" => $url,
-		)),"template/priv/layout.php")->show();
+		)),FILE_SYSTEM_ENTRY."/template/priv/layout.php")->show();
 	}
 	
 	
