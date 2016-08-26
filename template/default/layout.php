@@ -28,11 +28,11 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 			<?php 
 			$date =  getdate(time());
 			$hr = $date["hours"];
-			if (($hr >= 0) && ($hr <= 7))
+			if (($hr >= 0) && ($hr <= 5))
 				print "已经夜深了，请注意休息哦！";
-			elseif (($hr >= 7) && ($hr < 13))
+			elseif (($hr >= 7) && ($hr < 11))
 				print "上午好";
-			elseif (($hr >= 12) && ($hr <= 19))
+			elseif (($hr >= 12) && ($hr <= 17))
 				print "下午好 ";
 			else
 				print "晚上好！";
