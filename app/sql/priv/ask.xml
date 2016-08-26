@@ -24,6 +24,31 @@
 			SELECT COUNT(`data_ask`.`sid`) AS `cnt` FROM `data_ask`
 		</cnt>
 	</all>
+	<query>
+		<query>
+			SELECT 
+			`data_ask`.`sid` AS `aid`,
+			`data_ask`.`did`,
+			`data_attr_data`.`data` as `dis_name`,
+			`data_ask`.`dod`,
+			`data_doctor`.`name` as `doc_name`,
+			`data_ask`.`uid`,
+			`data_user`.`name` as `user_name`,
+			`data_ask`.`v`,
+			`data_ask`.`title`
+			FROM `data_ask`
+			LEFT JOIN `data_user` ON `data_user`.`sid` = `data_ask`.`uid`
+			LEFT JOIN `data_doctor` ON `data_doctor`.`sid` = `data_ask`.`dod`
+			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_ask`.`did`
+			WHERE `data_ask`.`title` like CONCAT('%',:q,'%')
+			ORDER BY `data_ask`.`sid` DESC
+			LIMIT :offset,:length
+		</query>
+		<cnt>
+			SELECT COUNT(`data_ask`.`sid`) AS `cnt` FROM `data_ask`
+			WHERE `data_ask`.`title` like CONCAT('%',:q,'%')
+		</cnt>
+	</query>
 
 	<verify>
 		UPDATE `data_ask` SET 

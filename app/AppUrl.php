@@ -21,6 +21,10 @@ class AppUrl {
 		return 0;
 	}
 	
+	
+	
+	
+	
 	// 全局URL
 	public static function getMediaPath() {
 		return AppUrl::build ( "/static/" . (APP_MOBILE_MODE ? "m" : "pc") );
@@ -62,6 +66,10 @@ class AppUrl {
 	
 	
 	
+
+	public static function intro() {
+		return AppUrl::build ( "/help/intro" );
+	}
 	
 	public static function process() {
 		return AppUrl::build ( "/help/process" );
@@ -69,13 +77,13 @@ class AppUrl {
 	public static function notice() {
 		return AppUrl::build ( "/help/notice" );
 	}
-	public static function statement() {
-		return AppUrl::build ( "/help/statement" );
+	public static function policy() {
+		return AppUrl::build ( "/help/policy" );
 	}
-	public static function toll() {
-		return AppUrl::build ( "/help/toll" );
+	public static function guide() {
+		return AppUrl::build ( "/help/guide" );
 	}
-
+	
 	
 	public static function environment() {
 		return AppUrl::build ( "/help/environment" );

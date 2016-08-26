@@ -1,5 +1,5 @@
  <?php include dirname(dirname(dirname(__FILE__)))."/inc/banner.php"?>
-   <div class="listpos fz13"><span class="gray">当前位置：</span><a href="/">首页</a> > <a href="<?php print  AppUrl::toll() ?>">价格与收费</a></div>
+   <div class="listpos fz13"><span class="gray">当前位置：</span><a<?php print App::useTarget()?> href="<?php print AppUrl::navHome()?>">>首页</a> > <a href="<?php print  AppUrl::guide() ?>">价格与收费</a></div>
 <?php include dirname(dirname(dirname(__FILE__)))."/modules/help/right.tpl.php"?>
   <div class="wid680 border2 fr">
       <div class="lcbox">

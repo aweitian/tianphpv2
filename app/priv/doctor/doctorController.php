@@ -56,22 +56,44 @@ class doctorController extends privController{
 		}
 	}
 	
-	
 	public function revrellvAction(pmcaiMsg $msg){
 		$data = $this->model->getCacheDocInfo();
-		
-
 		$this->view->setPmcaiMsg($msg);
-	
 		$this->view->showListForRevLv(
 				$msg->getPmcaiUrl(),
 				$this->priv->getUserInfo(),
 				$data,
 				$this->model->doctor_lv_all()
 		);
-
-		
 	}
+	
+	
+	public function addDodDidAction(pmcaiMsg $msg){
+		if($msg->isPost()){
+			if(!isset($msg["did"],$msg["dod"],$msg["weight"])){
+				$this->response->_404();
+			}
+			$retR = $this->model->update($msg["sid"],$msg["id"],$msg["name"],$msg["avatar"],$msg["date"]);
+			if($retR->isTrue()){
+				if(isset($msg["?returl"])){
+					$url = new pmcaiUrl($msg["?returl"]);
+					$url->setQuery("from", "edit");
+					$ret_url = $url->getUrl();
+				}else{
+					$ret_url = "";
+				}
+				$this->view->showOpSucc($this->priv->getUserInfo(),"更新",$ret_url);
+			}else{
+				$this->response->showError($retR->info);;
+			}
+		}else{
+			$this->model->msg = $msg;
+			$this->view->setPmcaiMsg($msg);
+			$this->view->showDiDDodForm($this->priv->getUserInfo(),$this->model);
+		}
+	}
+	
+	
 	public function con_rellvAction(pmcaiMsg $msg){
 		//di 3
 		//ds 3,4,7,8,9,10

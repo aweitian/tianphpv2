@@ -48,6 +48,13 @@ class doctorView extends privView{
 				)
 		))->show();
 	}
+	public function showDiDDodForm($userInfo,$model){
+		$this->priv_wrap($userInfo, $this->fetch(
+				"rel-dis-doc-form",array(
+						"model" => $model
+				)
+		))->show();
+	}
 	public function showList(pmcaiUrl $url,$userinfo,$data,$page,$length,$r,$q,$msg,$from){
 		$data["pageSize"] = $length;
 		$data["pageBtnLen"] = 5;

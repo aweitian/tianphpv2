@@ -59,18 +59,16 @@ if (is_null ( $q )) {
 
 
 			<div class="box-tools">
-				<!-- 
-                   <form action="<?php print HTTP_ENTRY?>/priv/ask/usrec">
+
+                   <form action="<?php print HTTP_ENTRY?>/priv/ask/">
                     <div class="input-group" style="width: 256px;">
-                    
                       <input name="q" value="<?php print $q?>" type="text" name="table_search" class="form-control input-sm pull-right" placeholder="邮箱/手机号/UID/昵称">
                       <div class="input-group-btn">
                         <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                       </div>
-                      
                     </div>
                     </form>
-                     -->
+
 			</div>
 
 
@@ -83,7 +81,6 @@ if (is_null ( $q )) {
 				href="<?php print HTTP_ENTRY?>/priv/ask/add"> <i class="fa fa-plus"></i>
 				添加提问
 			</a>
-
 
 			<table class="table table-bordered">
 				<tr>

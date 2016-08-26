@@ -21,6 +21,20 @@
 			FROM `data_article`
 	</allCnt>
 	
+	<!-- 根据大病种的ID获取文章id -->
+	<alllv0aids>
+		SELECT `data_article_dis`.`aid` FROM `data_article_dis` WHERE `data_article_dis`.`did` IN (
+			SELECT `data_attr_data`.`sid` FROM `data_attr_data` 
+			WHERE `data_attr_data`.`grp` = 1
+			AND `data_attr_data`.`pid` = :did
+			) 
+			ORDER BY `data_article_dis`.`aid` DESC
+			LIMIT :offset,:length
+	
+	</alllv0aids>
+	
+	
+	
 	<!-- 获取某病种下最新的文章 -->
 	<!-- 参数:did,offset,length -->
 	<!-- 返回字段:aid -->

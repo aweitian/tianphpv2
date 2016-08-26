@@ -205,9 +205,9 @@ foreach ($m->getDisease() as $item){
     <div class="fr wid300 fz13">
       <div class="syrbox1 clearfix">
         <dl class="dll dl1">
-          <a<?php print App::useTarget()?> href="<?php print AppUrl::process() ?>" onClick="openZoosUrl();return false;">
+          <a<?php print App::useTarget()?> href="<?php print AppUrl::intro() ?>">
           <dt></dt>
-          <dd>门诊流程</dd>
+          <dd>医院简介</dd>
           </a>
         </dl>
         <dl class="dl2">
@@ -223,13 +223,13 @@ foreach ($m->getDisease() as $item){
           </a>
         </dl>
         <dl class="dll dl4">
-          <a<?php print App::useTarget()?> href="<?php print AppUrl::navSubscribe()?>">
+          <a<?php print App::useTarget()?> href="/">
           <dt></dt>
           <dd>预约挂号</dd>
           </a>
         </dl>
         <dl class="dl5">
-          <a<?php print App::useTarget()?> href="<?php print AppUrl::statement() ?>" onClick="openZoosUrl();return false;">
+          <a<?php print App::useTarget()?> href="<?php print AppUrl::policy() ?>">
           <dt></dt>
           <dd>隐私声明</dd>
           </a>
@@ -241,21 +241,21 @@ foreach ($m->getDisease() as $item){
           </a>
         </dl>
         <dl class="dll dl7">
-          <a<?php print App::useTarget()?> href="<?php print AppUrl::navAsk()?>" onClick="openZoosUrl();return false;">
+         <a<?php print App::useTarget()?> href="<?php print AppUrl::process() ?>">
           <dt></dt>
-          <dd>疾病问答</dd>
+          <dd>门诊流程</dd>
           </a>
         </dl>
         <dl class="dl8">
-          <a<?php print App::useTarget()?> href="<?php print AppUrl::toll() ?>" onClick="openZoosUrl();return false;">
+          <a<?php print App::useTarget()?> href="<?php print AppUrl::guide() ?>">
           <dt></dt>
           <dd>价格与收费</dd>
           </a>
         </dl>
         <dl class="dl9">
-          <a<?php print App::useTarget()?> href="<?php print AppUrl::environment() ?>" onClick="openZoosUrl();return false;">
+          <a<?php print App::useTarget()?> href="/">
           <dt></dt>
-          <dd class="">就诊环境</dd>
+          <dd class="<?php print AppUrl::environment() ?>">就诊环境</dd>
           </a>
         </dl>
       </div>
@@ -309,13 +309,6 @@ foreach ($m->getDisease() as $item){
             </dl>
             <?php endforeach;?>
           </div>
-          <!-- 
-          <div class="blank10"></div>
-          <div class="fz13">共有<em class="orange">7,572</em>位患者送出<em class="orange">95,756</em>件礼物，下一个是你么? 我也要送</div>
-          
-          <div class="blank10"></div>
-          <div class="syrbox5nr_3 clearfix"><a<?php print App::useTarget()?> href="" class="fl blue">什么是“心意礼物”？</a><a<?php print App::useTarget()?> class="fr" href=""><img src="<?php print AppUrl::getMediaPath()?>/images/syrth11.jpg" width="80" height="26" /></a></div>
-         -->
         
         </div>
       </div>

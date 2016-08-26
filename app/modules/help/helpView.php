@@ -22,6 +22,16 @@ class helpView extends AppView {
 		include $this->getThemePath ( "help" )."/sendsmsproxy.tpl.php";
 	}
 	
+	public function intro($model) {
+	
+		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_NOW, array (
+				$this->getThemePath ( "help" ) . "/intro.tpl.php",
+				array (
+						"model" => $model
+				)
+		) )->setLayout ()->reponse ();
+	}
+	
 	
 	public function process($model) {
 	
@@ -43,19 +53,19 @@ class helpView extends AppView {
 		) )->setLayout ()->reponse ();
 	}
 	
-	public function statement($model) {
+	public function policy($model) {
 	
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_NOW, array (
-				$this->getThemePath ( "help" ) . "/statement.tpl.php",
+				$this->getThemePath ( "help" ) . "/policy.tpl.php",
 				array (
 						"model" => $model
 				)
 		) )->setLayout ()->reponse ();
 	}
-	public function toll($model) {
+	public function guide($model) {
 	
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_NOW, array (
-				$this->getThemePath ( "help" ) . "/toll.tpl.php",
+				$this->getThemePath ( "help" ) . "/guide.tpl.php",
 				array (
 						"model" => $model
 				)

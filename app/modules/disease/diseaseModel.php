@@ -46,4 +46,32 @@ class diseaseModel extends AppModel {
 		return doctorUIApi::getInstance()->getTopStar($length);
 	}
 	
+	
+	public function allDataByLv0did($lv0did,$length,$offset=0) {
+		return articleUIApi::getInstance()->allDataByLv0did($lv0did,$length,$offset);
+	}
+	public function rowNoContent($aid) {
+		$ret = articleUIApi::getInstance()->rowNoContent($aid);
+		return $ret;
+	}
+	
+		public function getAllQuestions($off,$len){
+		return askUIApi::getInstance()->getAllQuestions($off,$len);
+	}
+	
+	
+	public function getInfoByDod($dod){
+		return doctorUIApi::getInstance()->getInfoByDod($dod);
+	}
+	
+	public function getAnswerByAskid($askid) {
+		return askUIApi::getInstance ()->getAnswerByAskid ( $askid );
+	}
+	public function getAllQuestionsCnt() {
+		return askUIApi::getInstance ()->getAllQuestionsCnt (  );
+	}
+	
+	
+	
+	
 }

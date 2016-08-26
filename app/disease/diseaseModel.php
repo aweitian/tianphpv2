@@ -208,4 +208,8 @@ class diseaseControllerNotFoundModel extends AppModel {
 	public function getAllCntdid($did) {
 		return articleUIApi::getInstance()->getAllCnt($did);
 	}
+
+	
+	
+	
 }

@@ -39,6 +39,14 @@ class askController extends privController{
 			$this->model->getAllDis()
 		);
 	}
+	
+	
+
+	
+	
+	
+	
+	
 	public function verAction(pmcaiMsg $msg){
 		$ret_url = $_SERVER["HTTP_REFERER"];
 		if(!isset($msg["?sid"])){
@@ -57,6 +65,7 @@ class askController extends privController{
 		
 	}
 	public function showAll($msg) {
+		
 		$length = 10;
 		if(isset($msg["?page"])){
 			$page = intval($msg["?page"]);
@@ -74,8 +83,13 @@ class askController extends privController{
 		$offset = ($page - 1) * $length;
 		
 		$this->view->setPmcaiMsg($msg);
+		if(isset($msg["?q"])) {
+			setcookie("ask_page",1);
+			$data = $this->model->getQueryAll($msg["?q"], $offset, $length);
+		}else{
+			$data = $this->model->getAll($offset, $length);
+		}
 		
-		$data = $this->model->getAll($offset, $length);
 
 		$this->view->setPmcaiMsg($msg);
 		$this->view->showList(

@@ -31,7 +31,7 @@
         	<?php if($model->getVcFlag()):?>
         		<span class="fl">
          		<input name="code" class="logininp gray border2" placeholder='验证码'/>
-         		<img src="<?php print HTTP_ENTRY?>/captcha" width="86" height="32" id="captcha"/>
+         		<img src="<?php print AppUrl::Captcha()?>" width="86" height="32" id="captcha"/>
           		</span>
           	<?php endif;?>
           </div>

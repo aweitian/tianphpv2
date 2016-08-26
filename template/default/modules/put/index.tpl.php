@@ -32,7 +32,7 @@ $this->keyword = "";
 
 // exit;
 ?>
-  <div class="listpos fz13"><span class="gray">当前位置：</span><a<?php print App::useTarget()?> href="/">首页 </a>><a href="">我要提问</a> </div>
+  <div class="listpos fz13"><span class="gray">当前位置：</span><a <?php print App::useTarget()?> href="<?php print AppUrl::navHome()?>" class="blue">首页 </a>><a href="<?php print AppUrl::navPut() ?>">我要提问</a> </div>
   <div class="clearfix">
     <div class="wid680 fl border2">
       <div class="quetwbox">

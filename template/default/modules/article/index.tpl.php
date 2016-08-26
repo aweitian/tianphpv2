@@ -45,7 +45,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
   <div class="blank20"></div>
   <?php include dirname(dirname(dirname(__FILE__)))."/inc/banner.php"?>
   <div class="blank15"></div>
-  <div class="con_tit fz13">当前位置：<a<?php print App::useTarget()?> href="/">首页</a> > <a<?php print App::useTarget()?> href="">专题列表</a></div>
+  <div class="con_tit fz13">当前位置：<a<?php print App::useTarget()?> href="<?php print AppUrl::navHome()?>">首页</a> > <a<?php print App::useTarget()?> href="<?php print AppUrl::navArticle() ?>" class="blue">专题列表</a></div>
   
   <div class="blank15"></div>
   <div class="sybox clearfix">

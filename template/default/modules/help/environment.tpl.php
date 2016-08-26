@@ -1,5 +1,5 @@
  <?php include dirname(dirname(dirname(__FILE__)))."/inc/banner.php"?>
-   <div class="listpos fz13"><span class="gray">当前位置：</span><a href="/">首页</a> > <a href="<?php print AppUrl::environment() ?>">医院环境</a></div>
+   <div class="listpos fz13"><span class="gray">当前位置：</span><a <?php print App::useTarget()?> href="<?php print AppUrl::navHome() ?>">首页</a> > <a href="<?php print AppUrl::environment() ?>">医院环境</a></div>
 <?php include dirname(dirname(dirname(__FILE__)))."/modules/help/right.tpl.php"?>
  <div class="wid680 border2 fr">
       <div class="lcbox">
@@ -55,18 +55,7 @@ $(function(){
 		</div>
 	</div>
 </div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		<p class="js clearfix"><img class="fr" src="<?php print AppUrl::getMediaPath()?>/environment/yyhjjs1.jpg"><span>患者至上：</span>将患者利益放在首位，充分尊重患者的人格与尊严、
 		  尊重患者的个人隐私权与知情同意权。充分体现对患者的尊重、理解和关怀。</p>
 		<p class="js clearfix"><img class="fr" src="<?php print AppUrl::getMediaPath()?>/environment/yyhjjs2.jpg"><span>绿色医疗：</span>为患者就诊提供方便，实行“无假日门诊”，建立以病人为中心的科学布局和便捷就医的合理流程，实现导医带诊服务的绿色通道， 全力营造舒适、温馨的绿色医疗花园， 建立诚 信、理解、和谐的医疗环境。</p>

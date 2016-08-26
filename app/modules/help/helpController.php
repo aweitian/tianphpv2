@@ -33,6 +33,10 @@ class helpController extends appCtrl{
 	public function sendsmsproxyAction(){
 		$this->view->sendsmsproxy($this->model);
 	}
+	//医院简介
+	public function introAction(){
+		$this->view->intro($this->model);
+	}
 	//流程
 	public function processAction(){
 		$this->view->process($this->model);
@@ -42,12 +46,12 @@ class helpController extends appCtrl{
 		$this->view->notice($this->model);
 	}
 	//声明
-	public function statementAction(){
-		$this->view->statement($this->model);
+	public function policyAction(){
+		$this->view->policy($this->model);
 	}
 	//收费
-	public function tollAction(){
-		$this->view->toll($this->model);
+	public function guideAction(){
+		$this->view->guide($this->model);
 	}
 	//收费
 	public function environmentAction(){

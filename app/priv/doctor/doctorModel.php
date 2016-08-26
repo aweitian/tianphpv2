@@ -8,8 +8,10 @@ require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_ext/doctor_ext.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_lv/doctor_lv.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor/doctor.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/article/article.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_disease/doctor_disease.api.php";
 
 class doctorModel extends privModel{
+	public $msg;
 	public function __construct(){
 		parent::__construct();
 	}
@@ -32,6 +34,41 @@ class doctorModel extends privModel{
 	public function updateLv($dod,$dlv){
 		return $this->connectLv($dod, $dlv);
 	}
+	
+	public function relDisAdd($dod, $did, $weight){
+		$api = new doctorDiseaseApi();
+		return $api->add($dod, $did, $weight);
+	}
+	public function relDisRm($dod, $did){
+		$api = new doctorDiseaseApi();
+		return $api->remove($dod, $did);
+	}
+	public function relDisUpdate($dod, $did, $weight){
+		$api = new doctorDiseaseApi();
+		return $api->update($dod, $did, $weight);
+	}
+	public function relDisAll(){
+		$api = new doctorDiseaseApi();
+		return $api->getAll();
+	}
+	public function relDisAllDod($dod){
+		$api = new doctorDiseaseApi();
+		return $api->getAllByDod($dod);
+	}
+	public function relDisAllDid($did){
+		$api = new doctorDiseaseApi();
+		return $api->getAllByDid($did);
+	}
+	public function relDisRow($did, $dod){
+		$api = new doctorDiseaseApi();
+		return $api->row($did, $dod);
+	}
+	public function relDisNotRel(){
+		$api = new doctorDiseaseApi();
+		return $api->notRelDocs();
+	}
+	
+	
 	
 	
 	

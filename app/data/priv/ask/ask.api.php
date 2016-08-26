@@ -78,6 +78,24 @@ class askApi{
 		return new rirResult(0,$cnt,$data);
 	}
 	
+	public function getQueryAll($q,$length,$offset=0){
+		$sql = $this->sqlManager->getSql("/ask/query/cnt");
+		$bin = array();
+		$bin["q"] = $q;
+		$row = $this->db->fetch($sql, $bin);
+		if(empty($row)){
+			return new rirResult(1,$this->db->getErrorInfo());
+		}
+		$cnt = $row["cnt"];
+		
+		$bin["offset"] = $offset;
+		$bin["length"] = $length;
+		$sql = $this->sqlManager->getSql("/ask/query/query");
+// 		var_dump($sql,$bin);exit;
+		$data = $this->db->fetchAll($sql, $bin);
+		return new rirResult(0,$cnt,$data);
+	}
+	
 	
 	/**
 	 * 成功，INFO字段为COUNT,RETURN为数据

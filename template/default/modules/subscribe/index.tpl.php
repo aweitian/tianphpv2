@@ -14,7 +14,7 @@
 <body>
 <div class="ghhead clearfix tc"><img src="<?php print AppUrl::getMediaPath()?>/images/ghlogo.png" width="509" height="37" alt="上海九龙男子医院-官方在线自助挂号平台" /></div>
 <div class="wid1000">
-  <div class="location">当前位置：<a href="<?php print HTTP_ENTRY?>/" class="blue">首页</a> > 预约挂号</div>
+  <div class="location">当前位置：<a <?php print App::useTarget()?> href="<?php print AppUrl::navHome()?>" class="blue">首页</a> > <a href="<?php print AppUrl::navSubscribe()?>" class="blue">预约挂号</a></div>
   <div class="gdcontent border2 clearfix">
     <div class="ghLeft">
       <div class="ghbt">预约挂号平台</div>

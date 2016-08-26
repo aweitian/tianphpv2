@@ -19,6 +19,7 @@ require_once FILE_SYSTEM_ENTRY."/app/data/priv/comment/comment.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_lv/doctor_lv.api.php";
 
 class articleModel extends privModel{
+	public $msg;
 	public function __construct(){
 		parent::__construct();
 	}

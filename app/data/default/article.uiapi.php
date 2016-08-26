@@ -27,6 +27,33 @@ class articleUIApi {
 	}
 	
 	/**
+	 * 根据大病种的ID获取文章id
+	 * @param int $lv0did
+	 * @param int $length
+	 * @param int $offset
+	 * @return array(aid1,aid2,....)
+	 */
+	public function allDataByLv0did($lv0did,$length,$offset=0) {
+		$cache_key = "allDataByLv0did-" . $lv0did ."-".$length."-".$offset;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_article/alllv0aids" );
+		$data = $this->db->fetchAll ( $sql, array (
+				"did" => $lv0did,
+				"length" => $length,
+				"offset" => $offset,
+		) );
+		
+		$ret = array();
+		foreach($data as $item){
+			$ret[] = $item["aid"];
+		}
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	
+	/**
 	 * 根据医生ID获取文章
 	 * 
 	 * @param int $dod

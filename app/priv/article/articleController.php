@@ -27,6 +27,7 @@ class articleController extends privController{
 		$this->initHttpResponse();
 		$this->view->model = $this->model;
 	}
+	
 	public function welcomeAction(pmcaiMsg $msg){
 		$length = 10;//每页显示多少行
 		

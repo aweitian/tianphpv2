@@ -20,31 +20,56 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 </head>
 
 <body>
-<div class="header-out">
-	<div class="wid1000  header">
-		<div class="fl">
+	<div class="header-out">
+		<div class="wid1000  header">
+			<div class="fl">
 		<?php if(!AppUser::getInstance()->auth->isLogined()):?>
-			<span>中午好！</span><b>游客</b> , <a<?php print App::useTarget()?> href="<?php print AppUrl::userLogin().$loginReturnUrl?>" class="yellow">请登陆</a>
+			<span>
+			<?php 
+			$date =  getdate(time());
+			$hr = $date["hours"];
+			if (($hr >= 0) && ($hr <= 4))
+				print "已经夜深了，请注意休息哦！";
+			elseif (($hr >= 4) && ($hr < 7))
+				print "早上好，这么早就起来了？ ";
+			elseif (($hr >= 7) && ($hr < 12))
+				print "上午好，祝您保持心情愉快！";
+			elseif (($hr >= 12) && ($hr <= 13))
+				print "现在是午饭时间，你做什么好吃的了吗？";
+			elseif (($hr >= 13) && ($hr <= 17))
+				print "该午休了，希望您能够劳逸结合！ ";
+			elseif (($hr >= 17) && ($hr <= 18))
+				print "今晚时分，天空好美！";
+			elseif (($hr >= 18) && ($hr <= 19))
+				print "晚上好！";
+			elseif (($hr >= 19) && ($hr <= 23))
+				print "一天又快过去了，你今天收获很多吧？";
+			?>
+			
+			
+			</span><b>游客</b> , <a <?php print App::useTarget()?>
+					href="<?php print AppUrl::userLogin().$loginReturnUrl?>"
+					class="yellow">请登陆</a>
 		<?php else:?>
 		<?php $userinfo = AppUser::getInstance()->auth->getInfo()?>
-			<span>中午好！</span> , 
-			<a<?php print App::useTarget()?> href="<?php print AppUrl::userHome()?>" class="yellow">
-			<b><?php print AppFilter::filterOut($userinfo["name"]) ?></b>
-			</a>
-			&nbsp;
-			<a<?php print App::useTarget()?> href="<?php print AppUrl::userLogout()?>">退出</a>	
+			<span>中午好！</span> , <a <?php print App::useTarget()?>
+					href="<?php print AppUrl::userHome()?>" class="yellow"> <b><?php print AppFilter::filterOut($userinfo["name"]) ?></b>
+				</a> &nbsp; <a <?php print App::useTarget()?>
+					href="<?php print AppUrl::userLogout()?>">退出</a>	
 		<?php endif?>
 		</div>
-		<p class="fr">
-			<a<?php print App::useTarget()?> href="">设为首页</a>  |  
-			<a<?php print App::useTarget()?> href="">收藏本站</a>
-		</p>
+			<p class="fr">
+				<a <?php print App::useTarget()?> href="">设为首页</a> | <a
+					<?php print App::useTarget()?> href="">收藏本站</a>
+			</p>
+		</div>
 	</div>
-</div>
-<div class="wid1000">
+	<div class="wid1000">
 <?php include dirname(__FILE__)."/header.tpl.php"?>
 <?php $model->outputContent()?>
 <?php include dirname(__FILE__)."/footer.tpl.php"?>
+
+
 
 </body>
 </html>

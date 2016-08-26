@@ -10,6 +10,7 @@ require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor/doctor.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/disease/disease.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/user/user.api.php";
 class askModel extends privModel{
+	public $msg;
 	public function __construct(){
 		parent::__construct();
 	}
@@ -131,6 +132,12 @@ class askModel extends privModel{
 	public function getAll($offset,$length){
 		$api = new askApi();
 		return $api->getAll($length,$offset);
+	}
+	
+	
+	public function getQueryAll($q,$offset,$length){
+		$api = new askApi();
+		return $api->getQueryAll($q,$length,$offset);
 	}
 	public function verify($sid){
 		$api = new askApi();

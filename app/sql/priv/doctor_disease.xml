@@ -6,6 +6,13 @@
 		FROM `data_doctor_dis`
 		WHERE `did` = :did AND `dod` = :dod
 	</exists>
+	<!-- sid id name pwd avatar date -->
+	<notRel>
+		SELECT * FROM `data_doctor` WHERE `data_doctor`.`sid` NOT IN (
+			SELECT `data_doctor_dis`.`did` FROM `data_doctor_dis`
+		)
+	</notRel>
+	
 	<select>
 		<did>
 			SELECT
@@ -25,6 +32,13 @@
 			FROM `data_doctor_dis`
 			ORDER BY `weight` DESC	
 		</all>
+		<row>
+			SELECT
+			 *
+			FROM `data_doctor_dis`
+			WHERE `did` = :did		
+			AND `dod` = :dod	
+		</row>
 	</select>
 	<add>
 		INSERT INTO `data_doctor_dis`

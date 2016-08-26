@@ -13,21 +13,30 @@ $d = diseaseExtInfoes::getExtData();
 $this->title = "男科疾病就医指南_上海九龙男子医院";
 $this->description = "";
 $this->keyword = "";
+
+$all = $m->getAllQuestions(3,12);
+$alldoc = $m->getAllQuestions(0,2);
 // exit;
+
 ?>
 
-<div class="listpos fz13"><span class="gray">当前位置：</span><a href="">首页 > 男科疾病</a></div>
+
+
+
+<div class="listpos fz13"><span class="gray">当前位置：</span><a <?php print App::useTarget()?> href="<?php print AppUrl::navHome()?>"> 首页 </a> > <a href="<?php print  AppUrl::navdisease() ?>">男科疾病</a></div>
   <div class="quesnum clearfix">
     <div class="quesnuml fl border2">
-      <p class="line24 fz13">今日解决<em class="orange">498</em>个问题</p>
+     <!-- <p class="line24 fz13">今日解决<em class="orange">498</em>个问题</p>  -->
       <p class="line24">九龙问答已经收到的问题</p>
       <p class="blank10"></p>
-      <div class="sdwtnum blue fz13">3186241</div>
+      <?php $cnt=$m->getAllQuestionsCnt() ?>
+
+      <div class="sdwtnum blue fz13"><?php print($cnt) ?></div>
       <div class="fz13 nowask">现在提问，十分钟内免费解答</div>
       <div class="blank10"></div>
-      <p class="tc"><a href=""><img src="<?php print AppUrl::getMediaPath()?>/images//nowask.jpg" width="260" height="40" /></a></p>
+      <p class="tc"><a href="<?php print AppUrl::getSwtUrl()?>" onclick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/nowask.jpg" width="260" height="40" /></a></p>
     </div>
-    <div class="quesnumr fr"><a href=""><img src="<?php print AppUrl::getMediaPath()?>/images//frojbban.jpg" width="680" height="266" /></a></div>
+    <div class="quesnumr fr"><a href=""><img src="<?php print AppUrl::getMediaPath()?>/images/frojbban.jpg" width="680" height="266" /></a></div>
   </div>
   
   <!--quesnumbox end-->
@@ -95,127 +104,70 @@ $this->keyword = "";
         
         <div class="fromjbrtit clearfix"><span class="fl fz18">疾病知识</span></div>
         <div class="fromjbhd clearfix">
-        
-         <?php $dis=  $m->getLv0Infoes(); ?>
-      
+        <?php $z=1;?>
+           <?php foreach($m->getLv0Infoes() as $diswz):?> 
+           
           <dl class="clearfix">
-            <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images//frbz1.jpg" width="113" height="135" />
-              <p class="tc white fz13">前列腺疾病</p>
+            <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/<?php print($diswz["key"]) ?>.jpg" width="113" height="135" />
+              <p class="tc white fz13"><?php print($diswz["data"])?></p>
             </dt>
             <dd class="fl">
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
+              <?php foreach($m->allDataByLv0did($diswz["sid"],4,0) as $disxh):?> 
+                        <?php $list= $m->rowNoContent($disxh) ?>  
+                     
+              <p class="fz13 black"><a href="<?php print AppUrl::articleByAid($list["sid"]) ?>"><?php print utility::utf8Substr($list["title"],0,12)?></a></p>
+              <?php endforeach;?>
             </dd>
           </dl>
-          <dl class="clearfix">
-            <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images//frbz2.jpg" width="113" height="135" />
-              <p class="tc white fz13">性功能障碍</p>
-            </dt>
-            <dd class="fl">
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-            </dd>
-          </dl>
-          <dl class="clearfix">
-            <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images//frbz3.jpg" width="113" height="135" />
-              <p class="tc white fz13">性传播疾病</p>
-            </dt>
-            <dd class="fl">
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-            </dd>
-          </dl>
-          <dl class="clearfix">
-            <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images//frbz4.jpg" width="113" height="135" />
-              <p class="tc white fz13">男科手术</p>
-            </dt>
-            <dd class="fl">
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-            </dd>
-          </dl>
-          <dl class="clearfix">
-            <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images//frbz5.jpg" width="113" height="135" />
-              <p class="tc white fz13">泌尿感染</p>
-            </dt>
-            <dd class="fl">
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-            </dd>
-          </dl>
-          <dl class="clearfix">
-            <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images//frbz6.jpg" width="113" height="135" />
-              <p class="tc white fz13">男性不育</p>
-            </dt>
-            <dd class="fl">
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-              <p class="fz13 black"><a href="">听不见，不会说话</a></p>
-            </dd>
-          </dl>
+      <?php $z++;?>
+          <?php endforeach;?>
+         
+         
         </div>
         <div class="contr4box clearfix">
           <ul class="fl">
             <div class="iask_border01">
               <div class="iask08">
                 <ul class="iask08a" style="height:330px;background:none;overflow:hidden;"id="gundong">
+                 
+                  	<?php foreach ($alldoc["data"] as $docallitem):?>
+                  	<?php $doc=$m->getInfoByDod($docallitem["dod"]) ?>
+                  	  <?php $ans = $m->getAnswerByAskid($docallitem["sid"])?>
+               
                   <div class="iask08a" style="height:180px;margin-top:-9px;background-position:48px -21px;padding-top:0px;">
                     <dl>
-                      <dt><a href="zx-2718133-1.html" target='_blank'><img  src="<?php print AppUrl::getMediaPath()?>/images//zjhd1.jpg" /><span></span></a></dt>
+                      <dt><a href="<?php print AppUrl::askByAsdDocid($docallitem["dod"], $docallitem["sid"]) ?>" target='_blank'><img  src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print($doc["avatar"]) ?>" /><span></span></a></dt>
                       <dd>
-                        <p class="gray"><a class="blue" href="zx-2718133-1.html" target='_blank'>张俊峰</a><span>医生回答</span><span>2015-10-27 16:45</span></p>
+                        <p class="gray"><a class="blue" href="<?php print AppUrl::askByAsdDocid($docallitem["dod"], $docallitem["sid"]) ?>" target='_blank'><?php print ($doc["name"]) ?></a><span>医生回答</span><span><?php print utility::utf8Substr($doc["date"],0,10) ?></span></p>
                         <ul>
-                          <a href="question/101982045.html" target='_blank'>尿黄，且早晨气味重</a>
+                          <a href="<?php print AppUrl::askByAsdDocid($docallitem["dod"], $docallitem["sid"]) ?>" target='_blank'><?php print utility::utf8Substr($docallitem["title"], 0, 12) ?></a>
                         </ul>
                         <ol>
-                          尿液偏黄的话，应该主要还是与饮水量少以及饮食方面的原因以注意多...
+                       
+                            <?php 
+                             print empty($ans) ? "" : utility::utf8Substr($ans["content"], 0, 40)?>...
+                         
                         </ol>
                       </dd>
                     </dl>
                   </div>
-                  <div class="iask08a" style="height:180px;margin-top:-9px;background-position:48px -21px;padding-top:0px;">
-                    <dl>
-                      <dt><a href="zx-501124-1.html" target='_blank'><img  src="<?php print AppUrl::getMediaPath()?>/images//zjhd2.jpg" /><span></span></a></dt>
-                      <dd>
-                        <p class="gray"><a class="blue" href="zx-501124-1.html" target='_blank'>张俊峰</a><span>医生回答</span><span>2015-10-27 16:41</span></p>
-                        <ul>
-                          <a href="question/101982025.html" target='_blank'>尿黄，且早晨气味重</a>
-                        </ul>
-                        <ol>
-                          尿液偏黄的话，应该主要还是与饮水量少以及饮食方面的原因以注意多...
-                        </ol>
-                      </dd>
-                    </dl>
-                  </div>
+                  <?php endforeach;?>
+	
+                  
+                  
                 </ul>
               </div>
             </div>
           </ul>
           <div class="contr4r fl">
             <ul>
-              <li><a href="">嗓子疼痛有泡</a><span class="gray">6秒前</span></li>
-              <li><a href="">嗓子疼痛有泡</a><span class="gray">6秒前</span></li>
-              <li><a href="">嗓子疼痛有泡</a><span class="gray">6秒前</span></li>
-              <li><a href="">嗓子疼痛有泡</a><span class="gray">6秒前</span></li>
-              <li><a href="">嗓子疼痛有泡</a><span class="gray">6秒前</span></li>
-              <li><a href="">胃底贲门癌和粘液腺癌如何治疗</a><span class="gray">6秒前</span></li>
-              <li><a href="">嗓子疼痛有泡</a><span class="gray">6秒前</span></li>
-              <li><a href="">嗓子疼痛有泡</a><span class="gray">6秒前</span></li>
-              <li><a href="">嗓子疼痛有泡</a><span class="gray">6秒前</span></li>
-              <li><a href="">和男朋友性接触可是插进一点后</a><span class="gray">6秒前</span></li>
-              <li><a href="">嗓子疼痛有泡</a><span class="gray">6秒前</span></li>
-              <li><a href="">嗓子疼痛有泡</a><span class="gray">6秒前</span></li>
+            	<?php foreach ($all["data"] as $allitem):?>
+   
+          	 <li><a href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><?php print utility::utf8Substr($allitem["title"], 0, 18) ?></a></li>
+          	<?php endforeach;?>
+	
+             
+          
             </ul>
           </div>
           <div class="h0"></div>
