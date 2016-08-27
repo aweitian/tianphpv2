@@ -54,7 +54,7 @@ $a=$m->allThumbnail($pageSize,($page-1)*$pageSize);
     	<div class="blank20"></div>
     	<dt class="clr"><a href="<?php print AppUrl::articleByAid($lb["aid"])?>" class="blue fz28"><?php print utility::utf8Substr($lb["title"], 0, 16) ?></a></dt>
         <dd><?php print utility::utf8Substr($lb["desc"], 0, 60) ?>...</dd>
-        <dd class="kp_dd1">发表于 <?php print utility::utf8Substr($lb["date"], 0, 10) ?><span><?php print rand(1200,3000);?>人已读</span></dd>
+        <dd class="kp_dd1">发表于 <?php print utility::utf8Substr($lb["date"], 0, 10) ?><span><?php print rand(1000,2000);?>人已读</span></dd>
     </dl>
 </div>
 <div class="hd_hsx"></div>

@@ -4,17 +4,7 @@
  */
 $m = $model;
 if (!$m instanceof symptomModel)exit;
-// echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-// var_dump($m->getDisease());
-// var_dump($m->getDiseaseLv0());exit;
 
-// foreach($m->getDisease() as $item)
-// {
-	
-
-// }
-
-// exit;
 
 $docinfos=$m->getInfoes(10);
 

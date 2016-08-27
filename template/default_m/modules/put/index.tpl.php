@@ -3,9 +3,7 @@
  * @var putModel;
  */
 $m = $model;
-// echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-// var_dump($m->getDisease());
-// var_dump($m->getDiseaseLv0());exit;
+
 
 $this->title = "咨询医院在线医生_咨询专家_上海九龙男子医院";
 $this->description = "";

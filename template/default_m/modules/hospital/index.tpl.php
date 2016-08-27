@@ -35,7 +35,7 @@ $lenght=count($docs);
                 <dd class="fr">
                 	<h5 class="blue fz30">上海九龙男子医院</h5>
                     <div class="blank15"></div>
-                    <p class="color3 fz26"><span class="yellow">6</span>个科室    <span class="yellow"><?php print $lenght;?></span>位医生</p>
+                    <p class="color3 fz26"><span class="yellow">6</span>个科室    <span class="yellow"><?php print $m->getAllCnt();?></span>位医生</p>
                 </dd>
             </dl>
             <div class="blank30"></div>
@@ -47,7 +47,7 @@ $lenght=count($docs);
                 <p><span class="color9">电话：</span><a href="tel:021-52733999">021-52733999</a></p>
                 <p><span class="color9">简介：</span>上海九龙男子医院坐落于上海市长宁区中山西路333号（近中山公园，靠近地铁3号线）。是一家诊疗、... <a href="<?php print AppUrl::navHospital()?>" class="fr blue">更多</a></p>
                 <div class="blank30"></div>
-                <p class="tc yyjs_con_p1">在线服务患者<span class="yellow"><?php print rand(300000,400000);?></span>名, 获得<span class="yellow"><?php print $m->getLetterCnt()?></span>封感谢信 </p>
+                <p class="tc yyjs_con_p1">在线服务患者<span class="yellow"><?php print $m->getAllQuestionsCnt()?></span>名, 获得<span class="yellow"><?php print $m->getLetterCnt()?></span>封感谢信 </p>
             </div>
             
         </div>
@@ -110,23 +110,22 @@ $lenght=count($docs);
 
 <div class="bg_fff ">
 <div class="yyjs_box1 mzy30">
-	<?php $i=0;?>
-	<?php foreach($tree_dis as $dis):?>     
+	<?php foreach($m->getLv0Infoes() as $disdoc):?> 
 	<div>
     	<p class="blank30"></p>
-    	<p class="yellow fz28"><?php print $dis["text"]?></p>
+    	<p class="yellow fz28"><?php print($disdoc["data"])  ?></p>
         <p class="blank10"></p>     
         <p class="fz26">
-        
-        <a href="<?php print AppUrl::docHomeByDocid($docs[($i*3+0)%$lenght]["id"])?>"><?php print $docs[($i*3+0)%$lenght]["name"]; ?>(<?php print $docs[($i*3+0)%$lenght]["contribution"]; ?>票)</a>
-        <a href="<?php print AppUrl::docHomeByDocid($docs[($i*3+1)%$lenght]["id"])?>"><?php print $docs[($i*3+1)%$lenght]["name"]; ?>(<?php print $docs[($i*3+1)%$lenght]["contribution"]; ?>票)</a>
-        <a href="<?php print AppUrl::docHomeByDocid($docs[($i*3+2)%$lenght]["id"])?>"><?php print $docs[($i*3+2)%$lenght]["name"]; ?>(<?php print $docs[($i*3+2)%$lenght]["contribution"]; ?>票)</a>
+
+        <?php foreach ($m->getDodDataByDid($disdoc["sid"]) as $doc):?> 
+        <?php $docname=$m->getNameByDod($doc["dod"]) ?>
+        <a href="<?php print AppUrl::docHomeByDod($doc["dod"]);?>"><?php print ($docname)?>(<?php print $doc["weight"] ?>)</a>
+        <?php endforeach;?>
         </p>       
         <p class="blank30"></p>
     </div>
     
     <div class="hd_hsx"></div>
-    <?php $i++;?>
     <?php endforeach;?> 
     
     
@@ -134,88 +133,6 @@ $lenght=count($docs);
 </div>
 </div>
 
-
-<!-- 
-
-<div class="hd_hsx"></div>
-<div class="blank10"></div>
-<div class="index_hotzx">
-<div class="title_name">
-    <img src="<?php print AppUrl::getMediaPath()?>/images/ysym_img4.png" class="fl ys_tb" /><b>诊后服务星<span class="color3 fz24 fw400">    (根据医生经验推荐)</span></b>
-</div>
-</div>
-
-<div class="bg_fff">
-<div class="yyjs_box2 mzy30">
-	
-	
-	<div>
-    	<p class="blank30"></p>
-        <p class="fz26">
-        	<span class="fl fz28">前列腺疾病</span>
-            <b class="fr fw400"><a href="">陈希球</a><a href="">张俊峰</a><a href="">韩用涛</a></b>
-        </p>
-        <p class="blank30"></p>
-    </div>
-    
-    <div class="hd_hsx"></div>
-    
-    <div>
-    	<p class="blank30"></p>
-        <p class="fz26">
-        	<span class="fl fz28">前列腺疾病</span>
-            <b class="fr fw400"><a href="">陈希球</a><a href="">张俊峰</a><a href="">韩用涛</a></b>
-        </p>
-        <p class="blank30"></p>
-    </div>
-    
-    <div class="hd_hsx"></div>
-    
-    <div>
-    	<p class="blank30"></p>
-        <p class="fz26">
-        	<span class="fl fz28">前列腺疾病</span>
-            <b class="fr fw400"><a href="">陈希球</a><a href="">张俊峰</a><a href="">韩用涛</a></b>
-        </p>
-        <p class="blank30"></p>
-    </div>
-    
-    <div class="hd_hsx"></div>
-    
-    <div>
-    	<p class="blank30"></p>
-        <p class="fz26">
-        	<span class="fl fz28">前列腺疾病</span>
-            <b class="fr fw400"><a href="">陈希球</a><a href="">张俊峰</a><a href="">韩用涛</a></b>
-        </p>
-        <p class="blank30"></p>
-    </div>
-    
-    <div class="hd_hsx"></div>
-    
-    <div>
-    	<p class="blank30"></p>
-        <p class="fz26">
-        	<span class="fl fz28">前列腺疾病</span>
-            <b class="fr fw400"><a href="">陈希球</a><a href="">张俊峰</a><a href="">韩用涛</a></b>
-        </p>
-        <p class="blank30"></p>
-    </div>
-    
-    <div class="hd_hsx"></div>
-    
-    <div>
-    	<p class="blank30"></p>
-        <p class="fz26">
-        	<span class="fl fz28">前列腺疾病</span>
-            <b class="fr fw400"><a href="">陈希球</a><a href="">张俊峰</a><a href="">韩用涛</a></b>
-        </p>
-        <p class="blank30"></p>
-    </div>
-
-</div>
-</div>
- -->
 <div class="hd_hsx"></div>
 <div class="blank10"></div>
 <?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom.tpl.php";?>

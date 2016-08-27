@@ -1,13 +1,23 @@
 // JavaScript Document
 
+<!--
+ 
+var LiveAutoInvite0='您好，来自%IP%的朋友';
+var LiveAutoInvite1='来自首页自动邀请的对话';
+var LiveAutoInvite2='<iframe scrolling=no height=245 frameborder=0 width=400 align=center marginwidth=0 src=http://www.long120.com/tc.html charset="utf-8" marginheight=0>';
+var LiveAutoInvite2='<P align=center><IMG src=\\"http://www.long120.com/images/kefu4.gif\\" border=0></P>';
+var LR_next_invite_seconds = 15;    //10秒后再次显示自动邀请
+var LrinviteTimeout = 1;     //8秒后第一次自动弹出
+//-->
+document.writeln("<script language=\"javascript\" src=\"http://kqi.zoossoft.com/JS/LsJS.aspx?siteid=KQI10880110&float=1&lng=cn\"></script>");
 
-
+document.writeln("<style type=\"text/css\">#LRfloater0{display:none;}#LRfloater1{display:none;}</style>");
 
 /*---------------右侧悬浮---------------------*/
 
 document.writeln("<style>");
 
-document.writeln(".ycbox{position:fixed;top:40%;right:10px; width:144px;height:120px;overflow:hidden;z-index:999999999;}");
+document.writeln(".ycbox{position:fixed;top:18%;right:10px; width:144px;height:120px;overflow:hidden;z-index:999999999;}");
 
 document.writeln(".ycbox img{position:absolute;left:0;top:0;}");
 
@@ -23,7 +33,7 @@ document.writeln("<div class=\"ycbox\">");
 
 document.writeln("	<img src=\"/static/m/images/ycimg.png\" class=\"ycbox_index\" />");
 
-document.writeln("    <p><a href=\"javascript:void(0)\" onclick=\"openZoosUrl();return false;\" ><img src=\"/static/m/images/ycbtn.png\" id=\"fixed_left\" /></a></p>");
+document.writeln("    <p><a href=\"javascript:void(0)\" onclick=\"openZoosUrl();return false;\" rel=\"nofollow\"  target=\"_blank\" ><img src=\"/static/m/images/ycbtn.png\" id=\"fixed_left\" /></a></p>");
 
 document.writeln("</div>");
 
@@ -94,15 +104,15 @@ document.writeln("#divMceter,#divL,#divR,#divMceter_suoxiao{position: fixed;z-in
 
 document.writeln("/*  divMceter  */");
 
-document.writeln("#divMceter {width: 206px;height: 206px;background:url(/static/m/images/swt_center.png) 0 no-repeat; right: 50%;bottom: 50%;margin-right: -95px;margin-bottom: -90px;_position: absolute;_bottom: expression(offsetParent.scrollTop+242);}");
+document.writeln("#divMceter {width: 240px;height: 120px;background:url(/static/m/images/swt_center.jpg) 0 no-repeat; right: 50%;bottom: 50%;margin-right: -120px;margin-bottom: -60px;_position: absolute;_bottom: expression(offsetParent.scrollTop+242);}");
 
-document.writeln("#divMceter a{position:absolute;display: block; width:50%; height:60px;bottom:0;}");
+document.writeln("#divMceter a{position:absolute;display: block; width:105px; height:34px;bottom:26px;}");
 
-document.writeln("#divMceter #divMceteragb{ right:20px;top:3px; width:40px; height:40px; z-index:10000;}");
+document.writeln("#divMceter #divMceteragb{ right:5px; top:5px; width:20px; height:20px; z-index:10000;}");
 
-document.writeln("#divMceter #divMcetera1{ width:130px; height:30px; bottom:78px; left:38px;}");
+document.writeln("#divMceter #divMcetera1{ left:10px;}");
 
-document.writeln("#divMceter #divMcetera2{ width:130px; height:30px; bottom:38px; left:38px;}");
+document.writeln("#divMceter #divMcetera2{ left:124px;}");
 
 document.writeln("");
 
@@ -116,9 +126,11 @@ document.writeln("<div id=\"divMceter\">");
 
 document.writeln("     <a id=\"divMceteragb\" onclick=\"swtcloseM()\" target=\"_self\" title=\"关闭\"></a>");
 
-document.writeln("     <a id=\"divMcetera1\" href=\"tel:021-52733999\" target=\"_blank\" title=\"拨打电话\"></a>");
+document.writeln("     <a id=\"divMcetera1\" href=\"javascript:void(0)\" onclick=\"openZoosUrl();return false;\"  rel=\"nofollow\" target=\"_blank\" title=\"我要咨询\"></a>");
 
-document.writeln("     <a id=\"divMcetera2\" href=\"javascript:void(0)\" onclick=\"openZoosUrl();return false;\" target=\"_blank\" title=\"免费预约\"></a>");
+document.writeln("     <a id=\"divMcetera2\" href=\"tel:021-52733999\" rel=\"nofollow\" target=\"_blank\" title=\"拨打电话\"></a>");
+
+
 
 document.writeln("</div>");
 

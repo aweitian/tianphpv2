@@ -30,7 +30,7 @@ class AppUrl {
 		return AppUrl::build ( "/static/" . (APP_MOBILE_MODE ? "m" : "pc") );
 	}
 	public static function getMediaFilePath() {
-		return FILE_SYSTEM_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc");
+		return FILE_SYSTEM_ENTRY . "/web/static/" . (APP_MOBILE_MODE ? "m" : "pc");
 	}
 	public static function Captcha() {
 		return AppUrl::build ( "/captcha" );

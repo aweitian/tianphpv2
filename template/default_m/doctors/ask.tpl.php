@@ -131,7 +131,7 @@ $url = new url($req->requestUri());
             </dt>
             <dd class="fr">
             	<h5 class="fw400 fz26">已解答<span class="red"><?php print $m->getQuestionsCountByDod($m->data["dod"])?></span>名患者的咨询</h5>
-                <p class="color6">擅长：<?php print $m->data["lv"]?>... <a href="<?php print AppUrl::docHomeByDod($m->data["dod"])?>" class="fr blue">立即查看</a></p>
+                <p class="color6">擅长：<?php print utility::utf8substr($m->data["spec"],0,22);?>... <a href="<?php print AppUrl::docHomeByDod($m->data["dod"])?>" class="fr blue">立即查看</a></p>
             </dd>
         </dl>
         

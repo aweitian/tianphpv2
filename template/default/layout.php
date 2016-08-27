@@ -44,7 +44,7 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 					class="yellow">请登陆</a>
 		<?php else:?>
 		<?php $userinfo = AppUser::getInstance()->auth->getInfo()?>
-			<span>中午好！</span> , <a <?php print App::useTarget()?>
+			<span>中午好！</span><a <?php print App::useTarget()?>
 					href="<?php print AppUrl::userHome()?>" class="yellow"> <b><?php print AppFilter::filterOut($userinfo["name"]) ?></b>
 				</a> &nbsp; <a <?php print App::useTarget()?>
 					href="<?php print AppUrl::userLogout()?>">退出</a>	

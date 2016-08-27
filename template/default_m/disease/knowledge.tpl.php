@@ -130,7 +130,7 @@ $ctr = appCtrl::$msg->getAction();
                         <div class="fr">
                         	<h5 class="fz28 fw400"><a href="<?php print AppUrl::articleByAid($list["aid"]) ?>" class="color3"><?php print utility::utf8Substr( $list["title"], 0, 14)?></a></h5>
                             <p class="color6 fz22"><?php print utility::utf8Substr( $list["desc"], 0, 50)?>...</p>
-                            <p class="tr"><span class="yellow"><?php echo rand(1000,1300);?></span> 已读</p>
+                            <p class="tr"><span class="yellow"><?php echo rand(5200,7500);?></span> 已读</p>
                         </div>
                     </div>
     				
@@ -152,7 +152,7 @@ $ctr = appCtrl::$msg->getAction();
               <div class="fr">
                 <h5 class="fz28 fw400"><a href="<?php print AppUrl::articleByAid($wz["aid"]) ?>" class="color3"><?php print utility::utf8substr($wz["title"],0,14); ?></a></h5>
                 <p class="color6 fz22"><?php print utility::utf8substr($wz["desc"],0,50); ?>...</p>
-                <p class="tr"><span class="yellow"><?php echo rand(1000,1300);?></span> 已读</p>
+                <p class="tr"><span class="yellow"><?php echo rand(5200,7500);?></span> 已读</p>
               </div>
             </div>
             <div class="blank30"></div>

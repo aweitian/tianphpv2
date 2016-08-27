@@ -168,7 +168,7 @@ foreach ($m->getDisease() as $item){
           </div>
           <div class="fromjyfxlc">
           
-          	<?php foreach($m->getAllComment(4) as $app):?>
+          	<?php foreach($m->getAllComment(3) as $app):?>
           	<?php $articleRow = $m->getArticleRowByAid($app["aid"])?>
           	<?php $dod = $m->getFirstDocByAid($app["aid"])?>
           	<?php $doctorInfo = $m->getInfoByDod($dod)?>
@@ -189,7 +189,7 @@ foreach ($m->getDisease() as $item){
             <p><strong class="orange"><?php print $m->getLetterCnt()?></strong> 封感谢信</p>
           </div>
           <div class="fromjyfxrc">
-          	<?php foreach ($m->getLetter(4) as $let):?>
+          	<?php foreach ($m->getLetter(3) as $let):?>
             <dl class="fz13">
               <dt><span class="orange">感谢<?php print $m->getNameByDod($let["dod"])?>医生</span></dt>
               <dd><?php print AppFilter::filterOut($m->utf8cut($let["content"],0,54)) ?>...<a<?php print App::useTarget()?> class="gray" href="<?php print AppUrl::docLetterHomeByDod($let["dod"])?>">看详情>></a></dd>

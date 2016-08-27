@@ -78,12 +78,7 @@ $m = $model;
           <div class="blank20"></div>
           <div class="fromzxzjbox2">
 		  
-		
-		  
-		  <?php
-		  //echo "<pre>";
-		//var_dump($m->getDoctors(5));
-		  ?>
+	
 		   	<?php foreach($m->getDoctors(5) as $doc):?>
           
             <dl class="clearfix graybg">

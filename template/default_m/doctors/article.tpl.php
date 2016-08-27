@@ -36,7 +36,7 @@ $url = new url($req->requestUri());
     	<div class="blank20"></div>
     	<dt class="clr"><a href="<?php print AppUrl::articleByAid($a["sid"])?>" class="blue fz28"><?php print AppFilter::filterOut(utility::utf8Substr($a["title"], 0, 15));?>...</a></dt>
         <dd><?php print AppFilter::filterOut(utility::utf8Substr( $a["desc"], 0, 65));?>...</dd>
-        <dd class="kp_dd1">发表于 <?php print ($a["date"])?><span><?php echo rand(12000,15000);?>人已读</span></dd>
+        <dd class="kp_dd1">发表于 <?php print ($a["date"])?><span><?php echo rand(5200,7500);?>人已读</span></dd>
     </dl>
 </div>
 <?php endforeach;?> 

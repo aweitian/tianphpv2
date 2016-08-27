@@ -27,6 +27,31 @@ class diseaseUIApi {
 		return diseaseUIApi::$inst;
 	}
 	
+	
+	
+
+	/**
+	 * 获取医生ID，和医生对这个疾病的权重
+	 *
+	 * @param int $did
+	 * @return string;
+	 */
+	public function getDodDataByDid($did) {
+		$cache_key = "getDodDataByDid-" . $did;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		
+		$sql = $this->sqlManager->getSql("/ui_disease/getDodData_did");
+		$ret = $this->db->fetchAll($sql, array("did" => $did));
+// 		var_dump($sql);exit;
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	
+	
+	
+	
 	/**
 	 * 获取疾病名称
 	 *

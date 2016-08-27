@@ -1,23 +1,6 @@
 <?php
 defTplData::getInstance ()->title = $m->data ["name"] . " - 医师首页";
-/**
- * ["sid"]=> 11
- * ["id"]=> string(3) "zyl"
- * ["name"]=> string(9) "张耀龙"
- * ["lv"]=> string(7) "ccccccc"
- * ["avatar"]=> string(7) "zyl.jpg"
- * ["date"]=> string(10) "2016-05-16"
- * ["dod"]=> string(1) "2"
- * ["dlv"]=> string(1) "3"
- * ["star"]=> string(2) "10"
- * ["hot"]=> string(2) "22"
- * ["love"]=> string(1) "2"
- * ["contribution"]=> string(1) "2"
- * ["desc"]=> string(2) "33"
- * ["spec"]=> string(1) "3"
- * }
- */
-// var_dump($m->data);exit;
+
 $this->title = "".$m->data["name"]."大夫个人网站_上海九龙男子医院";
 $this->keyword = "".$m->data["name"]."大夫,".$m->data["name"]."医生";
 $this->description = "免费咨询".$m->data["name"]."医生,查看".$m->data["name"]."医生门诊,".$m->data["desc"]."";
@@ -49,7 +32,7 @@ $url = new url ( $req->requestUri () );
 		<div class="bg_fff">
 			<div class="zjtd">
 				<div class="mzy30 zjtd_box1">
-					<a href=""><img
+					<a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img
 						src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>"
 						class="fl zjtd_box1_img1" /></a>
 					<dl class="fl">
@@ -68,11 +51,11 @@ $url = new url ( $req->requestUri () );
 				<div class="mzy30">
 					<div class="ys_box1 clr">
 						<p>
-							感谢信<span class="red"><?php print $m->getLetterCnt()?></span>
+							感谢信<span class="red"><?php print $m->getDataCntByDod($m->data["dod"])?></span>
 						</p>
 						<b>|</b>
 						<p>
-							咨询量<span class="red"><?php echo rand(5000,10000);?></span>
+							咨询量<span class="red"><?php print $m->getQuestionsCountByDod($m->data["dod"]);?></span>
 						</p>
 						<b>|</b>
 						<p>

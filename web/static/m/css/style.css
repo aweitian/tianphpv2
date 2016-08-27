@@ -714,7 +714,7 @@
 .zjtd{padding-top:.2rem; background:#fff;}
 .zjtd_box1 dl{ margin-left:.3rem; color:#666;}
 .zjtd_box1 dl dt{ margin-bottom:.12rem;}
-.zjtd_box1 dl dt b{ margin-right:.15rem;}
+.zjtd_box1 dl dt b{ margin-right:.15rem; float:left;}
 .zjtd_box1 dl dd{ margin-bottom:.12rem;}
 .zjtd_box1 dl dd img{ width:.28rem; height:.28rem; margin-left:.15rem;}
 .zjtd_box1_img1{ width:1.18rem; height:1.18rem; border-radius:1.2rem; border:1px solid #ddd;}
@@ -826,7 +826,6 @@
 .jbkp_zjzx a.doc_name {
     width: auto;
     height: auto;
-    float: left;
 }
 .kp_about dl{ padding-bottom:.2rem;}
 .kp_about dl dt{ margin-bottom:.1rem;}

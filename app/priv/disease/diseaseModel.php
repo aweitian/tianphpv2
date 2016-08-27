@@ -16,8 +16,6 @@ class diseaseModel extends privModel{
 		parent::__construct();
 		$this->api = new diseaseApi();
 	}
-	
-	
 	public function rm($sid){
 		return $this->api->rm($sid);
 	}

@@ -6,7 +6,7 @@
  */
 // $pagestartime=microtime();
 
-
+ini_set('date.timezone','Asia/Shanghai');
 // var_dump($_SERVER["HTTP_HOST"]);
 if ($_SERVER["HTTP_HOST"] == "192.168.1.48") {
 	define("DEBUG_FLAG", true);

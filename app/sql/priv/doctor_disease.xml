@@ -6,6 +6,14 @@
 		FROM `data_doctor_dis`
 		WHERE `did` = :did AND `dod` = :dod
 	</exists>
+	
+	<clear>
+	
+		TRUNCATE TABLE `data_doctor_dis`
+	
+	</clear>
+	
+	
 	<!-- sid id name pwd avatar date -->
 	<notRel>
 		SELECT * FROM `data_doctor` WHERE `data_doctor`.`sid` NOT IN (

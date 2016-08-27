@@ -28,13 +28,7 @@ $req = new httpRequest();
 $url = new url($req->requestUri());
 
 
-// foreach($m->getDisease() as $item)
-// {
-	
 
-// }
-
-// exit;
 ?>
  <div class="public_width">
 
@@ -51,7 +45,7 @@ $url = new url($req->requestUri());
         <dl class="fl">
         	<dt class="fz24"><b><a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>" class="blue fz28"><?php print $doc["name"]; ?></a></b>  <?php print $doc["lv"]; ?></dt>
             <dd>患者推荐热度：<span class="red"><?php print $doc["hot"]; ?></span><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img3.png" /></dd>
-            <dd>咨询量：<span class="red"><?php print rand(200,300);?></span></dd>
+            <dd>咨询量：<span class="red"><?php print $m->getQuestionsCountByDod($doc["dod"]);?></span></dd>
         </dl>
         <a href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/images/zjtd_img2.png" class="fr zjtd_box1_img2" /></a>
     </div>

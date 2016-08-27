@@ -9,6 +9,7 @@ require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_lv/doctor_lv.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor/doctor.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/article/article.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_disease/doctor_disease.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/disease/disease.api.php";
 
 class doctorModel extends privModel{
 	public $msg;
@@ -19,7 +20,11 @@ class doctorModel extends privModel{
 		$api = new doctorLvApi();
 		return $api->getAllHomeless($offset, $len);
 	}
-	
+	/* get INFOES  */
+	public function getInfo_disease(){
+		$api = new diseaseApi();
+		return $api->getInfo();
+	}
 	/**
 	 * 连接医生职位(没有添加，有更新)
 	 * @param int $dod

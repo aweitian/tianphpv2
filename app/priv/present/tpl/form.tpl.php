@@ -5,6 +5,7 @@
  * Description: 
  */
 $avatar = tian::getFileList(AppUrl::getMediaFilePath()."/present","gif,jpg,png");
+// var_dump(AppUrl::getMediaFilePath()."/present");exit;
 $def_avatar_src = pathinfo($avatar[0],PATHINFO_BASENAME);
 
 if(isset($data["def"]) && !is_null($data["def"])){

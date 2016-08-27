@@ -22,4 +22,13 @@
 			LEFT JOIN `data_doctor_lv_meta` ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`  
 	</all>
 
+	<getDidData_dod>
+		SELECT
+		 *
+		FROM `data_doctor_dis`
+		WHERE `dod` = :dod	
+		ORDER BY `weight` DESC	
+	</getDidData_dod>
+	
+
 </ui_doctor>

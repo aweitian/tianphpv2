@@ -17,8 +17,8 @@
     <div class="blank30"></div>
     <div class="hd_hx"></div>
     <div class="what_version"> 
-        <a href="#" class="cur">触屏版</a>&nbsp;&nbsp;|&nbsp;&nbsp
-        <a href="#" class="cur">电脑版</a>
+        <a href="http://3g.hospital.cs999.cn/" class="cur">触屏版</a>&nbsp;&nbsp;|&nbsp;&nbsp
+        <a href="http://hospital.cs999.cn/" class="cur">电脑版</a>
     </div>
     <p class="company_title">版权所有 上海九龙男子医院</p>
   </div>

@@ -70,6 +70,10 @@ class doctorController extends privController{
 	
 	public function addDodDidAction(pmcaiMsg $msg){
 		if($msg->isPost()){
+			
+			var_dump($msg->getPostData());exit;
+			
+			
 			if(!isset($msg["did"],$msg["dod"],$msg["weight"])){
 				$this->response->_404();
 			}

@@ -44,12 +44,10 @@ class articleController extends privController{
 		$data = $this->model->getList($offset,$length);
 		
 		if($data->isTrue()){
-			
 			$this->view->setPmcaiMsg($msg);
-		
 			$this->view->showList($msg->getPmcaiUrl(),$this->priv->getUserInfo(),$data->return,$page,$length,$msg["?q"]);
 		}else{
-			$this->response->showError($retR->info);;
+			$this->response->showError($retR->info);
 		}
 	}
 	

@@ -57,6 +57,18 @@
 	</symptoms_did>	
 		
 		
+		
+		
+		
+	<getDodData_did>
+	
+			SELECT
+			 *
+			FROM `data_doctor_dis`
+			WHERE `did` = :did			
+			ORDER BY `weight` DESC	
+	</getDodData_did>	
+		
 
 	<!-- 获取DISEASE ROW INFO BY URL KEY -->
 	<!-- 

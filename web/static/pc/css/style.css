@@ -663,7 +663,7 @@ padding: 0px 0 20px 0px; width:320px;
 	padding: 0 20px 20px;
 }
 .syrbox5nr .syrbox5nr_1 {
-	height: 206px;
+	height: 300px;
 	overflow: hidden;
 }
 .syrbox5nr .syrbox5nr_1 dl {
@@ -2363,7 +2363,7 @@ a.td_link, a.td_link_read {
 	cursor:pointer
 }
 .owl-item{
-	width:211px;
+	width:210px;
 	height:230px;
 	border:1px solid #efefef;
 	}
@@ -2932,3 +2932,16 @@ a,img{border:0;}
   
   
 .zjtdpage_box1 a{ cursor:pointer!important;}
+
+
+/*------------------yyjj-------------------------*/
+.jjline{border-bottom:1px #d7d7e3 dashed;padding-bottom:20px;}
+.jjbox1 dt{float:left;width:380px;}
+.jjbox1 dd{padding-top:8px;}
+.jjbt{padding:25px 0 30px;}
+.jjbt h4{font-size:20px;color:#377bee;font-weight:normal;}
+.jjbt p{font-size:14px;color:#bbb;padding-top:5px;}
+.jjbox2 li{float:left;}
+.tindent2{text-indent:2em;}
+.jjbox3 li{float:left;margin-right:44px;}
+.jjbox3 li.last{margin-right:0;}

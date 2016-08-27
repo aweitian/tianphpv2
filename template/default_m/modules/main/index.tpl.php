@@ -8,11 +8,6 @@ $this->title = "上海男科医院_上海泌尿外科医院_上海男性专科�
 $this->keyword = "上海九龙男子医院,上海男科医院,上海泌尿外科医院，上海男性专科医院";
 $this->description = "上海九龙男子医院专家列表，25位医生详细介绍和门诊时间、7153篇患者发表的看病经验、按疾病推荐专家、25位专家在线咨询，免费预约上海九龙男子医院专家门诊。";
 
-
-// echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-// var_dump($m->getDisease());
-// var_dump($m->getDiseaseLv0());exit;
-
 $tree_dis = array();
 foreach ($m->getDisease() as $item){
 	if(!array_key_exists($item["pid"], $tree_dis)){
@@ -202,7 +197,7 @@ foreach ($m->getDisease() as $item){
     <h2 class="title_name_lan">热点文章<a href="<?php print AppUrl::navArticle()?>" class="fr">+更多</a></h2>
     <ul class="hotzx_box2"> 
         <?php foreach($m->getNewest(5) as $aitem):?>
-        <li><a href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print utility::utf8Substr($aitem["title"], 0, 15) ?>... <span>热度:<?php echo rand(70,300);?></span></a></li>
+        <li><a href="<?php print AppUrl::articleByAid($aitem["aid"])?>"><?php print utility::utf8Substr($aitem["title"], 0, 15) ?>... <span>热度:<?php echo rand(1000,2000);?></span></a></li>
         <?php endforeach;?>
     </ul>
   </div>

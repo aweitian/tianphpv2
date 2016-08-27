@@ -41,12 +41,14 @@
 			LEFT JOIN `data_doctor` ON `data_doctor`.`sid` = `data_ask`.`dod`
 			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_ask`.`did`
 			WHERE `data_ask`.`title` like CONCAT('%',:q,'%')
+			OR `data_ask`.`sid` = :q
 			ORDER BY `data_ask`.`sid` DESC
 			LIMIT :offset,:length
 		</query>
 		<cnt>
 			SELECT COUNT(`data_ask`.`sid`) AS `cnt` FROM `data_ask`
 			WHERE `data_ask`.`title` like CONCAT('%',:q,'%')
+			OR `data_ask`.`sid` = :q
 		</cnt>
 	</query>
 

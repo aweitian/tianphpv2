@@ -28,6 +28,27 @@ class doctorUIApi {
 		return doctorUIApi::$inst;
 	}
 	
+	
+	/**
+	 * 获取疾病ID，和医生对这个疾病的权重
+	 *
+	 * @param int $did
+	 * @return string;
+	 */
+	public function getDidDataByDod($dod) {
+		$cache_key = "getDidDataByDod-" . $dod;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql("/ui_doctor/getDidData_dod");
+		$ret = $this->db->fetchAll($sql, array("dod" => $dod));
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	
+	
+	
+	
 	/**
 	 * 获取医生姓名
 	 * @param int $dod

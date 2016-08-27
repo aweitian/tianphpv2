@@ -24,61 +24,76 @@ if(isset($_SERVER['HTTP_REFERER'])){
 }else{
 	$ret_url = "";
 }
+$dis_info =  $m->getInfo_disease();
 
+
+$tree_dis = array();
+foreach ($dis_info as $item){
+	if(!array_key_exists($item["pid"], $tree_dis)){
+		$tree_dis[$item["pid"]] = array(
+				"text" => $item["pd"],
+				"children" => array()
+		);
+	}
+	$tree_dis[$item["pid"]]["children"][$item["mid"]] = $item["md"];
+}
+// var_dump($dis_info);exit;
 ?>
 <style>
 .dutytable{}
 .dutytable td{padding:8px;}
+.ddt{
+	border-collpase:collapse;
+	width:100%;
+}
+.ddt td{
+	border:2px solid gray;
+	padding:8px;
+}
 </style>
 <section class="content">
  <!-- general form elements disabled -->
               <div class="box box-warning">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><?php print $at?>医生与疾病的关系</h3>
+                  <h3 class="box-title">更新医生与疾病的关系</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/doctor/<?php print $ua;?><?php print $ret_url?>">
+                  <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/doctor/addDodDid<?php print $ret_url?>">
                     <!-- text input -->
-                    <div class="form-group">
-                      <label>医生id</label>
-                      <?php if($ua == "editext"):?>
-                      <input type="hidden" name="dod" value="<?php print $def["dod"]?>">
-                      <?php endif?>
-                      
-                      
-                      <?php if ($ua == "editext"):?>
-		                      <?php foreach($m->relDisNotRel()->return as $doctor):?>
-		                      <div class="text-danger">
-		                      <?php if($doctor["dod"] == $def["dod"])print $doctor["name"]?>
-		                      </div>
-		                      <?php endforeach;?>
-		   			<?php else :?>
-		                      <select class="form-control" name="dod">
-		                      <?php foreach($m->relDisNotRel()->return as $doctor):?>
-		                      <option value="<?php print $doctor["sid"]?>"><?php print $doctor["name"]?></option>
-		                     	<?php endforeach;?>
-		                       </select>
-                       
-                       <?php endif;?>
-                    </div>
-                     <div class="form-group">
-                      <label>医生等级</label>
-					 <select class="form-control" name="dlv">
-	                      <?php foreach($data["lvMeta"] as $lv):?>
-	                      <option<?php if($lv["sid"] == $def["dlv"]):?> selected<?php endif;?> value="<?php print $lv["sid"]?>"><?php print $lv["data"]?></option>
-                      <?php endforeach;?>
-                           </select>
-
-                    </div>
-                    <div class="form-group">
-                      <label>诊后服务星</label>
-                        <input value="<?php print $def["star"]?>" name="star" required type="number" min="1" max="10" class="form-control" placeholder="请输入医生等级">
-                    </div>
-                      <div class="form-group">
-                      <label>患者推荐热度</label>
-                      <input value="<?php print $def["hot"]?>" name="hot" required type="text" class="form-control" placeholder="请输入医生等级">
-                    </div>
-
+                    <table class="ddt">
+                    
+                   <?php foreach($m->relDisNotRel()->return as $doctor):?>
+					<tr>
+                
+                     	
+               
+               
+                     	<td>
+							<input type="hidden" id="did" value="<?php print $doctor["sid"]?>">
+                     		<?php foreach ($tree_dis as $dis):?>
+                     		<?php print $dis["text"]?>(<?php print($doctor["name"]) ?>)
+                     			<hr>
+                     			<?php foreach($dis["children"] as $k => $d):?>
+                     			<label id="dd<?php print $k?>">
+                     			<input type="checkbox" name="did[]" value="<?php print $k?>">
+                     			<?php print($d)?>
+                     			</label>
+                     			<input size="3" name="weight[]" value="0">
+                     			<?php endforeach;?>
+                     			<br>
+                     			<br>
+                     			<br>
+							<?php endforeach;?>
+                     	
+                     	</td>
+                     
+                     </tr>
+		      		<?php endforeach;?>
+                    
+                    
+                    
+                    </table>
+                    
  					
 					<div class="form-group">
                     <button type="submit" class="btn btn-primary">提交</button>
