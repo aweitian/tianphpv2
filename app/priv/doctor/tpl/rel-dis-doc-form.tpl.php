@@ -50,6 +50,12 @@ foreach ($dis_info as $item){
 	border:2px solid gray;
 	padding:8px;
 }
+.weight{
+	margin-right:25px;
+}
+.ddlb{
+	min-width:80px;
+}
 </style>
 <section class="content">
  <!-- general form elements disabled -->
@@ -69,16 +75,20 @@ foreach ($dis_info as $item){
                
                
                      	<td>
-							<input type="hidden" id="did" value="<?php print $doctor["sid"]?>">
+							<input type="hidden" name="dod[]" value="<?php print $doctor["sid"]?>">
                      		<?php foreach ($tree_dis as $dis):?>
                      		<?php print $dis["text"]?>(<?php print($doctor["name"]) ?>)
-                     			<hr>
+                     			<br>
                      			<?php foreach($dis["children"] as $k => $d):?>
-                     			<label id="dd<?php print $k?>">
-                     			<input type="checkbox" name="did[]" value="<?php print $k?>">
-                     			<?php print($d)?>
-                     			</label>
-                     			<input size="3" name="weight[]" value="0">
+                     			<nobr>
+                     			
+	                     			<label id="dd<?php print $k?>" class="ddlb">
+	                     			<input type="checkbox" name="did[<?php $doctor["sid"]?>][]" value="<?php print $k?>">
+	                     			<?php print($d)?>
+	                     			</label>
+	                     			<input size="3" name="weight[<?php $doctor["sid"]?>][<?php print $k?>]" value="60" class="weight">
+                     			</nobr>
+                     			
                      			<?php endforeach;?>
                      			<br>
                      			<br>

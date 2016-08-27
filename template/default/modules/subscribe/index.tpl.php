@@ -20,7 +20,7 @@
       <div class="ghbt">预约挂号平台</div>
       <div class="online_form">
       <script src="<?php print AppUrl::getMediaPath()?>/js/guahao.js"></script>
-       <form name="form1" onSubmit="return guahao()" action="http://swt.gssmart.com/guahao/sockt.php" method="post"  >
+       <form name="form1"  accept-charset="gb2312" onSubmit="return guahao()" action="http://swt.gssmart.com/guahao/sockt.php" method="post"  >
        
           <p class="fl">
             <label for="name">姓&#12288;&#12288;名：</label>

@@ -138,5 +138,15 @@ class doctorDiseaseApi {
 		}
 		return new rirResult ( 0, "ok", $ret );
 	}
+	public function clear() {
+		$ret = $this->db->exec ( $this->sqlManager->getSql ( "/doctor_disease/clear" ), array (
 	
+		) );
+		if ($ret == 0) {
+			if ($this->db->hasError ()) {
+				return new rirResult ( 1, $this->db->getErrorInfo () );
+			}
+		}
+		return new rirResult ( 0, "ok", $ret );
+	}
 }

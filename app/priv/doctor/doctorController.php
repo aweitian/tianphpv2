@@ -70,31 +70,29 @@ class doctorController extends privController{
 	
 	public function addDodDidAction(pmcaiMsg $msg){
 		if($msg->isPost()){
-			
-			var_dump($msg->getPostData());exit;
-			
-			
-			if(!isset($msg["did"],$msg["dod"],$msg["weight"])){
-				$this->response->_404();
-			}
-			$retR = $this->model->update($msg["sid"],$msg["id"],$msg["name"],$msg["avatar"],$msg["date"]);
-			if($retR->isTrue()){
-				if(isset($msg["?returl"])){
-					$url = new pmcaiUrl($msg["?returl"]);
-					$url->setQuery("from", "edit");
-					$ret_url = $url->getUrl();
-				}else{
-					$ret_url = "";
+			//表单数据结构
+			//dod数组，里面是数字
+			//did[dod][]
+			//weight[dod][did]
+			$postData = $msg->getPostData();
+// 			var_dump($postData);exit;
+			if(isset($postData["did"]) && is_array($postData["did"])) {
+				foreach ($postData["dod"] as $dod) {
+					if(isset($postData["did"][$dod]) && is_array($postData["did"][$dod])) {
+// 						$this->model->relDisAdd($dod, $did, $weight)
+						foreach ($postData["did"][$dod] as $did) {
+							if(isset($postData["weight"][$dod][$did])) {
+								$this->model->relDisAdd($dod, $did, $postData["weight"][$dod][$did]);
+							}
+						}
+					}
 				}
-				$this->view->showOpSucc($this->priv->getUserInfo(),"更新",$ret_url);
-			}else{
-				$this->response->showError($retR->info);;
 			}
-		}else{
-			$this->model->msg = $msg;
-			$this->view->setPmcaiMsg($msg);
-			$this->view->showDiDDodForm($this->priv->getUserInfo(),$this->model);
+			
 		}
+		$this->model->msg = $msg;
+		$this->view->setPmcaiMsg($msg);
+		$this->view->showDiDDodForm($this->priv->getUserInfo(),$this->model);
 	}
 	
 	

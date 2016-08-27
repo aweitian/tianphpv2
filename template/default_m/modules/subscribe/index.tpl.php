@@ -26,7 +26,7 @@ foreach ($m->getDisease() as $item){
 
 <!--head end-->
 <script src="<?php print AppUrl::getMediaPath()?>/js/guahao.js"></script>
-<form name="form1" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
+<form name="form1" accept-charset="gb2312" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
 <div class="mzy30">
 	<div class="blank30"></div>
     <div class="yuy_warp bor_rad borddd clr">
@@ -46,26 +46,28 @@ foreach ($m->getDisease() as $item){
     
     <div class="blank20"></div>
 	<div class="yuy_warp bor_rad borddd clr">
-        <select>
-            <?php foreach($m->getDoctors(10) as $doc):?>
-        	<option><?php print $doc["name"]; ?></option>
+        <select name="d" id="zj">
+            <option value="0">选择医生</option>
+            <?php foreach($model->getAllDoc() as $doc):?>
+        	<option value="<?php print $doc["sid"]?>"><?php print $doc["name"]; ?></option>
             <?php endforeach;?>
         </select>
     </div>
     <div class="blank20"></div>
     <div class="yuy_warp bor_rad borddd clr">
-        <textarea placeholder="病情描述："></textarea>
+        <textarea placeholder="病情描述：" name="病情描述" id="desc"></textarea>
     </div>
     <div class="blank20"></div>
 	<div class="yuy_warp bor_rad borddd clr">
-        <select>
-            <?php foreach($tree_dis as $dis):?>  
-        	<option><?php print ($dis["text"])?></option>
+        <select name="j" id="diseases">
+            <option value="0">选择疾病</option>
+             <?php foreach($model->getLv0KeyInfoes() as $xbz):?>   	
+        	<option value="<?php print $xbz["sid"] ?>"><?php print ($xbz["data"])?></option>
             <?php endforeach;?>
         </select>
     </div>
     <div class="blank30"></div>
-    <button class="login_dl bor_rad yellow_bg">提交</button>
+    <button class="login_dl bor_rad yellow_bg" name="submit" type="submit">提交</button>
     <div class="blank30"></div>
 </div>
 

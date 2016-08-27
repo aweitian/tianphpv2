@@ -5,7 +5,7 @@
         <div class="syrboxtit fz18 graybg">预约挂号</div>
         <div class="syrbox4nr fz13">
         
-  <form name="form1" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
+  <form name="form1" accept-charset="gb2312" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
             <table>
               <tr>
                 <td height="26"  width="62">姓      名</td>
@@ -40,8 +40,9 @@
               </tr>
             </table>
             <div class="sybtn">
-              <button class="sybtn1" type="submit" value=""><img src="<?php print AppUrl::getMediaPath()?>/images/syrth8.jpg" width="120" height="40" /></button>
-              <button value=""><img src="<?php print AppUrl::getMediaPath()?>/images/syrth9.jpg" width="120" height="40" /></button>
+ <button class="sybtn1" type="submit" value=""><img src="/static/pc/images/syrth8.jpg" width="120" height="40" /></button>
+              <button type="submit" value=""><img src="/static/pc/images/syrth9.jpg" width="120" height="40" /></button>
+          
             </div>
           </form>
         </div>
