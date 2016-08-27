@@ -1,17 +1,8 @@
 // JavaScript Document
 
-<!--
- 
-var LiveAutoInvite0='您好，来自%IP%的朋友';
-var LiveAutoInvite1='来自首页自动邀请的对话';
-var LiveAutoInvite2='<iframe scrolling=no height=245 frameborder=0 width=400 align=center marginwidth=0 src=http://www.long120.com/tc.html charset="utf-8" marginheight=0>';
-var LiveAutoInvite2='<P align=center><IMG src=\\"http://www.long120.com/images/kefu4.gif\\" border=0></P>';
-var LR_next_invite_seconds = 15;    //10秒后再次显示自动邀请
-var LrinviteTimeout = 1;     //8秒后第一次自动弹出
-//-->
-document.writeln("<script language=\"javascript\" src=\"http://kqi.zoossoft.com/JS/LsJS.aspx?siteid=KQI10880110&float=1&lng=cn\"></script>");
 
-document.writeln("<style type=\"text/css\">#LRfloater0{display:none;}#LRfloater1{display:none;}</style>");
+document.writeln("<script language=\"javascript\" src=\"http://keb.twos.net.cn/JS/LsJS.aspx?siteid=KEB34786808&float=1&lng=cn\"></script>");
+
 
 /*---------------右侧悬浮---------------------*/
 

@@ -12,9 +12,11 @@ $module = AppModule::$moduleName;
 $msg = appCtrl::$msg;
 if($module == "default" && $msg->getControl() == "main"):
 ?>
- 	<script type="text/javascript" src="<?php print AppUrl::getMediaPath()?>/swt/indexbottomswt.js"></script>
- 	
-<?php endif;?>		
+<script type="text/javascript" src="<?php print AppUrl::getMediaPath()?>/swt/indexbottomswt.js"></script>
+<?php endif;?>
+	
+
+	
 <script type="text/javascript" src="<?php print AppUrl::getMediaPath()?>/swt/publicswt.js"></script>
 <script src="<?php print AppUrl::getMediaPath()?>/js/topscroll.js"></script>
  
