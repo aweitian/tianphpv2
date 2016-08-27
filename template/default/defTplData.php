@@ -10,21 +10,23 @@ class defTplData{
 	const TYPE_STATIC_HTML   = 0;
 	const TYPE_INCLUDE_NOW   = 1;
 	const TYPE_INCLUDE_DELAY = 2;
+	public $model;
 	public $title;
 	public $description;
 	public $keyword;
 	private $tpl = array();
 	private $html = array();
 	private $layout;
-	private function __construct(){
+	private function __construct($model = null){
+		$this->model = $model;
 		$this->init();
 	}
 	/**
 	 * @return defTplData
 	 */
-	public static function getInstance(){
+	public static function getInstance($model = null){
 		if(is_null(defTplData::$inst)){
-			defTplData::$inst = new defTplData();
+			defTplData::$inst = new defTplData($model);
 		}
 		return defTplData::$inst;
 	}

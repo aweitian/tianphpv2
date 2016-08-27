@@ -3,7 +3,7 @@
 
 document.writeln("<script language=\"javascript\" src=\"http://keb.twos.net.cn/JS/LsJS.aspx?siteid=KEB34786808&float=1&lng=cn\"></script>");
 
-
+document.writeln("<style type=\"text/css\">#LRdiv0{display:none;}#LRfloater0{display:none;}</style>");
 /*---------------右侧悬浮---------------------*/
 
 document.writeln("<style>");

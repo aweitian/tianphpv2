@@ -129,14 +129,4 @@ $url = new url($req->requestUri());
   </div>
   <!--sybox end-->
   
-    <?php 
-
-  $doc_id=$m->data["id"];
-  $doc_name=$m->data["name"];
-  $doc_lv=$m->data["lv"];
-  $doc_desc=$m->data["desc"];
-  $doc_spec=$m->data["spec"];
-  
-  ?>
-<?php include dirname(dirname(__FILE__))."/bottom_swt.tpl.php";?>
-  
+ 

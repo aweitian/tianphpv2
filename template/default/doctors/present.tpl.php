@@ -139,5 +139,4 @@ function gp(d,p)
   $doc_spec=$m->data["spec"];
   
   ?>
-<?php include dirname(dirname(__FILE__))."/bottom_swt.tpl.php";?>
   
