@@ -54,7 +54,7 @@ class doctorDiseaseApi {
 		$sql = $this->sqlManager->getSql ( "/doctor_disease/select/all" );
 		$bin = array ();
 		$data = $this->db->fetchAll ( $sql, $bin );
-		if (empty ( $row )) {
+		if (empty ( $data )) {
 			return new rirResult ( 1, $this->db->getErrorInfo () );
 		}
 		return new rirResult ( 0, "ok", $data );
@@ -138,9 +138,9 @@ class doctorDiseaseApi {
 		}
 		return new rirResult ( 0, "ok", $ret );
 	}
-	public function clear() {
+	public function clear($dod) {
 		$ret = $this->db->exec ( $this->sqlManager->getSql ( "/doctor_disease/clear" ), array (
-	
+				"dod" => $dod
 		) );
 		if ($ret == 0) {
 			if ($this->db->hasError ()) {

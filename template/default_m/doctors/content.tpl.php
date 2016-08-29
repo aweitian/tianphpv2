@@ -7,7 +7,9 @@ $data = $m->row($aid);
 $isArticle = true;
 
 if(empty($data)){
-	exit("removed.");
+	$httpResponse = new httpResponse();
+	$httpResponse->_404();
+	exit();
 }
 defTplData::getInstance()->title = $data["title"]."_上海九龙男子医院";
 defTplData::getInstance()->keyword = $data["kw"];
@@ -75,11 +77,20 @@ defTplData::getInstance()->description = $data["desc"];
     <div class="blank30"></div>
     <div class="jbkp_page">
         <?php print ($data["content"])?>
+        <script src="<?php print AppUrl::getMediaPath()?>/js/guahao.js"></script>
+        <div class="ksgh clearfix">
+          <h4 class="blue tc">上海九龙男子医院免费咨询、快速挂号</h4>
+          <p class="tc">请输入您的电话号码，提前与医生一对一交流</p>
+          <div class="ksbd">
+          
+            <form name="form1" accept-charset="gb2312" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
+            <input name="电话" id="hometel" placeholder="请输入手机号码" type="text" class="bd">
+            <input type="submit" name="submit" class="btn" value="点击咨询">
+            </form>
+          </div>
+        </div>
         <div class="jbkp_page_zx clr">
-
-			
-
-        	<!--  <a class="fl kp_bn1 zan">赞赏(<span><?php print rand(300,600);?></span>)</a>-->
+       	
         	<a class="fl kp_bn1">
         	<div class="heart" id="like2" rel="like" style="background-position: 0% 50%;"></div> <div class="likeCount" id="likeCount2"><?php print rand(300,600);?></div>
         	</a>
@@ -153,11 +164,11 @@ defTplData::getInstance()->description = $data["desc"];
 <div class="bg_fff">
 	<div class="yswd_jb bg_fff">
         <div class="mzy30">
-           <?php foreach($m->getRandomDid(5) as $dis):?>                  	
-            <p class="clr"><a<?php print App::useTarget()?> href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>" class="fl"><?php print $dis["data"] ?></a><a href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr" /></a></p>
+           
+            <?php foreach($m->getSiblingDids($did) as $xbz):?>   	
+            <p class="clr"><a href="<?php print AppUrl::disHomeByDiseasekey($xbz["key"])?>" class="fl"><?php print $xbz["data"] ?></a><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr" /></p>
             <div class="hd_hsx"></div>    
             <?php endforeach;?>
-
             
          </div>
     </div>

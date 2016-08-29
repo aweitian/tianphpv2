@@ -9,7 +9,8 @@
 	
 	<clear>
 	
-		TRUNCATE TABLE `data_doctor_dis`
+		DELETE FROM `data_doctor_dis`
+		WHERE `dod` = :dod
 	
 	</clear>
 	
@@ -38,7 +39,6 @@
 			SELECT
 			 *
 			FROM `data_doctor_dis`
-			ORDER BY `weight` DESC	
 		</all>
 		<row>
 			SELECT

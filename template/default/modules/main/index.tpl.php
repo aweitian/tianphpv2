@@ -43,7 +43,7 @@ foreach ($m->getDisease() as $item){
           <div class="fromjbboxnr">
           
           	<?php foreach($tree_dis as $dis):?>
-          
+         
           	<dl class="clearfix fl">
               <dt class="fl tc orange fz15"><span><?php print $dis["text"];?></span><br />
                 </dt>
@@ -96,7 +96,7 @@ foreach ($m->getDisease() as $item){
               <dd class="dd1 fl fz13">
                 <p><a<?php print App::useTarget()?> class="blue" href="<?php print AppUrl::docHomeByDocid($doc["id"])?>"><?php print $doc["name"]; ?></a> <?php print $doc["lv"]; ?></p>
                 <p>上海九龙男子医院</p>
-                <p> <?php print utility::utf8Substr($doc["spec"],0,12); ?>...</p>
+                <p> <?php print utility::utf8Substr($doc["spec"],0,10); ?>...</p>
               </dd>
 			  <?php $askdata = $m->getAskQuestionByDod($doc["sid"])?>
 			  <?php
@@ -159,7 +159,7 @@ foreach ($m->getDisease() as $item){
       <!--fromwlzx end-->
       <!--fromwlzx end-->
       <div class="blank20"></div>
-      <div class="fromtit fz18 black border1 clearfix">感谢信<span class="fz12 gray">Thank you note</span><span class="fr fz13 gray">把感谢信送给九龙，把经验留给患友！</span></div>
+      <div class="fromtit fz18 black border1 clearfix"><p class="fl">感谢信<span class="fz12 gray">Thank you note</span></p><span class="fr fz13 gray">把感谢信送给九龙，把经验留给患友！</span></div>
       <div class="blank20"></div>
       <div class="fromjyfx clearfix">
         <div class="fromjyfxl fl">
@@ -223,7 +223,7 @@ foreach ($m->getDisease() as $item){
           </a>
         </dl>
         <dl class="dll dl4">
-          <a<?php print App::useTarget()?> href="/">
+          <a<?php print App::useTarget()?> href="<?php print AppUrl::navSubscribe() ?>">
           <dt></dt>
           <dd>预约挂号</dd>
           </a>
@@ -253,7 +253,7 @@ foreach ($m->getDisease() as $item){
           </a>
         </dl>
         <dl class="dl9">
-          <a<?php print App::useTarget()?> href="/">
+          <a<?php print App::useTarget()?> href="<?php print AppUrl::environment() ?>">
           <dt></dt>
           <dd class="<?php print AppUrl::environment() ?>">就诊环境</dd>
           </a>

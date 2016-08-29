@@ -62,6 +62,6 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 <?php include dirname(__FILE__)."/footer.tpl.php"?>
 
 
-
+</div>
 </body>
 </html>

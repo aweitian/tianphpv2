@@ -36,6 +36,17 @@ if ($_SERVER["HTTP_HOST"] == "hospital.cs999.cn" && utility::isMobile()) {
 	exit;
 }
 
+if($_SERVER["HTTP_HOST"] == "192.168.1.48") {
+	
+	if(isset($_COOKIE["debug_swt_off"]) && $_COOKIE["debug_swt_off"] == '1') {
+		define("SWT_OPEN",FALSE);
+	} else {
+		define("SWT_OPEN",true);
+	}
+} else {
+	define("SWT_OPEN",true);
+}
+
 
 
 // var_dump(THEME);exit;

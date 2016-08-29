@@ -6,7 +6,9 @@ $this->description = "";
 $this->keyword = "";
 
 if(empty($data)){
-	exit("removed.");
+	$httpResponse = new httpResponse();
+	$httpResponse->_404();
+	exit();
 }
 defTplData::getInstance()->title = $data["title"]."_上海九龙男子医院";
 defTplData::getInstance()->keyword = $data["kw"];

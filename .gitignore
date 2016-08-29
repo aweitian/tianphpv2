@@ -3,7 +3,7 @@
 /.buildpath
 /.project
 /cli-tools.php
-/uploads
+/web/uploads
 /.metadata
 /doc
 /.cache

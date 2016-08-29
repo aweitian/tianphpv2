@@ -68,25 +68,26 @@ class doctorController extends privController{
 	}
 	
 	
-	public function addDodDidAction(pmcaiMsg $msg){
+	public function dodDidAction(pmcaiMsg $msg){
 		if($msg->isPost()){
 			//表单数据结构
 			//dod数组，里面是数字
 			//did[dod][]
 			//weight[dod][did]
 			$postData = $msg->getPostData();
-// 			var_dump($postData);exit;
-			if(isset($postData["did"]) && is_array($postData["did"])) {
-				foreach ($postData["dod"] as $dod) {
-					if(isset($postData["did"][$dod]) && is_array($postData["did"][$dod])) {
-// 						$this->model->relDisAdd($dod, $did, $weight)
-						foreach ($postData["did"][$dod] as $did) {
-							if(isset($postData["weight"][$dod][$did])) {
-								$this->model->relDisAdd($dod, $did, $postData["weight"][$dod][$did]);
+// 			var_dump($postData["dod"]);exit;
+			if(isset($postData["did"])) {
+				$this->model->relDisClear($postData["dod"]);
+
+
+						foreach ($postData["did"] as $did) {
+							if(isset($postData["weight"][$did])) {
+// 								echo $dod,",",$did,",",$postData["weight"][$dod][$did];exit;
+								$this->model->relDisAdd($postData["dod"], $did, $postData["weight"][$did]);
 							}
 						}
-					}
-				}
+
+
 			}
 			
 		}

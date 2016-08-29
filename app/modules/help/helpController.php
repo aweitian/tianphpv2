@@ -57,4 +57,17 @@ class helpController extends appCtrl{
 	public function environmentAction(){
 		$this->view->environment($this->model);
 	}
+	public function debugswtAction(pmcaiMsg $msg){
+		if(isset($msg["?f"]) && $msg["?f"] == 'off') {
+			setcookie('debug_swt_off','1',time()+60*60*24*30 ,'/');
+			print "off";
+			exit;
+		} else if (isset($msg["?f"]) && $msg["?f"] == 'on') {
+			setcookie('debug_swt_off','0',time()+60*60*24*30 ,'/');
+			print "on";
+			exit;
+		}
+		print "error";
+		exit;
+	}
 }

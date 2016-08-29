@@ -176,7 +176,7 @@ $this->keyword = "";
                           	<?php foreach ($all["data"] as $allitem):?>
 
                             <dl>
-                              <dt class="fl"><a <?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><span class="fl"><?php print ($allitem["title"]) ?>...</span></a>
+                              <dt class="fl"><a <?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>"><span class="fl"><?php print ($allitem["title"]) ?></span></a>
                               <span class="fr"><?php print $m->getNameByDod($allitem["dod"])?></span></dt>
                            
                               <dd class="fr gray"><a <?php print App::useTarget()?> href="<?php print AppUrl::askByAsdDocid($allitem["dod"], $allitem["sid"]) ?>">回复</a></dd>
@@ -194,7 +194,7 @@ $this->keyword = "";
                         	 	
                             	
                             <dl>
-                              <dt class="fl"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($listarticle["aid"])?>"><span class="fl"><?php print utility::utf8Substr($listarticle["title"], 0, 30) ?>...</span></a><span class="fr">
+                              <dt class="fl"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($listarticle["aid"])?>"><span class="fl"><?php print utility::utf8Substr($listarticle["title"], 0, 30) ?></span></a><span class="fr">
                               <?php print $m->getNameByDod($docname)?>
                               </span></dt>
                               <dd class="fr gray"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($listarticle["aid"])?>">回复</a></dd>

@@ -36,14 +36,13 @@ class diseaseUIApi {
 	 * @param int $did
 	 * @return string;
 	 */
-	public function getDodDataByDid($did) {
-		$cache_key = "getDodDataByDid-" . $did;
+	public function getDodDataByDid($lv0did) {
+		$cache_key = "getDodDataByDid-" . $lv0did;
 		if (array_key_exists ( $cache_key, $this->cache )) {
 			return $this->cache [$cache_key];
 		}
-		
-		$sql = $this->sqlManager->getSql("/ui_disease/getDodData_did");
-		$ret = $this->db->fetchAll($sql, array("did" => $did));
+		$sql = $this->sqlManager->getSql("/ui_disease/getDodData_lv0did");
+		$ret = $this->db->fetchAll($sql, array("did" => $lv0did));
 // 		var_dump($sql);exit;
 		$this->cache [$cache_key] = $ret;
 		return $ret;

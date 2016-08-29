@@ -60,14 +60,17 @@
 		
 		
 		
-	<getDodData_did>
-	
+	<getDodData_lv0did>
 			SELECT
 			 *
 			FROM `data_doctor_dis`
-			WHERE `did` = :did			
-			ORDER BY `weight` DESC	
-	</getDodData_did>	
+			WHERE `did` IN (
+				SELECT `data_attr_data`.`sid` FROM `data_attr_data` WHERE `data_attr_data`.`pid` =  :did
+			)	
+			group by dod			
+			ORDER BY sum(`weight`) DESC	
+			
+	</getDodData_lv0did>	
 		
 
 	<!-- 获取DISEASE ROW INFO BY URL KEY -->

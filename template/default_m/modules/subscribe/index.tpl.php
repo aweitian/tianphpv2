@@ -30,18 +30,18 @@ foreach ($m->getDisease() as $item){
 <div class="mzy30">
 	<div class="blank30"></div>
     <div class="yuy_warp bor_rad borddd clr">
-        <label class="fl" style="width:1.5rem;">您的姓名：</label>
-        <input type="text" name="名称" id="name"  class="fl" style="width:3.6rem;" />
+        <label class="fl">您的姓名：</label>
+        <input type="text" name="名称" id="name"  class="fl" />
     </div>
     <div class="blank20"></div>
     <div class="yuy_warp bor_rad borddd clr">
-        <label class="fl" style="width:1.5rem;">您的年龄：</label>
-        <input type="text" name="年龄" id="age" class="fl" style="width:3.6rem;" />
+        <label class="fl">您的年龄：</label>
+        <input type="text" name="年龄" id="age" class="fl" />
     </div>
     <div class="blank20"></div>
     <div class="yuy_warp bor_rad borddd clr">
-        <label class="fl" style="width:2.1rem;">您的手机号码：</label>
-        <input type="text" id="hometel" name="电话"  class="fl" style="width:3rem;" />
+        <label class="fl">您的电话：</label>
+        <input type="text" id="hometel" name="电话"  class="fl" />
     </div>
     
     <div class="blank20"></div>

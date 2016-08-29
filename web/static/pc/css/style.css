@@ -1,3 +1,4 @@
+@charset "utf-8";
 body {
 	font: 14px/18px Verdana, Simsun, Helvetica, Arial, sans-serif;
 	color: #333;
@@ -327,6 +328,10 @@ em {
 .fromtit span {
 	margin-left: 10px;
 	font-family: "Arial";
+	
+}
+.fromtit span.fr{
+	width:250px;
 }
 .fromjbbox {
 	padding: 20px 0 20px 19px;
@@ -407,6 +412,7 @@ padding: 0px 0 20px 0px; width:320px;
 }
 .fromzxzjbox2 dl dd p {
 	line-height: 23px;
+	width:160px;
 }
 .graybg {
 	background: #f5f5f5;
@@ -642,7 +648,7 @@ padding: 0px 0 20px 0px; width:320px;
 .syrbox4nr table tr td .input2 {
 	height: 24px;
 	line-height: 24px;
-	width: 195px;
+	width: 193px;
 	background: url(../images/syrth7.jpg) no-repeat 176px 3px;
 	text-indent: 10px;
 }
@@ -2401,7 +2407,7 @@ a.td_link, a.td_link_read {
 .yyjs_box2 h6{ font-weight:400; border:1px solid #d7e5fc; background:#ebf2fd; height:38px; line-height:38px;}
 .yyjs_box2 div{ margin-bottom:10px;}
 .yyjs_box2 div span{ width:98px; height:24px; color:#fe8100; line-height:24px; border:1px solid #fec07f; margin-right:12px; -moz-border-radius:24px; -webkit-border-radius:24px; border-radius:24px;}
-.yyjs_box2 div p{ line-height:24px;}
+.yyjs_box2 div p{ line-height:24px; width:520px;}
 .yyjs_box2 div p a{ color:#377bee;}
 
 

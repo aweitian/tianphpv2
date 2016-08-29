@@ -26,6 +26,10 @@ class AppUrl {
 	
 	
 	// 全局URL
+	public static function swtjs() {
+		return AppUrl::build ( "/swtjs" );
+	}
+	
 	public static function getMediaPath() {
 		return AppUrl::build ( "/static/" . (APP_MOBILE_MODE ? "m" : "pc") );
 	}

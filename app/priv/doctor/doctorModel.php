@@ -72,12 +72,10 @@ class doctorModel extends privModel{
 		$api = new doctorDiseaseApi();
 		return $api->notRelDocs();
 	}
-	public function relDisClear(){
+	public function relDisClear($dod){
 		$api = new doctorDiseaseApi();
-		return $api->clear();
+		return $api->clear($dod);
 	}
-	
-	
 	
 	
 	

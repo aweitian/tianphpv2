@@ -696,8 +696,8 @@
 
 
 .yuy_warp{ padding:0 .3rem;}
-.yuy_warp input{ width:100%; height:.64rem;}
-.yuy_warp label{ width:1.3rem; height:.66rem; line-height:.66rem; color:#777; font-size:.3rem;}
+.yuy_warp label{ width:32%; height:.66rem; line-height:.66rem; color:#777; font-size:.3rem;}
+.yuy_warp input{ width:65%; }
 .yuy_warp select{ width:5.35rem; height:.66rem; border:0; color:#333; font-size:.28rem;}
 .yuy_warp textarea{ padding:.2rem 0; height:2.4rem; width:5.2rem; resize: none;}
 
@@ -932,7 +932,7 @@
 	height:.05rem;
 }
 
-.yyjs_box1 div{ background:url(../images/memer_img1.png) no-repeat right center; background-size:.17rem .3rem;}
+.yyjs_box1 div{ background-size:.17rem .3rem;}
 .yyjs_box1 div a{ color:#666; margin-right:.3rem;}
 
 
@@ -1014,3 +1014,11 @@
 .page_tit dl dd a.page_zx2{ background:#53d37e;}
 
 .zjtd_xg4{ width:1.2rem; height:1.2rem; border-radius:1.2rem; border:1px solid #ddd;}
+
+
+.ksgh{background:#fff;padding:.1rem 0 .3rem;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;margin-bottom:.2rem;}
+.ksgh h4{font-weight:normal;font-size:.3rem;}
+.ksgh p{color:#999;text-indent:0;margin-bottom:.2rem;}
+.ksbd{padding:.3rem;border-top:1px #e5e5e5 solid;}
+.ksbd .bd{float:left;width:72%;height:.4rem;border:1px #e5e5e5 solid;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
+.ksbd .btn{float:right;width:23%;height:.42rem;background:#fe8100;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;color:#fff;font-size:.2rem;cursor:pointer;}

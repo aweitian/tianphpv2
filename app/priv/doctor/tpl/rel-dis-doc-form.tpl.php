@@ -6,19 +6,11 @@
  * Description: 
  */
 $m = $data["model"];
-if(isset($m->msg["?dod"],$m->msg["?did"])){
-	$def = $m->relDisRow($m->msg["?dod"],$m->msg["?did"]);
-	$at = "编辑";
-	$ua = "editext";
-}else{
-	$def = array(
-		"dod" => "",
-		"did" => "",
-		"weight" => "60",
-	);
-	$at = "添加";
-	$ua = "addext";
-}
+
+$def_weight = 60;
+
+$def = $m->relDisAll()->return;
+
 if(isset($_SERVER['HTTP_REFERER'])){
 	$ret_url = "?returl=".urlencode($_SERVER['HTTP_REFERER']);
 }else{
@@ -37,7 +29,34 @@ foreach ($dis_info as $item){
 	}
 	$tree_dis[$item["pid"]]["children"][$item["mid"]] = $item["md"];
 }
-// var_dump($dis_info);exit;
+
+
+$tree_data = array();
+foreach ($def as $item){
+	if(!array_key_exists($item["dod"], $tree_data)){
+		$tree_data[$item["dod"]] = array();
+	}
+	$tree_data[$item["dod"]][$item["did"]] = $item["weight"];
+}
+
+
+// array(2) {
+// 	[2]=>
+// 	array(1) {
+// 		[1088]=>
+// 		string(2) "25"
+// 	}
+// 	[3]=>
+// 	array(1) {
+// 		[1088]=>
+// 		string(2) "74"
+// 	}
+// }
+// var_dump($tree_data);exit;
+
+
+
+$def = $tree_data;
 ?>
 <style>
 .dutytable{}
@@ -57,6 +76,7 @@ foreach ($dis_info as $item){
 	min-width:80px;
 }
 </style>
+
 <section class="content">
  <!-- general form elements disabled -->
               <div class="box box-warning">
@@ -64,57 +84,53 @@ foreach ($dis_info as $item){
                   <h3 class="box-title">更新医生与疾病的关系</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/doctor/addDodDid<?php print $ret_url?>">
+                 <div class="form-group">
+                    
+                  </div>
+                   
                     <!-- text input -->
                     <table class="ddt">
                     
                    <?php foreach($m->relDisNotRel()->return as $doctor):?>
 					<tr>
-                
-                     	
-               
-               
                      	<td>
-							<input type="hidden" name="dod[]" value="<?php print $doctor["sid"]?>">
+                    		<form method="post" action="<?php print HTTP_ENTRY?>/priv/doctor/dodDid<?php print $ret_url?>">
+							<input type="hidden" name="dod" value="<?php print $doctor["sid"]?>">
                      		<?php foreach ($tree_dis as $dis):?>
-                     		<?php print $dis["text"]?>(<?php print($doctor["name"]) ?>)
-                     			<br>
+                     		<div>
+                     			<?php print $dis["text"]?>(<?php print($doctor["name"]) ?>|<?php print($doctor["sid"]) ?>)
+                     		</div>
                      			<?php foreach($dis["children"] as $k => $d):?>
                      			<nobr>
                      			
-	                     			<label id="dd<?php print $k?>" class="ddlb">
-	                     			<input type="checkbox" name="did[<?php $doctor["sid"]?>][]" value="<?php print $k?>">
+	                     			<label id="dd<?php print $k?>" class="ddlb" title="<?php print $k?>">
+	                     			<input<?php if(array_key_exists($doctor["sid"], $def) && array_key_exists($k, $def[$doctor["sid"]]) ):?> checked<?php endif?> type="checkbox" name="did[]" value="<?php print $k?>">
 	                     			<?php print($d)?>
 	                     			</label>
-	                     			<input size="3" name="weight[<?php $doctor["sid"]?>][<?php print $k?>]" value="60" class="weight">
+	                     			<input value="<?php print array_key_exists($doctor["sid"], $def) && array_key_exists($k, $def[$doctor["sid"]]) ? $def[$doctor["sid"]][$k] : $def_weight?>" size="3" name="weight[<?php print $k?>]" value="60" class="weight">
                      			</nobr>
                      			
                      			<?php endforeach;?>
-                     			<br>
-                     			<br>
-                     			<br>
 							<?php endforeach;?>
-                     	
+                     		<br>
+			        		<button type="submit" class="btn btn-primary">提交</button>
+			        
+		
+                    		</form>
                      	</td>
                      
                      </tr>
 		      		<?php endforeach;?>
-                    
-                    
+			        
                     
                     </table>
                     
  					
-					<div class="form-group">
-                    <button type="submit" class="btn btn-primary">提交</button>
-                  </div>
+					
 
-                  </form>
+                  
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
-
-
-
 </section>
 
 <script>

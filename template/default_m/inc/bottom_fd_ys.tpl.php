@@ -1,6 +1,6 @@
 <?php
 ?>
-<div style="height:1.25rem;"></div>
+<div style="height:1.45rem;"></div>
 <div class="box_d">
     <div class="clr">
         <a href="<?php print AppUrl::docHomeByDocid($m->data["id"])?>"><img src="<?php print AppUrl::getMediaPath()?>/doctor/<?php print $m->data["avatar"]?>" class="fl" /></a>
