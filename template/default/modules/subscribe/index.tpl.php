@@ -59,7 +59,7 @@
           </p>
           <p class="fl">
             <label for="diseases">选择病种：</label>
-            <select class="validation" title="请选择预约病种" id="diseases" name="j">
+            <select class="validation" title="请选择预约病种"  id="diseases" name="j">
               <option value="0">请选择病种</option>
                 <?php foreach($model->getLv0KeyInfoes() as $xbz):?>   	
               
@@ -126,6 +126,7 @@
     </div>
   </div>
 </div>
+<div class="blank20"></div>
 <?php include dirname(dirname(dirname(__FILE__)))."/footer.tpl.php"?>
 
 </body>

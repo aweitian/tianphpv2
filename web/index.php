@@ -16,6 +16,7 @@ if ($_SERVER["HTTP_HOST"] == "192.168.1.48") {
 
 
 define("FILE_SYSTEM_ENTRY",dirname(dirname(__FILE__)));
+define("TPL_404_CNF_PATH",FILE_SYSTEM_ENTRY."/template/default/404/index.tpl.php");
 //require_once FILE_SYSTEM_ENTRY.'/app/conf/pmcai.php';  #需要修改默认配置再加载
 require_once FILE_SYSTEM_ENTRY.'/lib/tian.php';
 require_once FILE_SYSTEM_ENTRY.'/app/App.php';

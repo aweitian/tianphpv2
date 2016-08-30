@@ -2951,3 +2951,10 @@ a,img{border:0;}
 .tindent2{text-indent:2em;}
 .jjbox3 li{float:left;margin-right:44px;}
 .jjbox3 li.last{margin-right:0;}
+
+#notfind{width:550px;margin:100px auto;}
+#notfind dd{float:right;width:400px;}
+#notfind li{float:left;width:140px;height:39px;font:18px/36px Microsoft Yahei;background:#e5995b;color:#fff;margin-left:30px;border-radius:25px;-moz-order-radius:25px;-webkit-order-radius:25px;text-align:center;}
+#notfind li img{ vertical-align:middle;padding-right:5px;}
+#notfind li a{color:#fff;}
+#notfind li a:hover{color:#ff0;}

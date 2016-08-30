@@ -36,6 +36,5 @@ class editorController extends appCtrl{
 	}
 	public function uploadAction(pmcaiMsg $msg){
 		uploadFactory::getInstance()->upload();
-		
 	}
 }

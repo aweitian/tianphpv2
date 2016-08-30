@@ -6,6 +6,10 @@
   </div>
   <div class="footerloc fz13 tc">地址：上海市长宁区中山西路333号（近中山公园）  沪ICP备14017357号-1 沪卫（中医）网复审【2014】第10045号　网站统计</div>
 
+  
+ 
+  
+  
 <?php if(AppModule::$moduleName == "default" && appCtrl::$msg->getControl() == "main"):?>
 	<?php if(SWT_OPEN):?>
 	<script type="text/javascript" src="<?php print AppUrl::getMediaPath()?>/swt/indexbottomswt.js"></script>

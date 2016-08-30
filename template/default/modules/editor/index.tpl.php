@@ -50,6 +50,7 @@ KindEditor.ready(function(K) {
 		uploadJson : '<?php print HTTP_ENTRY?>/priv/upload',
 		fileManagerJson : '<?php print HTTP_ENTRY?>/priv/upload/list',
 		allowFileManager : true,
+		filterMode : false,
 		afterCreate : function() {
 			var self = this;
 			K.ctrl(document, 13, function() {

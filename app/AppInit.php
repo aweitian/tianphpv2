@@ -9,45 +9,50 @@ define ( "HTTP_ENTRY", '' );
 if (DEBUG_FLAG) {
 	error_reporting ( E_ALL );
 	ini_set ( "display_errors", "On" );
-	set_error_handler ( array("App","myErrorHandler") );
-	define("APP_MOBILE_MODE",utility::isMobile ());
-	define("TARGET_BLANK_OPEN",false);
+	set_error_handler ( array (
+			"App",
+			"myErrorHandler" 
+	) );
+	define ( "APP_MOBILE_MODE", utility::isMobile () );
+	define ( "TARGET_BLANK_OPEN", false );
 	require_once FILE_SYSTEM_ENTRY . '/app/runEnvir/default.php';
 } else {
 	error_reporting ( 0 );
 	ini_set ( "display_errors", "Off" );
-	if($_SERVER["HTTP_HOST"] == "hospital.cs999.cn") {
-		define("APP_MOBILE_MODE",false);
-	}else if($_SERVER["HTTP_HOST"] == "3g.hospital.cs999.cn"){
-		define("APP_MOBILE_MODE",true);
-	}else{
-		exit('0x1596321');
+	if ($_SERVER ["HTTP_HOST"] == "hospital.cs999.cn") {
+		define ( "APP_MOBILE_MODE", false );
+	} else if ($_SERVER ["HTTP_HOST"] == "3g.hospital.cs999.cn") {
+		define ( "APP_MOBILE_MODE", true );
+	} else {
+		exit ( '0x1596321' );
 	}
 	require_once FILE_SYSTEM_ENTRY . '/app/runEnvir/online.php';
 }
 if (APP_MOBILE_MODE) {
-	define("THEME", "default_m");
+	define ( "THEME", "default_m" );
 } else {
-	define("THEME", "default");
+	define ( "THEME", "default" );
 }
 
-if ($_SERVER["HTTP_HOST"] == "hospital.cs999.cn" && utility::isMobile()) {
-	header("location:http://3g.hospital.cs999.cn");
-	exit;
-}
-
-if($_SERVER["HTTP_HOST"] == "192.168.1.48") {
-	
-	if(isset($_COOKIE["debug_swt_off"]) && $_COOKIE["debug_swt_off"] == '1') {
-		define("SWT_OPEN",FALSE);
+if ($_SERVER ["HTTP_HOST"] == "hospital.cs999.cn" && utility::isMobile ()) {
+	if (isset ( $_SERVER ['REQUEST_URI'] )) {
+		header ( "location:http://3g.hospital.cs999.cn" . $_SERVER ['REQUEST_URI'] );
 	} else {
-		define("SWT_OPEN",true);
+		header ( "location:http://3g.hospital.cs999.cn" );
+	};
+	exit ();
+}
+
+if ($_SERVER ["HTTP_HOST"] == "192.168.1.48") {
+	
+	if (isset ( $_COOKIE ["debug_swt_off"] ) && $_COOKIE ["debug_swt_off"] == '1') {
+		define ( "SWT_OPEN", FALSE );
+	} else {
+		define ( "SWT_OPEN", true );
 	}
 } else {
-	define("SWT_OPEN",true);
+	define ( "SWT_OPEN", true );
 }
-
-
 
 // var_dump(THEME);exit;
 require_once FILE_SYSTEM_ENTRY . '/app/AppConst.php';

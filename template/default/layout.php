@@ -51,8 +51,8 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 		<?php endif?>
 		</div>
 			<p class="fr">
-				<a <?php print App::useTarget()?> href="">设为首页</a> | <a
-					<?php print App::useTarget()?> href="">收藏本站</a>
+				<a <?php print App::useTarget()?> href="<?php print AppUrl::userWriteLetter()?>">登陆</a> | <a
+					<?php print App::useTarget()?> href="<?php print AppUrl::userRegister()?>">注册</a>
 			</p>
 		</div>
 	</div>

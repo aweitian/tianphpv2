@@ -12,7 +12,7 @@ $this->title = "疾病专题-上海九龙男子医院";
 $this->description = "";
 $this->keyword = "";
 
-$pageSize = 12;
+$pageSize = 10;
 if(isset($_REQUEST["page"])){
 	$page = intval($_REQUEST["page"]);
 } else{
@@ -21,7 +21,7 @@ if(isset($_REQUEST["page"])){
 
 
 
-$pagination = new pagination($m->getAllFullCnt(), $page, $pageSize, 10);
+$pagination = new pagination($m->getAllFullCnt(), $page, $pageSize, 7);
 
 $req = new httpRequest();
 $url = new url($req->requestUri());

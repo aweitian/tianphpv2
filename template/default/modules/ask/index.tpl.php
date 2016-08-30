@@ -30,7 +30,7 @@ if ($row["sid"] == 0) {
 }
 
 
-$pagination = new pagination($all["count"], $page, $pageSize, 10);
+$pagination = new pagination($all["count"], $page, $pageSize, 7);
 
 // foreach($m->getDisease() as $item)
 // {

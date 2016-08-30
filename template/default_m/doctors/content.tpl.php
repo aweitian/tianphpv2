@@ -84,7 +84,7 @@ defTplData::getInstance()->description = $data["desc"];
           <div class="ksbd">
           
             <form name="form1" accept-charset="gb2312" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
-            <input name="电话" id="hometel" placeholder="请输入手机号码" type="text" class="bd">
+            <input name="电话" id="hometel" type="text" class="bd" />
             <input type="submit" name="submit" class="btn" value="点击咨询">
             </form>
           </div>

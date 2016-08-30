@@ -62,7 +62,7 @@
 		
 	<getDodData_lv0did>
 			SELECT
-			 *
+			 dod,did,SUM(`weight`) as `weight`
 			FROM `data_doctor_dis`
 			WHERE `did` IN (
 				SELECT `data_attr_data`.`sid` FROM `data_attr_data` WHERE `data_attr_data`.`pid` =  :did
