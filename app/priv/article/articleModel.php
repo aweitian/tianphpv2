@@ -42,7 +42,8 @@ class articleModel extends privModel{
 	
 	public function hasArticleBysyd($syd){
 		$api = new articleSymptomApi();
-		return !empty($api->row($syd));
+		$ret = $api->row($syd);
+		return !empty($ret);
 	}
 	
 	/**
