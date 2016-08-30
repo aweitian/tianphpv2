@@ -22,6 +22,9 @@ class swtjsController extends appCtrl{
 	public function welcomeAction(pmcaiMsg $msg){
 		$response = new httpResponse();
 		$response->ContentType(httpResponse::CONTENT_TYPE_JS);
-		include FILE_SYSTEM_ENTRY."/template/default/swt/swtjs.tpl.php";
+		if(APP_MOBILE_MODE)
+			include FILE_SYSTEM_ENTRY."/template/default_m/swt/swtjs.tpl.php";
+		else
+			include FILE_SYSTEM_ENTRY."/template/default/swt/swtjs.tpl.php";
 	}
 }
