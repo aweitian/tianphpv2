@@ -33,7 +33,6 @@ if (DEBUG_FLAG) {
 	} else {
 		define ( "THEME", "default" );
 	}
-	
 } else {
 	error_reporting ( 0 );
 	ini_set ( "display_errors", "Off" );
@@ -41,8 +40,10 @@ if (DEBUG_FLAG) {
 	
 	if (AppChannel::isDeviceM()) {
 		define ( "THEME", "default_m" );
+		define ( "APP_MOBILE_MODE", true );
 	} else {
 		define ( "THEME", "default" );
+		define ( "APP_MOBILE_MODE", false );
 	}
 }
 
