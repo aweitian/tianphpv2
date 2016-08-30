@@ -2,11 +2,11 @@
 class AppChannel {
 	const DEVICE_PC = 0x0;
 	const DEVICE_M = 0x1;
-	const CHANNEL_WX1 = 0x0;
-	const CHANNEL_WX2 = 0x1;
-	const CHANNEL_PC = 0x2;
-	const CHANNEL_PC_SG = 0x3;
-	const CHANNEL_SM = 0x4;
+	const CHANNEL_WX1 = 0x1;
+	const CHANNEL_WX2 = 0x2;
+	const CHANNEL_PC = 0x3;
+	const CHANNEL_PC_SG = 0x4;
+	const CHANNEL_SM = 0x5;
 	public static $map = array ();
 	public static function init() {
 		AppChannel::$map = array (
