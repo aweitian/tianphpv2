@@ -57,7 +57,7 @@ defTplData::getInstance()->description = $data["desc"];
             <div class="blank10"></div>
             <dd>
             	<a href="<?php print AppUrl::getSwtUrl()?>" onclick="openZoosUrl();return false;" class="fl page_zx1">在线咨询</a>
-                <a href="<?php print AppChannel::getTel()?>" class="fl page_zx2">电话咨询</a>
+                <a href="tel:<?php print AppChannel::getTel()?>" class="fl page_zx2">电话咨询</a>
             </dd>
         </dl>
     </div>

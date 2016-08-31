@@ -24,7 +24,7 @@
         </dl>
         <dl class="clr">
         	<dt class="fl blue"><img src="<?php print AppUrl::getMediaPath()?>/images/lylx_tb2.png" />医院电话：</dt>
-            <dd class="fl"><a href="<?php print AppChannel::getTel()?>">021-52733999</a></dd>
+            <dd class="fl"><a href="tel:<?php print AppChannel::getTel()?>">021-52733999</a></dd>
         </dl>
         <dl class="clr">
         	<dt class="fl blue"><img src="<?php print AppUrl::getMediaPath()?>/images/lylx_tb3.png" style=" height:.39rem;" />医院地址：</dt>
@@ -67,7 +67,7 @@
 <div class="lylx_sm2 clr">
     	<h5 class="fz30 blue"><img src="<?php print AppUrl::getMediaPath()?>/images/lylx_zc5.png" class="fl" />自驾</h5>
         <div class="mzy30">
-        <p>直接开车到中山公园地铁站附近，如中途有路线不清楚可以拔打电话咨询：<b><a href="<?php print AppChannel::getTel()?>" class="yellow">021-52733999</a></b></p>
+        <p>直接开车到中山公园地铁站附近，如中途有路线不清楚可以拔打电话咨询：<b><a href="tel:<?php print AppChannel::getTel()?>" class="yellow">021-52733999</a></b></p>
     </div>
 </div>
 <?php include dirname(dirname(dirname(__FILE__)))."/inc/bottom.tpl.php";?>
