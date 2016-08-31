@@ -1756,7 +1756,7 @@ _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizing
 .zjtd_pagetit{ line-height:34px; border-bottom:1px dotted #d9d9d9; padding-bottom:10px;}
 .zjtd_pagetit h2{ font-weight:400;}
 .zjtd_pagenr p{ text-indent:2em; font-size:16px; line-height:160%;margin-bottom:25px;}
-
+.zjtd_pagenr a{ color:#0000FF;}
 .page_tit1{ background:#eee; height:30px; line-height:30px; padding-left:20px;}
 .page_tit1 span{ margin-left:15px; font-weight:400;}
 .zjtdpage_box1 div a img{ margin-right:19px; float:left;}

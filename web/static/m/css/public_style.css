@@ -67,6 +67,7 @@ input,button,select,textarea{
 	border-radius:0px;
 	font-size:.3rem;
 	color:#999;
+	-webkit-appearance: none; 
 	}
 .public_width{
 	width:6.4rem;
