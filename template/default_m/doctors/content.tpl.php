@@ -80,17 +80,17 @@ defTplData::getInstance()->description = $data["desc"];
         <?php print AppFilter::RePlaceholder($data["content"])?>
         
         
-        <script src="<?php print AppUrl::getMediaPath()?>/js/guahao.js"></script>
+     
         <div class="ksgh clearfix">
           <h4 class="blue tc">上海九龙男子医院免费咨询、快速挂号</h4>
           <p class="tc">请输入您的电话号码，提前与医生一对一交流</p>
           <div class="ksbd">
           
            	
-  <form name="form1" accept-charset="gb2312" action="http://swt.gssmart.com/send/index.php" method="post" onSubmit="return guahao()" >
+  <form name="form1" accept-charset="gb2312" action="http://swt.gssmart.com/send/index.php" method="post">
   <input type="hidden" name="content" value="上海九龙男子医院提醒：男科疾病要提早治疗，具体诊疗请在医生指导下进行！咨询电话：<?php print AppChannel::getTel() ?>-退订回T【上海九龙男子医院】">
             <input name="tel" id="home_dx_co" type="text" class="bd" />
-            <input type="submit" name="submit" class="btn" value="点击咨询">
+            <input type="submit" name="submit" class="btn" value="点击咨询" />
             
           </div>
         </div>
