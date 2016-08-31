@@ -53,7 +53,7 @@ defTplData::getInstance()->description = $data["desc"];
                        <div class="zjtd_pagenr">
                        
                        
-                       <p><?php print ($data["content"])?></p>
+                       <p> <?php print AppFilter::RePlaceholder($data["content"])?></p>
                        
                        
                        </div>

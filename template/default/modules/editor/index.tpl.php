@@ -30,6 +30,10 @@
 		<textarea id="content" style="width:700px;height:500px;visibility:hidden;"></textarea>
 	</form>
 	<button onclick="save()" style="width:128px;height:32px;">保存</button>
+	
+	<button onclick="itel()" style="width:128px;height:32px;">插入电话号码</button>
+	
+	<button onclick="iswt()" style="width:128px;height:32px;">插入商务通</button>
 </div>
 
 </div>
@@ -65,6 +69,21 @@ KindEditor.ready(function(K) {
 	});
 	prettyPrint();
 });
+function replaceHTML(html)
+{
+	return html.replace(/<.+?>/,'');
+	
+}
+function itel()
+{
+	var text = replaceHTML(editor1.selectedHtml());
+	editor1.insertHtml("<a href=\"tel:http://tel\">"+(text ? text : "点击打电话")+"</a>");
+}
+function iswt()
+{
+	var text = replaceHTML(editor1.selectedHtml());
+	editor1.insertHtml("<a href=\"javascript:void(0)\" onclick=\"openZoosUrl();return false;\">"+(text ? text : "点击咨询")+"</a>");
+}
 </script>
 
 </body>

@@ -29,7 +29,7 @@ class AppFilter {
 	 */
 	public static function RePlaceholder($content){
 		return strtr($content,array(
-			"http://swt" => AppChannel::getSwt(),	
+// 			"http://swt" => AppChannel::getSwt(),	
 			"http://tel" => AppChannel::getTel(),	
 		));
 	}
