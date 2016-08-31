@@ -225,27 +225,27 @@ class AppChannel {
 		$domain = $_SERVER ["HTTP_HOST"];
 		if (AppChannel::isChannelWX1 ( $domain )) {
 			if (AppChannel::isDeviceM ( $domain )) {
-				return "tel:021-52715099";
+				return "021-52715099";
 			} else {
-				return "tel:021-52715099";
+				return "021-52715099";
 			}
 		} else if (AppChannel::isChannelWX2 ( $domain )) {
 			if (AppChannel::isDeviceM ( $domain )) {
-				return "tel:021-52729299";
+				return "021-52729299";
 			} else {
-				return "tel:021-52729299";
+				return "021-52729299";
 			}
 		} else if (AppChannel::isChannelPC ( $domain )) {
 			if (AppChannel::isDeviceM ( $domain )) {
-				return "tel:021-52370007";
+				return "021-52370007";
 			} else {
-				return "tel:021-52370007";
+				return "021-52370007";
 			}
 		} else if (AppChannel::isChannelPC_SG ( $domain )) {
 			if (AppChannel::isDeviceM ( $domain )) {
-				return "tel:021-52669519";
+				return "021-52669519";
 			} else {
-				return "tel:021-52669519";
+				return "021-52669519";
 			}
 		} else if (AppChannel::isChannel_SM ( $domain )) {
 			if (AppChannel::isDeviceM ( $domain )) {

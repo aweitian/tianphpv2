@@ -77,7 +77,7 @@ function replaceHTML(html)
 function itel()
 {
 	var text = replaceHTML(editor1.selectedHtml());
-	editor1.insertHtml("<a href=\"http://tel\">"+(text ? text : "点击打电话")+"</a>");
+	editor1.insertHtml("<a href=\"tel:http://tel\">"+(text ? text : "点击打电话")+"</a>");
 }
 function iswt()
 {
