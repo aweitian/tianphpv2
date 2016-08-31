@@ -65,7 +65,7 @@ $url = new url ( $req->requestUri () );
 					<div class="blank30"></div>
 					<div class="ys_box1_sm1 clr">
 						<a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="blue_bg fl">在线咨询</a>
-						<a href="tel:021-52733999" class="new_green_bg fr">电话咨询</a>
+						<a href="<?php print AppChannel::getTel()?>" class="new_green_bg fr">电话咨询</a>
 					</div>
 					<div class="blank30"></div>
 				</div>

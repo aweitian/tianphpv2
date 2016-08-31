@@ -63,7 +63,7 @@ document.writeln("     <a id=\"divMceteragb\" onclick=\"swtcloseM()\" target=\"_
 
 document.writeln("     <a id=\"divMcetera1\" href=\"javascript:void(0)\" onclick=\"openZoosUrl();return false;\"  rel=\"nofollow\" target=\"_blank\" title=\"我要咨询\"></a>");
 
-document.writeln("     <a id=\"divMcetera2\" href=\"tel:021-52733999\" rel=\"nofollow\" target=\"_blank\" title=\"拨打电话\"></a>");
+document.writeln("     <a id=\"divMcetera2\" href=\"<?php print AppChannel::getTel()?>\" rel=\"nofollow\" target=\"_blank\" title=\"拨打电话\"></a>");
 
 
 

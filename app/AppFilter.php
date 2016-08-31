@@ -22,4 +22,15 @@ class AppFilter {
 	public static function filterIn($html){
 		return trim(strip_tags($html));
 	}
+	/**
+	 * 替换商务通和电话的点位符
+	 * @param string $html
+	 * @return string
+	 */
+	public static function RePlaceholder($content){
+		return strtr($content,array(
+			"http://swt" => AppChannel::getSwt(),	
+			"http://tel" => AppChannel::getTel(),	
+		));
+	}
 }

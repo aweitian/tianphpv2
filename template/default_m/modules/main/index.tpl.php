@@ -59,7 +59,7 @@ foreach ($m->getDisease() as $item){
           <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="order_menzhen"> 
               <span class="menzhen_ab"> 预约就诊<br/><span class="gray">省时、省心、省力、省钱</span> </span>
          </a> 
-         <a href="tel:021-52733999" class="order_pinzhi"> 
+         <a href="<?php print AppChannel::getTel()?>" class="order_pinzhi"> 
               <span class="dianhua_ab"> 电话咨询<br/><span class="gray">足不出户联系医生</span></span> 
           </a> 
     </div>

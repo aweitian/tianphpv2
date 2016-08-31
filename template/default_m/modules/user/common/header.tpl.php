@@ -28,7 +28,7 @@
   </div>
   <div class="three_btn clearfix">
     <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" id="cnzz_zixun205"><span></span></a>
-    <a href="tel:021-52733999" id="cnzz_dianhua206"><span></span></a>
+    <a href="<?php print AppChannel::getTel()?>" id="cnzz_dianhua206"><span></span></a>
     <a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" id="cnzz_jihao207" class="mr0"><span></span></a>
   </div>
   <div class="three_a clearfix">

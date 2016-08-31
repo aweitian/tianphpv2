@@ -57,7 +57,7 @@ defTplData::getInstance()->description = $data["desc"];
             <div class="blank10"></div>
             <dd>
             	<a href="<?php print AppUrl::getSwtUrl()?>" onclick="openZoosUrl();return false;" class="fl page_zx1">在线咨询</a>
-                <a href="tel:021-52733999" class="fl page_zx2">电话咨询</a>
+                <a href="<?php print AppChannel::getTel()?>" class="fl page_zx2">电话咨询</a>
             </dd>
         </dl>
     </div>
@@ -76,7 +76,10 @@ defTplData::getInstance()->description = $data["desc"];
     <div class="color9"><span class="fl">发表于 <?php print $data["date"]?></span><span class="fr">已阅读<?php print rand(1000,2000);?>次</span></div>
     <div class="blank30"></div>
     <div class="jbkp_page">
-        <?php print ($data["content"])?>
+        
+        <?php print AppFilter::RePlaceholder($data["content"])?>
+        
+        
         <script src="<?php print AppUrl::getMediaPath()?>/js/guahao.js"></script>
         <div class="ksgh clearfix">
           <h4 class="blue tc">上海九龙男子医院免费咨询、快速挂号</h4>

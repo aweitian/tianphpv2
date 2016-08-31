@@ -44,7 +44,7 @@ $lenght=count($docs);
             
             <div class="yyjs_con">
             	<p><span class="color9">地址：</span>上海市长宁区中山西路333号（近中山公园）<a href="<?php print AppUrl::helpRouting()?>" class="fr blue">查看路线</a></p>
-                <p><span class="color9">电话：</span><a href="tel:021-52733999">021-52733999</a></p>
+                <p><span class="color9">电话：</span><a href="<?php print AppChannel::getTel()?>">021-52733999</a></p>
                 <p><span class="color9">简介：</span>上海九龙男子医院坐落于上海市长宁区中山西路333号（近中山公园，靠近地铁3号线）。是一家诊疗、... <a href="<?php print AppUrl::navHospital()?>" class="fr blue">更多</a></p>
                 <div class="blank30"></div>
                 <p class="tc yyjs_con_p1">在线服务患者<span class="yellow"><?php print $m->getAllQuestionsCnt()?></span>名, 获得<span class="yellow"><?php print $m->getLetterCnt()?></span>封感谢信 </p>
