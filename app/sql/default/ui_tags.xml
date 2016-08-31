@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_tags>
+	<all>
+		SELECT * FROM `data_tags` WHERE 1
+	</all>
+</ui_tags>

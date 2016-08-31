@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<disease>
+		<create>
+			CREATE TABLE `cache_disease` (
+			  `pid` int(11) DEFAULT NULL,
+			  `pd` varchar(1024) DEFAULT NULL,
+			  `mid` int(11) DEFAULT NULL,
+			  `md` varchar(1024) DEFAULT NULL
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8
+		
+		</create>
+		
+		<update>
+			INSERT INTO `cache_disease` (`pid`,`pd`,`mid`,`md`)
+		    SELECT 
+			`data_attr_data`.`pid`,`p_data_attr_data`.`data`,
+			`data_attr_data`.`sid`,`data_attr_data`.`data`
+		    FROM `data_attr_data`
+		    LEFT JOIN `data_attr_data` `p_data_attr_data` ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+		    
+		    WHERE `data_attr_data`.`metaid` = 2 AND `data_attr_data`.`grp` = 1;		
+		
+		</update>
+		<all>
+			SELECT
+			  `pid`,
+			  `pd`,
+			  `mid`,
+			  `md`
+			FROM `cache_disease`
+		</all>
+		<query_on_raw>
+		 SELECT 
+			`data_attr_data`.`pid` as `pid`,`p_data_attr_data`.`data` as `pd`,
+			`data_attr_data`.`sid` as `mid`,`data_attr_data`.`data` as `md`
+		    FROM `data_attr_data`
+		    LEFT JOIN `data_attr_data` `p_data_attr_data` ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+		     WHERE `data_attr_data`.`metaid` = 2 AND `data_attr_data`.`grp` = 1;		
+		</query_on_raw>
+	</disease>
+	<doctor>
+		<create>
+			CREATE TABLE `cache_doctor` (
+			  `sid` int(11) DEFAULT NULL,
+			  `name` varchar(64) DEFAULT NULL,
+			  `dmd` int(11) DEFAULT NULL,
+			  `lv` varchar(32) DEFAULT NULL,
+			  UNIQUE KEY `sid` (`sid`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8
+		</create>
+		
+		<update>
+			INSERT INTO `cache_doctor` (`sid`,`name`,`dmd`,`lv`)
+		    SELECT 
+				`data_doctor`.`sid` AS `dod`,`data_doctor`.`name` AS `name`,
+				`data_doctor_lv_meta`.`sid` AS `dmd`,
+				`data_doctor_lv_meta`.`data` AS `lv`
+			FROM `data_doctor`
+			LEFT JOIN `data_doctor_ext`
+				ON `data_doctor_ext`.`dod` = `data_doctor`.`sid`
+			LEFT JOIN `data_doctor_lv_meta`
+				ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`	
+		
+		</update>
+		<all>
+			SELECT
+			  `sid`,`name`,`dmd`,`lv`
+			FROM `cache_doctor`
+		</all>
+		<query_on_raw>
+		  SELECT 
+				`data_doctor`.`sid` AS `dod`,`data_doctor`.`name` AS `name`,
+				`data_doctor_lv_meta`.`sid` AS `dmd`,
+				`data_doctor_lv_meta`.`data` AS `lv`
+			FROM `data_doctor`
+			LEFT JOIN `data_doctor_ext`
+				ON `data_doctor_ext`.`dod` = `data_doctor`.`sid`
+			LEFT JOIN `data_doctor_lv_meta`
+				ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`	
+		</query_on_raw>
+	</doctor>
+
+
+
+
+	<doctorlv>
+		<create>
+		
+		</create>
+		<update>
+		
+		</update>
+		<rel_homeless>
+			<count>
+				SELECT COUNT(`data_doctor`.`sid`) as `count`
+				FROM `data_doctor`
+				WHERE
+				`data_doctor`.`sid`
+				NOT IN (SELECT `dod` FROM `data_doctor_ext`)
+			</count>
+			<query>
+				SELECT 
+				`data_doctor`.`sid`,`data_doctor`.`name`,
+				`data_doctor`.`avatar`,`data_doctor`.`date`
+				
+				FROM `data_doctor`
+				WHERE
+				`data_doctor`.`sid`
+				NOT IN (SELECT `dod` FROM `data_doctor_ext`)
+
+				LIMIT :offset,:length 
+			</query>
+		</rel_homeless>
+	</doctorlv>
+
+
+
+
+
+
+
+
+
+
+
+
+	<article_disease>
+		<create>
+			CREATE TABLE `cache_article_disease` (
+			  `aid` int(11) DEFAULT NULL,
+			  `title` varchar(1024) DEFAULT NULL,
+			  `pid` int(11) DEFAULT NULL,
+			  `pd` varchar(1024) DEFAULT NULL,
+			  `mid` int(11) DEFAULT NULL,
+			  `md` varbinary(1024) DEFAULT NULL
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8
+		</create>
+		<update>
+			INSERT INTO `cache_article_disease` (`aid`,`title`,`pid`,`pd`,`mid`,`md`)
+
+			SELECT 
+				`data_article`.`sid`,`data_article`.`title`,
+				`data_attr_data`.`pid` AS `pid`,`p_data_attr_data`.`data`,
+				`data_attr_data`.`sid`,`data_attr_data`.`data`
+			FROM `data_attr_data`
+			LEFT JOIN `data_attr_data` `p_data_attr_data` ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+			RIGHT JOIN `data_article_dis`
+			ON `data_article_dis`.`did` =  `data_attr_data`.`sid`    
+			LEFT JOIN `data_article`
+			ON `data_article`.`sid` = `data_article_dis`.`aid`
+		</update>
+		<all>
+			SELECT
+			  `aid`,
+			  `title`,
+			  `pid`,
+			  `pd`,
+			  `mid`,
+			  `md`
+			FROM `cache_article_disease`
+		</all>
+	</article_disease>
+	<article_doctor>
+		<create>
+			CREATE TABLE `cache_article_doctor` (
+			  `aid` INT(11) DEFAULT NULL,
+			  `title` VARCHAR(1024) DEFAULT NULL,
+			  `dod` INT(11) DEFAULT NULL,
+			  `dname` VARCHAR(64) DEFAULT NULL,
+			  `lv` VARCHAR(32) DEFAULT NULL
+			) ENGINE=MYISAM DEFAULT CHARSET=utf8
+		</create>
+		<update>
+			INSERT INTO `cache_article_doctor` (`aid`,`title`,`dod`,`dname`,`lv`)
+
+			SELECT 
+				`data_article`.`sid` AS `aid`,`data_article`.`title` AS `title`,
+				`data_article_doc`.`dod`,`data_doctor`.`name` AS `dname`,
+				`data_doctor_lv_meta`.`data` AS `lv`
+			FROM `data_article_doc`
+			LEFT JOIN `data_article`
+				ON `data_article_doc`.`aid` = `data_article`.`sid`
+			LEFT JOIN `data_doctor`
+				ON `data_doctor`.`sid` = `data_article_doc`.`dod`
+			LEFT JOIN `data_doctor_ext`
+				ON `data_doctor_ext`.`dod` = `data_article_doc`.`dod`
+			LEFT JOIN `data_doctor_lv_meta`
+				ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`
+
+		</update>
+		<all>
+			SELECT
+			  `aid`,
+			  `title`,
+			  `dod`,
+			  `name`,
+			  `lv`
+			FROM `cache_article_doctor`
+		</all>
+	</article_doctor>
+
+</sql>

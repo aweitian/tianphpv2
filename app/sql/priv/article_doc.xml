@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<exists>
+		SELECT
+		  `aid`,
+		  `dod`
+		FROM `data_article_doc`
+		WHERE `aid` = :aid AND `dod` = :dod
+	</exists>
+	<all>
+		SELECT
+		  `aid`,
+		  `dod`
+		FROM `data_article_doc`
+		WHERE `aid` = :aid
+	</all>
+	<add>
+		INSERT INTO `data_article_doc`
+	            (`aid`,
+	             `dod`)
+		VALUES (:aid,
+		        :dod);
+	</add>
+	
+	<rm>
+		DELETE
+		FROM `data_article_doc`
+		WHERE `aid` = :aid
+		    AND `dod` = :dod;
+	</rm>
+	<update>
+			UPDATE `data_article_doc` SET 
+				`aid`=:aid,`dod`=:new_dod
+			 WHERE `aid`=:aid and `dod`=:old_dod
+	</update>
+	
+	<query_on_raw_count>
+		SELECT 
+			COUNT(`data_article`.`sid`) as `count`
+		FROM `data_article_doc`
+		LEFT JOIN `data_article`
+			ON `data_article_doc`.`aid` = `data_article`.`sid`
+		LEFT JOIN `data_doctor`
+			ON `data_doctor`.`sid` = `data_article_doc`.`dod`
+		LEFT JOIN `data_doctor_ext`
+			ON `data_doctor_ext`.`dod` = `data_article_doc`.`dod`
+		LEFT JOIN `data_doctor_lv_meta`
+			ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`
+	</query_on_raw_count>
+	<query_on_raw>
+		SELECT 
+			`data_article`.`sid` AS `aid`,`data_article`.`title` AS `title`,
+			`data_article`.`date` AS `date`,
+			`data_article_doc`.`dod`,`data_doctor`.`name` AS `name`,
+			`data_doctor_lv_meta`.`data` AS `lv`
+		FROM `data_article_doc`
+		LEFT JOIN `data_article`
+			ON `data_article_doc`.`aid` = `data_article`.`sid`
+		LEFT JOIN `data_doctor`
+			ON `data_doctor`.`sid` = `data_article_doc`.`dod`
+		LEFT JOIN `data_doctor_ext`
+			ON `data_doctor_ext`.`dod` = `data_article_doc`.`dod`
+		LEFT JOIN `data_doctor_lv_meta`
+			ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`
+		@WHERECLAUSE
+		ORDER BY `aid` ASC
+		LIMIT :offset,:length
+	</query_on_raw>
+	<where_clause_do>
+		`data_article_doc`.`dod` = :dod
+	</where_clause_do>
+	<where_clause_title>
+		`data_article`.`title` like CONCAT('%',:title,'%')
+	</where_clause_title>
+	
+	
+	<assignRand>
+		INSERT INTO `data_article_doc` (`aid`,`dod`)
+		SELECT `data_article`.`sid`,(SELECT sid FROM `data_doctor`
+				ORDER BY RAND() LIMIT 0,1) AS b
+			FROM `data_article`
+			WHERE
+			`data_article`.`sid`
+			NOT IN (SELECT `aid` FROM `data_article_doc`)
+	</assignRand>
+	
+	
+	<reldoc_homeless>
+		<count>
+			SELECT COUNT(`data_article`.`sid`) as `count`
+			FROM `data_article`
+			WHERE
+			`data_article`.`sid`
+			NOT IN (SELECT `aid` FROM `data_article_doc`)
+		</count>
+		<query>
+			SELECT `data_article`.`sid`,`data_article`.`title`,`data_article`.`date`
+			FROM `data_article`
+			WHERE
+			`data_article`.`sid`
+			NOT IN (SELECT `aid` FROM `data_article_doc`)
+			LIMIT :offset,:length 
+		</query>
+	</reldoc_homeless>	
+
+</sql>

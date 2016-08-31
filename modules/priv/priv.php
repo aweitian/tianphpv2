@@ -112,14 +112,14 @@ class priv implements IOp{
 		return $this->_saveInfo($ret);
 	}
 	public function getRemainTryTimes(){
-		return $this->conf["u_try_times_max"] - $this->getOPFailCnt();
+		return $this->conf["u_try_times_max"] - $this->getOpFailCnt();
 	}
 	public function getUiData(){
 		$ret = array(
 			"Name"=>"<input type=\"text\" name=\"email\">",
 			"Password"=>"<input type=\"password\" name=\"pwd\">",
 		);
-		$failCnt = $this->getOPFailCnt();
+		$failCnt = $this->getOpFailCnt();
 		if($failCnt>$this->conf["u_try_times"]){
 			$ret["Verification code"] = "<input type=\"text\" name=\"code\">";
 			$ret["code_img"] = "<img src=\"".HTTP_ENTRY."/captcha\">";
@@ -144,7 +144,7 @@ class priv implements IOp{
 	private function _checkVc($code){
 		if($this->conf["open"]){
 			//检查是否需要验证码
-			$failCnt = $this->getOPFailCnt();
+			$failCnt = $this->getOpFailCnt();
 			if($failCnt>$this->conf["u_try_times"]){
 				$helper = new session_captcha($this->session);
 				return $helper->check($code);
@@ -180,7 +180,7 @@ class priv implements IOp{
 			$this->oplog->update($this->opsid);
 		}
 	}
-	public function getOPFailCnt(){
+	public function getOpFailCnt(){
 		$priv = new oplog();
 		return $priv->getCnt($this->getOpType(), $this->idtoken->getIp());
 	}

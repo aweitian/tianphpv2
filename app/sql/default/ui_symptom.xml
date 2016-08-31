@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_symptom>
+	<all>
+	 	SELECT 
+	 		`data_attr_data`.`sid`,
+	 		`data_attr_data`.`key`,
+	 		`data_attr_data`.`data`,
+	 		`data_attr_data`.`pid`,
+	 		`data_attr_data`.`metaid`
+	 		FROM `data_attr_data`
+			WHERE `grp` = 2;		
+	</all>
+	<!-- 获取一级症状 -->
+	<!-- 参数:无 -->
+	<!-- 返回字段:syd,data -->
+	<!-- 
+	<all_lv0>
+		SELECT `sid` AS `syd`,`data`
+			FROM `data_attr_data`
+			WHERE `grp` = 2
+			AND `metaid` = 3
+	</all_lv0>
+	 -->
+	 
+	 
+	<!-- 获取一级症状 -->
+	<!-- 参数:syd -->
+	<!-- 返回字段:syd,data -->
+	<!-- 
+	<all_lv1_bysyd>
+		
+		SELECT `sid` AS `syd`,`data`
+			FROM `data_attr_data`
+			WHERE `grp` = 2
+			AND `metaid` = 4
+			AND `pid` = :syd
+			
+	</all_lv1_bysyd>
+	 -->
+	 
+	 
+	<!-- 症状诱发的疾病 -->
+	<!-- 参数:syd -->
+	<!-- 返回字段:did -->
+	<all_symptom_disease>
+		SELECT
+		  `did`
+		FROM `data_symptom_disease`
+		WHERE `syd` = :syd
+	</all_symptom_disease>
+
+</ui_symptom>

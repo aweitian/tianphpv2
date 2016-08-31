@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<all>
+		SELECT * FROM `data_article` WHERE 1
+		ORDER BY `sid` DESC
+		LIMIT :offset,:length
+	</all>
+
+	<count>
+		SELECT count(*) as count FROM `data_article` WHERE 1
+	</count>
+
+	<row>
+		SELECT * FROM `data_article` WHERE `sid` = :sid
+	</row>
+
+	<query_choose>
+		SELECT `sid`,`title` FROM `data_article` WHERE 
+			`title` LIKE CONCAT(  '%',  :q,  '%' ) 
+			OR `sid` = :q
+		LIMIT :offset,:length
+	</query_choose>
+	
+	<query>
+		SELECT * FROM `data_article` WHERE 
+			`title` LIKE CONCAT(  '%',  :q,  '%' ) 
+			OR `sid` = :q
+		LIMIT :offset,:length
+	</query>
+	<query_count>
+		SELECT count(`sid`) as count FROM `data_article` WHERE 
+			`title` LIKE CONCAT(  '%',  :q,  '%' ) 
+			OR `sid` = :q
+	</query_count>
+
+
+
+	<add>
+		INSERT INTO `data_article`
+		(`kw`,`desc`,`thumb`,`title`, `content`, `date`) 
+		VALUES 
+		(:kw,:desc,:thumb,:title,:content,:date)
+	</add>
+	
+	<update>
+		UPDATE `data_article` SET 
+		`kw`=:kw,`desc`=:desc,`thumb`=:thumb,
+		`title`=:title,`content`=:content,`date`=:date
+		WHERE `sid` = :sid
+	</update>
+	
+	<remove>
+		DELETE `data_article`,`data_article_comment`,`data_article_dis`,`data_article_doc`,`data_article_sym`,`data_article_tags`
+			FROM `data_article`
+			LEFT JOIN `data_article_comment` ON `data_article`.`sid` = `data_article_comment`.`aid`
+			LEFT JOIN `data_article_dis` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			LEFT JOIN `data_article_doc` ON `data_article`.`sid` = `data_article_doc`.`aid`
+			LEFT JOIN `data_article_sym` ON `data_article`.`sid` = `data_article_sym`.`aid`
+			LEFT JOIN `data_article_tags` ON `data_article`.`sid` = `data_article_tags`.`aid`
+			WHERE `data_article`.`sid` = :sid
+	</remove>
+</sql>

@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_article>
+	<!-- 获取最新的文章 -->
+	<!-- 参数:length -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<all>
+		SELECT
+			  `sid` as `aid`,
+			  `kw`,
+			  `desc`,
+			  `thumb`,
+			  `title`,
+			  `date`
+			FROM `data_article`
+			ORDER BY `sid` DESC
+			LIMIT :offset, :length;
+	</all>
+	<allCnt>
+		SELECT
+			  count(`sid`) as `cnt`
+			FROM `data_article`
+	</allCnt>
+	
+	<!-- 根据大病种的ID获取文章id -->
+	<alllv0aids>
+		SELECT `data_article_dis`.`aid` FROM `data_article_dis` WHERE `data_article_dis`.`did` IN (
+			SELECT `data_attr_data`.`sid` FROM `data_attr_data` 
+			WHERE `data_attr_data`.`grp` = 1
+			AND `data_attr_data`.`pid` = :did
+			) 
+			ORDER BY `data_article_dis`.`aid` DESC
+			LIMIT :offset,:length
+	
+	</alllv0aids>
+	
+	
+	
+	<!-- 获取某病种下最新的文章 -->
+	<!-- 参数:did,offset,length -->
+	<!-- 返回字段:aid -->
+	<all_bydid>
+		SELECT
+			  `aid`
+			FROM `data_article_dis`
+			WHERE `did` = :did
+			ORDER BY `sid` DESC
+			LIMIT :offset, :length;
+	</all_bydid>
+	<all_bydidCnt>
+		SELECT
+			  count(`aid`) as `cnt`
+			FROM `data_article_dis`
+			WHERE `did` = :did
+	</all_bydidCnt>
+	
+	<!-- 获取第一个写这篇文章的医生ID -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:dod -->
+	<first_author_byaid>
+		SELECT `dod`
+			FROM `data_article_doc`
+			WHERE `aid`=:aid
+			LIMIT 0, 1
+	</first_author_byaid>
+	
+	
+	<!-- 获取这篇文章的病种第一个ID -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:did -->
+	<first_did_byaid>
+		SELECT `data_article_dis`.`did` FROM `data_article_dis`
+			WHERE `data_article_dis`.`aid` = :aid
+			LIMIT 0,1
+	</first_did_byaid>
+	
+	<!-- 获取与症状ID相关的第一篇文章的ID -->
+	<!-- 参数:syd -->
+	<!-- 返回字段:aid -->
+	<first_aid_bysyd>
+		SELECT `aid` FROM `data_article_sym`
+			WHERE syd = :syd LIMIT 0,1
+	</first_aid_bysyd>
+	
+	
+	<!-- 获取疾病知识文章带内容 -->
+	<!-- 参数:did,length -->
+	<!-- 返回字段:aid -->
+	<allKnowledge>
+		<![CDATA[
+				SELECT 	`data_article_dis`.`aid`,`data_article_tags`.`tid` FROM 
+					`data_article_dis`
+					LEFT JOIN `data_article_tags` ON `data_article_dis`.`aid` = `data_article_tags`.`aid`
+					WHERE `data_article_tags`.`tid` < 7
+					AND `data_article_dis`.`did` = :did
+			LIMIT :offset,:length
+		]]>
+	</allKnowledge>
+	<allKnowledgeCnt>
+		<![CDATA[
+			SELECT count(`data_article_dis`.`aid`) as `cnt` FROM 
+			`data_article_dis`
+					LEFT JOIN `data_article_tags` ON `data_article_dis`.`aid` = `data_article_tags`.`aid`
+					WHERE `data_article_tags`.`tid` < 7
+					AND `data_article_dis`.`did` = :did
+		]]>
+	</allKnowledgeCnt>
+	
+	
+	<!-- 获取疾病知识某一类文章ID -->
+	<!-- 参数:did,tid,length -->
+	<!-- 返回字段:aid -->
+	<knowledge_kind>
+		SELECT 	`data_article_dis`.`aid`,`data_article_tags`.`tid` FROM 
+					`data_article_dis`
+					LEFT JOIN `data_article_tags` ON `data_article_dis`.`aid` = `data_article_tags`.`aid`
+					WHERE `data_article_tags`.`tid` = :tid
+					AND `data_article_dis`.`did` = :did
+		LIMIT :offset,:length
+	</knowledge_kind>
+	<knowledge_kindCnt>
+		SELECT count(`data_article_dis`.`aid`) as `cnt` FROM 
+		`data_article_dis`
+					LEFT JOIN `data_article_tags` ON `data_article_dis`.`aid` = `data_article_tags`.`aid`
+					WHERE `data_article_tags`.`tid` = :tid
+					AND `data_article_dis`.`did` = :did
+	</knowledge_kindCnt>
+	
+	<!-- 获取一篇文章信息，带内容 -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,content,date -->
+	<row>
+		SELECT
+		  `sid` as `aid`,
+		  `kw`,
+		  `desc`,
+		  `thumb`,
+		  `title`,
+		  `content`,
+		  `date`
+		FROM `data_article`
+		WHERE `data_article`.`sid` = :aid
+	</row>
+	
+	
+	
+	
+	<!-- 获取一篇文章信息，不带内容 -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<row_nocontent>
+		SELECT
+		  `sid`,
+		  `kw`,
+		  `desc`,
+		  `thumb`,
+		  `title`,
+		  `date`
+		FROM `data_article`
+		WHERE `data_article`.`sid` = :aid
+	</row_nocontent>
+	
+	<!-- 根据病种ID获取精华文章AID -->
+	<!-- 参数:did,length -->
+	<!-- 返回字段:aid -->
+	<getEssenceAidByDid>
+		SELECT `data_article_dis`.`aid` FROM `data_article_dis`
+			WHERE `data_article_dis`.`aid` IN (
+				SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` = 8
+			) AND `data_article_dis`.`did` = :did
+			LIMIT :offset,:length
+	</getEssenceAidByDid>
+	<getEssenceAidByDidCnt>
+		SELECT count(`data_article_dis`.`aid`) as `cnt` FROM `data_article_dis`
+			WHERE `data_article_dis`.`aid` IN (
+				SELECT `aid` FROM `data_article_tags` WHERE `data_article_tags`.`tid` = 8
+			) AND `data_article_dis`.`did` = :did
+	</getEssenceAidByDidCnt>
+	
+	
+	<!-- 获取所有写这篇文章的医生ID -->
+	<!-- 参数:aid -->
+	<!-- 返回字段:dod -->
+	<!-- 
+	<getAuthors_byaid>
+		SELECT `dod`
+			FROM `data_article_doc`
+			WHERE `aid`=:aid
+	</getAuthors_byaid>
+	 -->
+	
+	
+	<!-- 获取一篇带THUMBNAIL文章 -->
+	<!-- 参数:did -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<row_thumb>
+		SELECT 
+			`data_article`.`sid` as `aid`,
+			`data_article`.`kw`,
+			`data_article`.`desc`,
+			`data_article`.`thumb`,
+			`data_article`.`title`,
+			`data_article`.`date`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article`.`thumb` IS NOT NULL 
+			ORDER BY `aid` DESC 
+			LIMIT 0,1
+	</row_thumb>
+	<!-- 获取一篇带THUMBNAIL文章 -->
+	<!-- 参数:did -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<row_thumb_did>
+		SELECT 
+			`data_article`.`sid` as `aid`,
+			`data_article`.`kw`,
+			`data_article`.`desc`,
+			`data_article`.`thumb`,
+			`data_article`.`title`,
+			`data_article`.`date`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article_dis`.`did` = :did
+			AND
+			`data_article`.`thumb` IS NOT NULL 
+			ORDER BY `aid` DESC 
+			LIMIT 0,1
+	</row_thumb_did>
+
+	<!-- 获取病种下所有文章,按从新到旧的排序方式 -->
+	<!-- 参数:did,length -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<allByDid>
+		SELECT 
+			`data_article`.`sid` as `aid`,
+			`data_article`.`kw`,
+			`data_article`.`desc`,
+			`data_article`.`thumb`,
+			`data_article`.`title`,
+			`data_article`.`date`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article_dis`.`did` = :did
+			ORDER BY `aid` DESC
+			LIMIT :offset,:length
+	</allByDid>
+	<allByDidCnt>
+		SELECT 
+			count(`data_article`.`sid`) as `cnt`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article_dis`.`did` = :did
+	</allByDidCnt>
+	
+	
+	<!-- 获取病种不包括传递的AID的所有文章,按从新到旧的排序方式 -->
+	<!-- 参数:exc,length -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<all_Exc>
+		SELECT 
+			`data_article`.`sid` as `aid`,
+			`data_article`.`kw`,
+			`data_article`.`desc`,
+			`data_article`.`thumb`,
+			`data_article`.`title`,
+			`data_article`.`date`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article`.`sid` != :exc
+			ORDER BY `aid` DESC
+			LIMIT :offset,:length
+	</all_Exc>
+	<!-- 获取病种不包括传递的AID的所有文章,按从新到旧的排序方式 -->
+	<!-- 参数:did,exc,length -->
+	<!-- 返回字段:aid,kw,desc,thumb,title,date -->
+	<allByDid_Exc>
+		SELECT 
+			`data_article`.`sid` as `aid`,
+			`data_article`.`kw`,
+			`data_article`.`desc`,
+			`data_article`.`thumb`,
+			`data_article`.`title`,
+			`data_article`.`date`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article_dis`.`did` = :did
+			AND
+			`data_article`.`sid` != :exc
+			ORDER BY `aid` DESC
+			LIMIT :offset,:length
+	</allByDid_Exc>
+	<allByDid_ExcCnt>
+		SELECT 
+			count(`data_article`.`sid`) as `cnt`
+			FROM `data_article_dis`
+			LEFT JOIN `data_article` ON `data_article`.`sid` = `data_article_dis`.`aid`
+			WHERE 
+			`data_article_dis`.`did` = :did
+			AND
+			`data_article`.`sid` != :exc
+	</allByDid_ExcCnt>
+	<!-- 根据病种Id获取疾病知识的文章 -->
+	
+	
+	<!-- 获取知识介绍的文章 -->
+	<!-- 参数:did,length -->
+	<!-- 返回字段:  `aid`,`kw`,`desc`,`thumb`,`title`,`content`,`date` -->
+	<ArticleTag7>
+		<!-- 两条SQL返回结果一样，数据量达到一定程度时，BAK的效率可能更好 -->
+		<bak>
+			SELECT 
+				`data_article`.`sid` as `aid`,
+				`data_article`.`thumb`,
+				`data_article`.`title`,
+				`data_article`.`desc`,
+				`data_article`.`thumb`,
+				`data_article`.`content`,
+				`data_article`.`date`
+			FROM (SELECT `data_article_tags`.`aid`,`data_article_tags`.`tid` FROM `data_article_tags` 
+			WHERE `data_article_tags`.`tid` = 7) AS `data_article_tags`
+			LEFT JOIN data_article_dis ON `data_article_tags`.`aid` = `data_article_dis`.`aid`
+			LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
+			WHERE  `data_article_dis`.`did` = :did	
+			ORDER BY `sid` DESC
+			LIMIT :offset,:length	
+		</bak>
+		<bakCnt>
+			SELECT 
+				count(`data_article`.`sid`) as `cnt`
+			FROM (SELECT `data_article_tags`.`aid`,`data_article_tags`.`tid` FROM `data_article_tags` 
+			WHERE `data_article_tags`.`tid` = 7) AS `data_article_tags`
+			LEFT JOIN data_article_dis ON `data_article_tags`.`aid` = `data_article_dis`.`aid`
+			LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
+			WHERE  `data_article_dis`.`did` = :did	
+			ORDER BY `sid` DESC
+		</bakCnt>
+		<main>
+			SELECT 
+				`data_article`.`sid` as `aid`,
+				`data_article`.`thumb`,
+				`data_article`.`title`,
+				`data_article`.`desc`,
+				`data_article`.`thumb`,
+				`data_article`.`content`,
+				`data_article`.`date`
+			FROM `data_article_tags` 
+				LEFT JOIN data_article_dis ON `data_article_tags`.`aid` = `data_article_dis`.`aid`
+				LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
+				WHERE `data_article_tags`.`tid` = 7
+				AND `data_article_dis`.`did` = :did
+				ORDER BY `sid` DESC
+				LIMIT :offset,:length	
+		</main>
+		<mainCnt>
+			SELECT 
+				count(`data_article`.`sid`) as `cnt`
+			FROM `data_article_tags` 
+				LEFT JOIN data_article_dis ON `data_article_tags`.`aid` = `data_article_dis`.`aid`
+				LEFT JOIN `data_article` ON `data_article_tags`.`aid` = `data_article`.`sid`
+				WHERE `data_article_tags`.`tid` = 7
+				AND `data_article_dis`.`did` = :did
+		</mainCnt>
+	</ArticleTag7>
+	
+	<allByDod>
+	
+		SELECT
+			  `aid`,
+			  `dod`
+			FROM `data_article_doc`
+			WHERE `dod` = :dod
+			ORDER BY `aid` DESC
+			LIMIT :offset,:length
+	</allByDod>
+	<allByDodCnt>
+	
+		SELECT
+			  count(`aid`) as `cnt`
+			FROM `data_article_doc`
+			WHERE `dod` = :dod
+	</allByDodCnt>
+	
+	
+	
+</ui_article>

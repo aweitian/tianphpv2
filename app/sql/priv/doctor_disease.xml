@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctor_disease>
+	<exists>
+		SELECT
+		  *
+		FROM `data_doctor_dis`
+		WHERE `did` = :did AND `dod` = :dod
+	</exists>
+	
+	<clear>
+	
+		DELETE FROM `data_doctor_dis`
+		WHERE `dod` = :dod
+	
+	</clear>
+	
+	
+	<!-- sid id name pwd avatar date -->
+	<notRel>
+		SELECT * FROM `data_doctor` WHERE `data_doctor`.`sid` NOT IN (
+			SELECT `data_doctor_dis`.`did` FROM `data_doctor_dis`
+		)
+	</notRel>
+	
+	<select>
+		<did>
+			SELECT
+			 *
+			FROM `data_doctor_dis`
+			WHERE `dod` = :dod	
+		</did>
+		<dod>
+			SELECT
+			 *
+			FROM `data_doctor_dis`
+			WHERE `did` = :did			
+		</dod>
+		<all>
+			SELECT
+			 *
+			FROM `data_doctor_dis`
+		</all>
+		<row>
+			SELECT
+			 *
+			FROM `data_doctor_dis`
+			WHERE `did` = :did		
+			AND `dod` = :dod	
+		</row>
+	</select>
+	<add>
+		INSERT INTO `data_doctor_dis`
+	            (`did`,
+	             `dod`,
+	             `weight`)
+		VALUES (:did,
+		        :dod,
+		        :weight);
+	</add>
+	
+	<rm>
+		DELETE
+		FROM `data_doctor_dis`
+		WHERE `did` = :did
+		    AND `dod` = :dod;
+	</rm>
+	<update>
+			UPDATE `data_doctor_dis` SET 
+				`weight`=:weight
+			 WHERE `did`=:did and `dod`=:old_dod
+	</update>
+</doctor_disease>

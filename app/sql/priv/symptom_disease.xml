@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symptom_disease>
+	<all>
+		SELECT
+		  `syd`,
+		  `did`
+		FROM `data_symptom_disease`
+		WHERE `syd` = :syd
+	</all>
+	<add>
+		INSERT INTO `data_symptom_disease`
+	            (`syd`,
+	             `did`)
+		VALUES (:syd,
+		        :did);
+	</add>
+	
+	<rm>
+		DELETE
+		FROM `data_symptom_disease`
+		WHERE `syd` = :syd
+		    AND `did` = :did;
+	</rm>
+	<update>
+			UPDATE `data_symptom_disease` SET 
+				`syd`=:syd,`did`=:new_did
+			 WHERE `syd`=:syd and `did`=:old_did
+	</update>
+
+</symptom_disease>

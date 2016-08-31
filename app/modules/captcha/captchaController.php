@@ -12,6 +12,6 @@ class captchaController implements IController{
 
 	public function welcomeAction(){
 		$c = new session_captcha(App::getSession());
-		$c->getCode_char(6, 64, 23);
+		$c->getCode_char(5, 64, 23);
 	}
 }

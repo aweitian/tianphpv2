@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_disease>
+	<!-- sid,key,data,pid,grp,metaid  -->
+	<all>
+	 	SELECT 
+	 		`data_attr_data`.`sid`,
+	 		`data_attr_data`.`key`,
+	 		`data_attr_data`.`data`,
+	 		`data_attr_data`.`pid`,
+	 		`data_attr_data`.`metaid`
+	 		FROM `data_attr_data`
+			WHERE `grp` = 1;		
+	</all>
+	<tree2table>
+	 	SELECT 
+			`data_attr_data`.`pid` as `pid`,`p_data_attr_data`.`data` as `pd`,
+			`data_attr_data`.`sid` as `mid`,`data_attr_data`.`data` as `md`,
+			`data_attr_data`.`key` as `url`
+		    FROM `data_attr_data`
+		    LEFT JOIN `data_attr_data` `p_data_attr_data` 
+		    	ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+		     WHERE `data_attr_data`.`metaid` = 2 AND `data_attr_data`.`grp` = 1;		
+	</tree2table>
+
+	<!-- 
+	<rowBySid>
+		SELECT `data_attr_data`.`key`,
+		`data_attr_data`.`data`,
+		`data_attr_data`.`pid`
+		FROM `data_attr_data`
+		WHERE `grp` = 1
+		AND
+		`sid` = :did
+	</rowBySid>
+ 	-->
+
+	<!-- 
+	<lv0Infoes>
+		SELECT 
+			`data_attr_data`.`sid`,
+			`data_attr_data`.`key`,
+			`data_attr_data`.`data`
+			FROM `data_attr_data`
+			WHERE `grp` = 1
+			AND `pid` = 0
+	</lv0Infoes>
+	 -->	
+	
+	<!-- 根据疾病ID获取症状ID -->
+	<symptoms_did>
+		SELECT `data_attr_data`.`grp`,`data_symptom_disease`.`syd` FROM `data_symptom_disease`
+		LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_symptom_disease`.`syd` AND `data_attr_data`.`grp` = 2
+				WHERE `data_symptom_disease`.`did` = :did
+				AND `data_attr_data`.`grp` = 2
+				AND `data_attr_data`.`metaid` = 4
+
+	</symptoms_did>	
+		
+		
+		
+		
+		
+	<getDodData_lv0did>
+			SELECT
+			 dod,did,SUM(`weight`) as `weight`
+			FROM `data_doctor_dis`
+			WHERE `did` IN (
+				SELECT `data_attr_data`.`sid` FROM `data_attr_data` WHERE `data_attr_data`.`pid` =  :did
+			)	
+			group by dod			
+			ORDER BY sum(`weight`) DESC	
+			
+	</getDodData_lv0did>	
+		
+
+	<!-- 获取DISEASE ROW INFO BY URL KEY -->
+	<!-- 
+	<row_disease_url>
+		SELECT * FROM `data_attr_data`
+		WHERE 
+		`key` = :key AND
+		`data_attr_data`.`grp` = 1;	
+	</row_disease_url>
+	 -->
+	 
+	
+</ui_disease>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symptom>
+	<tree2table>
+	 	SELECT 
+			`data_attr_data`.`pid` as `pid`,`p_data_attr_data`.`data` as `pd`,
+			`data_attr_data`.`sid` as `mid`,`data_attr_data`.`data` as `md`
+		    FROM `data_attr_data`
+		    LEFT JOIN `data_attr_data` `p_data_attr_data` 
+		    	ON `data_attr_data`.`pid` = `p_data_attr_data`.`sid`
+		     WHERE `data_attr_data`.`metaid` = 4 AND `data_attr_data`.`grp` = 2;		
+	</tree2table>
+	
+	
+	<getInfoes>
+		SELECT `data_attr_data`.*,`data_attr_meta`.`level`
+		FROM  `data_attr_data` 
+		LEFT JOIN `data_attr_meta` ON `data_attr_data`.`metaid` = `data_attr_meta`.`sid`
+		WHERE 
+		`data_attr_data`.`grp` = 2 AND `data_attr_data`.`pid` = :pid
+	</getInfoes>
+	
+	<getLvById>
+		SELECT `data_attr_meta`.`level`
+		FROM  `data_attr_data` 
+		LEFT JOIN `data_attr_meta` ON `data_attr_data`.`metaid` = `data_attr_meta`.`sid`
+		WHERE 
+		`data_attr_data`.`sid` = :sid
+		AND `data_attr_data`.`grp` = 2;
+	</getLvById>
+	
+	<add>
+		INSERT INTO `data_attr_data`(`data`, `pid`, `grp`, `metaid`) 
+		VALUES (:data,:pid,2,:metaid)
+	</add>
+	
+	
+	<removeById>
+		DELETE FROM `data_attr_data` WHERE `sid` = :sid AND data_attr_data.`grp` = 2
+	</removeById>
+	<removeByPid>
+		DELETE FROM `data_attr_data` WHERE `pid` = :sid AND data_attr_data.`grp` = 2
+	</removeByPid>
+	
+
+	<updateById>
+		UPDATE `data_attr_data` SET 
+		`data`=:data,`pid`=:pid,`grp`=:grp,`metaid`=:metaid
+		WHERE `sid`=:sid AND `data_attr_data`.`grp` = 2
+	</updateById>
+	
+	<updateData>
+		UPDATE `data_attr_data` SET `data`=:data
+		WHERE `sid`=:sid
+	</updateData>
+	
+	<getInfoById>
+		SELECT * FROM `data_attr_data`
+		WHERE `sid`=:sid AND `data_attr_data`.`grp` = 2
+	</getInfoById>
+	
+	<meta>
+		
+		<getInfoById>
+			SELECT * 
+			FROM  `data_attr_meta` WHERE `sid` = :sid
+		</getInfoById>
+		<getInfoesByGrp>
+			SELECT * 
+			FROM  `data_attr_meta` WHERE `grp` = 2
+			ORDER BY `level` ASC
+		</getInfoesByGrp>
+		
+		<getNextMetaIdByGrpLv>
+			SELECT `sid` FROM `data_attr_meta`
+			WHERE `level` = :level + 1 AND `grp` = :grp
+		</getNextMetaIdByGrpLv>
+	
+	
+		<add>
+			INSERT INTO `data_attr_meta`(`val`, `level`, `grp`) 
+			VALUES (:val,:level,:grp)
+		</add>
+	
+	
+		<removeById>
+			DELETE FROM `data_attr_meta` WHERE `sid` = :sid
+		</removeById>
+		<removeByGrp>
+			DELETE FROM `data_attr_meta` WHERE `grp` = :grp
+		</removeByGrp>
+		
+		<updateById>
+			UPDATE `data_attr_meta` SET `val`=:val,`level`=:level,`grp`=:grp
+			WHERE `sid`=:sid
+		</updateById>
+		
+		<updateVal>
+			UPDATE `data_attr_meta` SET `val`=:val
+			WHERE `sid`=:sid
+		
+		</updateVal>	
+	
+	</meta>
+
+</symptom>

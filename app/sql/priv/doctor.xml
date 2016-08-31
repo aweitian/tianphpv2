@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<all>
+		SELECT * FROM `data_doctor` WHERE 1
+		LIMIT :offset,:length
+	</all>
+
+	<base>
+		SELECT
+		  `sid`,
+		  `name`
+		FROM `data_doctor`
+	</base>
+
+
+	<count>
+		SELECT count(*) as count FROM `data_doctor` WHERE 1
+	</count>
+
+	<row>
+		SELECT * FROM `data_doctor` WHERE `sid` = :sid
+	</row>
+
+	<updateId>
+		UPDATE `data_doctor` SET
+		`id`=:id
+		WHERE `sid`=:sid
+	</updateId>
+	
+	<updatePwd>
+		UPDATE `data_doctor` SET
+		`pwd`=:npwd
+		WHERE `sid`=:sid
+		AND `pwd`=:opwd
+	</updatePwd>
+
+	<resetpwdForce>
+		UPDATE `data_doctor` SET
+		`pwd`=:pwd
+		WHERE `sid`=:sid
+	</resetpwdForce>
+
+	<update>
+		UPDATE `data_doctor` SET 
+		`id`=:id,
+		`avatar`=:avatar,
+		`name`=:name,
+		`date`=:date
+	 	WHERE `sid`=:sid
+	</update>
+
+
+	<add>
+		INSERT INTO `data_doctor` (
+			`id`,`name`,`pwd`,`avatar`,`date`
+		) VALUES (
+			:id,:name,:pwd,:avatar,:date
+		)
+	</add>
+	
+	<remove>
+		DELETE FROM `data_doctor` WHERE `sid` = :sid
+	</remove>
+</sql>

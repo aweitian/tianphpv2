@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!-- 所有用户向数据库提交的数据都经过此文件中的SQL提交 -->
+
+<ui_put>
+
+	<ask>
+		INSERT INTO `data_ask` (
+			`uid`,`dod`,`title`,`did`,`desc`,`svr`,`v`,`date`
+		) VALUES (
+			:uid,:dod,:title,:did,:desc,:svr,0,CURDATE()
+		)
+	</ask>
+ 	<ask_rm>
+		DELETE `data_ask`,`data_ask_append`
+		 FROM `data_ask`
+		 LEFT JOIN `data_ask_append` ON `data_ask`.`sid` = `data_ask_append`.`askid`
+		 WHERE  
+			`data_ask`.`sid` = :askid
+			AND `data_ask`.`uid` = :uid
+			AND `data_ask`.`v` = 0
+	</ask_rm>
+	
+	<present>
+		 INSERT INTO `data_doctor_present`
+		(
+				`v`,
+	             `uid`,
+	             `dod`,
+	             `pid`,
+	             `date`)
+		VALUES (
+				0,
+		        :uid,
+		        :dod,
+		        :pid,
+		        CURDATE());   
+	</present>
+	<present_rm>
+		DELETE FROM `data_doctor_present`
+		WHERE  
+			`data_doctor_present`.`sid` = :pid
+			AND `data_doctor_present`.`uid` = :uid
+			AND `data_doctor_present`.`v` = 0
+	</present_rm>
+	
+	
+ 	<register_phone>
+ 		INSERT INTO `data_user` (
+			`v`,`name`,`pwd`,`phone`,`date`
+		) VALUES (
+			0,:name,:pwd,:phone,CURDATE()
+		)
+ 	</register_phone>
+ 	<register_phone_retry>
+ 		UPDATE `data_user`
+			SET  
+			  `pwd` = :pwd
+			WHERE `phone` = :phone AND `data_user`.`v` = 0;
+ 	</register_phone_retry>
+ 	<register_phone_active>
+ 		UPDATE `data_user`
+			SET  
+			  `v` = '1',
+			  `pwd` = :pwd,
+			  `avatar` =  CONCAT("memer_tx",1+CAST(RAND() * 8 AS UNSIGNED),".jpg")
+			WHERE `phone` = :phone AND `data_user`.`v` = 0 AND `pwd` = :oldpwd;
+ 	</register_phone_active>
+ 	
+ 	<reg_normal>
+		INSERT INTO `data_user`
+	            (
+	             `email`,
+	             `name`,
+	             `pwd`,
+	             `rpq`,
+	             `rpa`
+		) VALUES (
+		        :email,
+		        :name,
+		        :pwd,
+		        :rpq,
+		        :rpa
+		);
+	</reg_normal>
+	<reg_normal_noeml>
+		INSERT INTO `data_user`
+		(
+	             `name`,
+	             `pwd`,
+	             `rpq`,
+	             `rpa`
+		) VALUES (
+		        :name,
+		        :pwd,
+		        :rpq,
+		        :rpa
+		);
+	</reg_normal_noeml>
+	
+ 	<reset_pwd>
+		<name>
+			UPDATE `data_user`
+				SET
+				  `pwd` = :pwd
+				WHERE `name` = :name AND `rpq` = :rpq AND `rpa` = :rpa;
+		</name>
+		<email>
+			UPDATE `data_user`
+				SET
+				  `pwd` = :pwd
+				WHERE `email` = :email AND `rpq` = :rpq AND `rpa` = :rpa;
+		</email>
+		<phone>
+			UPDATE `data_user`
+				SET
+				  `pwd` = :pwd
+				WHERE `phone` = :phone AND `rpq` = :rpq AND `rpa` = :rpa;
+		</phone>
+		
+	</reset_pwd>
+	
+	
+	
+	
+	<profile>
+		<base>
+			UPDATE `data_user`
+				SET
+				  `name` = :name,
+				  @nep
+				  `rpq` = :rpq,
+				  `rpa` = :rpa
+				WHERE `sid` = :uid;
+		</base>
+	
+		<avatar>
+			UPDATE `data_user`
+				SET
+				  `avatar` = :avatar
+				WHERE `sid` = :uid
+		</avatar>
+		
+		<pwd>
+			UPDATE `data_user`
+				SET 
+				  `pwd` = :newpwd
+				WHERE `sid` = :uid AND `pwd` = :oldpwd;
+		</pwd>
+	</profile>
+
+
+	<comment>
+		INSERT INTO `data_article_comment` (
+			`aid`,`uid`,`comment`
+		) VALUES (
+			:aid,:uid,:comment
+		)
+	</comment>
+	
+	
+	<appraise>
+		INSERT INTO `data_appraise` (
+			`v`,`uid`,`did`,`dod`,`txt`,`lv`,`date`
+		) VALUES (
+			0,:uid,:did,:dod,:txt,:lv,:date
+		)
+	</appraise>
+	
+	<appraise_rm>
+		DELETE
+			FROM `data_appraise`
+			WHERE 
+				`sid` = :appid
+				AND `uid` = :uid
+				AND `v` = 0
+	</appraise_rm>
+	
+	
+	
+	<letter>
+		INSERT INTO `data_letter`
+		(
+			`verify`,
+             `uid`,
+             `dod`,
+             `did`,
+             `content`,
+             `date`
+	    ) VALUES (
+	    	0,
+	        :uid,
+	        :dod,
+	        :did,
+	        :content,
+	        CURDATE()
+		)
+	</letter>
+ 	<letter_rm>
+		DELETE
+			FROM `data_letter`
+			WHERE 
+			`sid` = :led
+			AND `uid` = :uid
+			AND `verify` = 0
+	</letter_rm>
+ 	
+ 	
+ 	
+ 	<read>
+ 		<dod>SELECT `data_doctor`.`sid` FROM `data_doctor` WHERE `data_doctor`.`sid` = :sid  </dod>
+ 		<did>SELECT `data_attr_data`.`sid` FROM `data_attr_data` WHERE `data_attr_data`.`sid` = :sid AND `data_attr_data`.`grp` = 1 </did>
+ 		<aid>SELECT `data_article`.`sid` FROM `data_article` WHERE `data_article`.`sid` = :sid  </aid>
+ 	</read>
+ 	
+ 	
+ 	
+ 	
+ 		
+</ui_put>

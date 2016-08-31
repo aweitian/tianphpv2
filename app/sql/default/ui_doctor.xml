@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_doctor>
+	<all>
+		SELECT
+			  `data_doctor`.`sid`,
+			  `data_doctor`.`id`,
+			  `data_doctor`.`name`,
+			  `data_doctor_lv_meta`.`data` AS `lv`,
+			  `data_doctor`.`avatar`,
+			  `data_doctor`.`date`,
+			  `data_doctor_ext`.`dod`,
+			  `data_doctor_ext`.`dlv`,
+			  `data_doctor_ext`.`star`,
+			  `data_doctor_ext`.`hot`,
+			  `data_doctor_ext`.`love`,
+			  `data_doctor_ext`.`contribution`,
+			  `data_doctor_ext`.`desc`,
+			  `data_doctor_ext`.`spec`,  
+			  CONV(`data_doctor_ext`.`duty`,10,4) as `duty`
+			FROM `data_doctor`
+			LEFT JOIN `data_doctor_ext` ON `data_doctor`.`sid` = `data_doctor_ext`.`dod`
+			LEFT JOIN `data_doctor_lv_meta` ON `data_doctor_lv_meta`.`sid` = `data_doctor_ext`.`dlv`  
+	</all>
+
+	<getDidData_dod>
+		SELECT
+		 *
+		FROM `data_doctor_dis`
+		WHERE `dod` = :dod	
+		ORDER BY `weight` DESC	
+	</getDidData_dod>
+	
+
+</ui_doctor>

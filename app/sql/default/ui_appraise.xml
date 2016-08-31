@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_appraise>
+	<!-- 获取所有对医生的评价,排序按ID倒序 -->
+	<!-- 参数:length -->
+	<!-- 返回字段:sid,uid,did,dod,txt,lv,date -->
+	<data>
+		SELECT * FROM `data_appraise`
+		WHERE `data_appraise`.`v` = 1
+			ORDER BY `sid` DESC
+			LIMIT :offset,:length
+	</data>
+	<dataCnt>
+		SELECT count(`sid`) as `cnt` 
+			FROM `data_appraise`
+			WHERE `data_appraise`.`v` = 1
+	</dataCnt>
+
+	<!-- 获取所有对医生的评价,排序按ID倒序 -->
+	<!-- 参数:dod,length -->
+	<!-- 返回字段:sid,uid,did,dod,txt,lv,date -->
+	<rows_dod>
+		SELECT * FROM `data_appraise`
+		WHERE `dod` = :dod
+		AND `data_appraise`.`v` = 1
+		LIMIT :offset,:length
+	</rows_dod>
+	<rows_dodCnt>
+		SELECT count(`sid`) as `cnt` 
+		FROM `data_appraise`
+		WHERE `dod` = :dod AND `data_appraise`.`v` = 1
+	</rows_dodCnt>
+	
+	<!-- 获取所有对医生的评价,排序按ID倒序 -->
+	<!-- 参数:uid,length -->
+	<!-- 返回字段:sid,uid,did,dod,txt,lv,date -->
+	<rows_uid>
+		SELECT * FROM `data_appraise`
+		WHERE `uid` = :uid
+		LIMIT :offset,:length
+	</rows_uid>
+	<rows_uidCnt>
+		SELECT count(`sid`) as `cnt` 
+		FROM `data_appraise`
+		WHERE `uid` = :uid
+	</rows_uidCnt>
+</ui_appraise>

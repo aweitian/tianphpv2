@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article_comment>
+	<row>
+		SELECT * FROM `data_article_comment`  WHERE `sid`=:sid
+	</row>
+	<add>
+		INSERT INTO `data_article_comment` (
+			`aid`,`uid`,`comment`
+		) VALUES (
+			:aid,:uid,:comment
+		)
+	</add>
+	<update>
+		UPDATE `data_article_comment` SET 
+		`comment`=:comment
+	 WHERE `sid`=:sid
+	</update>
+	<update_priv>
+		UPDATE `data_article_comment` SET 
+			`comment`=:comment,`uid`=:uid,`datetime`=:datetime
+		 WHERE `sid`=:sid
+	</update_priv>
+	<verify>
+		UPDATE `data_article_comment` SET 
+			`verify` = NOT(`verify`)
+		 WHERE `sid`=:sid
+	</verify>
+	<rm>
+		DELETE FROM `data_article_comment` WHERE `sid`=:sid
+	</rm>
+	
+	<all>
+		<count>
+			SELECT
+			  count(`data_article`.`sid`) as `count`
+			FROM `data_article`
+			WHERE `data_article`.`title` LIKE CONCAT('%',:q,'%')
+		</count>
+		<query>
+			SELECT
+			  `data_article`.`sid`,
+			  `data_article`.`title`,
+			  `data_article`.`date`,
+			  COUNT(`data_article_comment`.`sid`) AS `cnt`
+			FROM `data_article`
+			LEFT JOIN `data_article_comment` ON `data_article_comment`.`aid` = `data_article`.`sid`
+			WHERE `data_article`.`title` LIKE CONCAT('%',:q,'%')
+			GROUP BY `data_article`.`sid`
+			LIMIT :offset,:length
+		</query>
+	</all>
+	
+	
+	
+	<all_uid>
+		<count>
+			SELECT 
+				count(*) as `count`
+			FROM `data_article_comment`
+			WHERE `data_article_comment`.`uid`=:uid
+		</count>
+		<query>
+			SELECT
+				*
+			FROM `data_article_comment`
+			WHERE `data_article_comment`.`uid`=:uid
+			LIMIT :offset,:length
+		</query>
+
+	</all_uid>
+	
+	<all_aid>
+		<count>
+			SELECT 
+				count(*) as `count`
+			FROM `data_article_comment`
+			WHERE `data_article_comment`.`aid`=:aid
+		</count>
+		<query>
+			SELECT
+				`data_article_comment`.`sid`,
+				`data_user`.`name`,
+				`data_article_comment`.`comment`,
+				`data_article_comment`.`datetime`,
+				`data_article_comment`.`verify`
+			FROM `data_article_comment`
+			LEFT JOIN `data_user` ON `data_user`.`sid` = `data_article_comment`.`uid`
+			WHERE `data_article_comment`.`aid`=:aid
+			LIMIT :offset,:length
+		</query>
+
+	</all_aid>
+	
+	
+</article_comment>

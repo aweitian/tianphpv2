@@ -5,9 +5,8 @@
  * Description: 
  */
 class View{
-
 	protected $html;
-	public function wrap($content,$title="",$tpl = 'template/layout.php'){
+	public function wrap($content,$tpl = '/template/layout.php'){
 		ob_start();
 		include $tpl;
 		$this->html = ob_get_contents();

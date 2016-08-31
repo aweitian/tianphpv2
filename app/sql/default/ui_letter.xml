@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_letter>
+	
+
+
+	<!-- 获取感谢信的总数 -->
+	<!-- 参数:无 -->
+	<!-- 返回字段:cnt -->
+	<cnt>
+		SELECT COUNT(`sid`) AS `cnt` FROM `data_letter`
+		WHERE `data_letter`.`verify` = 1
+	</cnt>
+
+
+
+	<!-- 获取所有的感谢信,排序按ID倒序 -->
+	<!-- 参数:offset,length -->
+	<!-- 返回字段:sid,uid,dod,did,content,date -->
+	<data>
+		SELECT * FROM `data_letter` WHERE `verify` = 1
+			ORDER BY `sid` DESC 
+			LIMIT :offset,:length
+	</data>
+
+	<!-- 获取所有对医生的感谢信,排序按ID倒序 -->
+	<!-- 参数:dod,offset,length -->
+	<!-- 返回字段:sid,uid,dod,did,content,date -->
+	<rows_dod>
+		SELECT * FROM `data_letter`
+		WHERE `dod` = :dod AND `data_letter`.`verify` = 1
+		LIMIT :offset,:length
+	</rows_dod>
+	<rows_dod_cnt>
+		SELECT count(sid) as `cnt` FROM `data_letter`
+		WHERE `dod` = :dod AND `data_letter`.`verify` = 1
+	</rows_dod_cnt>
+	
+		
+	<!-- 获取所有对医生的感谢信,排序按ID倒序 -->
+	<!-- 参数:uid,offset,length -->
+	<!-- 返回字段:sid,uid,dod,did,content,date -->
+	<rows_uid>
+		SELECT * FROM `data_letter`
+		WHERE `uid` = :uid
+		LIMIT :offset,:length
+	</rows_uid>
+	<rows_uid_cnt>
+		SELECT count(sid) as `cnt` FROM `data_letter`
+		WHERE `uid` = :uid
+	</rows_uid_cnt>
+</ui_letter>

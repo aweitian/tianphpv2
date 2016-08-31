@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<all>
+		SELECT * FROM `data_present` WHERE 1
+	</all>
+	
+	
+	<row>
+		SELECT * FROM `data_present` WHERE `sid` = :sid
+	</row>
+
+	<present>
+		<give>
+			INSERT INTO `data_doctor_present` (
+				`sid`,`uid`,`dod`,`pid`,`date`
+			) VALUES (
+				:sid,:uid,:dod,:pid,:date
+			)
+		</give>	
+		<query>
+			<count>
+				SELECT
+				 count(`data_doctor_present`.`uid`) AS `count`
+				FROM `data_doctor_present`
+				LEFT JOIN `data_present` ON `data_doctor_present`.`pid` = `data_present`.`sid`
+				LEFT JOIN `data_doctor`  ON `data_doctor_present`.`dod` = `data_doctor`.`sid`
+				LEFT JOIN `data_user`    ON `data_doctor_present`.`uid` = `data_user`.`sid`
+				WHERE `data_doctor_present`.`dod` = :dod
+			</count>
+			<rows>
+				SELECT
+				  `data_doctor_present`.`uid` AS `ddp_uid`,
+				  `data_user`.`email` AS `du_email`,
+				  `data_user`.`name` AS `du_name`,
+				  `data_user`.`avatar` AS `du_avatar`,
+				  `data_doctor_present`.`dod` AS `ddp_present`,
+				  `data_doctor`.`name` AS `dd_name`,
+				  `data_doctor`.`avatar` AS `dd_avatar`,
+				  `data_doctor_present`.`pid` AS `ddp_pid`,
+				  `data_present`.`data` AS `dp_data`,
+				  `data_present`.`avatar` AS `dp_avatar`,
+				  `data_doctor_present`.`date` AS `ddp_date`
+				FROM `data_doctor_present`
+				LEFT JOIN `data_present` ON `data_doctor_present`.`pid` = `data_present`.`sid`
+				LEFT JOIN `data_doctor`  ON `data_doctor_present`.`dod` = `data_doctor`.`sid`
+				LEFT JOIN `data_user`    ON `data_doctor_present`.`uid` = `data_user`.`sid`
+				WHERE `data_doctor_present`.`dod` = :dod
+				LIMIT :offset,:length
+			</rows>
+		</query>
+		<rm>
+			DELETE FROM `data_doctor_present` WHERE `sid`=:sid
+		</rm>
+	</present>
+
+	
+
+
+	<add>
+		INSERT INTO `data_present`
+            (
+             `cost`,
+             `data`,
+             `ben`,
+             `avatar`)
+		VALUES (
+		        :cost,
+		        :data,
+		        :ben,
+		        :avatar);
+	</add>
+	
+	<update>
+		UPDATE `data_present` SET 
+		`cost`=:cost ,
+		`data`=:data ,
+		`ben`=:ben ,
+		`avatar`=:avatar 
+		
+		WHERE `sid` = :sid
+	</update>
+	
+	<remove>
+		DELETE FROM `data_present` WHERE `sid` = :sid
+	</remove>
+</sql>

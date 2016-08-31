@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<letter>
+	<add>
+		INSERT INTO `data_letter` (
+			`uid`,`dod`,`did`,`content`,`verify`,`date`
+		) VALUES (
+			:uid,:dod,:did,:content,1,:date
+		)
+	</add>
+
+	<update>
+		UPDATE `data_letter` SET 
+			`uid`=:uid,`dod`=:dod,`did`=:did,`content`=:content,`date`=:date
+		 WHERE `sid`=:sid
+	</update>
+
+	<verify>
+		UPDATE `data_letter`
+			SET
+			  `verify` = NOT(`verify`)
+			WHERE `sid`=:sid
+	</verify>
+
+	<rm>
+		DELETE FROM `data_letter` WHERE `sid`=:sid
+	</rm>
+	
+	<row>
+		SELECT * FROM `data_letter` WHERE `sid`=:sid
+	</row>
+	
+	<all_uid>
+		<cnt>
+			SELECT count(`sid`) as `count` FROM `data_letter` WHERE `uid`=:uid
+		</cnt>
+		<query>
+			SELECT * FROM `data_letter` WHERE `uid`=:uid LIMIT :offset,:length
+		</query>
+	</all_uid>
+	
+	<all_dod>
+		<cnt>
+			SELECT count(`sid`) as `count` FROM `data_letter` WHERE `dod`=:dod
+		</cnt>
+		<query>
+			SELECT * FROM `data_letter` WHERE `dod`=:dod LIMIT :offset,:length
+		</query>
+	</all_dod>
+	
+	<all>
+		<cnt>SELECT count(`sid`) as `count` FROM `data_letter` WHERE 1</cnt>
+		<query>
+			SELECT 
+				`data_letter`.`sid`,
+				`data_letter`.`verify`,
+				`data_user`.`name` as `username`,`data_user`.`email`,
+				`data_attr_data`.`data`,
+				`data_doctor`.`name` as `docname`,`data_doctor`.`avatar`,
+				`data_letter`.`content`,`data_letter`.`date`
+			FROM 
+				`data_letter`
+			LEFT JOIN `data_user` ON `data_user`.`sid` = `data_letter`.`uid`
+			LEFT JOIN `data_attr_data` ON `data_attr_data`.`sid` = `data_letter`.`did`
+			LEFT JOIN `data_doctor` ON `data_doctor`.`sid` = `data_letter`.`dod`
+			WHERE 1
+			ORDER BY `sid` DESC
+			LIMIT :offset,:length 
+		</query>
+	</all>
+	
+</letter>

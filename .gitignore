@@ -2,5 +2,10 @@
 /.settings
 /.buildpath
 /.project
-/uploads
+/cli-tools.php
+/web/uploads
+/.metadata
 /doc
+/.cache
+/.ssh
+/.bash_history

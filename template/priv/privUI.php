@@ -1,0 +1,30 @@
+<?php
+/**
+ * Date: May 9, 2016
+ * Author: Awei.tian
+ * Description: 
+ */
+class privUI{
+	protected $args;
+	public function __construct(){
+		
+	}
+	public function getArgs($data){
+		return $this->args;
+	}
+	public function setArgs($data){
+		$this->args = $data;
+	}
+	public function fetch($tpl,$data=array()){
+		ob_start();
+		extract($data);
+		include $tpl;
+		$ret = ob_get_contents();
+		ob_end_clean();
+		return $ret;
+	}
+	public function getHTML(){
+		return $this->fetch(dirname(__FILE__)."/layout.php");
+	}
+	
+}

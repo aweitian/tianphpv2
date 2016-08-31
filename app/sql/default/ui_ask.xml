@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_ask>
+	<!-- -->
+	<cnt>
+		SELECT 
+			count(`data_ask`.`sid`) as cnt
+			FROM `data_ask`
+			WHERE `v` = 1
+	</cnt>
+	<all>
+		SELECT 
+			`data_ask`.`sid`,
+			`data_ask`.`uid`,
+			`data_ask`.`did`,
+			`data_ask`.`title`,
+			`data_ask`.`date`,
+			`data_ask`.`dod`
+			FROM `data_ask`
+			WHERE `v` = 1
+			ORDER BY `data_ask`.`sid` DESC
+		LIMIT :offset,:length
+	</all>
+	<row>
+		SELECT * FROM `data_ask`
+		 WHERE `sid`=:sid
+	</row>
+
+	<getAskByUid>
+		SELECT 
+			*
+			FROM `data_ask`
+			WHERE `data_ask`.`uid` = :uid
+			ORDER BY `data_ask`.`sid` DESC
+		LIMIT :offset,:length
+	</getAskByUid>
+	<getAskByUidCnt>
+		SELECT 
+			count(`data_ask`.`sid`) as `cnt`
+			FROM `data_ask`
+			WHERE `data_ask`.`uid` = :uid
+	</getAskByUidCnt>
+
+
+
+
+
+
+	<!-- 根据病种Id获取问答和回答(医生回答最多只获取一条) -->
+	<getAskByDid>
+		SELECT 
+			`data_ask`.`sid`,
+			`data_ask`.`uid`,
+			`data_ask`.`did`,
+			`data_ask`.`title`,
+			`data_ask`.`desc`,
+			`data_ask`.`svr`,
+			`data_ask`.`date`,
+			`data_ask`.`dod`
+			FROM `data_ask`
+			WHERE `data_ask`.`did` = :did
+			AND `v` = 1
+			ORDER BY `data_ask`.`sid` DESC
+		LIMIT :offset,:length
+	</getAskByDid>
+	<getAskByDidCnt>
+		SELECT 
+			count(`data_ask`.`sid`) as `cnt`
+			FROM `data_ask`
+			WHERE `data_ask`.`did` = :did AND `v` = 1
+	</getAskByDidCnt>
+	<getAskByDod>
+		SELECT 
+			`data_ask`.`sid`,
+			`data_ask`.`uid`,
+			`data_ask`.`title`,
+			`data_ask`.`date`,
+			`data_ask`.`did`
+			FROM `data_ask`
+			WHERE `data_ask`.`dod` = :dod AND `v` = 1
+			ORDER BY `data_ask`.`sid` DESC
+		LIMIT :offset,:length
+	</getAskByDod>
+	<getAskByDodCnt>
+		SELECT 
+			count(`data_ask`.`sid`) as `cnt`
+			FROM `data_ask`
+			WHERE `data_ask`.`dod` = :dod AND `v` = 1
+	</getAskByDodCnt>
+	<getAnswerByAskid>
+		SELECT 
+			`data_ask_append`.`content`
+			FROM `data_ask_append`
+			WHERE `data_ask_append`.`askid` = :askid
+			AND `data_ask_append`.`role` = 'doctor'
+			LIMIT 0,1
+	</getAnswerByAskid>
+	
+	
+	<!-- 获取大病种下的问答,倒序排序 -->
+	<!-- 参数:did,offset,length -->
+	<!-- 返回字段:sid,uid,dod,title,did,desc,svr,files,date -->
+	<getAllByLv0Did>
+		SELECT `data_ask`.*
+			FROM `data_ask`
+			WHERE `did` IN (
+				SELECT `data_attr_data`.`sid` 
+				FROM `data_attr_data` 
+				WHERE 
+					`data_attr_data`.`pid` = :did
+					AND `grp` = 1
+			)
+			 AND `v` = 1
+			ORDER BY `sid` DESC	
+			LIMIT :offset,:length
+	</getAllByLv0Did>
+	<getAllByLv0DidCnt>
+		SELECT count(`data_ask`.`sid`) as `cnt`
+			FROM `data_ask`
+			WHERE `did` IN (
+				SELECT `data_attr_data`.`sid` 
+				FROM `data_attr_data` 
+				WHERE 
+					`data_attr_data`.`pid` = :did
+					AND `grp` = 1
+			)
+			 AND `v` = 1
+	</getAllByLv0DidCnt>
+	
+	<!-- 根据ASKID获取问题回答 -->
+	<!-- 参数:askid -->
+	<!-- 返回字段:sid,askid,role,conmeta,content,files,date -->
+	<rows_answer>
+		SELECT
+			  `sid`,
+			  `askid`,
+			  `role`,
+			  `conmeta`,
+			  `content`,
+			  `files`,
+			  `date`
+			FROM `data_ask_append`
+			WHERE `askid` = :askid
+			LIMIT :offset, :length;
+	</rows_answer>
+	<rows_answerCnt>
+		SELECT
+			  count(`sid`) as `cnt`
+			FROM `data_ask_append`
+			WHERE `askid` = :askid
+	</rows_answerCnt>
+	<rows_answerDocReplyCnt>
+		SELECT
+			  count(`sid`) as `cnt`
+			FROM `data_ask_append`
+			WHERE `askid` = :askid
+			AND
+			`role` = 'doctor'
+	</rows_answerDocReplyCnt>
+	
+		
+	
+	<getAskAnswerByDid>
+		<!-- 
+		SELECT 
+		`data_ask`.`sid`,
+		`data_ask`.`title`,
+		`data_ask`.`date`,
+		`data_ask`.`dod`,
+		`data_doctor`.`avatar`,
+		`data_doctor`.`name`,
+		`data_doctor`.`id`,
+		`data_ask_append`.`content`
+		FROM `data_ask`
+		LEFT JOIN `data_ask_append` ON `data_ask_append`.`askid` = `data_ask`.`sid`
+		LEFT JOIN `data_doctor` ON `data_doctor`.`sid` = `data_ask`.`dod`
+		WHERE `data_ask`.`did` = :did
+		AND `data_ask_append`.`role` = 'doctor'
+		GROUP BY `data_ask`.`sid`
+		ORDER BY `data_ask`.`sid` DESC
+		LIMIT 0,:length
+		-->
+		
+	</getAskAnswerByDid>
+</ui_ask>

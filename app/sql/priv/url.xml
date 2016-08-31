@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<url>
+	<add>
+		INSERT INTO `data_url` (
+			`mod`,`url`,`mid`
+		) VALUES (
+			:mod,:url,:mid
+		)
+	</add>
+
+	<update>
+		UPDATE `data_url` SET 
+			`mod`=:mod,`url`=:url,`mid`=:mid
+		 WHERE `sid`=:sid
+	</update>
+
+
+	<!-- test -->
+	<rm>
+		DELETE FROM `data_url` WHERE `sid`=:sid
+	</rm>
+</url>
