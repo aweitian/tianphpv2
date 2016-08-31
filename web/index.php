@@ -10,9 +10,13 @@ ini_set('date.timezone','Asia/Shanghai');
 // var_dump($_SERVER["HTTP_HOST"]);
 if ($_SERVER["HTTP_HOST"] == "192.168.1.48") {
 	define("DEBUG_FLAG", true);
+	if(!isset($_COOKIE["token"]) || $_COOKIE["token"] !== '123000') {
+		exit("<a href='http://hospital.cs999.cn'>move to hospital.cs999.cn</a>");
+	}
 } else {
 	define("DEBUG_FLAG", false);
 }
+
 
 
 define("FILE_SYSTEM_ENTRY",dirname(dirname(__FILE__)));

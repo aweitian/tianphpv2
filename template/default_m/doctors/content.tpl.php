@@ -86,10 +86,12 @@ defTplData::getInstance()->description = $data["desc"];
           <p class="tc">请输入您的电话号码，提前与医生一对一交流</p>
           <div class="ksbd">
           
-            <form name="form1" accept-charset="gb2312" action="http://swt.gssmart.com/guahao/sockt.php" method="post" onSubmit="return guahao()" >
-            <input name="电话" id="hometel" type="text" class="bd" />
+           	
+  <form name="form1" accept-charset="gb2312" action="http://swt.gssmart.com/send/index.php" method="post" onSubmit="return guahao()" >
+  <input type="hidden" name="content" value="上海九龙男子医院提醒：男科疾病要提早治疗，具体诊疗请在医生指导下进行！咨询电话：<?php print AppChannel::getTel() ?>-退订回T【上海九龙男子医院】">
+            <input name="tel" id="home_dx_co" type="text" class="bd" />
             <input type="submit" name="submit" class="btn" value="点击咨询">
-            </form>
+            
           </div>
         </div>
         <div class="jbkp_page_zx clr">
