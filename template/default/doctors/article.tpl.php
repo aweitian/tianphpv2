@@ -3,7 +3,7 @@ $this->title = "文章-找大夫咨询-上海九龙男子医院";
 $this->description = "";
 $this->keyword = "";
 
-$pageSize = 10;
+$pageSize = 15;
 if(isset($_REQUEST["page"])){
 	$page = intval($_REQUEST["page"]);
 } else{
@@ -69,51 +69,7 @@ $url = new url($req->requestUri());
                 </div>
     			<!--left end-->	
                 
-                <div class="fr wid300 fz13">
-                    
-                	<div class="zjtd_zxfw border4">
-                    	
-                    	<textarea placeholder="在此简单描述病情，向<?php print $m->data["name"]?>医生提问" class="border4"></textarea>
-                        <p class="blank10"></p>
-                        <p class="color6"><b><?php print $m->data["name"]?>的咨询范围： </b><?php print $m->data["spec"]?>... <a<?php print App::useTarget()?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="blue">[更多]</a></p>
-                        <p class="blank10"></p>
-                        <p><a<?php print App::useTarget()?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="zjtd_rgzx tc">咨询<?php print $m->data["name"]?>医生</a></p>
-                    </div>
-                    
-                  	<div class="blank20"></div>
-                    
-      				<div class="hotbq border2">
-                        <div class="syrboxtit fz18 graybg clearfix"><a<?php print App::useTarget()?> class="fl">医师推荐</a></div>
-                        <div class="hotbqbox fz13">
-                          <ul class="clearfix">
-       
-                                  
-                                  
-                                    
-                          <?php foreach($m->getRandomDid(8) as $dis):?>
-                  
-                            <li><a<?php print App::useTarget()?> href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><?php print $dis["data"] ?></a></li>
-                       <?php endforeach;?> 
-                          </ul>
-                        </div>
-                      </div>
-      
-                </div>
-                
-                <!--right end-->
-             </div>
-             
-          </div>
-        
-      </div>
-      
-      <!--fromjb end-->
-      
-      <div class="blank20"></div>
-      
-    </div>
-    <!--syboxl end-->
-  </div>
+  <?php include dirname(__FILE__)."/common/left.tpl.php";?>
 
 
   

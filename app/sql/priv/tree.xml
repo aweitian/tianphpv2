@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tree>
+	<all>
+		SELECT 
+			`sid`,
+		  `name`,
+		  `url`,
+		  `order`,
+		  `layout` FROM `data_tree` WHERE 1
+	</all>
+
+	<debug>
+	
+	        SELECT 
+            CONCAT( REPEAT('   ', COUNT(parent.name) - 1), node.name) AS NAME
+        FROM data_tree AS node,
+                data_tree AS parent
+            WHERE node.lft BETWEEN parent.lft AND parent.rgt
+            GROUP BY node.name
+            ORDER BY node.lft;
+	</debug>
+
+
+	<!-- 虚拟根结点，方便用于森林管理 -->
+	<virtualRoot>
+		<rgt>
+		SELECT MAX(`rgt`) as `rgt` FROM `data_tree`
+	
+		</rgt>
+	</virtualRoot>
+
+	<row>
+		SELECT 
+		  `sid`,
+		  `name`,
+		  `url`,
+		  `order`,
+		  `layout` 
+		 FROM `data_tree` WHERE `sid` = :sid
+	</row>
+	
+	<!-- 内部使用 -->
+	<row_full>
+		SELECT * FROM `data_tree` WHERE `sid` = :sid
+	</row_full>
+
+	<!-- 返回字段leaf，为1是叶子结点,0不是 -->
+	<isLeaf>
+		SELECT IF( `rgt` - `lft` = 1,1,0) AS `leaf` FROM `data_tree` WHERE `sid` = :sid
+	</isLeaf>
+
+	<!-- 根据SID，获取NAME路径 -->
+	<path>
+		SELECT 
+		    parent.`sid` AS pid,
+		    parent.`lft` AS plft,
+		    parent.`name` AS pname,
+		    parent.`rgt` AS prgt,
+		
+		    node.`sid` AS nid,
+		    node.`lft` AS nlft,
+		    node.`name` AS nname,
+		    node.`rgt` AS nrgt
+		    FROM `data_tree` AS node,
+		        `data_tree` AS parent
+		    WHERE node.lft BETWEEN parent.lft AND parent.rgt
+		    AND node.`sid` = :pid
+	</path>
+
+	<add>
+
+			<getParentRgt>
+				SELECT `rgt` FROM `data_tree`
+	       				WHERE `sid` = :pid;
+			</getParentRgt>
+			<balance>
+				<rgt>
+					<![CDATA[
+					 UPDATE `data_tree` SET `rgt` = `rgt` + 2 
+					 WHERE `rgt` >= :prgt
+					 ORDER BY `rgt` DESC
+					 ]]>
+				</rgt>
+				<lft>
+					<![CDATA[
+					UPDATE `data_tree` SET `lft` = `lft` + 2 
+					WHERE `lft` >= :prgt
+					ORDER BY `lft` DESC
+					]]>
+				</lft>
+			</balance>
+			<base>
+				INSERT INTO `data_tree`
+		            (
+		             `name`,
+		             `url`,
+		             `order`,
+		             `layout`,
+		             `lft`,
+		             `rgt`,
+		             `pid`
+		             )
+				VALUES (
+				        :name,
+				        :url,
+				        :order,
+				        :layout,
+			            :prgt,
+			            :prgt+1,
+			            :pid
+				     );			
+			</base>		
+		
+	</add>
+	
+	<!-- 删除自己和所有孩子结点 -->
+	<remove>
+		<getSpan>
+			SELECT `lft`, `rgt`, `rgt` - `lft` + 1 as `span` FROM `data_tree`
+				WHERE `sid` = :pid;
+		</getSpan>
+		<balance>
+			<self>
+				DELETE FROM `data_tree` WHERE `lft` BETWEEN :plft AND :prgt;
+			</self>
+			<rgt>
+				UPDATE `data_tree` SET `rgt` = `rgt` - :span WHERE `rgt` > :prgt;
+			</rgt>
+			<lft>
+				UPDATE `data_tree` SET `lft` = `lft` - :span WHERE `lft` > :prgt;
+			</lft>
+		</balance>
+	</remove>
+	
+	<!-- 返回字段有:sid,name,url,order,layout -->
+	<children>
+		SELECT 
+		  `sid`,
+		  `name`,
+		  `url`,
+		  `order`,
+		  `layout` 
+		 FROM `data_tree` WHERE `pid` = :pid
+		ORDER BY `order` ASC,`sid` ASC
+	</children>
+	
+	<update>
+		UPDATE `data_tree`
+			SET 
+			  `name` = 'name',
+			  `url` = 'url',
+			  `order` = 'order',
+			  `layout` = 'layout'
+
+			WHERE `sid` = :sid;
+	</update>
+</tree>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui_tree>
+	<all>
+		SELECT 
+			`sid`,
+			`pid`,
+			`name`,
+			`url`,
+			`order`,
+			`layout` FROM `data_tree` WHERE 1
+	</all>
+
+	
+	<!-- 返回字段有:sid,name,url,order,layout -->
+	<children>
+		SELECT 
+		  `sid`,
+		  `name`,
+		  `url`,
+		  `order`,
+		  `layout` 
+		 FROM `data_tree` WHERE `pid` = :pid
+		ORDER BY `order` ASC,`sid` ASC
+	</children>
+</ui_tree>

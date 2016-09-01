@@ -1,7 +1,8 @@
            
 
 var boxzj = document.getElementById("topzj"),can=true;
-boxzj.innerHTML+=boxzj.innerHTML;
+if(boxzj){
+	boxzj.innerHTML+=boxzj.innerHTML;
 boxzj.onmouseover=function(){can=false};
 boxzj.onmouseout=function(){can=true};
 new function (){
@@ -9,6 +10,8 @@ new function (){
  if(!stop)boxzj.scrollTop==parseInt(boxzj.scrollHeight/2)?boxzj.scrollTop=0:boxzj.scrollTop++;
  setTimeout(arguments.callee,boxzj.scrollTop%60?10:5000);
 };
+
+	}
 
 
 

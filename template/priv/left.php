@@ -25,7 +25,6 @@ function css_active_control($links){
 	$mca = explode("?", $url);
 	$mca = substr($mca[0],5);
 	return array_key_exists($mca, $links) ? $css : "";
-
 }
 
 ?>
@@ -56,6 +55,7 @@ function css_active_control($links){
           <ul class="sidebar-menu">
             <li class="header">主控制面板</li>
             <?php $links = array(
+            		"/tree"=>"栏目管理",
             		"/disease/import"=>"病种导入",
             		"/disease"=>"病种管理",
             		"/symptom/import"=>"症状导入",

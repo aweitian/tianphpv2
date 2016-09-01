@@ -2979,3 +2979,8 @@ a,img{border:0;}
 .ewmnr{display:none; position:absolute;right:35px;border:1px #357deb solid;font:14px/29px Microsoft Yahei;text-align:center;}
 .side li.ewm a:hover .ewmnr{display:block;width:134px;height:148px;}
 .side li.ewm a:hover .ewmnr img{padding-top:15px;}
+
+ .ysxx{padding:0 19px 15px;}
+					.ysxx li{border-bottom:1px #d7d7e3 dashed;line-height:44px;}
+					.ysxx li img{ vertical-align:middle;margin-left:6px;}
+					.ysxx li b{color:#00b7ee;}

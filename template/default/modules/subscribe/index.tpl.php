@@ -105,7 +105,7 @@
       <div class="ghfs ml20">
         <img src="<?php print AppUrl::getMediaPath()?>/images/ghp2.png" width="28" height="27" class="ghfl" />
         <dl>
-          <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/ghkf.jpg" width="135" height="68" /></dt>
+          <dt class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/ghkf.jpg" width="145" height="68" /></dt>
           <dd>
             <h5>在线客服挂号</h5>
             <a href="<?php print AppUrl::getSwtUrl()?>" onclick="openZoosUrl();return false;" ><img src="<?php print AppUrl::getMediaPath()?>/images/djgh.png" /></a>
