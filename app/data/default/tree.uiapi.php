@@ -12,10 +12,8 @@ class treeUIApi {
 	private $sidCache = array ();
 	private $ctrCache = array ();
 	
-	
-	//只存储PID为0的元素
+	// 只存储PID为0的元素
 	private $keyCache = array ();
-
 	private function __construct() {
 		$this->db = new mysqlPdoBase ();
 		$this->sqlManager = new sqlManager ( FILE_SYSTEM_ENTRY . "/app/sql/default/ui_tree.xml" );
@@ -68,9 +66,14 @@ class treeUIApi {
 		$ret = $this->db->fetchAll ( $sql, array () );
 		foreach ( $ret as $item ) {
 			$this->sidCache [$item ["sid"]] = $item;
-			
 			if ($item ["pid"] == 0)
 				$this->ctrCache [$item ["url"]] = $item;
+		}
+	}
+	private function initUrlCache() {
+		
+		foreach ($this->ctrCache as $ctr) {
+			
 		}
 	}
 }

@@ -22,7 +22,7 @@
 
 /*===ҽ��ҳ end===*/
 
-.box_d{background:#e1ebfc; border-top:1px solid #ddd;bottom: 0;height:1.25rem;left: 0;line-height: 1rem;position: fixed;right: auto;text-align: center;width: 100%;z-index: 5000; padding:.1rem 0;}
+.box_d{background:#e1ebfc; border-top:1px solid #ddd;bottom: 0;height:1.25rem;left: 0;line-height: 1rem;position: fixed;text-align: center;width: 100%;z-index: 5000; padding:.1rem 0;}
 .box_d img.fl{ width:1.2rem; height:1.2rem; margin-left:.3rem;}
 .box_d p{ line-height:.35rem;}
 
