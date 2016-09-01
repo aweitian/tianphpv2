@@ -140,7 +140,7 @@ $this->keyword = "";
                                   <p class="p3 tc"><a<?php print App::useTarget()?> href="<?php print AppUrl::docHomeByDocid($doc["id"])?>">个人网站</a></p>
                                 </dd>
                               </dl>
-                              <div class="blank20"></div>
+                          
                               <div class="zjsc">
                                 <p class="fz13 gray">擅长： <?php print utility::utf8Substr($doc["spec"], 0, 13); ?>...
                                   等</p>

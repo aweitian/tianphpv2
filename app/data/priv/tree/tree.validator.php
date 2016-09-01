@@ -10,6 +10,6 @@ class treeValidator {
 		return is_string ( $name ) && $name !== "";
 	}
 	public static function isValidUrl($url) {
-		return preg_match("/^[\w-\/]+$/",$url);
+		return preg_match("/^[\w-]+$/",$url);
 	}
 }

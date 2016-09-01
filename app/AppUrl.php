@@ -1,30 +1,5 @@
 <?php
 class AppUrl {
-	// 用于检测ControllerNotFound命名冲突
-	public static function checkControlExists($ctl) {
-		// 检查默认模块，它的优先级比ControllerNotFound高
-		$defCtls = tian::getDirList ( FILE_SYSTEM_ENTRY . "/app/modules" );
-		foreach ( $defCtls as $path ) {
-			if (strtolower ( $ctl ) == pathinfo ( $path, PATHINFO_BASENAME )) {
-				return 1;
-			}
-		}
-		
-		// 先检查医生 ,由hookControllerNotFound决定
-		if (doctorUIApi::getInstance ()->exists ( $ctl )) {
-			return 2;
-		}
-		if (diseaseUIApi::getInstance ()->exists ( $ctl )) {
-			return 3;
-		}
-		
-		return 0;
-	}
-	
-	
-	
-	
-	
 	// 全局URL
 	public static function swtjs() {
 		return AppUrl::build ( "/swtjs" );

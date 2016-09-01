@@ -14,7 +14,7 @@
                
              
                 	<div class="zjtd_zxfw border4">
-                    	<textarea placeholder="在此简单描述病情，向陈希球医生提问" class="border4"></textarea>
+                    	<textarea placeholder="在此简单描述病情，向<?php print $m->data["name"]?>医生提问" class="border4"></textarea>
                         <p class="blank10"></p>
                         <p class="color6"><b><?php print($m->data["name"]) ?>的咨询范围： </b><?php print($m->data["spec"]) ?>... <a<?php print App::useTarget()?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;" class="blue">[更多]</a></p>
                         <p class="blank10"></p>
@@ -90,7 +90,7 @@
                       </div>
                     
                     <div class="zjtd_r3 clr"><a<?php print App::useTarget()?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">立刻咨询</a></div>
-                 
+          <div class="blank20"></div>          
       </div>
        <div class="blank20"></div>             
       				<div class="hotbq border2">

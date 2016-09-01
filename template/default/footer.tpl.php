@@ -30,8 +30,13 @@
 <?php if (AppModule::$moduleName == "doctor"):?>
 <?php include (dirname(__FILE__))."/swt/bottom_swt.tpl.php";?>
 <?php endif?>
+
+<?php if (AppModule::$moduleName !== "default" || appCtrl::$msg->getControl() !== "user"):?>
+
 <?php if(SWT_OPEN):?>
 <script type="text/javascript" src="<?php print AppUrl::swtjs()?>?m=<?php print AppModule::$moduleName?><?php if(AppModule::$moduleName == "doctor")print '&n='.$this->model->data["id"]?><?php /*if(AppModule::$moduleName == "default" && appCtrl::$msg->getControl()=="main")print '&c=m'*/?>"></script>
 <?php endif?>
+<?php endif?>
+
 <script src="<?php print AppUrl::getMediaPath()?>/js/topscroll.js"></script>
  

@@ -1410,9 +1410,9 @@ padding: 0px 0 20px 0px; width:320px;
 	padding-top: 20px;
 }
 .fromjbzj ul li {
-	width: 195px;
+	width: 200px;
 	float: left;
-	margin-right: 15px;
+	margin-right: 10px;
 }
 .fromjbzj ul li.last {
 	margin-right: 0;
@@ -1422,6 +1422,7 @@ padding: 0px 0 20px 0px; width:320px;
 }
 .fromjbzj ul li dl dd {
 	margin-left: 8px;
+	width:100px;
 }
 .fromjbzj ul li dl dd .p2 img {
 	margin-top: 5px;

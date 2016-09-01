@@ -16,6 +16,9 @@ require_once FILE_SYSTEM_ENTRY."/app/data/default/symptom.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/tags.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/user.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/put.uiapi.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/default/tree.uiapi.php";
+
+// var_dump(treeUIApi::getInstance());exit;
 
 class AppModel extends Model{
 	/**

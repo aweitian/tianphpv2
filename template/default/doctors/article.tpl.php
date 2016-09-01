@@ -69,7 +69,7 @@ $url = new url($req->requestUri());
                 </div>
     			<!--left end-->	
                 
-  <?php include dirname(__FILE__)."/common/left.tpl.php";?>
+  <?php include dirname(__FILE__)."/common/right.tpl.php";?>
 
 
   

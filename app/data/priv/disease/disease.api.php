@@ -83,7 +83,7 @@ class diseaseApi{
 	}
 	
 	public function edit($sid,$key,$data){
-		$urkChk = AppUrl::checkControlExists($key);
+		$urkChk = App::checkControlExists($key);
 		switch ($urkChk){
 			case 0:
 				break;
@@ -93,6 +93,8 @@ class diseaseApi{
 				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(医生模块<a target='_blank' href='".AppUrl::docHomeByDocid($key)."'>点击查看</a>)占用");
 			case 3:
 				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(疾病模块<a target='_blank' href='".AppUrl::disHomeByDiseasekey($key)."'>点击查看</a>)占用");
+			case 4:
+				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(栏目文章模块占用");
 			default:
 				return new rirResult(3,"URL检测未知错误");
 		}
@@ -115,7 +117,7 @@ class diseaseApi{
 
 	public function add($key,$data,$pid,$metaid){
 		
-		$urkChk = AppUrl::checkControlExists($key);
+		$urkChk = App::checkControlExists($key);
 		switch ($urkChk){
 			case 0:
 				break;
@@ -125,6 +127,8 @@ class diseaseApi{
 				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(医生模块<a target='_blank' href='".AppUrl::docHomeByDocid($key)."'>点击查看</a>)占用");
 			case 3:
 				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(疾病模块<a target='_blank' href='".AppUrl::disHomeByDiseasekey($key)."'>点击查看</a>)占用");
+			case 4:
+				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(栏目文章模块占用");
 			default:
 				return new rirResult(3,"URL检测未知错误");
 		}

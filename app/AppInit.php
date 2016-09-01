@@ -15,7 +15,7 @@ if ($_SERVER ["HTTP_HOST"] == "192.168.1.48") {
 	define ( "SWT_OPEN", true );
 }
 //APP CHANNEL
-require_once FILE_SYSTEM_ENTRY . '/conf/channel.php';
+require_once FILE_SYSTEM_ENTRY . '/app/conf/channel.php';
 
 
 if (DEBUG_FLAG) {

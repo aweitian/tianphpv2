@@ -34,7 +34,21 @@ class treeApi {
 		if (! validator::isInt ( $order )) {
 			return new rirResult ( 3, "顺序只能为数字" );
 		}
-		
+		$urkChk = App::checkControlExists($url);
+		switch ($urkChk){
+			case 0:
+				break;
+			case 1:
+				return new rirResult(3,"栏目URL用于URL，但这个".$url."已被(默认路由<a target='_blank' href='".AppUrl::build("/".$url)."'>点击查看</a>)占用");
+			case 2:
+				return new rirResult(3,"栏目URL用于URL，但这个".$url."已被(医生模块<a target='_blank' href='".AppUrl::docHomeByDocid($url)."'>点击查看</a>)占用");
+			case 3:
+				return new rirResult(3,"栏目URL用于URL，但这个".$url."已被(疾病模块<a target='_blank' href='".AppUrl::disHomeByDiseasekey($url)."'>点击查看</a>)占用");
+			case 4:
+				return new rirResult(3,"栏目URL用于URL，<br>但这个".$url."已被(栏目文章模块)占用");
+			default:
+				return new rirResult(3,"URL检测未知错误");
+		}
 		// 先检查PID结点是否存在
 		if ($pid != 0){
 			$sql = $this->sqlManager->getSql ( "/tree/row_full" );
@@ -210,6 +224,21 @@ class treeApi {
 		}
 		if (! validator::isInt ( $order )) {
 			return new rirResult ( 3, "顺序只能为数字" );
+		}
+		$urkChk = App::checkControlExists($url);
+		switch ($urkChk){
+			case 0:
+				break;
+			case 1:
+				return new rirResult(3,"栏目URL用于URL，但这个".$url."已被(默认路由<a target='_blank' href='".AppUrl::build("/".$url)."'>点击查看</a>)占用");
+			case 2:
+				return new rirResult(3,"栏目URL用于URL，但这个".$url."已被(医生模块<a target='_blank' href='".AppUrl::docHomeByDocid($url)."'>点击查看</a>)占用");
+			case 3:
+				return new rirResult(3,"栏目URL用于URL，但这个".$url."已被(疾病模块<a target='_blank' href='".AppUrl::disHomeByDiseasekey($url)."'>点击查看</a>)占用");
+			case 4:
+				return new rirResult(3,"栏目URL用于URL，<br>但这个".$url."已被(栏目文章模块)占用");
+			default:
+				return new rirResult(3,"URL检测未知错误");
 		}
 		$sql = $this->sqlManager->getSql ( "/tree/update" );
 		$bnd = array (

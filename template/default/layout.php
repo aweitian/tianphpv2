@@ -51,11 +51,13 @@ $loginReturnUrl = "?return=".urlencode($curUrl);
 		<?php endif?>
 		</div>
 			<p class="fr">
-				<a <?php print App::useTarget()?> href="<?php print AppUrl::userWriteLetter()?>">登陆</a> | <a
-					<?php print App::useTarget()?> href="<?php print AppUrl::userRegister()?>">注册</a>
+				<a <?php print App::useTarget()?> href="javascript:void(0)" onclick="SetHome(this,window.location)">设为首页</a> | <a
+					<?php print App::useTarget()?> href="javascript:void(0)" onclick="shoucang(document.title,window.location)">加入收藏</a>
 			</p>
 		</div>
 	</div>
+
+	
 	<div class="wid1000">
 <?php include dirname(__FILE__)."/header.tpl.php"?>
 <?php $model->outputContent()?>
