@@ -207,13 +207,197 @@ function chk(form){
                     </div>
                     
                   	<div class="blank20"></div>
+                  	
+                  	
+              
+              
+              
+              
+              
+              <div class="syrbox5 border2">
+        <div class="syrboxtit fz18 graybg">大家都在送什么?</div>
+        <div class="syrbox5nr">
+          <div class="syrbox5nr_1" id="toplw">
+                        
+                    
+                  
+         
+             
+            <dl class="clearfix" >
+              <dt class="fl"><img src="/static/pc/present/zjtd_lw5.png" width="61" height="57" /></dt>
+              <dd class="fl">
+                <p class="ddp1"><strong><a href="/lyq">刘彦强</a></strong>医生收到了<strong>
+               
+                谁为谁心疼                
+                </strong>精心挑选的礼物<strong>赞</strong>医生爱心值+200</p>
+                <p class="ddp2 fr blue"><a href="/lyq/present">我也要送</a></p>
+              </dd>
+            </dl>
+                        
+                    
+                  
+         
+             
+            <dl class="clearfix" >
+              <dt class="fl"><img src="/static/pc/present/zjtd_lw1.png" width="61" height="57" /></dt>
+              <dd class="fl">
+                <p class="ddp1"><strong><a href="/jmq">金民强</a></strong>医生收到了<strong>
+               
+                谁为谁心疼                
+                </strong>精心挑选的礼物<strong>爱心气球</strong>医生爱心值+100</p>
+                <p class="ddp2 fr blue"><a href="/jmq/present">我也要送</a></p>
+              </dd>
+            </dl>
+                        
+                    
+                  
+         
+             
+            <dl class="clearfix" >
+              <dt class="fl"><img src="/static/pc/present/zjtd_lw2.png" width="61" height="57" /></dt>
+              <dd class="fl">
+                <p class="ddp1"><strong><a href="/jmq">金民强</a></strong>医生收到了<strong>
+               
+                谁为谁心疼                
+                </strong>精心挑选的礼物<strong>小糕点</strong>医生爱心值+1</p>
+                <p class="ddp2 fr blue"><a href="/jmq/present">我也要送</a></p>
+              </dd>
+            </dl>
+                        
+                    
+                  
+         
+             
+            <dl class="clearfix" >
+              <dt class="fl"><img src="/static/pc/present/zjtd_lw4.png" width="61" height="57" /></dt>
+              <dd class="fl">
+                <p class="ddp1"><strong><a href="/xkz">徐开忠</a></strong>医生收到了<strong>
+               
+                谁为谁心疼                
+                </strong>精心挑选的礼物<strong>医患同心</strong>医生爱心值+100</p>
+                <p class="ddp2 fr blue"><a href="/xkz/present">我也要送</a></p>
+              </dd>
+            </dl>
+                        
+                    
+                  
+         
+             
+            <dl class="clearfix" >
+              <dt class="fl"><img src="/static/pc/present/zjtd_lw2.png" width="61" height="57" /></dt>
+              <dd class="fl">
+                <p class="ddp1"><strong><a href="/zhq">张河清</a></strong>医生收到了<strong>
+               
+                谁为谁心疼                
+                </strong>精心挑选的礼物<strong>小糕点</strong>医生爱心值+1</p>
+                <p class="ddp2 fr blue"><a href="/zhq/present">我也要送</a></p>
+              </dd>
+            </dl>
+                        
+                    
+                  
+         
+             
+            <dl class="clearfix" >
+              <dt class="fl"><img src="/static/pc/present/zjtd_lw4.png" width="61" height="57" /></dt>
+              <dd class="fl">
+                <p class="ddp1"><strong><a href="/zyd">张英娣</a></strong>医生收到了<strong>
+               
+                谁为谁心疼                
+                </strong>精心挑选的礼物<strong>医患同心</strong>医生爱心值+100</p>
+                <p class="ddp2 fr blue"><a href="/zyd/present">我也要送</a></p>
+              </dd>
+            </dl>
+                      </div>
+        
+        </div>
+      </div>
+  <div class="blank20"></div>
+    <!--syboxr end--> 
+
+  
+  
+  
+   <div class="syrbox5 border2">
+                    <div class="syrboxtit fz18 graybg">祁浩医生的最新咨询<a href="/qh/ask" class="blue fz13 fr">+更多</a></div>
+<div class="zjtd_r2">
+                    	<div class="blank10"></div>
+
+                        <dl  class="selected">
+                          <dt class="fz18 blue"><a href="/qh/ask/1079.html">阳痿早泄尿频</a></dt>
+                          <dd class="fz16 dgray clr">
+                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">                             
+                             <a href="/qh/ask/1079.html">
+                            建议如果星期日有时间可以 早晨八点来...
+                            </a>
+                             ...</p>
+                          </dd>
+                        </dl>
+                                                
+          
+                  
+               
+                        <dl >
+                          <dt class="fz18 blue"><a href="/qh/ask/1048.html">非淋菌性尿道炎</a></dt>
+                          <dd class="fz16 dgray clr">
+                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">                             
+                             <a href="/qh/ask/1048.html">
+                            可以查一下支原体和衣原体，再观察一段时间，如症状仍...
+                            </a>
+                             ...</p>
+                          </dd>
+                        </dl>
+                                                
+          
+                  
+               
+                        <dl >
+                          <dt class="fz18 blue"><a href="/qh/ask/1010.html">排尿困难原因</a></dt>
+                          <dd class="fz16 dgray clr">
+                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">                             
+                             <a href="/qh/ask/1010.html">
+                            从病理结果来看膀胱炎的诊断是成立的，但具体引起膀胱...
+                            </a>
+                             ...</p>
+                          </dd>
+                        </dl>
+                                                
+          
+                  
+               
+                        <dl >
+                          <dt class="fz18 blue"><a href="/qh/ask/763.html">小儿支原体肺炎的恢复期治疗</a></dt>
+                          <dd class="fz16 dgray clr">
+                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">                             
+                             <a href="/qh/ask/763.html">
+                             问题应该是问我的吧？  支原体感染明确的，阿奇霉...
+                            </a>
+                             ...</p>
+                          </dd>
+                        </dl>
+                                                
+                      
+                      
+                      
+                      </div>
+                    
+                    <div class="zjtd_r3 clr"><a href="javascript:void(0)" onClick="openZoosUrl();return false;">立刻咨询</a></div>
+                   
+              
+              
+              
+              
+              
+              
+                  	
+                  	<div class="blank20"></div>
                     
       				<div class="hotbq border2">
                         <div class="syrboxtit fz18 graybg clearfix"><a<?php print App::useTarget()?> class="fl">医师推荐</a></div>
                         <div class="hotbqbox fz13">
                           <ul class="clearfix">
                                      
-                          <?php foreach($m->getRandomDid(8) as $dis):?>
+                          <?php foreach($m->getRandomDid(12) as $dis):?>
                   
                             <li><a<?php print App::useTarget()?> href="<?php print AppUrl::disHomeByDid($dis["sid"]) ?>"><?php print $dis["data"] ?></a></li>
                        <?php endforeach;?> 

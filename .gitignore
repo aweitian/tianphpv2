@@ -9,3 +9,4 @@
 /.cache
 /.ssh
 /.bash_history
+/init.sql
