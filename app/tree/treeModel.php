@@ -1,7 +1,7 @@
 <?php
 class treeControllerNotFoundModel extends AppModel {
 	public $data;
-	public $subid = 0;
+	public $channel = 0;
 	public function __construct() {
 		
 	}

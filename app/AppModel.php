@@ -18,7 +18,7 @@ require_once FILE_SYSTEM_ENTRY."/app/data/default/user.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/put.uiapi.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/default/tree.uiapi.php";
 
-// var_dump(treeUIApi::getInstance());exit;
+// (treeUIApi::getInstance()->debug());exit;
 
 class AppModel extends Model{
 	/**

@@ -191,16 +191,4 @@ defTplData::getInstance()->description = $data["desc"];
 </div>
 
 
-  
-<?php 
-
-  $doc_img=$m->data["avatar"];
-  $doc_name=$m->data["name"];
-  $doc_desc=$m->data["desc"];
-  $doc_spec=$m->data["spec"];
-  
-  ?>
- <?php if(!APP_MOBILE_MODE):?>
- <?php include dirname(dirname(__FILE__))."/template/default/bottom_swt.tpl.php";?>
- <?php endif?>
 

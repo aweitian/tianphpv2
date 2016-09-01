@@ -122,8 +122,13 @@
        
         3、到诊时，在导医台核对您的预约编号、姓名及联系方式，然后直接找医师就诊。<br />
         <br />
-        4、如因某些原因使您无法按时到诊，请及时取消或通知我院变更预约信息。</p>
+        4、如因某些原因使您无法按时到诊，请及时取消或通知我院变更预约信息。</p><br/>
+        <a href="<?php print AppUrl::getSwtUrl()?>" onclick="openZoosUrl();return false;" >  <img src="<?php print AppUrl::getMediaPath()?>/images/yuyue.jpg" width="234" height="160" /></a>
     </div>
+    
+   
+    
+   
   </div>
 </div>
 <div class="blank20"></div>

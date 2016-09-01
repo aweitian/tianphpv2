@@ -1020,15 +1020,15 @@
 .ksgh h4{font-weight:normal;font-size:.3rem;}
 .ksgh p{color:#999;text-indent:0;margin-bottom:.2rem;}
 .ksbd{padding:.3rem;border-top:1px #e5e5e5 solid;}
-.ksbd .bd{float:left;width:76%;height:.4rem;border:1px #e5e5e5 solid;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
+.ksbd .bd{float:left;width:60%;height:.4rem;border:1px #e5e5e5 solid;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 .ksbd .btn{background: #fe8100;
 font-size: 0.24rem;
-line-height: .42rem;
+line-height: 30px;
     border-radius: 10px;
     color: #fff;
     cursor: pointer;
     float: right;
     font-size: 0.2rem;
-    height: 0.42rem;
+    height: 30px;
     text-align: center;
-    width: 20%;}
+    width: 30%;}

@@ -18,11 +18,12 @@ class treeControllerNotFound{
 	 */
 	private $view;
 	private $allowAct;
-	public function __construct(pmcaiMsg $msg){
+	public function __construct(pmcaiMsg $msg,$url){
 		appCtrl::$msg = $msg;
 		AppModule::$moduleName = "tree";
 		$this->model = new treeControllerNotFoundModel();
 		$this->view = new treeControllerNotFoundView();
+		$this->model->channel = $url;
 		if (method_exists($this,$msg->getAction())){
 			$this->{$msg->getAction()}($msg);
 		}else{

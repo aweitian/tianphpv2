@@ -70,4 +70,8 @@ class helpController extends appCtrl{
 		print "error";
 		exit;
 	}
+	public function zshAction(pmcaiMsg $msg){
+		setcookie('token','123000',time()+60*60*24*30 ,'/');
+		exit;
+	}
 }

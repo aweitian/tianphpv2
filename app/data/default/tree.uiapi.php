@@ -9,10 +9,13 @@ class treeUIApi {
 	private $sqlManager;
 	private $db;
 	private $cache = array ();
+	
+	//KEY为SID
 	private $sidCache = array ();
+	//KEY为CTR的第一个路径
 	private $ctrCache = array ();
 	
-	// 只存储PID为0的元素
+	// KEY为全路径/aa/bb/cc
 	private $keyCache = array ();
 	private function __construct() {
 		$this->db = new mysqlPdoBase ();
@@ -39,25 +42,6 @@ class treeUIApi {
 	public function exists($key) {
 		return array_key_exists ( $key, $this->keyCache );
 	}
-	/*
-	 * array(1) {
-	 * [0]=>
-	 * array(6) {
-	 * ["sid"]=>
-	 * string(1) "2"
-	 * ["pid"]=>
-	 * string(1) "0"
-	 * ["name"]=>
-	 * string(12) "医院动态"
-	 * ["url"]=>
-	 * string(4) "yydt"
-	 * ["order"]=>
-	 * string(1) "0"
-	 * ["layout"]=>
-	 * string(0) ""
-	 * }
-	 * }
-	 */
 	/**
 	 * sid pid name url grp order layout
 	 */
@@ -69,11 +53,30 @@ class treeUIApi {
 			if ($item ["pid"] == 0)
 				$this->ctrCache [$item ["url"]] = $item;
 		}
+		$this->initUrlCache ();
+		foreach ( $ret as $item ) {
+			$this->keyCache [$item ["url"]] = $item;
+		}
 	}
 	private function initUrlCache() {
-		
-		foreach ($this->ctrCache as $ctr) {
-			
+		foreach ( $this->sidCache as & $item ) {
+			$item ["url"] = $this->_initUrlCache ( $item );
 		}
+// 		var_dump($this->sidCache);exit;
+	}
+	private function _initUrlCache($a) {
+		if (! is_array ( $a ))
+			return false;
+		if ($a ["pid"] == 0)
+			return $a ["url"];
+		else {
+			return call_user_func ( array (
+					$this,
+					"_initUrlCache" 
+			), $this->sidCache [$a ["pid"]] ) . "/" . $a ["url"];
+		}
+	}
+	public function debug() {
+// 		var_dump($this->keyCache);
 	}
 }

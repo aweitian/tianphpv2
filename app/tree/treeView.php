@@ -1,5 +1,5 @@
 <?php
-require_once FILE_SYSTEM_ENTRY . "/app/data/info/treeExtInfoes.php";
+
 class treeControllerNotFoundView extends AppView {
 	public function ask($model) {
 		return defTplData::getInstance ()->push ( defTplData::TYPE_INCLUDE_NOW, array (
