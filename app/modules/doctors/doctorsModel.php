@@ -97,4 +97,6 @@ class doctorsModel extends AppModel {
 	public function getLetterByDod($dod,$length,$offset=0){
 		return letterUIApi::getInstance()->getLetterByDod($dod,$length,$offset);
 	}
+	
+	
 }

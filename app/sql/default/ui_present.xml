@@ -44,6 +44,10 @@
 		WHERE `dod` = :dod
 		group by pid
 	</data_dod_cnt>
+	<data_dod_all_cnt>
+		SELECT count(`sid`) as `cnt` FROM `data_doctor_present`
+		WHERE `dod` = :dod
+	</data_dod_all_cnt>
 	
 	
 	<row>

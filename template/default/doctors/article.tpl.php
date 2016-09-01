@@ -9,7 +9,7 @@ if(isset($_REQUEST["page"])){
 } else{
 	$page = 1;
 }
-$pagination = new pagination($m->allByDodCnt($m->data["sid"]), $page, $pageSize, 6);
+$pagination = new pagination($m->allByDodCnt($m->data["sid"]), $page, $pageSize, 7);
 
 
 $req = new httpRequest();

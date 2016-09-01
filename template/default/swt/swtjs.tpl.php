@@ -62,3 +62,24 @@ function closeSwt(){
 
 	setTimeout("chuxian()", 15000);
 }
+
+
+
+
+
+
+
+document.writeln("");
+document.writeln("");
+document.writeln("<div class=\'side\'>");
+document.writeln("  <ul>");
+document.writeln("    <li class=\'zx\'><a href=\'javascript:void(0)\' onclick=\'openZoosUrl();return false;\'></a></li>");
+document.writeln("    <li class=\'gh\'><a href=\'/subscribe/\'></a></li>");
+document.writeln("    <li class=\'ewm\'><a>");
+document.writeln("      <div class=\'ewmnr\'>");
+document.writeln("        <img src=\'/static/pc/images/ewm.png\' /><br />");
+document.writeln("        扫一扫,更多惊喜");
+document.writeln("      </div>");
+document.writeln("    </a></li>");
+document.writeln("  </ul>");
+document.writeln("</div>");

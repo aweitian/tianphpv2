@@ -2958,3 +2958,24 @@ a,img{border:0;}
 #notfind li img{ vertical-align:middle;padding-right:5px;}
 #notfind li a{color:#fff;}
 #notfind li a:hover{color:#ff0;}
+
+
+
+
+
+
+
+
+
+.side{position:fixed;top:0;right:0;width:58px;height:100%;background:url(../images/sidebg.gif) repeat-y;}
+.side ul{width:58px;padding-top:240px;height:330px;background:url(../images/sidebg2.png) no-repeat;}
+.side li{float:right;width:35px;height:96px;position:relative;}
+.side li a{display:block;width:58px;height:96px;background:url(../images/side.png) no-repeat;transition:0 !important;}
+.side li.gh a{background-position:0 -96px;}
+.side li.ewm a{background-position:0 -192px;color:#357deb; cursor:pointer;}
+.side li.zx a:hover{background-position:-35px 0;}
+.side li.gh a:hover{background-position:-35px -96px;}
+.side li.ewm a:hover{background-position:-35px -192px;}
+.ewmnr{display:none; position:absolute;right:35px;border:1px #357deb solid;font:14px/29px Microsoft Yahei;text-align:center;}
+.side li.ewm a:hover .ewmnr{display:block;width:134px;height:148px;}
+.side li.ewm a:hover .ewmnr img{padding-top:15px;}

@@ -152,5 +152,14 @@ class doctorsModelControllerNotFound extends AppModel {
 	public function getRowByDid($did) {
 		return diseaseUIApi::getInstance ()->getRowByDid($did);
 	}
+	public function getDataByDodAllCnt($dod){
+		return presentUIApi::getInstance()->getDataByDodAllCnt($dod);
+	}
+	
+	
+	public function getDataByDodCntall($dod) {
+		return presentUIApi::getInstance ()->getDataByDodCnt ($dod);
+	}
+	
 	
 }

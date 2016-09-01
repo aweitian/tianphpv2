@@ -123,12 +123,12 @@ class presentUIApi {
 	}
 	
 	/**
-	 * 获取所有的赠送礼物数据个数
+	 * 获取所有的赠送礼物数据类别个数
 	 * 
 	 * @return int
 	 */
 	public function getDataByDodCnt($dod) {
-		$cache_key = "getDataByDodCnt";
+		$cache_key = "getDataByDodCnt-".$dod;
 		if (array_key_exists ( $cache_key, $this->cache )) {
 			return $this->cache [$cache_key];
 		}
@@ -141,6 +141,24 @@ class presentUIApi {
 		} else {
 			$ret = count($ret);
 		}
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 * 获取所有的赠送礼物数据个数
+	 * 
+	 * @return int
+	 */
+	public function getDataByDodAllCnt($dod) {
+		$cache_key = "getDataByDodCnt";
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		
+		$ret = $this->db->fetch( $this->sqlManager->getSql ( "/ui_present/data_dod_all_cnt" ), array (
+				"dod" => $dod 
+		) );
+		$ret = $ret["cnt"];
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}

@@ -5,7 +5,7 @@ $this->description = "";
 $this->keyword = "";
 
 $row = $m->data;
-// 	var_dump($m->data);exit;
+//var_dump($m->data);exit;
 
 
 ?>
@@ -51,13 +51,15 @@ function gp(d,p)
                 <li>
                   <p class="gift_num tc">01</p>
                   <p class="gift_top_con">您支付的费用将全部用于感谢医生牺牲休息时间，为患者进行科普宣教、解答咨询等；同时，医生还能看到漂亮的礼物，读到感谢祝福，更好地为患友服务。</p>
-                  <p class="gift_top_help"><a<?php print App::useTarget()?> href="" target="_blank">什么是心意礼物？</a></p>
+                 
                 </li>
                 <li>
                   <p class="gift_num tc">02</p>
                   <p class="gift_top_con"> <span class="fl"><b class="fz16 color3"><?php print $m->data["name"]?></b> 大夫</span><br>
-                    <span class="fl pt10 fz13">已经帮助<strong class="yellow"><?php print rand(30000,4000);?></strong>位患者，已收到<strong class="yellow"><?php print $m->getPresentDataByDodCnt($m->data["sid"]);?></strong>件心意礼物。</span> </p>
-                  <p class="gift_top_btn"><a<?php print App::useTarget()?> href="#" class="tc fz13">我也要送</a></p>
+                    <span class="fl pt10 fz13">已经帮助
+                  
+                    <strong class="yellow">  <?php print $m->getDataByDodAllCnt($m->data["sid"])?></strong>位患者，已收到<strong class="yellow"><?php print $m->getDataByDodCntall(3);?></strong>件心意礼物。</span> </p>
+              
                 </li>
               </ul>
               <div class="blank15"></div>
@@ -106,11 +108,10 @@ function gp(d,p)
                 <ul class="gift_wall_main clearfix">
                  <?php foreach( $m->getPresentDataByDod($m->data["sid"],10,0) as $lw):?>         
                  <?php $pre=$m->rowpid($lw["pid"]);?>    
-                 <?php $cnt=$m->getDataByDodCnt($lw["dod"]);?>
-                 
+                
                   <li>
                     <p class="gift_box"> <img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $pre["avatar"];?>" /></p>
-                    <p class="gift_name"><?php print $pre["data"];?>(<?php print ($cnt);?>)</p>
+                    <p class="gift_name"><?php print $pre["data"];?>(<?php print ($lw["cp"]);?>)</p>
                     <p class="gift_send pl3"><a<?php print App::useTarget()?> href="javascript:void(0)" onclick="gp(<?php print $m->data["sid"]?>,<?php print $lw["pid"]?>)">我要送一个</a></p>
                   </li>
                   <?php endforeach;?>
