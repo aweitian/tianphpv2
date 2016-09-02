@@ -82,3 +82,7 @@ function swtcloseM() {
     setTimeout("chuxian()", 30000);
 
 }
+
+document.writeln("<a href=\'javascript:void(0)\' onclick=\'openZoosUrl();return false;\'>");
+document.writeln("<div style=\'position:fixed;bottom:2.5rem;right:15px;width:50px;z-index:999999999;\'><img src=\'/static/m/images/askdoc.png\' width=\'50\' height=\'55\'></div>");
+document.writeln("</a>");

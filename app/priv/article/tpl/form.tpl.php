@@ -233,9 +233,11 @@ function hideContent(o)
                       
                       
                     </div>
+                   
                     <div class="form-group">
 	                      <label>栏目</label>
-	                      <select>
+	                      <select class="form-control pull-right">
+	                      <option value="0"> ---- 空 ----</option>
 	                      <?php foreach ($model->dump() as $item):?>
 	    					
 	    					<option value="<?php print $item["sid"]?>"><?php print str_replace(' ','&nbsp;',$item["name"])?></option>

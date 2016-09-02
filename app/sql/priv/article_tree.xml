@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<articleTree>
+	<exists>
+		SELECT
+		  `aid`,
+		  `trd`
+		FROM `data_article_tree`
+		WHERE `aid` = :aid AND `trd` = :trd
+	</exists>
+	<all>
+		SELECT
+		  `aid`,
+		  `trd`
+		FROM `data_article_tree`
+		WHERE `trd` = :trd
+		LIMIT :offset,:length
+	</all>
+	
+	<add>
+		INSERT INTO `data_article_tree`
+	            (`aid`,
+	             `trd`)
+		VALUES (:aid,
+		        :trd);
+	</add>
+	<rm>
+		DELETE
+		FROM `data_article_tree`
+		WHERE `aid` = :aid
+		    AND `trd` = :trd;
+	</rm>
+	<update>
+			UPDATE `data_article_tree` SET 
+				`aid`=:aid,`trd`=:new_trd
+			 WHERE `aid`=:aid and `trd`=:old_trd
+	</update>
+</articleTree>
+
+
