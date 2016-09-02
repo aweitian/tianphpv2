@@ -75,14 +75,14 @@ function hideContent(o)
                     <div class="form-group">
                       <label>标题</label>
                       <?php if($ua == "edit"):?>
-                      <input type="hidden" name="sid" value="<?php print AppFilter::filterOut($def["sid"])?>">
+                      <input type="hidden" name="sid" value="<?php print $def["sid"]?>">
                       <?php endif?>
-                      <input value="<?php print $def["title"]?>" name="title" required type="text" class="form-control" placeholder="文章标题">
+                      <input value="<?php print AppFilter::filterOut($def["title"])?>" name="title" required type="text" class="form-control" placeholder="文章标题">
                     </div>
                     <!-- textarea -->
                     <div class="form-group">
                       <label>内容</label>&nbsp;<a href="#" onclick="window.open('<?php print HTTP_ENTRY?>/editor')">使用kindeditor编辑器编辑</a>
-                      <textarea id="articlecontent" name="content" required class="form-control" rows="3" placeholder="内容"><?php print $def["content"]?></textarea>
+                      <textarea id="articlecontent" name="content" required class="form-control" rows="3" placeholder="内容"><?php print AppFilter::filterOut($def["content"])?></textarea>
                     </div>
                     <div class="form-group">
                       <label>关键词</label>
