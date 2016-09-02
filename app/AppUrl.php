@@ -4,7 +4,6 @@ class AppUrl {
 	public static function swtjs() {
 		return AppUrl::build ( "/swtjs" );
 	}
-	
 	public static function getMediaPath() {
 		return AppUrl::build ( "/static/" . (APP_MOBILE_MODE ? "m" : "pc") );
 	}
@@ -41,15 +40,9 @@ class AppUrl {
 	public static function navHospital() {
 		return AppUrl::build ( "/hospital" );
 	}
-
-	
-	
-	
-
 	public static function intro() {
 		return AppUrl::build ( "/help/intro" );
 	}
-	
 	public static function process() {
 		return AppUrl::build ( "/help/process" );
 	}
@@ -62,14 +55,9 @@ class AppUrl {
 	public static function guide() {
 		return AppUrl::build ( "/help/guide" );
 	}
-	
-	
 	public static function environment() {
 		return AppUrl::build ( "/help/environment" );
 	}
-	
-	
-	
 	
 	// 用户管理
 	public static function userHome() {
@@ -87,7 +75,6 @@ class AppUrl {
 	public static function userWritecode() {
 		return AppUrl::build ( "/user/writecode" );
 	}
-	
 	public static function userRegister() {
 		return AppUrl::build ( "/user/register" );
 	}
@@ -151,17 +138,12 @@ class AppUrl {
 	public static function userRegPhoneSendSms() {
 		return AppUrl::build ( "/user/sendsms4reg" );
 	}
-	
-	
-	
 	public static function helpRouting() {
 		return AppUrl::build ( "/help/routing" );
 	}
 	public static function helpAbout() {
 		return AppUrl::build ( "/help/about" );
 	}
-	
-
 	
 	// 医生评价
 	/**
@@ -383,10 +365,17 @@ class AppUrl {
 	public static function articleByAid($aid) {
 		$dod = articleUIApi::getInstance ()->getFirstDod ( $aid );
 		if ($dod == 0) {
-			return AppUrl::_404 ();
+			$ch = treeUIApi::getInstance ()->getChannelByAid ( $aid );
+			if ($ch == "")
+				return AppUrl::_404 ();
+			else
+				return AppUrl::articleByChannelAid ( $ch, $aid );
 		} else {
 			return AppUrl::articleByDodAid ( $dod, $aid );
 		}
+	}
+	public static function articleByChannelAid($ch, $aid) {
+		return AppUrl::build ( "/" . $ch . "/" . $aid . ".html" );
 	}
 	
 	/**
@@ -419,13 +408,13 @@ class AppUrl {
 	/**
 	 * 获取医生图片的URL
 	 */
-	public static function getDoctorAvatarUrl($avatar,$size="80X65") {
-		return HTTP_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/doctor/". $size . "/" . $avatar;
+	public static function getDoctorAvatarUrl($avatar, $size = "80X65") {
+		return HTTP_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/doctor/" . $size . "/" . $avatar;
 	}
 	/**
 	 * 获取医生图片的文件路径
 	 */
-	public static function getDoctorAvatarPath($size="80X65") {
+	public static function getDoctorAvatarPath($size = "80X65") {
 		return FILE_SYSTEM_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/doctor" . "/" . $size;
 	}
 	

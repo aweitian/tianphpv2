@@ -10,9 +10,9 @@ class treeUIApi {
 	private $db;
 	private $cache = array ();
 	
-	//KEY为SID
+	// KEY为SID
 	private $sidCache = array ();
-	//KEY为CTR的第一个路径
+	// KEY为CTR的第一个路径
 	private $ctrCache = array ();
 	
 	// KEY为全路径/aa/bb/cc
@@ -32,6 +32,42 @@ class treeUIApi {
 			treeUIApi::$inst = new treeUIApi ();
 		}
 		return treeUIApi::$inst;
+	}
+	
+	/**
+	 *
+	 * @param string $key        	
+	 * @return boolean
+	 */
+	public function getTrd($aid) {
+		$cache_key = "getTrd-" . $aid;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_tree/getTrdByAid" );
+		$ret = $this->db->fetch ( $sql, array (
+				"aid" => $aid 
+		) );
+		if (empty ( $ret )) {
+			$ret = 0;
+		} else {
+			$ret = $ret ["trd"];
+		}
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	public function getChannelByAid($aid) {
+		$trd = $this->getTrd ( $aid );
+		if ($trd == 0)
+			return "";
+		else
+			return $this->getChannelByTrd ( $trd );
+	}
+	public function getChannelByTrd($trd) {
+		if (array_key_exists ( $trd, $this->sidCache )) {
+			return $this->sidCache [$trd] ["url"];
+		}
+		return "";
 	}
 	
 	/**
@@ -62,7 +98,7 @@ class treeUIApi {
 		foreach ( $this->sidCache as & $item ) {
 			$item ["url"] = $this->_initUrlCache ( $item );
 		}
-// 		var_dump($this->sidCache);exit;
+		// var_dump($this->sidCache);exit;
 	}
 	private function _initUrlCache($a) {
 		if (! is_array ( $a ))
@@ -77,6 +113,6 @@ class treeUIApi {
 		}
 	}
 	public function debug() {
-// 		var_dump($this->keyCache);
+		// var_dump($this->keyCache);
 	}
 }

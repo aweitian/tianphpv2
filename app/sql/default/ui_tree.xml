@@ -11,15 +11,11 @@
 	</all>
 
 	
-	<!-- 返回字段有:sid,name,url,order,layout -->
-	<children>
-		SELECT 
-		  `sid`,
-		  `name`,
-		  `url`,
-		  `order`,
-		  `layout` 
-		 FROM `data_tree` WHERE `pid` = :pid
-		ORDER BY `order` ASC,`sid` ASC
-	</children>
+	<!-- 返回字段有:trd -->
+	<getTrdByAid>
+		SELECT
+			  `trd`
+			FROM `data_article_tree`
+			WHERE `data_article_tree`.`aid` = :aid
+	</getTrdByAid>
 </ui_tree>

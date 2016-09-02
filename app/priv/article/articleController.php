@@ -513,6 +513,11 @@ class articleController extends privController {
 			$this->model->con_relsym ( array (
 					$msg ["sid"] 
 			), $msg ["syid"] );
+			if (isset ( $_REQUEST ["doid"] )) {
+				$this->model->con_reldoc ( array (
+						$msg ["sid"] 
+				), $_REQUEST ["doid"] );
+			}
 			$this->model->updateTree ( $msg ["sid"], $msg ["tree"] );
 			$retR = $this->model->update ( $msg ["sid"], $msg ["kw"], $msg ["desc"], $msg ["thumb"], $msg ["title"], $msg ["content"], $msg ["date"] );
 			if ($retR->isTrue ()) {
