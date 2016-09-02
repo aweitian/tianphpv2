@@ -22,10 +22,10 @@ class hookControllerNotFound implements IControlNotFound {
 		} else {
 			$url = $msg->getHttpRequest ()->requestUri ();
 			$url = explode ( "?", $url );
-			$url = trim ( preg_replace ( "/\/\d+\.html$/", "", $url [0] ), "/" );
-			
-			if (treeUIApi::getInstance ()->exists ( $url )) {
-				new treeControllerNotFound ( $msg, $url );
+			if (preg_match ( "/^([\w\/]+?)\/(\d+)\.html$/", $url [0], $matches )) {
+				new treeControllerNotFound ( $msg, trim ( $matches [1], "/" ), $matches [2] );
+			} else if (preg_match ( "/^[\w\/]+$/", $url [0] )) {
+				new treeControllerNotFound ( $msg, trim ( $url [0], "/" ), 0 );
 			} else {
 				$this->_404 ();
 			}

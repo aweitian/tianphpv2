@@ -49,7 +49,7 @@ $url = new url($req->requestUri());
                     	<div class="zjtd_hzfw_fl tc fl">
                         	<img src="<?php print AppUrl::getMediaPath()?>/avatar/<?php print $user["avatar"] ?>" width="61" height="62" />
                             <p><?php print $user["name"] ?></p>
-                            <p><?php print $user["date"] ?></p>
+                            <p><?php print utility::utf8Substr($askq["date"], 0, 10)  ?></p>
                         </div>
                         
                         <div class="zjtd_hzfw_fr border2 hzfw_hz fr">
@@ -79,7 +79,7 @@ $url = new url($req->requestUri());
                     	<div class="zjtd_hzfw_fl tc fl">
                         	<img src="<?php print AppUrl::getMediaPath()?>/avatar/<?php print $user["avatar"] ?>" width="61" height="62" />
                             <p><?php print(AppFilter::filterOut($user["name"]))  ?></p>
-                            <p><?php print $user["date"] ?></p>
+                            <p><?php print utility::utf8Substr($wd["date"], 0, 10)  ?></p>
                         </div>
                         
                         <div class="zjtd_hzfw_fr border2 hzfw_hz fr">
@@ -113,7 +113,7 @@ $url = new url($req->requestUri());
                     	<div class="zjtd_hzfw_fl tc fl">
                         	<img src="<?php print AppUrl::getMediaPath()?>/doctor/170X170/<?php print $doc["avatar"] ?>" width="61" height="62"  />
                             <p><span class="blue">  <?php print $doc["name"] ?></span> 医生</p>
-                            <p><?php print $doc["date"] ?></p>
+                            <p><?php print utility::utf8Substr($wd["date"], 0, 10)  ?></p>
                         </div>
                         
                         <div class="zjtd_hzfw_fr border2 hzfw_ys fr">

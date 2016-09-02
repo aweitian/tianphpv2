@@ -43,8 +43,16 @@ if(isset($_SERVER['HTTP_REFERER'])){
 	$ret_url = "";
 }
 ?>
+
 <link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
 <script type="text/javascript" src="<?php print HTTP_ENTRY?>/static/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+<script>
+function hideContent(o)
+{
+	$(o).parent().parent().find("div").toggle();
+}
+</script>
+
 <section class="content">
  <!-- general form elements disabled -->
               <div class="box box-warning">
@@ -98,13 +106,15 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       }
                       ?>
                       <fieldset>
-                      	<legend>选择医生</legend>
-         
-	                        <?php foreach ($info["doctor"] as $child):?>
+                      	<legend>选择医生 <span onclick="hideContent(this)" class="text-info" style="cursor:pointer">显示/隐藏</span></legend>
+						<div style="display: none">
+ 	                        <?php foreach ($info["doctor"] as $child):?>
 	                        <label style="font-weight:normal;padding-right:12px;">
 	                        <input type="checkbox" name="doid[]" value="<?php print $child["sid"]?>"<?php if(array_key_exists($child["sid"], $hash_doc_rel)):?>checked <?php endif;?>><?php print $child["name"]?>
 	                        </label>
-	                        <?php endforeach;?>
+	                        <?php endforeach;?>        				
+
+						</div>
                       	</fieldset>  
                         
                         
@@ -146,7 +156,8 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       	}
                       	?>
                       	<fieldset>
-                      	<legend>选择疾病</legend>
+                      	<legend>选择疾病 <span onclick="hideContent(this)" class="text-info" style="cursor:pointer">显示/隐藏</span></legend>
+                      	<div style="display: none">
                       	 <?php foreach ($tree_dis as $pid => $item):?>
                         <b><?php print $item["text"]?>:</b>
 	                        <?php foreach ($item["children"] as $mid => $child):?>
@@ -155,9 +166,10 @@ if(isset($_SERVER['HTTP_REFERER'])){
 	                        </label>
 	                        <?php endforeach;?>
                         <br>
+                        
                         <?php endforeach;?>
                       	
-                      	
+                      	</div>
                       	</fieldset>
 <!--                         <select multiple class="form-control" name="diid[]"> -->
                        
@@ -203,7 +215,8 @@ if(isset($_SERVER['HTTP_REFERER'])){
                       	?>
                       
                       	<fieldset>
-                      	<legend>选择症状</legend>
+                      	<legend>选择症状 <span onclick="hideContent(this)" class="text-info" style="cursor:pointer">显示/隐藏</span></legend>
+                      	<div style="display: none">
                       	 <?php foreach ($tree_sym as $pid => $item):?>
                         <b><?php print $item["text"]?>:</b><br>
 	                       <?php foreach ($item["children"] as $mid => $child):?>
@@ -214,7 +227,7 @@ if(isset($_SERVER['HTTP_REFERER'])){
                         <br>
                         <?php endforeach;?>
                       	
-                      	
+                      	</div>
                       	</fieldset>
                       
                       
@@ -230,7 +243,8 @@ if(isset($_SERVER['HTTP_REFERER'])){
 	                			$hash_tag_selected[$tag_selected_item["tid"]] = 1;
 	                		}
 // 	                		var_dump($hash_tag_selected);
-	                		?>      
+	                		?>    
+	                		
 	                      <?php foreach ($info["tags"] as $item):?>
 	    					<div class="checkbox">
 	    					<label>

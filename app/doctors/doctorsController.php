@@ -54,7 +54,13 @@ class doctorsControllerNotFound{
 		if ($info == "") {
 			$this->view->ask($this->model);
 		} else if (preg_match("/^(\d+)\.html$/",$info,$match)) {
-			$this->view->askcontent($this->model,intval($match[1]));
+			$row = $this->model->getQuestionByAskid(intval($match[1]));
+			if(empty($row)) {
+				$this->_404();
+			}else{
+				$this->view->askcontent($this->model,intval($match[1]));
+			}
+			
 		}else{
 			$this->_404();
 		}

@@ -46,4 +46,7 @@ class AppView extends View {
 	public function getDocThemePath() {
 		return FILE_SYSTEM_ENTRY . "/template/" . THEME . "/doctors/";
 	}
+	public function getTreeThemePath() {
+		return FILE_SYSTEM_ENTRY . "/template/" . THEME . "/tree/";
+	}
 }
