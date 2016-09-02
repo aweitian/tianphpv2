@@ -25,45 +25,9 @@
                     <div class="padd20 border2">
                  
                                            
-                        <div class="clr jb_box2">
-                                                	<div class="zt_box2 fl" style="padding-right:30px; border-bottom:1px dotted #d7d7d7;">
-                            
-                            	<div class=" clr">
-                                	<span class="fl"><img src="/static/pc/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a href="/zyl/article/7151.html">asdfwe</a>...</p>
-                                </div>
-                                <div class="blank15"></div>
-                            </div>
-                              
-                                                                 <div class="zt_box2 fr" style="padding-left:15px; border-left:1px dotted #d7d7d7; border-bottom:1px dotted #d7d7d7;">
-                    
-                            	<div class=" clr">
-                                	<span class="fl"><img src="/static/pc/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a href="/yydt/7150.html">qwerq</a>...</p>
-                                </div>
-                                <div class="blank15"></div>
-                            </div>
-                                                                                                 <div class="zt_box2 fl" style="width:290px; padding-right:30px;">
-                            	<div class="blank15"></div>
-                            	<div class=" clr">
-                                	<span class="fl"><img src="/static/pc/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a href="/szg/article/7148.html">医生解析早泄有哪些症状</a>...</p>
-                                </div>
-                                <div class="blank15"></div>
-                                
-                            </div>
-                                                                                          <div class="zt_box2 fr" style="width:290px; padding-left:20px; border-left:1px dotted #d7d7d7;">
-                            	<div class="blank15"></div>
-                            	<div class=" clr">
-                                	<span class="fl"><img src="/static/pc/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a href="/hyt/article/7147.html">医生解析男性性生活质量不高等9大症状</a>...</p>
-                                </div>
-                                <div class="blank15"></div>
-                            </div>
-                                                            </div>
-                        <div class="blank20"></div>
-                        <div class="hx"></div>
-                        <div class="blank20"></div>
+               
+                     
+                  
                         
                         <div class="zt_box3">
                         	

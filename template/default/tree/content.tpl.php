@@ -31,7 +31,7 @@ $conten=($model->getContent($model->aid,0));
                		<div class="padd20 border2">
                        <div class="zjtd_pagetit tc">
                             <h2 class="color3 fz24"><?php print($conten["title"]) ?></h2>
-                            <p><span class="color9">2016-09-01</span> <span class="color6"> 发表者：</span><span class="color3">上海九龙男子医院</span>   </p>
+                            <p><span class="color9"><?php print($conten["date"]) ?></span> <span class="color6"> 发表者：</span><span class="color3">上海九龙男子医院</span>   </p>
                        </div>
                        <div class="blank20"></div>
                        <div class="zjtd_pagenr">
@@ -85,6 +85,16 @@ $conten=($model->getContent($model->aid,0));
                         
                         <div class="zjtd_box3">
                        
+                                  
+             
+                    	
+                        <dl class="clr">
+                        	<p class="blank20"></p>
+                        	<dt>觉得这篇内容很有用，不知道这个吃药能不能治好啊</dt>
+                            <dd class="fr"><span class="color9">2016-08-23 17:19:22</span></dd>
+                            <p class="blank20"></p>
+                        </dl>
+                         	          
                     </div>
                     
                     </div>
@@ -203,127 +213,111 @@ function chk(form){
                     <div class="blank20"></div>
                 </div>
     			<!--left end-->
-      <div class="fr wid300 fz13"> 
-        <div class="doctj border2">
+   
+                <div class="fr wid300 fz13">
+                	
+                    <div class="doctj border2">
     
-    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a><a class="fz13 blue fr" href="/doctors">+更多</a></div>            
-               <div class="doctjbox">
+    <div class="syrboxtit fz18 graybg clearfix"><a class="fl">医师推荐</a><a class="fz13 blue fr" href="/doctors">+更多</a></div>
+    <div class="doctjbox">
     
-         <dl class="clearfix"><dt class="fl"><a href="/lml"><img src="/static/pc/doctor/170X170/lml.jpg" width="80" height="80" /></a></dt>
+              <dl class="clearfix"><dt class="fl"><a href="/lml"><img src="/static/pc/doctor/170X170/lml.jpg" width="80" height="80" /></a></dt>
       <dd class="fl">
       <p class="blank5"></p>
-      <p class="fz18">李美龙 <span class="gray fz13">主治医师</span></p>
+      <p class="fz18">李美龙<span class="gray fz13">主治医师</span></p>
       <p class="blank5"></p>
-      <p class="fz13 gray">擅长：治疗前列腺炎，性功能障碍（阳痿、早泄），</p>
+      <p class="fz13 gray">擅长：治疗前列腺炎，性功能障碍（阳痿、早泄），...</p>
       <p class="blank5"></p>
-      <p class="p3 tc"><a href="" onclick="openZoosUrl();return false;">咨询</a></p>
+      <p class="p3 tc"><a href="javascript:void(0)" onClick="openZoosUrl();return false;">咨询</a></p>
       </dd></dl>
-     	    <dl class="clearfix"><dt class="fl"><a href="/zyl"><img src="/static/pc/doctor/170X170/zyl.jpg" width="80" height="80" /></a></dt>
+      	      <dl class="clearfix"><dt class="fl"><a href="/zyl"><img src="/static/pc/doctor/170X170/zyl.jpg" width="80" height="80" /></a></dt>
       <dd class="fl">
       <p class="blank5"></p>
-      <p class="fz18">张耀龙 <span class="gray fz13">副主任医师</span></p>
+      <p class="fz18">张耀龙<span class="gray fz13">副主任医师</span></p>
       <p class="blank5"></p>
-      <p class="fz13 gray">擅长：从医40余年，擅长治疗生殖器皮肤病，如湿</p>
+      <p class="fz13 gray">擅长：从医40余年，擅长治疗生殖器皮肤病，如湿...</p>
       <p class="blank5"></p>
-      <p class="p3 tc"><a href="" onclick="openZoosUrl();return false;">咨询</a></p>
+      <p class="p3 tc"><a href="javascript:void(0)" onClick="openZoosUrl();return false;">咨询</a></p>
       </dd></dl>
-     	    <dl class="clearfix"><dt class="fl"><a href="/zdz"><img src="/static/pc/doctor/170X170/zdz.jpg" width="80" height="80" /></a></dt>
+      	      <dl class="clearfix"><dt class="fl"><a href="/zdz"><img src="/static/pc/doctor/170X170/zdz.jpg" width="80" height="80" /></a></dt>
       <dd class="fl">
       <p class="blank5"></p>
-      <p class="fz18">郑殿增 <span class="gray fz13">副主任医师</span></p>
+      <p class="fz18">郑殿增<span class="gray fz13">副主任医师</span></p>
       <p class="blank5"></p>
-      <p class="fz13 gray">擅长：治疗顽固性前列腺炎，尿道炎，前列腺肥大，</p>
+      <p class="fz13 gray">擅长：治疗顽固性前列腺炎，尿道炎，前列腺肥大，...</p>
       <p class="blank5"></p>
-      <p class="p3 tc"><a href="" onclick="openZoosUrl();return false;">咨询</a></p>
+      <p class="p3 tc"><a href="javascript:void(0)" onClick="openZoosUrl();return false;">咨询</a></p>
       </dd></dl>
-     	 
-      </div>
+      	
       
       </div>
-                	<div class="blank20"></div>
-               
-             
-                
+    
+    
+    
+    </div>
+                      
+                  <div class="blank20"></div>
+
+                    <div class="syrbox5 border2">
+                    <div class="syrboxtit fz18 graybg">相关问答<a href="/ask" class="blue fz13 fr">+更多</a></div>
                     
-                 
-         
-
-    <!--syboxr end--> 
-     <div class="syrbox5 border2">
-                    <div class="syrboxtit fz18 graybg">相关问答<a target="_blank" href="/ckl/ask" class="blue fz13 fr">+更多</a></div>
-<div class="zjtd_r2">
+                    <div class="zjtd_r2">
                     	<div class="blank10"></div>
-
-                        <dl  class="selected">
-                          <dt class="fz18 blue"><a target="_blank" href="/ckl/ask/1059.html">前列腺囊肿请问怎么办</a></dt>
+                    	
+                       	
+                    	                        <dl  class="selected" >
+                          <dt class="fz18 blue"><a href="/zly/ask/1094.html">梅毒螺旋体抗体阳性，快速血...</a></dt>
                           <dd class="fz16 dgray clr">
-                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">                             
-                             <a target="_blank" href="/ckl/ask/1059.html">
-                            您需要去正规的泌尿专科医院就诊...
+                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">
+                            <a href="/zly/ask/1094.html">
+                              	关于梅毒特异性抗体阳性，非特异抗体RPR检查...
                             </a>
-                             ...</p>
+                            </p>
                           </dd>
                         </dl>
-     
-                        <dl >
-                          <dt class="fz18 blue"><a target="_blank" href="/ckl/ask/1058.html">外生殖器畸形</a></dt>
+                         
+                        <dl  >
+                          <dt class="fz18 blue"><a href="/xkz/ask/1093.html">阴茎弯曲，阴茎勃起疼痛</a></dt>
                           <dd class="fz16 dgray clr">
-                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">                             
-                             <a target="_blank" href="/ckl/ask/1058.html">
-                            如阴茎弯曲逐渐加重，需就诊专科医生以免耽搁诊治。一...
+                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">
+                            <a href="/xkz/ask/1093.html">
+                            只是挤压一下，不应该那么严重，最好去正规医院检查一...
                             </a>
-                             ...</p>
+                            </p>
                           </dd>
                         </dl>
-
-                        <dl >
-                          <dt class="fz18 blue"><a target="_blank" href="/ckl/ask/958.html">附睾炎无精FSh高</a></dt>
+                         
+                        <dl  >
+                          <dt class="fz18 blue"><a href="/szg/ask/1092.html">前列腺癌的诱因</a></dt>
                           <dd class="fz16 dgray clr">
-                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">                             
-                             <a target="_blank" href="/ckl/ask/958.html">
-                            您好！建议带着报告单门诊就诊！...
+                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">
+                            <a href="/szg/ask/1092.html">
+                            手淫和前列腺癌有啥关系。...
                             </a>
-                             ...</p>
+                            </p>
                           </dd>
                         </dl>
-   
-                        <dl >
-                          <dt class="fz18 blue"><a target="_blank" href="/ckl/ask/786.html">睾丸囊肿是否需要手术</a></dt>
+                         
+                        <dl  >
+                          <dt class="fz18 blue"><a href="/jmq/ask/1091.html">衣原体阳性如何治疗</a></dt>
                           <dd class="fz16 dgray clr">
-                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">                             
-                             <a target="_blank" href="/ckl/ask/786.html">
-                            是附睾的或是睾丸上的？睾丸囊肿很少见的。...
+                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">
+                            <a href="/jmq/ask/1091.html">
+                            根据你所描述的情况，应该是普通的包皮龟头炎，建议你...
                             </a>
-                             ...</p>
+                            </p>
                           </dd>
                         </dl>
-                                                
-          
-                  
-               
-                        <dl >
-                          <dt class="fz18 blue"><a target="_blank" href="/ckl/ask/783.html">附睾炎 附睾结核</a></dt>
-                          <dd class="fz16 dgray clr">
-                            <img src="/static/pc/images/zjtd_img7.png" class="fl" /><p class="fl">                             
-                             <a target="_blank" href="/ckl/ask/783.html">
-                            浙医还是不错的，建议就诊。...
-                            </a>
-                             ...</p>
-                          </dd>
-                        </dl>
-                                                
-                      
-                      
-                      
+                         
+                        
                       </div>
                     
-                    <div class="zjtd_r3 clr"><a target="_blank" href="javascript:void(0)" onClick="openZoosUrl();return false;">立刻咨询</a></div>
-          <div class="blank20"></div>          
-      </div>
-      
-  
-       <div class="blank20"></div>  
-   <script src="/static/pc/js/guahao.js"></script>
+                    <div class="zjtd_r3 clr"><a href="javascript:void(0)">立刻咨询</a></div>
+                    <div class="blank20"></div>
+                  </div>
+                	
+                    <div class="blank20"></div>
+                 <script src="/static/pc/js/guahao.js"></script>
       <div class="syrbox4 border2">
         <div class="syrboxtit fz18 graybg">预约挂号</div>
         <div class="syrbox4nr fz13">
@@ -370,50 +364,16 @@ function chk(form){
           </form>
         </div>
       </div>                  
-                  <div class="blank20"></div>   
-      				<div class="hotbq border2">
-                        <div class="syrboxtit fz18 graybg clearfix"><a target="_blank" class="fl">医师推荐</a></div>
-                        <div class="hotbqbox fz13">
-                          <ul class="clearfix">
-                                     
-                                            
-                            <li><a target="_blank" href="/jzyc">精子异常</a></li>
-                                         
-                            <li><a target="_blank" href="/qlxt">前列腺痛</a></li>
-                                         
-                            <li><a target="_blank" href="/jsjmqz">精索静脉曲张</a></li>
-                                         
-                            <li><a target="_blank" href="/ndxl">尿道下裂</a></li>
-                                         
-                            <li><a target="_blank" href="/xcbjb">性传播疾病</a></li>
-                                         
-                            <li><a target="_blank" href="/gwy">睾丸炎</a></li>
-                                         
-                            <li><a target="_blank" href="/yw">阳痿</a></li>
-                                         
-                            <li><a target="_blank" href="/nxby">男性不育</a></li>
-                                         
-                            <li><a target="_blank" href="/yjwq">阴茎弯曲</a></li>
-                                         
-                            <li><a target="_blank" href="/bpbj">包皮包茎</a></li>
-                                         
-                            <li><a target="_blank" href="/rrtl">人乳头瘤</a></li>
-                                         
-                            <li><a target="_blank" href="/fgnz">附睾囊肿</a></li>
-                        
-                          </ul>
-                        </div>
-                      </div>
-      
                 </div>
                 
                 <!--right end-->
              </div>
-             
+            
           </div>
+          <!--zjtd_con2 end-->
         
-   </div>
-
+      </div>
+      
       <!--fromjb end-->
       
       <div class="blank20"></div>
@@ -422,8 +382,8 @@ function chk(form){
     <!--syboxl end-->
   </div>
   <!--sybox end-->
-    
-      
+ 
   
+                
 
 	

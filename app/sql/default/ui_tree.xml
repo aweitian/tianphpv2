@@ -18,4 +18,12 @@
 			FROM `data_article_tree`
 			WHERE `data_article_tree`.`aid` = :aid
 	</getTrdByAid>
+	
+	<!-- 返回字段有:trd -->
+	<getAidArrByTrd>
+		SELECT
+			  `aid`
+			FROM `data_article_tree`
+			WHERE `data_article_tree`.`trd` = :trd
+	</getAidArrByTrd>
 </ui_tree>

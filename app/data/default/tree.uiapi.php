@@ -39,6 +39,29 @@ class treeUIApi {
 	 * @param string $key        	
 	 * @return boolean
 	 */
+	public function existAid($aid) {
+		$cache_key = "getTrd-" . $aid;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_tree/getTrdByAid" );
+		$ret = $this->db->fetch ( $sql, array (
+				"aid" => $aid 
+		) );
+		if (empty ( $ret )) {
+			$ret = false;
+		} else {
+			$ret = true;
+		}
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	
+	/**
+	 *
+	 * @param string $key        	
+	 * @return boolean
+	 */
 	public function getTrd($aid) {
 		$cache_key = "getTrd-" . $aid;
 		if (array_key_exists ( $cache_key, $this->cache )) {
@@ -52,6 +75,27 @@ class treeUIApi {
 			$ret = 0;
 		} else {
 			$ret = $ret ["trd"];
+		}
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
+	/**
+	 *
+	 * @param string $key        	
+	 * @return array()
+	 */
+	public function getAidArrByTrd($trd) {
+		$cache_key = "getAidArrByTrd-" . $trd;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		$sql = $this->sqlManager->getSql ( "/ui_tree/getAidArrByTrd" );
+		$data = $this->db->fetchAll ( $sql, array (
+				"trd" => $trd 
+		) );
+		$ret = array ();
+		foreach ( $data as $item ) {
+			$ret [] = $item ["aid"];
 		}
 		$this->cache [$cache_key] = $ret;
 		return $ret;

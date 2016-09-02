@@ -157,6 +157,7 @@
  		foreach ($idArr as $id){
  			$hash[$id] = 0;
  		}
+//  		var_dump($idArr);exit;
  		//从数据库中抓取AID的IDS
  		$sql = $this->sqlManager->getSql("/sql/all");
  		$bnd = array("aid" => $aid);

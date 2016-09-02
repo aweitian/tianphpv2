@@ -30,7 +30,12 @@ class treeControllerNotFound {
 		$this->model->aid = $aid;
 // 		var_dump(FILE_SYSTEM_ENTRY . "/" . THEME . "/tree/" . trim ( $channel , "/" ) . "/index.tpl.php");exit();
 		if ($aid > 0) {
-			$this->article ( $msg );
+			if(treeUIApi::getInstance()->existAid($aid)) {
+				$this->article ( $msg );
+			} else {
+				$this->_404 ();
+			}
+			
 		} else if ($aid == 0 && file_exists ( FILE_SYSTEM_ENTRY . "/template/" . THEME . "/tree/" . trim ( $channel , "/" ) . "/index.tpl.php" )) {
 			$this->channel ( $msg, FILE_SYSTEM_ENTRY . "/template/" . THEME . "/tree/" . trim ( $channel , "/" ) . "/index.tpl.php" );
 		} else {

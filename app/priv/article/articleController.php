@@ -501,11 +501,11 @@ class articleController extends privController {
 			}
 			if (! isset ( $msg ["doid"] )) {
 				$msg ["doid"] = array ();
-			}
+			} 
 			if (! isset ( $msg ["tags"] )) {
 				$msg ["tags"] = array ();
 			}
-			// var_dump($msg["tags"]);exit;
+// 			var_dump($msg["doid"]);exit;
 			$this->model->updateTags ( $msg ["sid"], $msg ["tags"] );
 			$this->model->con_reldis ( array (
 					$msg ["sid"] 
@@ -513,10 +513,10 @@ class articleController extends privController {
 			$this->model->con_relsym ( array (
 					$msg ["sid"] 
 			), $msg ["syid"] );
-			if (isset ( $_REQUEST ["doid"] )) {
+			if (isset ( $msg["doid"] )) {
 				$this->model->con_reldoc ( array (
 						$msg ["sid"] 
-				), $_REQUEST ["doid"] );
+				), $msg["doid"] );
 			}
 			$this->model->updateTree ( $msg ["sid"], $msg ["tree"] );
 			$retR = $this->model->update ( $msg ["sid"], $msg ["kw"], $msg ["desc"], $msg ["thumb"], $msg ["title"], $msg ["content"], $msg ["date"] );
