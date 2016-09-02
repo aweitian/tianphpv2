@@ -31,8 +31,14 @@ $file_item_html = "<div class='input-group'><i class='glyphicon glyphicon-trash 
 
 if(isset($_SERVER['HTTP_REFERER'])){
 	$ret_url = "?returl=".urlencode($_SERVER['HTTP_REFERER']);
+	if(isset($_REQUEST["listret"])) {
+		$ret_url .= "&listret=".urlencode($_REQUEST["listret"]);
+	}
 }else{
 	$ret_url = "";
+	if(isset($_REQUEST["listret"])) {
+		$ret_url .= "?listret=".urlencode($_REQUEST["listret"]);
+	}
 }
 
 // var_dump($def["dod"]);exit;

@@ -84,5 +84,5 @@ function swtcloseM() {
 }
 
 document.writeln("<a href=\'javascript:void(0)\' onclick=\'openZoosUrl();return false;\'>");
-document.writeln("<div style=\'position:fixed;bottom:2.5rem;right:15px;width:50px;z-index:999999999;\'><img src=\'/static/m/images/askdoc.png\' width=\'50\' height=\'55\'></div>");
+document.writeln("<div style=\'position:fixed;bottom:2.2rem;right:15px;width:50px;z-index:999999999;\'><img src=\'/static/m/images/askdoc.png\' width=\'50\' height=\'55\'></div>");
 document.writeln("</a>");

@@ -89,7 +89,7 @@ if($hasData)
 		          
 		          <a style=';' onclick='return confirm("?")' href='<?php print HTTP_ENTRY?>/priv/ask/appendrm?sid=<?php print $item["aspapid"]?>'>删除</a>
 		          |
-		          <a style=';' href='<?php print HTTP_ENTRY?>/priv/ask/append?r=u&askid=<?php print $item["sid"]?>&sid=<?php print $item["aspapid"]?>'>编辑</a>
+		          <a style=';' href='<?php print HTTP_ENTRY?>/priv/ask/append?r=u&askid=<?php print $item["sid"]?>&sid=<?php print $item["aspapid"]?><?php if(isset($_SERVER["HTTP_REFERER"])):?>&listret=<?php print urlencode($_SERVER["HTTP_REFERER"])?><?php endif?>'>编辑</a>
 		        
 		        </div><!-- /.direct-chat-text -->
 		      </div><!-- /.direct-chat-msg -->
@@ -108,7 +108,7 @@ if($hasData)
 		          
 		          <a style='color:white;' onclick='return confirm("?")' href='<?php print HTTP_ENTRY?>/priv/ask/appendrm?sid=<?php print $item["aspapid"]?>'>删除</a>
 		          |
-		          <a style='color:white;' href='<?php print HTTP_ENTRY?>/priv/ask/append?r=d&askid=<?php print $item["sid"]?>&sid=<?php print $item["aspapid"]?>'>编辑</a>
+		          <a style='color:white;' href='<?php print HTTP_ENTRY?>/priv/ask/append?r=d&askid=<?php print $item["sid"]?>&sid=<?php print $item["aspapid"]?><?php if(isset($_REQUEST["listret"])):?>&listret=<?php print urlencode($_REQUEST["listret"])?><?php endif?>'>编辑</a>
 		        </div><!-- /.direct-chat-text -->
 		      </div><!-- /.direct-chat-msg -->
 		   

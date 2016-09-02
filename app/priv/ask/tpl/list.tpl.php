@@ -104,7 +104,7 @@ if (is_null ( $q )) {
 					<td><?php print $item["dis_name"]?></td>
 
 					<td><a class="btn bg-navy"
-						href="<?php print HTTP_ENTRY?>/priv/ask/viewappend?sid=<?php print $item["aid"]?>">
+						href="<?php print HTTP_ENTRY?>/priv/ask/viewappend?sid=<?php print $item["aid"]?>&listret=<?php print urlencode($req->currentUrl())?>">
 							查看</a> <a class="btn btn-default"
 						href="<?php print HTTP_ENTRY?>/priv/ask/edit?sid=<?php print $item["aid"]?>">
 							编辑</a> <a class="btn btn-danger"

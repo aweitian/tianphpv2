@@ -70,11 +70,7 @@ class askController extends privController{
 		if(isset($msg["?page"])){
 			$page = intval($msg["?page"]);
 		}else{
-			if(isset($_COOKIE["ask_page"])){
-				$page = intval($_COOKIE["ask_page"]);
-			}else{
-				$page = 1;
-			}
+			$page = 1;
 		}
 		if($page < 1){
 			$page = 1;
@@ -84,7 +80,6 @@ class askController extends privController{
 		
 		$this->view->setPmcaiMsg($msg);
 		if(isset($msg["?q"])) {
-			setcookie("ask_page",1);
 			$data = $this->model->getQueryAll($msg["?q"], $offset, $length);
 		}else{
 			$data = $this->model->getAll($offset, $length);
@@ -178,7 +173,12 @@ class askController extends privController{
 			}else{
 				$ret_url = "";
 			}
-			$this->view->showOpSucc($this->priv->getUserInfo(),"添加",$ret_url);
+			if(isset($msg["?listret"])){
+				$listret = $msg["?listret"];
+			}else{
+				$listret = "";
+			}
+			$this->view->showOpSucc($this->priv->getUserInfo(),"添加",$ret_url,$listret);
 		}else{
 			$this->response->showError($ret->info);
 		}
@@ -210,7 +210,12 @@ class askController extends privController{
 			}else{
 				$ret_url = "";
 			}
-			$this->view->showOpSucc($this->priv->getUserInfo(),"编辑",$ret_url);
+			if(isset($msg["?listret"])){
+				$listret = $msg["?listret"];
+			}else{
+				$listret = "";
+			}
+			$this->view->showOpSucc($this->priv->getUserInfo(),"编辑",$ret_url,$listret);
 		}else{
 			$this->response->showError($ret->info);
 		}
