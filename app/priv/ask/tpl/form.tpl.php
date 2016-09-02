@@ -4,10 +4,18 @@
  * Author: Awei.tian
  * Description: 
  */
+
+$model = $data["model"];
+
+
+
+
+
 if(isset($data["def"]) && !is_null($data["def"])){
 	$def = $data["def"];
 	$at = "编辑";
 	$ua = "edit";
+	$aid = $msg["?sid"];
 }else{
 	$def = array(
 		"uid" => $data["uid"],
@@ -20,11 +28,12 @@ if(isset($data["def"]) && !is_null($data["def"])){
 	);
 	$at = "添加";
 	$ua = "add";
+	$aid = 0;
 }
 
 $file_item_html = "<div class='input-group'><i class='glyphicon glyphicon-trash input-group-addon'></i><input name='files[]' class='form-control' placeholder='图片路径' value=''></div>";
 
-// var_dump($def);exit;
+// var_dump($model->getInfo_tree($aid));exit;
 
 
 if(isset($_SERVER['HTTP_REFERER'])){

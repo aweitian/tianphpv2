@@ -59,6 +59,20 @@
 	</add>
 	
 	<remove>
-		DELETE FROM `data_doctor` WHERE `sid` = :sid
+		DELETE 
+			`data_doctor`,`data_doctor_dis`,
+			`data_doctor_ext`,`data_doctor_present`,
+			`data_letter`,`data_appraise`,`data_article_doc`,
+			`data_ask`,`data_ask_append`
+			FROM  `data_doctor`
+			LEFT JOIN `data_doctor_dis` ON `data_doctor`.`sid` = `data_doctor_dis`.`dod`
+			LEFT JOIN `data_doctor_ext` ON `data_doctor`.`sid` = `data_doctor_ext`.`dod`
+			LEFT JOIN `data_doctor_present` ON `data_doctor`.`sid` = `data_doctor_present`.`dod`
+			LEFT JOIN `data_letter` ON `data_doctor`.`sid` = `data_letter`.`dod`
+			LEFT JOIN `data_appraise` ON `data_doctor`.`sid` = `data_appraise`.`dod`
+			LEFT JOIN `data_article_doc` ON `data_doctor`.`sid` = `data_article_doc`.`dod`
+			LEFT JOIN `data_ask` ON `data_doctor`.`sid` = `data_ask`.`dod`
+			LEFT JOIN `data_ask_append` ON `data_ask`.`sid` = `data_ask_append`.`askid`
+			WHERE `data_doctor`.`sid` = :sid 
 	</remove>
 </sql>

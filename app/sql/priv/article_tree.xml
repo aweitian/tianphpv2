@@ -34,12 +34,11 @@
 		DELETE
 		FROM `data_article_tree`
 		WHERE `aid` = :aid
-		    AND `trd` = :trd;
 	</rm>
 	<update>
 			UPDATE `data_article_tree` SET 
-				`aid`=:aid,`trd`=:new_trd
-			 WHERE `aid`=:aid and `trd`=:old_trd
+				`trd`=:trd
+			 WHERE `aid`=:aid
 	</update>
 </articleTree>
 

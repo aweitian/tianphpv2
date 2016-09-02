@@ -18,12 +18,16 @@ if(isset($data["def"]) && !is_null($data["def"])) {
 	$actionMode = "add";
 }
 
-
+/**
+ * @var pmcaiMsg
+ */
+$msg = $model->msg;
 
 if($actionMode == "edit"){
 	$def = $data["def"];
 	$at = "编辑";
 	$ua = "edit";
+	$aid = $msg["?sid"];
 }else{
 	$def = array(
 		"title" => "",
@@ -36,12 +40,18 @@ if($actionMode == "edit"){
 	);
 	$at = "添加";
 	$ua = "add";
+	$aid = 0;
 }
 if(isset($_SERVER['HTTP_REFERER'])){
 	$ret_url = "?returl=".urlencode($_SERVER['HTTP_REFERER']);
 }else{
 	$ret_url = "";
 }
+
+//array(2) { ["aid"]=> string(3) "354" ["trd"]=> string(1) "7" }
+if($aid > 0)
+	$channelData = $model->getInfo_tree($aid);
+
 ?>
 
 <link rel="stylesheet" href="<?php print HTTP_ENTRY?>/static/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
@@ -65,7 +75,7 @@ function hideContent(o)
                     <div class="form-group">
                       <label>标题</label>
                       <?php if($ua == "edit"):?>
-                      <input type="hidden" name="sid" value="<?php print $def["sid"]?>">
+                      <input type="hidden" name="sid" value="<?php print AppFilter::filterOut($def["sid"])?>">
                       <?php endif?>
                       <input value="<?php print $def["title"]?>" name="title" required type="text" class="form-control" placeholder="文章标题">
                     </div>
@@ -236,11 +246,11 @@ function hideContent(o)
                    
                     <div class="form-group">
 	                      <label>栏目</label>
-	                      <select class="form-control pull-right">
+	                      <select name="tree" class="form-control pull-right">
 	                      <option value="0"> ---- 空 ----</option>
 	                      <?php foreach ($model->dump() as $item):?>
 	    					
-	    					<option value="<?php print $item["sid"]?>"><?php print str_replace(' ','&nbsp;',$item["name"])?></option>
+	    					<option<?php if(isset($channelData["trd"]) && $channelData["trd"] == $item["sid"]):?> selected<?php endif?> value="<?php print $item["sid"]?>"><?php print str_replace(' ','&nbsp;',$item["name"])?></option>
 	    					
 	    					
 	                      <?php endforeach;?>  

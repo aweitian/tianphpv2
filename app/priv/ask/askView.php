@@ -10,12 +10,13 @@ class askView extends privView{
 	public $model;
 	
 	
-	public function showForm($userInfo,$uid,$docInfo,$disInfo,$def=null){
+	public function showForm($userInfo,$model,$uid,$docInfo,$disInfo,$def=null){
 // 		var_dump($docInfo);exit;
 		$this->priv_wrap($userInfo, 
 			$this->fetch(
 				"form",
 				array(
+					"model" => $model,
 					"def" => $def,
 					"uid" => $uid,
 					"doc_infoes" => $docInfo,
@@ -25,13 +26,13 @@ class askView extends privView{
 		)->show();
 	}
 	
-	public function showAllForm($userInfo){
+	public function showAllForm($userInfo,$model){
 // 		var_dump($docInfo);exit;
 		$this->priv_wrap($userInfo, 
 			$this->fetch(
 				"allform",
 				array(
-
+					"model" => $model
 				)
 			)
 		)->show();

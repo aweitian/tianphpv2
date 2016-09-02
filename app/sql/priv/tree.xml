@@ -130,7 +130,9 @@
 		</getSpan>
 		<balance>
 			<self>
-				DELETE FROM `data_tree` WHERE `lft` BETWEEN :plft AND :prgt;
+				DELETE  `data_tree`,`data_article_tree` FROM `data_tree`
+					LEFT JOIN `data_article_tree` ON `data_tree`.`sid` = `data_article_tree`.`trd`
+					 WHERE `data_tree`.`lft` BETWEEN :plft AND :prgt;
 			</self>
 			<rgt>
 				UPDATE `data_tree` SET `rgt` = `rgt` - :span WHERE `rgt` > :prgt;

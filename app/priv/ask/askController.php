@@ -4,496 +4,423 @@
  * Author: Awei.tian
  * Description: 
  */
-require_once FILE_SYSTEM_ENTRY.'/app/priv/init.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/ask/askModel.php';
-require_once FILE_SYSTEM_ENTRY.'/app/priv/ask/askView.php';
-class askController extends privController{
+require_once FILE_SYSTEM_ENTRY . '/app/priv/init.php';
+require_once FILE_SYSTEM_ENTRY . '/app/priv/ask/askModel.php';
+require_once FILE_SYSTEM_ENTRY . '/app/priv/ask/askView.php';
+class askController extends privController {
 	/**
-	 * 
+	 *
 	 * @var askModel
 	 */
 	private $model;
 	/**
-	 * 
+	 *
 	 * @var askView
 	 */
 	private $view;
-	public function __construct(){
-		$this->checkPriv();
-		$this->model = new askModel();
-		$this->view = new askView();
+	public function __construct() {
+		$this->checkPriv ();
+		$this->model = new askModel ();
+		$this->view = new askView ();
 		$this->view->model = $this->model;
-		$this->initHttpResponse();
+		$this->initHttpResponse ();
 	}
-	public function welcomeAction(pmcaiMsg $msg){
-		if(!isset($msg["?uid"])){
-			//$this->response->_404();
-			$this->showAll($msg);
+	public function welcomeAction(pmcaiMsg $msg) {
+		if (! isset ( $msg ["?uid"] )) {
+			// $this->response->_404();
+			$this->showAll ( $msg );
 			return;
 		}
-		$this->view->setPmcaiMsg($msg);
-		$this->view->showForm(
-			$this->priv->getUserInfo(),
-			$msg["?uid"],
-			$this->model->getAllDoc(),
-			$this->model->getAllDis()
-		);
+		$this->view->setPmcaiMsg ( $msg );
+		$this->view->showForm ( $this->priv->getUserInfo (), $this->model, $msg ["?uid"], $this->model->getAllDoc (), $this->model->getAllDis () );
 	}
-	
-	
-
-	
-	
-	
-	
-	
-	public function verAction(pmcaiMsg $msg){
-		$ret_url = $_SERVER["HTTP_REFERER"];
-		if(!isset($msg["?sid"])){
-			$this->response->_404();
+	public function verAction(pmcaiMsg $msg) {
+		$ret_url = $_SERVER ["HTTP_REFERER"];
+		if (! isset ( $msg ["?sid"] )) {
+			$this->response->_404 ();
 		}
 		
-		if(httpRequest::isJsonAccept()){
-			$ret = $this->model->verify(intval($msg["?sid"]));
-			print $ret->toJSON();
-			exit;
-		}else{
-			$this->model->verify(intval($msg["?sid"]));
-			$this->response->redirect($ret_url);
+		if (httpRequest::isJsonAccept ()) {
+			$ret = $this->model->verify ( intval ( $msg ["?sid"] ) );
+			print $ret->toJSON ();
+			exit ();
+		} else {
+			$this->model->verify ( intval ( $msg ["?sid"] ) );
+			$this->response->redirect ( $ret_url );
 		}
-		
-		
 	}
 	public function showAll($msg) {
-		
 		$length = 10;
-		if(isset($msg["?page"])){
-			$page = intval($msg["?page"]);
-		}else{
+		if (isset ( $msg ["?page"] )) {
+			$page = intval ( $msg ["?page"] );
+		} else {
 			$page = 1;
 		}
-		if($page < 1){
+		if ($page < 1) {
 			$page = 1;
 		}
-		setcookie("ask_page",$page);
+		setcookie ( "ask_page", $page );
 		$offset = ($page - 1) * $length;
 		
-		$this->view->setPmcaiMsg($msg);
-		if(isset($msg["?q"])) {
-			$data = $this->model->getQueryAll($msg["?q"], $offset, $length);
-		}else{
-			$data = $this->model->getAll($offset, $length);
+		$this->view->setPmcaiMsg ( $msg );
+		if (isset ( $msg ["?q"] )) {
+			$data = $this->model->getQueryAll ( $msg ["?q"], $offset, $length );
+		} else {
+			$data = $this->model->getAll ( $offset, $length );
 		}
 		
-
-		$this->view->setPmcaiMsg($msg);
-		$this->view->showList(
-				$msg->getPmcaiUrl(),
-				$this->priv->getUserInfo(),
-				$data->info,
-				$data->return,
-				$page,
-				$length,
-				$msg["?q"]
-		);
-		
+		$this->view->setPmcaiMsg ( $msg );
+		$this->view->showList ( $msg->getPmcaiUrl (), $this->priv->getUserInfo (), $data->info, $data->return, $page, $length, $msg ["?q"] );
 	}
-	public function editAction(pmcaiMsg $msg){
-		if($msg->isPost()){
+	public function editAction(pmcaiMsg $msg) {
+		if ($msg->isPost ()) {
 			
-			$this->chkPost($msg, array("sid","uid","dod","title","did","desc","svr","date"));
-			if(!isset($msg["files"])){
-				$files = array();
-			}else{
-				$files = $msg["files"];
+			$this->chkPost ( $msg, array (
+					"sid",
+					"uid",
+					"dod",
+					"title",
+					"did",
+					"desc",
+					"svr",
+					"date" 
+			) );
+			if (! isset ( $msg ["files"] )) {
+				$files = array ();
+			} else {
+				$files = $msg ["files"];
 			}
-			$ret = $this->model->update($msg["sid"],$msg["uid"], $msg["dod"], $msg["title"],
-					$msg["did"], $msg["desc"], $msg["svr"], $files, $msg["date"]);
+			$ret = $this->model->update ( $msg ["sid"], $msg ["uid"], $msg ["dod"], $msg ["title"], $msg ["did"], $msg ["desc"], $msg ["svr"], $files, $msg ["date"] );
 			
-			if($ret->isTrue()){
-				if(isset($msg["?returl"])){
-					$ret_url = $msg["?returl"];
-				}else{
+			if ($ret->isTrue ()) {
+				if (isset ( $msg ["?returl"] )) {
+					$ret_url = $msg ["?returl"];
+				} else {
 					$ret_url = "";
 				}
-				$this->view->showOpSucc($this->priv->getUserInfo(),"更新",$ret_url);
-			}else{
-				$this->response->showError($ret->info);
+				$this->view->showOpSucc ( $this->priv->getUserInfo (), "更新", $ret_url );
+			} else {
+				$this->response->showError ( $ret->info );
+			}
+		} else {
+			if (! isset ( $msg ["?sid"] )) {
+				$this->response->_404 ();
 			}
 			
-			
-		}else{
-			if(!isset($msg["?sid"])){
-				$this->response->_404();
+			$row = $this->model->row ( $msg ["?sid"] );
+			$this->view->setPmcaiMsg ( $msg );
+			if (isset ( $row ["files"] ) && $row ["files"] != "") {
+				$row ["files"] = explode ( ",", $row ["files"] );
+			} else {
+				$row ["files"] = array ();
 			}
-			
-			$row = $this->model->row($msg["?sid"]);
-			$this->view->setPmcaiMsg($msg);
-			if(isset($row["files"]) && $row["files"] != ""){
-				$row["files"] = explode(",", $row["files"]);
-			}else{
-				$row["files"] = array();
-			}
-	// 		var_dump($row);
-			$this->view->showForm(
-				$this->priv->getUserInfo(),
-				$msg["?uid"],
-				$this->model->getAllDoc(),
-				$this->model->getAllDis(),
-				$row
-			);			
+			// var_dump($row);
+			$this->view->showForm ( $this->priv->getUserInfo (), $this->model, $msg ["?uid"], $this->model->getAllDoc (), $this->model->getAllDis (), $row );
 		}
 	}
-	
-	public function rmAction(pmcaiMsg $msg){
-		$ret_url = $_SERVER["HTTP_REFERER"];
-		if(!isset($msg["?sid"])){
-			$this->response->_404();
+	public function rmAction(pmcaiMsg $msg) {
+		$ret_url = $_SERVER ["HTTP_REFERER"];
+		if (! isset ( $msg ["?sid"] )) {
+			$this->response->_404 ();
 		}
-		$this->model->remove(intval($msg["?sid"]));
-		$this->response->redirect($ret_url);
+		$this->model->remove ( intval ( $msg ["?sid"] ) );
+		$this->response->redirect ( $ret_url );
 	}
-	
-	
-	public function appendaddAction(pmcaiMsg $msg){
-		//["askid" ["role"] ["content"] ["date"]=> string(19) "2016-05-25 12:25:47" }
-		$this->chkPost($msg, array("askid","role","conmeta","content","date"));
+	public function appendaddAction(pmcaiMsg $msg) {
+		// ["askid" ["role"] ["content"] ["date"]=> string(19) "2016-05-25 12:25:47" }
+		$this->chkPost ( $msg, array (
+				"askid",
+				"role",
+				"conmeta",
+				"content",
+				"date" 
+		) );
 		
-		if(!isset($msg["files"])){
-			$files = array();
-		}else{
-			$files = $msg["files"];
+		if (! isset ( $msg ["files"] )) {
+			$files = array ();
+		} else {
+			$files = $msg ["files"];
 		}
 		
-		$ret = $this->model->appendAdd($msg["askid"], $msg["role"], $msg["conmeta"],
-				$msg["content"], $files, $msg["date"]);
-		if($ret->isTrue()){
-			if(isset($msg["?returl"])){
-				$ret_url = $msg["?returl"];
-			}else{
+		$ret = $this->model->appendAdd ( $msg ["askid"], $msg ["role"], $msg ["conmeta"], $msg ["content"], $files, $msg ["date"] );
+		if ($ret->isTrue ()) {
+			if (isset ( $msg ["?returl"] )) {
+				$ret_url = $msg ["?returl"];
+			} else {
 				$ret_url = "";
 			}
-			if(isset($msg["?listret"])){
-				$listret = $msg["?listret"];
-			}else{
+			if (isset ( $msg ["?listret"] )) {
+				$listret = $msg ["?listret"];
+			} else {
 				$listret = "";
 			}
-			$this->view->showOpSucc($this->priv->getUserInfo(),"添加",$ret_url,$listret);
-		}else{
-			$this->response->showError($ret->info);
+			$this->view->showOpSucc ( $this->priv->getUserInfo (), "添加", $ret_url, $listret );
+		} else {
+			$this->response->showError ( $ret->info );
 		}
 	}
-	public function appendrmAction(pmcaiMsg $msg){
-		//["askid" ["role"] ["content"] ["date"]=> string(19) "2016-05-25 12:25:47" }
-		$ret_url = $_SERVER["HTTP_REFERER"];
-		if(!isset($msg["?sid"])){
-			$this->response->_404();
+	public function appendrmAction(pmcaiMsg $msg) {
+		// ["askid" ["role"] ["content"] ["date"]=> string(19) "2016-05-25 12:25:47" }
+		$ret_url = $_SERVER ["HTTP_REFERER"];
+		if (! isset ( $msg ["?sid"] )) {
+			$this->response->_404 ();
 		}
-		$this->model->removeAppend(intval($msg["?sid"]));
-		$this->response->redirect($ret_url);
+		$this->model->removeAppend ( intval ( $msg ["?sid"] ) );
+		$this->response->redirect ( $ret_url );
 	}
-	public function appendeditAction(pmcaiMsg $msg){
-		//["askid" ["role"] ["content"] ["date"]=> string(19) "2016-05-25 12:25:47" }
-		$this->chkPost($msg, array("sid","askid","role","conmeta","content","date"));
+	public function appendeditAction(pmcaiMsg $msg) {
+		// ["askid" ["role"] ["content"] ["date"]=> string(19) "2016-05-25 12:25:47" }
+		$this->chkPost ( $msg, array (
+				"sid",
+				"askid",
+				"role",
+				"conmeta",
+				"content",
+				"date" 
+		) );
 		
-		if(!isset($msg["files"])){
-			$files = array();
-		}else{
-			$files = $msg["files"];
+		if (! isset ( $msg ["files"] )) {
+			$files = array ();
+		} else {
+			$files = $msg ["files"];
 		}
 		
-		$ret = $this->model->appendUpdate($msg["sid"],$msg["askid"], $msg["role"], $msg["conmeta"],
-				$msg["content"], $files, $msg["date"]);
-		if($ret->isTrue()){
-			if(isset($msg["?returl"])){
-				$ret_url = $msg["?returl"];
-			}else{
+		$ret = $this->model->appendUpdate ( $msg ["sid"], $msg ["askid"], $msg ["role"], $msg ["conmeta"], $msg ["content"], $files, $msg ["date"] );
+		if ($ret->isTrue ()) {
+			if (isset ( $msg ["?returl"] )) {
+				$ret_url = $msg ["?returl"];
+			} else {
 				$ret_url = "";
 			}
-			if(isset($msg["?listret"])){
-				$listret = $msg["?listret"];
-			}else{
+			if (isset ( $msg ["?listret"] )) {
+				$listret = $msg ["?listret"];
+			} else {
 				$listret = "";
 			}
-			$this->view->showOpSucc($this->priv->getUserInfo(),"编辑",$ret_url,$listret);
-		}else{
-			$this->response->showError($ret->info);
+			$this->view->showOpSucc ( $this->priv->getUserInfo (), "编辑", $ret_url, $listret );
+		} else {
+			$this->response->showError ( $ret->info );
 		}
 	}
-	
-	public function viewappendAction(pmcaiMsg $msg){
-		if(!isset($msg["?sid"])){
-			$this->response->_404();
+	public function viewappendAction(pmcaiMsg $msg) {
+		if (! isset ( $msg ["?sid"] )) {
+			$this->response->_404 ();
 		}
 		
-		$data = $this->model->getAppendByAskid($msg["?sid"]);
+		$data = $this->model->getAppendByAskid ( $msg ["?sid"] );
 		
-		$this->view->setPmcaiMsg($msg);
-		$this->view->showAppendView($this->priv->getUserInfo(), $data);
-		
+		$this->view->setPmcaiMsg ( $msg );
+		$this->view->showAppendView ( $this->priv->getUserInfo (), $data );
 	}
-	
-	
-	
-	public function presentAction(pmcaiMsg $msg){
-		
-		if($msg->isPost()){
-// 			var_dump($msg->getPostData());exit;
-			$this->chkPost($msg, array("askid","pid","present","name"));
+	public function presentAction(pmcaiMsg $msg) {
+		if ($msg->isPost ()) {
+			// var_dump($msg->getPostData());exit;
+			$this->chkPost ( $msg, array (
+					"askid",
+					"pid",
+					"present",
+					"name" 
+			) );
 			
+			// TODO 添加赠送礼物逻辑
 			
-			//TODO 添加赠送礼物逻辑
-			
-			
-			$ret = $this->model->appendAdd($msg["askid"], 'user', 'present',
-				$msg["present"].",".$msg["name"], array(), date("Y-m-d H:i:s"));
-			if($ret->isTrue()){
-				if(isset($_SERVER['HTTP_REFERER'])){
-					$ret_url = $_SERVER['HTTP_REFERER'];
-				}else{
+			$ret = $this->model->appendAdd ( $msg ["askid"], 'user', 'present', $msg ["present"] . "," . $msg ["name"], array (), date ( "Y-m-d H:i:s" ) );
+			if ($ret->isTrue ()) {
+				if (isset ( $_SERVER ['HTTP_REFERER'] )) {
+					$ret_url = $_SERVER ['HTTP_REFERER'];
+				} else {
 					$ret_url = "";
 				}
-				$this->view->showOpSucc($this->priv->getUserInfo(),"赠送",$ret_url);
-			}else{
-				$this->response->showError($ret->info);
+				$this->view->showOpSucc ( $this->priv->getUserInfo (), "赠送", $ret_url );
+			} else {
+				$this->response->showError ( $ret->info );
 			}
-		}else{
-			if(!isset($msg["?askid"])){
-				$this->response->_404();
+		} else {
+			if (! isset ( $msg ["?askid"] )) {
+				$this->response->_404 ();
 			}
-			$data = $this->model->getAllPresent();
+			$data = $this->model->getAllPresent ();
 			
-			$this->view->setPmcaiMsg($msg);
-			$this->view->showPresent($this->priv->getUserInfo(), $data);			
+			$this->view->setPmcaiMsg ( $msg );
+			$this->view->showPresent ( $this->priv->getUserInfo (), $data );
 		}
-		
-
-		
-		
 	}
-	
-	
-	
-	public function appendAction(pmcaiMsg $msg){
-		$this->chkGet($msg, array("r","askid"));
-		$present = $this->model->getAllPresent();
+	public function appendAction(pmcaiMsg $msg) {
+		$this->chkGet ( $msg, array (
+				"r",
+				"askid" 
+		) );
+		$present = $this->model->getAllPresent ();
 		
-		$this->view->setPmcaiMsg($msg);
+		$this->view->setPmcaiMsg ( $msg );
 		
-		
-		//这个SID是APPEND的SID
-		if(isset($msg["?sid"])) {
-			$def = $this->model->getAppendRow($msg["?sid"]);
-		}else{
+		// 这个SID是APPEND的SID
+		if (isset ( $msg ["?sid"] )) {
+			$def = $this->model->getAppendRow ( $msg ["?sid"] );
+		} else {
 			$def = null;
 		}
 		
-		
-		$this->view->showAppendForm(
-				$this->priv->getUserInfo(), 
-				$msg["?askid"], 
-				$msg["?r"] == "u" ? "user" : "doctor", 
-				$present,
-				$def
-		);
-		
-		
+		$this->view->showAppendForm ( $this->priv->getUserInfo (), $msg ["?askid"], $msg ["?r"] == "u" ? "user" : "doctor", $present, $def );
 	}
-
-	
 	
 	/**
-	 * @param pmcaiMsg $msg
+	 *
+	 * @param pmcaiMsg $msg        	
 	 */
-	public function qAction(pmcaiMsg $msg){
-		if(!isset($msg["?uid"])){
-			$this->response->_404();
+	public function qAction(pmcaiMsg $msg) {
+		if (! isset ( $msg ["?uid"] )) {
+			$this->response->_404 ();
 		}
-		$length = 10;//每页显示多少行
+		$length = 10; // 每页显示多少行
 		
-		if(isset($msg["?page"])){
-			$page = intval($msg["?page"]);
-		}else{
+		if (isset ( $msg ["?page"] )) {
+			$page = intval ( $msg ["?page"] );
+		} else {
 			$page = 1;
 		}
-		if($page < 1){
+		if ($page < 1) {
 			$page = 1;
 		}
 		$offset = ($page - 1) * $length;
-		$data = $this->model->getAllAskByUid($msg["?uid"], $offset, $length);
+		$data = $this->model->getAllAskByUid ( $msg ["?uid"], $offset, $length );
 		
-// 		var_dump($data->return);exit;
+		// var_dump($data->return);exit;
 		
-		
-		$this->view->setPmcaiMsg($msg);
-		$this->view->showUidList(
-			$msg->getPmcaiUrl(),
-			$this->priv->getUserInfo(),
-			$data->info,
-			$data->return,
-			$page,
-			$length,
-			$msg["?q"]
-		);
+		$this->view->setPmcaiMsg ( $msg );
+		$this->view->showUidList ( $msg->getPmcaiUrl (), $this->priv->getUserInfo (), $data->info, $data->return, $page, $length, $msg ["?q"] );
 	}
 	
-	//显示查询用户UI
-	public function usrAction(pmcaiMsg $msg){
-		$length = 10;//每页显示多少行
+	// 显示查询用户UI
+	public function usrAction(pmcaiMsg $msg) {
+		$length = 10; // 每页显示多少行
 		
-		if(isset($msg["?page"])){
-			$page = intval($msg["?page"]);
-		}else{
+		if (isset ( $msg ["?page"] )) {
+			$page = intval ( $msg ["?page"] );
+		} else {
 			$page = 1;
 		}
-		if($page < 1){
+		if ($page < 1) {
 			$page = 1;
 		}
 		$offset = ($page - 1) * $length;
 		
-		$ret = $this->model->queryUsr($msg["?q"], $offset, $length);
-			
-		if($ret->isTrue()){
-			$this->view->setPmcaiMsg($msg);
-			$this->view->showUsrList(
-					"/priv/ask",
-					$msg->getPmcaiUrl(),
-					$this->priv->getUserInfo(),
-					$ret->info,
-					$ret->return,$page,$length,$msg["?q"]);
-		}else{
-			$this->response->showError($ret->info);;
+		$ret = $this->model->queryUsr ( $msg ["?q"], $offset, $length );
+		
+		if ($ret->isTrue ()) {
+			$this->view->setPmcaiMsg ( $msg );
+			$this->view->showUsrList ( "/priv/ask", $msg->getPmcaiUrl (), $this->priv->getUserInfo (), $ret->info, $ret->return, $page, $length, $msg ["?q"] );
+		} else {
+			$this->response->showError ( $ret->info );
+			;
 		}
 	}
-	//显示查询医生UI
-	public function docAction(pmcaiMsg $msg){
-		$length = 10;//每页显示多少行
+	// 显示查询医生UI
+	public function docAction(pmcaiMsg $msg) {
+		$length = 10; // 每页显示多少行
 		
-		if(isset($msg["?page"])){
-			$page = intval($msg["?page"]);
-		}else{
+		if (isset ( $msg ["?page"] )) {
+			$page = intval ( $msg ["?page"] );
+		} else {
 			$page = 1;
 		}
-		if($page < 1){
+		if ($page < 1) {
 			$page = 1;
 		}
 		$offset = ($page - 1) * $length;
 		
-		$ret = $this->model->queryDoc($msg["?q"], $offset, $length);
-			
-		if($ret->isTrue()){
-			$this->view->setPmcaiMsg($msg);
-			$this->view->showDocList(
-					$msg->getPmcaiUrl(),
-					$this->priv->getUserInfo(),
-					$ret->info,
-					$ret->return,$page,$length,$msg["?q"]);
-		}else{
-			$this->response->showError($ret->info);;
+		$ret = $this->model->queryDoc ( $msg ["?q"], $offset, $length );
+		
+		if ($ret->isTrue ()) {
+			$this->view->setPmcaiMsg ( $msg );
+			$this->view->showDocList ( $msg->getPmcaiUrl (), $this->priv->getUserInfo (), $ret->info, $ret->return, $page, $length, $msg ["?q"] );
+		} else {
+			$this->response->showError ( $ret->info );
+			;
 		}
 	}
-	
-	
-	public function viewAction(pmcaiMsg $msg){
-		
-		if(!isset($msg["?dod"])){
-			$this->response->_404();
+	public function viewAction(pmcaiMsg $msg) {
+		if (! isset ( $msg ["?dod"] )) {
+			$this->response->_404 ();
 		}
 		
 		$length = 10;
-		if(isset($msg["?page"])){
-			$page = intval($msg["?page"]);
-		}else{
+		if (isset ( $msg ["?page"] )) {
+			$page = intval ( $msg ["?page"] );
+		} else {
 			$page = 1;
 		}
-		if($page < 1){
+		if ($page < 1) {
 			$page = 1;
 		}
 		$offset = ($page - 1) * $length;
 		
+		$this->view->setPmcaiMsg ( $msg );
 		
-		$this->view->setPmcaiMsg($msg);
+		$data = $this->model->getAllAskByDod ( $msg ["?dod"], $offset, $length );
 		
-		$data = $this->model->getAllAskByDod($msg["?dod"], $offset, $length);
-		
-// 		var_dump($data);
+		// var_dump($data);
 		/*
-		 * 
-
+		 *
+		 *
 		 */
 		
-		$this->view->setPmcaiMsg($msg);
-		$this->view->showDodList(
-				$msg->getPmcaiUrl(),
-				$this->priv->getUserInfo(),
-				$data->info,
-				$data->return,
-				$page,
-				$length,
-				$msg["?q"]
-		);
-		
-		
+		$this->view->setPmcaiMsg ( $msg );
+		$this->view->showDodList ( $msg->getPmcaiUrl (), $this->priv->getUserInfo (), $data->info, $data->return, $page, $length, $msg ["?q"] );
 	}
-	
-	
-	
-	public function usrecAction(pmcaiMsg $msg){
-		$length = 10;//每页显示多少行
+	public function usrecAction(pmcaiMsg $msg) {
+		$length = 10; // 每页显示多少行
 		
-		if(isset($msg["?page"])){
-			$page = intval($msg["?page"]);
-		}else{
+		if (isset ( $msg ["?page"] )) {
+			$page = intval ( $msg ["?page"] );
+		} else {
 			$page = 1;
 		}
-		if($page < 1){
+		if ($page < 1) {
 			$page = 1;
 		}
 		$offset = ($page - 1) * $length;
 		
-		$ret = $this->model->queryUsr($msg["?q"], $offset, $length);
-			
-		if($ret->isTrue()){
-			$this->view->setPmcaiMsg($msg);
-			$this->view->showUsrList(
-					"/priv/ask/q",
-					$msg->getPmcaiUrl(),
-					$this->priv->getUserInfo(),
-					$ret->info,
-					$ret->return,$page,$length,$msg["?q"]);
-		}else{
-			$this->response->showError($ret->info);;
+		$ret = $this->model->queryUsr ( $msg ["?q"], $offset, $length );
+		
+		if ($ret->isTrue ()) {
+			$this->view->setPmcaiMsg ( $msg );
+			$this->view->showUsrList ( "/priv/ask/q", $msg->getPmcaiUrl (), $this->priv->getUserInfo (), $ret->info, $ret->return, $page, $length, $msg ["?q"] );
+		} else {
+			$this->response->showError ( $ret->info );
+			;
 		}
 	}
-	
-	
-	
-	public function addAction(pmcaiMsg $msg){
-		if(!$msg->isPost()){
-			$this->view->setPmcaiMsg($msg);
-			return $this->view->showAllForm(
-					$this->priv->getUserInfo());
+	public function addAction(pmcaiMsg $msg) {
+		if (! $msg->isPost ()) {
+			$this->view->setPmcaiMsg ( $msg );
+			return $this->view->showAllForm ( $this->priv->getUserInfo (), $this->model );
 		}
-		$this->chkPost($msg, array("uid","dod","title","did","desc","svr","date"));
-
-		if(!isset($msg["files"])){
-			$files = array();
-		}else{
-			$files = $msg["files"];
+		$this->chkPost ( $msg, array (
+				"uid",
+				"dod",
+				"title",
+				"did",
+				"desc",
+				"svr",
+				"date" 
+		) );
+		
+		if (! isset ( $msg ["files"] )) {
+			$files = array ();
+		} else {
+			$files = $msg ["files"];
 		}
-		$ret = $this->model->add($msg["uid"], $msg["dod"], $msg["title"],
-				 $msg["did"], $msg["desc"], $msg["svr"], $files, $msg["date"]);
-		if($ret->isTrue()){
-			if(isset($msg["?returl"])){
-				$ret_url = $msg["?returl"];
-			}else{
+		$ret = $this->model->add ( $msg ["uid"], $msg ["dod"], $msg ["title"], $msg ["did"], $msg ["desc"], $msg ["svr"], $files, $msg ["date"] );
+		if ($ret->isTrue ()) {
+			if (isset ( $msg ["?returl"] )) {
+				$ret_url = $msg ["?returl"];
+			} else {
 				$ret_url = "";
 			}
-			$this->view->showOpSucc($this->priv->getUserInfo(),"添加",$ret_url);
-		}else{
-			$this->response->showError($ret->info);
+			$this->view->showOpSucc ( $this->priv->getUserInfo (), "添加", $ret_url );
+		} else {
+			$this->response->showError ( $ret->info );
 		}
 	}
-	
-	
 }
