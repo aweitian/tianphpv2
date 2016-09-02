@@ -15,6 +15,13 @@
 		WHERE `trd` = :trd
 		LIMIT :offset,:length
 	</all>
+	<row>
+		SELECT
+		  `aid`,
+		  `trd`
+		FROM `data_article_tree`
+		WHERE `aid` = :aid
+	</row>
 	
 	<add>
 		INSERT INTO `data_article_tree`

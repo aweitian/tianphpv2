@@ -215,6 +215,6 @@ $url = new url($req->requestUri());
 </div>
 
 
-<div class="ask_ys"><a href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;"></a></div> 
+
 
  

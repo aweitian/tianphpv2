@@ -103,6 +103,16 @@ class articleModel extends privModel{
 		return array();
 	}
 	
+	public function getInfo_tree(){
+		$api = new articleTreeApi();
+		$ret = $api->getAll();
+		if($ret->isTrue()){
+			return $ret->return;
+		}
+		return array();
+	}
+	
+	
 	
 	public function con_relsym($idArr,$syd){
 		if(!is_array($syd)){
