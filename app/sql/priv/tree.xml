@@ -19,7 +19,16 @@
             GROUP BY node.name
             ORDER BY node.lft;
 	</debug>
-
+	<dump>
+	
+	    SELECT 
+            node.`sid`,CONCAT( REPEAT('   ', COUNT(parent.name) - 1), node.name) AS name
+        FROM data_tree AS node,
+                data_tree AS parent
+            WHERE node.lft BETWEEN parent.lft AND parent.rgt
+            GROUP BY node.name
+            ORDER BY node.lft;
+	</dump>
 
 	<!-- 虚拟根结点，方便用于森林管理 -->
 	<virtualRoot>

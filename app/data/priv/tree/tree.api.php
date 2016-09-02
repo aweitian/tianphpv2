@@ -118,6 +118,17 @@ class treeApi {
 		return $this->db->fetchAll($sql, $bnd);
 	}
 	
+	/**
+	 * 返回字段sid,name
+	 * @return array;
+	 */
+	public function dump() {
+		$sql = $this->sqlManager->getSql ( "/tree/dump" );
+		$bnd = array (
+				
+		);
+		return $this->db->fetchAll($sql, $bnd);
+	}
 	
 	
 	/**

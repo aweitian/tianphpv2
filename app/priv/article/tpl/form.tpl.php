@@ -233,6 +233,18 @@ function hideContent(o)
                       
                       
                     </div>
+                    <div class="form-group">
+	                      <label>栏目</label>
+	                      <select>
+	                      <?php foreach ($model->dump() as $item):?>
+	    					
+	    					<option value="<?php print $item["sid"]?>"><?php print str_replace(' ','&nbsp;',$item["name"])?></option>
+	    					
+	    					
+	                      <?php endforeach;?>  
+							</select>
+                    </div>
+                    
                     
                      <div class="form-group">
                     

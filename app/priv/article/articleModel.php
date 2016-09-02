@@ -14,6 +14,7 @@ require_once FILE_SYSTEM_ENTRY."/app/data/priv/article_disease/article_disease.a
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/article_symptom/article_symptom.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/article_doctor/article_doctor.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/article_tags/article_tags.api.php";
+require_once FILE_SYSTEM_ENTRY."/app/data/priv/tree/tree.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/tags/tags.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/comment/comment.api.php";
 require_once FILE_SYSTEM_ENTRY."/app/data/priv/doctor_lv/doctor_lv.api.php";
@@ -22,6 +23,10 @@ class articleModel extends privModel{
 	public $msg;
 	public function __construct(){
 		parent::__construct();
+	}
+	public function dump(){
+		$api = new treeApi();
+		return $api->dump();
 	}
 	public function row($sid){
 		$api = new articleApi();

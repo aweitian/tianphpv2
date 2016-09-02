@@ -1,4 +1,4 @@
-//·µ»Ø¶¥²¿
+//ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½
 $(document).ready(function() { (function() {
         var t = $('<div class="backToTop"></div>').appendTo($("body")).click(function() {
             $("html, body").animate({
@@ -14,13 +14,14 @@ $(document).ready(function() { (function() {
                 t.css("top", i + n - 60)
             }
         };
-        $(window).bind("scroll", i);
+        $(window).bind("scroll", i);$(".backToTop").slideToggle();
+
         $(function() {
             i()
         })
     })();
 	
-	var tab_ss1_nav_li = $('.jb_sstab li');//ÇÐ»»ÑùÊ½
+	var tab_ss1_nav_li = $('.jb_sstab li');//ï¿½Ð»ï¿½ï¿½ï¿½Ê½
 	tab_ss1_nav_li.mouseover(function(){
 		$(this).addClass('selected')
 				 .siblings().removeClass('selected');
