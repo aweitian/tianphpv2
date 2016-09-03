@@ -44,7 +44,7 @@ class treeUIApi {
 	 * @return boolean
 	 */
 	public function existAid($aid, $channel) {
-		$cache_key = "getTrd-" . $aid;
+		$cache_key = "existAid-" . $aid . "-" . $channel;
 		if (array_key_exists ( $cache_key, $this->cache )) {
 			return $this->cache [$cache_key];
 		}
@@ -97,7 +97,7 @@ class treeUIApi {
 	 * @return array()
 	 */
 	public function getAidArrByTrd($trd, $length, $offset = 0) {
-		$cache_key = "getAidArrByTrd-" . $trd;
+		$cache_key = "getAidArrByTrd-" . $trd . "-" . $length . "-" . $offset;
 		if (array_key_exists ( $cache_key, $this->cache )) {
 			return $this->cache [$cache_key];
 		}
@@ -160,31 +160,37 @@ class treeUIApi {
 			return $this->getChannelByTrd ( $trd );
 	}
 	public function getChannelByTrd($trd) {
+		if (! validator::isUint ( $trd )) {
+			// debug_print_backtrace ();
+			// var_dump($trd);exit;
+			return "";
+		}
 		if (array_key_exists ( $trd, $this->sidCache )) {
 			return $this->sidCache [$trd] ["url"];
 		}
 		return "";
 	}
 	/**
-	 * 
-	 * @param int $trd treeid
+	 *
+	 * @param int $trd
+	 *        	treeid
 	 * @return string 类似 aaaa / bbbb / cccc 这样的路径
 	 */
-// 	public function getPathName($trd) {
-// 		return array_key_exists ( $trd, $this->sidCache ) ? $this->_getPathName ( $this->sidCache [$trd] ) : "";
-// 	}
-// 	private function _getPathName($a, $sep = " / ") {
-// 		if (! is_array ( $a ))
-// 			return false;
-// 		if ($a ["pid"] == 0)
-// 			return $a ["url"];
-// 		else {
-// 			return call_user_func ( array (
-// 					$this,
-// 					"_getPathName" 
-// 			), $this->sidCache [$a ["pid"]] ) . $sep . $a ["url"];
-// 		}
-// 	}
+	// public function getPathName($trd) {
+	// return array_key_exists ( $trd, $this->sidCache ) ? $this->_getPathName ( $this->sidCache [$trd] ) : "";
+	// }
+	// private function _getPathName($a, $sep = " / ") {
+	// if (! is_array ( $a ))
+	// return false;
+	// if ($a ["pid"] == 0)
+	// return $a ["url"];
+	// else {
+	// return call_user_func ( array (
+	// $this,
+	// "_getPathName"
+	// ), $this->sidCache [$a ["pid"]] ) . $sep . $a ["url"];
+	// }
+	// }
 	/**
 	 *
 	 * @param string $key        	

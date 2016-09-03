@@ -164,10 +164,11 @@ function chk(form){
                         	<ul >
 
               <?php foreach($model->getAidArrByTrd(($row["sid"]),8,0) as $aitem):?>
-                 <?php $a= $model->rowNoContent($aitem)?> 
-                 <?php if(!empty($a)):?>
-                       	<li><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($a["sid"])?>"> 	
-                       	<?php print utility::utf8Substr($a["title"], 0, 22) ; ?></a> 	
+             
+                 <?php $list= $model->rowNoContent($aitem)?> 
+                 <?php if(!empty($list)):?>
+                       	<li><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($list["sid"])?>"> 	
+                       	<?php print utility::utf8Substr($list["title"], 0, 22) ; ?></a> 	
                        	</li>
                        	<?php endif;?>
                     <?php endforeach;?> 
