@@ -28,13 +28,14 @@ class articleUIApi {
 	
 	/**
 	 * 根据大病种的ID获取文章id
-	 * @param int $lv0did
-	 * @param int $length
-	 * @param int $offset
+	 *
+	 * @param int $lv0did        	
+	 * @param int $length        	
+	 * @param int $offset        	
 	 * @return array(aid1,aid2,....)
 	 */
-	public function allDataByLv0did($lv0did,$length,$offset=0) {
-		$cache_key = "allDataByLv0did-" . $lv0did ."-".$length."-".$offset;
+	public function allDataByLv0did($lv0did, $length, $offset = 0) {
+		$cache_key = "allDataByLv0did-" . $lv0did . "-" . $length . "-" . $offset;
 		if (array_key_exists ( $cache_key, $this->cache )) {
 			return $this->cache [$cache_key];
 		}
@@ -42,12 +43,12 @@ class articleUIApi {
 		$data = $this->db->fetchAll ( $sql, array (
 				"did" => $lv0did,
 				"length" => $length,
-				"offset" => $offset,
+				"offset" => $offset 
 		) );
 		
-		$ret = array();
-		foreach($data as $item){
-			$ret[] = $item["aid"];
+		$ret = array ();
+		foreach ( $data as $item ) {
+			$ret [] = $item ["aid"];
 		}
 		$this->cache [$cache_key] = $ret;
 		return $ret;
@@ -55,12 +56,12 @@ class articleUIApi {
 	
 	/**
 	 * 根据医生ID获取文章
-	 * 
-	 * @param int $dod
+	 *
+	 * @param int $dod        	
 	 * @return array(aid1,aid2,....)
 	 */
-	public function allByDod($dod,$length,$offset=0){
-		$cache_key = "allByDod-" . $dod ."-".$length."-".$offset;
+	public function allByDod($dod, $length, $offset = 0) {
+		$cache_key = "allByDod-" . $dod . "-" . $length . "-" . $offset;
 		if (array_key_exists ( $cache_key, $this->cache )) {
 			return $this->cache [$cache_key];
 		}
@@ -68,35 +69,34 @@ class articleUIApi {
 		$data = $this->db->fetchAll ( $sql, array (
 				"dod" => $dod,
 				"length" => $length,
-				"offset" => $offset,
+				"offset" => $offset 
 		) );
-		$ret = array();
-		foreach($data as $item){
-			$ret[] = $item["aid"];
+		$ret = array ();
+		foreach ( $data as $item ) {
+			$ret [] = $item ["aid"];
 		}
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}
 	/**
 	 * 根据医生ID获取文章的个数
-	 * 
-	 * @param int $dod
+	 *
+	 * @param int $dod        	
 	 * @return int
 	 */
-	public function allByDodCnt($dod){
+	public function allByDodCnt($dod) {
 		$cache_key = "allByDodCnt-" . $dod;
 		if (array_key_exists ( $cache_key, $this->cache )) {
 			return $this->cache [$cache_key];
 		}
 		$sql = $this->sqlManager->getSql ( "/ui_article/allByDodCnt" );
 		$data = $this->db->fetch ( $sql, array (
-				"dod" => $dod,
+				"dod" => $dod 
 		) );
-		$ret = $data["cnt"];
+		$ret = $data ["cnt"];
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}
-	
 	
 	/**
 	 * 根据文章查找医生，返回一个医生的ID,数据出错的情况下返回0
@@ -125,7 +125,7 @@ class articleUIApi {
 	/**
 	 * 根据文章查找病种，返回一个病种的ID,文章不属于任何病种的时候返回0
 	 *
-	 * @param int $aid
+	 * @param int $aid        	
 	 * @return number
 	 */
 	public function getFirstDid($aid) {
@@ -135,7 +135,7 @@ class articleUIApi {
 		}
 		$sql = $this->sqlManager->getSql ( "/ui_article/first_did_byaid" );
 		$ret = $this->db->fetch ( $sql, array (
-				"aid" => $aid
+				"aid" => $aid 
 		) );
 		if (! empty ( $ret )) {
 			$ret = $ret ["did"];
@@ -145,8 +145,6 @@ class articleUIApi {
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}
-	
-	
 	
 	/**
 	 * 获取症状的第一篇文章id,没有找到返回0
@@ -309,8 +307,8 @@ class articleUIApi {
 		$ret = array ();
 		foreach ( $data as $item ) {
 			$t = $this->row ( $item ["aid"], $txtlength );
-			$t["tid"] = $item["tid"];
-			$ret[] = $t;
+			$t ["tid"] = $item ["tid"];
+			$ret [] = $t;
 		}
 		$this->cache [$cache_key] = $ret;
 		return $ret;
@@ -365,8 +363,8 @@ class articleUIApi {
 		$ret = array ();
 		foreach ( $data as $item ) {
 			$t = $this->row ( $item ["aid"], $txtlength );
-			$t["tid"] = $item["tid"];
-			$ret[] = $t;
+			$t ["tid"] = $item ["tid"];
+			$ret [] = $t;
 		}
 		$this->cache [$cache_key] = $ret;
 		return $ret;
@@ -467,6 +465,32 @@ class articleUIApi {
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}
+	/**
+	 * 获取文章,第一篇带THUMBNAIL(THUMBNAIL最多返回一个，有可能为0)
+	 * aid,kw,desc,thumb,title,date
+	 *
+	 * @param int $offset        	
+	 * @param int $length        	
+	 * @return array fetchAll
+	 */
+	public function allThumbnailWithContent($length, $offset = 0, $textlength = 0) {
+		$cache_key = "allThumbnailWithContent-" . $length . "-" . $offset . "-" . $textlength;
+		if (array_key_exists ( $cache_key, $this->cache )) {
+			return $this->cache [$cache_key];
+		}
+		
+		$sql = $this->sqlManager->getSql ( "/ui_article/allFull" );
+		$ret = $this->db->fetchAll ( $sql, array (
+				"offset" => $offset,
+				"length" => $length 
+		) );
+		foreach ( $ret as $key => $item ) {
+			if ($textlength > 0)
+				$ret [$key] ["content"] = utility::utf8Substr ( strip_tags ( $item ["content"] ), 0, $textlength );
+		}
+		$this->cache [$cache_key] = $ret;
+		return $ret;
+	}
 	
 	/**
 	 * 按病种ID获取第一篇带THUMBNAIL文章(最多返回一个，有可能为0)
@@ -532,14 +556,14 @@ class articleUIApi {
 	/**
 	 * 根据文章查找医生，返回一个医生的ID,数据出错的情况下返回0
 	 * 别名(getFirstDod)
-	 * @param int $aid (文章ID)
+	 *
+	 * @param int $aid
+	 *        	(文章ID)
 	 * @return int
 	 */
-	public function getOwner($aid){
-		return $this->getFirstDod($aid);
+	public function getOwner($aid) {
+		return $this->getFirstDod ( $aid );
 	}
-	
-	
 	
 	/**
 	 * 根据DID获取病种下所有文章

@@ -69,6 +69,25 @@ class treeController extends privController{
 			$this->view->showFormUI($this->priv->getUserInfo(), $pid);
 		}
 	}
+	public function editAction(pmcaiMsg $msg){
+		if($msg->isPost()){
+			//insert
+			$ret = $this->model->edit($msg["sid"],$msg["name"], $msg["url"], $msg["order"]);
+			if($ret->isTrue()){
+				if(isset($msg["?returl"])){
+					$ret_url = $msg["?returl"];
+				}else{
+					$ret_url = "";
+				}
+				$this->view->showEditSucc($this->priv->getUserInfo(),$ret_url);
+			}else{
+				$this->response->showError($ret->info);
+			}
+		}else{
+			$this->view->setPmcaiMsg($msg);
+			$this->view->showFormUI($this->priv->getUserInfo(), 0,$this->model->row($msg["?sid"])->return);
+		}
+	}
 	
 	public function rmAction(pmcaiMsg $msg){
 		$ret_url = $_SERVER["HTTP_REFERER"];

@@ -177,7 +177,28 @@ foreach ($m->getDisease() as $item){
             <dl class="fz13">
               <dt><span class="gray"></span> <span class="black"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($app["aid"])?>"><?php print utility::utf8Substr($articleRow["title"],0,18) ?></a></span></dt>
                 <dd><?php print AppFilter::filterOut(utility::utf8Substr($app["comment"],0,30)) ;?>...
-                <p class="clr"><font class="fl"><span class="gray">发布医生： </span><span class="blue"><a<?php print App::useTarget()?> href="<?php print AppUrl::docHomeByDocid($doctorInfo["id"])?>"><?php print $doctorInfo["name"]?></a></span></font>
+                <p class="clr">
+                <font class="fl">
+                	<?php if($dod):?>
+                	
+                	<span class="gray">发布医生： </span>
+                	<span class="blue">
+                		<a<?php print App::useTarget()?> 
+                			href="<?php print AppUrl::docHomeByDocid($doctorInfo["id"])?>">
+                			<?php print $doctorInfo["name"]?>
+                		</a>
+                	</span>
+                	<?php else:?>
+                	<span class="gray">发布者： </span>
+                	<span class="blue">
+                		<a<?php print App::useTarget()?> 
+                			href="<?php print AppUrl::navHospital()?>">
+                			九龙男子医院
+                		</a>
+                	</span>
+                	
+                	<?php endif?>
+                </font>
                 <font class="fr"><span class="gray">评论：</span><span class="gray"><?php print $userInfo["name"]?></span></font></p></dd>
             </dl>
 			<?php endforeach;?>

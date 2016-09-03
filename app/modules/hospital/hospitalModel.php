@@ -80,6 +80,10 @@ class hospitalModel extends AppModel {
 		return articleUIApi::getInstance()->getFirstDod($aid);
 	}
 	
-	
-	
+	public function getArticleRowByAid($aid){
+		return articleUIApi::getInstance()->rowNoContent($aid);
+	}
+	public function getNewsArticles($length,$offset=0){
+		return treeUIApi::getInstance()->getAidArrByChannel("/news", $length,$offset);
+	}
 }

@@ -4,7 +4,10 @@
  * Author: Awei.tian
  * Description: 
  */
-
+// var_dump($data["def"]);exit;
+//array(5) { 
+//["sid"]=> string(1) "2" ["name"]=> string(12) "医院动态" 
+//["url"]=> string(4) "news" ["order"]=> string(1) "0" ["layout"]=> string(0) "" }
 if(isset($data["def"]) && !is_null($data["def"])){
 	$def = $data["def"];
 	$at = "编辑";
@@ -37,7 +40,11 @@ if(isset($_SERVER['HTTP_REFERER'])){
                   <div class="box-body">
                     <div class="form-group">
                       <label for="vv">栏目名称</label>
+                      <?php if($ua == "add"):?>
                       <input type="hidden" name="pid" value="<?php print $pid?>">
+                      <?php else:?>
+                      <input type="hidden" name="sid" value="<?php print $def["sid"]?>">
+                      <?php endif?>
                       <input required id="vv" type="text" name="name" value="<?php print $def["name"]?>" class="form-control" placeholder="名称">
                     </div>
                     <div class="form-group">

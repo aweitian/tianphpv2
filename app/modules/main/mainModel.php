@@ -114,4 +114,5 @@ class mainModel extends AppModel {
 	public function getUserRowByUid($uid){
 		return userUIApi::getInstance()->row($uid);
 	}
+	
 }

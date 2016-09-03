@@ -83,21 +83,28 @@ class diseaseApi{
 	}
 	
 	public function edit($sid,$key,$data){
-		$urkChk = App::checkControlExists($key);
-		switch ($urkChk){
-			case 0:
-				break;
-			case 1:
-				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(默认路由<a target='_blank' href='".AppUrl::build("/".$key)."'>点击查看</a>)占用");
-			case 2:
-				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(医生模块<a target='_blank' href='".AppUrl::docHomeByDocid($key)."'>点击查看</a>)占用");
-			case 3:
-				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(疾病模块<a target='_blank' href='".AppUrl::disHomeByDiseasekey($key)."'>点击查看</a>)占用");
-			case 4:
-				return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(栏目文章模块占用");
-			default:
-				return new rirResult(3,"URL检测未知错误");
+		$row = $this->row ( $sid );
+		if (! $row)
+			return new rirResult(1,"invalid sid");
+// 		var_dump($row);exit;	
+		if($row["key"] != $key) {
+			$urkChk = App::checkControlExists($key);
+			switch ($urkChk){
+				case 0:
+					break;
+				case 1:
+					return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(默认路由<a target='_blank' href='".AppUrl::build("/".$key)."'>点击查看</a>)占用");
+				case 2:
+					return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(医生模块<a target='_blank' href='".AppUrl::docHomeByDocid($key)."'>点击查看</a>)占用");
+				case 3:
+					return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(疾病模块<a target='_blank' href='".AppUrl::disHomeByDiseasekey($key)."'>点击查看</a>)占用");
+				case 4:
+					return new rirResult(3,"疾病KEY用于URL，<br>但这个ID已被(栏目文章模块占用");
+				default:
+					return new rirResult(3,"URL检测未知错误");
+			}			
 		}
+
 		$sql = $this->sqlManager->getSql("/disease/updateData");
 		$data = array(
 				"key" => $key,

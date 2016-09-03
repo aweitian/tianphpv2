@@ -418,7 +418,7 @@ class AppUrl {
 	 * 获取医生图片的文件路径
 	 */
 	public static function getDoctorAvatarPath($size = "80X65") {
-		return FILE_SYSTEM_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/doctor" . "/" . $size;
+		return FILE_SYSTEM_ENTRY . "/web/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/doctor" . "/" . $size;
 	}
 	
 	/**

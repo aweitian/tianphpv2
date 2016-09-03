@@ -91,6 +91,21 @@ class treeUIApi {
 		$this->cache [$cache_key] = $ret;
 		return $ret;
 	}
+	
+	/**
+	 * 根据栏目获取所有文章ID
+	 * @param string $channel  /news
+	 * @param int $length
+	 * @param int $offset
+	 * @return array()
+	 */
+	public function getAidArrByChannel($channel, $length, $offset = 0) {
+		$channel = trim ( $channel, "/" );
+		if (! array_key_exists ( $channel, $this->keyCache ))
+			return array ();
+		return $this->getAidArrByTrd ( $this->keyCache [$channel] ["sid"], $length, $offset );
+	}
+	
 	/**
 	 *
 	 * @param string $key        	

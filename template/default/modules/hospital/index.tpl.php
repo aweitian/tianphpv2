@@ -164,6 +164,7 @@ $this->keyword = "";
                             <ul class="clr">
                               <li class="selected" style="border-left:0;">最新咨询</li>
                               <li>最新文章</li>
+                              <li>医院风采</li>
                            
                             </ul>
                         </div>
@@ -199,6 +200,27 @@ $this->keyword = "";
                               </span></dt>
                               <dd class="fr gray"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($listarticle["aid"])?>">回复</a></dd>
                             </dl>
+                            
+                               	<?php endforeach;?>
+                            
+                            
+                          </div>
+                        </div>
+                        <div class="yyjs_ssbox" style="display: none;">
+                        	<div class="wlzxnr tabcon fz13">
+                        	
+                        	
+                        	
+                        	 	<?php foreach($m->getNewsArticles(8) as $aid):?>
+                     
+                        	 	<?php $row = $m->getArticleRowByAid($aid)?>
+                
+                            	<dl>
+	                              <dt class="fl"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($row["sid"])?>"><span class="fl"><?php print utility::utf8Substr($row["title"], 0, 30) ?></span></a><span class="fr">
+	                              上海九龙男子医院
+	                              </span></dt>
+	                              <dd class="fr gray"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($row["sid"])?>">回复</a></dd>
+                            	</dl>
                             
                                	<?php endforeach;?>
                             

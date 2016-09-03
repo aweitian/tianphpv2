@@ -158,10 +158,10 @@
 	<update>
 		UPDATE `data_tree`
 			SET 
-			  `name` = 'name',
-			  `url` = 'url',
-			  `order` = 'order',
-			  `layout` = 'layout'
+			  `name` = :name,
+			  `url` = :url,
+			  `order` = :order,
+			  `layout` = :layout
 
 			WHERE `sid` = :sid;
 	</update>

@@ -27,7 +27,7 @@ $req = new httpRequest();
 $url = new url($req->requestUri());
 
 
-$a=$m->allThumbnail($pageSize,($page-1)*$pageSize);
+$a=$m->allThumbnailWithContent($pageSize,($page-1)*$pageSize,80);
 if(count($a)>1){$a1=array_shift($a);}else{$a1=array();}
 if(count($a)>1){$a2=array_shift($a);}else{$a2=array();}
 if(count($a)>1){$a3=array_shift($a);}else{$a3=array();}
@@ -73,7 +73,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                         	</dt>
                             <dd class="fl">
                             	<b class="fz18 color3"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($a1["aid"])?>"><?php print utility::utf8Substr($a1["title"], 0, 15) ?></a></b>
-                                <p class="color9"><?php print utility::utf8Substr($a1["desc"], 0, 80) ?>...<a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($a1["aid"])?>" class="bule">[查看全文]</a></p>
+                                <p class="color9"><?php print utility::utf8Substr($a1["content"], 0, 80) ?>...<a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($a1["aid"])?>" class="bule">[查看全文]</a></p>
                             </dd>
                         </dl>                  
                         <?php endif?>
@@ -131,10 +131,10 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                             <ul class="clr">
                             
                                	<?php foreach($a as $lb):?>
-                               
+                           
                             	<li>
                                 	<a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($lb["aid"])?>"><?php print utility::utf8Substr($lb["title"], 0, 30) ?></a>
-                                    <p><?php print utility::utf8Substr($lb["desc"], 0, 80) ?>...</p>
+                                    <p><?php print ($lb["content"]) ?>...</p>
                                 </li>
                                    	<?php endforeach;?>
                               

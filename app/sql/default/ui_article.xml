@@ -15,6 +15,19 @@
 			ORDER BY `sid` DESC
 			LIMIT :offset, :length;
 	</all>
+	<allFull>
+		SELECT
+			  `sid` as `aid`,
+			  `kw`,
+			  `desc`,
+			  `thumb`,
+			  `title`,
+			  `content`,
+			  `date`
+			FROM `data_article`
+			ORDER BY `sid` DESC
+			LIMIT :offset, :length;
+	</allFull>
 	<allCnt>
 		SELECT
 			  count(`sid`) as `cnt`

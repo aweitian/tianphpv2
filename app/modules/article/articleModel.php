@@ -61,6 +61,12 @@ class articleModel extends AppModel {
 	public function getAllFullCnt(){
 		return articleUIApi::getInstance()->getAllFullCnt();
 	}
+	public function allThumbnailWithContent($length, $offset = 0, $textlength = 0){
+		return articleUIApi::getInstance()->allThumbnailWithContent($length, $offset,$textlength );
+	}
+	
+	
+	
 	
 	
 }
