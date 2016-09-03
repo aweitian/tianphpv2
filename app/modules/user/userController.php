@@ -216,7 +216,7 @@ class userController extends appCtrl {
 		if ($msg->isPost ()) {
 			$i = AppUser::getInstance ()->auth->getInfo ();
 			$ret = $this->model->modProfile ( $i ["sid"], $msg ["name"], $msg ["email"], $msg ["phone"], $msg ["rpq"], $msg ["rpa"] );
-			
+// 			var_dump($ret->return);exit;
 			if ($ret->isTrue ()) {
 				AppUser::getInstance ()->auth->saveInfo ( $ret->return );
 				$this->view->profile ( $this->model, "修改成功" );

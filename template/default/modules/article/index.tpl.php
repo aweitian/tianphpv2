@@ -12,7 +12,7 @@ $this->title = "疾病专题-上海九龙男子医院";
 $this->description = "";
 $this->keyword = "";
 
-$pageSize = 10;
+$pageSize = 15;
 if(isset($_REQUEST["page"])){
 	$page = intval($_REQUEST["page"]);
 } else{
@@ -105,7 +105,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                             	<div class="blank15"></div>
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($a4["aid"])?>"><?php print utility::utf8Substr($a4["title"], 0, 30) ?></a>...</p>
+                                    	<p class="fr"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($a4["aid"])?>"><?php print utility::utf8Substr($a4["title"], 0, 15) ?></a>...</p>
                                 </div>
                                 <div class="blank15"></div>
                                 
@@ -116,7 +116,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                             	<div class="blank15"></div>
                             	<div class=" clr">
                                 	<span class="fl"><img src="<?php print AppUrl::getMediaPath()?>/images/syhot1.jpg" /></span>
-                                    	<p class="fr"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($a5["aid"])?>"><?php print utility::utf8Substr($a5["title"], 0, 30) ?></a>...</p>
+                                    	<p class="fr"><a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($a5["aid"])?>"><?php print utility::utf8Substr($a5["title"], 0, 15) ?></a></p>
                                 </div>
                                 <div class="blank15"></div>
                             </div>
@@ -131,6 +131,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                             <ul class="clr">
                             
                                	<?php foreach($a as $lb):?>
+                               
                             	<li>
                                 	<a<?php print App::useTarget()?> href="<?php print AppUrl::articleByAid($lb["aid"])?>"><?php print utility::utf8Substr($lb["title"], 0, 30) ?></a>
                                     <p><?php print utility::utf8Substr($lb["desc"], 0, 80) ?>...</p>
@@ -209,7 +210,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
                         
                       </div>
                     
-                    <div class="zjtd_r3 clr"><a<?php print App::useTarget()?> href="<?php print AppUrl::getSwtUrl() ?>">立刻咨询</a></div>
+                    <div class="zjtd_r3 clr"><a<?php print App::useTarget()?> href="<?php print AppUrl::getSwtUrl()?>" onClick="openZoosUrl();return false;">立刻咨询</a></div>
                     <div class="blank20"></div>
                   </div>
                 	

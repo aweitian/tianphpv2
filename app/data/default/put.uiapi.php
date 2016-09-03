@@ -16,11 +16,13 @@ require_once FILE_SYSTEM_ENTRY . "/app/data/priv/appraise/appraiseValidator.php"
 class putUIApi {
 	private static $inst = null;
 	private $sqlManager;
+	private $sqlManager_read;
 	private $db;
 	private $cache = array ();
 	private function __construct() {
 		$this->db = new mysqlPdoBase ();
 		$this->sqlManager = new sqlManager ( FILE_SYSTEM_ENTRY . "/app/sql/default/ui_put.xml" );
+		$this->sqlManager_read = new sqlManager(FILE_SYSTEM_ENTRY . "/app/sql/default/ui_user.xml");
 	}
 	
 	/**
@@ -34,77 +36,77 @@ class putUIApi {
 		return putUIApi::$inst;
 	}
 	
-// 	/**
-// 	 *
-// 	 * @param int $did        	
-// 	 * @param int $uid        	
-// 	 * @param int $dod        	
-// 	 * @param string $title        	
-// 	 * @param string $desc        	
-// 	 * @param string $svr        	
-// 	 * @return 数字 大于 0 正常，0数据库错误，负数见代码
-// 	 */
-// 	public function addAsk($uid, $dod, $title, $did, $desc, $svr, $date) {
-// 		$op_type = "user_submit";
-// 		$op_id = $uid;
-// 		$oplog = new oplog ();
-// 		$try_cnt = $oplog->getCnt ( $op_type, $op_id );
-// 		if (USER_SUBMIT_TRY_MAX - $try_cnt <= 0) {
-// 			return - 9;
-// 		}
-// 		$opsid = $oplog->add ( $op_type, $op_id );
-// 		$oplog->update ( $opsid );
-		
-// 		if (utility::utf8Strlen ( $desc ) > 2048) {
-// 			return - 10;
-// 		}
-// 		if (utility::utf8Strlen ( $svr ) > 2048) {
-// 			return - 11;
-// 		}
-// 		// validate data
-// 		if (! validator::isUint ( $uid )) {
-// 			return - 1;
-// 		}
-// 		if (! validator::isUint ( $dod )) {
-// 			return - 2;
-// 		}
-// 		if (! askValidator::isValidTitle ( $title )) {
-// 			return - 3;
-// 		}
-// 		if (! validator::isUint ( $did )) {
-// 			return - 4;
-// 		}
-// 		if (! askValidator::isValidDesc ( $desc )) {
-// 			return - 5;
-// 		}
-// 		if (! askValidator::isValidSvr ( $svr )) {
-// 			return - 6;
-// 		}
-// 		if (! askValidator::isValidFiles ( $files )) {
-// 			return - 7;
-// 		}
-// 		if (! validator::isDateTime ( $date )) {
-// 			return - 8;
-// 		}
-// 		$sql = $this->sqlManager->getSql ( "/ui_put/add" );
-// 		$bnd = array (
-// 				"uid" => $uid,
-// 				"dod" => $dod,
-// 				"title" => $title,
-// 				"did" => $did,
-// 				"desc" => $desc,
-// 				"svr" => $svr,
-// 				"date" => $date 
-// 		);
-		
-// 		$sid = $this->db->insert ( $sql, $bind );
-		
-// 		return $sid;
-// 	}
+	// /**
+	// *
+	// * @param int $did
+	// * @param int $uid
+	// * @param int $dod
+	// * @param string $title
+	// * @param string $desc
+	// * @param string $svr
+	// * @return 数字 大于 0 正常，0数据库错误，负数见代码
+	// */
+	// public function addAsk($uid, $dod, $title, $did, $desc, $svr, $date) {
+	// $op_type = "user_submit";
+	// $op_id = $uid;
+	// $oplog = new oplog ();
+	// $try_cnt = $oplog->getCnt ( $op_type, $op_id );
+	// if (USER_SUBMIT_TRY_MAX - $try_cnt <= 0) {
+	// return - 9;
+	// }
+	// $opsid = $oplog->add ( $op_type, $op_id );
+	// $oplog->update ( $opsid );
+	
+	// if (utility::utf8Strlen ( $desc ) > 2048) {
+	// return - 10;
+	// }
+	// if (utility::utf8Strlen ( $svr ) > 2048) {
+	// return - 11;
+	// }
+	// // validate data
+	// if (! validator::isUint ( $uid )) {
+	// return - 1;
+	// }
+	// if (! validator::isUint ( $dod )) {
+	// return - 2;
+	// }
+	// if (! askValidator::isValidTitle ( $title )) {
+	// return - 3;
+	// }
+	// if (! validator::isUint ( $did )) {
+	// return - 4;
+	// }
+	// if (! askValidator::isValidDesc ( $desc )) {
+	// return - 5;
+	// }
+	// if (! askValidator::isValidSvr ( $svr )) {
+	// return - 6;
+	// }
+	// if (! askValidator::isValidFiles ( $files )) {
+	// return - 7;
+	// }
+	// if (! validator::isDateTime ( $date )) {
+	// return - 8;
+	// }
+	// $sql = $this->sqlManager->getSql ( "/ui_put/add" );
+	// $bnd = array (
+	// "uid" => $uid,
+	// "dod" => $dod,
+	// "title" => $title,
+	// "did" => $did,
+	// "desc" => $desc,
+	// "svr" => $svr,
+	// "date" => $date
+	// );
+	
+	// $sid = $this->db->insert ( $sql, $bind );
+	
+	// return $sid;
+	// }
 	
 	/**
 	 *
-	 * @param int $pid
+	 * @param int $pid        	
 	 * @param int $uid
 	 *        	删除感谢信
 	 * @return int 1/0
@@ -113,12 +115,11 @@ class putUIApi {
 		$sql = $this->sqlManager->getSql ( "/ui_put/present_rm" );
 		$bnd = array (
 				"uid" => $uid,
-				"pid" => $pid
+				"pid" => $pid 
 		);
 		return $this->db->exec ( $sql, $bnd );
 	}
-	
-	public function givePresent($uid,$dod,$pid){
+	public function givePresent($uid, $dod, $pid) {
 		$op_type = "user_modify";
 		$oplog = new oplog ();
 		$try_cnt = $oplog->getCnt ( $op_type, $uid );
@@ -128,22 +129,21 @@ class putUIApi {
 		$opsid = $oplog->add ( $op_type, $uid );
 		$oplog->update ( $opsid );
 		
-		if(!validator::isUint($dod)){
-			return new rirResult(1,"无效的医生ID");
+		if (! validator::isUint ( $dod )) {
+			return new rirResult ( 1, "无效的医生ID" );
 		}
-		if(!validator::isUint($uid)){
-			return new rirResult(1,"无效的用户ID");
+		if (! validator::isUint ( $uid )) {
+			return new rirResult ( 1, "无效的用户ID" );
 		}
-		if(!validator::isUint($pid)){
-			return new rirResult(1,"无效的礼物ID");
+		if (! validator::isUint ( $pid )) {
+			return new rirResult ( 1, "无效的礼物ID" );
 		}
-		
 		
 		$sql = $this->sqlManager->getSql ( "/ui_put/present" );
 		$row = $this->db->exec ( $sql, array (
 				"uid" => $uid,
 				"dod" => $dod,
-				"pid" => $pid
+				"pid" => $pid 
 		) );
 		if ($row == 1) {
 			return new rirResult ( 0, "ok" );
@@ -185,7 +185,8 @@ class putUIApi {
 	/**
 	 *
 	 * @param string $phone        	
-	 * @param string $code  手机验证码        	
+	 * @param string $code
+	 *        	手机验证码
 	 * @param string $sq        	
 	 * @param string $sa        	
 	 * @param string $eml        	
@@ -203,17 +204,15 @@ class putUIApi {
 		}
 		$opsid = $oplog->add ( $op_type, identityToken::getInstance ()->getIp () );
 		
-		
-		if (!userValidator::isValidPhone($phone)) {
+		if (! userValidator::isValidPhone ( $phone )) {
 			return new rirResult ( 0xb, "请输入正确的手机号码" );
 		}
-		
 		
 		$sql = $this->sqlManager->getSql ( "/ui_put/register_phone" );
 		$bnd = array (
 				"name" => $phone,
 				"pwd" => Security::encrypt ( $code ),
-				"phone" => $phone,
+				"phone" => $phone 
 		);
 		// var_dump($sql,$bnd);exit;
 		$ret = $this->db->exec ( $sql, $bnd );
@@ -235,12 +234,13 @@ class putUIApi {
 		return new rirResult ( 0, "注册成功", $ret );
 	}
 	
-	
 	/**
 	 *
 	 * @param string $phone        	
-	 * @param string $code 手机验证码        	
-	 * @param string $pwd 密码        	
+	 * @param string $code
+	 *        	手机验证码
+	 * @param string $pwd
+	 *        	密码
 	 * @param string $sa        	
 	 * @param string $eml        	
 	 * @param string $code        	
@@ -248,12 +248,11 @@ class putUIApi {
 	 */
 	public function register_phone_active($phone, $code, $pwd) {
 		// 23000
-
 		$sql = $this->sqlManager->getSql ( "/ui_put/register_phone_active" );
 		$bnd = array (
 				"oldpwd" => Security::encrypt ( $code ),
 				"pwd" => Security::encrypt ( $pwd ),
-				"phone" => $phone,
+				"phone" => $phone 
 		);
 		$ret = $this->db->exec ( $sql, $bnd );
 		if ($ret == 0) {
@@ -262,18 +261,18 @@ class putUIApi {
 		return new rirResult ( 0, "注册成功", $ret );
 	}
 	
-	
 	/**
 	 *
-	 * @param string $phone
-	 * @param string $code 手机验证码
+	 * @param string $phone        	
+	 * @param string $code
+	 *        	手机验证码
 	 * @return rirResult
 	 */
 	public function register_phone_retry($phone, $code) {
 		$sql = $this->sqlManager->getSql ( "/ui_put/register_phone_retry" );
 		$bnd = array (
 				"pwd" => Security::encrypt ( $code ),
-				"phone" => $phone,
+				"phone" => $phone 
 		);
 		// var_dump($sql,$bnd);exit;
 		$ret = $this->db->exec ( $sql, $bnd );
@@ -369,7 +368,7 @@ class putUIApi {
 	
 	/**
 	 *
-	 * @param int $uid
+	 * @param int $uid        	
 	 * @param string $newavatar
 	 *        	(只要BASENAME部分)
 	 * @return rirResult
@@ -384,26 +383,25 @@ class putUIApi {
 		$opsid = $oplog->add ( $op_type, $uid );
 		$oplog->update ( $opsid );
 		$avatarMeta = avatarMeta::getAllAvatar ();
-	
+		
 		if (! in_array ( $newavatar, $avatarMeta )) {
 			return new rirResult ( 2, "头像不存在" );
 		}
-	
+		
 		$sql = $this->sqlManager->getSql ( "/ui_put/profile/avatar" );
 		$row = $this->db->exec ( $sql, array (
 				"uid" => $uid,
-				"avatar" => $newavatar
+				"avatar" => $newavatar 
 		) );
 		if ($row == 1) {
-			$sql = sqlManager::getInstance(FILE_SYSTEM_ENTRY . "/app/sql/default/ui_user.xml") ->getSql ( "/ui_user/row_uid" );
+			$sql = $this->sqlManager_read->getSql ( "/ui_user/row_uid" );
 			$ret = $this->db->fetch ( $sql, array (
-					"uid" => $uid
+					"uid" => $uid 
 			) );
 			return new rirResult ( 0, "ok", $ret );
 		}
 		return new rirResult ( 3, "头像没有变化" );
 	}
-	
 	
 	/**
 	 *
@@ -541,7 +539,7 @@ class putUIApi {
 			}
 			return new rirResult ( 0xa, $info );
 		}
-		$sql = $this->sqlManager->getSql ( "/ui_put/row_uid" );
+		$sql = $this->sqlManager_read->getSql ( "/ui_user/row_uid" );
 		$ret = $this->db->fetch ( $sql, array (
 				"uid" => $uid 
 		) );
@@ -566,7 +564,7 @@ class putUIApi {
 		$opsid = $oplog->add ( $op_type, $op_id );
 		$oplog->update ( $opsid );
 		
-		$content = AppFilter::filterIn($content);
+		$content = AppFilter::filterIn ( $content );
 		
 		if (utility::utf8Strlen ( $content ) > 2048) {
 			return new rirResult ( 2, "内容过长" );
@@ -603,7 +601,7 @@ class putUIApi {
 		$opsid = $oplog->add ( $op_type, $op_id );
 		$oplog->update ( $opsid );
 		
-// 		var_dump($uid, $did, $dod, $lv, $txt);exit;
+		// var_dump($uid, $did, $dod, $lv, $txt);exit;
 		
 		// validate data
 		if (! validator::isUint ( $uid )) {
@@ -619,20 +617,19 @@ class putUIApi {
 			return new rirResult ( 5, "invalid appraise" );
 		}
 		
-		$txt = AppFilter::filterIn($txt);
+		$txt = AppFilter::filterIn ( $txt );
 		
 		if (! appraiseValidator::isValidContent ( $txt )) {
 			return new rirResult ( 6, "invalid content" );
 		}
 		
-		if(!$this->existDid($did)){
-			return new rirResult(4,"无效的病种ID");
+		if (! $this->existDid ( $did )) {
+			return new rirResult ( 4, "无效的病种ID" );
 		}
 		
-		if(!$this->existDod($dod)){
-			return new rirResult(4,"无效的医生ID");
+		if (! $this->existDod ( $dod )) {
+			return new rirResult ( 4, "无效的医生ID" );
 		}
-		
 		
 		$sql = $this->sqlManager->getSql ( "/ui_put/appraise" );
 		$bind = array (
@@ -657,7 +654,7 @@ class putUIApi {
 	 * @param string $content        	
 	 * @return rirResult
 	 */
-	public function addLetter($uid, $dod, $did,$content) {
+	public function addLetter($uid, $dod, $did, $content) {
 		$op_type = "user_submit";
 		$op_id = $uid;
 		$oplog = new oplog ();
@@ -668,30 +665,28 @@ class putUIApi {
 		$opsid = $oplog->add ( $op_type, $op_id );
 		$oplog->update ( $opsid );
 		
-		$content = AppFilter::filterIn($content);
-		
+		$content = AppFilter::filterIn ( $content );
 		
 		if (utility::utf8Strlen ( $content ) > 2048) {
 			return new rirResult ( 2, "内容过长" );
 		}
 		
+		if (! validator::isUint ( $uid ) or $uid < 1) {
+			return new rirResult ( 3, "无效的UID" );
+		}
+		if (! validator::isUint ( $dod ) or $dod < 1) {
+			return new rirResult ( 4, "无效的医生ID" );
+		}
+		if (! validator::isUint ( $did ) or $did < 1) {
+			return new rirResult ( 5, "无效的病种ID" );
+		}
+		// var_dump($uid, $dod, $did,$content);exit;
+		if (! $this->existDid ( $did )) {
+			return new rirResult ( 4, "无效的病种ID" );
+		}
 		
-		if(!validator::isUint($uid) or $uid < 1) {
-			return new rirResult(3,"无效的UID");
-		}
-		if(!validator::isUint($dod) or $dod < 1) {
-			return new rirResult(4,"无效的医生ID");
-		}
-		if(!validator::isUint($did) or $did < 1) {
-			return new rirResult(5,"无效的病种ID");
-		}
-// 		var_dump($uid, $dod, $did,$content);exit;
-		if(!$this->existDid($did)){
-			return new rirResult(4,"无效的病种ID");
-		}
-		
-		if(!$this->existDod($dod)){
-			return new rirResult(4,"无效的医生ID");
+		if (! $this->existDod ( $dod )) {
+			return new rirResult ( 4, "无效的医生ID" );
 		}
 		
 		$sql = $this->sqlManager->getSql ( "/ui_put/letter" );
@@ -716,7 +711,7 @@ class putUIApi {
 	 * @param string $content        	
 	 * @return rirResult
 	 */
-	public function addQuestion($uid,$dod,$title,$did,$desc,$svr) {
+	public function addQuestion($uid, $dod, $title, $did, $desc, $svr) {
 		$op_type = "user_submit";
 		$op_id = $uid;
 		$oplog = new oplog ();
@@ -727,27 +722,19 @@ class putUIApi {
 		$opsid = $oplog->add ( $op_type, $op_id );
 		$oplog->update ( $opsid );
 		
-		
-		if (!validator::isUint($uid)) {
+		if (! validator::isUint ( $uid )) {
 			return new rirResult ( 2, "没有登陆" );
 		}
-		if (!validator::isUint($dod)) {
+		if (! validator::isUint ( $dod )) {
 			return new rirResult ( 2, "没有这个医生" );
 		}
-		if (!validator::isUint($did)) {
+		if (! validator::isUint ( $did )) {
 			return new rirResult ( 2, "病种不正确" );
 		}
 		
-		
-		$title = AppFilter::filterIn($title);
-		$desc = AppFilter::filterIn($desc);
-		$svr = AppFilter::filterIn($svr);
-		
-		
-		
-		
-		
-		
+		$title = AppFilter::filterIn ( $title );
+		$desc = AppFilter::filterIn ( $desc );
+		$svr = AppFilter::filterIn ( $svr );
 		
 		if (utility::utf8Strlen ( $title ) > 128) {
 			return new rirResult ( 2, "标题过长" );
@@ -759,41 +746,35 @@ class putUIApi {
 			return new rirResult ( 2, "想要得到哪些帮助的内容过长" );
 		}
 		
-		
-		if(!validator::isUint($uid) or $uid < 1) {
-			return new rirResult(3,"无效的UID");
+		if (! validator::isUint ( $uid ) or $uid < 1) {
+			return new rirResult ( 3, "无效的UID" );
 		}
-		if(!validator::isUint($dod) or $dod < 1) {
-			return new rirResult(4,"无效的医生ID");
+		if (! validator::isUint ( $dod ) or $dod < 1) {
+			return new rirResult ( 4, "无效的医生ID" );
 		}
-		if(!validator::isUint($did) or $did < 1) {
-			return new rirResult(5,"无效的病种ID");
-		}
-		
-		
-		
-// 		var_dump($uid,$dod,$title,$did,$desc,$svr);exit;
-		
-		
-		
-		
-		if(!$this->existDid($did)){
-			return new rirResult(4,"无效的病种ID");
+		if (! validator::isUint ( $did ) or $did < 1) {
+			return new rirResult ( 5, "无效的病种ID" );
 		}
 		
-		if(!$this->existDod($dod)){
-			return new rirResult(4,"无效的医生ID");
+		// var_dump($uid,$dod,$title,$did,$desc,$svr);exit;
+		
+		if (! $this->existDid ( $did )) {
+			return new rirResult ( 4, "无效的病种ID" );
+		}
+		
+		if (! $this->existDod ( $dod )) {
+			return new rirResult ( 4, "无效的医生ID" );
 		}
 		
 		$sql = $this->sqlManager->getSql ( "/ui_put/ask" );
 		$bnd = array (
-				//:uid,:dod,:title,:did,:desc,:svr
+				// :uid,:dod,:title,:did,:desc,:svr
 				"uid" => $uid,
 				"dod" => $dod,
 				"did" => $did,
-				"title" => $title, 
-				"desc" => $desc, 
-				"svr" => $svr, 
+				"title" => $title,
+				"desc" => $desc,
+				"svr" => $svr 
 		);
 		$row = $this->db->insert ( $sql, $bnd );
 		if ($row > 0) {
@@ -801,9 +782,6 @@ class putUIApi {
 		}
 		return new rirResult ( 2, $this->db->getErrorInfo () );
 	}
-	
-	
-	
 	
 	/**
 	 *
@@ -820,7 +798,6 @@ class putUIApi {
 		);
 		return $this->db->exec ( $sql, $bnd );
 	}
-	
 	
 	/**
 	 *
@@ -852,33 +829,28 @@ class putUIApi {
 		);
 		return $this->db->exec ( $sql, $bnd );
 	}
-	
-	
-	
-	
-	
-	public function existDid($did){
+	public function existDid($did) {
 		$sql = $this->sqlManager->getSql ( "/ui_put/read/did" );
 		$bnd = array (
-				"sid" => $did,
+				"sid" => $did 
 		);
-		$ret = $this->db->fetch( $sql, $bnd );
-		return !empty($ret);
+		$ret = $this->db->fetch ( $sql, $bnd );
+		return ! empty ( $ret );
 	}
-	public function existDod($dod){
+	public function existDod($dod) {
 		$sql = $this->sqlManager->getSql ( "/ui_put/read/dod" );
 		$bnd = array (
-				"sid" => $dod,
+				"sid" => $dod 
 		);
-		$ret = $this->db->fetch( $sql, $bnd );
-		return !empty($ret);
+		$ret = $this->db->fetch ( $sql, $bnd );
+		return ! empty ( $ret );
 	}
-	public function existAid($aid){
+	public function existAid($aid) {
 		$sql = $this->sqlManager->getSql ( "/ui_put/read/aid" );
 		$bnd = array (
-				"sid" => $aid,
+				"sid" => $aid 
 		);
-		$ret = $this->db->fetch( $sql, $bnd );
-		return !empty($ret);
+		$ret = $this->db->fetch ( $sql, $bnd );
+		return ! empty ( $ret );
 	}
 }

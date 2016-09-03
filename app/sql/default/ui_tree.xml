@@ -25,5 +25,13 @@
 			  `aid`
 			FROM `data_article_tree`
 			WHERE `data_article_tree`.`trd` = :trd
+			ORDER BY `aid` DESC
+			LIMIT :offset,:length
 	</getAidArrByTrd>
+	<getAidArrByTrdCnt>
+		SELECT
+			  count(`aid`) as `cnt`
+			FROM `data_article_tree`
+			WHERE `data_article_tree`.`trd` = :trd
+	</getAidArrByTrdCnt>
 </ui_tree>

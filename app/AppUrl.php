@@ -377,6 +377,9 @@ class AppUrl {
 	public static function articleByChannelAid($ch, $aid) {
 		return AppUrl::build ( "/" . $ch . "/" . $aid . ".html" );
 	}
+	public static function articleByChannel($ch) {
+		return AppUrl::build ( "/" . $ch );
+	}
 	
 	/**
 	 * 根据医生ID和文章ID生成URL
@@ -428,7 +431,7 @@ class AppUrl {
 	 * 获取用户图片的文件路径
 	 */
 	public static function getUserAvatarPath() {
-		return FILE_SYSTEM_ENTRY . "/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/avatar";
+		return FILE_SYSTEM_ENTRY . "/web/static/" . (APP_MOBILE_MODE ? "m" : "pc") . "/avatar";
 	}
 	
 	/**
