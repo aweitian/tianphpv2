@@ -62,7 +62,7 @@ document.writeln("        <h4>我们有着多年的问诊经验，<br />能根�
 document.writeln("专业的解答！</h4>");
 document.writeln("        <ul>");
 document.writeln("          <li><a href=\'javascript:void(0)\' onclick=\'openZoosUrl();return false;\'><img src=\'/static/m/swt/swtbtn1.png\' / width=\'96\' height=\'36\'></a></li>");
-document.writeln("          <li><a href=\'tel:<?php AppChannel::getTel() ?>\'><img src=\'/static/m/swt/swtbtn2.png\' / width=\'96\' height=\'36\'></a></li>");
+document.writeln("          <li><a href=\'tel:<?php print AppChannel::getTel() ?>\'><img src=\'/static/m/swt/swtbtn2.png\' / width=\'96\' height=\'36\'></a></li>");
 document.writeln("        </ul>");
 document.writeln("      </dd>");
 document.writeln("    </dl>");
@@ -90,7 +90,7 @@ document.writeln("      <img src=\'/static/m/swt/swtzx.png\' width=\'71\' height
 document.writeln("      <p>您有任何男科疾病的问题，<br />可与男科医生一对一快速<br />在线沟通。</p>");
 document.writeln("      <ul>");
 document.writeln("        <li><a href=\'javascript:void(0)\' onclick=\'openZoosUrl();return false;\'><img src=\'/static/m/swt/swtbtn1.png\' width=\'96\' height=\'36\' /></a></li>");
-document.writeln("        <li><a href=\'tel:<?php AppChannel::getTel() ?>\'><img src=\'/static/m/swt/swtbtn2.png\' width=\'96\' height=\'36\' /></a></li>");
+document.writeln("        <li><a href=\'tel:<?php  AppChannel::getTel() ?>\'><img src=\'/static/m/swt/swtbtn2.png\' width=\'96\' height=\'36\' /></a></li>");
 document.writeln("      </ul>");
 document.writeln("    </div>");
 document.writeln("  </div>");
