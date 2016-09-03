@@ -911,6 +911,7 @@
 
 .jbkp_page{ line-height:.4rem; color:#333; font-size:.24rem;}
 .jbkp_page p{ text-indent:2em; margin-bottom:.3rem; font-size:.24rem;}
+.jbkp_page p img{ max-width:80%;}
 .jbkp_page p a{ font-size:.24rem;}
 .jbkp_page img{ margin-bottom:.3rem;width:100%}
 
