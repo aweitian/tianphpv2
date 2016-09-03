@@ -14,7 +14,7 @@
     </div>
     <div class="bd">
       <ul>
-        <li> <a href="<?php print AppUrl::getSwtUrl();?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/ban1.jpg" /></a> </li>
+    
         <li> <a href="<?php print AppUrl::getSwtUrl();?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/banner2.jpg" /></a> </li>
         <li> <a href="<?php print AppUrl::getSwtUrl();?>" onClick="openZoosUrl();return false;"><img src="<?php print AppUrl::getMediaPath()?>/images/banner3.jpg" /></a> </li>
       </ul>
