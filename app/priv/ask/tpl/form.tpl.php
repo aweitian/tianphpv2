@@ -15,7 +15,7 @@ if(isset($data["def"]) && !is_null($data["def"])){
 	$def = $data["def"];
 	$at = "编辑";
 	$ua = "edit";
-	$aid = $msg["?sid"];
+	$aid = $model->msg["?sid"];
 }else{
 	$def = array(
 		"uid" => $data["uid"],

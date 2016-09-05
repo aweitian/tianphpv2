@@ -32,88 +32,251 @@ document.writeln("<script language=\"javascript\" src=\"<?php print AppChannel::
 document.writeln("<style type=\"text/css\">#LRdiv0{display:none;}#LRfloater0{display:none;}</style>");
 
 
-
+document.writeln("<script src=\'/static/m/swt/bouncs.js\'></script>");
 
 <?php if(isDoctor($msg)):?>
 
 document.writeln("<style type=\'text/css\'>");
 document.writeln("*{margin:0;padding:0;}");
-document.writeln("#swtbox{width:272px;height:162px; position:fixed;left:50%;top:50%;margin-left:-136px;margin-top:-81px;background:#fff3e0;border:4px #fad699 solid;border-radius:15px;-moz-border-radius:15px;-webkit-border-radius:15px;z-index:999999999;}");
+document.writeln("#swtys{width:292px;height:152px; position:fixed;left:50%;top:50%;margin-left:-146px;margin-top:-72px;z-index:999999999;border:4px #fad699 solid;background:#fff3e0;border-radius:15px;-moz-border-radius:15px;-webkit-border-radius:15px;-webkit-box-shadow:0 0 10px #d5d5d5;-moz-box-shadow:0 0 10px #d5d5d5;box-shadow:0 0 10px #d5d5d5;display:none;}");
 document.writeln(".swtclose2{ position:absolute;top:-13px;right:-8px;cursor:pointer;}");
-document.writeln(".ysbd{border:1px #fff solid;height:161px;border-radius:15px;-moz-border-radius:15px;-webkit-border-radius:15px;}");
+document.writeln(".ysbd{border:1px #fff solid;padding:15px 14px;height:120px;border-radius:15px;-moz-border-radius:15px;-webkit-border-radius:15px;}");
+document.writeln(".ysbd dl{position:relative;}");
+document.writeln(".ysbd dt{ position:absolute;top:-23px;left:-5px;}");
+document.writeln(".ysbd dd{float:right;width:153px;}");
+document.writeln(".ysbd h4{background:url(/static/m/swt/swtbg.png);width:121px;height:23px;font:12px/19px Microsoft Yahei;color:#fff;padding-left:9px;}");
+document.writeln(".ysbd h4 span{color:#fff799;}");
+document.writeln(".ysbd dd p{color:#333;font:16px/24px Microsoft Yahei;padding-left:9px;}");
 document.writeln("ul{ list-style:none;}");
-document.writeln(".ysbd dt{position:absolute;left:-4px;bottom:-6px;}");
-document.writeln(".ysbd dd{position:absolute;width:205px;right:10px;z-index:999999;}");
-document.writeln(".ysbd h4{font:16px/24px Microsoft Yahei;padding:20px 0 0 10px;}");
-document.writeln(".ysbd li{float:left;padding-top:15px;}");
+document.writeln(".ysbd li{float:left;padding-top:12px;}");
 document.writeln(".ysbd li:last-child{float:right;}");
-document.writeln(".swtline1{position:absolute;top:2px;left:21px;}");
-document.writeln(".swtline2{position:absolute;top:78px;right:2px;}");
+document.writeln(".animated{-webkit-animation-duration:.8s;animation-duration:.8s;-webkit-animation-fill-mode:both;animation-fill-mode:both;}");
+document.writeln("");
+document.writeln("@-webkit-keyframes fadeInDown { 0% {");
+document.writeln("-webkit-transform:translate3d(0, -300%, 0) ;");
+document.writeln("transform: translate3d(0, -300%, 0);");
+document.writeln("}");
+document.writeln("");
+document.writeln("50%{");
+document.writeln("-webkit-transform:rotate(3deg);");
+document.writeln("transform:rotate(3deg);");
+document.writeln("	}");
+document.writeln("");
+document.writeln("100% {");
+document.writeln("-webkit-transform: none;");
+document.writeln("transform: none;");
+document.writeln("}");
+document.writeln("}");
+document.writeln("@keyframes fadeInDown { 0% {");
+document.writeln("-webkit-transform:translate3d(0, -300%, 0) ;");
+document.writeln("transform: translate3d(0, -300%, 0) ;");
+document.writeln("}");
+document.writeln("50%{");
+document.writeln("-webkit-transform:rotate(3deg);");
+document.writeln("transform:rotate(3deg);");
+document.writeln("	}");
+document.writeln("");
+document.writeln("100% {");
+document.writeln("-webkit-transform: none;");
+document.writeln("transform: none;");
+document.writeln("}");
+document.writeln("}");
+document.writeln(".fadeInDown { -webkit-animation-name: fadeInDown; animation-name: fadeInDown }");
+document.writeln("@-webkit-keyframes fadeOutDown { ");
+document.writeln("50%{");
+document.writeln("-webkit-transform:rotate(-5deg);");
+document.writeln("transform:rotate(-5deg);");
+document.writeln("	}");
+document.writeln("100% {");
+document.writeln("-webkit-transform:translate3d(0, 300%, 0);");
+document.writeln("transform:translate3d(0, 300%, 0);");
+document.writeln("}");
+document.writeln("}");
+document.writeln("@keyframes fadeOutDown { ");
+document.writeln("50%{");
+document.writeln("");
+document.writeln("-webkit-transform:rotate(-5deg);");
+document.writeln("transform:rotate(-5deg);");
+document.writeln("	}");
+document.writeln("100% {");
+document.writeln("-webkit-transform:translate3d(0, 300%, 0);");
+document.writeln("transform:translate3d(0, 300%, 0) ;");
+document.writeln("}");
+document.writeln("}");
+document.writeln(".fadeOutDown { -webkit-animation-name: fadeOutDown; animation-name: fadeOutDown }");
+document.writeln(".bounce{-webkit-animation-name:bounce;animation-name:bounce}");
 document.writeln("</style>");
-document.writeln("<div id=\'swtbox\'>");
-document.writeln("  <img src=\'/static/m/swt/swtline1.png\' width=\'53\' height=\'33\' class=\'swtline1\' />");
-document.writeln("  <img src=\'/static/m/swt/swtline2.png\' width=\'22\' height=\'21\' class=\'swtline2\' />");
-document.writeln("  <img onclick=\"swtcloseM()\" src=\'/static/m/swt/swtclose.png\' width=\'29\' height=\'29\' class=\'swtclose2\' />");
+
+document.writeln("<div id=\'swtys\' class=\'animated fadeInDown\'>");
+document.writeln(" <img src=\'/static/m/swt/swtclose.png\' width=\'29\' height=\'29\' class=\'swtclose2\' />");
 document.writeln("  <div class=\'ysbd\'>");
 document.writeln("    <dl>");
-document.writeln("      <dt><img src=\'/static/m/swt/<?php print swtbgimg($msg)?>\' width=\'101\' height=\'116\' /></dt>");
+document.writeln("      <dt><img src=\'/static/m/swt/<?php print swtbgimg($msg)?>\' width=\'111\' height=\'105\' /></dt>");
 document.writeln("      <dd>");
-document.writeln("        <h4>我们有着多年的问诊经验，<br />能根据您描述的症状给予<br />");
-document.writeln("专业的解答！</h4>");
-document.writeln("        <ul>");
-document.writeln("          <li><a href=\'javascript:void(0)\' onclick=\'openZoosUrl();return false;\'><img src=\'/static/m/swt/swtbtn1.png\' / width=\'96\' height=\'36\'></a></li>");
-document.writeln("          <li><a href=\'tel:<?php print AppChannel::getTel()?>\'><img src=\'/static/m/swt/swtbtn2.png\' / width=\'96\' height=\'36\'></a></li>");
-document.writeln("        </ul>");
+document.writeln("        <h4>我是今天的<span>值班医生</span></h4>");
+document.writeln("        <p>您有任何男科问题，");
+document.writeln("可在线与我沟通！</p>");
 document.writeln("      </dd>");
 document.writeln("    </dl>");
+document.writeln("        <ul>");
+document.writeln("          <li><a href=\'javascript:void(0)\' onclick=\'openZoosUrl();return false;\'><img src=\'/static/m/swt/swtbtn3.png\' width=\'126\' height=\'36\' /></a></li>");
+document.writeln("          <li><a href=\'tel:<?php print AppChannel::getTel()?>\'><img src=\'/static/m/swt/swtbtn4.png\' width=\'126\' height=\'36\' /></a></li>");
+document.writeln("      </ul>");
 document.writeln("  </div>");
 document.writeln("</div>");
+setTimeout(openMswt,3000);
+
+function openMswt(){
+
+	$("#swtys").show().removeClass("fadeInDown").addClass("fadeInDown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){	
+			footerHeight.stop().animate({bottom:-_footerHeight()+'px'},400,function(){
+				$(this).show();
+				bTrue = true;
+			});	
+		});		
+}
+
+function closeSwt(){
+	$("#swtys").removeClass("fadeInDown").addClass("fadeOutDown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){	
+			$(this).removeClass("fadeOutDown").hide();
+		});			
+}
+$(function(){
+  $(".swtclose2").on("click",function(){
+		closeSwt();
+		setTimeout(openMswt,25000);
+	})	
+})
+$(function(){
+		var bounce = new Bounce();
+		$(".swtclose2").click(function(){
+			bounce.rotate({
+			  from: 0,
+			  to: 360,	
+			  duration: 800,		 
+		})
+       .applyTo(document.querySelectorAll("#yczx"));
+      })		
+  });
 
 <?php else:?>
 document.writeln("<style type=\'text/css\'>");
 document.writeln("*{margin:0;padding:0;}");
-document.writeln("#swtbox{width:280px;height:170px; position:fixed;left:50%;top:50%;margin-left:-140px;margin-top:-85px;z-index:999999999;}");
-document.writeln(".swtbd1{float:right;width:218px;height:160px;background:#fff3e0;border:4px #fad699 solid;border-radius:15px;-moz-border-radius:15px;-webkit-border-radius:15px;-webkit-box-shadow:0 0 10px #d5d5d5;-moz-box-shadow:0 0 10px #d5d5d5;box-shadow:0 0 10px #d5d5d5;}");
-document.writeln(".swtbd2{border:1px #fff solid;height:128px;padding:15px 5px 15px 8px;border-radius:15px;-moz-border-radius:15px;-webkit-border-radius:15px;color:#333;font:16px/24px Microsoft Yahei;}");
-document.writeln(".swtys{ position:absolute;top:3px;left:3px;z-index:999999999;}");
-document.writeln(".swtbd2 p{padding-left:8px;}");
-document.writeln(".swtbd2 ul{list-style:none;padding-top:15px;}");
-document.writeln(".swtbd2 li{float:left;}");
-document.writeln(".swtbd2 li:last-child{float:right;}");
-document.writeln(".swtclose1{ position:absolute;top:-9px;right:-8px;cursor:pointer;}");
+document.writeln("#swtbox{width:292px;height:134px; position:fixed;left:50%;top:50%;margin-left:-146px;margin-top:-66px;z-index:999999999;border:4px #fad699 solid;background:#fff3e0;border-radius:15px;-moz-border-radius:15px;-webkit-border-radius:15px;-webkit-box-shadow:0 0 10px #d5d5d5;-moz-box-shadow:0 0 10px #d5d5d5;box-shadow:0 0 10px #d5d5d5;display:none;}");
+document.writeln(".swtbd{border:1px #fff solid;height:112px;padding:10px 13px;border-radius:15px;-moz-border-radius:15px;-webkit-border-radius:15px;color:#333;}");
+document.writeln(".swtbd h4{font:20px/30px Microsoft Yahei;text-align:center;}");
+document.writeln(".swtbd ul{list-style:none;padding-top:10px;}");
+document.writeln(".swtbd li{float:left;}");
+document.writeln(".swtbd li:last-child{float:right;}");
+document.writeln(".swtclose1{ position:absolute;top:-15px;right:-9px;cursor:pointer;}");
+document.writeln(".animated{-webkit-animation-duration:.8s;animation-duration:.8s;-webkit-animation-fill-mode:both;animation-fill-mode:both;}");
+document.writeln("");
+document.writeln("@-webkit-keyframes fadeInDown { 0% {");
+document.writeln("-webkit-transform:translate3d(0, -300%, 0) ;");
+document.writeln("transform: translate3d(0, -300%, 0);");
+document.writeln("}");
+document.writeln("");
+document.writeln("50%{");
+document.writeln("-webkit-transform:rotate(3deg);");
+document.writeln("transform:rotate(3deg);");
+document.writeln("	}");
+document.writeln("");
+document.writeln("100% {");
+document.writeln("-webkit-transform: none;");
+document.writeln("transform: none;");
+document.writeln("}");
+document.writeln("}");
+document.writeln("@keyframes fadeInDown { 0% {");
+document.writeln("-webkit-transform:translate3d(0, -300%, 0) ;");
+document.writeln("transform: translate3d(0, -300%, 0) ;");
+document.writeln("}");
+document.writeln("50%{");
+document.writeln("-webkit-transform:rotate(3deg);");
+document.writeln("transform:rotate(3deg);");
+document.writeln("	}");
+document.writeln("");
+document.writeln("100% {");
+document.writeln("-webkit-transform: none;");
+document.writeln("transform: none;");
+document.writeln("}");
+document.writeln("}");
+document.writeln(".fadeInDown { -webkit-animation-name: fadeInDown; animation-name: fadeInDown }");
+document.writeln("@-webkit-keyframes fadeOutDown { ");
+document.writeln("50%{");
+document.writeln("-webkit-transform:rotate(-5deg);");
+document.writeln("transform:rotate(-5deg);");
+document.writeln("	}");
+document.writeln("100% {");
+document.writeln("-webkit-transform:translate3d(0, 300%, 0);");
+document.writeln("transform:translate3d(0, 300%, 0);");
+document.writeln("}");
+document.writeln("}");
+document.writeln("@keyframes fadeOutDown { ");
+document.writeln("50%{");
+document.writeln("");
+document.writeln("-webkit-transform:rotate(-5deg);");
+document.writeln("transform:rotate(-5deg);");
+document.writeln("	}");
+document.writeln("100% {");
+document.writeln("-webkit-transform:translate3d(0, 300%, 0);");
+document.writeln("transform:translate3d(0, 300%, 0) ;");
+document.writeln("}");
+document.writeln("}");
+document.writeln(".fadeOutDown { -webkit-animation-name: fadeOutDown; animation-name: fadeOutDown }");
+document.writeln(".bounce{-webkit-animation-name:bounce;animation-name:bounce}");
 document.writeln("</style>");
-document.writeln("<div id=\'swtbox\'>");
-document.writeln("  <img onclick=\"swtcloseM()\" src=\'/static/m/swt/swtclose.png\' width=\'29\' height=\'29\' class=\'swtclose1\' />");
-document.writeln("  <div class=\'swtbd1\'>");
-document.writeln("    <div class=\'swtbd2\'>");
-document.writeln("      <img src=\'/static/m/swt/swtzx.png\' width=\'71\' height=\'167\' class=\'swtys\' />");
-document.writeln("      <p>您有任何男科疾病的问题，<br />可与男科医生一对一快速<br />在线沟通。</p>");
+
+document.writeln("<div id=\'swtbox\' class=\'animated fadeInDown\'> <img src=\'/static/m/swt/swtclose.png\' width=\'29\' height=\'29\' class=\'swtclose1\' />");
+document.writeln("    <div class=\'swtbd\'>");
+document.writeln("      <h4>男科疾病在线问诊<br />");
+document.writeln("一对一解答护隐私</h4>");
 document.writeln("      <ul>");
-document.writeln("        <li><a href=\'javascript:void(0)\' onclick=\'openZoosUrl();return false;\'><img src=\'/static/m/swt/swtbtn1.png\' width=\'96\' height=\'36\' /></a></li>");
-document.writeln("        <li><a href=\'tel:<?php print AppChannel::getTel() ?>\'><img src=\'/static/m/swt/swtbtn2.png\' width=\'96\' height=\'36\' /></a></li>");
+document.writeln("        <li><a href=\'javascript:void(0)\' onclick=\'openZoosUrl();return false;\'><img src=\'/static/m/swt/swtbtn1.png\' width=\'126\' height=\'36\' /></a></li>");
+document.writeln("        <li><a href=\'tel:<?php print AppChannel::getTel()?>\'><img src=\'/static/m/swt/swtbtn2.png\' width=\'126\' height=\'36\' /></a></li>");
 document.writeln("      </ul>");
-document.writeln("    </div>");
 document.writeln("  </div>");
 document.writeln("</div>");
+
+
+
+setTimeout(openMswt,3000);
+
+function openMswt(){
+
+	$("#swtbox").show().removeClass("fadeInDown").addClass("fadeInDown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){	
+			footerHeight.stop().animate({bottom:-_footerHeight()+'px'},400,function(){
+				$(this).show();
+				bTrue = true;
+			});	
+		});		
+}
+function closeSwt(){
+	$("#swtbox").removeClass("fadeInDown").addClass("fadeOutDown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){	
+			$(this).removeClass("fadeOutDown").hide();
+		});		
+}
+$(function(){
+$(".swtclose1").on("click",function(){
+		closeSwt();
+		setTimeout(openMswt,25000);
+	})	
+})
+$(function(){
+		var bounce = new Bounce();
+		$(".swtclose1").click(function(){
+			bounce.rotate({
+			  from: 0,
+			  to: 360,	
+			  duration: 1200,		 
+		})
+       .applyTo(document.querySelectorAll("#yczx"));
+      })		
+  });
 <?php endif?>
 
 
-function chuxian() {
-
-    document.getElementById('swtbox').style.display = 'block';
-
-}
-
-function swtcloseM() {
-
-    document.getElementById('swtbox').style.display = 'none';
-
-    setTimeout("chuxian()", 30000);
-
-}
 
 
+document.writeln("<div style=\'position:fixed;bottom:2.2rem;right:15px;width:50px;z-index:999999999;animation: animation-11 1000ms linear both;\' id=\'yczx\'><a onclick=\'openZoosUrl();return false;\' href=\'javascript:void(0)\'><img width=\'50\' height=\'55\' src=\'static/m/images/askdoc.png\'></a></div>");
 
-document.writeln("<a href=\'javascript:void(0)\' onclick=\'openZoosUrl();return false;\'>");
-document.writeln("<div style=\'position:fixed;bottom:2.2rem;right:15px;width:50px;z-index:999999999;\'><img src=\'/static/m/images/askdoc.png\' width=\'50\' height=\'55\'></div>");
-document.writeln("</a>");
+

@@ -53,48 +53,10 @@ $row=($model->getRow());
             
           </div>
         </div>
-        <div class="jbkp_page_zx clr">
-       	
-        	<a class="fl kp_bn1">
-        	<div class="heart" id="like2" rel="like" style="background-position: 0% 50%;"></div> <div class="likeCount" id="likeCount2"><?php print rand(300,600);?></div>
-        	</a>
-        	<a href="<?php print AppUrl::userAddAppraise();?>" class="fr kp_bn2">去评论</a>
-        </div>
+   
         <div class="blank30"></div>
     </div>
-    <script>
-	$(document).ready(function()
-	{
-    
-	$('body').on("click",'.heart',function()
-    {
-    	
-    	var A=$(this).attr("id");
-    	var B=A.split("like");
-        var messageID=B[1];
-        var C=parseInt($("#likeCount"+messageID).html());
-    	$(this).css("background-position","")
-        var D=$(this).attr("rel");
-       
-        if(D === 'like') 
-        {      
-        $("#likeCount"+messageID).html(C+1);
-        $(this).addClass("heartAnimation").attr("rel","unlike");
-        
-        }
-        else
-        {
-        $("#likeCount"+messageID).html(C-1);
-        $(this).removeClass("heartAnimation").attr("rel","like");
-        $(this).css("background-position","left");
-        }
-
-
-    });
-
-
-	});
-	</script>
+   
 </div>
 
 <div class="blank10"></div>
@@ -117,17 +79,9 @@ $row=($model->getRow());
         <div class="hd_hsx"></div>
              	<?php endif;?>
                     <?php endforeach;?> 
-    	     	
-    	
-    	
-    	
             </div>
     </div>
     </div>
-
-
-<div class="blank10"></div>
-
 
 <div class="blank10"></div>
 

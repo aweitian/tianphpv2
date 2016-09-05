@@ -94,48 +94,10 @@ defTplData::getInstance()->description = $data["desc"];
             
           </div>
         </div>
-        <div class="jbkp_page_zx clr">
-       	
-        	<a class="fl kp_bn1">
-        	<div class="heart" id="like2" rel="like" style="background-position: 0% 50%;"></div> <div class="likeCount" id="likeCount2"><?php print rand(300,600);?></div>
-        	</a>
-        	<a href="<?php print AppUrl::userAddAppraise();?>" class="fr kp_bn2">去评论</a>
-        </div>
+       
         <div class="blank30"></div>
     </div>
-    <script>
-	$(document).ready(function()
-	{
     
-	$('body').on("click",'.heart',function()
-    {
-    	
-    	var A=$(this).attr("id");
-    	var B=A.split("like");
-        var messageID=B[1];
-        var C=parseInt($("#likeCount"+messageID).html());
-    	$(this).css("background-position","")
-        var D=$(this).attr("rel");
-       
-        if(D === 'like') 
-        {      
-        $("#likeCount"+messageID).html(C+1);
-        $(this).addClass("heartAnimation").attr("rel","unlike");
-        
-        }
-        else
-        {
-        $("#likeCount"+messageID).html(C-1);
-        $(this).removeClass("heartAnimation").attr("rel","like");
-        $(this).css("background-position","left");
-        }
-
-
-    });
-
-
-	});
-	</script>
 </div>
 
 <?php $did=$m->getFirstDid($data["aid"]) ?>
@@ -145,44 +107,20 @@ defTplData::getInstance()->description = $data["desc"];
 <div class="index_hotzx">
     <h2 class="title_name_lan"><?php print ($dis) ?><b class="fz28 color3">的相关文章</b><a href="<?php print AppUrl::disHomeByDid($did)?>" class="fr blue">+更多</a></h2>
 </div>
-
-
-
   <div class="bg_fff">
 	<div class="yswd_jb bg_fff">
    <div class="mzy30">
        <?php foreach ($m->getAll($did,5) as $wz):?>
-    	
-    	
         <p class="clr"><a href="<?php print AppUrl::articleByAid($wz["aid"]) ?>" class="color3"><?php print $m->utf8cut($wz["title"],0,16)?></a></p>
         <div class="hd_hsx"></div>
         <?php endforeach; ?>
     </div>
     </div>
     </div>
-
-
 <div class="blank10"></div>
-<div class="index_hotzx">
-    <h2 class="title_name_lan"><?php print ($dis) ?><b class="fz28 color3">的相关疾病</b></h2>
-</div>
-<div class="bg_fff">
-	<div class="yswd_jb bg_fff">
-        <div class="mzy30">
-           
-            <?php foreach($m->getSiblingDids($did) as $xbz):?>   	
-            <p class="clr"><a href="<?php print AppUrl::disHomeByDiseasekey($xbz["key"])?>" class="fl"><?php print $xbz["data"] ?></a><img src="<?php print AppUrl::getMediaPath()?>/images/memer_img1.png" class="fr" /></p>
-            <div class="hd_hsx"></div>    
-            <?php endforeach;?>
-            
-         </div>
-    </div>
-    <div class="hd_hsx"></div>
-</div>
 <?php } ?>
 
 
-<div class="blank10"></div>
 
 <?php include dirname(dirname(__FILE__))."/inc/bottom.tpl.php";?>
 </div>

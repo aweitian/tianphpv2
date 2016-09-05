@@ -73,6 +73,7 @@ class askController extends privController {
 		$this->view->showList ( $msg->getPmcaiUrl (), $this->priv->getUserInfo (), $data->info, $data->return, $page, $length, $msg ["?q"] );
 	}
 	public function editAction(pmcaiMsg $msg) {
+		$this->model->msg = $msg;
 		if ($msg->isPost ()) {
 			
 			$this->chkPost ( $msg, array (

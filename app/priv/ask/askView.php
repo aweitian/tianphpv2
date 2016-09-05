@@ -16,6 +16,7 @@ class askView extends privView{
 			$this->fetch(
 				"form",
 				array(
+					
 					"model" => $model,
 					"def" => $def,
 					"uid" => $uid,
