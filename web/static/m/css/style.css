@@ -1033,3 +1033,11 @@ line-height: 30px;
     height: 30px;
     text-align: center;
     width: 30%;}
+    
+    
+    .telephone{background:#dee5f2;border:1px #b9cff5 solid;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;padding:.2rem .2rem .3rem;margin-bottom:.2rem;}
+.telephone h4{text-align:center;font-size:.3rem;color:#3b83ff;font-weight:normal;}
+.telephone p{color:#666;margin:0 0 .15rem;text-indent:0;text-align:center;}
+.telephone .nr{border:1px #c7ced9 solid;height:.68rem;border-right:none;background:none;font-size:.3rem;border-radius:.3rem;}
+.telephone .bd{float:left;width:63%;padding-left:4%;height:.66rem;border-radius:.3rem 0 0 .3rem;background:#fff;}
+.telephone .btn{float:left;width:32%;border:1px #f80 solid;background:#f80;color:#fff;height:.68rem;cursor:pointer;border-radius: 0 .3rem .3rem 0;}

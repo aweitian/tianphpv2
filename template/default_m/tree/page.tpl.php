@@ -40,19 +40,20 @@ $row=($model->getRow());
           <?php print($conten["content"]) ?>		  
  </div>  	          
         
-     
-        <div class="ksgh clearfix">
-          <h4 class="blue tc">上海九龙男子医院免费咨询、快速挂号</h4>
-        <p class="tc">请输入您的电话号码，提前与医生一对一交流</p>
-          <div class="ksbd">
 
-  <form name="form1" accept-charset="gb2312" action="http://swt.gssmart.com/send/index.php" method="post">
-  <input type="hidden" name="content" value="上海九龙男子医院提醒：男科疾病要提早治疗，具体诊疗请在医生指导下进行！咨询电话：-退订回T【上海九龙男子医院】">
-            <input name="tel" id="home_dx_co" placeholder="请输入手机号码" type="text" class="bd" />
-            <input type="submit" name="submit" class="btn" value="点击咨询" />
-            
-          </div>
-        </div>
+<div class="telephone">
+<h4><b>上海九龙男子医院免费咨询、快速挂号</b></h4>
+<p>请输入手机号码，90%当天通话，沟通充分!</p>
+<div class="nr clearfix">
+<form name="form1" accept-charset="gb2312" action="http://swt.gssmart.com/send/index.php" method="post">
+<input type="hidden" name="content" value="上海九龙男子医院提醒：男科疾病要提早治疗，具体诊疗请在医生指导下进行！咨询电话：021-52370007-退订回T【上海九龙男子医院】">
+<input name="tel" id="home_dx_co" placeholder="请输入手机号码" type="text" class="bd" />
+<input type="submit" name="submit" class="btn" value="点击咨询" />
+</div>
+        
+        
+        
+        
    
         <div class="blank30"></div>
     </div>

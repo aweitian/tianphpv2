@@ -136,7 +136,7 @@ $("#swtbox").on("click",function(){
 		closeSwt();
 	
 	$("#btzx").show(400)
-	
+	 $("#btswt").hide(400);
 		
 		setTimeout(openMswt,25000);
 	})	
