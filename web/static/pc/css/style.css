@@ -2069,8 +2069,8 @@ a.td_link, a.td_link_read {
 	}
 
 .jbbox1_sm1 p a:hover{ background:#529bff; color:#fff;}
-.jbbox2_p1{ width:66px; height:54px; padding-top:12px; line-height:20px;border-radius:66px;-webkit-border-radius:66px;-moz-border-radius:66px;}
-.jbbox2_sm1top div.fr{ width:209px; height:72px; line-height:24px;}
+.jbbox2_p1{padding:12px 25px;line-height:20px;border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;}
+.jbbox2_sm1top div.fr{ width:200px; height:72px; line-height:24px;} 
 
 .jb_ys1{ border:1px solid #fe986a; color:#fe986a;}
 .jb_ys1col{ color:#fe986a;}

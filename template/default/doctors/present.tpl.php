@@ -81,7 +81,7 @@ function gp(d,p)
                   <li <?php if($xy%5==0){?> class="mr0"<?php }?>>
                     <p class="gift_box"><img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $lw["avatar"];?>" /></p>
                     <p class="gift_name"><?php print $lw["data"];?></p>
-                    <p class="gift_send"><a<?php print App::useTarget()?> href="javascript:void(0)" onclick="gp(<?php print $m->data["sid"]?>,<?php print $lw["sid"]?>)">我也要送</a></p>
+                    <p class="gift_send"><a href="javascript:void(0)" onclick="gp(<?php print $m->data["sid"]?>,<?php print $lw["sid"]?>)">我也要送</a></p>
                   </li>
                   <?php $xy++;?>
                   <?php endforeach;?>
@@ -112,7 +112,7 @@ function gp(d,p)
                   <li>
                     <p class="gift_box"> <img src="<?php print AppUrl::getMediaPath()?>/present/<?php print $pre["avatar"];?>" /></p>
                     <p class="gift_name"><?php print $pre["data"];?>(<?php print ($lw["cp"]);?>)</p>
-                    <p class="gift_send pl3"><a<?php print App::useTarget()?> href="javascript:void(0)" onclick="gp(<?php print $m->data["sid"]?>,<?php print $lw["pid"]?>)">我要送一个</a></p>
+                    <p class="gift_send pl3"><a href="javascript:void(0)" onclick="gp(<?php print $m->data["sid"]?>,<?php print $lw["pid"]?>)">我要送一个</a></p>
                   </li>
                   <?php endforeach;?>
                 </ul>
