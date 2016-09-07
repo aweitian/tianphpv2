@@ -82,8 +82,8 @@ $this->description = "".$row["data"]."哪家医院看得好,治疗".$row["data"]
                         <?php foreach ($data as $ask):?>
                   
                           
-                        	<div class="jbbox2_sm1 fl">                    
-                            	<div class="jbbox2_sm1top clr">
+                        	<div class="jbbox2_sm1 fl clearfix">                    
+                            	<div class="jbbox2_sm1top  clearfix">
                                 	<div class="fl jbbox2_p1 tc fz16 jb_ys<?php print $m ?>">
                                 	<?php print preg_match_all('/([\xC0-\xFF][\x80-\xBF]+){2}|([\xC0-\xFF][\x80-\xBF]+)/',$model->getDisnameByDid($row["pid"]),$match) ? join("<br>",$match[0]) : ""?>
                                 	

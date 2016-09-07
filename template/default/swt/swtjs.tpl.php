@@ -117,12 +117,7 @@ setTimeout(openMswt,3000);
 function openMswt(){
 	$("#btzx").hide(400)
 	 $("#btswt").show(400);
-	$("#swtbox").show().removeClass("fadeInDown").addClass("fadeInDown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){	
-			footerHeight.stop().animate({bottom:-_footerHeight()+'px'},400,function(){
-				$(this).show();
-				bTrue = true;
-			});	
-		});		
+	$("#swtbox").show().removeClass("fadeInDown").addClass("fadeInDown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend');		
 }
 
 function closeSwt(){
