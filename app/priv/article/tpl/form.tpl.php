@@ -301,6 +301,7 @@ function chk(o) {
 	for(var i=0;i<dods.length;i++){
 		if(dods[i].checked)return true;
 	}
+	alert("需要选择一个医生");
 	return false;
 }
 </script>
