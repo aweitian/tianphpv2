@@ -14,5 +14,6 @@
 </head>
 <body>
 <?php $this->outputContent()?>
+
 </body>
 </html>

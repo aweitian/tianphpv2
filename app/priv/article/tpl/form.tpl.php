@@ -70,7 +70,7 @@ function hideContent(o)
                   <h3 class="box-title"><?php print $at?>文章</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form <?php if($ua == "add"):?>enctype="multipart/form-data"<?php endif?> role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/article/<?php print $ua;?><?php print $ret_url?>">
+                  <form onsubmit="return chk(this)" <?php if($ua == "add"):?>enctype="multipart/form-data"<?php endif?> role="form" method="post" action="<?php print HTTP_ENTRY?>/priv/article/<?php print $ua;?><?php print $ret_url?>">
                     <!-- text input -->
                     <div class="form-group">
                       <label>标题</label>
@@ -296,6 +296,13 @@ $(function(){
 		"format":"yyyy-mm-dd"
 	});
 });
+function chk(o) {
+	var dods = o["doid[]"];
+	for(var i=0;i<dods.length;i++){
+		if(dods[i].checked)return true;
+	}
+	return false;
+}
 </script>
 
 

@@ -179,9 +179,7 @@ if(count($a)>1){$a5=array_shift($a);}else{$a5=array();}
 
       
       </div>
-    
-    
-    
+
     </div>
                       
                   <div class="blank20"></div>
